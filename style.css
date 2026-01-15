@@ -1,0 +1,11 @@
+/* style.css */
+
+/* Imposta lo scorrimento fluido per l'intera pagina */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Nota: La maggior parte dello stile è gestita dalle classi Tailwind 
+   direttamente nel file HTML. Qui puoi aggiungere stili personalizzati
+   che non sono coperti da Tailwind.
+*/

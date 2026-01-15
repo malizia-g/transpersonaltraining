@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transpersonal Training | Educating Therapists for a Revolution of Consciousness</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Theme color variables */
+        :root {
+            --theme-primary: #aa92ca;
+            --theme-darker: #6b5b7f;
+            --theme-light: #d4c5e2;
+        }
+        
+        body.theme-iris {
+            --theme-primary: #4B0082;
+            --theme-darker: #2d004d;
+            --theme-light: #9b6bb8;
+        }
+        
+        body.theme-blue {
+            --theme-primary: #1E3A8A;
+            --theme-darker: #0f2540;
+            --theme-light: #3b82f6;
+        }
+        
+        /* Dynamic color changes */
+        .theme-bg-primary { background-color: var(--theme-primary); }
+        .theme-text-primary { color: var(--theme-primary); }
+        .theme-border-primary { border-color: var(--theme-primary); }
+        .theme-hover-primary:hover { background-color: var(--theme-primary); }
+        
+        /* Navbar background */
+        body.theme-iris #navbar.bg-indigo-950\/95,
+        body.theme-blue #navbar.bg-indigo-950\/95 {
+            background-color: rgba(var(--theme-primary-rgb, 0, 0, 0), 0.95) !important;
+        }
+        
+        body.theme-iris #navbar.bg-indigo-950\/95,
+        body.theme-blue #navbar.bg-indigo-950\/95 {
+            background-color: var(--theme-darker) !important;
+            background-color: rgba(75, 0, 130, 0.95) !important;
+        }
+        
+        body.theme-blue #navbar.bg-indigo-950\/95 {
+            background-color: rgba(30, 58, 138, 0.95) !important;
+        }
+        
+        /* Program section and major elements */
+        body.theme-iris #program,
+        body.theme-blue #program {
+            background-color: var(--theme-darker);
+        }
+        
+        /* Card hover effects */
+        body.theme-iris .bg-indigo-900\/50,
+        body.theme-blue .bg-indigo-900\/50 {
+            background-color: rgba(var(--theme-primary-rgb, 0, 0, 0), 0.5);
+        }
+        
+        /* Apply dynamic accent colors */
+        body.theme-iris .hover\:bg-indigo-900:hover,
+        body.theme-blue .hover\:bg-indigo-900:hover {
+            background-color: var(--theme-darker) !important;
+        }
+        
+        /* Text primary color on dark backgrounds */
+        body.theme-iris .text-amber-400,
+        body.theme-blue .text-amber-400 {
+            color: var(--theme-light) !important;
+        }
+        
+        /* Section headers */
+        body.theme-iris .text-indigo-950,
+        body.theme-blue .text-indigo-950 {
+            color: var(--theme-darker) !important;
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800 bg-slate-50 antialiased">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 bg-transparent text-white/90">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center opacity-90">
+                    <i data-lucide="feather" class="text-white w-6 h-6"></i>
+                </div>
+                <span id="nav-logo-text" class="text-2xl font-serif font-bold tracking-wide text-white">
+                    Transpersonal Training
+                </span>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#welcome" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">About</a>
+                <a href="#program" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Program</a>
+                <a href="#schedule" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Schedule 2026</a>
+                <a href="#students" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Students</a>
+                <a href="#contact" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Contact</a>
+                <a href="#contact" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 rounded-full font-medium transition-transform hover:scale-105 shadow-md">
+                    Apply
+                </a>
+                <!-- Theme Switcher -->
+                <div class="flex items-center gap-2 ml-4">
+                    <button id="theme-btn" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors" title="Switch theme">
+                        <i data-lucide="palette" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+                <i data-lucide="menu" class="w-7 h-7"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-indigo-950 border-t border-indigo-900 shadow-xl py-6 px-6 flex-col gap-4">
+            <a href="#welcome" class="text-slate-200 hover:text-amber-400 py-2 border-b border-indigo-900/50 block">About</a>
+            <a href="#program" class="text-slate-200 hover:text-amber-400 py-2 border-b border-indigo-900/50 block">Program</a>
+            <a href="#schedule" class="text-slate-200 hover:text-amber-400 py-2 border-b border-indigo-900/50 block">Schedule 2026</a>
+            <a href="#students" class="text-slate-200 hover:text-amber-400 py-2 border-b border-indigo-900/50 block">Students</a>
+            <a href="#contact" class="text-slate-200 hover:text-amber-400 py-2 border-b border-indigo-900/50 block">Contact</a>
+            <a href="#contact" class="bg-amber-500 text-white px-6 py-3 rounded-md w-full mt-4 font-bold text-center">
+                Apply
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img 
+                src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2000&q=80" 
+                alt="Circle of people in mindful breathwork" 
+                class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 bg-gradient-to-b from-indigo-950/70 via-indigo-900/50 to-slate-50"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 container mx-auto px-6 text-center pt-20">
+            <div class="animate-fade-in-up">
+                <span class="inline-block py-1 px-3 rounded-full bg-white/10 text-amber-300 backdrop-blur-md border border-white/20 text-sm font-medium mb-6 tracking-wider uppercase">
+                    Counselling Psychotherapy and Breathwork School
+                </span>
+                <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-lg">
+                    Educating Therapists<br /> for a Revolution of Consciousness
+                </h1>
+                <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto mb-10 font-light leading-relaxed">
+                    Online lectures, in-person intensives across Europe, and mentorship that combines transpersonal psychotherapy with breathwork psychotechnology.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#schedule" class="bg-amber-500 hover:bg-amber-600 text-white text-lg px-8 py-4 rounded-full font-medium transition-all shadow-lg hover:shadow-amber-500/25 flex items-center justify-center gap-2 group">
+                        View Schedule 2026 <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="#contact" class="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white text-lg px-8 py-4 rounded-full font-medium transition-all flex items-center justify-center">
+                        Talk to Admissions
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Welcome Section -->
+    <section id="welcome" class="py-24 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <div class="lg:w-1/2">
+                    <div class="relative">
+                        <div class="absolute -top-4 -left-4 w-24 h-24 bg-amber-100 rounded-full opacity-50 z-0"></div>
+                        <img 
+                            src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80" 
+                            alt="Group breathwork circle lying on mats" 
+                            class="relative z-10 rounded-lg shadow-2xl w-full"
+                        />
+                        <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-lg shadow-xl z-20 max-w-xs hidden md:block border-l-4 border-amber-500">
+                            <p class="font-serif italic text-indigo-900 text-lg">"Welcome to our School for Transpersonal Counseling & Breathwork Psychotherapy."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2">
+                    <h2 class="text-sm font-bold tracking-widest text-amber-600 uppercase mb-3">About the School</h2>
+                    <h3 class="text-4xl font-serif font-bold text-indigo-950 mb-6">Therapists for a New Paradigm</h3>
+                    <p class="text-slate-600 text-lg leading-relaxed mb-6">
+                        We train clinicians to work safely and skillfully with holotropic states of consciousness. Weekly online lectures, breathwork intensives, and mentored practice weave together transpersonal psychology, Grof® Breathwork, and integrative methods.
+                    </p>
+                    <p class="text-slate-600 text-lg leading-relaxed mb-8">
+                        Our team is rooted in EUROTAS standards and decades of facilitation experience. Join as a full student or select individual seminars that deepen your practice.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3 text-indigo-900 font-medium">
+                            <div class="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600">
+                                <i data-lucide="heart" class="w-3.5 h-3.5"></i>
+                            </div>
+                            Transpersonal counseling & Grof®/Holotropic Breathwork
+                        </li>
+                        <li class="flex items-center gap-3 text-indigo-900 font-medium">
+                            <div class="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600">
+                                <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+                            </div>
+                            120-minute weekly online lectures with tutors and peer forum
+                        </li>
+                        <li class="flex items-center gap-3 text-indigo-900 font-medium">
+                            <div class="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600">
+                                <i data-lucide="globe-2" class="w-3.5 h-3.5"></i>
+                            </div>
+                            In-person intensives across Western and Eastern Europe
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Section -->
+    <section id="program" class="py-24 bg-indigo-950 text-white relative overflow-hidden">
+        <!-- Decorative elements -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
+            <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-amber-500 blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-teal-500 blur-3xl"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-4xl font-serif font-bold mb-4">Program Pathways</h2>
+                <p class="text-indigo-200 text-lg">Hybrid training that blends online learning, in-person intensives, and mentored practice.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- West Program -->
+                <div class="bg-indigo-900/50 backdrop-blur-sm border border-indigo-800 p-8 rounded-2xl hover:bg-indigo-900 transition-all hover:-translate-y-2 group cursor-pointer">
+                    <div class="absolute top-0 right-0 bg-amber-500 text-indigo-950 text-xs font-bold px-3 py-1 rounded-bl-lg">EUROTAS</div>
+                    <div class="mb-6 bg-indigo-950 w-16 h-16 rounded-xl flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform">
+                        <i data-lucide="compass" class="w-8 h-8 text-amber-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-1">West Program 2024–2027</h3>
+                    <p class="text-amber-400 text-sm font-medium mb-4 uppercase tracking-wider">Hybrid • Online + Germany</p>
+                    <div class="flex items-center gap-2 text-indigo-300 text-sm mb-4">
+                        <i data-lucide="calendar" class="w-4 h-4"></i>
+                        13 modules • 3 years
+                    </div>
+                    <p class="text-indigo-200 leading-relaxed mb-8">
+                        Weekly 120-minute lectures, peer forums, and in-person intensives in Germany. Join on schedule or contact us to enter later in the cohort.
+                    </p>
+                    <a href="https://transpersonal-training.com/schedule/#tab-id-2" class="inline-flex items-center text-white font-medium hover:text-amber-400 transition-colors">
+                        Schedule West <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- East Program -->
+                <div class="bg-indigo-900/50 backdrop-blur-sm border border-indigo-800 p-8 rounded-2xl hover:bg-indigo-900 transition-all hover:-translate-y-2 group cursor-pointer relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-amber-500 text-indigo-950 text-xs font-bold px-3 py-1 rounded-bl-lg">EUROTAS</div>
+                    <div class="mb-6 bg-indigo-950 w-16 h-16 rounded-xl flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform">
+                        <i data-lucide="map" class="w-8 h-8 text-indigo-300"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-1">East Program 2021–2025</h3>
+                    <p class="text-amber-400 text-sm font-medium mb-4 uppercase tracking-wider">Hybrid • Eastern Europe</p>
+                    <div class="flex items-center gap-2 text-indigo-300 text-sm mb-4">
+                        <i data-lucide="calendar" class="w-4 h-4"></i>
+                        Closing cohort
+                    </div>
+                    <p class="text-indigo-200 leading-relaxed mb-8">
+                        A blended path with intensives in Moldova and regional partner sites. Ask about spaces, make-ups, and breathwork seminars with our faculty.
+                    </p>
+                    <a href="https://transpersonal-training.com/program/" class="inline-flex items-center text-white font-medium hover:text-amber-400 transition-colors">
+                        Program Overview <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Breathwork Intensives -->
+                <div class="bg-indigo-900/50 backdrop-blur-sm border border-indigo-800 p-8 rounded-2xl hover:bg-indigo-900 transition-all hover:-translate-y-2 group cursor-pointer">
+                    <div class="mb-6 bg-indigo-950 w-16 h-16 rounded-xl flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform">
+                        <i data-lucide="sun" class="w-8 h-8 text-teal-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-1">Intensives & Practice</h3>
+                    <p class="text-amber-400 text-sm font-medium mb-4 uppercase tracking-wider">Breathwork & Supervision</p>
+                    <div class="flex items-center gap-2 text-indigo-300 text-sm mb-4">
+                        <i data-lucide="clock-4" class="w-4 h-4"></i>
+                        4-day immersions • Summer school
+                    </div>
+                    <p class="text-indigo-200 leading-relaxed mb-8">
+                        Breathwork psychotechnology, shamanic journeying, gestalt, bodywork, and integrative techniques. Includes breather + sitter roles and supervised practice.
+                    </p>
+                    <a href="https://transpersonal-training.com/participate/" class="inline-flex items-center text-white font-medium hover:text-amber-400 transition-colors">
+                        Join a Seminar <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Study Here -->
+    <section class="py-24 bg-stone-100" id="students">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-serif font-bold text-indigo-950">Why Train With Us?</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-indigo-50 text-indigo-900 rounded-full flex items-center justify-center mb-4">
+                        <i data-lucide="users" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-indigo-950 mb-2">Experiential Core</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Holotropic and Grof® Breathwork, gestalt, and bodywork are practiced in every intensive for real embodied learning.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-indigo-50 text-indigo-900 rounded-full flex items-center justify-center mb-4">
+                        <i data-lucide="award" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-indigo-950 mb-2">EUROTAS Standards</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Pathways toward EUROTAS transpersonal psychotherapist certification with supervised practice and ethics.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-indigo-50 text-indigo-900 rounded-full flex items-center justify-center mb-4">
+                        <i data-lucide="globe" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-indigo-950 mb-2">International Network</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Cooperations with Freiburg, Milan, Watertown MA, Estonia, Latvia, and Romania for shared seminars and exchanges.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-indigo-50 text-indigo-900 rounded-full flex items-center justify-center mb-4">
+                        <i data-lucide="book-open" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-indigo-950 mb-2">Flexible Participation</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Enroll as a full student, join late with make-up intensives, or purchase individual lectures that fit your focus.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule & Testimonials -->
+    <section id="schedule" class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row gap-16">
+                
+                <!-- Schedule List -->
+                <div class="lg:w-1/2">
+                    <div class="flex justify-between items-end mb-8">
+                        <div>
+                            <h2 class="text-3xl font-serif font-bold text-indigo-950">Schedule & Archives</h2>
+                            <p class="text-slate-500 mt-2">Weekly online Tuesdays, intensives each module, and summer school options.</p>
+                        </div>
+                        <a href="https://transpersonal-training.com/schedule/" class="text-indigo-600 font-medium hover:text-indigo-800">View Full</a>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex gap-6 p-4 rounded-lg hover:bg-slate-50 border border-transparent hover:border-slate-100 transition-all group cursor-pointer">
+                            <div class="flex flex-col items-center justify-center w-16 h-16 bg-indigo-50 rounded-lg text-indigo-900 group-hover:bg-indigo-900 group-hover:text-white transition-colors">
+                                <span class="text-xs font-bold uppercase">2026</span>
+                                <span class="text-xl font-bold">Live</span>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-slate-800 group-hover:text-indigo-700 transition-colors">Schedule 2026</h4>
+                                <div class="flex items-center gap-4 mt-1 text-sm text-slate-500">
+                                    <span class="bg-slate-100 px-2 py-0.5 rounded text-xs uppercase tracking-wide font-medium">West program</span>
+                                    <span>Online + Germany intensives</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-6 p-4 rounded-lg hover:bg-slate-50 border border-transparent hover:border-slate-100 transition-all group cursor-pointer">
+                            <div class="flex flex-col items-center justify-center w-16 h-16 bg-indigo-50 rounded-lg text-indigo-900 group-hover:bg-indigo-900 group-hover:text-white transition-colors">
+                                <span class="text-xs font-bold uppercase">2025</span>
+                                <span class="text-xl font-bold">Archive</span>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-slate-800 group-hover:text-indigo-700 transition-colors">2025 Archive</h4>
+                                <div class="flex items-center gap-4 mt-1 text-sm text-slate-500">
+                                    <span class="bg-slate-100 px-2 py-0.5 rounded text-xs uppercase tracking-wide font-medium">Past modules</span>
+                                    <span>Catch up recordings</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-6 p-4 rounded-lg hover:bg-slate-50 border border-transparent hover:border-slate-100 transition-all group cursor-pointer">
+                            <div class="flex flex-col items-center justify-center w-16 h-16 bg-indigo-50 rounded-lg text-indigo-900 group-hover:bg-indigo-900 group-hover:text-white transition-colors">
+                                <span class="text-xs font-bold uppercase">Summer</span>
+                                <span class="text-xl font-bold">INT</span>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-slate-800 group-hover:text-indigo-700 transition-colors">Summer School Moldova</h4>
+                                <div class="flex items-center gap-4 mt-1 text-sm text-slate-500">
+                                    <span class="bg-slate-100 px-2 py-0.5 rounded text-xs uppercase tracking-wide font-medium">Intensive</span>
+                                    <span>Multiple teachers & deep dives</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial -->
+                <div class="lg:w-1/2 bg-indigo-50 rounded-2xl p-10 flex flex-col justify-center relative">
+                    <div class="absolute top-8 left-8 text-indigo-200">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21L14.017 18C14.017 16.896 14.321 16.036 14.929 15.419C15.545 14.803 16.347 14.494 17.336 14.494L20.001 14.494L20.001 3L11.516 3L11.516 12.088L14.017 12.088L14.017 21ZM3.516 21L3.516 18C3.516 16.896 3.821 16.036 4.429 15.419C5.045 14.803 5.847 14.494 6.836 14.494L9.501 14.494L9.501 3L1.015 3L1.015 12.088L3.516 12.088L3.516 21Z"></path></svg>
+                    </div>
+                    <blockquote class="relative z-10 text-xl md:text-2xl font-serif text-indigo-900 leading-relaxed mb-6">
+                        "This training gave me tools, supervision, and the personal work to hold breathwork safely. The combination of online depth and in-person intensives is unique."
+                    </blockquote>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-200 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=150&q=80" alt="Student" class="w-full h-full object-cover" />
+                        </div>
+                        <div>
+                            <cite class="not-italic font-bold text-indigo-950 block">Elena, Graduate</cite>
+                            <span class="text-sm text-indigo-600">Transpersonal psychotherapist in practice</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section id="contact" class="py-20 bg-teal-800 text-white text-center">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-serif font-bold mb-4">Talk to the Team</h2>
+            <p class="text-teal-100 max-w-2xl mx-auto mb-8 text-lg">
+                Apply, join late, or book individual seminars. We will help you choose the right entry point and make up any missed intensives.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                <a href="mailto:office@transpersonal-training.com" class="bg-white text-teal-900 px-8 py-3 rounded-full font-bold hover:bg-teal-50 transition-colors">
+                    office@transpersonal-training.com
+                </a>
+                <a href="https://web.whatsapp.com/send?phone=4917638034517" class="border border-white text-white px-8 py-3 rounded-full font-medium hover:bg-white/10 transition-colors">
+                    +49 176 38034517 (West)
+                </a>
+            </div>
+            <p class="text-teal-100 max-w-2xl mx-auto text-sm">
+                East office: +373 79024199 • Facebook: Eastwest Transpersonal Training School
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300 py-16">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 border-b border-slate-800 pb-12 mb-12">
+                
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-2 mb-6">
+                        <i data-lucide="feather" class="text-amber-500 w-6 h-6"></i>
+                        <span class="text-2xl font-serif font-bold text-white">Transpersonal Training</span>
+                    </div>
+                    <p class="text-sm leading-relaxed mb-6">
+                        Educating therapists for a revolution of consciousness with transpersonal counseling, Grof® Breathwork, and supervised practice across Europe.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="https://www.facebook.com/Eastwest-Transpersonal-Training-School-101185572356568" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-indigo-600 transition-colors" aria-label="Facebook">
+                            <i data-lucide="facebook" class="w-4 h-4 text-slate-400 hover:text-white"></i>
+                        </a>
+                        <a href="mailto:office@transpersonal-training.com" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-indigo-600 transition-colors" aria-label="Email">
+                            <i data-lucide="mail" class="w-4 h-4 text-slate-400 hover:text-white"></i>
+                        </a>
+                        <a href="https://web.whatsapp.com/send?phone=4917638034517" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-indigo-600 transition-colors" aria-label="WhatsApp">
+                            <i data-lucide="message-circle" class="w-4 h-4 text-slate-400 hover:text-white"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Quick Links</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="https://transpersonal-training.com/apply/" class="hover:text-amber-500 transition-colors">Apply</a></li>
+                        <li><a href="https://transpersonal-training.com/program/" class="hover:text-amber-500 transition-colors">Program</a></li>
+                        <li><a href="https://transpersonal-training.com/schedule/" class="hover:text-amber-500 transition-colors">Schedule 2026</a></li>
+                        <li><a href="https://transpersonal-training.com/payment/" class="hover:text-amber-500 transition-colors">Payment</a></li>
+                        <li><a href="https://transpersonal-training.com/participate/" class="hover:text-amber-500 transition-colors">Participate in lectures</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Contact</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="map-pin" class="text-amber-500 w-4 h-4 shrink-0 mt-0.5"></i>
+                            <span>West Head Office<br />+49 176 38034517</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="map-pin" class="text-amber-500 w-4 h-4 shrink-0 mt-0.5"></i>
+                            <span>East Head Office<br />+373 79024199</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="mail" class="text-amber-500 w-4 h-4 shrink-0"></i>
+                            <span>office@transpersonal-training.com</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="facebook" class="text-amber-500 w-4 h-4 shrink-0"></i>
+                            <a href="https://www.facebook.com/Eastwest-Transpersonal-Training-School-101185572356568" class="hover:text-amber-500 transition-colors">Facebook page</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Resources -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Resources</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="https://eurotas.world" class="hover:text-amber-500 transition-colors">EUROTAS Member</a></li>
+                        <li><a href="https://transpersonal-training.com/wp-content/uploads/2025/12/newsletter_12_25.pdf" class="hover:text-amber-500 transition-colors">Newsletter 12/25</a></li>
+                        <li><a href="https://transpersonal-training.com/agreement-appendix" class="hover:text-amber-500 transition-colors">Agreement Appendix</a></li>
+                        <li><a href="https://transpersonal-training.com/information/" class="hover:text-amber-500 transition-colors">Student info</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
+                <p>&copy; 2026 transpersonal-training.com — Educating therapists for a revolution of consciousness.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="https://transpersonal-training.com/?page_id=3" class="hover:text-slate-300">Privacy</a>
+                    <a href="https://transpersonal-training.com/agreement-appendix" class="hover:text-slate-300">Agreement</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Lucide Icons
+            lucide.createIcons();
+
+            // Navbar Logic
+            const navbar = document.getElementById('navbar');
+            const navLogoText = document.getElementById('nav-logo-text');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const themeBtn = document.getElementById('theme-btn');
+
+            // Theme Management
+            const themes = ['default', 'iris', 'blue'];
+            const themeNames = {
+              'default': 'School Lavender',
+              'iris': 'Deep Iris',
+              'blue': 'Scientific Blue'
+            };
+            let currentThemeIndex = 0;
+
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme-preference');
+            if (savedTheme) {
+              currentThemeIndex = themes.indexOf(savedTheme);
+              applyTheme(themes[currentThemeIndex]);
+            }
+
+            function applyTheme(themeName) {
+              document.body.classList.remove('theme-iris', 'theme-blue');
+              if (themeName === 'iris') {
+                document.body.classList.add('theme-iris');
+              } else if (themeName === 'blue') {
+                document.body.classList.add('theme-blue');
+              }
+              localStorage.setItem('theme-preference', themeName);
+              console.log('Theme applied:', themeName);
+            }
+
+            if (themeBtn) {
+              themeBtn.addEventListener('click', () => {
+                currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+                const theme = themes[currentThemeIndex];
+                applyTheme(theme);
+                themeBtn.title = `Switch theme (Current: ${themeNames[theme]})`;
+                lucide.createIcons();
+                console.log('Theme switched to:', theme);
+              });
+              
+              // Set initial theme button title
+              themeBtn.title = `Switch theme (Current: ${themeNames[themes[currentThemeIndex]]})`;
+            }
+
+            // Scroll Effect
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.remove('bg-transparent', 'py-6');
+                    navbar.classList.add('bg-indigo-950/95', 'backdrop-blur-sm', 'shadow-lg', 'py-4');
+                    navLogoText.classList.remove('text-white');
+                    navLogoText.classList.add('text-white');
+                } else {
+                    navbar.classList.add('bg-transparent', 'py-6');
+                    navbar.classList.remove('bg-indigo-950/95', 'backdrop-blur-sm', 'shadow-lg', 'py-4');
+                }
+            });
+
+            // Mobile Menu Toggle
+            if (mobileMenuBtn) {
+              mobileMenuBtn.addEventListener('click', () => {
+                  mobileMenu.classList.toggle('hidden');
+                  mobileMenu.classList.toggle('flex');
+              });
+            }
+        });
+    </script>
+</body>
+</html>
