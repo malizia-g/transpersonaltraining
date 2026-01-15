@@ -165,6 +165,7 @@
                     <button id="theme-btn" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors" title="Switch theme">
                         <i data-lucide="palette" class="w-5 h-5"></i>
                     </button>
+                    <span id="theme-name" class="text-sm font-medium text-white/90 min-w-[140px] text-left">School Lavender</span>
                 </div>
             </div>
 
@@ -625,18 +626,27 @@
               console.log('Theme applied:', themeName);
             }
 
+            const themeNameDisplay = document.getElementById('theme-name');
+            
             if (themeBtn) {
               themeBtn.addEventListener('click', () => {
                 currentThemeIndex = (currentThemeIndex + 1) % themes.length;
                 const theme = themes[currentThemeIndex];
                 applyTheme(theme);
                 themeBtn.title = `Switch theme (Current: ${themeNames[theme]})`;
+                // Update theme name display
+                if (themeNameDisplay) {
+                  themeNameDisplay.textContent = themeNames[theme];
+                }
                 lucide.createIcons();
                 console.log('Theme switched to:', theme);
               });
               
-              // Set initial theme button title
+              // Set initial theme button title and name display
               themeBtn.title = `Switch theme (Current: ${themeNames[themes[currentThemeIndex]]})`;
+              if (themeNameDisplay) {
+                themeNameDisplay.textContent = themeNames[themes[currentThemeIndex]];
+              }
             }
 
             // Scroll Effect: navbar transparency based on hero progress
