@@ -133,6 +133,20 @@
         @media (prefers-reduced-motion: reduce) {
             #hero-video { display: none !important; }
         }
+        
+        /* Mobile menu theme colors */
+        body[class*="theme-"] #mobile-menu {
+            background-color: var(--theme-darker) !important;
+            border-color: var(--theme-primary) !important;
+        }
+        
+        body[class*="theme-"] #mobile-menu a.border-b {
+            border-color: rgba(var(--theme-primary-rgb, 107, 91, 127), 0.5) !important;
+        }
+        
+        body[class*="theme-"] #mobile-menu a:hover {
+            color: var(--theme-light) !important;
+        }
     </style>
 </head>
 <body class="font-sans text-slate-800 bg-slate-50 antialiased">
@@ -140,14 +154,22 @@
     <!-- Navigation -->
     <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 bg-transparent text-white/90">
         <div class="container mx-auto px-6 flex justify-between items-center relative z-10">
-            <!-- Logo -->
-            <div class="flex items-center gap-2">
+            <!-- Logo (Desktop Only) -->
+            <div class="hidden md:flex items-center gap-2">
                 <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center opacity-90">
                     <i data-lucide="loader-pinwheel" class="text-white w-6 h-6"></i>
                 </div>
                 <span id="nav-logo-text" class="text-2xl font-serif font-bold tracking-wide text-white">
                     Transpersonal Training
                 </span>
+            </div>
+
+            <!-- Theme Switcher (Mobile Only) -->
+            <div class="flex md:hidden items-center gap-2">
+                <button id="theme-btn-mobile" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors" title="Switch theme">
+                    <i data-lucide="palette" class="w-5 h-5"></i>
+                </button>
+                <span id="theme-name-mobile" class="text-sm font-medium text-white/90">School Lavender</span>
             </div>
 
             <!-- Desktop Menu -->
@@ -160,7 +182,7 @@
                 <a href="#contact" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 rounded-full font-medium transition-transform hover:scale-105 shadow-md">
                     Apply
                 </a>
-                <!-- Theme Switcher -->
+                <!-- Theme Switcher (Desktop) -->
                 <div class="flex items-center gap-2 ml-4">
                     <button id="theme-btn" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors" title="Switch theme">
                         <i data-lucide="palette" class="w-5 h-5"></i>
@@ -176,12 +198,12 @@
         </div>
 
         <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-indigo-950 border-t border-indigo-900 shadow-xl py-6 px-6 flex-col gap-4 z-20">
-            <a href="#welcome" class="text-slate-200 hover:text-amber-400 py-2 border-b border-indigo-900/50 block">About</a>
-            <a href="#program" class="text-slate-200 hover:text-amber-400 py-2 border-b border-indigo-900/50 block">Program</a>
-            <a href="#schedule" class="text-slate-200 hover:text-amber-400 py-2 border-b border-indigo-900/50 block">Schedule 2026</a>
-            <a href="#students" class="text-slate-200 hover:text-amber-400 py-2 border-b border-indigo-900/50 block">Students</a>
-            <a href="#contact" class="text-slate-200 hover:text-amber-400 py-2 border-b border-indigo-900/50 block">Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full shadow-xl py-6 px-6 flex-col gap-4 z-20 border-t">
+            <a href="#welcome" class="text-slate-200 py-2 border-b block transition-colors">About</a>
+            <a href="#program" class="text-slate-200 py-2 border-b block transition-colors">Program</a>
+            <a href="#schedule" class="text-slate-200 py-2 border-b block transition-colors">Schedule 2026</a>
+            <a href="#students" class="text-slate-200 py-2 border-b block transition-colors">Students</a>
+            <a href="#contact" class="text-slate-200 py-2 border-b block transition-colors">Contact</a>
             <a href="#contact" class="bg-amber-500 text-white px-6 py-3 rounded-md w-full mt-4 font-bold text-center">
                 Apply
             </a>
@@ -596,6 +618,9 @@
             const mobileMenu = document.getElementById('mobile-menu');
             const navLinks = document.querySelectorAll('.nav-link');
             const themeBtn = document.getElementById('theme-btn');
+            const themeBtnMobile = document.getElementById('theme-btn-mobile');
+            const themeNameDisplay = document.getElementById('theme-name');
+            const themeNameDisplayMobile = document.getElementById('theme-name-mobile');
 
             // Theme Management
                         const themes = ['default', 'iris', 'blue', 'ocean', 'forest', 'earth', 'alchemy'];
@@ -625,27 +650,47 @@
               localStorage.setItem('theme-preference', themeName);
               console.log('Theme applied:', themeName);
             }
-
-            const themeNameDisplay = document.getElementById('theme-name');
             
-            if (themeBtn) {
-              themeBtn.addEventListener('click', () => {
+            function switchTheme() {
                 currentThemeIndex = (currentThemeIndex + 1) % themes.length;
                 const theme = themes[currentThemeIndex];
                 applyTheme(theme);
-                themeBtn.title = `Switch theme (Current: ${themeNames[theme]})`;
-                // Update theme name display
+                
+                // Update desktop button and display
+                if (themeBtn) {
+                    themeBtn.title = `Switch theme (Current: ${themeNames[theme]})`;
+                }
                 if (themeNameDisplay) {
                   themeNameDisplay.textContent = themeNames[theme];
                 }
+                
+                // Update mobile button and display
+                if (themeBtnMobile) {
+                    themeBtnMobile.title = `Switch theme (Current: ${themeNames[theme]})`;
+                }
+                if (themeNameDisplayMobile) {
+                  themeNameDisplayMobile.textContent = themeNames[theme];
+                }
+                
                 lucide.createIcons();
                 console.log('Theme switched to:', theme);
-              });
-              
-              // Set initial theme button title and name display
+            }
+
+            // Desktop theme button
+            if (themeBtn) {
+              themeBtn.addEventListener('click', switchTheme);
               themeBtn.title = `Switch theme (Current: ${themeNames[themes[currentThemeIndex]]})`;
               if (themeNameDisplay) {
                 themeNameDisplay.textContent = themeNames[themes[currentThemeIndex]];
+              }
+            }
+            
+            // Mobile theme button
+            if (themeBtnMobile) {
+              themeBtnMobile.addEventListener('click', switchTheme);
+              themeBtnMobile.title = `Switch theme (Current: ${themeNames[themes[currentThemeIndex]]})`;
+              if (themeNameDisplayMobile) {
+                themeNameDisplayMobile.textContent = themeNames[themes[currentThemeIndex]];
               }
             }
 
