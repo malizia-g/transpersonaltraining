@@ -16,6 +16,13 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
+        <!-- Hero video source (set via build or here) -->
+        <script>
+            // Imposta l'URL del video caricato (foresta/stream)
+            // Nota: lasciamo anche l'override da altre parti se necessario
+            window.NATURE_VIDEO_URL = encodeURI('Bella mattina destate nella foresta. I raggi del sole sfondano i.mp4');
+        </script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -61,6 +68,37 @@
             --theme-primary: #1E3A8A;
             --theme-darker: #0f2540;
             --theme-light: #3b82f6;
+            --theme-primary-rgb: 30, 58, 138;
+        }
+        
+        /* Additional test palette themes */
+        body.theme-ocean {
+            /* Ocean Depth (Teal): Calm & Trust */
+            --theme-primary: #0f766e; /* teal-700 */
+            --theme-darker: #134e4a; /* teal-900 */
+            --theme-light: #5eead4;  /* teal-300 */
+            --theme-primary-rgb: 15, 118, 110;
+        }
+        body.theme-forest {
+            /* Deep Forest (Green): Healing & Nature */
+            --theme-primary: #166534; /* green-700 */
+            --theme-darker: #14532d; /* green-900 */
+            --theme-light: #86efac;  /* green-300 */
+            --theme-primary-rgb: 22, 101, 52;
+        }
+        body.theme-earth {
+            /* Burnt Earth (Terracotta): Courage & Vitality */
+            --theme-primary: #c2410c; /* orange-700-ish terracotta */
+            --theme-darker: #7c2d12; /* orange-900 */
+            --theme-light: #fdba74;  /* orange-300 */
+            --theme-primary-rgb: 194, 65, 12;
+        }
+        body.theme-alchemy {
+            /* Alchemy (Magenta): Transformation */
+            --theme-primary: #a21caf; /* fuchsia-700 */
+            --theme-darker: #701a75; /* fuchsia-900 */
+            --theme-light: #f0abfc;  /* fuchsia-300 */
+            --theme-primary-rgb: 162, 28, 175;
         }
         
         /* Dynamic color changes */
@@ -69,50 +107,31 @@
         .theme-border-primary { border-color: var(--theme-primary); }
         .theme-hover-primary:hover { background-color: var(--theme-primary); }
         
-        /* Navbar background */
-        body.theme-iris #navbar.bg-indigo-950\/95,
-        body.theme-blue #navbar.bg-indigo-950\/95 {
-            background-color: rgba(var(--theme-primary-rgb, 0, 0, 0), 0.95) !important;
-        }
-        
-        body.theme-iris #navbar.bg-indigo-950\/95,
-        body.theme-blue #navbar.bg-indigo-950\/95 {
+        /* Navbar background - generic for all themes */
+        body[class*="theme-"] #navbar.bg-indigo-950\/95 {
             background-color: var(--theme-darker) !important;
-            background-color: rgba(75, 0, 130, 0.95) !important;
-        }
-        
-        body.theme-blue #navbar.bg-indigo-950\/95 {
-            background-color: rgba(30, 58, 138, 0.95) !important;
         }
         
         /* Program section and major elements */
-        body.theme-iris #program,
-        body.theme-blue #program {
-            background-color: var(--theme-darker);
-        }
+        body[class*="theme-"] #program { background-color: var(--theme-darker); }
         
         /* Card hover effects */
-        body.theme-iris .bg-indigo-900\/50,
-        body.theme-blue .bg-indigo-900\/50 {
+        body[class*="theme-"] .bg-indigo-900\/50 {
             background-color: rgba(var(--theme-primary-rgb, 0, 0, 0), 0.5);
         }
         
         /* Apply dynamic accent colors */
-        body.theme-iris .hover\:bg-indigo-900:hover,
-        body.theme-blue .hover\:bg-indigo-900:hover {
-            background-color: var(--theme-darker) !important;
-        }
+        body[class*="theme-"] .hover\:bg-indigo-900:hover { background-color: var(--theme-darker) !important; }
         
         /* Text primary color on dark backgrounds */
-        body.theme-iris .text-amber-400,
-        body.theme-blue .text-amber-400 {
-            color: var(--theme-light) !important;
-        }
+        body[class*="theme-"] .text-amber-400 { color: var(--theme-light) !important; }
         
         /* Section headers */
-        body.theme-iris .text-indigo-950,
-        body.theme-blue .text-indigo-950 {
-            color: var(--theme-darker) !important;
+        body[class*="theme-"] .text-indigo-950 { color: var(--theme-darker) !important; }
+
+        /* Background video accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            #hero-video { display: none !important; }
         }
     </style>
 </head>
@@ -120,7 +139,7 @@
 
     <!-- Navigation -->
     <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 bg-transparent text-white/90">
-        <div class="container mx-auto px-6 flex justify-between items-center">
+        <div class="container mx-auto px-6 flex justify-between items-center relative z-10">
             <!-- Logo -->
             <div class="flex items-center gap-2">
                 <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center opacity-90">
@@ -156,7 +175,7 @@
         </div>
 
         <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-indigo-950 border-t border-indigo-900 shadow-xl py-6 px-6 flex-col gap-4">
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-indigo-950 border-t border-indigo-900 shadow-xl py-6 px-6 flex-col gap-4 z-20">
             <a href="#welcome" class="text-slate-200 hover:text-amber-400 py-2 border-b border-indigo-900/50 block">About</a>
             <a href="#program" class="text-slate-200 hover:text-amber-400 py-2 border-b border-indigo-900/50 block">Program</a>
             <a href="#schedule" class="text-slate-200 hover:text-amber-400 py-2 border-b border-indigo-900/50 block">Schedule 2026</a>
@@ -170,11 +189,17 @@
 
     <!-- Hero Section -->
     <header class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
-        <!-- Background Image with Overlay -->
+        <!-- Background Media with Overlay -->
         <div class="absolute inset-0 z-0">
+            <!-- Optional nature background video (muted autoplay loop) -->
+            <video id="hero-video" class="w-full h-full object-cover" autoplay muted loop playsinline
+                   poster="https://images.unsplash.com/photo-1441974231531-2c45c316d55d?auto=format&fit=crop&w=2000&q=80"
+                   aria-hidden="true" style="display:none"></video>
+
+            <!-- Fallback nature image (forest/stream) -->
             <img 
-                src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2000&q=80" 
-                alt="Circle of people in mindful breathwork" 
+                src="https://images.unsplash.com/photo-1441974231531-2c45c316d55d?auto=format&fit=crop&w=2000&q=80" 
+                alt="Forest nature background with trees and stream" 
                 class="w-full h-full object-cover"
             />
             <div class="absolute inset-0 bg-gradient-to-b from-indigo-950/70 via-indigo-900/50 to-slate-50"></div>
@@ -572,11 +597,15 @@
             const themeBtn = document.getElementById('theme-btn');
 
             // Theme Management
-            const themes = ['default', 'iris', 'blue'];
+                        const themes = ['default', 'iris', 'blue', 'ocean', 'forest', 'earth', 'alchemy'];
             const themeNames = {
               'default': 'School Lavender',
               'iris': 'Deep Iris',
-              'blue': 'Scientific Blue'
+                            'blue': 'Scientific Blue',
+                            'ocean': 'Ocean Depth (Teal)',
+                            'forest': 'Deep Forest (Green)',
+                            'earth': 'Burnt Earth (Terracotta)',
+                            'alchemy': 'Alchemy (Magenta)'
             };
             let currentThemeIndex = 0;
 
@@ -588,12 +617,10 @@
             }
 
             function applyTheme(themeName) {
-              document.body.classList.remove('theme-iris', 'theme-blue');
-              if (themeName === 'iris') {
-                document.body.classList.add('theme-iris');
-              } else if (themeName === 'blue') {
-                document.body.classList.add('theme-blue');
-              }
+                            document.body.classList.remove('theme-iris', 'theme-blue', 'theme-ocean', 'theme-forest', 'theme-earth', 'theme-alchemy');
+                            if (themeName !== 'default') {
+                                document.body.classList.add(`theme-${themeName}`);
+                            }
               localStorage.setItem('theme-preference', themeName);
               console.log('Theme applied:', themeName);
             }
@@ -612,18 +639,62 @@
               themeBtn.title = `Switch theme (Current: ${themeNames[themes[currentThemeIndex]]})`;
             }
 
-            // Scroll Effect
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 20) {
-                    navbar.classList.remove('bg-transparent', 'py-6');
-                    navbar.classList.add('bg-indigo-950/95', 'backdrop-blur-sm', 'shadow-lg', 'py-4');
-                    navLogoText.classList.remove('text-white');
-                    navLogoText.classList.add('text-white');
+            // Scroll Effect: navbar transparency based on hero progress
+            const hero = document.querySelector('header');
+            const overlay = document.createElement('div');
+            overlay.id = 'navbar-overlay';
+            overlay.style.cssText = `
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: var(--navbar-height, 80px);
+              background-color: var(--theme-darker);
+              opacity: 0;
+              transition: opacity 200ms linear;
+              pointer-events: none;
+              z-index: 49;
+            `;
+            document.body.insertBefore(overlay, navbar);
+
+            // Set navbar height CSS variable
+            const updateNavbarHeight = () => {
+              document.documentElement.style.setProperty('--navbar-height', navbar.offsetHeight + 'px');
+            };
+            updateNavbarHeight();
+            window.addEventListener('resize', updateNavbarHeight);
+
+            let heroHeight = hero ? hero.offsetHeight : 0;
+            const recalc = () => { heroHeight = hero ? hero.offsetHeight : 0; };
+            window.addEventListener('resize', recalc);
+
+            const onScroll = () => {
+              const y = window.scrollY || 0;
+              if (!heroHeight) { recalc(); }
+              const half = heroHeight * 0.5;
+              const end = heroHeight;
+
+              if (y >= end) {
+                // Fully visible past hero
+                overlay.style.opacity = '0.95';
+                navbar.classList.remove('py-6');
+                navbar.classList.add('py-4', 'backdrop-blur-sm', 'shadow-lg');
+              } else {
+                // Before end of hero
+                navbar.classList.add('py-6');
+                navbar.classList.remove('py-4', 'backdrop-blur-sm', 'shadow-lg');
+                if (y <= half) {
+                  // Transparent until at least half of the video
+                  overlay.style.opacity = '0';
                 } else {
-                    navbar.classList.add('bg-transparent', 'py-6');
-                    navbar.classList.remove('bg-indigo-950/95', 'backdrop-blur-sm', 'shadow-lg', 'py-4');
+                  // Gradually increase opacity from half to end
+                  const t = Math.min(1, Math.max(0, (y - half) / (end - half)));
+                  overlay.style.opacity = String(0.95 * t);
                 }
-            });
+              }
+            };
+            onScroll();
+            window.addEventListener('scroll', onScroll, { passive: true });
 
             // Mobile Menu Toggle
             if (mobileMenuBtn) {
@@ -632,6 +703,37 @@
                   mobileMenu.classList.toggle('flex');
               });
             }
+
+                        // Background Video Setup (trees/stream)
+                        try {
+                                const videoEl = document.getElementById('hero-video');
+                                // Respect reduced motion preference
+                                const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                                if (videoEl && !prefersReducedMotion) {
+                                    // Default demo nature video with outdoor trees; replace with your licensed media
+                                    const defaultVideo = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+                                    const src = window.NATURE_VIDEO_URL || defaultVideo;
+                                    // Only attach if we have a non-empty string (supports relative URLs)
+                                    if (typeof src === 'string' && src.length > 0) {
+                                        videoEl.src = src;
+                                        videoEl.addEventListener('loadeddata', () => {
+                                            videoEl.style.display = 'block';
+                                            const fallbackImg = videoEl.nextElementSibling;
+                                            if (fallbackImg && fallbackImg.tagName === 'IMG') {
+                                                fallbackImg.style.display = 'none';
+                                            }
+                                        }, { once: true });
+                                        // In case autoplay is blocked, attempt play when user interacts
+                                        const tryPlay = () => {
+                                            videoEl.play().catch(() => {/* ignore */});
+                                            window.removeEventListener('click', tryPlay);
+                                        };
+                                        window.addEventListener('click', tryPlay);
+                                    }
+                                }
+                        } catch (e) {
+                                console.warn('Background video setup skipped:', e);
+                        }
         });
     </script>
 </body>
