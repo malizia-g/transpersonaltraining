@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Hero's Journey - Curriculum | Lumina Institute</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --theme-primary: #755498;
+            --theme-darker: #2e203b;
+            --theme-light: #aa92ca;
+            --theme-primary-rgb: 117, 84, 152;
+        }
+        
+        body.theme-iris {
+            --theme-primary: #4B0082;
+            --theme-darker: #2d004d;
+            --theme-light: #9b6bb8;
+            --theme-primary-rgb: 75, 0, 130;
+        }
+        
+        body.theme-blue {
+            --theme-primary: #1E3A8A;
+            --theme-darker: #0f2540;
+            --theme-light: #3b82f6;
+            --theme-primary-rgb: 30, 58, 138;
+        }
+        
+        body.theme-ocean {
+            --theme-primary: #0f766e;
+            --theme-darker: #134e4a;
+            --theme-light: #5eead4;
+            --theme-primary-rgb: 15, 118, 110;
+        }
+        
+        body.theme-forest {
+            --theme-primary: #166534;
+            --theme-darker: #14532d;
+            --theme-light: #86efac;
+            --theme-primary-rgb: 22, 101, 52;
+        }
+        
+        body.theme-earth {
+            --theme-primary: #c2410c;
+            --theme-darker: #7c2d12;
+            --theme-light: #fdba74;
+            --theme-primary-rgb: 194, 65, 12;
+        }
+        
+        body.theme-alchemy {
+            --theme-primary: #a21caf;
+            --theme-darker: #701a75;
+            --theme-light: #f0abfc;
+            --theme-primary-rgb: 162, 28, 175;
+        }
+
+        html { scroll-behavior: smooth; }
+        
+        /* Dynamic theme colors */
+        body[class*="theme-"] #navbar {
+            background-color: rgba(var(--theme-primary-rgb), 0.95) !important;
+        }
+        
+        body[class*="theme-"] .bg-primary-950\/95 {
+            background-color: rgba(var(--theme-primary-rgb), 0.95) !important;
+        }
+        
+        body[class*="theme-"] .text-primary-200 {
+            color: var(--theme-light) !important;
+        }
+        
+        body[class*="theme-"] .bg-amber-500 {
+            background-color: var(--theme-light) !important;
+            color: var(--theme-darker) !important;
+        }
+        
+        body[class*="theme-"] .bg-primary-700,
+        body[class*="theme-"] .bg-primary-500 {
+            background-color: var(--theme-primary) !important;
+        }
+        
+        body[class*="theme-"] .border-primary-700,
+        body[class*="theme-"] .border-primary-500 {
+            border-color: var(--theme-primary) !important;
+        }
+        
+        body[class*="theme-"] .text-primary-700,
+        body[class*="theme-"] .text-primary-500 {
+            color: var(--theme-primary) !important;
+        }
+        
+        body[class*="theme-"] .text-amber-600 {
+            color: var(--theme-light) !important;
+        }
+        
+        body[class*="theme-"] header .from-primary-950\/70 {
+            --tw-gradient-from: rgba(var(--theme-primary-rgb), 0.7) !important;
+        }
+        
+        body[class*="theme-"] header .via-primary-900\/50 {
+            --tw-gradient-to: rgba(var(--theme-primary-rgb), 0.5) !important;
+        }
+        
+        body[class*="theme-"] .bg-primary-950 {
+            background-color: var(--theme-darker) !important;
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 100px;
+        }
+
+        .vine-path {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: visible;
+        }
+
+        .vine-branch {
+            fill: none;
+            stroke: #5D4037;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.2));
+        }
+
+        .vine-leaf-path {
+            filter: drop-shadow(1px 2px 2px rgba(0,0,0,0.2));
+        }
+
+        .module-card {
+            position: relative;
+            z-index: 10;
+        }
+
+        .vine-leaf {
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(1px 2px 2px rgba(0,0,0,0.3));
+            cursor: pointer;
+        }
+        
+        .vine-leaf-svg {
+            transition: all 0.3s ease;
+        }
+        
+        .vine-leaf-svg:hover {
+            transform: scale(1.5) !important;
+            filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.4));
+        }
+        
+        .vine-leaf-svg:hover {
+            transform: scale(1.5) !important;
+            filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.4));
+        }
+
+        @media (max-width: 768px) {
+            .module-card { margin-left: 0 !important; margin-right: 0 !important; }
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: 'var(--color-primary-50)', 100: 'var(--color-primary-100)', 200: 'var(--color-primary-200)',
+                            300: 'var(--color-primary-300)', 400: 'var(--color-primary-400)', 500: 'var(--color-primary-500)',
+                            600: 'var(--color-primary-600)', 700: 'var(--color-primary-700)', 800: 'var(--color-primary-800)',
+                            900: 'var(--color-primary-900)', 950: 'var(--color-primary-950)',
+                        },
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] },
+                    animation: { 'fade-in-up': 'fadeInUp 1s ease-out forwards' },
+                    keyframes: { fadeInUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } } }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans text-slate-800 bg-slate-50 antialiased transition-colors duration-700">
+
+    <nav id="navbar" class="fixed w-full z-40 transition-all duration-300 py-4 bg-primary-950/95 backdrop-blur-sm shadow-lg text-white">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                <div class="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center shadow-lg">
+                    <i data-lucide="arrow-left" class="text-white w-5 h-5"></i>
+                </div>
+                <span class="text-xl font-serif font-bold tracking-wide">Back to Home</span>
+            </a>
+            <div class="hidden md:flex items-center gap-6">
+                <div class="text-primary-200 text-sm font-medium tracking-widest uppercase">
+                    The EastWest Transpersonal Curriculum
+                </div>
+                <!-- Theme Switcher -->
+                <div class="flex items-center gap-2 ml-4">
+                    <button id="theme-btn" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors" title="Switch theme">
+                        <i data-lucide="palette" class="w-5 h-5"></i>
+                    </button>
+                    <span id="theme-name" class="text-sm font-medium text-white/90 min-w-[140px] text-left">School Lavender</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative h-[60vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img 
+                src="vineyard.jpg" 
+                alt="Vineyard landscape" 
+                class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 bg-gradient-to-b from-primary-950/70 via-primary-900/50 to-slate-50"></div>
+        </div>
+
+        <div class="relative z-10 container mx-auto px-6 text-center pt-10">
+            <div class="animate-fade-in-up">
+                <span class="inline-block py-1 px-4 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-sm font-medium mb-4 tracking-wider uppercase">
+                    13 Steps to Wholeness
+                </span>
+                <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-xl">
+                    Our Hero's Journey
+                </h1>
+                <p class="text-xl text-slate-200 max-w-2xl mx-auto font-light leading-relaxed">
+                    A comprehensive 4-year evolutionary path. From the foundations of counseling to the peaks of transpersonal experience.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-24 bg-white relative overflow-hidden">
+        <div class="absolute left-0 top-0 z-0 opacity-20 pointer-events-none" style="width: 200px; height: 100%;">
+            <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 200 2000">
+                <!-- Main vine path continuous -->
+                <path d="M 100,0 Q 120,80 100,160 Q 80,240 100,320 Q 120,400 100,480 Q 80,560 100,640 Q 120,720 100,800 Q 80,880 100,960 Q 120,1040 100,1120 Q 80,1200 100,1280 Q 120,1360 100,1440 Q 80,1520 100,1600 Q 120,1680 100,1760 Q 80,1840 100,1920 Q 120,1980 100,2000" stroke="#6b8e6b" stroke-width="2.5" fill="none" opacity="0.6"/>
+                
+                <!-- Secondary branches along the vine -->
+                <path d="M 100,50 Q 75,85 70,120" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
+                <path d="M 100,150 Q 125,180 135,210" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
+                <path d="M 100,280 Q 75,310 65,340" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
+                <path d="M 100,420 Q 125,450 140,480" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
+                <path d="M 100,600 Q 75,630 70,660" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
+                <path d="M 100,780 Q 125,810 138,840" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
+                <path d="M 100,950 Q 75,980 68,1010" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
+                <path d="M 100,1120 Q 125,1150 140,1180" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
+                <path d="M 100,1300 Q 75,1330 70,1360" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
+                <path d="M 100,1470 Q 125,1500 138,1530" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
+                <path d="M 100,1650 Q 75,1680 68,1710" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
+                <path d="M 100,1820 Q 125,1850 140,1880" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
+                
+                <!-- Leaves along the vine -->
+                <circle cx="100" cy="80" r="3" fill="#88a580" opacity="0.7"/>
+                <circle cx="78" cy="120" r="2.5" fill="#88a580" opacity="0.7"/>
+                <circle cx="125" cy="180" r="2.5" fill="#88a580" opacity="0.7"/>
+                <circle cx="100" cy="240" r="3" fill="#88a580" opacity="0.7"/>
+                <circle cx="72" cy="310" r="2.5" fill="#88a580" opacity="0.7"/>
+                <circle cx="130" cy="380" r="2.5" fill="#88a580" opacity="0.7"/>
+                <circle cx="100" cy="450" r="3" fill="#88a580" opacity="0.7"/>
+                <circle cx="88" cy="540" r="2.5" fill="#88a580" opacity="0.7"/>
+                <circle cx="118" cy="620" r="2.5" fill="#88a580" opacity="0.7"/>
+                <circle cx="100" cy="700" r="3" fill="#88a580" opacity="0.7"/>
+                <circle cx="75" cy="780" r="2.5" fill="#88a580" opacity="0.7"/>
+                <circle cx="128" cy="860" r="2.5" fill="#88a580" opacity="0.7"/>
+                <circle cx="100" cy="940" r="3" fill="#88a580" opacity="0.7"/>
+                <circle cx="82" cy="1020" r="2.5" fill="#88a580" opacity="0.7"/>
+                <circle cx="125" cy="1100" r="2.5" fill="#88a580" opacity="0.7"/>
+                <circle cx="100" cy="1180" r="3" fill="#88a580" opacity="0.7"/>
+                <circle cx="70" cy="1260" r="2.5" fill="#88a580" opacity="0.7"/>
+                <circle cx="132" cy="1340" r="2.5" fill="#88a580" opacity="0.7"/>
+                <circle cx="100" cy="1420" r="3" fill="#88a580" opacity="0.7"/>
+                <circle cx="80" cy="1500" r="2.5" fill="#88a580" opacity="0.7"/>
+                <circle cx="122" cy="1580" r="2.5" fill="#88a580" opacity="0.7"/>
+                <circle cx="100" cy="1660" r="3" fill="#88a580" opacity="0.7"/>
+                <circle cx="75" cy="1740" r="2.5" fill="#88a580" opacity="0.7"/>
+                <circle cx="128" cy="1820" r="2.5" fill="#88a580" opacity="0.7"/>
+            </svg>
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="timeline-container" id="timelineContainer">
+                
+                <svg class="vine-path" id="vineSvg" style="position: absolute; top: 0; left: -100px; width: calc(100% + 200px); height: 100%; overflow: visible;">
+                    <g id="branchesContainer"></g>
+                    <path id="vinePath" class="vine-branch" d=""/>
+                    <g id="leavesContainer"></g>
+                </svg>
+
+                <div class="mb-20 module-card" data-module="1" style="margin-left: 10%;">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">1</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-l-4 border-primary-500 hover:scale-105 transition-transform duration-300 cursor-pointer">
+                            <div class="flex items-center gap-3 mb-3">
+                                <i data-lucide="map" class="text-primary-500 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">The Foundation</h3>
+                            </div>
+                            <p class="text-sm text-amber-600 font-bold uppercase mb-2">Therapeutic Approaches</p>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                The journey begins. Overview of psychotherapeutic approaches, CBT, Humanistic approach, and the fundamentals of Analytical Psychology (Jung): Shadow, projections, and patterns.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 module-card" data-module="2" style="margin-left: 55%;">
+                    <div class="flex items-center gap-4 mb-3 flex-row-reverse">
+                        <div class="bg-primary-700 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">2</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-r-4 border-primary-700 hover:scale-105 transition-transform duration-300 cursor-pointer text-right">
+                            <div class="flex items-center gap-3 mb-3 flex-row-reverse">
+                                <i data-lucide="users" class="text-primary-700 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">System & Process</h3>
+                            </div>
+                            <p class="text-sm text-primary-500 font-bold uppercase mb-2">Systemic & Gestalt Work</p>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Resource-based Systemic Therapy, Process Oriented Therapy, and Gestalt Work. Double Holotropic Breathwork sessions in Todtmoos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 module-card" data-module="3" style="margin-left: 5%;">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="bg-primary-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">3</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-l-4 border-primary-500 hover:scale-105 transition-transform duration-300 cursor-pointer">
+                            <div class="flex items-center gap-3 mb-3">
+                                <i data-lucide="sprout" class="text-primary-500 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">Evolution of the Psyche</h3>
+                            </div>
+                            <p class="text-sm text-amber-600 font-bold uppercase mb-2">Effective Psychotherapy</p>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Creative Evolution 2.0. Relationships as evolutionary practice. The 12 ancient practices of caring for the soul. The Hero's Journey.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 module-card" data-module="4" style="margin-left: 60%;">
+                    <div class="flex items-center gap-4 mb-3 flex-row-reverse">
+                        <div class="bg-primary-700 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">4</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-r-4 border-primary-700 hover:scale-105 transition-transform duration-300 cursor-pointer text-right">
+                            <div class="flex items-center gap-3 mb-3 flex-row-reverse">
+                                <i data-lucide="zap" class="text-primary-700 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">Archetypes & Energy</h3>
+                            </div>
+                            <p class="text-sm text-primary-500 font-bold uppercase mb-2">Biotransenergetics I</p>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Deep dive into Archetypes and the foundations of Biotransenergetics (BTE) with Dr. Pier Luigi Lattuada. Film study: "The Secret of Carlos Castaneda".
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 module-card" data-module="5" style="margin-left: 15%;">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="bg-primary-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">5</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-l-4 border-primary-500 hover:scale-105 transition-transform duration-300 cursor-pointer">
+                            <div class="flex items-center gap-3 mb-3">
+                                <i data-lucide="baby" class="text-primary-500 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">The Inner Child</h3>
+                            </div>
+                            <p class="text-sm text-amber-600 font-bold uppercase mb-2">Hypnotherapy & BTE II</p>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Continuation of Biotransenergetics. Introduction to Hypnotherapy and working with the Inner Child. Healing the Ego and understanding Stan Grof's life work.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 module-card" data-module="6" style="margin-left: 50%;">
+                    <div class="flex items-center gap-4 mb-3 flex-row-reverse">
+                        <div class="bg-primary-700 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">6</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-r-4 border-primary-700 hover:scale-105 transition-transform duration-300 cursor-pointer text-right">
+                            <div class="flex items-center gap-3 mb-3 flex-row-reverse">
+                                <i data-lucide="map-pin" class="text-primary-700 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">Maps of the Psyche</h3>
+                            </div>
+                            <p class="text-sm text-primary-500 font-bold uppercase mb-2">Constellations & Psychosynthesis</p>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Strategic sessions, Family Constellations (Orders of Love), Psychosynthesis, and Stan Grof's expanded maps of consciousness.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 module-card" data-module="7" style="margin-left: 8%;">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="bg-primary-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">7</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-l-4 border-primary-500 hover:scale-105 transition-transform duration-300 cursor-pointer">
+                            <div class="flex items-center gap-3 mb-3">
+                                <i data-lucide="infinity" class="text-primary-500 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">Holotropic States</h3>
+                            </div>
+                            <p class="text-sm text-amber-600 font-bold uppercase mb-2">Transpersonal Psychotherapy</p>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Collective Trauma, Kundalini, Spiritual Journey via Heart-based Meditation. Regression Therapy as a healing tool. Perpetrator-Victim structure.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 module-card" data-module="8" style="margin-left: 58%;">
+                    <div class="flex items-center gap-4 mb-3 flex-row-reverse">
+                        <div class="bg-primary-700 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">8</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-r-4 border-primary-700 hover:scale-105 transition-transform duration-300 cursor-pointer text-right">
+                            <div class="flex items-center gap-3 mb-3 flex-row-reverse">
+                                <i data-lucide="flask-conical" class="text-primary-700 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">Forbidden Wisdom</h3>
+                            </div>
+                            <p class="text-sm text-primary-500 font-bold uppercase mb-2">Psychedelics & Perinatal</p>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Healing potential of Holotropic states. Perinatal Matrices. Psychedelics as a source of spiritual experience: dangers, recreation, and therapeutic settings.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 module-card" data-module="9" style="margin-left: 12%;">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="bg-primary-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">9</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-l-4 border-primary-500 hover:scale-105 transition-transform duration-300 cursor-pointer">
+                            <div class="flex items-center gap-3 mb-3">
+                                <i data-lucide="flame" class="text-primary-500 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">Alchemy of Trauma</h3>
+                            </div>
+                            <p class="text-sm text-amber-600 font-bold uppercase mb-2">Psychopathology</p>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Love in Psychotherapy. Forging transpersonal gold from life's deepest wounds. Gestalt Chair Work. Spiritual Emergency vs Spiritual Resistance.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 module-card" data-module="10" style="margin-left: 52%;">
+                    <div class="flex items-center gap-4 mb-3 flex-row-reverse">
+                        <div class="bg-primary-700 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">10</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-r-4 border-primary-700 hover:scale-105 transition-transform duration-300 cursor-pointer text-right">
+                            <div class="flex items-center gap-3 mb-3 flex-row-reverse">
+                                <i data-lucide="music" class="text-primary-700 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">Breath & Sound</h3>
+                            </div>
+                            <p class="text-sm text-primary-500 font-bold uppercase mb-2">Setting & Music</p>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Individual Constellations in the group. How to work with a group. Setting and concept of Holotropic Breathwork. The role of Music in Breathwork.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 module-card" data-module="11" style="margin-left: 10%;">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="bg-primary-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">11</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-l-4 border-primary-500 hover:scale-105 transition-transform duration-300 cursor-pointer">
+                            <div class="flex items-center gap-3 mb-3">
+                                <i data-lucide="skull" class="text-primary-500 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">Death & Rebirth</h3>
+                            </div>
+                            <p class="text-sm text-amber-600 font-bold uppercase mb-2">Integration Therapy</p>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Strategy of Holotropic Sessions. Death of the Ego in Stan Grof's work. Integration Therapy and Family Constellations.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 module-card" data-module="12" style="margin-left: 56%;">
+                    <div class="flex items-center gap-4 mb-3 flex-row-reverse">
+                        <div class="bg-primary-700 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">12</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-r-4 border-primary-700 hover:scale-105 transition-transform duration-300 cursor-pointer text-right">
+                            <div class="flex items-center gap-3 mb-3 flex-row-reverse">
+                                <i data-lucide="feather" class="text-primary-700 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">Ancient & Modern</h3>
+                            </div>
+                            <p class="text-sm text-primary-500 font-bold uppercase mb-2">Shamanism & Integral Theory</p>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                The Psychology of Shamanism. Psychopathology from Grof's point of view. Deep dive into Ken Wilber's Integral Theory.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8 module-card" data-module="13" style="margin-left: 15%;">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">13</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-l-4 border-amber-500 hover:scale-105 transition-transform duration-300 cursor-pointer">
+                            <div class="flex items-center gap-3 mb-3">
+                                <i data-lucide="graduation-cap" class="text-amber-500 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">Practice & Completion</h3>
+                            </div>
+                            <p class="text-sm text-amber-600 font-bold uppercase mb-2">Supervision & Ethics</p>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Ethics in Holotropic states. Art Therapy. Dealing with Shame, Fear, and Guilt. Spiritual crisis vs psychic disorder. Final Exams and Supervision.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-primary-950 text-slate-300 py-16 transition-colors duration-700">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-2xl font-serif font-bold text-white mb-6">Ready to begin your journey?</h2>
+            <button class="bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 rounded-full font-bold transition-transform hover:scale-105 shadow-lg">
+                Apply for the Training
+            </button>
+            <p class="mt-8 text-sm text-primary-400">&copy; 2026 Lumina Institute. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Draw the twisted vine path dynamically based on module positions
+        function drawVine() {
+            const cards = document.querySelectorAll('.module-card');
+            const svg = document.getElementById('vineSvg');
+            const path = document.getElementById('vinePath');
+            const container = document.getElementById('timelineContainer');
+            
+            if (cards.length === 0) return;
+
+            const containerRect = container.getBoundingClientRect();
+            svg.style.height = container.offsetHeight + 'px';
+            
+            const points = [];
+            cards.forEach((card, i) => {
+                const circle = card.querySelector('[class*="rounded-full"]');
+                if (!circle) return;
+                
+                const rect = circle.getBoundingClientRect();
+                const containerTop = container.getBoundingClientRect().top;
+                
+                const x = rect.left - containerRect.left + rect.width / 2;
+                const y = rect.top - containerTop + rect.height / 2;
+                points.push({x, y});
+            });
+
+            if (points.length < 2) return;
+
+            // Create flowing path with smooth loops instead of cusps
+            let d = `M ${points[0].x} ${points[0].y}`;
+            
+            for (let i = 0; i < points.length - 1; i++) {
+                const current = points[i];
+                const next = points[i + 1];
+                
+                const dx = next.x - current.x;
+                const dy = next.y - current.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                // Alternate direction for each loop
+                const twist = (i % 2 === 0 ? 1 : -1);
+                // Smooth intensity variation with more complexity
+                const intensity = 0.9 + Math.sin(i * 0.6) * 0.3 + Math.cos(i * 1.1) * 0.2;
+                const loopSize = Math.min(distance * 0.65, 180) * intensity;
+                
+                // Create circular loop by going far out and back
+                const angle = Math.atan2(dy, dx);
+                const perpAngle = angle + Math.PI / 2;
+                
+                // Use smooth quadratic curves to avoid cusps
+                const loopx = current.x + dx * 0.5 + Math.cos(perpAngle) * loopSize * twist * 1.15;
+                const loopy = current.y + dy * 0.5 + Math.sin(perpAngle) * loopSize * twist * 1.15;
+                
+                // Simple smooth curve
+                d += ` Q ${loopx} ${loopy}, ${next.x} ${next.y}`;
+            }
+            
+            path.setAttribute('d', d);
+            path.setAttribute('stroke-width', '4');
+            path.setAttribute('opacity', '0.65');
+            
+            // Add small branches along the path
+            addSmallBranches();
+        }
+        
+        function addSmallBranches() {
+            const path = document.getElementById('vinePath');
+            const branchesContainer = document.getElementById('branchesContainer');
+            const pathLength = path.getTotalLength();
+            
+            // Clear existing branches
+            branchesContainer.innerHTML = '';
+            
+            // Array to store branch info for adding leaves
+            const allBranches = [];
+            
+            // Number of small branches
+            const numBranches = 25;
+            
+            for (let i = 0; i < numBranches; i++) {
+                // Random position along the path
+                const position = Math.random() * (pathLength - 50) + 25;
+                const startPoint = path.getPointAtLength(position);
+                
+                // Get tangent for branch direction
+                const nextPoint = path.getPointAtLength(position + 5);
+                const tangentAngle = Math.atan2(nextPoint.y - startPoint.y, nextPoint.x - startPoint.x);
+                
+                // Random angle offset for branch (30-90 degrees from main branch)
+                const side = Math.random() > 0.5 ? 1 : -1;
+                const branchAngle = tangentAngle + (Math.PI / 6 + Math.random() * Math.PI / 3) * side;
+                
+                // Random branch length
+                const branchLength = 40 + Math.random() * 60;
+                
+                // End point of branch
+                const endX = startPoint.x + Math.cos(branchAngle) * branchLength;
+                const endY = startPoint.y + Math.sin(branchAngle) * branchLength;
+                
+                // Control point for curve
+                const curvature = 0.4 + Math.random() * 0.4;
+                const cpx = startPoint.x + Math.cos(branchAngle) * branchLength * curvature + Math.cos(branchAngle + Math.PI/2) * (20 - Math.random() * 40);
+                const cpy = startPoint.y + Math.sin(branchAngle) * branchLength * curvature + Math.sin(branchAngle + Math.PI/2) * (20 - Math.random() * 40);
+                
+                // Create secondary branch path
+                const branch = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                branch.setAttribute('d', `M ${startPoint.x} ${startPoint.y} Q ${cpx} ${cpy}, ${endX} ${endY}`);
+                branch.setAttribute('class', 'vine-branch');
+                branch.setAttribute('stroke-width', '2.5');
+                branch.setAttribute('opacity', '0.75');
+                
+                branchesContainer.appendChild(branch);
+                
+                // Store branch info for leaves
+                allBranches.push({ path: branch, weight: 0.6 });
+                
+                // Add tertiary branches (rametti) to each secondary branch
+                const numTertiaryBranches = 2 + Math.floor(Math.random() * 3);
+                for (let j = 0; j < numTertiaryBranches; j++) {
+                    const t = 0.3 + Math.random() * 0.5; // Position along secondary branch
+                    
+                    // Calculate point on secondary branch
+                    const tertiaryStartX = startPoint.x * (1 - t) * (1 - t) + cpx * 2 * (1 - t) * t + endX * t * t;
+                    const tertiaryStartY = startPoint.y * (1 - t) * (1 - t) + cpy * 2 * (1 - t) * t + endY * t * t;
+                    
+                    // Calculate tangent of secondary branch at this point
+                    const tertiaryTangentX = 2 * (1 - t) * (cpx - startPoint.x) + 2 * t * (endX - cpx);
+                    const tertiaryTangentY = 2 * (1 - t) * (cpy - startPoint.y) + 2 * t * (endY - cpy);
+                    const tertiaryTangentAngle = Math.atan2(tertiaryTangentY, tertiaryTangentX);
+                    
+                    // Tertiary branch angle
+                    const tertiarySide = Math.random() > 0.5 ? 1 : -1;
+                    const tertiaryAngle = tertiaryTangentAngle + (Math.PI / 4 + Math.random() * Math.PI / 6) * tertiarySide;
+                    
+                    // Tertiary branch length (much shorter)
+                    const tertiaryLength = 15 + Math.random() * 30;
+                    
+                    // End point of tertiary branch
+                    const tertiaryEndX = tertiaryStartX + Math.cos(tertiaryAngle) * tertiaryLength;
+                    const tertiaryEndY = tertiaryStartY + Math.sin(tertiaryAngle) * tertiaryLength;
+                    
+                    // Control point for tertiary curve
+                    const tertiaryCpx = tertiaryStartX + Math.cos(tertiaryAngle) * tertiaryLength * 0.5;
+                    const tertiaryCpy = tertiaryStartY + Math.sin(tertiaryAngle) * tertiaryLength * 0.5;
+                    
+                    // Create tertiary branch
+                    const tertiaryBranch = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    tertiaryBranch.setAttribute('d', `M ${tertiaryStartX} ${tertiaryStartY} Q ${tertiaryCpx} ${tertiaryCpy}, ${tertiaryEndX} ${tertiaryEndY}`);
+                    tertiaryBranch.setAttribute('class', 'vine-branch');
+                    tertiaryBranch.setAttribute('stroke-width', '1.2');
+                    tertiaryBranch.setAttribute('opacity', '0.65');
+                    
+                    branchesContainer.appendChild(tertiaryBranch);
+                    
+                    // Store tertiary branch info for leaves
+                    allBranches.push({ path: tertiaryBranch, weight: 0.3 });
+                }
+            }
+            
+            // Add leaves to all branches
+            addLeavesAlongBranches(allBranches);
+        }
+        
+        function addLeavesAlongBranches(branches) {
+            const leavesContainer = document.getElementById('leavesContainer');
+            const leafColors = ['#7fb069', '#88a580', '#6b8e6b', '#8b9d83', '#759e75', '#6d8b6d', '#9db19d'];
+            
+            // Add leaves to each branch
+            branches.forEach(branchInfo => {
+                const { path, weight } = branchInfo;
+                const pathLength = path.getTotalLength();
+                
+                // Number of leaves proportional to branch size
+                const numLeaves = Math.max(3, Math.floor(weight * 15));
+                
+                for (let i = 0; i < numLeaves; i++) {
+                    // Position leaves at intervals, with some randomness
+                    const position = (pathLength / numLeaves) * i + Math.random() * 20;
+                    const point = path.getPointAtLength(Math.min(position, pathLength - 5));
+                    
+                    // Get tangent angle for leaf orientation
+                    const nextPoint = path.getPointAtLength(Math.min(position + 3, pathLength));
+                    const tangentAngle = Math.atan2(nextPoint.y - point.y, nextPoint.x - point.x);
+                    
+                    // Leaves grow perpendicular to the branch, alternating sides
+                    const side = (i % 2 === 0 ? 1 : -1);
+                    const perpendicularAngle = tangentAngle + (Math.PI / 2) * side;
+                    
+                    // Add random rotation to each leaf (10 to 45 degrees)
+                    const randomRotation = (10 + Math.random() * 35) * side;
+                    const leafAngle = perpendicularAngle * (180 / Math.PI) + randomRotation;
+                    
+                    // No offset - leaves start from the branch
+                    const leafX = point.x;
+                    const leafY = point.y;
+                    
+                    // Create leaf
+                    const leaf = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                    leaf.setAttribute('class', 'vine-leaf-svg');
+                    leaf.setAttribute('transform', `translate(${leafX}, ${leafY}) rotate(${leafAngle})`);
+                    leaf.setAttribute('opacity', '0.8');
+                    
+                    // Leaf path (simplified leaf shape)
+                    const leafPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    const size = 8 + Math.random() * 5;
+                    leafPath.setAttribute('d', `M 0,0 Q ${size*0.4},${-size*0.6} 0,${-size} Q ${-size*0.4},${-size*0.6} 0,0`);
+                    leafPath.setAttribute('fill', leafColors[i % leafColors.length]);
+                    leafPath.setAttribute('stroke', '#2d5016');
+                    leafPath.setAttribute('stroke-width', '0.5');
+                    leafPath.setAttribute('opacity', '0.85');
+                    
+                    leaf.appendChild(leafPath);
+                    leavesContainer.appendChild(leaf);
+                }
+            });
+        }
+
+        // Initialize vine on load
+        setTimeout(() => {
+            drawVine();
+        }, 100);
+        window.addEventListener('resize', drawVine);
+
+        // Theme Switcher Logic
+        const themeBtn = document.getElementById('theme-btn');
+        const themeNameDisplay = document.getElementById('theme-name');
+        
+        const themes = ['default', 'iris', 'blue', 'ocean', 'forest', 'earth', 'alchemy'];
+        const themeNames = {
+            'default': 'School Lavender',
+            'iris': 'Deep Iris',
+            'blue': 'Scientific Blue',
+            'ocean': 'Ocean Depth (Teal)',
+            'forest': 'Deep Forest (Green)',
+            'earth': 'Burnt Earth (Terracotta)',
+            'alchemy': 'Alchemy (Magenta)'
+        };
+        let currentThemeIndex = 0;
+        
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme-preference');
+        if (savedTheme) {
+            currentThemeIndex = themes.indexOf(savedTheme);
+            applyTheme(themes[currentThemeIndex]);
+        }
+        
+        function applyTheme(themeName) {
+            document.body.classList.remove('theme-iris', 'theme-blue', 'theme-ocean', 'theme-forest', 'theme-earth', 'theme-alchemy');
+            if (themeName !== 'default') {
+                document.body.classList.add(`theme-${themeName}`);
+            }
+            localStorage.setItem('theme-preference', themeName);
+            
+            // Update theme display
+            if (themeNameDisplay) {
+                themeNameDisplay.textContent = themeNames[themeName];
+            }
+        }
+        
+        function switchTheme() {
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            const theme = themes[currentThemeIndex];
+            applyTheme(theme);
+        }
+        
+        if (themeBtn) {
+            themeBtn.addEventListener('click', switchTheme);
+        }
+    </script>
+</body>
+</html>
