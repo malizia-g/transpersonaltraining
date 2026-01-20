@@ -111,12 +111,51 @@
         body[class*="theme-"] .bg-primary-950 {
             background-color: var(--theme-darker) !important;
         }
+        
+        /* Mobile menu theme colors */
+        body[class*="theme-"] #mobile-menu {
+            background-color: var(--theme-darker) !important;
+            border-color: var(--theme-primary) !important;
+        }
+        
+        body[class*="theme-"] #mobile-menu a.border-b {
+            border-color: rgba(var(--theme-primary-rgb, 107, 91, 127), 0.5) !important;
+        }
+        
+        body[class*="theme-"] #mobile-menu a:hover {
+            color: var(--theme-light) !important;
+        }
+        
+        /* Keep amber colors unchanged across all themes for buttons and badges */
+        body[class*="theme-"] .bg-amber-500,
+        body.bg-amber-500 {
+            background-color: #fbbf24 !important;
+        }
+        
+        body[class*="theme-"] .hover\:bg-amber-600:hover,
+        body .hover\:bg-amber-600:hover {
+            background-color: #f59e0b !important;
+        }
+        
+        body[class*="theme-"] .text-white.bg-amber-500,
+        body .text-white.bg-amber-500 {
+            color: white !important;
+        }
+        
+        body[class*="theme-"] .border-amber-500,
+        body .border-amber-500 {
+            border-color: #fbbf24 !important;
+        }
+        
+        body[class*="theme-"] .text-amber-500,
+        body .text-amber-500 {
+            color: #fbbf24 !important;
+        }
 
         .timeline-container {
             position: relative;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 100px;
         }
 
         .vine-path {
@@ -145,6 +184,11 @@
         .module-card {
             position: relative;
             z-index: 10;
+        }
+        
+        .module-card > div {
+            position: relative;
+            z-index: 20;
         }
 
         .vine-leaf {
@@ -194,19 +238,37 @@
 </head>
 <body class="font-sans text-slate-800 bg-slate-50 antialiased transition-colors duration-700">
 
-    <nav id="navbar" class="fixed w-full z-40 transition-all duration-300 py-4 bg-primary-950/95 backdrop-blur-sm shadow-lg text-white">
-        <div class="container mx-auto px-6 flex justify-between items-center">
-            <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                <div class="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center shadow-lg">
-                    <i data-lucide="arrow-left" class="text-white w-5 h-5"></i>
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4 bg-primary-950/95 backdrop-blur-sm shadow-lg text-white">
+        <div class="container mx-auto px-6 flex justify-between items-center relative z-10">
+            <!-- Logo (Desktop Only) -->
+            <div class="hidden md:flex items-center gap-2">
+                <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center opacity-90">
+                    <i data-lucide="loader-pinwheel" class="text-white w-6 h-6"></i>
                 </div>
-                <span class="text-xl font-serif font-bold tracking-wide">Back to Home</span>
-            </a>
-            <div class="hidden md:flex items-center gap-6">
-                <div class="text-primary-200 text-sm font-medium tracking-widest uppercase">
-                    The EastWest Transpersonal Curriculum
-                </div>
-                <!-- Theme Switcher -->
+                <span id="nav-logo-text" class="text-2xl font-serif font-bold tracking-wide text-white">
+                    Transpersonal Training
+                </span>
+            </div>
+
+            <!-- Theme Switcher (Mobile Only) -->
+            <div class="flex md:hidden items-center gap-2">
+                <button id="theme-btn-mobile" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors" title="Switch theme">
+                    <i data-lucide="palette" class="w-5 h-5"></i>
+                </button>
+                <span id="theme-name-mobile" class="text-sm font-medium text-white/90">School Lavender</span>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="index.html#welcome" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">About</a>
+                <a href="index.html#program" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Program</a>
+                <a href="index.html#schedule" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Schedule 2026</a>
+                <a href="index.html#students" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Students</a>
+                <a href="index.html#contact" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Contact</a>
+                <a href="index.html#contact" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 rounded-full font-medium transition-transform hover:scale-105 shadow-md">
+                    Apply
+                </a>
+                <!-- Theme Switcher (Desktop) -->
                 <div class="flex items-center gap-2 ml-4">
                     <button id="theme-btn" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors" title="Switch theme">
                         <i data-lucide="palette" class="w-5 h-5"></i>
@@ -214,6 +276,23 @@
                     <span id="theme-name" class="text-sm font-medium text-white/90 min-w-[140px] text-left">School Lavender</span>
                 </div>
             </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+                <i data-lucide="menu" class="w-7 h-7"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full shadow-xl py-6 px-6 flex-col gap-4 z-20 border-t bg-primary-950/95 backdrop-blur-sm">
+            <a href="index.html#welcome" class="text-slate-200 py-2 border-b block transition-colors">About</a>
+            <a href="index.html#program" class="text-slate-200 py-2 border-b block transition-colors">Program</a>
+            <a href="index.html#schedule" class="text-slate-200 py-2 border-b block transition-colors">Schedule 2026</a>
+            <a href="index.html#students" class="text-slate-200 py-2 border-b block transition-colors">Students</a>
+            <a href="index.html#contact" class="text-slate-200 py-2 border-b block transition-colors">Contact</a>
+            <a href="index.html#contact" class="bg-amber-500 text-white px-6 py-3 rounded-md w-full mt-4 font-bold text-center block">
+                Apply
+            </a>
         </div>
     </nav>
 
@@ -243,56 +322,10 @@
     </header>
 
     <section class="py-24 bg-white relative overflow-hidden">
-        <div class="absolute left-0 top-0 z-0 opacity-20 pointer-events-none" style="width: 200px; height: 100%;">
-            <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 200 2000">
-                <!-- Main vine path continuous -->
-                <path d="M 100,0 Q 120,80 100,160 Q 80,240 100,320 Q 120,400 100,480 Q 80,560 100,640 Q 120,720 100,800 Q 80,880 100,960 Q 120,1040 100,1120 Q 80,1200 100,1280 Q 120,1360 100,1440 Q 80,1520 100,1600 Q 120,1680 100,1760 Q 80,1840 100,1920 Q 120,1980 100,2000" stroke="#6b8e6b" stroke-width="2.5" fill="none" opacity="0.6"/>
-                
-                <!-- Secondary branches along the vine -->
-                <path d="M 100,50 Q 75,85 70,120" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
-                <path d="M 100,150 Q 125,180 135,210" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
-                <path d="M 100,280 Q 75,310 65,340" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
-                <path d="M 100,420 Q 125,450 140,480" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
-                <path d="M 100,600 Q 75,630 70,660" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
-                <path d="M 100,780 Q 125,810 138,840" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
-                <path d="M 100,950 Q 75,980 68,1010" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
-                <path d="M 100,1120 Q 125,1150 140,1180" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
-                <path d="M 100,1300 Q 75,1330 70,1360" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
-                <path d="M 100,1470 Q 125,1500 138,1530" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
-                <path d="M 100,1650 Q 75,1680 68,1710" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
-                <path d="M 100,1820 Q 125,1850 140,1880" stroke="#7fb069" stroke-width="1.5" fill="none" opacity="0.5"/>
-                
-                <!-- Leaves along the vine -->
-                <circle cx="100" cy="80" r="3" fill="#88a580" opacity="0.7"/>
-                <circle cx="78" cy="120" r="2.5" fill="#88a580" opacity="0.7"/>
-                <circle cx="125" cy="180" r="2.5" fill="#88a580" opacity="0.7"/>
-                <circle cx="100" cy="240" r="3" fill="#88a580" opacity="0.7"/>
-                <circle cx="72" cy="310" r="2.5" fill="#88a580" opacity="0.7"/>
-                <circle cx="130" cy="380" r="2.5" fill="#88a580" opacity="0.7"/>
-                <circle cx="100" cy="450" r="3" fill="#88a580" opacity="0.7"/>
-                <circle cx="88" cy="540" r="2.5" fill="#88a580" opacity="0.7"/>
-                <circle cx="118" cy="620" r="2.5" fill="#88a580" opacity="0.7"/>
-                <circle cx="100" cy="700" r="3" fill="#88a580" opacity="0.7"/>
-                <circle cx="75" cy="780" r="2.5" fill="#88a580" opacity="0.7"/>
-                <circle cx="128" cy="860" r="2.5" fill="#88a580" opacity="0.7"/>
-                <circle cx="100" cy="940" r="3" fill="#88a580" opacity="0.7"/>
-                <circle cx="82" cy="1020" r="2.5" fill="#88a580" opacity="0.7"/>
-                <circle cx="125" cy="1100" r="2.5" fill="#88a580" opacity="0.7"/>
-                <circle cx="100" cy="1180" r="3" fill="#88a580" opacity="0.7"/>
-                <circle cx="70" cy="1260" r="2.5" fill="#88a580" opacity="0.7"/>
-                <circle cx="132" cy="1340" r="2.5" fill="#88a580" opacity="0.7"/>
-                <circle cx="100" cy="1420" r="3" fill="#88a580" opacity="0.7"/>
-                <circle cx="80" cy="1500" r="2.5" fill="#88a580" opacity="0.7"/>
-                <circle cx="122" cy="1580" r="2.5" fill="#88a580" opacity="0.7"/>
-                <circle cx="100" cy="1660" r="3" fill="#88a580" opacity="0.7"/>
-                <circle cx="75" cy="1740" r="2.5" fill="#88a580" opacity="0.7"/>
-                <circle cx="128" cy="1820" r="2.5" fill="#88a580" opacity="0.7"/>
-            </svg>
-        </div>
         <div class="container mx-auto px-6 relative z-10">
             <div class="timeline-container" id="timelineContainer">
                 
-                <svg class="vine-path" id="vineSvg" style="position: absolute; top: 0; left: -100px; width: calc(100% + 200px); height: 100%; overflow: visible;">
+                <svg class="vine-path" id="vineSvg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none;">
                     <g id="branchesContainer"></g>
                     <path id="vinePath" class="vine-branch" d=""/>
                     <g id="leavesContainer"></g>
@@ -318,7 +351,7 @@
 
                 <div class="mb-20 module-card" data-module="2" style="margin-left: 55%;">
                     <div class="flex items-center gap-4 mb-3 flex-row-reverse">
-                        <div class="bg-primary-700 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
                             <span class="font-bold text-white text-xl">2</span>
                         </div>
                         <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-r-4 border-primary-700 hover:scale-105 transition-transform duration-300 cursor-pointer text-right">
@@ -336,7 +369,7 @@
 
                 <div class="mb-20 module-card" data-module="3" style="margin-left: 5%;">
                     <div class="flex items-center gap-4 mb-3">
-                        <div class="bg-primary-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
                             <span class="font-bold text-white text-xl">3</span>
                         </div>
                         <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-l-4 border-primary-500 hover:scale-105 transition-transform duration-300 cursor-pointer">
@@ -354,7 +387,7 @@
 
                 <div class="mb-20 module-card" data-module="4" style="margin-left: 60%;">
                     <div class="flex items-center gap-4 mb-3 flex-row-reverse">
-                        <div class="bg-primary-700 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
                             <span class="font-bold text-white text-xl">4</span>
                         </div>
                         <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-r-4 border-primary-700 hover:scale-105 transition-transform duration-300 cursor-pointer text-right">
@@ -372,7 +405,7 @@
 
                 <div class="mb-20 module-card" data-module="5" style="margin-left: 15%;">
                     <div class="flex items-center gap-4 mb-3">
-                        <div class="bg-primary-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
                             <span class="font-bold text-white text-xl">5</span>
                         </div>
                         <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-l-4 border-primary-500 hover:scale-105 transition-transform duration-300 cursor-pointer">
@@ -390,7 +423,7 @@
 
                 <div class="mb-20 module-card" data-module="6" style="margin-left: 50%;">
                     <div class="flex items-center gap-4 mb-3 flex-row-reverse">
-                        <div class="bg-primary-700 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
                             <span class="font-bold text-white text-xl">6</span>
                         </div>
                         <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-r-4 border-primary-700 hover:scale-105 transition-transform duration-300 cursor-pointer text-right">
@@ -408,7 +441,7 @@
 
                 <div class="mb-20 module-card" data-module="7" style="margin-left: 8%;">
                     <div class="flex items-center gap-4 mb-3">
-                        <div class="bg-primary-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
                             <span class="font-bold text-white text-xl">7</span>
                         </div>
                         <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-l-4 border-primary-500 hover:scale-105 transition-transform duration-300 cursor-pointer">
@@ -426,7 +459,7 @@
 
                 <div class="mb-20 module-card" data-module="8" style="margin-left: 58%;">
                     <div class="flex items-center gap-4 mb-3 flex-row-reverse">
-                        <div class="bg-primary-700 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
                             <span class="font-bold text-white text-xl">8</span>
                         </div>
                         <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-r-4 border-primary-700 hover:scale-105 transition-transform duration-300 cursor-pointer text-right">
@@ -444,7 +477,7 @@
 
                 <div class="mb-20 module-card" data-module="9" style="margin-left: 12%;">
                     <div class="flex items-center gap-4 mb-3">
-                        <div class="bg-primary-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
                             <span class="font-bold text-white text-xl">9</span>
                         </div>
                         <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-l-4 border-primary-500 hover:scale-105 transition-transform duration-300 cursor-pointer">
@@ -462,7 +495,7 @@
 
                 <div class="mb-20 module-card" data-module="10" style="margin-left: 52%;">
                     <div class="flex items-center gap-4 mb-3 flex-row-reverse">
-                        <div class="bg-primary-700 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
                             <span class="font-bold text-white text-xl">10</span>
                         </div>
                         <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-r-4 border-primary-700 hover:scale-105 transition-transform duration-300 cursor-pointer text-right">
@@ -480,7 +513,7 @@
 
                 <div class="mb-20 module-card" data-module="11" style="margin-left: 10%;">
                     <div class="flex items-center gap-4 mb-3">
-                        <div class="bg-primary-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
                             <span class="font-bold text-white text-xl">11</span>
                         </div>
                         <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-l-4 border-primary-500 hover:scale-105 transition-transform duration-300 cursor-pointer">
@@ -498,7 +531,7 @@
 
                 <div class="mb-20 module-card" data-module="12" style="margin-left: 56%;">
                     <div class="flex items-center gap-4 mb-3 flex-row-reverse">
-                        <div class="bg-primary-700 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
                             <span class="font-bold text-white text-xl">12</span>
                         </div>
                         <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-r-4 border-primary-700 hover:scale-105 transition-transform duration-300 cursor-pointer text-right">
@@ -546,275 +579,24 @@
         </div>
     </footer>
 
+    <!-- Vine drawing script -->
+    <script src="vine.js"></script>
+    
+    <!-- Theme switcher script -->
+    <script src="theme-switcher.js"></script>
+    
     <script>
         lucide.createIcons();
 
-        // Draw the twisted vine path dynamically based on module positions
-        function drawVine() {
-            const cards = document.querySelectorAll('.module-card');
-            const svg = document.getElementById('vineSvg');
-            const path = document.getElementById('vinePath');
-            const container = document.getElementById('timelineContainer');
-            
-            if (cards.length === 0) return;
-
-            const containerRect = container.getBoundingClientRect();
-            svg.style.height = container.offsetHeight + 'px';
-            
-            const points = [];
-            cards.forEach((card, i) => {
-                const circle = card.querySelector('[class*="rounded-full"]');
-                if (!circle) return;
-                
-                const rect = circle.getBoundingClientRect();
-                const containerTop = container.getBoundingClientRect().top;
-                
-                const x = rect.left - containerRect.left + rect.width / 2;
-                const y = rect.top - containerTop + rect.height / 2;
-                points.push({x, y});
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('flex');
             });
-
-            if (points.length < 2) return;
-
-            // Create flowing path with smooth loops instead of cusps
-            let d = `M ${points[0].x} ${points[0].y}`;
-            
-            for (let i = 0; i < points.length - 1; i++) {
-                const current = points[i];
-                const next = points[i + 1];
-                
-                const dx = next.x - current.x;
-                const dy = next.y - current.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                
-                // Alternate direction for each loop
-                const twist = (i % 2 === 0 ? 1 : -1);
-                // Smooth intensity variation with more complexity
-                const intensity = 0.9 + Math.sin(i * 0.6) * 0.3 + Math.cos(i * 1.1) * 0.2;
-                const loopSize = Math.min(distance * 0.65, 180) * intensity;
-                
-                // Create circular loop by going far out and back
-                const angle = Math.atan2(dy, dx);
-                const perpAngle = angle + Math.PI / 2;
-                
-                // Use smooth quadratic curves to avoid cusps
-                const loopx = current.x + dx * 0.5 + Math.cos(perpAngle) * loopSize * twist * 1.15;
-                const loopy = current.y + dy * 0.5 + Math.sin(perpAngle) * loopSize * twist * 1.15;
-                
-                // Simple smooth curve
-                d += ` Q ${loopx} ${loopy}, ${next.x} ${next.y}`;
-            }
-            
-            path.setAttribute('d', d);
-            path.setAttribute('stroke-width', '4');
-            path.setAttribute('opacity', '0.65');
-            
-            // Add small branches along the path
-            addSmallBranches();
-        }
-        
-        function addSmallBranches() {
-            const path = document.getElementById('vinePath');
-            const branchesContainer = document.getElementById('branchesContainer');
-            const pathLength = path.getTotalLength();
-            
-            // Clear existing branches
-            branchesContainer.innerHTML = '';
-            
-            // Array to store branch info for adding leaves
-            const allBranches = [];
-            
-            // Number of small branches
-            const numBranches = 25;
-            
-            for (let i = 0; i < numBranches; i++) {
-                // Random position along the path
-                const position = Math.random() * (pathLength - 50) + 25;
-                const startPoint = path.getPointAtLength(position);
-                
-                // Get tangent for branch direction
-                const nextPoint = path.getPointAtLength(position + 5);
-                const tangentAngle = Math.atan2(nextPoint.y - startPoint.y, nextPoint.x - startPoint.x);
-                
-                // Random angle offset for branch (30-90 degrees from main branch)
-                const side = Math.random() > 0.5 ? 1 : -1;
-                const branchAngle = tangentAngle + (Math.PI / 6 + Math.random() * Math.PI / 3) * side;
-                
-                // Random branch length
-                const branchLength = 40 + Math.random() * 60;
-                
-                // End point of branch
-                const endX = startPoint.x + Math.cos(branchAngle) * branchLength;
-                const endY = startPoint.y + Math.sin(branchAngle) * branchLength;
-                
-                // Control point for curve
-                const curvature = 0.4 + Math.random() * 0.4;
-                const cpx = startPoint.x + Math.cos(branchAngle) * branchLength * curvature + Math.cos(branchAngle + Math.PI/2) * (20 - Math.random() * 40);
-                const cpy = startPoint.y + Math.sin(branchAngle) * branchLength * curvature + Math.sin(branchAngle + Math.PI/2) * (20 - Math.random() * 40);
-                
-                // Create secondary branch path
-                const branch = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                branch.setAttribute('d', `M ${startPoint.x} ${startPoint.y} Q ${cpx} ${cpy}, ${endX} ${endY}`);
-                branch.setAttribute('class', 'vine-branch');
-                branch.setAttribute('stroke-width', '2.5');
-                branch.setAttribute('opacity', '0.75');
-                
-                branchesContainer.appendChild(branch);
-                
-                // Store branch info for leaves
-                allBranches.push({ path: branch, weight: 0.6 });
-                
-                // Add tertiary branches (rametti) to each secondary branch
-                const numTertiaryBranches = 2 + Math.floor(Math.random() * 3);
-                for (let j = 0; j < numTertiaryBranches; j++) {
-                    const t = 0.3 + Math.random() * 0.5; // Position along secondary branch
-                    
-                    // Calculate point on secondary branch
-                    const tertiaryStartX = startPoint.x * (1 - t) * (1 - t) + cpx * 2 * (1 - t) * t + endX * t * t;
-                    const tertiaryStartY = startPoint.y * (1 - t) * (1 - t) + cpy * 2 * (1 - t) * t + endY * t * t;
-                    
-                    // Calculate tangent of secondary branch at this point
-                    const tertiaryTangentX = 2 * (1 - t) * (cpx - startPoint.x) + 2 * t * (endX - cpx);
-                    const tertiaryTangentY = 2 * (1 - t) * (cpy - startPoint.y) + 2 * t * (endY - cpy);
-                    const tertiaryTangentAngle = Math.atan2(tertiaryTangentY, tertiaryTangentX);
-                    
-                    // Tertiary branch angle
-                    const tertiarySide = Math.random() > 0.5 ? 1 : -1;
-                    const tertiaryAngle = tertiaryTangentAngle + (Math.PI / 4 + Math.random() * Math.PI / 6) * tertiarySide;
-                    
-                    // Tertiary branch length (much shorter)
-                    const tertiaryLength = 15 + Math.random() * 30;
-                    
-                    // End point of tertiary branch
-                    const tertiaryEndX = tertiaryStartX + Math.cos(tertiaryAngle) * tertiaryLength;
-                    const tertiaryEndY = tertiaryStartY + Math.sin(tertiaryAngle) * tertiaryLength;
-                    
-                    // Control point for tertiary curve
-                    const tertiaryCpx = tertiaryStartX + Math.cos(tertiaryAngle) * tertiaryLength * 0.5;
-                    const tertiaryCpy = tertiaryStartY + Math.sin(tertiaryAngle) * tertiaryLength * 0.5;
-                    
-                    // Create tertiary branch
-                    const tertiaryBranch = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                    tertiaryBranch.setAttribute('d', `M ${tertiaryStartX} ${tertiaryStartY} Q ${tertiaryCpx} ${tertiaryCpy}, ${tertiaryEndX} ${tertiaryEndY}`);
-                    tertiaryBranch.setAttribute('class', 'vine-branch');
-                    tertiaryBranch.setAttribute('stroke-width', '1.2');
-                    tertiaryBranch.setAttribute('opacity', '0.65');
-                    
-                    branchesContainer.appendChild(tertiaryBranch);
-                    
-                    // Store tertiary branch info for leaves
-                    allBranches.push({ path: tertiaryBranch, weight: 0.3 });
-                }
-            }
-            
-            // Add leaves to all branches
-            addLeavesAlongBranches(allBranches);
-        }
-        
-        function addLeavesAlongBranches(branches) {
-            const leavesContainer = document.getElementById('leavesContainer');
-            const leafColors = ['#7fb069', '#88a580', '#6b8e6b', '#8b9d83', '#759e75', '#6d8b6d', '#9db19d'];
-            
-            // Add leaves to each branch
-            branches.forEach(branchInfo => {
-                const { path, weight } = branchInfo;
-                const pathLength = path.getTotalLength();
-                
-                // Number of leaves proportional to branch size
-                const numLeaves = Math.max(3, Math.floor(weight * 15));
-                
-                for (let i = 0; i < numLeaves; i++) {
-                    // Position leaves at intervals, with some randomness
-                    const position = (pathLength / numLeaves) * i + Math.random() * 20;
-                    const point = path.getPointAtLength(Math.min(position, pathLength - 5));
-                    
-                    // Get tangent angle for leaf orientation
-                    const nextPoint = path.getPointAtLength(Math.min(position + 3, pathLength));
-                    const tangentAngle = Math.atan2(nextPoint.y - point.y, nextPoint.x - point.x);
-                    
-                    // Leaves grow perpendicular to the branch, alternating sides
-                    const side = (i % 2 === 0 ? 1 : -1);
-                    const perpendicularAngle = tangentAngle + (Math.PI / 2) * side;
-                    
-                    // Add random rotation to each leaf (10 to 45 degrees)
-                    const randomRotation = (10 + Math.random() * 35) * side;
-                    const leafAngle = perpendicularAngle * (180 / Math.PI) + randomRotation;
-                    
-                    // No offset - leaves start from the branch
-                    const leafX = point.x;
-                    const leafY = point.y;
-                    
-                    // Create leaf
-                    const leaf = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-                    leaf.setAttribute('class', 'vine-leaf-svg');
-                    leaf.setAttribute('transform', `translate(${leafX}, ${leafY}) rotate(${leafAngle})`);
-                    leaf.setAttribute('opacity', '0.8');
-                    
-                    // Leaf path (simplified leaf shape)
-                    const leafPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                    const size = 8 + Math.random() * 5;
-                    leafPath.setAttribute('d', `M 0,0 Q ${size*0.4},${-size*0.6} 0,${-size} Q ${-size*0.4},${-size*0.6} 0,0`);
-                    leafPath.setAttribute('fill', leafColors[i % leafColors.length]);
-                    leafPath.setAttribute('stroke', '#2d5016');
-                    leafPath.setAttribute('stroke-width', '0.5');
-                    leafPath.setAttribute('opacity', '0.85');
-                    
-                    leaf.appendChild(leafPath);
-                    leavesContainer.appendChild(leaf);
-                }
-            });
-        }
-
-        // Initialize vine on load
-        setTimeout(() => {
-            drawVine();
-        }, 100);
-        window.addEventListener('resize', drawVine);
-
-        // Theme Switcher Logic
-        const themeBtn = document.getElementById('theme-btn');
-        const themeNameDisplay = document.getElementById('theme-name');
-        
-        const themes = ['default', 'iris', 'blue', 'ocean', 'forest', 'earth', 'alchemy'];
-        const themeNames = {
-            'default': 'School Lavender',
-            'iris': 'Deep Iris',
-            'blue': 'Scientific Blue',
-            'ocean': 'Ocean Depth (Teal)',
-            'forest': 'Deep Forest (Green)',
-            'earth': 'Burnt Earth (Terracotta)',
-            'alchemy': 'Alchemy (Magenta)'
-        };
-        let currentThemeIndex = 0;
-        
-        // Load saved theme
-        const savedTheme = localStorage.getItem('theme-preference');
-        if (savedTheme) {
-            currentThemeIndex = themes.indexOf(savedTheme);
-            applyTheme(themes[currentThemeIndex]);
-        }
-        
-        function applyTheme(themeName) {
-            document.body.classList.remove('theme-iris', 'theme-blue', 'theme-ocean', 'theme-forest', 'theme-earth', 'theme-alchemy');
-            if (themeName !== 'default') {
-                document.body.classList.add(`theme-${themeName}`);
-            }
-            localStorage.setItem('theme-preference', themeName);
-            
-            // Update theme display
-            if (themeNameDisplay) {
-                themeNameDisplay.textContent = themeNames[themeName];
-            }
-        }
-        
-        function switchTheme() {
-            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-            const theme = themes[currentThemeIndex];
-            applyTheme(theme);
-        }
-        
-        if (themeBtn) {
-            themeBtn.addEventListener('click', switchTheme);
         }
     </script>
 </body>
