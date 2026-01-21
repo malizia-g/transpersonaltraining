@@ -214,6 +214,76 @@
         @media (max-width: 768px) {
             .module-card { margin-left: 0 !important; margin-right: 0 !important; }
         }
+        
+        /* Fixed theme switcher button */
+        #theme-switcher-fixed {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        #theme-switcher-fixed button {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--theme-primary), var(--theme-darker));
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border: 3px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        #theme-switcher-fixed button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        #theme-switcher-fixed .theme-label {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 1;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute; top: 0; left: 100%; margin-left: 0.5rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
+            backdrop-filter: blur(20px); border-radius: 0.75rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.3);
+            min-width: 240px; opacity: 0; visibility: hidden;
+            transform: translateX(-10px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 100;
+        }
+        .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(0); }
+        .dropdown-menu::before {
+            content: ''; position: absolute; left: -6px; top: 1rem;
+            width: 12px; height: 12px; background: white;
+            transform: rotate(45deg); box-shadow: -3px -3px 5px rgba(0, 0, 0, 0.05);
+        }
+        .dropdown-menu a {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 1rem 1.25rem; color: #1e293b; font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        .dropdown-menu a:hover { color: #f59e0b; }
+        .dropdown-menu a:first-child { border-radius: 0.75rem 0.75rem 0 0; }
+        .dropdown-menu a:last-child { border-radius: 0 0 0.75rem 0.75rem; }
+        .dropdown-menu .submenu-icon { color: #94a3b8; transition: color 0.2s ease; }
+        .dropdown-menu a:hover .submenu-icon { color: #f59e0b; }
     </style>
 
     <script>
@@ -260,21 +330,24 @@
 
             <!-- Desktop Menu -->
             <div class="hidden md:flex items-center gap-8">
-                <a href="index.html#welcome" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">About</a>
-                <a href="index.html#program" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Program</a>
-                <a href="index.html#schedule" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Schedule 2026</a>
-                <a href="index.html#students" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Students</a>
-                <a href="index.html#contact" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Contact</a>
-                <a href="index.html#contact" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 rounded-full font-medium transition-transform hover:scale-105 shadow-md">
-                    Apply
-                </a>
-                <!-- Theme Switcher (Desktop) -->
-                <div class="flex items-center gap-2 ml-4">
-                    <button id="theme-btn" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors" title="Switch theme">
-                        <i data-lucide="palette" class="w-5 h-5"></i>
-                    </button>
-                    <span id="theme-name" class="text-sm font-medium text-white/90 min-w-[140px] text-left">School Lavender</span>
+                <a href="courses.html" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Courses</a>
+                <a href="techniques.html" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Techniques</a>
+                <div class="dropdown">
+                    <a href="transpersonal_therapy.html" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors flex items-center gap-1">
+                        Transpersonal Therapy <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="transpersonal_therapist.html" class="text-sm">
+                            <i data-lucide="stethoscope" class="w-4 h-4 submenu-icon"></i>
+                            <span>The Transpersonal Therapist</span>
+                        </a>
+                        <a href="client_model.html" class="text-sm">
+                            <i data-lucide="user-check" class="w-4 h-4 submenu-icon"></i>
+                            <span>Become a Client Model</span>
+                        </a>
+                    </div>
                 </div>
+                <a href="index.html#contact" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 rounded-full font-medium transition-transform hover:scale-105 shadow-md">Apply</a>
             </div>
 
             <!-- Mobile Menu Button -->
@@ -285,14 +358,12 @@
 
         <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full shadow-xl py-6 px-6 flex-col gap-4 z-20 border-t bg-primary-950/95 backdrop-blur-sm">
-            <a href="index.html#welcome" class="text-slate-200 py-2 border-b block transition-colors">About</a>
-            <a href="index.html#program" class="text-slate-200 py-2 border-b block transition-colors">Program</a>
-            <a href="index.html#schedule" class="text-slate-200 py-2 border-b block transition-colors">Schedule 2026</a>
-            <a href="index.html#students" class="text-slate-200 py-2 border-b block transition-colors">Students</a>
-            <a href="index.html#contact" class="text-slate-200 py-2 border-b block transition-colors">Contact</a>
-            <a href="index.html#contact" class="bg-amber-500 text-white px-6 py-3 rounded-md w-full mt-4 font-bold text-center block">
-                Apply
-            </a>
+            <a href="courses.html" class="text-slate-200 py-2 border-b block transition-colors">Courses</a>
+            <a href="techniques.html" class="text-slate-200 py-2 border-b block transition-colors">Techniques</a>
+            <a href="transpersonal_therapy.html" class="text-slate-200 py-2 border-b block transition-colors">Transpersonal Therapy</a>
+            <a href="transpersonal_therapist.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ The Transpersonal Therapist</a>
+            <a href="client_model.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Become a Client Model</a>
+            <a href="index.html#contact" class="bg-amber-500 text-white px-6 py-3 rounded-md w-full mt-4 font-bold text-center block">Apply</a>
         </div>
     </nav>
 
@@ -663,6 +734,33 @@
                 mobileMenu.classList.toggle('flex');
             });
         }
+
+        // Fixed Theme Switcher
+        const themeBtnFixed = document.getElementById('theme-btn-fixed');
+        const themeNameFixed = document.getElementById('theme-label');
+
+        if (themeBtnFixed) {
+            themeBtnFixed.addEventListener('click', () => {
+                document.body.classList.toggle('theme-iris');
+                document.body.classList.toggle('theme-blue');
+                document.body.classList.toggle('theme-ocean');
+                document.body.classList.toggle('theme-forest');
+                document.body.classList.toggle('theme-earth');
+                document.body.classList.toggle('theme-alchemy');
+
+                // Update theme name label
+                const currentTheme = Array.from(document.body.classList).find(cls => cls.startsWith('theme-'));
+                themeNameFixed.textContent = currentTheme ? currentTheme.replace('theme-', '').charAt(0).toUpperCase() + currentTheme.slice(1) : 'School Lavender';
+            });
+        }
+
+        const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+            });
+        });
     </script>
 </body>
 </html>

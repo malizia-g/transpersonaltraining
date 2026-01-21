@@ -2,10 +2,8 @@
 (function() {
     // Wait for DOM to be ready
     const init = () => {
-        const themeBtn = document.getElementById('theme-btn');
-        const themeBtnMobile = document.getElementById('theme-btn-mobile');
-        const themeNameDisplay = document.getElementById('theme-name');
-        const themeNameDisplayMobile = document.getElementById('theme-name-mobile');
+        const themeBtnFixed = document.getElementById('theme-btn-fixed');
+        const themeLabel = document.getElementById('theme-label');
         
         const themes = ['default', 'iris', 'blue', 'ocean', 'forest', 'earth', 'alchemy'];
         const themeNames = {
@@ -40,20 +38,9 @@
             const theme = themes[currentThemeIndex];
             applyTheme(theme);
             
-            // Update desktop button and display
-            if (themeBtn) {
-                themeBtn.title = `Switch theme (Current: ${themeNames[theme]})`;
-            }
-            if (themeNameDisplay) {
-                themeNameDisplay.textContent = themeNames[theme];
-            }
-            
-            // Update mobile button and display
-            if (themeBtnMobile) {
-                themeBtnMobile.title = `Switch theme (Current: ${themeNames[theme]})`;
-            }
-            if (themeNameDisplayMobile) {
-                themeNameDisplayMobile.textContent = themeNames[theme];
+            // Update label
+            if (themeLabel) {
+                themeLabel.textContent = themeNames[theme];
             }
             
             // Recreate icons if lucide is available
@@ -62,21 +49,11 @@
             }
         }
         
-        // Desktop theme button
-        if (themeBtn) {
-            themeBtn.addEventListener('click', switchTheme);
-            themeBtn.title = `Switch theme (Current: ${themeNames[themes[currentThemeIndex]]})`;
-            if (themeNameDisplay) {
-                themeNameDisplay.textContent = themeNames[themes[currentThemeIndex]];
-            }
-        }
-        
-        // Mobile theme button
-        if (themeBtnMobile) {
-            themeBtnMobile.addEventListener('click', switchTheme);
-            themeBtnMobile.title = `Switch theme (Current: ${themeNames[themes[currentThemeIndex]]})`;
-            if (themeNameDisplayMobile) {
-                themeNameDisplayMobile.textContent = themeNames[themes[currentThemeIndex]];
+        // Fixed theme button
+        if (themeBtnFixed) {
+            themeBtnFixed.addEventListener('click', switchTheme);
+            if (themeLabel) {
+                themeLabel.textContent = themeNames[themes[currentThemeIndex]];
             }
         }
     };

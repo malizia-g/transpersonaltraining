@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Become a Client Model | Transpersonal Training</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        
+        :root {
+            --theme-primary: #aa92ca;
+            --theme-darker: #6b5b7f;
+            --theme-light: #d4c5e2;
+        }
+        
+        body.theme-iris { --theme-primary: #4B0082; --theme-darker: #2d004d; --theme-light: #9b6bb8; }
+        body.theme-blue { --theme-primary: #1E3A8A; --theme-darker: #0f2540; --theme-light: #3b82f6; --theme-primary-rgb: 30, 58, 138; }
+        body.theme-ocean { --theme-primary: #0f766e; --theme-darker: #134e4a; --theme-light: #5eead4; --theme-primary-rgb: 15, 118, 110; }
+        body.theme-forest { --theme-primary: #166534; --theme-darker: #14532d; --theme-light: #86efac; --theme-primary-rgb: 22, 101, 52; }
+        body.theme-earth { --theme-primary: #c2410c; --theme-darker: #7c2d12; --theme-light: #fdba74; --theme-primary-rgb: 194, 65, 12; }
+        body.theme-alchemy { --theme-primary: #a21caf; --theme-darker: #701a75; --theme-light: #f0abfc; --theme-primary-rgb: 162, 28, 175; }
+        
+        body[class*="theme-"] #navbar.bg-indigo-950\/95 { background-color: var(--theme-darker) !important; }
+        body[class*="theme-"] .text-indigo-950 { color: var(--theme-darker) !important; }
+        body[class*="theme-"] #mobile-menu { background-color: var(--theme-darker) !important; border-color: var(--theme-primary) !important; }
+        
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute; top: 0; left: 100%; margin-left: 0.5rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
+            backdrop-filter: blur(20px); border-radius: 0.75rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.3);
+            min-width: 240px; opacity: 0; visibility: hidden;
+            transform: translateX(-10px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 100;
+        }
+        .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(0); }
+        .dropdown-menu::before {
+            content: ''; position: absolute; left: -6px; top: 1rem;
+            width: 12px; height: 12px; background: white;
+            transform: rotate(45deg); box-shadow: -3px -3px 5px rgba(0, 0, 0, 0.05);
+        }
+        .dropdown-menu a {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 1rem 1.25rem; color: #1e293b; font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        .dropdown-menu a:hover { color: #f59e0b; }
+        .dropdown-menu a:first-child { border-radius: 0.75rem 0.75rem 0 0; }
+        .dropdown-menu a:last-child { border-radius: 0 0 0.75rem 0.75rem; }
+        .dropdown-menu .submenu-icon { color: #94a3b8; transition: color 0.2s ease; }
+        .dropdown-menu a:hover .submenu-icon { color: #f59e0b; }
+        
+        #theme-switcher-fixed {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+        }
+        
+        #theme-switcher-fixed button {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--theme-primary), var(--theme-darker));
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); border: 3px solid white;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.3s ease;
+        }
+        
+        #theme-switcher-fixed button:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); }
+        
+        #theme-switcher-fixed .theme-label {
+            background-color: rgba(0, 0, 0, 0.8); color: white;
+            padding: 0.5rem 1rem; border-radius: 1.5rem;
+            font-size: 0.875rem; font-weight: 600; white-space: nowrap;
+            opacity: 1; pointer-events: none; transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800 bg-slate-50 antialiased transition-colors duration-700">
+
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 bg-indigo-950/95 backdrop-blur-sm shadow-lg text-white/90">
+        <div class="container mx-auto px-6 flex justify-between items-center relative z-10">
+            <a href="index.html" class="hidden md:flex items-center gap-2 hover:opacity-80 transition-opacity">
+                <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center opacity-90">
+                    <i data-lucide="loader-pinwheel" class="text-white w-6 h-6"></i>
+                </div>
+                <span class="text-2xl font-serif font-bold tracking-wide text-white">Transpersonal Training</span>
+            </a>
+
+            <a href="index.html" class="flex md:hidden items-center gap-2 hover:opacity-80 transition-opacity">
+                <div class="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center opacity-90">
+                    <i data-lucide="loader-pinwheel" class="text-white w-5 h-5"></i>
+                </div>
+                <span class="text-xl font-serif font-bold tracking-wide text-white">Transpersonal Training</span>
+            </a>
+
+            <div class="hidden md:flex items-center gap-8">
+                <a href="courses.html" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Courses</a>
+                <a href="techniques.html" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Techniques</a>
+                <div class="dropdown">
+                    <a href="transpersonal_therapy.html" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors flex items-center gap-1">
+                        Transpersonal Therapy <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="transpersonal_therapist.html" class="text-sm">
+                            <i data-lucide="stethoscope" class="w-4 h-4 submenu-icon"></i>
+                            <span>The Transpersonal Therapist</span>
+                        </a>
+                        <a href="client_model.html" class="text-sm">
+                            <i data-lucide="user-check" class="w-4 h-4 submenu-icon"></i>
+                            <span>Become a Client Model</span>
+                        </a>
+                    </div>
+                </div>
+                <a href="index.html#contact" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 rounded-full font-medium transition-transform hover:scale-105 shadow-md">Apply</a>
+            </div>
+
+            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+                <i data-lucide="menu" class="w-7 h-7"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full shadow-xl py-6 px-6 flex-col gap-4 z-20 border-t bg-primary-950/95 backdrop-blur-sm">
+            <a href="courses.html" class="text-slate-200 py-2 border-b block transition-colors">Courses</a>
+            <a href="techniques.html" class="text-slate-200 py-2 border-b block transition-colors">Techniques</a>
+            <a href="transpersonal_therapy.html" class="text-slate-200 py-2 border-b block transition-colors">Transpersonal Therapy</a>
+            <a href="transpersonal_therapist.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ The Transpersonal Therapist</a>
+            <a href="client_model.html" class="text-amber-400 py-2 pl-4 border-b block transition-colors text-sm">→ Become a Client Model</a>
+            <a href="index.html#contact" class="bg-amber-500 text-white px-6 py-3 rounded-md w-full mt-4 font-bold text-center block">Apply</a>
+        </div>
+    </nav>
+
+    <header class="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=2000&q=80" alt="Person in contemplation" class="w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-b from-indigo-950/70 via-indigo-900/50 to-slate-50"></div>
+        </div>
+
+        <div class="relative z-10 container mx-auto px-6 text-center pt-20">
+            <span class="inline-block py-1 px-3 rounded-full bg-white/10 text-amber-300 backdrop-blur-md border border-white/20 text-sm font-medium mb-6 tracking-wider uppercase">
+                Support Training & Receive Therapy
+            </span>
+            <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-lg">
+                Become a Client Model
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
+                Experience professional transpersonal therapy while helping students develop their skills
+            </p>
+        </div>
+    </header>
+
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-serif font-bold text-indigo-950 mb-8">What is a Client Model?</h2>
+                <div class="prose prose-lg max-w-none text-slate-600 leading-relaxed space-y-6">
+                    <p>
+                        Client models are individuals who volunteer to work with our supervised students, receiving professional transpersonal therapy at reduced cost while contributing to the education of future therapists.
+                    </p>
+                    <p>
+                        This mutually beneficial arrangement creates a safe learning environment where students can practice under expert supervision, while clients receive authentic therapeutic support using transpersonal and breathwork techniques.
+                    </p>
+                </div>
+
+                <div class="mt-12 bg-indigo-50 border-l-4 border-indigo-500 p-8 rounded-r-2xl">
+                    <h3 class="text-2xl font-bold text-indigo-950 mb-4">Benefits for Client Models</h3>
+                    <ul class="space-y-3">
+                        <li class="flex gap-3">
+                            <i data-lucide="check-circle" class="text-indigo-600 w-5 h-5 shrink-0 mt-1"></i>
+                            <span class="text-slate-700">Free or significantly reduced therapy sessions</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <i data-lucide="check-circle" class="text-indigo-600 w-5 h-5 shrink-0 mt-1"></i>
+                            <span class="text-slate-700">Access to specialized transpersonal and breathwork techniques</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <i data-lucide="check-circle" class="text-indigo-600 w-5 h-5 shrink-0 mt-1"></i>
+                            <span class="text-slate-700">All sessions supervised by experienced faculty</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <i data-lucide="check-circle" class="text-indigo-600 w-5 h-5 shrink-0 mt-1"></i>
+                            <span class="text-slate-700">Contribute to training highly skilled therapists</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <i data-lucide="check-circle" class="text-indigo-600 w-5 h-5 shrink-0 mt-1"></i>
+                            <span class="text-slate-700">Flexible scheduling options</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="mt-12">
+                    <h3 class="text-2xl font-bold text-indigo-950 mb-6">Requirements</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-slate-50 p-6 rounded-xl">
+                            <h4 class="font-bold text-indigo-950 mb-3 flex items-center gap-2">
+                                <i data-lucide="user-check" class="w-5 h-5 text-indigo-600"></i>
+                                Personal Requirements
+                            </h4>
+                            <ul class="space-y-2 text-sm text-slate-600">
+                                <li>• Willingness to work with students in training</li>
+                                <li>• Commitment to regular sessions</li>
+                                <li>• Basic psychological stability</li>
+                                <li>• Openness to experiential techniques</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-xl">
+                            <h4 class="font-bold text-indigo-950 mb-3 flex items-center gap-2">
+                                <i data-lucide="shield-check" class="w-5 h-5 text-indigo-600"></i>
+                                Practical Details
+                            </h4>
+                            <ul class="space-y-2 text-sm text-slate-600">
+                                <li>• Sessions are supervised (confidentiality maintained)</li>
+                                <li>• Weekly or bi-weekly commitment</li>
+                                <li>• Online or in-person options</li>
+                                <li>• Not suitable for acute crisis</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-gradient-to-r from-teal-800 to-cyan-800 text-white text-center">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-serif font-bold mb-4">Ready to Begin?</h2>
+            <p class="text-teal-100 max-w-2xl mx-auto mb-8 text-lg">
+                Contact our team to learn more about becoming a client model and how we can match you with the right student-therapist.
+            </p>
+            <a href="index.html#contact" class="inline-flex items-center gap-2 bg-white text-teal-900 text-lg px-8 py-4 rounded-full font-bold hover:bg-teal-50 transition-all shadow-lg">
+                Apply as Client Model <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-slate-300 py-16">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-sm">&copy; 2026 Transpersonal Training. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="theme-switcher-fixed">
+        <div class="theme-label" id="theme-label">School Lavender</div>
+        <button id="theme-btn-fixed" title="Switch theme" aria-label="Switch color theme">
+            <i data-lucide="palette" class="w-6 h-6 text-white"></i>
+        </button>
+    </div>
+
+    <script src="theme-switcher.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenuBtn) {
+              mobileMenuBtn.addEventListener('click', () => {
+                  mobileMenu.classList.toggle('hidden');
+                  mobileMenu.classList.toggle('flex');
+              });
+            }
+        });
+    </script>
+</body>
+</html>
