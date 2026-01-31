@@ -1,0 +1,207 @@
+---
+layout: base.njk
+title: Our Teachers | Transpersonal Training
+---
+
+<!-- Hero Section -->
+<header class="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        <img 
+            src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=2000&q=80" 
+            alt="Teaching and learning" 
+            class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-indigo-950/70 via-indigo-900/50 to-slate-50"></div>
+    </div>
+
+    <div class="relative z-10 container mx-auto px-6 text-center pt-20">
+        <div class="animate-fade-in-up">
+            <span class="inline-block py-1 px-3 rounded-full bg-white/10 text-amber-300 backdrop-blur-md border border-white/20 text-sm font-medium mb-6 tracking-wider uppercase">
+                Our Faculty
+            </span>
+            <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-lg">
+                Meet Our Teachers
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
+                Experienced professionals bringing East and West together in transpersonal knowledge
+            </p>
+        </div>
+    </div>
+</header>
+
+<!-- Core Teachers Section -->
+<section class="py-24 bg-white">
+    <div class="container mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <div class="inline-flex items-center gap-2 mb-4">
+                <i data-lucide="star" class="w-8 h-8 text-amber-500"></i>
+                <h2 class="text-4xl font-serif font-bold text-indigo-950">Core Teachers</h2>
+            </div>
+            <p class="text-indigo-900/70 text-lg">The heart of our training program, bringing decades of experience in transpersonal psychotherapy and breathwork</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for teacher in coreTeachers %}
+            <div class="teacher-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300" onclick="toggleBio(this)">
+                <div class="overflow-hidden h-72">
+                    <img src="{{ teacher.image }}" alt="{{ teacher.name }}" class="teacher-img w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="inline-block px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-semibold">Core Teacher</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-400 bio-icon transition-transform duration-300"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif font-bold text-indigo-950 mb-1">{{ teacher.name }}</h3>
+                    <p class="text-amber-600 font-medium mb-3">{{ teacher.role }}</p>
+                    <p class="text-slate-600 text-sm">{{ teacher.credentials }}</p>
+                </div>
+                <div class="teacher-bio">
+                    <div class="p-6 pt-0">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            {{ teacher.id | getBio | safe }}
+                        </div>
+                        {% if teacher.website %}
+                        <div class="mt-4 pt-4 border-t border-slate-200">
+                            <a href="{{ teacher.website }}" target="_blank" class="inline-flex items-center gap-2 text-teal-600 hover:text-teal-700 font-medium text-sm transition-colors">
+                                <i data-lucide="globe" class="w-4 h-4"></i>
+                                <span>Visit Website</span>
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Guest Teachers Section -->
+<section class="py-24 bg-slate-50">
+    <div class="container mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <div class="inline-flex items-center gap-2 mb-4">
+                <i data-lucide="users" class="w-8 h-8 text-purple-600"></i>
+                <h2 class="text-4xl font-serif font-bold text-indigo-950">Methodology Guest Teachers</h2>
+            </div>
+            <p class="text-indigo-900/70 text-lg">International experts sharing specialized knowledge and diverse methodologies</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {% for teacher in guestTeachers %}
+            <div class="teacher-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300" onclick="toggleBio(this)">
+                <div class="overflow-hidden h-56">
+                    <img src="{{ teacher.image }}" alt="{{ teacher.name }}" class="teacher-img w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="inline-block px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">Guest</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-purple-400 bio-icon transition-transform duration-300"></i>
+                    </div>
+                    <h3 class="text-lg font-serif font-bold text-indigo-950 mb-1">{{ teacher.name }}</h3>
+                    <p class="text-purple-600 font-medium text-sm">{{ teacher.location }}</p>
+                </div>
+                <div class="teacher-bio">
+                    <div class="p-4 pt-0">
+                        <div class="text-slate-700 text-sm leading-relaxed">
+                            {{ teacher.id | getBio | safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-24 bg-gradient-to-br from-indigo-950 via-purple-900 to-indigo-900 text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-amber-500 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-teal-500 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="container mx-auto px-6 text-center relative z-10">
+        <h2 class="text-4xl md:text-5xl font-serif font-bold mb-6">Learn from the Best</h2>
+        <p class="text-xl text-indigo-200 max-w-2xl mx-auto mb-10">
+            Join our internationally recognized training program and study with experienced teachers from around the world
+        </p>
+        <a href="/#contact" class="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all hover:scale-105 shadow-xl">
+            <span>Apply to Our Program</span>
+            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+        </a>
+    </div>
+</section>
+
+<style>
+    .teacher-card {
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .teacher-card:hover {
+        transform: translateY(-4px);
+    }
+    .teacher-card:hover .teacher-img {
+        transform: scale(1.1);
+    }
+    .teacher-img {
+        transition: transform 0.3s ease;
+    }
+    
+    /* Biography container - hidden by default */
+    .teacher-bio {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-out;
+    }
+    
+    /* Biography visible when card is active */
+    .teacher-card.active .teacher-bio {
+        max-height: 2000px;
+        transition: max-height 0.5s ease-in;
+    }
+    
+    /* Rotate icon when expanded */
+    .teacher-card.active .bio-icon {
+        transform: rotate(180deg);
+    }
+    
+    /* Prose styling for biography content */
+    .prose h2 {
+        color: #312e81;
+        font-weight: 700;
+        font-size: 1.25rem;
+        margin-top: 1rem;
+        margin-bottom: 0.75rem;
+    }
+    .prose ul {
+        list-style-type: disc;
+        margin-left: 1.5rem;
+        margin-top: 0.5rem;
+    }
+    .prose li {
+        margin-bottom: 0.25rem;
+    }
+    .prose p {
+        margin-bottom: 0.75rem;
+    }
+</style>
+
+<script>
+    function toggleBio(card) {
+        // Close all other bios
+        document.querySelectorAll('.teacher-card.active').forEach(openCard => {
+            if (openCard !== card) {
+                openCard.classList.remove('active');
+            }
+        });
+        
+        // Toggle current bio
+        card.classList.toggle('active');
+        
+        // Re-initialize lucide icons for any new content
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+    }
+</script>

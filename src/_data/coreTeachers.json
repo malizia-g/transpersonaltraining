@@ -1,0 +1,60 @@
+[
+  {
+    "id": "lyudmila-skartsesku",
+    "name": "Lyudmila Skartsesku",
+    "role": "Head East",
+    "location": "Moldova",
+    "credentials": "MA Transpersonal Psychotherapist EUROTAS",
+    "image": "https://transpersonal-training.com/wp-content/uploads/2023/04/Lyudmila.jpg",
+    "website": "https://arasco.org/",
+    "type": "core"
+  },
+  {
+    "id": "kati-wortelkamp",
+    "name": "Kati Wortelkamp",
+    "role": "Head West",
+    "location": "Germany",
+    "credentials": "Anthropologist & Psychologist M.A.",
+    "image": "https://transpersonal-training.com/wp-content/uploads/2020/11/Kati_Wortelkamp-1.jpg",
+    "website": "http://www.kati-wortelkamp.de",
+    "type": "core"
+  },
+  {
+    "id": "jure-biechonski",
+    "name": "Prof. Jure Biechonski",
+    "role": "Core Teacher",
+    "location": "Estonia",
+    "credentials": "Expert in transpersonal psychology and academic research",
+    "image": "https://transpersonal-training.com/wp-content/uploads/2020/12/jure-biechonski.jpg",
+    "type": "core"
+  },
+  {
+    "id": "lilian-gscheidel",
+    "name": "Lilian Gscheidel",
+    "role": "Core Teacher",
+    "location": "Germany",
+    "credentials": "Psychologist BSc, Transpersonal Breathwork Practitioner",
+    "image": "https://transpersonal-training.com/wp-content/uploads/2023/09/Lilian.jpg",
+    "website": "http://www.wandel-zart-und-wild.de",
+    "type": "core"
+  },
+  {
+    "id": "manal-al-hammadi",
+    "name": "Manal Al-Hammadi",
+    "role": "Core Teacher",
+    "location": "Yemen / Poland",
+    "credentials": "Psychedelic Integration Facilitator & Educator",
+    "image": "https://transpersonal-training.com/wp-content/uploads/2025/03/Manal_Klein.jpg",
+    "type": "core"
+  },
+  {
+    "id": "tina-lindhard",
+    "name": "Tina Lindhard",
+    "role": "Core Teacher",
+    "location": "Spain",
+    "credentials": "Ph.D. Consciousness Studies - Author & Researcher",
+    "image": "https://transpersonal-training.com/wp-content/uploads/2020/12/Tina-Linhard.jpg",
+    "website": "http://tinalindhard.com/",
+    "type": "core"
+  }
+]

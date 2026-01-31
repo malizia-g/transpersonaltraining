@@ -1,0 +1,44 @@
+[
+  {
+    "id": "lev-belogorodskii",
+    "name": "Lev Belogorodskii",
+    "location": "Russia",
+    "image": "https://transpersonal-training.com/wp-content/uploads/2020/12/Belogodkii-Lev-1.jpg",
+    "type": "guest"
+  },
+  {
+    "id": "liudmila-serbina",
+    "name": "Liudmila Serbina",
+    "location": "Russia",
+    "image": "https://transpersonal-training.com/wp-content/uploads/2020/12/Liudmila-Serbina-Ph.jpg",
+    "type": "guest"
+  },
+  {
+    "id": "ingo-jahrsetz",
+    "name": "Dr. Ingo Benjamin Jahrsetz",
+    "location": "Germany",
+    "image": "https://transpersonal-training.com/wp-content/uploads/2023/07/Ingo-Jahrsetz-1.jpg",
+    "type": "guest"
+  },
+  {
+    "id": "vladimir-maykov",
+    "name": "Vladimir Maykov",
+    "location": "Russia",
+    "image": "https://transpersonal-training.com/wp-content/uploads/2024/03/Vladimir-Maykov-1.jpg",
+    "type": "guest"
+  },
+  {
+    "id": "pier-luigi-lattuada",
+    "name": "Pier Luigi Lattuada",
+    "location": "Italy",
+    "image": "https://transpersonal-training.com/wp-content/uploads/2023/09/Pier-Luigi-Lattuada.jpg",
+    "type": "guest"
+  },
+  {
+    "id": "samvedam-randles",
+    "name": "Samvedam B. Randles",
+    "location": "USA",
+    "image": "https://transpersonal-training.com/wp-content/uploads/2021/02/samvedan.jpg",
+    "type": "guest"
+  }
+]

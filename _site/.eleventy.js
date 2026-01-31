@@ -1,4 +1,26 @@
+const markdownIt = require('markdown-it');
+const fs = require('fs');
+const path = require('path');
+
 module.exports = function(eleventyConfig) {
+  // Markdown instance
+  const md = markdownIt({
+    html: true,
+    linkify: true,
+    typographer: true
+  });
+  
+  // Filter to read and render biography Markdown files
+  eleventyConfig.addFilter('getBio', function(teacherId) {
+    try {
+      const bioPath = path.join(__dirname, 'src/_data/bios', `${teacherId}.md`);
+      const content = fs.readFileSync(bioPath, 'utf-8');
+      return md.render(content);
+    } catch (error) {
+      return '<p>Biography not available.</p>';
+    }
+  });
+  
   // Copy static assets to output
   eleventyConfig.addPassthroughCopy("*.js");
   eleventyConfig.addPassthroughCopy("*.css");
@@ -7,7 +29,6 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy(".vscode");
   
   // These pages keep their old HTML format for now (can be converted later if needed)
-  eleventyConfig.addPassthroughCopy("teachers.html");
   eleventyConfig.addPassthroughCopy("teachers_testB.html");
   eleventyConfig.addPassthroughCopy("teachers_testC.html");
   eleventyConfig.addPassthroughCopy("transpersonal_therapist.html");
