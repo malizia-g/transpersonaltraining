@@ -1,0 +1,117 @@
+---
+layout: base.njk
+title: "Educating Therapists for a Revolution of Consciousness"
+---
+
+<!-- Hero Section -->
+<header class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+    <!-- Background Media with Overlay -->
+    <div class="absolute inset-0 z-0">
+        <!-- Video Background (optional) -->
+        <video id="hero-video" 
+               class="absolute inset-0 w-full h-full object-cover" 
+               autoplay 
+               muted 
+               loop 
+               playsinline
+               poster="">
+        </video>
+        
+        <!-- Fallback Image -->
+        <img 
+            src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=80" 
+            alt="Nature forest stream" 
+            class="absolute inset-0 w-full h-full object-cover"
+            id="hero-image"
+        />
+        
+        <!-- Overlay Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-b from-indigo-950/70 via-indigo-900/50 to-slate-50"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-10 container mx-auto px-6 text-center pt-20">
+        <div class="animate-fade-in-up">
+            <span class="inline-block py-1 px-3 rounded-full bg-white/10 text-amber-300 backdrop-blur-md border border-white/20 text-sm font-medium mb-6 tracking-wider uppercase">
+                Professional Training
+            </span>
+            <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-lg">
+                Transpersonal Training
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
+                Educating therapists for a revolution of consciousness
+            </p>
+            <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/training.html" class="bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-full font-medium text-lg transition-transform hover:scale-105 shadow-lg">
+                    Explore Our Training
+                </a>
+                <a href="#welcome" class="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white px-8 py-4 rounded-full font-medium text-lg transition-all border border-white/30 shadow-lg">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Welcome Section -->
+<section id="welcome" class="py-24 bg-slate-50">
+    <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-indigo-950 mb-6">
+                Welcome to Transpersonal Training
+            </h2>
+            <p class="text-lg text-slate-600 leading-relaxed">
+                We offer comprehensive training in transpersonal psychotherapy and breathwork psychotechnology, 
+                blending ancient wisdom with modern therapeutic practices to support deep personal and collective transformation.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Card 1 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
+                <div class="w-16 h-16 bg-indigo-100 rounded-xl flex items-center justify-center mb-6">
+                    <i data-lucide="heart-pulse" class="w-8 h-8 text-indigo-600"></i>
+                </div>
+                <h3 class="text-2xl font-serif font-bold text-indigo-950 mb-4">Holistic Approach</h3>
+                <p class="text-slate-600 leading-relaxed">
+                    Integrating mind, body, and spirit through transpersonal psychology and somatic practices.
+                </p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
+                <div class="w-16 h-16 bg-teal-100 rounded-xl flex items-center justify-center mb-6">
+                    <i data-lucide="users-round" class="w-8 h-8 text-teal-600"></i>
+                </div>
+                <h3 class="text-2xl font-serif font-bold text-indigo-950 mb-4">Expert Faculty</h3>
+                <p class="text-slate-600 leading-relaxed">
+                    Learn from experienced practitioners and teachers in transpersonal therapy and breathwork.
+                </p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
+                <div class="w-16 h-16 bg-amber-100 rounded-xl flex items-center justify-center mb-6">
+                    <i data-lucide="graduation-cap" class="w-8 h-8 text-amber-600"></i>
+                </div>
+                <h3 class="text-2xl font-serif font-bold text-indigo-950 mb-4">Professional Certification</h3>
+                <p class="text-slate-600 leading-relaxed">
+                    EUROTAS-accredited programs leading to professional certification in transpersonal psychotherapy.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact CTA -->
+<section id="contact" class="py-20 bg-teal-800 text-white text-center">
+    <div class="container mx-auto px-6">
+        <h2 class="text-4xl font-serif font-bold mb-6">Ready to Begin Your Journey?</h2>
+        <p class="text-xl text-teal-100 max-w-2xl mx-auto mb-8">
+            Join our community of practitioners dedicated to consciousness transformation and healing.
+        </p>
+        <a href="mailto:info@transpersonal-training.com" class="inline-block bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-full font-medium text-lg transition-transform hover:scale-105 shadow-lg">
+            Get in Touch
+        </a>
+    </div>
+</section>

@@ -1,0 +1,91 @@
+<nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 bg-transparent text-white/90">
+    <div class="container mx-auto px-6 flex justify-between items-center relative z-10">
+        <!-- Logo (Desktop Only) -->
+        <a href="/" class="hidden md:flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center opacity-90">
+                <i data-lucide="loader-pinwheel" class="text-white w-6 h-6"></i>
+            </div>
+            <span class="text-2xl font-serif font-bold tracking-wide text-white">
+                Transpersonal Training
+            </span>
+        </a>
+
+        <!-- Logo (Mobile Only) -->
+        <a href="/" class="flex md:hidden items-center gap-2 hover:opacity-80 transition-opacity">
+            <div class="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center opacity-90">
+                <i data-lucide="loader-pinwheel" class="text-white w-5 h-5"></i>
+            </div>
+            <span class="text-xl font-serif font-bold tracking-wide text-white">
+                Transpersonal Training
+            </span>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-8">
+            <!-- Training Dropdown -->
+            <div class="dropdown">
+                <a href="/training/" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors flex items-center gap-1">
+                    Training <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="/schedule/" class="text-sm">
+                        <i data-lucide="calendar" class="w-4 h-4 submenu-icon"></i>
+                        <span>Schedule</span>
+                    </a>
+                    <a href="/teachers.html" class="text-sm">
+                        <i data-lucide="users" class="w-4 h-4 submenu-icon"></i>
+                        <span>Our Teachers</span>
+                    </a>
+                    <a href="/teachers_testB.html" class="text-sm">
+                        <i data-lucide="layout-grid" class="w-4 h-4 submenu-icon"></i>
+                        <span>Teachers - Layout B (Tabs)</span>
+                    </a>
+                    <a href="/teachers_testC.html" class="text-sm">
+                        <i data-lucide="maximize-2" class="w-4 h-4 submenu-icon"></i>
+                        <span>Teachers - Layout C (Modal)</span>
+                    </a>
+                </div>
+            </div>
+
+            <a href="/techniques/" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Techniques</a>
+            
+            <!-- Transpersonal Therapy Dropdown -->
+            <div class="dropdown">
+                <a href="/transpersonal_therapy/" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors flex items-center gap-1">
+                    Transpersonal Therapy <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="/transpersonal_therapist.html" class="text-sm">
+                        <i data-lucide="stethoscope" class="w-4 h-4 submenu-icon"></i>
+                        <span>The Transpersonal Therapist</span>
+                    </a>
+                    <a href="/client_model.html" class="text-sm">
+                        <i data-lucide="user-check" class="w-4 h-4 submenu-icon"></i>
+                        <span>Become a Client Model</span>
+                    </a>
+                </div>
+            </div>
+
+            <a href="/#contact" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 rounded-full font-medium transition-transform hover:scale-105 shadow-md">Apply</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+            <i data-lucide="menu" class="w-7 h-7"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Menu Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full shadow-xl py-6 px-6 flex-col gap-4 z-20 border-t">
+        <a href="/training/" class="text-slate-200 py-2 border-b block transition-colors">Training</a>
+        <a href="/schedule/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Schedule</a>
+        <a href="/teachers.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Our Teachers</a>
+        <a href="/teachers_testB.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Teachers - Layout B (Tabs)</a>
+        <a href="/teachers_testC.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Teachers - Layout C (Modal)</a>
+        <a href="/techniques/" class="text-slate-200 py-2 border-b block transition-colors">Techniques</a>
+        <a href="/transpersonal_therapy/" class="text-slate-200 py-2 border-b block transition-colors">Transpersonal Therapy</a>
+        <a href="/transpersonal_therapist.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ The Transpersonal Therapist</a>
+        <a href="/client_model.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Become a Client Model</a>
+        <a href="/#contact" class="bg-amber-500 text-white px-6 py-3 rounded-md w-full mt-4 font-bold text-center block">Apply</a>
+    </div>
+</nav>
