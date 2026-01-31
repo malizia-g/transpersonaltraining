@@ -330,7 +330,17 @@
 
             <!-- Desktop Menu -->
             <div class="hidden md:flex items-center gap-8">
-                <a href="courses.html" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Courses</a>
+                <div class="dropdown">
+                    <a href="training.html" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors flex items-center gap-1">
+                        Training <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="teachers.html" class="text-sm">
+                            <i data-lucide="users" class="w-4 h-4 submenu-icon"></i>
+                            <span>Our Teachers</span>
+                        </a>
+                    </div>
+                </div>
                 <a href="techniques.html" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Techniques</a>
                 <div class="dropdown">
                     <a href="transpersonal_therapy.html" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors flex items-center gap-1">
@@ -358,7 +368,8 @@
 
         <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full shadow-xl py-6 px-6 flex-col gap-4 z-20 border-t bg-primary-950/95 backdrop-blur-sm">
-            <a href="courses.html" class="text-slate-200 py-2 border-b block transition-colors">Courses</a>
+            <a href="training.html" class="text-slate-200 py-2 border-b block transition-colors">Training</a>
+            <a href="teachers.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Our Teachers</a>
             <a href="techniques.html" class="text-slate-200 py-2 border-b block transition-colors">Techniques</a>
             <a href="transpersonal_therapy.html" class="text-slate-200 py-2 border-b block transition-colors">Transpersonal Therapy</a>
             <a href="transpersonal_therapist.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ The Transpersonal Therapist</a>
