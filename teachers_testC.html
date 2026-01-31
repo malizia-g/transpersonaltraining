@@ -221,7 +221,7 @@
         }
         
         .teacher-bio.active {
-            max-height: 600px;
+            max-height: 2000px;
             padding: 1.5rem;
         }
         
@@ -394,6 +394,14 @@
                             <i data-lucide="users" class="w-4 h-4 submenu-icon"></i>
                             <span>Our Teachers</span>
                         </a>
+                        <a href="teachers_testB.html" class="text-sm">
+                            <i data-lucide="layout-grid" class="w-4 h-4 submenu-icon"></i>
+                            <span>Teachers - Layout B (Tabs)</span>
+                        </a>
+                        <a href="teachers_testC.html" class="text-sm">
+                            <i data-lucide="maximize-2" class="w-4 h-4 submenu-icon"></i>
+                            <span>Teachers - Layout C (Modal)</span>
+                        </a>
                     </div>
                 </div>
                 <a href="techniques.html" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Techniques</a>
@@ -425,6 +433,8 @@
         <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full shadow-xl py-6 px-6 flex-col gap-4 z-20 border-t bg-primary-950/95 backdrop-blur-sm">
             <a href="training.html" class="text-amber-400 py-2 border-b block transition-colors">Training</a>
             <a href="teachers.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Our Teachers</a>
+            <a href="teachers_testB.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Teachers - Layout B</a>
+            <a href="teachers_testC.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Teachers - Layout C</a>
             <a href="techniques.html" class="text-slate-200 py-2 border-b block transition-colors">Techniques</a>
             <a href="transpersonal_therapy.html" class="text-slate-200 py-2 border-b block transition-colors">Transpersonal Therapy</a>
             <a href="transpersonal_therapist.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ The Transpersonal Therapist</a>
@@ -491,309 +501,104 @@
                 </div>
 
                 <!-- Kati Wortelkamp -->
-                <div class="teacher-card" onclick="toggleBio(this)">
+                <div class="teacher-card" onclick="openModal('modal-kati')">
                     <div class="overflow-hidden">
                         <img src="https://transpersonal-training.com/wp-content/uploads/2020/11/Kati_Wortelkamp-1.jpg" alt="Kati Wortelkamp" class="teacher-img">
                     </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-2">
                             <span class="badge-core">Core Teacher</span>
-                            <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-400 bio-icon"></i>
+                            <i data-lucide="external-link" class="w-5 h-5 text-indigo-400"></i>
                         </div>
                         <h3 class="text-2xl font-serif font-bold text-indigo-950 mb-1">Kati Wortelkamp</h3>
                         <p class="text-amber-600 font-medium mb-3">Head West</p>
                         <p class="text-slate-600 text-sm">Anthropologist & Psychologist M.A. - Germany</p>
-                    </div>
-                    <div class="teacher-bio">
-                        <div class="mb-6">
-                            <div class="flex items-center gap-2 mb-3">
-                                <i data-lucide="book-open" class="w-5 h-5 text-amber-600"></i>
-                                <h4 class="font-semibold text-indigo-950">Biography</h4>
-                            </div>
-                            <p class="text-slate-700 leading-relaxed">
-                                Co-founder and Head West of the Transpersonal Training program. Based in Germany, she brings decades 
-                                of experience in Holotropic Breathwork and transpersonal psychotherapy. She oversees the Western curriculum 
-                                and ensures the program meets EUROTAS standards for professional transpersonal training. With over 10 years 
-                                at the Cancer-Hotline (University Medical Center Freiburg), she brings deep compassion and practical expertise 
-                                to therapeutic work.
-                            </p>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <div class="flex items-center gap-2 mb-3">
-                                <i data-lucide="award" class="w-5 h-5 text-amber-600"></i>
-                                <h4 class="font-semibold text-indigo-950">Credentials & Certifications</h4>
-                            </div>
-                            <ul class="space-y-2 text-slate-700">
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Certified Holotropic Breathwork® Practitioner (Grof Transpersonal Training)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Certified in Grof® Legacy Training</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Professional Member of EUROTAS</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Innovation Trainer/Coach (motiv network, Institute of German Economy)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Didacted Therapy in Transpersonal Psychotherapy (Dr. Ingo Jahrsetz)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> One Light Healing Touch - Energetic-Therapeutic-Shamanic School</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Non-Medical Practitioner for Psychotherapy (Public Health Dept. Freiburg)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Person-Centered Psychotherapy (University of Freiburg)</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <div class="flex items-center gap-2 mb-3">
-                                <i data-lucide="briefcase" class="w-5 h-5 text-amber-600"></i>
-                                <h4 class="font-semibold text-indigo-950">Experience & Specializations</h4>
-                            </div>
-                            <ul class="space-y-2 text-slate-700">
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Private Practice near Freiburg, Germany</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Offering Holotropic Breathwork® Seminars for Many Years</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> 10 Years at Cancer-Hotline (University Medical Center Freiburg)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Extensive Practice in Bioenergetic, Kundalini and Iyengar Yoga</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Body-Oriented Methods Specialist</li>
-                            </ul>
-                        </div>
-                        
-                        <div>
-                            <div class="flex items-center gap-2 mb-3">
-                                <i data-lucide="globe" class="w-5 h-5 text-amber-600"></i>
-                                <h4 class="font-semibold text-indigo-950">Website</h4>
-                            </div>
-                            <a href="http://www.kati-wortelkamp.de" target="_blank" class="text-amber-600 hover:text-amber-700 underline">www.kati-wortelkamp.de</a>
-                        </div>
+                        <button class="mt-4 text-amber-600 font-medium hover:text-amber-700 transition-colors flex items-center gap-2">
+                            View Full Profile <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
                     </div>
                 </div>
 
                 <!-- Jure Biechonski -->
-                <div class="teacher-card" onclick="toggleBio(this)">
+                <div class="teacher-card" onclick="openModal('modal-jure')">
                     <div class="overflow-hidden">
                         <img src="https://transpersonal-training.com/wp-content/uploads/2020/12/jure-biechonski.jpg" alt="Prof. Jure Biechonski" class="teacher-img">
                     </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-2">
                             <span class="badge-core">Core Teacher</span>
-                            <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-400 bio-icon"></i>
+                            <i data-lucide="external-link" class="w-5 h-5 text-indigo-400"></i>
                         </div>
                         <h3 class="text-2xl font-serif font-bold text-indigo-950 mb-1">Prof. Jure Biechonski</h3>
                         <p class="text-amber-600 font-medium mb-3">Estonia</p>
                         <p class="text-slate-600 text-sm">Expert in transpersonal psychology and academic research</p>
-                    </div>
-                    <div class="teacher-bio">
-                        <p class="text-slate-700 leading-relaxed">
-                            Professor Jure Biechonski brings academic rigor and deep theoretical knowledge to our program. 
-                            Based in Estonia, he is a renowned researcher and practitioner in transpersonal psychology, 
-                            bridging the gap between academic research and practical application in therapeutic settings.
-                        </p>
+                        <button class="mt-4 text-amber-600 font-medium hover:text-amber-700 transition-colors flex items-center gap-2">
+                            View Full Profile <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
                     </div>
                 </div>
 
                 <!-- Lilian Gscheidel -->
-                <div class="teacher-card" onclick="toggleBio(this)">
+                <div class="teacher-card" onclick="openModal('modal-lilian')">
                     <div class="overflow-hidden">
                         <img src="https://transpersonal-training.com/wp-content/uploads/2023/09/Lilian.jpg" alt="Lilian Gscheidel" class="teacher-img">
                     </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-2">
                             <span class="badge-core">Core Teacher</span>
-                            <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-400 bio-icon"></i>
+                            <i data-lucide="external-link" class="w-5 h-5 text-indigo-400"></i>
                         </div>
                         <h3 class="text-2xl font-serif font-bold text-indigo-950 mb-1">Lilian Gscheidel</h3>
                         <p class="text-amber-600 font-medium mb-3">Germany</p>
                         <p class="text-slate-600 text-sm">Psychologist BSc, Transpersonal Breathwork Practitioner</p>
-                    </div>
-                    <div class="teacher-bio">
-                        <div class="mb-6">
-                            <div class="flex items-center gap-2 mb-3">
-                                <i data-lucide="book-open" class="w-5 h-5 text-amber-600"></i>
-                                <h4 class="font-semibold text-indigo-950">Biography</h4>
-                            </div>
-                            <p class="text-slate-700 leading-relaxed">
-                                Core faculty member specializing in breathwork psychotherapy, gestalt therapy, and dance therapy. 
-                                Works in a private practice for gestalt therapy in Berlin and offers Grof Breathwork® weekends. 
-                                Living in community for many years, she brings a deeply relational and embodied approach to therapeutic work, 
-                                integrating movement, breath, and consciousness exploration.
-                            </p>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <div class="flex items-center gap-2 mb-3">
-                                <i data-lucide="award" class="w-5 h-5 text-amber-600"></i>
-                                <h4 class="font-semibold text-indigo-950">Credentials & Certifications</h4>
-                            </div>
-                            <ul class="space-y-2 text-slate-700">
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Certified Transpersonal Breathwork Practitioner (Dr. Ingo Jahrsetz)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Certified in Grof® Legacy Training</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Certified Gestalt Therapist (Institut für Gestalt und Erfahrung)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Certified Dance Therapist (Institut für Gestalt und Erfahrung)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Psychedelic Facilitator (with Kiyumi)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Psychologist BSc (University of Magdeburg)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Certified Heroes Journey Facilitator</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <div class="flex items-center gap-2 mb-3">
-                                <i data-lucide="briefcase" class="w-5 h-5 text-amber-600"></i>
-                                <h4 class="font-semibold text-indigo-950">Experience & Specializations</h4>
-                            </div>
-                            <ul class="space-y-2 text-slate-700">
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Private Practice for Gestalt Therapy, Berlin</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Grof Breathwork® Weekend Facilitator</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Therapeutic Aftercare Groups for Psychosomatic Clinic Patients</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Living in Intentional Community for Many Years</li>
-                            </ul>
-                        </div>
-                        
-                        <div>
-                            <div class="flex items-center gap-2 mb-3">
-                                <i data-lucide="globe" class="w-5 h-5 text-amber-600"></i>
-                                <h4 class="font-semibold text-indigo-950">Website</h4>
-                            </div>
-                            <a href="http://www.wandel-zart-und-wild.de" target="_blank" class="text-amber-600 hover:text-amber-700 underline">www.wandel-zart-und-wild.de</a>
-                        </div>
+                        <button class="mt-4 text-amber-600 font-medium hover:text-amber-700 transition-colors flex items-center gap-2">
+                            View Full Profile <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
                     </div>
                 </div>
 
                 <!-- Manal Al-Hammadi -->
-                <div class="teacher-card" onclick="toggleBio(this)">
+                <div class="teacher-card" onclick="openModal('modal-manal')">
                     <div class="overflow-hidden">
                         <img src="https://transpersonal-training.com/wp-content/uploads/2025/03/Manal_Klein.jpg" alt="Manal Al-Hammadi" class="teacher-img">
                     </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-2">
                             <span class="badge-core">Core Teacher</span>
-                            <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-400 bio-icon"></i>
+                            <i data-lucide="external-link" class="w-5 h-5 text-indigo-400"></i>
                         </div>
                         <h3 class="text-2xl font-serif font-bold text-indigo-950 mb-1">Manal Al-Hammadi</h3>
                         <p class="text-amber-600 font-medium mb-3">Yemen / Poland</p>
                         <p class="text-slate-600 text-sm">Psychedelic Integration Facilitator & Educator</p>
-                    </div>
-                    <div class="teacher-bio">
-                        <div class="mb-6">
-                            <div class="flex items-center gap-2 mb-3">
-                                <i data-lucide="book-open" class="w-5 h-5 text-amber-600"></i>
-                                <h4 class="font-semibold text-indigo-950">Biography</h4>
-                            </div>
-                            <p class="text-slate-700 leading-relaxed">
-                                Certified Psychedelic Integration Facilitator and Educator (USA), serving as Managing Director at the 
-                                Psychedelic Studies Institute in Poland. Originally from Yemen and descendant of the Queen of Sheba, 
-                                she brings over a decade of experience studying psychedelics, bridging ancient wisdom with modern research. 
-                                Her mission is to honor ancestral knowledge while pioneering new frontiers in psychedelic science, innovation, 
-                                and mental health care with a strong focus on ethical standards.
-                            </p>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <div class="flex items-center gap-2 mb-3">
-                                <i data-lucide="award" class="w-5 h-5 text-amber-600"></i>
-                                <h4 class="font-semibold text-indigo-950">Credentials & Certifications</h4>
-                            </div>
-                            <ul class="space-y-2 text-slate-700">
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Certified Psychedelic Integration Facilitator & Educator (USA)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Managing Director, Psychedelic Studies Institute (Poland)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Training as Transpersonal Psychotherapist (in progress)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Ph.D. Candidate: Psychedelics, Public Health & Drug Policy</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <div class="flex items-center gap-2 mb-3">
-                                <i data-lucide="briefcase" class="w-5 h-5 text-amber-600"></i>
-                                <h4 class="font-semibold text-indigo-950">Experience & Specializations</h4>
-                            </div>
-                            <ul class="space-y-2 text-slate-700">
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Over a Decade Studying Psychedelics</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Career in Technology and Innovation</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Leading Initiatives in Psychedelic Education & Training</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Bridging Ancestral Lineage with Modern Science</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Focus on Ethical Standards in Psychedelic Therapy</li>
-                            </ul>
-                        </div>
+                        <button class="mt-4 text-amber-600 font-medium hover:text-amber-700 transition-colors flex items-center gap-2">
+                            View Full Profile <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
                     </div>
                 </div>
 
                 <!-- Tina Lindhard -->
-                <div class="teacher-card" onclick="toggleBio(this)">
+                <div class="teacher-card" onclick="openModal('modal-tina')">
                     <div class="overflow-hidden">
                         <img src="https://transpersonal-training.com/wp-content/uploads/2020/12/Tina-Linhard.jpg" alt="Tina Lindhard" class="teacher-img">
                     </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-2">
                             <span class="badge-core">Core Teacher</span>
-                            <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-400 bio-icon"></i>
+                            <i data-lucide="external-link" class="w-5 h-5 text-indigo-400"></i>
                         </div>
                         <h3 class="text-2xl font-serif font-bold text-indigo-950 mb-1">Tina Lindhard</h3>
                         <p class="text-amber-600 font-medium mb-3">Spain</p>
                         <p class="text-slate-600 text-sm">Ph.D. Consciousness Studies - Author & Researcher</p>
-                    </div>
-                    <div class="teacher-bio">
-                        <div class="mb-6">
-                            <div class="flex items-center gap-2 mb-3">
-                                <i data-lucide="book-open" class="w-5 h-5 text-amber-600"></i>
-                                <h4 class="font-semibold text-indigo-950">Biography</h4>
-                            </div>
-                            <p class="text-slate-700 leading-relaxed">
-                                Senior core teacher with extensive experience in meditation, craniosacral therapy, and transpersonal psychology. 
-                                Based in Spain, she is an accomplished author, researcher, and public speaker on consciousness, meditation, health, 
-                                and wellness. With a background spanning psychology, philosophy, and consciousness studies, she brings deep theoretical 
-                                and experiential knowledge to breathwork psychotherapy. Mentor for MA and PhD students at IUPS.
-                            </p>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <div class="flex items-center gap-2 mb-3">
-                                <i data-lucide="award" class="w-5 h-5 text-amber-600"></i>
-                                <h4 class="font-semibold text-indigo-950">Academic Degrees & Certificates</h4>
-                            </div>
-                            <ul class="space-y-2 text-slate-700">
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Ph.D. Consciousness Studies (IUPS, Hawaii, 2016)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> MATP Transpersonal Psychology (Sofia University/ITP, 2013)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Certificate of Transpersonal Studies (Sofia University, 2012)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Diploma in Craniosacral Therapy - Biodynamic School (2005)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Diploma in Family Constellation Therapy (2009)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Diploma in Kinesiology Practice & Philosophy (2003)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Diploma in Cranial Osteopathy (2002)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> BSc Social Science - Research Psychology (UCT, South Africa, 1976)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Arka Dhyana Meditation Teachers Training Certificate</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <div class="flex items-center gap-2 mb-3">
-                                <i data-lucide="briefcase" class="w-5 h-5 text-amber-600"></i>
-                                <h4 class="font-semibold text-indigo-950">Experience & Specializations</h4>
-                            </div>
-                            <ul class="space-y-2 text-slate-700">
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Mentor for MA/PhD Students at IUPS (2017-present)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Arka Dhyana Meditation Teacher & Facilitator (2005-present)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Private Consultancy: Eclectic Therapist (2002-2013)</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Public Speaker on Self, Meditation, Health & Wellness</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> Specializing in Trauma, Families, Death, Dying & Grief</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <div class="flex items-center gap-2 mb-3">
-                                <i data-lucide="book" class="w-5 h-5 text-amber-600"></i>
-                                <h4 class="font-semibold text-indigo-950">Selected Publications (2020)</h4>
-                            </div>
-                            <ul class="space-y-2 text-slate-700 text-sm">
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> <em>Intuition: A Heart-based Epistemology.</em> Diálogo vol. 7,(1):181-194</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> <em>Mesoderm: The Possible Key to the Organic Basis of Freud's Theories.</em> Psychology 11(11):1769-1793</li>
-                                <li class="flex gap-2"><span class="text-amber-600">•</span> <em>La Salud Mental Y La Superación De La Violencia.</em> Salud Mental, Madrid</li>
-                            </ul>
-                        </div>
-                        
-                        <div>
-                            <div class="flex items-center gap-2 mb-3">
-                                <i data-lucide="globe" class="w-5 h-5 text-amber-600"></i>
-                                <h4 class="font-semibold text-indigo-950">Website</h4>
-                            </div>
-                            <a href="http://tinalindhard.com/" target="_blank" class="text-amber-600 hover:text-amber-700 underline">tinalindhard.com</a>
-                        </div>
+                        <button class="mt-4 text-amber-600 font-medium hover:text-amber-700 transition-colors flex items-center gap-2">
+                            View Full Profile <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Guest Teachers Section -->
+        <!-- Guest Teachers Section -->
     <section class="py-24 bg-slate-50">
         <div class="container mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto mb-16">
@@ -1462,6 +1267,489 @@
                     </div>
                     <a href="https://arasco.org/" target="_blank" class="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 font-medium text-lg">
                         https://arasco.org/ <i data-lucide="external-link" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal for Kati Wortelkamp -->
+    <div id="modal-kati" class="modal-container">
+        <div class="modal-header">
+            <button class="modal-close" onclick="closeModal()">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div class="flex items-start gap-6">
+                <img src="https://transpersonal-training.com/wp-content/uploads/2020/11/Kati_Wortelkamp-1.jpg" alt="Kati Wortelkamp" class="w-32 h-32 rounded-lg object-cover">
+                <div class="flex-1">
+                    <span class="badge-core mb-2 inline-block">Core Teacher</span>
+                    <h2 class="text-3xl font-serif font-bold text-indigo-950 mb-1">Kati Wortelkamp</h2>
+                    <p class="text-amber-600 font-semibold mb-2">Head West</p>
+                    <p class="text-slate-600">Anthropologist & Psychologist M.A. - Germany</p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="space-y-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="book-open" class="w-6 h-6 text-amber-600"></i>
+                        <h3 class="text-2xl font-serif font-bold text-indigo-950">Biography</h3>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed mb-4">
+                        Co-founder and Head West of the Transpersonal Training program. Based in Germany, she brings decades 
+                        of experience in Holotropic Breathwork and transpersonal psychotherapy. She oversees the Western curriculum 
+                        and ensures the program meets EUROTAS standards for professional transpersonal training. With over 10 years 
+                        at the Cancer-Hotline (University Medical Center Freiburg), she brings deep compassion and practical expertise 
+                        to therapeutic work.
+                    </p>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="award" class="w-6 h-6 text-amber-600"></i>
+                        <h3 class="text-2xl font-serif font-bold text-indigo-950">Credentials & Certifications</h3>
+                    </div>
+                    <ul class="space-y-3 text-slate-700">
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Certified Holotropic Breathwork® Practitioner (Grof Transpersonal Training)</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Certified in Grof® Legacy Training</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Professional Member of EUROTAS</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Innovation Trainer/Coach (motiv network, Institute of German Economy)</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Didacted Therapy in Transpersonal Psychotherapy (Dr. Ingo Jahrsetz)</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Non-Medical Practitioner for Psychotherapy (Public Health Dept. Freiburg)</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Person-Centered Psychotherapy (University of Freiburg)</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="briefcase" class="w-6 h-6 text-amber-600"></i>
+                        <h3 class="text-2xl font-serif font-bold text-indigo-950">Experience & Specializations</h3>
+                    </div>
+                    <ul class="space-y-3 text-slate-700">
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Private Practice near Freiburg, Germany</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>10 Years at Cancer-Hotline (University Medical Center Freiburg)</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Body-Oriented Methods Specialist</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Extensive Practice in Bioenergetic, Kundalini and Iyengar Yoga</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="globe" class="w-6 h-6 text-amber-600"></i>
+                        <h3 class="text-2xl font-serif font-bold text-indigo-950">Website</h3>
+                    </div>
+                    <a href="http://www.kati-wortelkamp.de" target="_blank" class="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 font-medium text-lg">
+                        www.kati-wortelkamp.de <i data-lucide="external-link" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Jure Biechonski -->
+    <div id="modal-jure" class="modal-container">
+        <div class="modal-header">
+            <button class="modal-close" onclick="closeModal()">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div class="flex items-start gap-6">
+                <img src="https://transpersonal-training.com/wp-content/uploads/2020/12/jure-biechonski.jpg" alt="Prof. Jure Biechonski" class="w-32 h-32 rounded-lg object-cover">
+                <div class="flex-1">
+                    <span class="badge-core mb-2 inline-block">Core Teacher</span>
+                    <h2 class="text-3xl font-serif font-bold text-indigo-950 mb-1">Prof. Jure Biechonski</h2>
+                    <p class="text-amber-600 font-semibold mb-2">Estonia</p>
+                    <p class="text-slate-600">Expert in transpersonal psychology and academic research</p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="space-y-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="book-open" class="w-6 h-6 text-amber-600"></i>
+                        <h3 class="text-2xl font-serif font-bold text-indigo-950">Biography</h3>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed mb-4">
+                        Professor Jure Biechonski brings academic rigor and deep theoretical knowledge to our program. 
+                        Based in Estonia, he is a renowned researcher and practitioner in transpersonal psychology, 
+                        bridging the gap between academic research and practical application in therapeutic settings.
+                    </p>
+                    <p class="text-slate-700 leading-relaxed">
+                        His work focuses on integrating transpersonal psychology principles with contemporary psychotherapeutic 
+                        approaches, emphasizing the importance of consciousness studies in modern therapeutic practice.
+                    </p>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="award" class="w-6 h-6 text-amber-600"></i>
+                        <h3 class="text-2xl font-serif font-bold text-indigo-950">Credentials & Certifications</h3>
+                    </div>
+                    <ul class="space-y-3 text-slate-700">
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Professor in Transpersonal Psychology</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Academic Researcher in Consciousness Studies</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Certified Transpersonal Psychotherapist</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Expert in Holotropic Breathwork Theory and Practice</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="briefcase" class="w-6 h-6 text-amber-600"></i>
+                        <h3 class="text-2xl font-serif font-bold text-indigo-950">Experience & Specializations</h3>
+                    </div>
+                    <ul class="space-y-3 text-slate-700">
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Academic Teaching in Transpersonal Psychology, Estonia</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Research in Consciousness Studies and Altered States</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Integration of Academic Theory with Clinical Practice</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Facilitating Transpersonal Workshops and Seminars</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Lilian Gscheidel -->
+    <div id="modal-lilian" class="modal-container">
+        <div class="modal-header">
+            <button class="modal-close" onclick="closeModal()">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div class="flex items-start gap-6">
+                <img src="https://transpersonal-training.com/wp-content/uploads/2023/09/Lilian.jpg" alt="Lilian Gscheidel" class="w-32 h-32 rounded-lg object-cover">
+                <div class="flex-1">
+                    <span class="badge-core mb-2 inline-block">Core Teacher</span>
+                    <h2 class="text-3xl font-serif font-bold text-indigo-950 mb-1">Lilian Gscheidel</h2>
+                    <p class="text-amber-600 font-semibold mb-2">Germany</p>
+                    <p class="text-slate-600">Psychologist BSc, Transpersonal Breathwork Practitioner</p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="space-y-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="book-open" class="w-6 h-6 text-amber-600"></i>
+                        <h3 class="text-2xl font-serif font-bold text-indigo-950">Biography</h3>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed">
+                        Core faculty member specializing in breathwork psychotherapy, gestalt therapy, and dance therapy. 
+                        Works in a private practice for gestalt therapy in Berlin and offers Grof Breathwork® weekends. 
+                        Living in community for many years, she brings a deeply relational and embodied approach to therapeutic work, 
+                        integrating movement, breath, and consciousness exploration.
+                    </p>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="award" class="w-6 h-6 text-amber-600"></i>
+                        <h3 class="text-2xl font-serif font-bold text-indigo-950">Credentials & Certifications</h3>
+                    </div>
+                    <ul class="space-y-3 text-slate-700">
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Certified Transpersonal Breathwork Practitioner (Dr. Ingo Jahrsetz)</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Certified in Grof® Legacy Training</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Certified Gestalt Therapist (Institut für Gestalt und Erfahrung)</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Certified Dance Therapist (Institut für Gestalt und Erfahrung)</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Psychedelic Facilitator (with Kiyumi)</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Psychologist BSc (University of Magdeburg)</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Certified Heroes Journey Facilitator</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="briefcase" class="w-6 h-6 text-amber-600"></i>
+                        <h3 class="text-2xl font-serif font-bold text-indigo-950">Experience & Specializations</h3>
+                    </div>
+                    <ul class="space-y-3 text-slate-700">
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Private Practice for Gestalt Therapy, Berlin</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Grof Breathwork® Weekend Facilitator</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Therapeutic Aftercare Groups for Psychosomatic Clinic Patients</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Living in Intentional Community for Many Years</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="globe" class="w-6 h-6 text-amber-600"></i>
+                        <h3 class="text-2xl font-serif font-bold text-indigo-950">Website</h3>
+                    </div>
+                    <a href="http://www.wandel-zart-und-wild.de" target="_blank" class="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 font-medium text-lg">
+                        www.wandel-zart-und-wild.de <i data-lucide="external-link" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Manal Al-Hammadi -->
+    <div id="modal-manal" class="modal-container">
+        <div class="modal-header">
+            <button class="modal-close" onclick="closeModal()">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div class="flex items-start gap-6">
+                <img src="https://transpersonal-training.com/wp-content/uploads/2025/03/Manal_Klein.jpg" alt="Manal Al-Hammadi" class="w-32 h-32 rounded-lg object-cover">
+                <div class="flex-1">
+                    <span class="badge-core mb-2 inline-block">Core Teacher</span>
+                    <h2 class="text-3xl font-serif font-bold text-indigo-950 mb-1">Manal Al-Hammadi</h2>
+                    <p class="text-amber-600 font-semibold mb-2">Yemen / Poland</p>
+                    <p class="text-slate-600">Psychedelic Integration Facilitator & Educator</p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="space-y-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="book-open" class="w-6 h-6 text-amber-600"></i>
+                        <h3 class="text-2xl font-serif font-bold text-indigo-950">Biography</h3>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed">
+                        Certified Psychedelic Integration Facilitator and Educator (USA), serving as Managing Director at the 
+                        Psychedelic Studies Institute in Poland. Originally from Yemen and descendant of the Queen of Sheba, 
+                        she brings over a decade of experience studying psychedelics, bridging ancient wisdom with modern research. 
+                        Her mission is to honor ancestral knowledge while pioneering new frontiers in psychedelic science, innovation, 
+                        and mental health care with a strong focus on ethical standards.
+                    </p>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="award" class="w-6 h-6 text-amber-600"></i>
+                        <h3 class="text-2xl font-serif font-bold text-indigo-950">Credentials & Certifications</h3>
+                    </div>
+                    <ul class="space-y-3 text-slate-700">
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Certified Psychedelic Integration Facilitator & Educator (USA)</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Managing Director, Psychedelic Studies Institute (Poland)</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Training as Transpersonal Psychotherapist (in progress)</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Ph.D. Candidate: Psychedelics, Public Health & Drug Policy</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="briefcase" class="w-6 h-6 text-amber-600"></i>
+                        <h3 class="text-2xl font-serif font-bold text-indigo-950">Experience & Specializations</h3>
+                    </div>
+                    <ul class="space-y-3 text-slate-700">
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Over a Decade Studying Psychedelics</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Career in Technology and Innovation</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Leading Initiatives in Psychedelic Education & Training</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Bridging Ancestral Lineage with Modern Science</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Focus on Ethical Standards in Psychedelic Therapy</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Tina Lindhard -->
+    <div id="modal-tina" class="modal-container">
+        <div class="modal-header">
+            <button class="modal-close" onclick="closeModal()">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div class="flex items-start gap-6">
+                <img src="https://transpersonal-training.com/wp-content/uploads/2020/12/Tina-Linhard.jpg" alt="Tina Lindhard" class="w-32 h-32 rounded-lg object-cover">
+                <div class="flex-1">
+                    <span class="badge-core mb-2 inline-block">Core Teacher</span>
+                    <h2 class="text-3xl font-serif font-bold text-indigo-950 mb-1">Tina Lindhard</h2>
+                    <p class="text-amber-600 font-semibold mb-2">Spain</p>
+                    <p class="text-slate-600">Ph.D. Consciousness Studies - Author & Researcher</p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="space-y-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="book-open" class="w-6 h-6 text-amber-600"></i>
+                        <h3 class="text-2xl font-serif font-bold text-indigo-950">Biography</h3>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed">
+                        Senior core teacher with extensive experience in meditation, craniosacral therapy, and transpersonal psychology. 
+                        Based in Spain, she is an accomplished author, researcher, and public speaker on consciousness, meditation, health, 
+                        and wellness. With a background spanning psychology, philosophy, and consciousness studies, she brings deep theoretical 
+                        and experiential knowledge to breathwork psychotherapy. Mentor for MA and PhD students at IUPS.
+                    </p>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="award" class="w-6 h-6 text-amber-600"></i>
+                        <h3 class="text-2xl font-serif font-bold text-indigo-950">Credentials & Certifications</h3>
+                    </div>
+                    <ul class="space-y-3 text-slate-700">
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Ph.D. Consciousness Studies (IUPS, Hawaii, 2016)</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>MATP Transpersonal Psychology (Sofia University/ITP, 2013)</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Certificate of Transpersonal Studies (Sofia University, 2012)</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Diploma in Craniosacral Therapy - Biodynamic School (2005)</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>BSc Social Science - Research Psychology (UCT, South Africa, 1976)</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Arka Dhyana Meditation Teachers Training Certificate</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="briefcase" class="w-6 h-6 text-amber-600"></i>
+                        <h3 class="text-2xl font-serif font-bold text-indigo-950">Experience & Specializations</h3>
+                    </div>
+                    <ul class="space-y-3 text-slate-700">
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Mentor for MA/PhD Students at IUPS (2017-present)</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Arka Dhyana Meditation Teacher & Facilitator (2005-present)</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Private Consultancy: Eclectic Therapist (2002-2013)</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Public Speaker on Self, Meditation, Health & Wellness</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i data-lucide="star" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                            <span>Specializing in Trauma, Families, Death, Dying & Grief</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="globe" class="w-6 h-6 text-amber-600"></i>
+                        <h3 class="text-2xl font-serif font-bold text-indigo-950">Website</h3>
+                    </div>
+                    <a href="http://tinalindhard.com/" target="_blank" class="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 font-medium text-lg">
+                        tinalindhard.com <i data-lucide="external-link" class="w-4 h-4"></i>
                     </a>
                 </div>
             </div>
