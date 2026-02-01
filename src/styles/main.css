@@ -1,0 +1,9 @@
+/* Main stylesheet - imports all styles */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './base.css';
+@import './theme.css';
+@import './components/navigation.css';

@@ -23,22 +23,23 @@ module.exports = function(eleventyConfig) {
   
   // Copy static assets to output
   eleventyConfig.addPassthroughCopy("*.js");
-  eleventyConfig.addPassthroughCopy("*.css");
+  eleventyConfig.addPassthroughCopy("style.css");
   eleventyConfig.addPassthroughCopy("*.mp4");
+  eleventyConfig.addPassthroughCopy("*.jpg");
   eleventyConfig.addPassthroughCopy("assets");
-  eleventyConfig.addPassthroughCopy(".vscode");
   
   // These pages keep their old HTML format for now (can be converted later if needed)
+  eleventyConfig.addPassthroughCopy("teachers.html");
   eleventyConfig.addPassthroughCopy("teachers_testB.html");
   eleventyConfig.addPassthroughCopy("teachers_testC.html");
   eleventyConfig.addPassthroughCopy("transpersonal_therapist.html");
   eleventyConfig.addPassthroughCopy("client_model.html");
   eleventyConfig.addPassthroughCopy("hero_journey.html");
   
-  // Watch for changes in these files
+  // Watch for changes
   eleventyConfig.addWatchTarget("*.js");
-  eleventyConfig.addWatchTarget("*.css");
-  eleventyConfig.addWatchTarget("*.html");
+  eleventyConfig.addWatchTarget("style.css");
+  eleventyConfig.addWatchTarget("src/styles/**/*.css");
   
   // Configuration
   return {

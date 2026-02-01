@@ -4,9 +4,15 @@
   "description": "- Immagine di fallback: l'hero usa una foto natura royalty-free da Unsplash (foresta/rigagnolo). - Video opzionale: è predisposto un `<video>` in [index.html](index.html) che si attiva se presente un URL valido. Per impostare un video personalizzato e con licenza libera, puoi definire `window.NATURE_VIDEO_URL` (ad es. in [script.js](script.js)):",
   "main": "script.js",
   "scripts": {
-    "build": "eleventy",
-    "serve": "eleventy --serve",
-    "start": "eleventy --serve",
+    "clean": "rm -rf _site",
+    "build:css": "tailwindcss -i ./src/styles/main.css -o ./_site/css/main.css --minify",
+    "build:eleventy": "eleventy",
+    "build": "npm run clean && npm run build:css && npm run build:eleventy",
+    "watch:css": "tailwindcss -i ./src/styles/main.css -o ./_site/css/main.css --watch",
+    "watch:eleventy": "eleventy --serve",
+    "dev": "npm-run-all --parallel watch:*",
+    "serve": "npm run dev",
+    "start": "npm run dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,7 +28,11 @@
   },
   "homepage": "https://github.com/malizia-g/transpersonaltraining#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.2"
+    "@11ty/eleventy": "^3.1.2",
+    "autoprefixer": "^10.4.24",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.19"
   },
   "dependencies": {
     "markdown-it": "^14.1.0"
