@@ -30,7 +30,6 @@ module.exports = function(eleventyConfig) {
   
   // Legacy JS files (for backwards compatibility with non-Eleventy pages)
   eleventyConfig.addPassthroughCopy("schedule-app.js");
-  eleventyConfig.addPassthroughCopy("vine.js");
   
   // Legacy HTML page (to be migrated)
   eleventyConfig.addPassthroughCopy("teachers.html");

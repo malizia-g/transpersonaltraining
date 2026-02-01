@@ -90,8 +90,7 @@ transpersonaltraining/
 └── Legacy Files (compatibilità temporanea)
     ├── teachers.html         # Da migrare a Eleventy
     ├── style.css             # CSS per teachers.html legacy
-    ├── schedule-app.js       # Usato da schedule page
-    └── vine.js               # Usato da training page
+    └── schedule-app.js       # Usato da schedule page
 ```
 
 ### Flusso di Build
@@ -389,9 +388,9 @@ npx update-browserslist-db@latest
 **Fix:** Specificare versione fissa (vedi TODO #3)
 
 ### 4. File Legacy JS nella Root
-**Files:** schedule-app.js (449 righe), vine.js (243 righe)  
-**Motivo:** Usati da pagine Eleventy tramite tag script  
-**Considerare:** Convertire a ES6 modules in src/scripts/pages/
+**File:** schedule-app.js (449 righe)  
+**Motivo:** Usato da schedule page tramite tag script  
+**Fix:** Migrazione a Eleventy data file in corso (vedi SCHEDULE_MIGRATION_PLAN.md)
 
 ---
 
