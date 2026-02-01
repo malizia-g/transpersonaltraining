@@ -23,9 +23,7 @@ module.exports = function(eleventyConfig) {
   
   // Copy static assets to output
   eleventyConfig.addPassthroughCopy("style.css");
-  eleventyConfig.addPassthroughCopy("*.mp4");
-  eleventyConfig.addPassthroughCopy("*.jpg");
-  eleventyConfig.addPassthroughCopy("assets");
+  eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   
   // Copy new scripts structure
   eleventyConfig.addPassthroughCopy({ "src/scripts": "scripts" });
@@ -46,6 +44,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addWatchTarget("style.css");
   eleventyConfig.addWatchTarget("src/styles/**/*.css");
   eleventyConfig.addWatchTarget("src/scripts/**/*.js");
+  eleventyConfig.addWatchTarget("src/assets/**/*");
   
   // Configuration
   return {
