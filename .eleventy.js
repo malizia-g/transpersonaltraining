@@ -32,13 +32,11 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("schedule-app.js");
   eleventyConfig.addPassthroughCopy("vine.js");
   
-  // These pages keep their old HTML format for now (can be converted later if needed)
+  // Legacy HTML page (to be migrated)
   eleventyConfig.addPassthroughCopy("teachers.html");
-  eleventyConfig.addPassthroughCopy("teachers_testB.html");
-  eleventyConfig.addPassthroughCopy("teachers_testC.html");
-  eleventyConfig.addPassthroughCopy("transpersonal_therapist.html");
-  eleventyConfig.addPassthroughCopy("client_model.html");
-  eleventyConfig.addPassthroughCopy("hero_journey.html");
+  
+  // Test files (optional, in TESTS folder)
+  eleventyConfig.addPassthroughCopy({ "TESTS": "TESTS" });
   
   // Watch for changes
   eleventyConfig.addWatchTarget("style.css");
