@@ -38,93 +38,6 @@
         }
     </script>
     
-    <style>
-        html { scroll-behavior: smooth; }
-        
-        /* Theme color variables */
-        :root {
-            --theme-primary: #aa92ca;
-            --theme-darker: #6b5b7f;
-            --theme-light: #d4c5e2;
-        }
-        
-        body.theme-iris { --theme-primary: #4B0082; --theme-darker: #2d004d; --theme-light: #9b6bb8; }
-        body.theme-blue { --theme-primary: #1E3A8A; --theme-darker: #0f2540; --theme-light: #3b82f6; --theme-primary-rgb: 30, 58, 138; }
-        body.theme-ocean { --theme-primary: #0f766e; --theme-darker: #134e4a; --theme-light: #5eead4; --theme-primary-rgb: 15, 118, 110; }
-        body.theme-forest { --theme-primary: #166534; --theme-darker: #14532d; --theme-light: #86efac; --theme-primary-rgb: 22, 101, 52; }
-        body.theme-earth { --theme-primary: #c2410c; --theme-darker: #7c2d12; --theme-light: #fdba74; --theme-primary-rgb: 194, 65, 12; }
-        body.theme-alchemy { --theme-primary: #a21caf; --theme-darker: #701a75; --theme-light: #f0abfc; --theme-primary-rgb: 162, 28, 175; }
-        
-        /* Navbar background */
-        #navbar { 
-            transition: all 0.3s ease;
-        }
-        body[class*="theme-"] #navbar.bg-indigo-950\/95,
-        body[class*="theme-"] #navbar.bg-indigo-950\/95 { background-color: var(--theme-darker) !important; }
-        
-        /* Mobile menu theme colors */
-        body[class*="theme-"] #mobile-menu {
-            background-color: var(--theme-darker) !important;
-            border-color: var(--theme-primary) !important;
-        }
-        body[class*="theme-"] #mobile-menu a.border-b {
-            border-color: rgba(var(--theme-primary-rgb, 107, 91, 127), 0.5) !important;
-        }
-        body[class*="theme-"] #mobile-menu a:hover { color: var(--theme-light) !important; }
-        
-        /* Fixed theme switcher button */
-        #theme-switcher-fixed {
-            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
-            display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-        }
-        #theme-switcher-fixed button {
-            width: 56px; height: 56px; border-radius: 50%;
-            background: linear-gradient(135deg, var(--theme-primary), var(--theme-darker));
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); border: 3px solid white;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: all 0.3s ease;
-        }
-        #theme-switcher-fixed button:hover {
-            transform: scale(1.1); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-        }
-        #theme-switcher-fixed .theme-label {
-            background-color: rgba(0, 0, 0, 0.8); color: white;
-            padding: 0.5rem 1rem; border-radius: 1.5rem;
-            font-size: 0.875rem; font-weight: 600; white-space: nowrap;
-            opacity: 1; pointer-events: none; transition: all 0.3s ease;
-        }
-        
-        /* Dropdown styles */
-        .dropdown { position: relative; }
-        .dropdown-menu {
-            position: absolute; top: 0; left: 100%; margin-left: 0.5rem;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
-            backdrop-filter: blur(20px); border-radius: 0.75rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.3);
-            min-width: 240px; opacity: 0; visibility: hidden;
-            transform: translateX(-10px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 100;
-        }
-        .dropdown:hover .dropdown-menu { 
-            opacity: 1; visibility: visible; transform: translateX(0); 
-        }
-        .dropdown-menu::before {
-            content: ''; position: absolute; left: -6px; top: 1rem;
-            width: 12px; height: 12px; background: white;
-            transform: rotate(45deg); box-shadow: -3px -3px 5px rgba(0, 0, 0, 0.05);
-        }
-        .dropdown-menu a {
-            display: flex; align-items: center; gap: 0.75rem;
-            padding: 1rem 1.25rem; color: #1e293b; font-weight: 500;
-            transition: color 0.2s ease;
-        }
-        .dropdown-menu a:hover { color: #f59e0b; }
-        .dropdown-menu a:first-child { border-radius: 0.75rem 0.75rem 0 0; }
-        .dropdown-menu a:last-child { border-radius: 0 0 0.75rem 0.75rem; }
-        .dropdown-menu .submenu-icon { color: #94a3b8; transition: color 0.2s ease; }
-        .dropdown-menu a:hover .submenu-icon { color: #f59e0b; }
-    </style>
-    
     <link rel="stylesheet" href="/style.css">
 </head>
 <body class="font-sans text-slate-800 bg-slate-50 antialiased">
@@ -150,36 +63,7 @@
 
     <!-- Theme switcher script -->
     <script src="/theme-switcher.js"></script>
-
-    <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
-
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-                mobileMenu.classList.toggle('flex');
-            });
-        }
-
-        // Navbar scroll effect - Always start transparent for all pages
-        const navbar = document.getElementById('navbar');
-        if (navbar) {
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.remove('bg-transparent');
-                    navbar.classList.add('bg-indigo-950/95', 'backdrop-blur-sm', 'shadow-lg');
-                } else {
-                    navbar.classList.add('bg-transparent');
-                    navbar.classList.remove('bg-indigo-950/95', 'backdrop-blur-sm', 'shadow-lg');
-                }
-            });
-        }
-    </script>
+    <script src="/script.js"></script>
 
     {% block scripts %}{% endblock %}
 </body>
