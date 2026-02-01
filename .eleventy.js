@@ -22,11 +22,17 @@ module.exports = function(eleventyConfig) {
   });
   
   // Copy static assets to output
-  eleventyConfig.addPassthroughCopy("*.js");
   eleventyConfig.addPassthroughCopy("style.css");
   eleventyConfig.addPassthroughCopy("*.mp4");
   eleventyConfig.addPassthroughCopy("*.jpg");
   eleventyConfig.addPassthroughCopy("assets");
+  
+  // Copy new scripts structure
+  eleventyConfig.addPassthroughCopy({ "src/scripts": "scripts" });
+  
+  // Legacy JS files (for backwards compatibility with non-Eleventy pages)
+  eleventyConfig.addPassthroughCopy("schedule-app.js");
+  eleventyConfig.addPassthroughCopy("vine.js");
   
   // These pages keep their old HTML format for now (can be converted later if needed)
   eleventyConfig.addPassthroughCopy("teachers.html");
@@ -37,9 +43,9 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("hero_journey.html");
   
   // Watch for changes
-  eleventyConfig.addWatchTarget("*.js");
   eleventyConfig.addWatchTarget("style.css");
   eleventyConfig.addWatchTarget("src/styles/**/*.css");
+  eleventyConfig.addWatchTarget("src/scripts/**/*.js");
   
   // Configuration
   return {
