@@ -5,10 +5,11 @@
         const themeBtnFixed = document.getElementById('theme-btn-fixed');
         const themeLabel = document.getElementById('theme-label');
         
-        const themes = ['default', 'iris', 'blue', 'ocean', 'forest', 'earth', 'alchemy'];
+        const themes = ['default', 'iris', 'violet', 'blue', 'ocean', 'forest', 'earth', 'alchemy'];
         const themeNames = {
             'default': 'School Lavender',
             'iris': 'Deep Iris',
+            'violet': 'Steel Silver',
             'blue': 'Scientific Blue',
             'ocean': 'Ocean Depth (Teal)',
             'forest': 'Deep Forest (Green)',
@@ -26,7 +27,7 @@
         }
         
         function applyTheme(themeName) {
-            document.body.classList.remove('theme-iris', 'theme-blue', 'theme-ocean', 'theme-forest', 'theme-earth', 'theme-alchemy');
+            document.body.classList.remove('theme-iris', 'theme-violet', 'theme-blue', 'theme-ocean', 'theme-forest', 'theme-earth', 'theme-alchemy');
             if (themeName !== 'default') {
                 document.body.classList.add(`theme-${themeName}`);
             }

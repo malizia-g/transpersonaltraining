@@ -56,6 +56,20 @@
             --theme-primary: #aa92ca;
             --theme-darker: #6b5b7f;
             --theme-light: #d4c5e2;
+            --texture-url: url('Texturelabs_Metal_261M.jpg');
+        }
+        
+        /* Default theme texture - Home page only */
+        body:not(.no-texture) .bg-slate-50,
+        body:not(.no-texture) .bg-white {
+            background-image: 
+                linear-gradient(to bottom, rgba(170, 146, 202, 0.12), rgba(107, 91, 127, 0.08)),
+                linear-gradient(to bottom, rgba(255, 255, 255, var(--texture-opacity, 0.85)), rgba(248, 250, 252, var(--texture-opacity, 0.85))),
+                var(--texture-url);
+            background-size: auto, auto, cover;
+            background-repeat: repeat, repeat, no-repeat;
+            background-attachment: scroll, scroll, fixed;
+            background-position: center, center, center;
         }
         
         body.theme-iris {
@@ -64,11 +78,58 @@
             --theme-light: #9b6bb8;
         }
         
+        /* Deep Iris texture - Home page only */
+        body.theme-iris:not(.no-texture) .bg-slate-50,
+        body.theme-iris:not(.no-texture) .bg-white {
+            background-image: 
+                linear-gradient(to bottom, rgba(75, 0, 130, 0.12), rgba(45, 0, 77, 0.08)),
+                linear-gradient(to bottom, rgba(255, 255, 255, var(--texture-opacity, 0.85)), rgba(248, 250, 252, var(--texture-opacity, 0.85))),
+                var(--texture-url);
+            background-size: auto, auto, cover;
+            background-repeat: repeat, repeat, no-repeat;
+            background-attachment: scroll, scroll, fixed;
+            background-position: center, center, center;
+        }
+        
+        body.theme-violet {
+            /* Steel Silver: Metallic elegance */
+            --theme-primary: #647A8F;
+            --theme-darker: #2D3742;
+            --theme-light: #9BB0C4;
+            --theme-primary-rgb: 100, 122, 143;
+        }
+        
+        /* Steel Silver texture - Home page only */
+        body.theme-violet:not(.no-texture) .bg-slate-50,
+        body.theme-violet:not(.no-texture) .bg-white {
+            background-image: 
+                linear-gradient(to bottom, rgba(100, 122, 143, 0.15), rgba(45, 55, 66, 0.1)),
+                linear-gradient(to bottom, rgba(255, 255, 255, var(--texture-opacity, 0.85)), rgba(248, 250, 252, var(--texture-opacity, 0.85))),
+                var(--texture-url);
+            background-size: auto, auto, cover;
+            background-repeat: repeat, repeat, no-repeat;
+            background-attachment: scroll, scroll, fixed;
+            background-position: center, center, center;
+        }
+        
         body.theme-blue {
             --theme-primary: #1E3A8A;
             --theme-darker: #0f2540;
             --theme-light: #3b82f6;
             --theme-primary-rgb: 30, 58, 138;
+        }
+        
+        /* Scientific Blue texture - Home page only */
+        body.theme-blue:not(.no-texture) .bg-slate-50,
+        body.theme-blue:not(.no-texture) .bg-white {
+            background-image: 
+                linear-gradient(to bottom, rgba(30, 58, 138, 0.12), rgba(15, 37, 64, 0.08)),
+                linear-gradient(to bottom, rgba(255, 255, 255, var(--texture-opacity, 0.85)), rgba(248, 250, 252, var(--texture-opacity, 0.85))),
+                var(--texture-url);
+            background-size: auto, auto, cover;
+            background-repeat: repeat, repeat, no-repeat;
+            background-attachment: scroll, scroll, fixed;
+            background-position: center, center, center;
         }
         
         /* Additional test palette themes */
@@ -79,6 +140,20 @@
             --theme-light: #5eead4;  /* teal-300 */
             --theme-primary-rgb: 15, 118, 110;
         }
+        
+        /* Ocean texture - Home page only */
+        body.theme-ocean:not(.no-texture) .bg-slate-50,
+        body.theme-ocean:not(.no-texture) .bg-white {
+            background-image: 
+                linear-gradient(to bottom, rgba(15, 118, 110, 0.1), rgba(19, 78, 74, 0.08)),
+                linear-gradient(to bottom, rgba(255, 255, 255, var(--texture-opacity, 0.88)), rgba(248, 250, 252, var(--texture-opacity, 0.88))),
+                var(--texture-url);
+            background-size: auto, auto, cover;
+            background-repeat: repeat, repeat, no-repeat;
+            background-attachment: scroll, scroll, fixed;
+            background-position: center, center, center;
+        }
+        
         body.theme-forest {
             /* Deep Forest (Green): Healing & Nature */
             --theme-primary: #166534; /* green-700 */
@@ -86,6 +161,20 @@
             --theme-light: #86efac;  /* green-300 */
             --theme-primary-rgb: 22, 101, 52;
         }
+        
+        /* Forest texture - Home page only */
+        body.theme-forest:not(.no-texture) .bg-slate-50,
+        body.theme-forest:not(.no-texture) .bg-white {
+            background-image: 
+                linear-gradient(to bottom, rgba(22, 101, 52, 0.1), rgba(20, 83, 45, 0.08)),
+                linear-gradient(to bottom, rgba(255, 255, 255, var(--texture-opacity, 0.88)), rgba(248, 250, 252, var(--texture-opacity, 0.88))),
+                var(--texture-url);
+            background-size: auto, auto, cover;
+            background-repeat: repeat, repeat, no-repeat;
+            background-attachment: scroll, scroll, fixed;
+            background-position: center, center, center;
+        }
+        
         body.theme-earth {
             /* Burnt Earth (Terracotta): Courage & Vitality */
             --theme-primary: #c2410c; /* orange-700-ish terracotta */
@@ -93,12 +182,99 @@
             --theme-light: #fdba74;  /* orange-300 */
             --theme-primary-rgb: 194, 65, 12;
         }
+        
+        /* Earth texture - Home page only */
+        body.theme-earth:not(.no-texture) .bg-slate-50,
+        body.theme-earth:not(.no-texture) .bg-white {
+            background-image: 
+                linear-gradient(to bottom, rgba(194, 65, 12, 0.12), rgba(124, 45, 18, 0.1)),
+                linear-gradient(to bottom, rgba(255, 255, 255, var(--texture-opacity, 0.85)), rgba(248, 250, 252, var(--texture-opacity, 0.85))),
+                var(--texture-url);
+            background-size: auto, auto, cover;
+            background-repeat: repeat, repeat, no-repeat;
+            background-attachment: scroll, scroll, fixed;
+            background-position: center, center, center;
+        }
+        
         body.theme-alchemy {
             /* Alchemy (Magenta): Transformation */
             --theme-primary: #a21caf; /* fuchsia-700 */
             --theme-darker: #701a75; /* fuchsia-900 */
             --theme-light: #f0abfc;  /* fuchsia-300 */
             --theme-primary-rgb: 162, 28, 175;
+        }
+        
+        /* Alchemy texture - Home page only */
+        body.theme-alchemy:not(.no-texture) .bg-slate-50,
+        body.theme-alchemy:not(.no-texture) .bg-white {
+            background-image: 
+                linear-gradient(to bottom, rgba(162, 28, 175, 0.1), rgba(112, 26, 117, 0.08)),
+                linear-gradient(to bottom, rgba(255, 255, 255, var(--texture-opacity, 0.88)), rgba(248, 250, 252, var(--texture-opacity, 0.88))),
+                var(--texture-url);
+            background-size: auto, auto, cover;
+            background-repeat: repeat, repeat, no-repeat;
+            background-attachment: scroll, scroll, fixed;
+            background-position: center, center, center;
+        }
+        
+        /* Texture opacity control */
+        #texture-opacity-control {
+            position: fixed;
+            bottom: 9rem;
+            right: 2rem;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            min-width: 180px;
+        }
+        
+        #texture-opacity-control label {
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        #texture-opacity-slider {
+            width: 100%;
+            height: 4px;
+            border-radius: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            outline: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+        
+        #texture-opacity-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        #texture-opacity-slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        #texture-opacity-value {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.75rem;
+            text-align: center;
         }
         
         /* Dynamic color changes */
@@ -677,6 +853,46 @@
         </button>
     </div>
 
+    <!-- Texture Opacity Control -->
+    <div id="texture-opacity-control">
+        <label for="texture-opacity-slider">Texture Opacity</label>
+        <input type="range" id="texture-opacity-slider" min="0" max="100" value="85" step="1">
+        <div id="texture-opacity-value">85%</div>
+        <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid rgba(255,255,255,0.2);">
+            <label style="color: white; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.5rem;">Texture Type</label>
+            <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.7rem; color: rgba(255,255,255,0.9);">
+                    <input type="radio" name="texture-type" value="none" style="cursor: pointer;">
+                    <span>No Texture</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.7rem; color: rgba(255,255,255,0.9);">
+                    <input type="radio" name="texture-type" value="Texturelabs_Metal_261M.jpg" checked style="cursor: pointer;">
+                    <span>Metal 261</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.7rem; color: rgba(255,255,255,0.9);">
+                    <input type="radio" name="texture-type" value="Texturelabs_Metal_178M.jpg" style="cursor: pointer;">
+                    <span>Metal 178</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.7rem; color: rgba(255,255,255,0.9);">
+                    <input type="radio" name="texture-type" value="Texturelabs_Water_142M.jpg" style="cursor: pointer;">
+                    <span>Water 142</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.7rem; color: rgba(255,255,255,0.9);">
+                    <input type="radio" name="texture-type" value="Texturelabs_Wood_293M.jpg" style="cursor: pointer;">
+                    <span>Wood 293</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.7rem; color: rgba(255,255,255,0.9);">
+                    <input type="radio" name="texture-type" value="Texturelabs_Wood_272M.jpg" style="cursor: pointer;">
+                    <span>Wood 272</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.7rem; color: rgba(255,255,255,0.9);">
+                    <input type="radio" name="texture-type" value="Texturelabs_Wood_275M.jpg" style="cursor: pointer;">
+                    <span>Wood 275</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
     <!-- Theme switcher script -->
     <script src="theme-switcher.js"></script>
 
@@ -684,6 +900,55 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize Lucide Icons
             lucide.createIcons();
+            
+            // Texture Opacity Control
+            const opacitySlider = document.getElementById('texture-opacity-slider');
+            const opacityValue = document.getElementById('texture-opacity-value');
+            const textureRadios = document.querySelectorAll('input[name="texture-type"]');
+            
+            // Load saved opacity
+            const savedOpacity = localStorage.getItem('texture-opacity') || '85';
+            opacitySlider.value = savedOpacity;
+            opacityValue.textContent = savedOpacity + '%';
+            document.documentElement.style.setProperty('--texture-opacity', savedOpacity / 100);
+            
+            // Load saved texture type
+            const savedTexture = localStorage.getItem('texture-type') || 'Texturelabs_Metal_261M.jpg';
+            textureRadios.forEach(radio => {
+                if (radio.value === savedTexture) {
+                    radio.checked = true;
+                }
+            });
+            
+            // Apply saved texture
+            if (savedTexture === 'none') {
+                document.body.classList.add('no-texture');
+                opacitySlider.disabled = true;
+            } else {
+                document.documentElement.style.setProperty('--texture-url', `url('${savedTexture}')`);
+            }
+            
+            opacitySlider.addEventListener('input', function() {
+                const value = this.value;
+                opacityValue.textContent = value + '%';
+                document.documentElement.style.setProperty('--texture-opacity', value / 100);
+                localStorage.setItem('texture-opacity', value);
+            });
+            
+            textureRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'none') {
+                        document.body.classList.add('no-texture');
+                        opacitySlider.disabled = true;
+                    } else {
+                        document.body.classList.remove('no-texture');
+                        opacitySlider.disabled = false;
+                        document.documentElement.style.setProperty('--texture-url', `url('${this.value}')`);
+                    }
+                    localStorage.setItem('texture-type', this.value);
+                });
+            });
+
 
             // Navbar Logic
             const navbar = document.getElementById('navbar');
