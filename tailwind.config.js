@@ -2,7 +2,14 @@
 module.exports = {
   content: [
     "./src/**/*.{html,njk,md}",
-    "./src/_includes/**/*.njk"
+    "./src/_includes/**/*.njk",
+    "./src/scripts/**/*.js"
+  ],
+  safelist: [
+    'bg-indigo-950/95',
+    'backdrop-blur-sm',
+    'shadow-lg',
+    'bg-transparent'
   ],
   theme: {
     extend: {
