@@ -2,6 +2,8 @@ name: Rebuild Schedule Page Only
 
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types: [rebuild-schedule]
 
 permissions:
   contents: write
