@@ -58,8 +58,14 @@ module.exports = async function() {
       });
     });
     
-    console.log(`Successfully fetched ${data.length} schedule events`);
-    return data;
+    // Map fields to ensure all expected fields are present
+    const mappedData = data.map(item => ({
+      ...item,
+      module: item.module || item['ewtt - module'] || item.ewtt_module || ''
+    }));
+    
+    console.log(`Successfully fetched ${mappedData.length} schedule events`);
+    return mappedData;
     
   } catch (error) {
     console.error('Error fetching schedule data:', error.message);

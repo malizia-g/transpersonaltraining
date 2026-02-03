@@ -12,7 +12,7 @@ title: Training Schedule | Transpersonal Training
             <div class="mb-6 inline-block">
                 <i data-lucide="calendar-days" class="w-16 h-16 text-amber-400 mx-auto"></i>
             </div>
-            <h1 class="text-5xl md:text-6xl font-serif font-bold mb-6 leading-tight">
+            <h1 class="text-3xl md:text-5xl font-serif font-bold mb-6 leading-tight">
                 Training Schedule
             </h1>
             <p class="text-xl md:text-2xl text-white/80 font-light leading-relaxed max-w-3xl mx-auto">
@@ -41,39 +41,41 @@ title: Training Schedule | Transpersonal Training
         <div class="max-w-5xl mx-auto">
             
             <!-- Filters Section -->
-            <div id="filters-section" class="hidden mb-8 bg-white rounded-xl shadow-md p-6 border border-slate-200">
+            <div id="filters-section" class="mb-8 bg-white rounded-xl shadow-md p-6 border border-slate-200">
                 <!-- Header Row with Title and Clear Button -->
                 <div class="flex items-center justify-between mb-4">
                     <div class="flex items-center gap-2 text-slate-700">
                         <i data-lucide="filter" class="w-5 h-5"></i>
                         <h3 class="font-semibold text-lg">Filter Events</h3>
                     </div>
-                    <button id="clear-filters" class="px-4 py-2 bg-slate-200 text-slate-700 rounded-lg hover:bg-slate-300 transition-colors font-medium flex items-center gap-2">
+                    <button id="clear-filters-btn" class="px-4 py-2 bg-slate-200 text-slate-700 rounded-lg hover:bg-slate-300 transition-colors font-medium flex items-center gap-2">
                         <i data-lucide="x" class="w-4 h-4"></i>
                         Clear
                     </button>
                 </div>
                 
                 <!-- Filter Dropdowns -->
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="flex flex-wrap gap-4">
+                    <!-- Period Filter -->
+                    <div class="flex-1 min-w-[200px]">
+                        <label for="filter-period" class="block text-sm font-medium text-slate-600 mb-1">Period</label>
+                        <select id="filter-period" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white text-slate-700">
+                            <option value="future">Future Events</option>
+                            <option value="past">Past Events</option>
+                            <option value="all">All Events</option>
+                        </select>
+                    </div>
+                    
                     <!-- Type Filter -->
-                    <div>
+                    <div class="flex-1 min-w-[200px]">
                         <label for="filter-type" class="block text-sm font-medium text-slate-600 mb-1">Type</label>
                         <select id="filter-type" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white text-slate-700">
                             <option value="">All Types</option>
                         </select>
                     </div>
                     
-                    <!-- Year Filter -->
-                    <div>
-                        <label for="filter-year" class="block text-sm font-medium text-slate-600 mb-1">Year</label>
-                        <select id="filter-year" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white text-slate-700">
-                            <option value="">All Years</option>
-                        </select>
-                    </div>
-                    
                     <!-- Facilitator Filter -->
-                    <div>
+                    <div class="flex-1 min-w-[200px]">
                         <label for="filter-facilitator" class="block text-sm font-medium text-slate-600 mb-1">Facilitator</label>
                         <select id="filter-facilitator" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white text-slate-700">
                             <option value="">All Facilitators</option>
@@ -81,7 +83,7 @@ title: Training Schedule | Transpersonal Training
                     </div>
                     
                     <!-- Location Filter -->
-                    <div>
+                    <div class="flex-1 min-w-[200px]">
                         <label for="filter-location" class="block text-sm font-medium text-slate-600 mb-1">Location</label>
                         <select id="filter-location" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white text-slate-700">
                             <option value="">All Locations</option>
@@ -101,69 +103,96 @@ title: Training Schedule | Transpersonal Training
             <div id="appointments-list" class="space-y-6">
                 {% if scheduleEvents.length > 0 %}
                     {% for event in scheduleEvents %}
-                    <div class="appointment-card bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 border border-slate-200 overflow-hidden"
+                    <div class="appointment-card group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 overflow-hidden hover:border-indigo-300"
                          data-date="{{ event.date }}"
                          data-type="{{ event.type1 or event.type2 }}"
-                         data-location="{{ event.location }}">
-                        <div class="p-6">
-                            <div class="flex flex-col md:flex-row md:items-start gap-4">
-                                <!-- Date Badge -->
-                                <div class="flex-shrink-0">
-                                    <div class="bg-gradient-to-br from-indigo-500 to-indigo-700 text-white rounded-xl p-4 text-center shadow-lg min-w-[100px]">
-                                        <div class="text-sm uppercase tracking-wide opacity-90">{{ event.date }}</div>
+                         data-location="{{ event.location }}"
+                         data-facilitator="{{ event.facilitator }}">
+                        
+                        <!-- Colored header bar -->
+                        <div class="h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-amber-500"></div>
+                        
+                        <div class="p-4">
+                            <!-- Layout principale: contenuto a sinistra, badges a destra -->
+                            <div class="flex justify-between items-start gap-3">
+                                <!-- Colonna sinistra: Titolo + Info -->
+                                <div class="flex-1 min-w-0">
+                                    <!-- Titolo -->
+                                    <h3 class="text-lg font-serif font-bold text-slate-900 group-hover:text-indigo-700 transition-colors mb-2">
+                                        {{ event.title }}
+                                    </h3>
+                                    
+                                    <!-- Info in colonna -->
+                                    <div class="flex flex-col gap-2">
+                                        <!-- Data -->
+                                        <div class="flex items-center gap-1.5">
+                                            <i data-lucide="calendar" class="w-3.5 h-3.5 text-indigo-600 flex-shrink-0"></i>
+                                            <span class="text-xs text-slate-700">{{ event.date }}</span>
+                                        </div>
+                                        
+                                        <!-- Facilitator -->
+                                        {% if event.facilitator %}
+                                        <div class="flex items-center gap-1.5">
+                                            <i data-lucide="user" class="w-3.5 h-3.5 text-purple-600 flex-shrink-0"></i>
+                                            <span class="text-xs text-slate-700">{{ event.facilitator }}</span>
+                                        </div>
+                                        {% endif %}
+                                        
+                                        <!-- Location -->
+                                        {% if event.location %}
+                                        <div class="flex items-center gap-1.5">
+                                            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-emerald-600 flex-shrink-0"></i>
+                                            <span class="text-xs text-slate-700">{{ event.location }}</span>
+                                        </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 
-                                <!-- Event Details -->
-                                <div class="flex-grow">
-                                    <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
-                                        <h3 class="text-xl font-serif font-bold text-slate-900 flex-grow">
-                                            {{ event.title }}
-                                        </h3>
-                                        {% if event.type1 %}
-                                        <span class="px-3 py-1 bg-amber-100 text-amber-800 text-sm font-medium rounded-full">
-                                            {{ event.type1 }}
-                                        </span>
-                                        {% endif %}
-                                    </div>
-                                    
-                                    <div class="space-y-2 text-sm text-slate-600">
-                                        {% if event.facilitator %}
-                                        <div class="flex items-center gap-2">
-                                            <i data-lucide="user" class="w-4 h-4 text-indigo-600"></i>
-                                            <span class="font-medium">{{ event.facilitator }}</span>
-                                        </div>
-                                        {% endif %}
-                                        
-                                        {% if event.location %}
-                                        <div class="flex items-center gap-2">
-                                            <i data-lucide="map-pin" class="w-4 h-4 text-indigo-600"></i>
-                                            <span>{{ event.location }}</span>
-                                        </div>
-                                        {% endif %}
-                                        
-                                        {% if event.status %}
-                                        <div class="flex items-center gap-2">
-                                            <i data-lucide="info" class="w-4 h-4 text-indigo-600"></i>
-                                            <span>{{ event.status }}</span>
-                                        </div>
-                                        {% endif %}
-                                    </div>
-                                    
-                                    {% if event.description %}
-                                    <div class="mt-4">
-                                        <div id="desc-{{ loop.index }}" class="description-content text-slate-700 leading-relaxed">
-                                            {{ event.description }}
-                                        </div>
-                                        <button onclick="toggleDescription('{{ loop.index }}')" 
-                                                class="mt-2 flex items-center gap-1 text-indigo-600 hover:text-indigo-800 text-sm font-medium transition-colors">
-                                            <span id="text-{{ loop.index }}">Read more</span>
-                                            <i id="icon-{{ loop.index }}" data-lucide="chevron-down" class="w-4 h-4"></i>
-                                        </button>
-                                    </div>
+                                <!-- Colonna destra: Badges (colonna su mobile, fila su desktop) -->
+                                <div class="flex flex-col lg:flex-row gap-1.5 flex-shrink-0">
+                                    {% if event.type1 %}
+                                    <span class="px-3 py-1 bg-gradient-to-r from-amber-100 to-amber-50 text-amber-800 text-xs font-semibold rounded-full border border-amber-200 whitespace-nowrap">
+                                        {{ event.type1 }}
+                                    </span>
+                                    {% endif %}
+                                    {% if event.type2 %}
+                                    <span class="px-3 py-1 bg-gradient-to-r from-purple-100 to-purple-50 text-purple-800 text-xs font-semibold rounded-full border border-purple-200 whitespace-nowrap">
+                                        {{ event.type2 }}
+                                    </span>
+                                    {% endif %}
+                                    {% if event.module %}
+                                    <span class="px-3 py-1 bg-gradient-to-r from-teal-100 to-teal-50 text-teal-800 text-xs font-semibold rounded-full border border-teal-200 whitespace-nowrap">
+                                        {{ event.module }}
+                                    </span>
                                     {% endif %}
                                 </div>
                             </div>
+                            
+                            <!-- Descrizione -->
+                            <div class="mt-3">
+                                
+                                <!-- Status -->
+                                {% if event.status %}
+                                <div class="flex items-center gap-1.5">
+                                    <i data-lucide="info" class="w-3.5 h-3.5 text-blue-600 flex-shrink-0"></i>
+                                    <span class="text-xs text-blue-700">{{ event.status }}</span>
+                                </div>
+                                {% endif %}
+                            </div>
+                            
+                            <!-- Description with preview -->
+                            {% if event.description %}
+                            <div class="mt-2">
+                                <div id="desc-{{ loop.index }}" class="description-preview text-slate-600 text-xs">
+                                    {{ event.description }}
+                                </div>
+                                <button onclick="toggleDescription('{{ loop.index }}')" 
+                                        class="mt-1.5 flex items-center gap-1 text-indigo-600 hover:text-indigo-800 text-xs font-semibold transition-colors">
+                                    <span id="text-{{ loop.index }}">Read more</span>
+                                    <i id="icon-{{ loop.index }}" data-lucide="chevron-down" class="w-3 h-3"></i>
+                                </button>
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
                     {% endfor %}

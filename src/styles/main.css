@@ -7,3 +7,19 @@
 @import './base.css';
 @import './theme.css';
 @import './components/navigation.css';
+
+/* Schedule page - Description preview/expand */
+.description-preview {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: 1.5em;
+    line-height: 1.5em;
+}
+
+.description-preview.expanded {
+    display: block;
+    -webkit-line-clamp: unset;
+    max-height: none;
+}

@@ -7,26 +7,27 @@ title: "Educating Therapists for a Revolution of Consciousness"
 <header class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
     <!-- Background Media with Overlay -->
     <div class="absolute inset-0 z-0">
-        <!-- Video Background (optional) -->
+        <!-- Video Background -->
         <video id="hero-video" 
-               class="absolute inset-0 w-full h-full object-cover" 
+               class="absolute inset-0 w-full h-full object-cover z-10" 
                autoplay 
                muted 
                loop 
                playsinline
-               poster="">
+               poster=""
+               src="/assets/videos/forest-stream.mp4">
         </video>
         
-        <!-- Fallback Image -->
+        <!-- Fallback Image (shown only if video fails to load) -->
         <img 
             src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=80" 
             alt="Nature forest stream" 
-            class="absolute inset-0 w-full h-full object-cover"
+            class="absolute inset-0 w-full h-full object-cover z-0"
             id="hero-image"
         />
         
         <!-- Overlay Gradient -->
-        <div class="absolute inset-0 bg-gradient-to-b from-indigo-950/70 via-indigo-900/50 to-slate-50"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-indigo-950/70 via-indigo-900/50 to-slate-50 z-20"></div>
     </div>
 
     <!-- Content -->
@@ -35,7 +36,7 @@ title: "Educating Therapists for a Revolution of Consciousness"
             <span class="inline-block py-1 px-3 rounded-full bg-white/10 text-amber-300 backdrop-blur-md border border-white/20 text-sm font-medium mb-6 tracking-wider uppercase">
                 Professional Training
             </span>
-            <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-lg">
+            <h1 class="text-3xl md:text-5xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-lg">
                 Transpersonal Training
             </h1>
             <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
