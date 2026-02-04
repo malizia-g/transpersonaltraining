@@ -49,8 +49,8 @@ function onOpen() {
 }
 
 /**
- * Trigger rebuild del sito via GitHub Repository Dispatch API
- * Usa l'evento 'rebuild-schedule' che attiva il workflow rebuild-schedule.yml
+ * Trigger rebuild completo del sito via GitHub Workflow Dispatch API
+ * Usa il workflow 'deploy.yml' che rebuilda tutto il sito
  */
 function triggerGitHubRebuild() {
   const ui = SpreadsheetApp.getUi();
@@ -75,8 +75,9 @@ function triggerGitHubRebuild() {
       ui.ButtonSet.OK
     );
     
-    // URL dell'API GitHub per repository dispatch
-    const url = `https://api.github.com/repos/${GITHUB_REPO}/dispatches`;
+    // URL dell'API GitHub per workflow dispatch
+    // Usa il nome del file del workflow (più affidabile dell'ID numerico)
+    const url = `https://api.github.com/repos/${GITHUB_REPO}/actions/workflows/deploy.yml/dispatches`;
     
     // Opzioni per la richiesta HTTP
     const options = {
@@ -87,7 +88,7 @@ function triggerGitHubRebuild() {
         'Content-Type': 'application/json'
       },
       payload: JSON.stringify({
-        event_type: 'rebuild-schedule'  // Questo corrisponde al trigger nel workflow
+        ref: 'main'  // Branch da cui eseguire il workflow (deve contenere deploy.yml)
       }),
       muteHttpExceptions: true  // Per gestire gli errori manualmente
     };
@@ -96,11 +97,11 @@ function triggerGitHubRebuild() {
     const result = UrlFetchApp.fetch(url, options);
     const responseCode = result.getResponseCode();
     
-    // 204 No Content = successo per repository dispatch
+    // 204 No Content = successo per workflow dispatch
     if (responseCode === 204) {
       ui.alert(
         '✅ Rebuild avviato con successo!',
-        'Il sito sarà aggiornato tra 2-3 minuti.\n\n' +
+        'Il sito completo sarà aggiornato tra 2-3 minuti.\n\n' +
         'Puoi monitorare il progresso su:\n' +
         'https://github.com/' + GITHUB_REPO + '/actions',
         ui.ButtonSet.OK
@@ -232,36 +233,55 @@ Dovresti vedere un nuovo workflow **"Rebuild Schedule Page Only"** in esecuzione
 
 ## Come Funziona
 
-1. **Lo script invia un evento `repository_dispatch`** a GitHub
-2. **Il workflow `rebuild-schedule.yml`** viene attivato dall'evento
+1. **Lo script invia un evento `workflow_dispatch`** a GitHub
+2. **Il workflow `deploy.yml`** viene attivato manualmente
 3. **GitHub Actions:**
    - Fa checkout del branch `test-11ty`
    - Installa le dipendenze
-   - Esegue il build del sito (leggendo i dati dal Google Sheet)
-   - Aggiorna solo la pagina schedule sul branch `deploy`
+   - Esegue il build completo del sito (leggendo i dati dal Google Sheet)
+   - Deploya l'intero sito sul branch `deploy`
 4. **GitHub Pages** serve automaticamente il sito aggiornato
 
 ## Workflow Git Coinvolto
 
-Il workflow che viene triggerato è [`rebuild-schedule.yml`](/.github/workflows/rebuild-schedule.yml):
+Il workflow che viene triggerato è [`deploy.yml`](/.github/workflows/deploy.yml):
 
 ```yaml
 on:
-  workflow_dispatch:        # Trigger manuale da GitHub UI
-  repository_dispatch:       # Trigger via API (dal Google Sheet)
-    types: [rebuild-schedule]
+  push:
+    branches:
+      - test-11ty
+  workflow_dispatch:  # Trigger manuale (usato dal Google Sheet)
 ```
 
 ## Troubleshooting
 
 ### Errore 404: Not Found
 
-**Causa**: Il workflow file non esiste o il nome dell'evento non corrisponde.
+**Causa**: Il workflow non viene trovato da GitHub.
 
-**Soluzione**: 
-- Verifica che il file `.github/workflows/rebuild-schedule.yml` esista nel repository
-- Verifica che contenga `repository_dispatch` con `types: [rebuild-schedule]`
-- Ho già corretto questo nel commit precedente ✅
+**Soluzioni da provare in ordine**:
+
+1. **Verifica che il workflow esista sul branch corretto**:
+   - Apri: https://github.com/malizia-g/transpersonaltraining/blob/main/.github/workflows/deploy.yml
+   - Se il file NON esiste, verifica su quale branch si trova il workflow
+   - Nello script, cambia `ref: 'main'` con il branch corretto (es. `ref: 'test-11ty'`)
+
+2. **Verifica che il workflow contenga `workflow_dispatch`**:
+   - Il file `deploy.yml` deve avere questa sezione:
+   ```yaml
+   on:
+     workflow_dispatch:
+   ```
+
+3. **Attendi che il workflow sia registrato da GitHub**:
+   - Se hai appena creato/modificato il workflow, aspetta 1-2 minuti
+   - GitHub deve "vedere" il workflow almeno una volta prima di poterlo triggerare
+   - Prova a fare un push al branch per forzare GitHub a registrare il workflow
+
+4. **Verifica il nome del repository**:
+   - Lo script usa: `malizia-g/transpersonaltraining`
+   - Verifica che sia corretto nel tuo script
 
 ### Errore 401: Unauthorized
 
@@ -296,6 +316,14 @@ on:
 - Aspetta 1-2 minuti per la propagazione
 - Fai un hard refresh del browser (Ctrl+Shift+R o Cmd+Shift+R)
 - Controlla il log del workflow su GitHub Actions per eventuali errori
+
+## Workflow Disponibili
+
+Attualmente il repository ha due workflow:
+- **`deploy.yml`**: Rebuilda l'intero sito (usato dal Google Sheet button) ✅
+- **`rebuild-schedule.yml`**: Rebuilda solo schedule.html (non ancora funzionante)
+
+Il Google Sheet usa `deploy.yml` per garantire che tutto il sito venga aggiornato.
 
 ## Sicurezza
 
