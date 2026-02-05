@@ -1,0 +1,22 @@
+backend:
+  name: github
+  repo: malizia-g/transpersonaltraining
+  branch: working
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+
+media_folder: "assets/images"
+public_folder: "/assets/images"
+
+collections:
+  - name: "biographies"
+    label: "Biografie Docenti"
+    folder: "src/_data/bios"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    editor:
+      preview: false
+    fields:
+      - {label: "Contenuto Biografia (usa ## per le sezioni: Biography, Credentials, Experience, etc.)", name: "body", widget: "markdown"}

@@ -62,6 +62,9 @@
     
     <!-- Lucide Icons (defer loading) -->
     <script src="https://unpkg.com/lucide@latest" defer></script>
+    
+    <!-- Netlify Identity Widget (for CMS authentication) -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body class="font-sans text-slate-800 bg-slate-50 antialiased">
 
@@ -104,6 +107,19 @@
                 setTimeout(() => loader.remove(), 300);
             }
         });
+    </script>
+    
+    <!-- Netlify Identity redirect -->
+    <script>
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+                if (!user) {
+                    window.netlifyIdentity.on("login", () => {
+                        document.location.href = "/admin/";
+                    });
+                }
+            });
+        }
     </script>
 </body>
 </html>

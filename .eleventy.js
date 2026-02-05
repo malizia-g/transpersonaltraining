@@ -34,6 +34,9 @@ module.exports = function(eleventyConfig) {
   // Copy new scripts structure
   eleventyConfig.addPassthroughCopy({ "src/scripts": "scripts" });
   
+  // Copy admin folder for Decap CMS
+  eleventyConfig.addPassthroughCopy({ "src/admin": "admin" });
+  
   // Legacy JS files (for backwards compatibility with non-Eleventy pages)
   eleventyConfig.addPassthroughCopy("schedule-app.js");
   
