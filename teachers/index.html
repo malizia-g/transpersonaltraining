@@ -110,14 +110,6 @@
                         <i data-lucide="users" class="w-4 h-4 submenu-icon"></i>
                         <span>Our Teachers</span>
                     </a>
-                    <a href="/teachers_testB.html" class="text-sm">
-                        <i data-lucide="layout-grid" class="w-4 h-4 submenu-icon"></i>
-                        <span>Teachers - Layout B (Tabs)</span>
-                    </a>
-                    <a href="/teachers_testC.html" class="text-sm">
-                        <i data-lucide="maximize-2" class="w-4 h-4 submenu-icon"></i>
-                        <span>Teachers - Layout C (Modal)</span>
-                    </a>
                 </div>
             </div>
 
@@ -129,11 +121,11 @@
                     Transpersonal Therapy <i data-lucide="chevron-down" class="w-4 h-4"></i>
                 </a>
                 <div class="dropdown-menu">
-                    <a href="/transpersonal_therapist.html" class="text-sm">
+                    <a href="/TESTS/transpersonal_therapist.html" class="text-sm">
                         <i data-lucide="stethoscope" class="w-4 h-4 submenu-icon"></i>
                         <span>The Transpersonal Therapist</span>
                     </a>
-                    <a href="/client_model.html" class="text-sm">
+                    <a href="/TESTS/client_model.html" class="text-sm">
                         <i data-lucide="user-check" class="w-4 h-4 submenu-icon"></i>
                         <span>Become a Client Model</span>
                     </a>
@@ -154,12 +146,10 @@
         <a href="/training/" class="text-slate-200 py-2 border-b block transition-colors">Training</a>
         <a href="/schedule/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Schedule</a>
         <a href="/teachers/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Our Teachers</a>
-        <a href="/teachers_testB.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Teachers - Layout B (Tabs)</a>
-        <a href="/teachers_testC.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Teachers - Layout C (Modal)</a>
         <a href="/techniques/" class="text-slate-200 py-2 border-b block transition-colors">Techniques</a>
         <a href="/transpersonal_therapy/" class="text-slate-200 py-2 border-b block transition-colors">Transpersonal Therapy</a>
-        <a href="/transpersonal_therapist.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ The Transpersonal Therapist</a>
-        <a href="/client_model.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Become a Client Model</a>
+        <a href="/TESTS/transpersonal_therapist.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ The Transpersonal Therapist</a>
+        <a href="/TESTS/client_model.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Become a Client Model</a>
         <a href="/#contact" class="bg-amber-500 text-white px-6 py-3 rounded-md w-full mt-4 font-bold text-center block">Apply</a>
     </div>
 </nav>
@@ -168,6 +158,143 @@
     <!-- Main Content -->
     <main>
         
+<style>
+    /* Teacher Card Styles */
+    .teacher-card {
+        background: white;
+        border-radius: 1rem;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: 2px solid transparent;
+    }
+    
+    .teacher-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        border-color: var(--theme-primary, #4B0082);
+    }
+    
+    .teacher-img {
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+    
+    .teacher-card:hover .teacher-img {
+        transform: scale(1.05);
+    }
+    
+    .teacher-bio {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease, padding 0.5s ease;
+        padding: 0 1.5rem;
+    }
+    
+    .teacher-bio.active {
+        max-height: none;
+        padding: 0;
+    }
+    
+    .badge-core {
+        background: linear-gradient(135deg, #f59e0b, #d97706);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    
+    .badge-guest {
+        background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    
+    /* Tab Navigation Styles */
+    .tab-navigation {
+        display: flex;
+        justify-content: center;
+        border-bottom: 2px solid #e2e8f0;
+        margin-bottom: 1.5rem;
+        gap: 0.5rem;
+    }
+    
+    .tab-button {
+        padding: 0.75rem 1rem;
+        background: transparent;
+        border: none;
+        border-bottom: 3px solid transparent;
+        color: #64748b;
+        font-weight: 500;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+    }
+    
+    .tab-button:hover {
+        color: var(--theme-primary, #4B0082);
+    }
+    
+    .tab-button.active {
+        color: var(--theme-primary, #4B0082);
+        border-bottom-color: var(--theme-primary, #4B0082);
+    }
+    
+    .tab-content {
+        display: none;
+        animation: fadeIn 0.4s ease;
+        padding: 1rem 0.5rem;
+    }
+    
+    .tab-content.active {
+        display: block;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .bio-icon {
+        transition: transform 0.3s ease;
+    }
+    
+    .teacher-bio.active + .teacher-card .bio-icon,
+    .teacher-card.expanded .bio-icon {
+        transform: rotate(180deg);
+    }
+    
+    /* List styles for Training and Practice tabs */
+    .tab-content ul {
+        list-style-type: disc;
+        padding-left: 1.5rem;
+        margin: 1rem 0;
+        line-height: 1.8;
+    }
+    
+    .tab-content ul li {
+        margin-bottom: 0.75rem;
+        padding-left: 0.25rem;
+    }
+    
+    .tab-content ul li::marker {
+        color: var(--theme-primary, #4B0082);
+    }
+</style>
+
 <!-- Hero Section -->
 <header class="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 z-0">
@@ -207,26 +334,59 @@
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            <div class="teacher-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300" onclick="toggleBio(this)">
-                <div class="overflow-hidden h-72">
-                    <img src="https://transpersonal-training.com/wp-content/uploads/2023/04/Lyudmila.jpg" alt="Lyudmila Skartsesku" class="teacher-img w-full h-full object-cover">
+            <div class="teacher-card" onclick="toggleBio(this)">
+                <div class="overflow-hidden">
+                    <img src="https://transpersonal-training.com/wp-content/uploads/2023/04/Lyudmila.jpg" alt="Lyudmila Skartsesku" class="teacher-img">
                 </div>
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="inline-block px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-semibold">Core Teacher</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-400 bio-icon transition-transform duration-300"></i>
+                        <span class="badge-core">Core Teacher</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-400 bio-icon"></i>
                     </div>
                     <h3 class="text-2xl font-serif font-bold text-indigo-950 mb-1">Lyudmila Skartsesku</h3>
                     <p class="text-amber-600 font-medium mb-3">Head East</p>
                     <p class="text-slate-600 text-sm">MA Transpersonal Psychotherapist EUROTAS</p>
                 </div>
                 <div class="teacher-bio">
-                    <div class="p-6 pt-0">
+                    <!-- Tab Navigation -->
+                    <div class="tab-navigation">
+                        <button class="tab-button active" onclick="switchTab(event, 'bio-lyudmila-skartsesku')">
+                            <i data-lucide="book-open" class="w-5 h-5"></i>
+                            <span>Bio</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'training-lyudmila-skartsesku')">
+                            <i data-lucide="award" class="w-5 h-5"></i>
+                            <span>Training</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'practice-lyudmila-skartsesku')">
+                            <i data-lucide="briefcase" class="w-5 h-5"></i>
+                            <span>Practice</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Biography Tab -->
+                    <div id="bio-lyudmila-skartsesku" class="tab-content active">
                         <div class="prose prose-sm max-w-none text-slate-700">
-                            <h2>Biography</h2>
-<p>President of the Association of Transpersonal Development in Moldova and certified transpersonal psychotherapist. She leads the Eastern European program with extensive experience in transpersonal psychology and breathwork. Board member of EUROTAS and coordinator of the Ethics Committee. Her approach combines traditional Eastern wisdom with modern transpersonal methodologies, exploring shamanic states of consciousness, spiritual crisis, and quantum processes on individual and collective consciousness.</p>
-<h2>Credentials</h2>
-<ul>
+                            
+                                <p>President of the Association of Transpersonal Development in Moldova and certified transpersonal psychotherapist. She leads the Eastern European program with extensive experience in transpersonal psychology and breathwork. Board member of EUROTAS and coordinator of the Ethics Committee. Her approach combines traditional Eastern wisdom with modern transpersonal methodologies, exploring shamanic states of consciousness, spiritual crisis, and quantum processes on individual and collective consciousness.</p>
+
+                            
+                        </div>
+                        
+                        <div class="mt-4">
+                            <a href="https://arasco.org/" target="_blank" class="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 font-medium">
+                                <i data-lucide="globe" class="w-4 h-4"></i>
+                                arasco.org/
+                            </a>
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Training Tab -->
+                    <div id="training-lyudmila-skartsesku" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <ul>
 <li>Certified Transpersonal Psychotherapist</li>
 <li>Holotropic Breathwork Leader in Moldova</li>
 <li>Specialist in Intense Integrative Psychotherapeutic Methods</li>
@@ -234,8 +394,16 @@
 <li>Institute of Psychoanalysis and Social Management, Moscow</li>
 <li>Faculty of Russian Philology, USSR</li>
 </ul>
-<h2>Experience</h2>
-<ul>
+
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Practice Tab -->
+                    <div id="practice-lyudmila-skartsesku" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <ul>
 <li>President, Association of Transpersonal Development, Moldova</li>
 <li>Teaches Introduction to Process Oriented Therapy</li>
 <li>Leading Author’s Programs in Transpersonal Psychology</li>
@@ -243,39 +411,65 @@
 <li>Research on Psychoacoustic Correction of the Brain</li>
 </ul>
 
+                            
                         </div>
-                        
-                        <div class="mt-4 pt-4 border-t border-slate-200">
-                            <a href="https://arasco.org/" target="_blank" class="inline-flex items-center gap-2 text-teal-600 hover:text-teal-700 font-medium text-sm transition-colors">
-                                <i data-lucide="globe" class="w-4 h-4"></i>
-                                <span>Visit Website</span>
-                            </a>
-                        </div>
-                        
                     </div>
                 </div>
             </div>
             
-            <div class="teacher-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300" onclick="toggleBio(this)">
-                <div class="overflow-hidden h-72">
-                    <img src="https://transpersonal-training.com/wp-content/uploads/2020/11/Kati_Wortelkamp-1.jpg" alt="Kati Wortelkamp" class="teacher-img w-full h-full object-cover">
+            <div class="teacher-card" onclick="toggleBio(this)">
+                <div class="overflow-hidden">
+                    <img src="https://transpersonal-training.com/wp-content/uploads/2020/11/Kati_Wortelkamp-1.jpg" alt="Kati Wortelkamp" class="teacher-img">
                 </div>
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="inline-block px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-semibold">Core Teacher</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-400 bio-icon transition-transform duration-300"></i>
+                        <span class="badge-core">Core Teacher</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-400 bio-icon"></i>
                     </div>
                     <h3 class="text-2xl font-serif font-bold text-indigo-950 mb-1">Kati Wortelkamp</h3>
                     <p class="text-amber-600 font-medium mb-3">Head West</p>
                     <p class="text-slate-600 text-sm">Anthropologist &amp; Psychologist M.A.</p>
                 </div>
                 <div class="teacher-bio">
-                    <div class="p-6 pt-0">
+                    <!-- Tab Navigation -->
+                    <div class="tab-navigation">
+                        <button class="tab-button active" onclick="switchTab(event, 'bio-kati-wortelkamp')">
+                            <i data-lucide="book-open" class="w-5 h-5"></i>
+                            <span>Bio</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'training-kati-wortelkamp')">
+                            <i data-lucide="award" class="w-5 h-5"></i>
+                            <span>Training</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'practice-kati-wortelkamp')">
+                            <i data-lucide="briefcase" class="w-5 h-5"></i>
+                            <span>Practice</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Biography Tab -->
+                    <div id="bio-kati-wortelkamp" class="tab-content active">
                         <div class="prose prose-sm max-w-none text-slate-700">
-                            <h2>Biography</h2>
-<p>Co-founder and Head West of the Transpersonal Training program. Based in Germany, she brings decades of experience in Holotropic Breathwork and transpersonal psychotherapy. She oversees the Western curriculum and ensures the program meets EUROTAS standards for professional transpersonal training. With over 10 years at the Cancer-Hotline (University Medical Center Freiburg), she brings deep compassion and practical expertise to therapeutic work.</p>
-<h2>Credentials</h2>
-<ul>
+                            
+                                <p>Co-founder and Head West of the Transpersonal Training program. Based in Germany, she brings decades of experience in Holotropic Breathwork and transpersonal psychotherapy. She oversees the Western curriculum and ensures the program meets EUROTAS standards for professional transpersonal training. With over 10 years at the Cancer-Hotline (University Medical Center Freiburg), she brings deep compassion and practical expertise to therapeutic work.</p>
+
+                            
+                        </div>
+                        
+                        <div class="mt-4">
+                            <a href="http://www.kati-wortelkamp.de" target="_blank" class="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 font-medium">
+                                <i data-lucide="globe" class="w-4 h-4"></i>
+                                kati-wortelkamp.de
+                            </a>
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Training Tab -->
+                    <div id="training-kati-wortelkamp" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <ul>
 <li>Certified Holotropic Breathwork® Practitioner (Grof Transpersonal Training)</li>
 <li>Certified in Grof® Legacy Training</li>
 <li>Professional Member of EUROTAS</li>
@@ -285,8 +479,16 @@
 <li>Non-Medical Practitioner for Psychotherapy (Public Health Dept. Freiburg)</li>
 <li>Person-Centered Psychotherapy (University of Freiburg)</li>
 </ul>
-<h2>Experience</h2>
-<ul>
+
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Practice Tab -->
+                    <div id="practice-kati-wortelkamp" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <ul>
 <li>Private Practice near Freiburg, Germany</li>
 <li>Offering Holotropic Breathwork® Seminars for Many Years</li>
 <li>10 Years at Cancer-Hotline (University Medical Center Freiburg)</li>
@@ -294,79 +496,139 @@
 <li>Body-Oriented Methods Specialist</li>
 </ul>
 
+                            
                         </div>
-                        
-                        <div class="mt-4 pt-4 border-t border-slate-200">
-                            <a href="http://www.kati-wortelkamp.de" target="_blank" class="inline-flex items-center gap-2 text-teal-600 hover:text-teal-700 font-medium text-sm transition-colors">
-                                <i data-lucide="globe" class="w-4 h-4"></i>
-                                <span>Visit Website</span>
-                            </a>
-                        </div>
-                        
                     </div>
                 </div>
             </div>
             
-            <div class="teacher-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300" onclick="toggleBio(this)">
-                <div class="overflow-hidden h-72">
-                    <img src="https://transpersonal-training.com/wp-content/uploads/2020/12/jure-biechonski.jpg" alt="Prof. Jure Biechonski" class="teacher-img w-full h-full object-cover">
+            <div class="teacher-card" onclick="toggleBio(this)">
+                <div class="overflow-hidden">
+                    <img src="https://transpersonal-training.com/wp-content/uploads/2020/12/jure-biechonski.jpg" alt="Prof. Jure Biechonski" class="teacher-img">
                 </div>
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="inline-block px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-semibold">Core Teacher</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-400 bio-icon transition-transform duration-300"></i>
+                        <span class="badge-core">Core Teacher</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-400 bio-icon"></i>
                     </div>
                     <h3 class="text-2xl font-serif font-bold text-indigo-950 mb-1">Prof. Jure Biechonski</h3>
                     <p class="text-amber-600 font-medium mb-3">Core Teacher</p>
                     <p class="text-slate-600 text-sm">Expert in transpersonal psychology and academic research</p>
                 </div>
                 <div class="teacher-bio">
-                    <div class="p-6 pt-0">
+                    <!-- Tab Navigation -->
+                    <div class="tab-navigation">
+                        <button class="tab-button active" onclick="switchTab(event, 'bio-jure-biechonski')">
+                            <i data-lucide="book-open" class="w-5 h-5"></i>
+                            <span>Bio</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'training-jure-biechonski')">
+                            <i data-lucide="award" class="w-5 h-5"></i>
+                            <span>Training</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'practice-jure-biechonski')">
+                            <i data-lucide="briefcase" class="w-5 h-5"></i>
+                            <span>Practice</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Biography Tab -->
+                    <div id="bio-jure-biechonski" class="tab-content active">
                         <div class="prose prose-sm max-w-none text-slate-700">
-                            <h2>Biography</h2>
-<p>Professor Jure Biechonski brings academic rigor and deep theoretical knowledge to our program. Based in Estonia, he is a renowned researcher and practitioner in transpersonal psychology, bridging the gap between academic research and practical application in therapeutic settings.</p>
+                            
+                                <p>Professor Jure Biechonski brings academic rigor and deep theoretical knowledge to our program. Based in Estonia, he is a renowned researcher and practitioner in transpersonal psychology, bridging the gap between academic research and practical application in therapeutic settings.</p>
 <p>His work focuses on integrating transpersonal psychology principles with contemporary psychotherapeutic approaches, emphasizing the importance of consciousness studies in modern therapeutic practice. With extensive experience in both academic research and clinical applications, he offers unique insights into the theoretical foundations and practical implementations of transpersonal methods.</p>
-<h2>Credentials</h2>
-<ul>
+
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Training Tab -->
+                    <div id="training-jure-biechonski" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <ul>
 <li>Professor in Transpersonal Psychology</li>
 <li>Academic Researcher in Consciousness Studies</li>
 <li>Certified Transpersonal Psychotherapist</li>
 <li>Expert in Holotropic Breathwork Theory and Practice</li>
 </ul>
-<h2>Experience</h2>
-<ul>
+
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Practice Tab -->
+                    <div id="practice-jure-biechonski" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <ul>
 <li>Academic Teaching in Transpersonal Psychology, Estonia</li>
 <li>Research in Consciousness Studies and Altered States</li>
 <li>Integration of Academic Theory with Clinical Practice</li>
 <li>Facilitating Transpersonal Workshops and Seminars</li>
 </ul>
 
+                            
                         </div>
-                        
                     </div>
                 </div>
             </div>
             
-            <div class="teacher-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300" onclick="toggleBio(this)">
-                <div class="overflow-hidden h-72">
-                    <img src="https://transpersonal-training.com/wp-content/uploads/2023/09/Lilian.jpg" alt="Lilian Gscheidel" class="teacher-img w-full h-full object-cover">
+            <div class="teacher-card" onclick="toggleBio(this)">
+                <div class="overflow-hidden">
+                    <img src="https://transpersonal-training.com/wp-content/uploads/2023/09/Lilian.jpg" alt="Lilian Gscheidel" class="teacher-img">
                 </div>
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="inline-block px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-semibold">Core Teacher</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-400 bio-icon transition-transform duration-300"></i>
+                        <span class="badge-core">Core Teacher</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-400 bio-icon"></i>
                     </div>
                     <h3 class="text-2xl font-serif font-bold text-indigo-950 mb-1">Lilian Gscheidel</h3>
                     <p class="text-amber-600 font-medium mb-3">Core Teacher</p>
                     <p class="text-slate-600 text-sm">Psychologist BSc, Transpersonal Breathwork Practitioner</p>
                 </div>
                 <div class="teacher-bio">
-                    <div class="p-6 pt-0">
+                    <!-- Tab Navigation -->
+                    <div class="tab-navigation">
+                        <button class="tab-button active" onclick="switchTab(event, 'bio-lilian-gscheidel')">
+                            <i data-lucide="book-open" class="w-5 h-5"></i>
+                            <span>Bio</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'training-lilian-gscheidel')">
+                            <i data-lucide="award" class="w-5 h-5"></i>
+                            <span>Training</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'practice-lilian-gscheidel')">
+                            <i data-lucide="briefcase" class="w-5 h-5"></i>
+                            <span>Practice</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Biography Tab -->
+                    <div id="bio-lilian-gscheidel" class="tab-content active">
                         <div class="prose prose-sm max-w-none text-slate-700">
-                            <h2>Biography</h2>
-<p>Core faculty member specializing in breathwork psychotherapy, gestalt therapy, and dance therapy. Works in a private practice for gestalt therapy in Berlin and offers Grof Breathwork® weekends. Living in community for many years, she brings a deeply relational and embodied approach to therapeutic work, integrating movement, breath, and consciousness exploration.</p>
-<h2>Credentials</h2>
-<ul>
+                            
+                                <p>Core faculty member specializing in breathwork psychotherapy, gestalt therapy, and dance therapy. Works in a private practice for gestalt therapy in Berlin and offers Grof Breathwork® weekends. Living in community for many years, she brings a deeply relational and embodied approach to therapeutic work, integrating movement, breath, and consciousness exploration.</p>
+
+                            
+                        </div>
+                        
+                        <div class="mt-4">
+                            <a href="http://www.wandel-zart-und-wild.de" target="_blank" class="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 font-medium">
+                                <i data-lucide="globe" class="w-4 h-4"></i>
+                                wandel-zart-und-wild.de
+                            </a>
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Training Tab -->
+                    <div id="training-lilian-gscheidel" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <ul>
 <li>Certified Transpersonal Breathwork Practitioner (Dr. Ingo Jahrsetz)</li>
 <li>Certified in Grof® Legacy Training</li>
 <li>Certified Gestalt Therapist (Institut für Gestalt und Erfahrung)</li>
@@ -375,54 +637,89 @@
 <li>Psychologist BSc (University of Magdeburg)</li>
 <li>Certified Heroes Journey Facilitator</li>
 </ul>
-<h2>Experience</h2>
-<ul>
+
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Practice Tab -->
+                    <div id="practice-lilian-gscheidel" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <ul>
 <li>Private Practice for Gestalt Therapy, Berlin</li>
 <li>Grof Breathwork® Weekend Facilitator</li>
 <li>Therapeutic Aftercare Groups for Psychosomatic Clinic Patients</li>
 <li>Living in Intentional Community for Many Years</li>
 </ul>
 
+                            
                         </div>
-                        
-                        <div class="mt-4 pt-4 border-t border-slate-200">
-                            <a href="http://www.wandel-zart-und-wild.de" target="_blank" class="inline-flex items-center gap-2 text-teal-600 hover:text-teal-700 font-medium text-sm transition-colors">
-                                <i data-lucide="globe" class="w-4 h-4"></i>
-                                <span>Visit Website</span>
-                            </a>
-                        </div>
-                        
                     </div>
                 </div>
             </div>
             
-            <div class="teacher-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300" onclick="toggleBio(this)">
-                <div class="overflow-hidden h-72">
-                    <img src="https://transpersonal-training.com/wp-content/uploads/2025/03/Manal_Klein.jpg" alt="Manal Al-Hammadi" class="teacher-img w-full h-full object-cover">
+            <div class="teacher-card" onclick="toggleBio(this)">
+                <div class="overflow-hidden">
+                    <img src="https://transpersonal-training.com/wp-content/uploads/2025/03/Manal_Klein.jpg" alt="Manal Al-Hammadi" class="teacher-img">
                 </div>
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="inline-block px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-semibold">Core Teacher</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-400 bio-icon transition-transform duration-300"></i>
+                        <span class="badge-core">Core Teacher</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-400 bio-icon"></i>
                     </div>
                     <h3 class="text-2xl font-serif font-bold text-indigo-950 mb-1">Manal Al-Hammadi</h3>
                     <p class="text-amber-600 font-medium mb-3">Core Teacher</p>
                     <p class="text-slate-600 text-sm">Psychedelic Integration Facilitator &amp; Educator</p>
                 </div>
                 <div class="teacher-bio">
-                    <div class="p-6 pt-0">
+                    <!-- Tab Navigation -->
+                    <div class="tab-navigation">
+                        <button class="tab-button active" onclick="switchTab(event, 'bio-manal-al-hammadi')">
+                            <i data-lucide="book-open" class="w-5 h-5"></i>
+                            <span>Bio</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'training-manal-al-hammadi')">
+                            <i data-lucide="award" class="w-5 h-5"></i>
+                            <span>Training</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'practice-manal-al-hammadi')">
+                            <i data-lucide="briefcase" class="w-5 h-5"></i>
+                            <span>Practice</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Biography Tab -->
+                    <div id="bio-manal-al-hammadi" class="tab-content active">
                         <div class="prose prose-sm max-w-none text-slate-700">
-                            <h2>Biography</h2>
-<p>Certified Psychedelic Integration Facilitator and Educator (USA), serving as Managing Director at the Psychedelic Studies Institute in Poland. Originally from Yemen and descendant of the Queen of Sheba, she brings over a decade of experience studying psychedelics, bridging ancient wisdom with modern research. Her mission is to honor ancestral knowledge while pioneering new frontiers in psychedelic science, innovation, and mental health care with a strong focus on ethical standards.</p>
-<h2>Credentials</h2>
-<ul>
+                            
+                                <p>Certified Psychedelic Integration Facilitator and Educator (USA), serving as Managing Director at the Psychedelic Studies Institute in Poland. Originally from Yemen and descendant of the Queen of Sheba, she brings over a decade of experience studying psychedelics, bridging ancient wisdom with modern research. Her mission is to honor ancestral knowledge while pioneering new frontiers in psychedelic science, innovation, and mental health care with a strong focus on ethical standards.</p>
+
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Training Tab -->
+                    <div id="training-manal-al-hammadi" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <ul>
 <li>Certified Psychedelic Integration Facilitator &amp; Educator (USA)</li>
 <li>Managing Director, Psychedelic Studies Institute (Poland)</li>
 <li>Training as Transpersonal Psychotherapist (in progress)</li>
 <li>Ph.D. Candidate: Psychedelics, Public Health &amp; Drug Policy</li>
 </ul>
-<h2>Experience</h2>
-<ul>
+
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Practice Tab -->
+                    <div id="practice-manal-al-hammadi" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <ul>
 <li>Over a Decade Studying Psychedelics</li>
 <li>Career in Technology and Innovation</li>
 <li>Leading Initiatives in Psychedelic Education &amp; Training</li>
@@ -430,32 +727,65 @@
 <li>Focus on Ethical Standards in Psychedelic Therapy</li>
 </ul>
 
+                            
                         </div>
-                        
                     </div>
                 </div>
             </div>
             
-            <div class="teacher-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300" onclick="toggleBio(this)">
-                <div class="overflow-hidden h-72">
-                    <img src="https://transpersonal-training.com/wp-content/uploads/2020/12/Tina-Linhard.jpg" alt="Tina Lindhard" class="teacher-img w-full h-full object-cover">
+            <div class="teacher-card" onclick="toggleBio(this)">
+                <div class="overflow-hidden">
+                    <img src="https://transpersonal-training.com/wp-content/uploads/2020/12/Tina-Linhard.jpg" alt="Tina Lindhard" class="teacher-img">
                 </div>
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="inline-block px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-semibold">Core Teacher</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-400 bio-icon transition-transform duration-300"></i>
+                        <span class="badge-core">Core Teacher</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-400 bio-icon"></i>
                     </div>
                     <h3 class="text-2xl font-serif font-bold text-indigo-950 mb-1">Tina Lindhard</h3>
                     <p class="text-amber-600 font-medium mb-3">Core Teacher</p>
                     <p class="text-slate-600 text-sm">Ph.D. Consciousness Studies - Author &amp; Researcher</p>
                 </div>
                 <div class="teacher-bio">
-                    <div class="p-6 pt-0">
+                    <!-- Tab Navigation -->
+                    <div class="tab-navigation">
+                        <button class="tab-button active" onclick="switchTab(event, 'bio-tina-lindhard')">
+                            <i data-lucide="book-open" class="w-5 h-5"></i>
+                            <span>Bio</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'training-tina-lindhard')">
+                            <i data-lucide="award" class="w-5 h-5"></i>
+                            <span>Training</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'practice-tina-lindhard')">
+                            <i data-lucide="briefcase" class="w-5 h-5"></i>
+                            <span>Practice</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Biography Tab -->
+                    <div id="bio-tina-lindhard" class="tab-content active">
                         <div class="prose prose-sm max-w-none text-slate-700">
-                            <h2>Biography</h2>
-<p>Senior core teacher with extensive experience in meditation, craniosacral therapy, and transpersonal psychology. Based in Spain, she is an accomplished author, researcher, and public speaker on consciousness, meditation, health, and wellness. With a background spanning psychology, philosophy, and consciousness studies, she brings deep theoretical and experiential knowledge to breathwork psychotherapy. Mentor for MA and PhD students at IUPS.</p>
-<h2>Academic Degrees &amp; Certificates</h2>
-<ul>
+                            
+                                <p>Senior core teacher with extensive experience in meditation, craniosacral therapy, and transpersonal psychology. Based in Spain, she is an accomplished author, researcher, and public speaker on consciousness, meditation, health, and wellness. With a background spanning psychology, philosophy, and consciousness studies, she brings deep theoretical and experiential knowledge to breathwork psychotherapy. Mentor for MA and PhD students at IUPS.</p>
+
+                            
+                        </div>
+                        
+                        <div class="mt-4">
+                            <a href="http://tinalindhard.com/" target="_blank" class="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 font-medium">
+                                <i data-lucide="globe" class="w-4 h-4"></i>
+                                tinalindhard.com/
+                            </a>
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Training Tab -->
+                    <div id="training-tina-lindhard" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <ul>
 <li>Ph.D. Consciousness Studies (IUPS, Hawaii, 2016)</li>
 <li>MATP Transpersonal Psychology (Sofia University/ITP, 2013)</li>
 <li>Certificate of Transpersonal Studies (Sofia University, 2012)</li>
@@ -466,30 +796,25 @@
 <li>BSc Social Science - Research Psychology (UCT, South Africa, 1976)</li>
 <li>Arka Dhyana Meditation Teachers Training Certificate</li>
 </ul>
-<h2>Experience</h2>
-<ul>
+
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Practice Tab -->
+                    <div id="practice-tina-lindhard" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <ul>
 <li>Mentor for MA/PhD Students at IUPS (2017-present)</li>
 <li>Arka Dhyana Meditation Teacher &amp; Facilitator (2005-present)</li>
 <li>Private Consultancy: Eclectic Therapist (2002-2013)</li>
 <li>Public Speaker on Self, Meditation, Health &amp; Wellness</li>
 <li>Specializing in Trauma, Families, Death, Dying &amp; Grief</li>
 </ul>
-<h2>Selected Publications (2020)</h2>
-<ul>
-<li><em>Intuition: A Heart-based Epistemology.</em> Diálogo vol. 7,(1):181-194</li>
-<li><em>Mesoderm: The Possible Key to the Organic Basis of Freud’s Theories.</em> Psychology 11(11):1769-1793</li>
-<li><em>La Salud Mental Y La Superación De La Violencia.</em> Salud Mental, Madrid</li>
-</ul>
 
+                            
                         </div>
-                        
-                        <div class="mt-4 pt-4 border-t border-slate-200">
-                            <a href="http://tinalindhard.com/" target="_blank" class="inline-flex items-center gap-2 text-teal-600 hover:text-teal-700 font-medium text-sm transition-colors">
-                                <i data-lucide="globe" class="w-4 h-4"></i>
-                                <span>Visit Website</span>
-                            </a>
-                        </div>
-                        
                     </div>
                 </div>
             </div>
@@ -511,133 +836,355 @@
 
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             
-            <div class="teacher-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300" onclick="toggleBio(this)">
+            <div class="teacher-card" onclick="toggleBio(this)">
                 <div class="overflow-hidden h-56">
-                    <img src="https://transpersonal-training.com/wp-content/uploads/2020/12/Belogodkii-Lev-1.jpg" alt="Lev Belogorodskii" class="teacher-img w-full h-full object-cover">
+                    <img src="https://transpersonal-training.com/wp-content/uploads/2020/12/Belogodkii-Lev-1.jpg" alt="Lev Belogorodskii" class="teacher-img">
                 </div>
                 <div class="p-4">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="inline-block px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">Guest</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-purple-400 bio-icon transition-transform duration-300"></i>
+                        <span class="badge-guest">Guest</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-purple-400 bio-icon"></i>
                     </div>
                     <h3 class="text-lg font-serif font-bold text-indigo-950 mb-1">Lev Belogorodskii</h3>
                     <p class="text-purple-600 font-medium text-sm">Russia</p>
                 </div>
                 <div class="teacher-bio">
-                    <div class="p-4 pt-0">
-                        <div class="text-slate-700 text-sm leading-relaxed">
-                            <p>Experienced transpersonal psychologist and breathwork facilitator from Russia, contributing unique perspectives from the Russian transpersonal tradition.</p>
+                    <!-- Tab Navigation -->
+                    <div class="tab-navigation">
+                        <button class="tab-button active" onclick="switchTab(event, 'bio-lev-belogorodskii')">
+                            <i data-lucide="book-open" class="w-5 h-5"></i>
+                            <span>Bio</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'training-lev-belogorodskii')">
+                            <i data-lucide="award" class="w-5 h-5"></i>
+                            <span>Training</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'practice-lev-belogorodskii')">
+                            <i data-lucide="briefcase" class="w-5 h-5"></i>
+                            <span>Practice</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Biography Tab -->
+                    <div id="bio-lev-belogorodskii" class="tab-content active">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <p>Experienced transpersonal psychologist and breathwork facilitator from Russia, contributing unique perspectives from the Russian transpersonal tradition.</p>
 
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Training Tab -->
+                    <div id="training-lev-belogorodskii" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <p class="text-slate-600">Training information coming soon</p>
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Practice Tab -->
+                    <div id="practice-lev-belogorodskii" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <p class="text-slate-600">Practice information coming soon</p>
+                            
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="teacher-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300" onclick="toggleBio(this)">
+            <div class="teacher-card" onclick="toggleBio(this)">
                 <div class="overflow-hidden h-56">
-                    <img src="https://transpersonal-training.com/wp-content/uploads/2020/12/Liudmila-Serbina-Ph.jpg" alt="Liudmila Serbina" class="teacher-img w-full h-full object-cover">
+                    <img src="https://transpersonal-training.com/wp-content/uploads/2020/12/Liudmila-Serbina-Ph.jpg" alt="Liudmila Serbina" class="teacher-img">
                 </div>
                 <div class="p-4">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="inline-block px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">Guest</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-purple-400 bio-icon transition-transform duration-300"></i>
+                        <span class="badge-guest">Guest</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-purple-400 bio-icon"></i>
                     </div>
                     <h3 class="text-lg font-serif font-bold text-indigo-950 mb-1">Liudmila Serbina</h3>
                     <p class="text-purple-600 font-medium text-sm">Russia</p>
                 </div>
                 <div class="teacher-bio">
-                    <div class="p-4 pt-0">
-                        <div class="text-slate-700 text-sm leading-relaxed">
-                            <p>Brings extensive expertise in transpersonal psychology and therapeutic practices from the Russian school of psychology.</p>
+                    <!-- Tab Navigation -->
+                    <div class="tab-navigation">
+                        <button class="tab-button active" onclick="switchTab(event, 'bio-liudmila-serbina')">
+                            <i data-lucide="book-open" class="w-5 h-5"></i>
+                            <span>Bio</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'training-liudmila-serbina')">
+                            <i data-lucide="award" class="w-5 h-5"></i>
+                            <span>Training</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'practice-liudmila-serbina')">
+                            <i data-lucide="briefcase" class="w-5 h-5"></i>
+                            <span>Practice</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Biography Tab -->
+                    <div id="bio-liudmila-serbina" class="tab-content active">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <p>Brings extensive expertise in transpersonal psychology and therapeutic practices from the Russian school of psychology.</p>
 
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Training Tab -->
+                    <div id="training-liudmila-serbina" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <p class="text-slate-600">Training information coming soon</p>
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Practice Tab -->
+                    <div id="practice-liudmila-serbina" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <p class="text-slate-600">Practice information coming soon</p>
+                            
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="teacher-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300" onclick="toggleBio(this)">
+            <div class="teacher-card" onclick="toggleBio(this)">
                 <div class="overflow-hidden h-56">
-                    <img src="https://transpersonal-training.com/wp-content/uploads/2023/07/Ingo-Jahrsetz-1.jpg" alt="Dr. Ingo Benjamin Jahrsetz" class="teacher-img w-full h-full object-cover">
+                    <img src="https://transpersonal-training.com/wp-content/uploads/2023/07/Ingo-Jahrsetz-1.jpg" alt="Dr. Ingo Benjamin Jahrsetz" class="teacher-img">
                 </div>
                 <div class="p-4">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="inline-block px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">Guest</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-purple-400 bio-icon transition-transform duration-300"></i>
+                        <span class="badge-guest">Guest</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-purple-400 bio-icon"></i>
                     </div>
                     <h3 class="text-lg font-serif font-bold text-indigo-950 mb-1">Dr. Ingo Benjamin Jahrsetz</h3>
                     <p class="text-purple-600 font-medium text-sm">Germany</p>
                 </div>
                 <div class="teacher-bio">
-                    <div class="p-4 pt-0">
-                        <div class="text-slate-700 text-sm leading-relaxed">
-                            <p>Combines academic research with practical therapeutic experience in transpersonal psychology and consciousness studies.</p>
+                    <!-- Tab Navigation -->
+                    <div class="tab-navigation">
+                        <button class="tab-button active" onclick="switchTab(event, 'bio-ingo-jahrsetz')">
+                            <i data-lucide="book-open" class="w-5 h-5"></i>
+                            <span>Bio</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'training-ingo-jahrsetz')">
+                            <i data-lucide="award" class="w-5 h-5"></i>
+                            <span>Training</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'practice-ingo-jahrsetz')">
+                            <i data-lucide="briefcase" class="w-5 h-5"></i>
+                            <span>Practice</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Biography Tab -->
+                    <div id="bio-ingo-jahrsetz" class="tab-content active">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <p>Combines academic research with practical therapeutic experience in transpersonal psychology and consciousness studies.</p>
 
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Training Tab -->
+                    <div id="training-ingo-jahrsetz" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <p class="text-slate-600">Training information coming soon</p>
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Practice Tab -->
+                    <div id="practice-ingo-jahrsetz" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <p class="text-slate-600">Practice information coming soon</p>
+                            
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="teacher-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300" onclick="toggleBio(this)">
+            <div class="teacher-card" onclick="toggleBio(this)">
                 <div class="overflow-hidden h-56">
-                    <img src="https://transpersonal-training.com/wp-content/uploads/2024/03/Vladimir-Maykov-1.jpg" alt="Vladimir Maykov" class="teacher-img w-full h-full object-cover">
+                    <img src="https://transpersonal-training.com/wp-content/uploads/2024/03/Vladimir-Maykov-1.jpg" alt="Vladimir Maykov" class="teacher-img">
                 </div>
                 <div class="p-4">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="inline-block px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">Guest</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-purple-400 bio-icon transition-transform duration-300"></i>
+                        <span class="badge-guest">Guest</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-purple-400 bio-icon"></i>
                     </div>
                     <h3 class="text-lg font-serif font-bold text-indigo-950 mb-1">Vladimir Maykov</h3>
                     <p class="text-purple-600 font-medium text-sm">Russia</p>
                 </div>
                 <div class="teacher-bio">
-                    <div class="p-4 pt-0">
-                        <div class="text-slate-700 text-sm leading-relaxed">
-                            <p>Leading figure in transpersonal psychology research and practice in Russia and internationally.</p>
+                    <!-- Tab Navigation -->
+                    <div class="tab-navigation">
+                        <button class="tab-button active" onclick="switchTab(event, 'bio-vladimir-maykov')">
+                            <i data-lucide="book-open" class="w-5 h-5"></i>
+                            <span>Bio</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'training-vladimir-maykov')">
+                            <i data-lucide="award" class="w-5 h-5"></i>
+                            <span>Training</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'practice-vladimir-maykov')">
+                            <i data-lucide="briefcase" class="w-5 h-5"></i>
+                            <span>Practice</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Biography Tab -->
+                    <div id="bio-vladimir-maykov" class="tab-content active">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <p>Leading figure in transpersonal psychology research and practice in Russia and internationally.</p>
 
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Training Tab -->
+                    <div id="training-vladimir-maykov" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <p class="text-slate-600">Training information coming soon</p>
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Practice Tab -->
+                    <div id="practice-vladimir-maykov" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <p class="text-slate-600">Practice information coming soon</p>
+                            
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="teacher-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300" onclick="toggleBio(this)">
+            <div class="teacher-card" onclick="toggleBio(this)">
                 <div class="overflow-hidden h-56">
-                    <img src="https://transpersonal-training.com/wp-content/uploads/2023/09/Pier-Luigi-Lattuada.jpg" alt="Pier Luigi Lattuada" class="teacher-img w-full h-full object-cover">
+                    <img src="https://transpersonal-training.com/wp-content/uploads/2023/09/Pier-Luigi-Lattuada.jpg" alt="Pier Luigi Lattuada" class="teacher-img">
                 </div>
                 <div class="p-4">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="inline-block px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">Guest</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-purple-400 bio-icon transition-transform duration-300"></i>
+                        <span class="badge-guest">Guest</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-purple-400 bio-icon"></i>
                     </div>
                     <h3 class="text-lg font-serif font-bold text-indigo-950 mb-1">Pier Luigi Lattuada</h3>
                     <p class="text-purple-600 font-medium text-sm">Italy</p>
                 </div>
                 <div class="teacher-bio">
-                    <div class="p-4 pt-0">
-                        <div class="text-slate-700 text-sm leading-relaxed">
-                            <p>Renowned transpersonal psychotherapist and founder of the Integral Transpersonal Institute in Italy.</p>
+                    <!-- Tab Navigation -->
+                    <div class="tab-navigation">
+                        <button class="tab-button active" onclick="switchTab(event, 'bio-pier-luigi-lattuada')">
+                            <i data-lucide="book-open" class="w-5 h-5"></i>
+                            <span>Bio</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'training-pier-luigi-lattuada')">
+                            <i data-lucide="award" class="w-5 h-5"></i>
+                            <span>Training</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'practice-pier-luigi-lattuada')">
+                            <i data-lucide="briefcase" class="w-5 h-5"></i>
+                            <span>Practice</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Biography Tab -->
+                    <div id="bio-pier-luigi-lattuada" class="tab-content active">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <p>Renowned transpersonal psychotherapist and founder of the Integral Transpersonal Institute in Italy.</p>
 
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Training Tab -->
+                    <div id="training-pier-luigi-lattuada" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <p class="text-slate-600">Training information coming soon</p>
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Practice Tab -->
+                    <div id="practice-pier-luigi-lattuada" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <p class="text-slate-600">Practice information coming soon</p>
+                            
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="teacher-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300" onclick="toggleBio(this)">
+            <div class="teacher-card" onclick="toggleBio(this)">
                 <div class="overflow-hidden h-56">
-                    <img src="https://transpersonal-training.com/wp-content/uploads/2021/02/samvedan.jpg" alt="Samvedam B. Randles" class="teacher-img w-full h-full object-cover">
+                    <img src="https://transpersonal-training.com/wp-content/uploads/2021/02/samvedan.jpg" alt="Samvedam B. Randles" class="teacher-img">
                 </div>
                 <div class="p-4">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="inline-block px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">Guest</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-purple-400 bio-icon transition-transform duration-300"></i>
+                        <span class="badge-guest">Guest</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-purple-400 bio-icon"></i>
                     </div>
                     <h3 class="text-lg font-serif font-bold text-indigo-950 mb-1">Samvedam B. Randles</h3>
                     <p class="text-purple-600 font-medium text-sm">USA</p>
                 </div>
                 <div class="teacher-bio">
-                    <div class="p-4 pt-0">
-                        <div class="text-slate-700 text-sm leading-relaxed">
-                            <p>Brings American transpersonal psychology perspectives and expertise in integral and consciousness studies.</p>
+                    <!-- Tab Navigation -->
+                    <div class="tab-navigation">
+                        <button class="tab-button active" onclick="switchTab(event, 'bio-samvedam-randles')">
+                            <i data-lucide="book-open" class="w-5 h-5"></i>
+                            <span>Bio</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'training-samvedam-randles')">
+                            <i data-lucide="award" class="w-5 h-5"></i>
+                            <span>Training</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'practice-samvedam-randles')">
+                            <i data-lucide="briefcase" class="w-5 h-5"></i>
+                            <span>Practice</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Biography Tab -->
+                    <div id="bio-samvedam-randles" class="tab-content active">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <p>Brings American transpersonal psychology perspectives and expertise in integral and consciousness studies.</p>
 
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Training Tab -->
+                    <div id="training-samvedam-randles" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <p class="text-slate-600">Training information coming soon</p>
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Practice Tab -->
+                    <div id="practice-samvedam-randles" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-slate-700">
+                            
+                                <p class="text-slate-600">Practice information coming soon</p>
+                            
                         </div>
                     </div>
                 </div>
@@ -666,73 +1213,59 @@
     </div>
 </section>
 
-<style>
-    .teacher-card {
-        cursor: pointer;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .teacher-card:hover {
-        transform: translateY(-4px);
-    }
-    .teacher-card:hover .teacher-img {
-        transform: scale(1.1);
-    }
-    .teacher-img {
-        transition: transform 0.3s ease;
-    }
-    
-    /* Biography container - hidden by default */
-    .teacher-bio {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.5s ease-out;
-    }
-    
-    /* Biography visible when card is active */
-    .teacher-card.active .teacher-bio {
-        max-height: 2000px;
-        transition: max-height 0.5s ease-in;
-    }
-    
-    /* Rotate icon when expanded */
-    .teacher-card.active .bio-icon {
-        transform: rotate(180deg);
-    }
-    
-    /* Prose styling for biography content */
-    .prose h2 {
-        color: #312e81;
-        font-weight: 700;
-        font-size: 1.25rem;
-        margin-top: 1rem;
-        margin-bottom: 0.75rem;
-    }
-    .prose ul {
-        list-style-type: disc;
-        margin-left: 1.5rem;
-        margin-top: 0.5rem;
-    }
-    .prose li {
-        margin-bottom: 0.25rem;
-    }
-    .prose p {
-        margin-bottom: 0.75rem;
-    }
-</style>
-
 <script>
     function toggleBio(card) {
+        event.stopPropagation();
+        
         // Close all other bios
-        document.querySelectorAll('.teacher-card.active').forEach(openCard => {
+        document.querySelectorAll('.teacher-card').forEach(openCard => {
             if (openCard !== card) {
-                openCard.classList.remove('active');
+                const bio = openCard.querySelector('.teacher-bio');
+                if (bio) {
+                    bio.classList.remove('active');
+                    openCard.classList.remove('expanded');
+                }
             }
         });
         
         // Toggle current bio
-        card.classList.toggle('active');
+        const bio = card.querySelector('.teacher-bio');
+        if (bio) {
+            bio.classList.toggle('active');
+            card.classList.toggle('expanded');
+        }
         
         // Re-initialize lucide icons for any new content
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+    }
+
+    function switchTab(event, tabId) {
+        event.stopPropagation();
+        
+        // Get the parent card
+        const card = event.target.closest('.teacher-card');
+        if (!card) return;
+        
+        // Get all tabs and tab contents within this card
+        const tabButtons = card.querySelectorAll('.tab-button');
+        const tabContents = card.querySelectorAll('.tab-content');
+        
+        // Remove active class from all tabs and contents
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        
+        // Add active class to clicked tab
+        event.target.closest('.tab-button').classList.add('active');
+        
+        // Show corresponding content
+        const targetContent = card.querySelector(`#${tabId}`);
+        if (targetContent) {
+            targetContent.classList.add('active');
+        }
+        
+        // Re-initialize lucide icons
         if (window.lucide) {
             lucide.createIcons();
         }
