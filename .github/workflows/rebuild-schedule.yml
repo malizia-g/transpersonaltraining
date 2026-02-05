@@ -1,0 +1,45 @@
+name: Rebuild Schedule Page Only
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild-schedule:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout test-11ty branch
+        uses: actions/checkout@v4
+        with:
+          ref: test-11ty
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build schedule page
+        run: npm run build
+      
+      - name: Update schedule in deploy branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout deploy
+          cp _site/schedule.html ./schedule.html
+          if git diff --quiet schedule.html; then
+            echo "No changes to schedule.html"
+            exit 0
+          fi
+          git add schedule.html
+          git commit -m "Update schedule page with fresh data"
+          git push origin deploy
+          echo "✅ Schedule page updated successfully!"
