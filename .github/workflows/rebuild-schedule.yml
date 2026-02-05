@@ -1,9 +1,6 @@
 name: Rebuild Schedule Page Only
 
 on:
-  push:
-    branches:
-      - test-11ty
   workflow_dispatch:
   repository_dispatch:
     types: [rebuild-schedule]
