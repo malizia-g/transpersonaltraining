@@ -2,15 +2,27 @@
  * Triggera il workflow deploy.yml sul branch test-11ty
  * Può essere chiamato da un pulsante o menu in Google Sheets
  * 
- * SETUP: Imposta il token in: Impostazioni progetto > Proprietà script
- * - Nome proprietà: GITHUB_TOKEN
- * - Valore: il tuo GitHub Personal Access Token con scope 'workflow'
+ * SETUP OBBLIGATORIO:
+ * 1. Apri questo script in Apps Script
+ * 2. Vai su Impostazioni progetto (icona ingranaggio)
+ * 3. Scorri fino a "Proprietà script"
+ * 4. Clicca "Aggiungi proprietà script"
+ * 5. Inserisci: Nome = GITHUB_TOKEN, Valore = il tuo token GitHub
+ * 
+ * OPPURE esegui una volta la funzione setupToken() qui sotto
  */
 function triggerDeployWorkflow() {
-  const GITHUB_TOKEN = PropertiesService.getScriptProperties().getProperty('GITHUB_TOKEN');
+  // Recupera il token dalle Script Properties
+  const scriptProperties = PropertiesService.getScriptProperties();
+  let GITHUB_TOKEN = scriptProperties.getProperty('GITHUB_TOKEN');
+  
+  // Se non è nelle Script Properties, prova nelle User Properties
+  if (!GITHUB_TOKEN) {
+    GITHUB_TOKEN = PropertiesService.getUserProperties().getProperty('GITHUB_TOKEN');
+  }
   
   if (!GITHUB_TOKEN) {
-    SpreadsheetApp.getUi().alert('❌ Error: GITHUB_TOKEN not configured.\n\nGo to Project Settings > Script Properties and add:\nName: GITHUB_TOKEN\nValue: your GitHub token');
+    SpreadsheetApp.getUi().alert('❌ Token non configurato!\n\nEsegui la funzione setupToken() oppure configura manualmente GITHUB_TOKEN nelle Proprietà script.');
     return;
   }
   
@@ -57,4 +69,20 @@ function onOpen() {
     .createMenu('🚀 Deploy')
     .addItem('Avvia Deploy', 'triggerDeployWorkflow')
     .addToUi();
+}
+
+/**
+ * FUNZIONE DI SETUP - Esegui questa funzione UNA VOLTA per configurare il token
+ * Sostituisci YOUR_TOKEN_HERE con il tuo GitHub Personal Access Token
+ */
+function setupToken() {
+  const token = 'YOUR_TOKEN_HERE'; // <-- Sostituisci con il tuo token
+  
+  if (token === 'YOUR_TOKEN_HERE') {
+    SpreadsheetApp.getUi().alert('⚠️ Modifica il token nella funzione setupToken() prima di eseguirla!');
+    return;
+  }
+  
+  PropertiesService.getScriptProperties().setProperty('GITHUB_TOKEN', token);
+  SpreadsheetApp.getUi().alert('✅ Token configurato con successo!');
 }
