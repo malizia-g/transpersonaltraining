@@ -76,8 +76,8 @@ function triggerGitHubRebuild() {
     );
     
     // URL dell'API GitHub per workflow dispatch
-    // Usa il nome del file del workflow (più affidabile dell'ID numerico)
-    const url = `https://api.github.com/repos/${GITHUB_REPO}/actions/workflows/deploy.yml/dispatches`;
+    // Usa l'ID numerico del workflow invece del nome file
+    const url = `https://api.github.com/repos/${GITHUB_REPO}/actions/workflows/229994437/dispatches`;
     
     // Opzioni per la richiesta HTTP
     const options = {
@@ -88,7 +88,7 @@ function triggerGitHubRebuild() {
         'Content-Type': 'application/json'
       },
       payload: JSON.stringify({
-        ref: 'main'  // Branch da cui eseguire il workflow (deve contenere deploy.yml)
+        ref: 'test-11ty'  // Branch da cui eseguire il workflow
       }),
       muteHttpExceptions: true  // Per gestire gli errori manualmente
     };
@@ -260,28 +260,10 @@ on:
 
 **Causa**: Il workflow non viene trovato da GitHub.
 
-**Soluzioni da provare in ordine**:
-
-1. **Verifica che il workflow esista sul branch corretto**:
-   - Apri: https://github.com/malizia-g/transpersonaltraining/blob/main/.github/workflows/deploy.yml
-   - Se il file NON esiste, verifica su quale branch si trova il workflow
-   - Nello script, cambia `ref: 'main'` con il branch corretto (es. `ref: 'test-11ty'`)
-
-2. **Verifica che il workflow contenga `workflow_dispatch`**:
-   - Il file `deploy.yml` deve avere questa sezione:
-   ```yaml
-   on:
-     workflow_dispatch:
-   ```
-
-3. **Attendi che il workflow sia registrato da GitHub**:
-   - Se hai appena creato/modificato il workflow, aspetta 1-2 minuti
-   - GitHub deve "vedere" il workflow almeno una volta prima di poterlo triggerare
-   - Prova a fare un push al branch per forzare GitHub a registrare il workflow
-
-4. **Verifica il nome del repository**:
-   - Lo script usa: `malizia-g/transpersonaltraining`
-   - Verifica che sia corretto nel tuo script
+**Soluzione**: 
+- Lo script usa l'ID numerico del workflow (`229994437`) che corrisponde a `deploy.yml`
+- Verifica che il workflow esista sul branch `test-11ty`
+- Se il workflow è stato ricreato, potrebbe avere un nuovo ID - contatta lo sviluppatore
 
 ### Errore 401: Unauthorized
 
