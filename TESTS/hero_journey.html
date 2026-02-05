@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Hero's Journey - Curriculum | Lumina Institute</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --theme-primary: #755498;
+            --theme-darker: #2e203b;
+            --theme-light: #aa92ca;
+            --theme-primary-rgb: 117, 84, 152;
+        }
+        
+        body.theme-iris {
+            --theme-primary: #4B0082;
+            --theme-darker: #2d004d;
+            --theme-light: #9b6bb8;
+            --theme-primary-rgb: 75, 0, 130;
+        }
+        
+        body.theme-blue {
+            --theme-primary: #1E3A8A;
+            --theme-darker: #0f2540;
+            --theme-light: #3b82f6;
+            --theme-primary-rgb: 30, 58, 138;
+        }
+        
+        body.theme-ocean {
+            --theme-primary: #0f766e;
+            --theme-darker: #134e4a;
+            --theme-light: #5eead4;
+            --theme-primary-rgb: 15, 118, 110;
+        }
+        
+        body.theme-forest {
+            --theme-primary: #166534;
+            --theme-darker: #14532d;
+            --theme-light: #86efac;
+            --theme-primary-rgb: 22, 101, 52;
+        }
+        
+        body.theme-earth {
+            --theme-primary: #c2410c;
+            --theme-darker: #7c2d12;
+            --theme-light: #fdba74;
+            --theme-primary-rgb: 194, 65, 12;
+        }
+        
+        body.theme-alchemy {
+            --theme-primary: #a21caf;
+            --theme-darker: #701a75;
+            --theme-light: #f0abfc;
+            --theme-primary-rgb: 162, 28, 175;
+        }
+
+        html { scroll-behavior: smooth; }
+        
+        /* Dynamic theme colors */
+        body[class*="theme-"] #navbar {
+            background-color: rgba(var(--theme-primary-rgb), 0.95) !important;
+        }
+        
+        body[class*="theme-"] .bg-primary-950\/95 {
+            background-color: rgba(var(--theme-primary-rgb), 0.95) !important;
+        }
+        
+        body[class*="theme-"] .text-primary-200 {
+            color: var(--theme-light) !important;
+        }
+        
+        body[class*="theme-"] .bg-amber-500 {
+            background-color: var(--theme-light) !important;
+            color: var(--theme-darker) !important;
+        }
+        
+        body[class*="theme-"] .bg-primary-700,
+        body[class*="theme-"] .bg-primary-500 {
+            background-color: var(--theme-primary) !important;
+        }
+        
+        body[class*="theme-"] .border-primary-700,
+        body[class*="theme-"] .border-primary-500 {
+            border-color: var(--theme-primary) !important;
+        }
+        
+        body[class*="theme-"] .text-primary-700,
+        body[class*="theme-"] .text-primary-500 {
+            color: var(--theme-primary) !important;
+        }
+        
+        body[class*="theme-"] .text-amber-600 {
+            color: var(--theme-light) !important;
+        }
+        
+        body[class*="theme-"] header .from-primary-950\/70 {
+            --tw-gradient-from: rgba(var(--theme-primary-rgb), 0.7) !important;
+        }
+        
+        body[class*="theme-"] header .via-primary-900\/50 {
+            --tw-gradient-to: rgba(var(--theme-primary-rgb), 0.5) !important;
+        }
+        
+        body[class*="theme-"] .bg-primary-950 {
+            background-color: var(--theme-darker) !important;
+        }
+        
+        /* Mobile menu theme colors */
+        body[class*="theme-"] #mobile-menu {
+            background-color: var(--theme-darker) !important;
+            border-color: var(--theme-primary) !important;
+        }
+        
+        body[class*="theme-"] #mobile-menu a.border-b {
+            border-color: rgba(var(--theme-primary-rgb, 107, 91, 127), 0.5) !important;
+        }
+        
+        body[class*="theme-"] #mobile-menu a:hover {
+            color: var(--theme-light) !important;
+        }
+        
+        /* Keep amber colors unchanged across all themes for buttons and badges */
+        body[class*="theme-"] .bg-amber-500,
+        body.bg-amber-500 {
+            background-color: #fbbf24 !important;
+        }
+        
+        body[class*="theme-"] .hover\:bg-amber-600:hover,
+        body .hover\:bg-amber-600:hover {
+            background-color: #f59e0b !important;
+        }
+        
+        body[class*="theme-"] .text-white.bg-amber-500,
+        body .text-white.bg-amber-500 {
+            color: white !important;
+        }
+        
+        body[class*="theme-"] .border-amber-500,
+        body .border-amber-500 {
+            border-color: #fbbf24 !important;
+        }
+        
+        body[class*="theme-"] .text-amber-500,
+        body .text-amber-500 {
+            color: #fbbf24 !important;
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .vine-path {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: visible;
+        }
+
+        .vine-branch {
+            fill: none;
+            stroke: #5D4037;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.2));
+        }
+
+        .vine-leaf-path {
+            filter: drop-shadow(1px 2px 2px rgba(0,0,0,0.2));
+        }
+
+        .module-card {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .module-card > div {
+            position: relative;
+            z-index: 20;
+        }
+
+        .vine-leaf {
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(1px 2px 2px rgba(0,0,0,0.3));
+            cursor: pointer;
+        }
+        
+        .vine-leaf-svg {
+            transition: all 0.3s ease;
+        }
+        
+        .vine-leaf-svg:hover {
+            transform: scale(1.5) !important;
+            filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.4));
+        }
+        
+        .vine-leaf-svg:hover {
+            transform: scale(1.5) !important;
+            filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.4));
+        }
+
+        @media (max-width: 768px) {
+            .module-card { margin-left: 0 !important; margin-right: 0 !important; }
+        }
+        
+        /* Fixed theme switcher button */
+        #theme-switcher-fixed {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        #theme-switcher-fixed button {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--theme-primary), var(--theme-darker));
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border: 3px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        #theme-switcher-fixed button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        #theme-switcher-fixed .theme-label {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 1;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute; top: 0; left: 100%; margin-left: 0.5rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
+            backdrop-filter: blur(20px); border-radius: 0.75rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.3);
+            min-width: 240px; opacity: 0; visibility: hidden;
+            transform: translateX(-10px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 100;
+        }
+        .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(0); }
+        .dropdown-menu::before {
+            content: ''; position: absolute; left: -6px; top: 1rem;
+            width: 12px; height: 12px; background: white;
+            transform: rotate(45deg); box-shadow: -3px -3px 5px rgba(0, 0, 0, 0.05);
+        }
+        .dropdown-menu a {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 1rem 1.25rem; color: #1e293b; font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        .dropdown-menu a:hover { color: #f59e0b; }
+        .dropdown-menu a:first-child { border-radius: 0.75rem 0.75rem 0 0; }
+        .dropdown-menu a:last-child { border-radius: 0 0 0.75rem 0.75rem; }
+        .dropdown-menu .submenu-icon { color: #94a3b8; transition: color 0.2s ease; }
+        .dropdown-menu a:hover .submenu-icon { color: #f59e0b; }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: 'var(--color-primary-50)', 100: 'var(--color-primary-100)', 200: 'var(--color-primary-200)',
+                            300: 'var(--color-primary-300)', 400: 'var(--color-primary-400)', 500: 'var(--color-primary-500)',
+                            600: 'var(--color-primary-600)', 700: 'var(--color-primary-700)', 800: 'var(--color-primary-800)',
+                            900: 'var(--color-primary-900)', 950: 'var(--color-primary-950)',
+                        },
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] },
+                    animation: { 'fade-in-up': 'fadeInUp 1s ease-out forwards' },
+                    keyframes: { fadeInUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } } }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans text-slate-800 bg-slate-50 antialiased transition-colors duration-700">
+
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4 bg-primary-950/95 backdrop-blur-sm shadow-lg text-white">
+        <div class="container mx-auto px-6 flex justify-between items-center relative z-10">
+            <!-- Logo (Desktop Only) -->
+            <div class="hidden md:flex items-center gap-2">
+                <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center opacity-90">
+                    <i data-lucide="loader-pinwheel" class="text-white w-6 h-6"></i>
+                </div>
+                <span id="nav-logo-text" class="text-2xl font-serif font-bold tracking-wide text-white">
+                    Transpersonal Training
+                </span>
+            </div>
+
+            <!-- Theme Switcher (Mobile Only) -->
+            <div class="flex md:hidden items-center gap-2">
+                <button id="theme-btn-mobile" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors" title="Switch theme">
+                    <i data-lucide="palette" class="w-5 h-5"></i>
+                </button>
+                <span id="theme-name-mobile" class="text-sm font-medium text-white/90">School Lavender</span>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8">
+                <div class="dropdown">
+                    <a href="training.html" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors flex items-center gap-1">
+                        Training <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="schedule.html" class="text-sm">
+                            <i data-lucide="calendar" class="w-4 h-4 submenu-icon"></i>
+                            <span>Schedule</span>
+                        </a>
+                        <a href="teachers.html" class="text-sm">
+                            <i data-lucide="users" class="w-4 h-4 submenu-icon"></i>
+                            <span>Our Teachers</span>
+                        </a>
+                        <a href="teachers_testB.html" class="text-sm">
+                            <i data-lucide="layout-grid" class="w-4 h-4 submenu-icon"></i>
+                            <span>Teachers - Layout B (Tabs)</span>
+                        </a>
+                        <a href="teachers_testC.html" class="text-sm">
+                            <i data-lucide="maximize-2" class="w-4 h-4 submenu-icon"></i>
+                            <span>Teachers - Layout C (Modal)</span>
+                        </a>
+                    </div>
+                </div>
+                <a href="techniques.html" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Techniques</a>
+                <div class="dropdown">
+                    <a href="transpersonal_therapy.html" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors flex items-center gap-1">
+                        Transpersonal Therapy <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="transpersonal_therapist.html" class="text-sm">
+                            <i data-lucide="stethoscope" class="w-4 h-4 submenu-icon"></i>
+                            <span>The Transpersonal Therapist</span>
+                        </a>
+                        <a href="client_model.html" class="text-sm">
+                            <i data-lucide="user-check" class="w-4 h-4 submenu-icon"></i>
+                            <span>Become a Client Model</span>
+                        </a>
+                    </div>
+                </div>
+                <a href="index.html#contact" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 rounded-full font-medium transition-transform hover:scale-105 shadow-md">Apply</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+                <i data-lucide="menu" class="w-7 h-7"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full shadow-xl py-6 px-6 flex-col gap-4 z-20 border-t bg-primary-950/95 backdrop-blur-sm">
+            <a href="training.html" class="text-slate-200 py-2 border-b block transition-colors">Training</a>
+            <a href="schedule.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Schedule</a>
+            <a href="teachers.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Our Teachers</a>
+            <a href="teachers_testB.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Teachers - Layout B (Tabs)</a>
+            <a href="teachers_testC.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Teachers - Layout C (Modal)</a>
+            <a href="techniques.html" class="text-slate-200 py-2 border-b block transition-colors">Techniques</a>
+            <a href="transpersonal_therapy.html" class="text-slate-200 py-2 border-b block transition-colors">Transpersonal Therapy</a>
+            <a href="transpersonal_therapist.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ The Transpersonal Therapist</a>
+            <a href="client_model.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Become a Client Model</a>
+            <a href="index.html#contact" class="bg-amber-500 text-white px-6 py-3 rounded-md w-full mt-4 font-bold text-center block">Apply</a>
+        </div>
+    </nav>
+
+    <header class="relative h-[60vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img 
+                src="vineyard.jpg" 
+                alt="Vineyard landscape" 
+                class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 bg-gradient-to-b from-primary-950/70 via-primary-900/50 to-slate-50"></div>
+        </div>
+
+        <div class="relative z-10 container mx-auto px-6 text-center pt-10">
+            <div class="animate-fade-in-up">
+                <span class="inline-block py-1 px-4 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-sm font-medium mb-4 tracking-wider uppercase">
+                    13 Steps to Wholeness
+                </span>
+                <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-xl">
+                    Our Hero's Journey
+                </h1>
+                <p class="text-xl text-slate-200 max-w-2xl mx-auto font-light leading-relaxed">
+                    A comprehensive 4-year evolutionary path. From the foundations of counseling to the peaks of transpersonal experience.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-24 bg-white relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="timeline-container" id="timelineContainer">
+                
+                <svg class="vine-path" id="vineSvg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none;">
+                    <g id="branchesContainer"></g>
+                    <path id="vinePath" class="vine-branch" d=""/>
+                    <g id="leavesContainer"></g>
+                </svg>
+
+                <div class="mb-20 module-card" data-module="1" style="margin-left: 10%;">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">1</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-l-4 border-primary-500 hover:scale-105 transition-transform duration-300 cursor-pointer">
+                            <div class="flex items-center gap-3 mb-3">
+                                <i data-lucide="map" class="text-primary-500 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">The Foundation</h3>
+                            </div>
+                            <p class="text-sm text-amber-600 font-bold uppercase mb-3">Therapeutic Approaches</p>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-3">The journey begins with foundational understanding of how therapy works and the pillars of modern psychotherapy.</p>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Cognitive Behavioral Therapy (CBT) fundamentals</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Humanistic and person-centered approaches</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Analytical Psychology: Jung's shadow work</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Projections, patterns, and unconscious material</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Archetypal frameworks in practice</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 module-card" data-module="2" style="margin-left: 55%;">
+                    <div class="flex items-center gap-4 mb-3 flex-row-reverse">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">2</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-r-4 border-primary-700 hover:scale-105 transition-transform duration-300 cursor-pointer text-right">
+                            <div class="flex items-center gap-3 mb-3 flex-row-reverse">
+                                <i data-lucide="users" class="text-primary-700 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">System & Process</h3>
+                            </div>
+                            <p class="text-sm text-primary-500 font-bold uppercase mb-3">Systemic & Gestalt Work</p>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-3">Expand perspective through systems thinking and experiential body-centered techniques.</p>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Resource-based Systemic Therapy</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Process Oriented Therapy (Process Work)</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Gestalt techniques and chair work</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Experiential awareness practices</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Intensive Holotropic Breathwork (Todtmoos)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 module-card" data-module="3" style="margin-left: 5%;">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">3</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-l-4 border-primary-500 hover:scale-105 transition-transform duration-300 cursor-pointer">
+                            <div class="flex items-center gap-3 mb-3">
+                                <i data-lucide="sprout" class="text-primary-500 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">Evolution of the Psyche</h3>
+                            </div>
+                            <p class="text-sm text-amber-600 font-bold uppercase mb-3">Effective Psychotherapy</p>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-3">Integrate theory into transformative relational practice and soul-centered work.</p>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Creative Evolution 2.0 framework</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Relationships as evolutionary crucibles</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Ancient practices of soul care</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> The Hero's Journey archetype in healing</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Integrating myth and clinical practice</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 module-card" data-module="4" style="margin-left: 60%;">
+                    <div class="flex items-center gap-4 mb-3 flex-row-reverse">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">4</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-r-4 border-primary-700 hover:scale-105 transition-transform duration-300 cursor-pointer text-right">
+                            <div class="flex items-center gap-3 mb-3 flex-row-reverse">
+                                <i data-lucide="zap" class="text-primary-700 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">Archetypes & Energy</h3>
+                            </div>
+                            <p class="text-sm text-primary-500 font-bold uppercase mb-3">Biotransenergetics I</p>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-3">Discover the energetic foundations of transformation with Dr. Pier Luigi Lattuada's pioneering work.</p>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Biotransenergetics (BTE) core principles</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Archetypes and energetic patterns</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Energy body anatomy and activation</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Dr. Pier Luigi Lattuada's teachings</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Film study: The Secret of Carlos Castaneda</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 module-card" data-module="5" style="margin-left: 15%;">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">5</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-l-4 border-primary-500 hover:scale-105 transition-transform duration-300 cursor-pointer">
+                            <div class="flex items-center gap-3 mb-3">
+                                <i data-lucide="baby" class="text-primary-500 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">The Inner Child</h3>
+                            </div>
+                            <p class="text-sm text-amber-600 font-bold uppercase mb-3">Hypnotherapy & BTE II</p>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-3">Access subconscious material and reconnect with the wounded inner child through hypnotic states.</p>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Biotransenergetics advanced techniques</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Clinical hypnotherapy methods</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Inner Child identification and healing</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Ego dissolution and transformation</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Stan Grof's cartography of consciousness</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 module-card" data-module="6" style="margin-left: 50%;">
+                    <div class="flex items-center gap-4 mb-3 flex-row-reverse">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">6</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-r-4 border-primary-700 hover:scale-105 transition-transform duration-300 cursor-pointer text-right">
+                            <div class="flex items-center gap-3 mb-3 flex-row-reverse">
+                                <i data-lucide="map-pin" class="text-primary-700 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">Maps of the Psyche</h3>
+                            </div>
+                            <p class="text-sm text-primary-500 font-bold uppercase mb-3">Constellations & Psychosynthesis</p>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-3">Map the psyche's territory and resolve systemic entanglements through representational work.</p>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Family Constellations fundamentals</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Orders of Love and systemic healing</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Psychosynthesis and the Self</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Strategic intervention techniques</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Grof's expanded maps of consciousness</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 module-card" data-module="7" style="margin-left: 8%;">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">7</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-l-4 border-primary-500 hover:scale-105 transition-transform duration-300 cursor-pointer">
+                            <div class="flex items-center gap-3 mb-3">
+                                <i data-lucide="infinity" class="text-primary-500 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">Holotropic States</h3>
+                            </div>
+                            <p class="text-sm text-amber-600 font-bold uppercase mb-3">Transpersonal Psychotherapy</p>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-3">Enter holotropic states and access transpersonal dimensions through sacred practices.</p>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Holotropic states of consciousness</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Kundalini awakening and integration</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Heart-centered meditation practices</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Regression therapy as spiritual tool</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Collective trauma and perpetrator-victim dynamics</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 module-card" data-module="8" style="margin-left: 58%;">
+                    <div class="flex items-center gap-4 mb-3 flex-row-reverse">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">8</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-r-4 border-primary-700 hover:scale-105 transition-transform duration-300 cursor-pointer text-right">
+                            <div class="flex items-center gap-3 mb-3 flex-row-reverse">
+                                <i data-lucide="flask-conical" class="text-primary-700 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">Forbidden Wisdom</h3>
+                            </div>
+                            <p class="text-sm text-primary-500 font-bold uppercase mb-3">Psychedelics & Perinatal</p>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-3">Explore the perinatal matrices and the sacred medicine path with clinical wisdom and safety.</p>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Perinatal matrices (BPM I-IV)</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Birth trauma and its resolution</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Psychedelics in therapeutic context</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Integration and spiritual vs. recreational use</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Safety, ethics, and containment</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 module-card" data-module="9" style="margin-left: 12%;">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">9</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-l-4 border-primary-500 hover:scale-105 transition-transform duration-300 cursor-pointer">
+                            <div class="flex items-center gap-3 mb-3">
+                                <i data-lucide="flame" class="text-primary-500 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">Alchemy of Trauma</h3>
+                            </div>
+                            <p class="text-sm text-amber-600 font-bold uppercase mb-3">Psychopathology</p>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-3">Transform trauma into wisdom and distinguish spiritual emergence from crisis.</p>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Alchemy of trauma and wounding</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Love as the healing agent in therapy</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Gestalt chair work and dialogue</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Spiritual Emergency vs. Spiritual Resistance</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Shame, fear, and guilt transmutation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 module-card" data-module="10" style="margin-left: 52%;">
+                    <div class="flex items-center gap-4 mb-3 flex-row-reverse">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">10</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-r-4 border-primary-700 hover:scale-105 transition-transform duration-300 cursor-pointer text-right">
+                            <div class="flex items-center gap-3 mb-3 flex-row-reverse">
+                                <i data-lucide="music" class="text-primary-700 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">Breath & Sound</h3>
+                            </div>
+                            <p class="text-sm text-primary-500 font-bold uppercase mb-3">Setting & Music</p>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-3">Master the container and learn how music facilitates deep states and collective healing.</p>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Creating sacred therapeutic containers</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Group dynamics and collective field</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Individual Constellations within groups</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Music's role in consciousness activation</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Holotropic Breathwork protocols</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 module-card" data-module="11" style="margin-left: 10%;">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">11</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-l-4 border-primary-500 hover:scale-105 transition-transform duration-300 cursor-pointer">
+                            <div class="flex items-center gap-3 mb-3">
+                                <i data-lucide="skull" class="text-primary-500 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">Death & Rebirth</h3>
+                            </div>
+                            <p class="text-sm text-amber-600 font-bold uppercase mb-3">Integration Therapy</p>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-3">Navigate ego death and bring profound experiences into embodied transformation.</p>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Holotropic session protocols and strategy</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Ego death and dissolution</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Integration of peak experiences</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Post-session Family Constellations</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Embodying and grounding transcendent states</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 module-card" data-module="12" style="margin-left: 56%;">
+                    <div class="flex items-center gap-4 mb-3 flex-row-reverse">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">12</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-r-4 border-primary-700 hover:scale-105 transition-transform duration-300 cursor-pointer text-right">
+                            <div class="flex items-center gap-3 mb-3 flex-row-reverse">
+                                <i data-lucide="feather" class="text-primary-700 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">Ancient & Modern</h3>
+                            </div>
+                            <p class="text-sm text-primary-500 font-bold uppercase mb-3">Shamanism & Integral Theory</p>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-3">Integrate ancient wisdom with modern maps of consciousness for holistic understanding.</p>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Shamanic psychology and worldview</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Shamanism in clinical practice</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Grof's transpersonal psychopathology</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Ken Wilber's Integral Theory fundamentals</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> AQAL framework in therapy</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8 module-card" data-module="13" style="margin-left: 15%;">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="bg-amber-500 shadow-xl w-14 h-14 rounded-full border-[3px] border-white flex items-center justify-center relative">
+                            <span class="font-bold text-white text-xl">13</span>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl flex-1 px-6 py-6 border-l-4 border-amber-500 hover:scale-105 transition-transform duration-300 cursor-pointer">
+                            <div class="flex items-center gap-3 mb-3">
+                                <i data-lucide="graduation-cap" class="text-amber-500 w-5 h-5"></i>
+                                <h3 class="font-serif font-bold text-gray-800 text-xl">Practice & Completion</h3>
+                            </div>
+                            <p class="text-sm text-amber-600 font-bold uppercase mb-3">Supervision & Ethics</p>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-3">Embody ethical practice and prepare for professional integration as a transpersonal practitioner.</p>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Ethics in transpersonal work</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Art Therapy and creative integration</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Differentiation: Spiritual emergence vs. psychosis</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Professional supervision and mentorship</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Certification, exams, and completion</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-primary-950 text-slate-300 py-16 transition-colors duration-700">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-2xl font-serif font-bold text-white mb-6">Ready to begin your journey?</h2>
+            <button class="bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 rounded-full font-bold transition-transform hover:scale-105 shadow-lg">
+                Apply for the Training
+            </button>
+            <p class="mt-8 text-sm text-primary-400">&copy; 2026 Lumina Institute. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Vine drawing script -->
+    <script src="vine.js"></script>
+    
+    <!-- Theme switcher script -->
+    <script src="theme-switcher.js"></script>
+    
+    <script>
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('flex');
+            });
+        }
+
+        // Fixed Theme Switcher
+        const themeBtnFixed = document.getElementById('theme-btn-fixed');
+        const themeNameFixed = document.getElementById('theme-label');
+
+        if (themeBtnFixed) {
+            themeBtnFixed.addEventListener('click', () => {
+                document.body.classList.toggle('theme-iris');
+                document.body.classList.toggle('theme-blue');
+                document.body.classList.toggle('theme-ocean');
+                document.body.classList.toggle('theme-forest');
+                document.body.classList.toggle('theme-earth');
+                document.body.classList.toggle('theme-alchemy');
+
+                // Update theme name label
+                const currentTheme = Array.from(document.body.classList).find(cls => cls.startsWith('theme-'));
+                themeNameFixed.textContent = currentTheme ? currentTheme.replace('theme-', '').charAt(0).toUpperCase() + currentTheme.slice(1) : 'School Lavender';
+            });
+        }
+
+        const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+            });
+        });
+    </script>
+</body>
+</html>
