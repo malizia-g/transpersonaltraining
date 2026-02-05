@@ -21,6 +21,12 @@ module.exports = function(eleventyConfig) {
     }
   });
   
+  // Filter to convert markdown to HTML
+  eleventyConfig.addFilter('markdown', function(content) {
+    if (!content) return '';
+    return md.render(content);
+  });
+  
   // Copy static assets to output
   eleventyConfig.addPassthroughCopy("style.css");
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
