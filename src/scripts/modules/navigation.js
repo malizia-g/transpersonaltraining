@@ -23,15 +23,26 @@ export function initNavbarScroll() {
     const navbar = document.getElementById('navbar');
     if (!navbar) return;
     
-    window.addEventListener('scroll', () => {
-        const scrollClasses = ['bg-indigo-950/95', 'backdrop-blur-sm', 'shadow-lg'];
+    // Initialize navbar state on page load
+    const updateNavbarStyle = () => {
+        const scrollClasses = ['shadow-lg'];
         
         if (window.scrollY > 50) {
+            // On scroll - show solid background with backdrop blur
             navbar.classList.remove('bg-transparent');
-            navbar.classList.add(...scrollClasses);
+            navbar.style.backgroundColor = 'rgba(15, 37, 64, 0.95)';
+            navbar.classList.add('backdrop-blur-sm', ...scrollClasses);
         } else {
+            // At top - make transparent
             navbar.classList.add('bg-transparent');
-            navbar.classList.remove(...scrollClasses);
+            navbar.style.backgroundColor = 'transparent';
+            navbar.classList.remove('backdrop-blur-sm', ...scrollClasses);
         }
-    });
+    };
+    
+    // Run on page load
+    updateNavbarStyle();
+    
+    // Run on scroll
+    window.addEventListener('scroll', updateNavbarStyle);
 }

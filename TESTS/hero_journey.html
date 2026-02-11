@@ -13,142 +13,85 @@
 
     <style>
         :root {
-            --theme-primary: #755498;
-            --theme-darker: #2e203b;
-            --theme-light: #aa92ca;
-            --theme-primary-rgb: 117, 84, 152;
-        }
-        
-        body.theme-iris {
-            --theme-primary: #4B0082;
-            --theme-darker: #2d004d;
-            --theme-light: #9b6bb8;
-            --theme-primary-rgb: 75, 0, 130;
-        }
-        
-        body.theme-blue {
             --theme-primary: #1E3A8A;
             --theme-darker: #0f2540;
             --theme-light: #3b82f6;
             --theme-primary-rgb: 30, 58, 138;
         }
         
-        body.theme-ocean {
-            --theme-primary: #0f766e;
-            --theme-darker: #134e4a;
-            --theme-light: #5eead4;
-            --theme-primary-rgb: 15, 118, 110;
-        }
-        
-        body.theme-forest {
-            --theme-primary: #166534;
-            --theme-darker: #14532d;
-            --theme-light: #86efac;
-            --theme-primary-rgb: 22, 101, 52;
-        }
-        
-        body.theme-earth {
-            --theme-primary: #c2410c;
-            --theme-darker: #7c2d12;
-            --theme-light: #fdba74;
-            --theme-primary-rgb: 194, 65, 12;
-        }
-        
-        body.theme-alchemy {
-            --theme-primary: #a21caf;
-            --theme-darker: #701a75;
-            --theme-light: #f0abfc;
-            --theme-primary-rgb: 162, 28, 175;
-        }
-
         html { scroll-behavior: smooth; }
         
-        /* Dynamic theme colors */
-        body[class*="theme-"] #navbar {
-            background-color: rgba(var(--theme-primary-rgb), 0.95) !important;
+        .bg-primary-950\/95 {
+            background-color: rgba(15, 37, 64, 0.95) !important;
         }
         
-        body[class*="theme-"] .bg-primary-950\/95 {
-            background-color: rgba(var(--theme-primary-rgb), 0.95) !important;
+        .text-primary-200 {
+            color: #3b82f6 !important;
         }
         
-        body[class*="theme-"] .text-primary-200 {
-            color: var(--theme-light) !important;
+        .bg-primary-700,
+        .bg-primary-500 {
+            background-color: #1E3A8A !important;
         }
         
-        body[class*="theme-"] .bg-amber-500 {
-            background-color: var(--theme-light) !important;
-            color: var(--theme-darker) !important;
+        .border-primary-700,
+        .border-primary-500 {
+            border-color: #1E3A8A !important;
         }
         
-        body[class*="theme-"] .bg-primary-700,
-        body[class*="theme-"] .bg-primary-500 {
-            background-color: var(--theme-primary) !important;
+        .text-primary-700,
+        .text-primary-500 {
+            color: #1E3A8A !important;
         }
         
-        body[class*="theme-"] .border-primary-700,
-        body[class*="theme-"] .border-primary-500 {
-            border-color: var(--theme-primary) !important;
+        .text-amber-600 {
+            color: #3b82f6 !important;
         }
         
-        body[class*="theme-"] .text-primary-700,
-        body[class*="theme-"] .text-primary-500 {
-            color: var(--theme-primary) !important;
+        header .from-primary-950\/70 {
+            --tw-gradient-from: rgba(15, 37, 64, 0.7) !important;
         }
         
-        body[class*="theme-"] .text-amber-600 {
-            color: var(--theme-light) !important;
+        header .via-primary-900\/50 {
+            --tw-gradient-to: rgba(15, 37, 64, 0.5) !important;
         }
         
-        body[class*="theme-"] header .from-primary-950\/70 {
-            --tw-gradient-from: rgba(var(--theme-primary-rgb), 0.7) !important;
+        .bg-primary-950 {
+            background-color: #0f2540 !important;
         }
         
-        body[class*="theme-"] header .via-primary-900\/50 {
-            --tw-gradient-to: rgba(var(--theme-primary-rgb), 0.5) !important;
+        /* Mobile menu colors */
+        #mobile-menu {
+            background-color: #0f2540 !important;
+            border-color: #1E3A8A !important;
         }
         
-        body[class*="theme-"] .bg-primary-950 {
-            background-color: var(--theme-darker) !important;
+        #mobile-menu a.border-b {
+            border-color: rgba(30, 58, 138, 0.5) !important;
         }
         
-        /* Mobile menu theme colors */
-        body[class*="theme-"] #mobile-menu {
-            background-color: var(--theme-darker) !important;
-            border-color: var(--theme-primary) !important;
+        #mobile-menu a:hover {
+            color: #3b82f6 !important;
         }
         
-        body[class*="theme-"] #mobile-menu a.border-b {
-            border-color: rgba(var(--theme-primary-rgb, 107, 91, 127), 0.5) !important;
-        }
-        
-        body[class*="theme-"] #mobile-menu a:hover {
-            color: var(--theme-light) !important;
-        }
-        
-        /* Keep amber colors unchanged across all themes for buttons and badges */
-        body[class*="theme-"] .bg-amber-500,
-        body.bg-amber-500 {
+        /* Keep amber colors unchanged for buttons and badges */
+        .bg-amber-500 {
             background-color: #fbbf24 !important;
         }
         
-        body[class*="theme-"] .hover\:bg-amber-600:hover,
-        body .hover\:bg-amber-600:hover {
+        .hover\:bg-amber-600:hover {
             background-color: #f59e0b !important;
         }
         
-        body[class*="theme-"] .text-white.bg-amber-500,
-        body .text-white.bg-amber-500 {
+        .text-white.bg-amber-500 {
             color: white !important;
         }
         
-        body[class*="theme-"] .border-amber-500,
-        body .border-amber-500 {
+        .border-amber-500 {
             border-color: #fbbf24 !important;
         }
         
-        body[class*="theme-"] .text-amber-500,
-        body .text-amber-500 {
+        .text-amber-500 {
             color: #fbbf24 !important;
         }
 
@@ -214,50 +157,6 @@
         @media (max-width: 768px) {
             .module-card { margin-left: 0 !important; margin-right: 0 !important; }
         }
-        
-        /* Fixed theme switcher button */
-        #theme-switcher-fixed {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        #theme-switcher-fixed button {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--theme-primary), var(--theme-darker));
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            border: 3px solid white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        #theme-switcher-fixed button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-        }
-        
-        #theme-switcher-fixed .theme-label {
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 1.5rem;
-            font-size: 0.875rem;
-            font-weight: 600;
-            white-space: nowrap;
-            opacity: 1;
-            pointer-events: none;
-            transition: all 0.3s ease;
-        }
 
         .dropdown { position: relative; }
         .dropdown-menu {
@@ -308,7 +207,7 @@
 </head>
 <body class="font-sans text-slate-800 bg-slate-50 antialiased transition-colors duration-700">
 
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4 bg-primary-950/95 backdrop-blur-sm shadow-lg text-white">
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4 bg-transparent text-white">
         <div class="container mx-auto px-6 flex justify-between items-center relative z-10">
             <!-- Logo (Desktop Only) -->
             <div class="hidden md:flex items-center gap-2">
@@ -318,14 +217,6 @@
                 <span id="nav-logo-text" class="text-2xl font-serif font-bold tracking-wide text-white">
                     Transpersonal Training
                 </span>
-            </div>
-
-            <!-- Theme Switcher (Mobile Only) -->
-            <div class="flex md:hidden items-center gap-2">
-                <button id="theme-btn-mobile" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors" title="Switch theme">
-                    <i data-lucide="palette" class="w-5 h-5"></i>
-                </button>
-                <span id="theme-name-mobile" class="text-sm font-medium text-white/90">School Lavender</span>
             </div>
 
             <!-- Desktop Menu -->
@@ -744,9 +635,6 @@
     <!-- Vine drawing script -->
     <script src="vine.js"></script>
     
-    <!-- Theme switcher script -->
-    <script src="theme-switcher.js"></script>
-    
     <script>
         lucide.createIcons();
 
@@ -761,25 +649,6 @@
             });
         }
 
-        // Fixed Theme Switcher
-        const themeBtnFixed = document.getElementById('theme-btn-fixed');
-        const themeNameFixed = document.getElementById('theme-label');
-
-        if (themeBtnFixed) {
-            themeBtnFixed.addEventListener('click', () => {
-                document.body.classList.toggle('theme-iris');
-                document.body.classList.toggle('theme-blue');
-                document.body.classList.toggle('theme-ocean');
-                document.body.classList.toggle('theme-forest');
-                document.body.classList.toggle('theme-earth');
-                document.body.classList.toggle('theme-alchemy');
-
-                // Update theme name label
-                const currentTheme = Array.from(document.body.classList).find(cls => cls.startsWith('theme-'));
-                themeNameFixed.textContent = currentTheme ? currentTheme.replace('theme-', '').charAt(0).toUpperCase() + currentTheme.slice(1) : 'School Lavender';
-            });
-        }
-
         const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
         mobileMenuLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -787,6 +656,26 @@
                 mobileMenu.classList.remove('flex');
             });
         });
+        
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
+            const updateNavbar = () => {
+                if (window.scrollY > 50) {
+                    // On scroll - show solid background
+                    navbar.classList.remove('bg-transparent');
+                    navbar.style.backgroundColor = 'rgba(15, 37, 64, 0.95)';
+                    navbar.classList.add('backdrop-blur-sm', 'shadow-lg');
+                } else {
+                    // At top - make transparent
+                    navbar.classList.add('bg-transparent');
+                    navbar.style.backgroundColor = 'transparent';
+                    navbar.classList.remove('backdrop-blur-sm', 'shadow-lg');
+                }
+            };
+            updateNavbar();
+            window.addEventListener('scroll', updateNavbar);
+        }
     </script>
 </body>
 </html>

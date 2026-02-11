@@ -17,7 +17,7 @@ title: Our Teachers | Transpersonal Training
     .teacher-card:hover {
         transform: translateY(-8px);
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        border-color: var(--theme-primary, #4B0082);
+        border-color: var(--color-primary, #1E40AF);
     }
     
     .teacher-img {
@@ -44,8 +44,8 @@ title: Our Teachers | Transpersonal Training
     }
     
     .badge-core {
-        background: linear-gradient(135deg, #f59e0b, #d97706);
-        color: white;
+        background: linear-gradient(135deg, #FCD34D, #FBB03E);
+        color: #1E3A8A;
         padding: 0.25rem 0.75rem;
         border-radius: 1rem;
         font-size: 0.75rem;
@@ -54,7 +54,7 @@ title: Our Teachers | Transpersonal Training
     }
     
     .badge-guest {
-        background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        background: linear-gradient(135deg, #7C3AED, #6D28D9);
         color: white;
         padding: 0.25rem 0.75rem;
         border-radius: 1rem;
@@ -67,7 +67,7 @@ title: Our Teachers | Transpersonal Training
     .tab-navigation {
         display: flex;
         justify-content: center;
-        border-bottom: 2px solid #e2e8f0;
+        border-bottom: 2px solid #E5D4C1;
         margin-bottom: 1.5rem;
         gap: 0.5rem;
     }
@@ -77,7 +77,7 @@ title: Our Teachers | Transpersonal Training
         background: transparent;
         border: none;
         border-bottom: 3px solid transparent;
-        color: #64748b;
+        color: #8B8680;
         font-weight: 500;
         font-size: 0.95rem;
         cursor: pointer;
@@ -90,12 +90,12 @@ title: Our Teachers | Transpersonal Training
     }
     
     .tab-button:hover {
-        color: var(--theme-primary, #4B0082);
+        color: var(--color-primary, #1E40AF);
     }
     
     .tab-button.active {
-        color: var(--theme-primary, #4B0082);
-        border-bottom-color: var(--theme-primary, #4B0082);
+        color: var(--color-primary, #1E40AF);
+        border-bottom-color: var(--color-primary, #1E40AF);
     }
     
     .tab-content {
@@ -136,7 +136,7 @@ title: Our Teachers | Transpersonal Training
     }
     
     .tab-content ul li::marker {
-        color: var(--theme-primary, #4B0082);
+        color: var(--color-primary, #1E40AF);
     }
 </style>
 
@@ -148,18 +148,18 @@ title: Our Teachers | Transpersonal Training
             alt="Teaching and learning" 
             class="w-full h-full object-cover"
         />
-        <div class="absolute inset-0 bg-gradient-to-b from-indigo-950/70 via-indigo-900/50 to-slate-50"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-science-blue-900/70 via-science-blue-800/50 to-neutral-warm-50"></div>
     </div>
 
     <div class="relative z-10 container mx-auto px-6 text-center pt-20">
         <div class="animate-fade-in-up">
-            <span class="inline-block py-1 px-3 rounded-full bg-white/10 text-amber-300 backdrop-blur-md border border-white/20 text-sm font-medium mb-6 tracking-wider uppercase">
+            <span class="inline-block py-1 px-3 rounded-full bg-white/10 text-warm-yellow-200 backdrop-blur-md border border-white/20 text-sm font-medium mb-6 tracking-wider uppercase">
                 Our Faculty
             </span>
             <h1 class="text-3xl md:text-5xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-lg">
                 Meet Our Teachers
             </h1>
-            <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
+            <p class="text-xl md:text-2xl text-neutral-warm-200 max-w-3xl mx-auto font-light leading-relaxed">
                 Experienced professionals bringing East and West together in transpersonal knowledge
             </p>
         </div>
@@ -171,10 +171,10 @@ title: Our Teachers | Transpersonal Training
     <div class="container mx-auto px-6">
         <div class="text-center max-w-3xl mx-auto mb-16">
             <div class="inline-flex items-center gap-2 mb-4">
-                <i data-lucide="star" class="w-8 h-8 text-amber-500"></i>
-                <h2 class="text-4xl font-serif font-bold text-indigo-950">Core Teachers</h2>
+                <i data-lucide="star" class="w-8 h-8 text-warm-yellow-500"></i>
+                <h2 class="text-4xl font-serif font-bold text-indigo-deep-900">Core Teachers</h2>
             </div>
-            <p class="text-indigo-900/70 text-lg">The heart of our training program, bringing decades of experience in transpersonal psychotherapy and breathwork</p>
+            <p class="text-indigo-deep-900/70 text-lg">The heart of our training program, bringing decades of experience in transpersonal psychotherapy and breathwork</p>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -186,11 +186,11 @@ title: Our Teachers | Transpersonal Training
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-2">
                         <span class="badge-core">Core Teacher</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-indigo-400 bio-icon"></i>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-science-blue-400 bio-icon"></i>
                     </div>
-                    <h3 class="text-2xl font-serif font-bold text-indigo-950 mb-1">{{ teacher.name }}</h3>
-                    <p class="text-amber-600 font-medium mb-3">{{ teacher.role }}</p>
-                    <p class="text-slate-600 text-sm">{{ teacher.credentials }}</p>
+                    <h3 class="text-2xl font-serif font-bold text-indigo-deep-900 mb-1">{{ teacher.name }}</h3>
+                    <p class="text-warm-yellow-600 font-medium mb-3">{{ teacher.role }}</p>
+                    <p class="text-neutral-warm-600 text-sm">{{ teacher.credentials }}</p>
                 </div>
                 <div class="teacher-bio">
                     <!-- Tab Navigation -->
@@ -211,7 +211,7 @@ title: Our Teachers | Transpersonal Training
                     
                     <!-- Biography Tab -->
                     <div id="bio-{{ teacher.id }}" class="tab-content active">
-                        <div class="prose prose-sm max-w-none text-slate-700">
+                        <div class="prose prose-sm max-w-none text-neutral-warm-700">
                             {% if teacher.bio %}
                                 {{ teacher.bio | markdown | safe }}
                             {% else %}
@@ -220,7 +220,7 @@ title: Our Teachers | Transpersonal Training
                         </div>
                         {% if teacher.website %}
                         <div class="mt-4">
-                            <a href="{{ teacher.website }}" target="_blank" class="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 font-medium">
+                            <a href="{{ teacher.website }}" target="_blank" class="inline-flex items-center gap-2 text-warm-yellow-600 hover:text-warm-yellow-700 font-medium">
                                 <i data-lucide="globe" class="w-4 h-4"></i>
                                 {{ teacher.website | replace('https://', '') | replace('http://', '') | replace('www.', '') | truncate(30) }}
                             </a>
@@ -230,7 +230,7 @@ title: Our Teachers | Transpersonal Training
                     
                     <!-- Training Tab -->
                     <div id="training-{{ teacher.id }}" class="tab-content">
-                        <div class="prose prose-sm max-w-none text-slate-700">
+                        <div class="prose prose-sm max-w-none text-neutral-warm-700">
                             {% if teacher.credentials_detail %}
                                 {{ teacher.credentials_detail | markdown | safe }}
                             {% else %}
@@ -241,7 +241,7 @@ title: Our Teachers | Transpersonal Training
                     
                     <!-- Practice Tab -->
                     <div id="practice-{{ teacher.id }}" class="tab-content">
-                        <div class="prose prose-sm max-w-none text-slate-700">
+                        <div class="prose prose-sm max-w-none text-neutral-warm-700">
                             {% if teacher.experience %}
                                 {{ teacher.experience | markdown | safe }}
                             {% elif teacher.publications %}
@@ -259,14 +259,14 @@ title: Our Teachers | Transpersonal Training
 </section>
 
 <!-- Guest Teachers Section -->
-<section class="py-24 bg-slate-50">
+<section class="py-24 bg-neutral-warm-50">
     <div class="container mx-auto px-6">
         <div class="text-center max-w-3xl mx-auto mb-16">
             <div class="inline-flex items-center gap-2 mb-4">
-                <i data-lucide="users" class="w-8 h-8 text-purple-600"></i>
-                <h2 class="text-4xl font-serif font-bold text-indigo-950">Methodology Guest Teachers</h2>
+                <i data-lucide="users" class="w-8 h-8 text-violet-600"></i>
+                <h2 class="text-4xl font-serif font-bold text-indigo-deep-900">Methodology Guest Teachers</h2>
             </div>
-            <p class="text-indigo-900/70 text-lg">International experts sharing specialized knowledge and diverse methodologies</p>
+            <p class="text-indigo-deep-900/70 text-lg">International experts sharing specialized knowledge and diverse methodologies</p>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -278,10 +278,10 @@ title: Our Teachers | Transpersonal Training
                 <div class="p-4">
                     <div class="flex items-center justify-between mb-2">
                         <span class="badge-guest">Guest</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-purple-400 bio-icon"></i>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-violet-400 bio-icon"></i>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-indigo-950 mb-1">{{ teacher.name }}</h3>
-                    <p class="text-purple-600 font-medium text-sm">{{ teacher.location }}</p>
+                    <h3 class="text-lg font-serif font-bold text-indigo-deep-900 mb-1">{{ teacher.name }}</h3>
+                    <p class="text-violet-600 font-medium text-sm">{{ teacher.location }}</p>
                 </div>
                 <div class="teacher-bio">
                     <!-- Tab Navigation -->
@@ -302,7 +302,7 @@ title: Our Teachers | Transpersonal Training
                     
                     <!-- Biography Tab -->
                     <div id="bio-{{ teacher.id }}" class="tab-content active">
-                        <div class="prose prose-sm max-w-none text-slate-700">
+                        <div class="prose prose-sm max-w-none text-neutral-warm-700">
                             {% if teacher.bio %}
                                 {{ teacher.bio | markdown | safe }}
                             {% else %}
@@ -313,7 +313,7 @@ title: Our Teachers | Transpersonal Training
                     
                     <!-- Training Tab -->
                     <div id="training-{{ teacher.id }}" class="tab-content">
-                        <div class="prose prose-sm max-w-none text-slate-700">
+                        <div class="prose prose-sm max-w-none text-neutral-warm-700">
                             {% if teacher.credentials_detail %}
                                 {{ teacher.credentials_detail | markdown | safe }}
                             {% else %}
@@ -324,7 +324,7 @@ title: Our Teachers | Transpersonal Training
                     
                     <!-- Practice Tab -->
                     <div id="practice-{{ teacher.id }}" class="tab-content">
-                        <div class="prose prose-sm max-w-none text-slate-700">
+                        <div class="prose prose-sm max-w-none text-neutral-warm-700">
                             {% if teacher.experience %}
                                 {{ teacher.experience | markdown | safe }}
                             {% elif teacher.publications %}
@@ -342,18 +342,17 @@ title: Our Teachers | Transpersonal Training
 </section>
 
 <!-- CTA Section -->
-<section class="py-24 bg-gradient-to-br from-indigo-950 via-purple-900 to-indigo-900 text-white relative overflow-hidden">
+<section class="py-24 bg-gradient-to-br from-science-blue-900 via-violet-900 to-science-blue-800 text-white relative overflow-hidden">
     <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-0 left-0 w-96 h-96 bg-amber-500 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 right-0 w-96 h-96 bg-teal-500 rounded-full blur-3xl"></div>
-    </div>
+        <div class="absolute top-0 left-0 w-96 h-96 bg-warm-yellow-400 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-accent-teal-400 rounded-full blur-3xl"></div>
 
     <div class="container mx-auto px-6 text-center relative z-10">
         <h2 class="text-4xl md:text-5xl font-serif font-bold mb-6">Learn from the Best</h2>
-        <p class="text-xl text-indigo-200 max-w-2xl mx-auto mb-10">
+        <p class="text-xl text-science-blue-200 max-w-2xl mx-auto mb-10">
             Join our internationally recognized training program and study with experienced teachers from around the world
         </p>
-        <a href="/#contact" class="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all hover:scale-105 shadow-xl">
+        <a href="/#contact" class="inline-flex items-center gap-2 bg-white hover:bg-slate-100 text-science-blue-900 px-8 py-4 rounded-full font-semibold text-lg transition-all hover:scale-105 shadow-xl">
             <span>Apply to Our Program</span>
             <i data-lucide="arrow-right" class="w-5 h-5"></i>
         </a>

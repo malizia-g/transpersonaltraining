@@ -5,11 +5,6 @@
     transition: all 0.3s ease;
 }
 
-body[class*="theme-"] #navbar.bg-indigo-950\/95,
-body[class*="theme-"] #navbar.bg-indigo-950\/95 { 
-    background-color: var(--theme-darker) !important; 
-}
-
 /* Mobile menu theme colors */
 body[class*="theme-"] #mobile-menu {
     background-color: var(--theme-darker) !important;
