@@ -1,14 +1,110 @@
 ---
 layout: base.njk
-title: "Our Training"
+title: "Training Program"
 ---
+
+<style>
+    .level-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .level-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    }
+    .level-badge {
+        letter-spacing: 0.1em;
+    }
+    /* Accordion collapse/expand */
+    .level-content {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                    opacity 0.4s ease,
+                    margin 0.4s ease;
+        margin-top: 0;
+    }
+    .level-content.expanded {
+        max-height: 5000px;
+        opacity: 1;
+        margin-top: 2rem;
+    }
+    .level-toggle {
+        cursor: pointer;
+        user-select: none;
+    }
+    .level-toggle:hover {
+        opacity: 0.9;
+    }
+    .toggle-icon {
+        transition: transform 0.3s ease;
+    }
+    .toggle-icon.rotated {
+        transform: rotate(180deg);
+    }
+    .module-count {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-weight: 600;
+    }
+    .req-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    .req-check {
+        color: #16a34a;
+        font-weight: 700;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    /* Vine styles */
+    .curriculum-vine-wrapper {
+        position: relative;
+    }
+    .curriculum-vine-svg {
+        position: absolute;
+        top: 0;
+        left: 12px;
+        width: 70px;
+        height: 100%;
+        pointer-events: none;
+        z-index: 5;
+        overflow: visible;
+    }
+    .vine-trunk {
+        fill: none;
+        stroke: #5D4037;
+        stroke-width: 3.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.15));
+    }
+    .vine-curr-branch {
+        fill: none;
+        stroke: #5D4037;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        filter: drop-shadow(0.5px 0.5px 1px rgba(0,0,0,0.1));
+    }
+    .vine-curr-leaf {
+        filter: drop-shadow(0.5px 1px 1px rgba(0,0,0,0.15));
+    }
+    @media (max-width: 768px) {
+        .curriculum-vine-svg {
+            display: none;
+        }
+    }
+</style>
 
 <!-- Hero Section -->
 <header class="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 z-0">
         <img 
-            src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=2000&q=80" 
-            alt="Learning and education" 
+            src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=2000&q=80" 
+            alt="Journey landscape" 
             class="w-full h-full object-cover"
         />
         <div class="absolute inset-0 bg-gradient-to-b from-science-blue-900/70 via-science-blue-800/50 to-neutral-warm-50"></div>
@@ -17,108 +113,654 @@ title: "Our Training"
     <div class="relative z-10 container mx-auto px-6 text-center pt-20">
         <div class="animate-fade-in-up">
             <span class="inline-block py-1 px-3 rounded-full bg-white/10 text-warm-yellow-200 backdrop-blur-md border border-white/20 text-sm font-medium mb-6 tracking-wider uppercase">
-                Training Programs
+                3 Levels • 500+ Hours
             </span>
             <h1 class="text-3xl md:text-5xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-lg">
-                Our Training
+                Training Program
             </h1>
             <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
-                Comprehensive pathways in transpersonal psychotherapy and breathwork psychotechnology
+                A progressive journey from self-development through professional facilitation to advanced transpersonal psychotherapy and Holotropic Breathwork practice.
             </p>
         </div>
     </div>
 </header>
 
-<!-- Program Section -->
-<section id="program" class="py-24 bg-science-blue-900 text-white relative overflow-hidden">
-    <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
-        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-warm-yellow-400 blur-3xl"></div>
-        <div class="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-accent-teal-400 blur-3xl"></div>
-    </div>
-
-    <div class="container mx-auto px-6 relative z-10">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-4xl font-serif font-bold mb-4">Program Pathways</h2>
-            <p class="text-science-blue-200 text-lg">Hybrid training that blends online learning, in-person intensives, and mentored practice.</p>
+<!-- Breadcrumb -->
+<div class="bg-white border-b border-neutral-warm-200">
+    <div class="container mx-auto px-6 py-4">
+        <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
+            <a href="/" class="hover:text-science-blue-600 transition-colors">Home</a>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <span class="text-science-blue-800 font-medium">Training</span>
         </div>
+    </div>
+</div>
 
-        <div class="grid md:grid-cols-3 gap-8">
-            <!-- West Program -->
-            <div class="bg-science-blue-800/50 backdrop-blur-sm border border-science-blue-700 p-8 rounded-2xl hover:bg-science-blue-800 transition-all hover:-translate-y-2 group cursor-pointer relative">
-                <div class="absolute top-0 right-0 bg-warm-yellow-400 text-science-blue-900 text-xs font-bold px-3 py-1 rounded-bl-lg">EUROTAS</div>
-                <div class="mb-6 bg-science-blue-900 w-16 h-16 rounded-xl flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform">
-                    <i data-lucide="compass" class="w-8 h-8 text-warm-yellow-400"></i>
+<!-- Training Philosophy -->
+<section class="py-16 bg-white relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-5 pointer-events-none">
+        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-science-blue-400 blur-3xl"></div>
+    </div>
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="bg-science-blue-600 text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-md">
+                    <i data-lucide="heart-handshake" class="w-6 h-6"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-1">West Program 2024–2027</h3>
-                <p class="text-warm-yellow-300 text-sm font-medium mb-4 uppercase tracking-wider">Hybrid • Online + Germany</p>
-                <div class="flex items-center gap-2 text-science-blue-200 text-sm mb-4">
-                    <i data-lucide="calendar" class="w-4 h-4"></i>
-                    13 modules • 3 years
-                </div>
-                <p class="text-indigo-200 leading-relaxed mb-8">
-                    Weekly 120-minute lectures, peer forums, and in-person intensives in Germany. Join on schedule or contact us to enter later in the cohort.
-                </p>
-                <a href="/hero_journey.html" class="inline-flex items-center text-white font-medium hover:text-warm-yellow-300 transition-colors">
-                    View Curriculum <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
-                </a>
+                <h2 class="text-2xl md:text-3xl font-serif font-bold text-slate-800">Training Philosophy</h2>
             </div>
+            <p class="text-gray-700 text-lg leading-relaxed">
+                We recognize that healing and consciousness development require integration of psychotherapeutic expertise with understanding of transpersonal dimensions of human experience. Our training prepares practitioners who are capable of working with clients across the full spectrum of psychological and spiritual needs; from symptom relief to consciousness expansion and authentic self-realization. This requires synchronized development of rigorous psychotherapeutic skills and deep personal understanding of different states of consciousness.
+            </p>
+        </div>
+    </div>
+</section>
 
-            <!-- East Program -->
-            <div class="bg-science-blue-800/50 backdrop-blur-sm border border-science-blue-700 p-8 rounded-2xl hover:bg-science-blue-800 transition-all hover:-translate-y-2 group cursor-pointer relative">
-                <div class="absolute top-0 right-0 bg-warm-yellow-400 text-science-blue-900 text-xs font-bold px-3 py-1 rounded-bl-lg">EUROTAS</div>
-                <div class="mb-6 bg-science-blue-900 w-16 h-16 rounded-xl flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform">
-                    <i data-lucide="map" class="w-8 h-8 text-science-blue-200"></i>
+<!-- Program Overview -->
+<section class="py-16 bg-neutral-warm-50 relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-5 pointer-events-none">
+        <div class="absolute bottom-0 -left-24 w-96 h-96 rounded-full bg-accent-teal-400 blur-3xl"></div>
+    </div>
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="bg-accent-teal-500 text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-md">
+                    <i data-lucide="compass" class="w-6 h-6"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-1">East Program 2021–2025</h3>
-                <p class="text-warm-yellow-300 text-sm font-medium mb-4 uppercase tracking-wider">Hybrid • Eastern Europe</p>
-                <div class="flex items-center gap-2 text-science-blue-200 text-sm mb-4">
-                    <i data-lucide="calendar" class="w-4 h-4"></i>
-                    Closing cohort
-                </div>
-                <p class="text-indigo-200 leading-relaxed mb-8">
-                    A blended path with intensives in Moldova and regional partner sites. Ask about spaces, make-ups, and breathwork seminars with our faculty.
-                </p>
-                <a href="https://transpersonal-training.com/program/" class="inline-flex items-center text-white font-medium hover:text-warm-yellow-300 transition-colors">
-                    Program Overview <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
-                </a>
+                <h2 class="text-2xl md:text-3xl font-serif font-bold text-slate-800">Program Overview</h2>
             </div>
-
-            <!-- Breathwork Intensives -->
-            <div class="bg-science-blue-800/50 backdrop-blur-sm border border-science-blue-700 p-8 rounded-2xl hover:bg-science-blue-800 transition-all hover:-translate-y-2 group cursor-pointer">
-                <div class="mb-6 bg-science-blue-900 w-16 h-16 rounded-xl flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform">
-                    <i data-lucide="sun" class="w-8 h-8 text-accent-teal-400"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-1">Intensives & Practice</h3>
-                <p class="text-warm-yellow-300 text-sm font-medium mb-4 uppercase tracking-wider">Breathwork & Supervision</p>
-                <div class="flex items-center gap-2 text-science-blue-200 text-sm mb-4">
-                    <i data-lucide="clock-4" class="w-4 h-4"></i>
-                    4-day immersions • Summer school
-                </div>
-                <p class="text-indigo-200 leading-relaxed mb-8">
-                    Breathwork psychotechnology, shamanic journeying, gestalt, bodywork, and integrative techniques. Includes breather + sitter roles and supervised practice.
+            <div class="space-y-5">
+                <p class="text-gray-700 text-lg leading-relaxed">
+                    Our postgraduate program in transpersonal psychotherapy training represents a holistic approach to developing professional competence in transpersonal psychotherapy and Holotropic Breathwork. This program is designed not only for mental health professionals, educators, and practitioners but as well as, individuals motivated for self-development who are seeking to deepen their theoretical understanding and psychotherapeutic application of transpersonal psychology; a field that recognizes the spiritual dimension as integral to healing, psychological well-being and self-development.
                 </p>
-                <a href="https://transpersonal-training.com/participate/" class="inline-flex items-center text-white font-medium hover:text-warm-yellow-300 transition-colors">
-                    Join a Seminar <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
-                </a>
+                <p class="text-gray-700 text-lg leading-relaxed">
+                    Transpersonal psychotherapy training integrates contemporary research in psychology with established wisdom traditions, creating a comprehensive framework for understanding human consciousness, transformation, and healing. Our approach to holistic therapy acknowledges that self-development is not relying on symptomatic relief alone, but rather a process of psychological maturation and spiritual awakening that supports individuals steering through their hero journey; the archetypal process of personal transformation and growth.
+                </p>
             </div>
         </div>
     </div>
 </section>
 
+<!-- Divider -->
+<div class="border-t border-slate-200"></div>
+
+<div class="curriculum-vine-wrapper" id="curriculumWrapper">
+    <svg class="curriculum-vine-svg" id="curriculumVineSvg" xmlns="http://www.w3.org/2000/svg">
+        <g id="vineBranches"></g>
+        <path id="vineTrunk" class="vine-trunk" d=""/>
+        <g id="vineLeaves"></g>
+    </svg>
+
+<!-- Level 1: Foundation Level Training -->
+<section class="py-12 bg-white relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-5 pointer-events-none">
+        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-accent-teal-400 blur-3xl"></div>
+    </div>
+
+    <div class="container mx-auto px-6 relative z-10">
+        <!-- Level Header (Toggle) -->
+        <div class="level-toggle flex items-center gap-4" onclick="toggleLevel('level1')">
+            <div class="bg-accent-teal-500 text-white w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0">
+                <i data-lucide="sprout" class="w-8 h-8"></i>
+            </div>
+            <div class="flex-1">
+                <span class="level-badge text-xs font-bold uppercase text-accent-teal-600 block mb-1">Level 1 — Foundation</span>
+                <h2 class="text-2xl md:text-3xl font-serif font-bold text-slate-800">Self-Development & Consciousness Exploration</h2>
+                <p class="text-sm text-gray-500 mt-1">100 hours · 12 months · Open to All</p>
+            </div>
+            <div class="flex items-center gap-3 flex-shrink-0">
+                <span class="module-count bg-accent-teal-100 text-accent-teal-700 hidden sm:inline-block">4 areas</span>
+                <i data-lucide="chevron-down" class="w-6 h-6 text-accent-teal-500 toggle-icon" id="level1-icon"></i>
+            </div>
+        </div>
+
+        <!-- Collapsible Content -->
+        <div class="level-content" id="level1">
+            <div class="grid md:grid-cols-2 gap-8">
+
+                <!-- Experiential Learning -->
+                <div class="level-card bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 min-w-[2.75rem] rounded-full bg-accent-teal-500 text-white flex items-center justify-center shadow-md flex-shrink-0">
+                            <i data-lucide="activity" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif font-bold text-slate-800 text-lg mb-3">Experiential Learning</h3>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li class="flex gap-2"><span class="text-accent-teal-500 font-bold">•</span> Daily practice (20 mins daily breathwork, meditation, etc.)</li>
+                                <li class="flex gap-2"><span class="text-accent-teal-500 font-bold">•</span> Personal breathwork sessions (minimum 10 sessions)</li>
+                                <li class="flex gap-2"><span class="text-accent-teal-500 font-bold">•</span> Group consciousness work (minimum 2 sessions)</li>
+                                <li class="flex gap-2"><span class="text-accent-teal-500 font-bold">•</span> Shadow work introductory (minimum 5 sessions)</li>
+                                <li class="flex gap-2"><span class="text-accent-teal-500 font-bold">•</span> Peer facilitation practice (weekly)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Development -->
+                <div class="level-card bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 min-w-[2.75rem] rounded-full bg-accent-teal-500 text-white flex items-center justify-center shadow-md flex-shrink-0">
+                            <i data-lucide="book-open" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif font-bold text-slate-800 text-lg mb-3">Skills Development</h3>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li class="flex gap-2"><span class="text-accent-teal-500 font-bold">•</span> Transpersonal psychology foundations</li>
+                                <li class="flex gap-2"><span class="text-accent-teal-500 font-bold">•</span> History of Psychedelics</li>
+                                <li class="flex gap-2"><span class="text-accent-teal-500 font-bold">•</span> Consciousness state understanding</li>
+                                <li class="flex gap-2"><span class="text-accent-teal-500 font-bold">•</span> Basic breathwork facilitation</li>
+                                <li class="flex gap-2"><span class="text-accent-teal-500 font-bold">•</span> Spiritual crisis recognition</li>
+                                <li class="flex gap-2"><span class="text-accent-teal-500 font-bold">•</span> Group support presence</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning Outcomes -->
+                <div class="level-card bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 min-w-[2.75rem] rounded-full bg-accent-teal-500 text-white flex items-center justify-center shadow-md flex-shrink-0">
+                            <i data-lucide="target" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif font-bold text-slate-800 text-lg mb-3">Learning Outcomes</h3>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li class="flex gap-2"><span class="text-accent-teal-500 font-bold">•</span> Understand transpersonal psychology theory</li>
+                                <li class="flex gap-2"><span class="text-accent-teal-500 font-bold">•</span> Experience consciousness states personally</li>
+                                <li class="flex gap-2"><span class="text-accent-teal-500 font-bold">•</span> Recognize spiritual vs. pathological</li>
+                                <li class="flex gap-2"><span class="text-accent-teal-500 font-bold">•</span> Facilitate basic group breathwork</li>
+                                <li class="flex gap-2"><span class="text-accent-teal-500 font-bold">•</span> Establish personal practice</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Development & Supervision Requirements -->
+                <div class="level-card bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 min-w-[2.75rem] rounded-full bg-accent-teal-500 text-white flex items-center justify-center shadow-md flex-shrink-0">
+                            <i data-lucide="clipboard-check" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif font-bold text-slate-800 text-lg mb-3">Personal Development & Supervision</h3>
+                            <ul class="text-gray-600 text-sm space-y-2.5">
+                                <li class="req-item"><span class="req-check">✓</span> Personal psychotherapy: 10 sessions (transpersonal approach)</li>
+                                <li class="req-item"><span class="req-check">✓</span> Breathwork experience: 10 sessions</li>
+                                <li class="req-item"><span class="req-check">✓</span> Supervision: 10 hours (group supervision)</li>
+                                <li class="req-item"><span class="req-check">✓</span> Personal development: 20 hours (workshops, online courses, reading)</li>
+                                <li class="req-item"><span class="req-check">✓</span> Meditation practice: Documented daily practice</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Divider -->
+<div class="border-t border-slate-200"></div>
+
+<!-- Level 2: Intermediate Level Training -->
+<section class="py-12 bg-neutral-warm-50 relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-5 pointer-events-none">
+        <div class="absolute bottom-0 -left-24 w-96 h-96 rounded-full bg-science-blue-400 blur-3xl"></div>
+    </div>
+
+    <div class="container mx-auto px-6 relative z-10">
+        <!-- Level Header (Toggle) -->
+        <div class="level-toggle flex items-center gap-4" onclick="toggleLevel('level2')">
+            <div class="bg-science-blue-600 text-white w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0">
+                <i data-lucide="users" class="w-8 h-8"></i>
+            </div>
+            <div class="flex-1">
+                <span class="level-badge text-xs font-bold uppercase text-science-blue-600 block mb-1">Level 2 — Intermediate</span>
+                <h2 class="text-2xl md:text-3xl font-serif font-bold text-slate-800">Counselling Skills & Professional Facilitation</h2>
+                <p class="text-sm text-gray-500 mt-1">200 hours · 18 months · Counsellors & Coaches</p>
+            </div>
+            <div class="flex items-center gap-3 flex-shrink-0">
+                <span class="module-count bg-science-blue-100 text-science-blue-700 hidden sm:inline-block">4 areas</span>
+                <i data-lucide="chevron-down" class="w-6 h-6 text-science-blue-500 toggle-icon" id="level2-icon"></i>
+            </div>
+        </div>
+
+        <!-- Collapsible Content -->
+        <div class="level-content" id="level2">
+            <div class="grid md:grid-cols-2 gap-8">
+
+                <!-- Experiential Learning -->
+                <div class="level-card bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 min-w-[2.75rem] rounded-full bg-science-blue-600 text-white flex items-center justify-center shadow-md flex-shrink-0">
+                            <i data-lucide="activity" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif font-bold text-slate-800 text-lg mb-3">Experiential Learning</h3>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li class="flex gap-2"><span class="text-science-blue-500 font-bold">•</span> Personal breathwork sessions (minimum 15)</li>
+                                <li class="flex gap-2"><span class="text-science-blue-500 font-bold">•</span> Professional case consultation</li>
+                                <li class="flex gap-2"><span class="text-science-blue-500 font-bold">•</span> Group facilitation practice</li>
+                                <li class="flex gap-2"><span class="text-science-blue-500 font-bold">•</span> Shadow work intensive</li>
+                                <li class="flex gap-2"><span class="text-science-blue-500 font-bold">•</span> Supervised clinical practice (30+ hours)</li>
+                                <li class="flex gap-2"><span class="text-science-blue-500 font-bold">•</span> Personal psychotherapy (minimum 15 sessions)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Development -->
+                <div class="level-card bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 min-w-[2.75rem] rounded-full bg-science-blue-600 text-white flex items-center justify-center shadow-md flex-shrink-0">
+                            <i data-lucide="book-open" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif font-bold text-slate-800 text-lg mb-3">Skills Development</h3>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li class="flex gap-2"><span class="text-science-blue-500 font-bold">•</span> Foundational clinical theories (psychodynamic, somatic, etc.)</li>
+                                <li class="flex gap-2"><span class="text-science-blue-500 font-bold">•</span> Transpersonal counselling techniques</li>
+                                <li class="flex gap-2"><span class="text-science-blue-500 font-bold">•</span> Professional breathwork facilitation</li>
+                                <li class="flex gap-2"><span class="text-science-blue-500 font-bold">•</span> Spiritual crisis assessment</li>
+                                <li class="flex gap-2"><span class="text-science-blue-500 font-bold">•</span> Group and individual facilitation</li>
+                                <li class="flex gap-2"><span class="text-science-blue-500 font-bold">•</span> Professional ethical practice</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning Outcomes -->
+                <div class="level-card bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 min-w-[2.75rem] rounded-full bg-science-blue-600 text-white flex items-center justify-center shadow-md flex-shrink-0">
+                            <i data-lucide="target" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif font-bold text-slate-800 text-lg mb-3">Learning Outcomes</h3>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li class="flex gap-2"><span class="text-science-blue-500 font-bold">•</span> Facilitate professional counselling sessions</li>
+                                <li class="flex gap-2"><span class="text-science-blue-500 font-bold">•</span> Independently facilitate breathwork</li>
+                                <li class="flex gap-2"><span class="text-science-blue-500 font-bold">•</span> Assess spiritual crisis accurately</li>
+                                <li class="flex gap-2"><span class="text-science-blue-500 font-bold">•</span> Integrate transpersonal in practice</li>
+                                <li class="flex gap-2"><span class="text-science-blue-500 font-bold">•</span> Maintain professional ethics</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Development & Supervision Requirements -->
+                <div class="level-card bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 min-w-[2.75rem] rounded-full bg-science-blue-600 text-white flex items-center justify-center shadow-md flex-shrink-0">
+                            <i data-lucide="clipboard-check" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif font-bold text-slate-800 text-lg mb-3">Personal Development & Supervision</h3>
+                            <ul class="text-gray-600 text-sm space-y-2.5">
+                                <li class="req-item"><span class="req-check">✓</span> Personal psychotherapy: 15 sessions (cumulative: 25 total)</li>
+                                <li class="req-item"><span class="req-check">✓</span> Breathwork experience: 15 sessions (cumulative: 25 total)</li>
+                                <li class="req-item"><span class="req-check">✓</span> Supervision: 50 hours (individual + group supervision)</li>
+                                <li class="req-item"><span class="req-check">✓</span> Personal development: 60 hours (workshops, conferences, retreat)</li>
+                                <li class="req-item"><span class="req-check">✓</span> Client contact hours: 30+ hours documented</li>
+                                <li class="req-item"><span class="req-check">✓</span> Breathwork facilitation: 20+ sessions documented with feedback</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Divider -->
+<div class="border-t border-slate-200"></div>
+
+<!-- Level 3: Advanced Level Training -->
+<section class="py-12 bg-white relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-5 pointer-events-none">
+        <div class="absolute -top-24 right-0 w-96 h-96 rounded-full bg-warm-yellow-300 blur-3xl"></div>
+    </div>
+
+    <div class="container mx-auto px-6 relative z-10">
+        <!-- Level Header (Toggle) -->
+        <div class="level-toggle flex items-center gap-4" onclick="toggleLevel('level3')">
+            <div class="bg-amber-500 text-white w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0">
+                <i data-lucide="graduation-cap" class="w-8 h-8"></i>
+            </div>
+            <div class="flex-1">
+                <span class="level-badge text-xs font-bold uppercase text-amber-600 block mb-1">Level 3 — Advanced</span>
+                <h2 class="text-2xl md:text-3xl font-serif font-bold text-slate-800">Transpersonal Psychotherapy & Holotropic Breathwork Practitioner</h2>
+                <p class="text-sm text-gray-500 mt-1">200+ hours · 18+ months · Mental Health Professionals, Psychotherapists</p>
+            </div>
+            <div class="flex items-center gap-3 flex-shrink-0">
+                <span class="module-count bg-amber-100 text-amber-700 hidden sm:inline-block">4 areas</span>
+                <i data-lucide="chevron-down" class="w-6 h-6 text-amber-500 toggle-icon" id="level3-icon"></i>
+            </div>
+        </div>
+
+        <!-- Collapsible Content -->
+        <div class="level-content" id="level3">
+            <div class="grid md:grid-cols-2 gap-8">
+
+                <!-- Experiential Learning -->
+                <div class="level-card bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 min-w-[2.75rem] rounded-full bg-amber-500 text-white flex items-center justify-center shadow-md flex-shrink-0">
+                            <i data-lucide="activity" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif font-bold text-slate-800 text-lg mb-3">Experiential Learning</h3>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Personal breathwork sessions (minimum 20 sessions)</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Supervised clinical practice (90+ hours)</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Advanced facilitation (10 session facilitation or floating with supervision)</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Personal psychotherapy (minimum 25 sessions)</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Research/writing project</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Development -->
+                <div class="level-card bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 min-w-[2.75rem] rounded-full bg-amber-500 text-white flex items-center justify-center shadow-md flex-shrink-0">
+                            <i data-lucide="book-open" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif font-bold text-slate-800 text-lg mb-3">Skills Development</h3>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Advanced clinical theories & diagnosis</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Grof's consciousness cartography</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Complex trauma processing</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Psychiatric differential diagnosis</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Expert breathwork facilitation</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Clinical integration & synthesis</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Supervision and teaching capacity</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning Outcomes -->
+                <div class="level-card bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 min-w-[2.75rem] rounded-full bg-amber-500 text-white flex items-center justify-center shadow-md flex-shrink-0">
+                            <i data-lucide="target" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif font-bold text-slate-800 text-lg mb-3">Learning Outcomes</h3>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Clinical competence</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Advanced breathwork facilitation</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Assess trauma within transpersonal</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Distinguish spiritual from psychiatric</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Integrate multiple modalities</li>
+                                <li class="flex gap-2"><span class="text-amber-500 font-bold">•</span> Contribute to field development</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Development & Supervision Requirements -->
+                <div class="level-card bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 min-w-[2.75rem] rounded-full bg-amber-500 text-white flex items-center justify-center shadow-md flex-shrink-0">
+                            <i data-lucide="clipboard-check" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif font-bold text-slate-800 text-lg mb-3">Personal Development & Supervision</h3>
+                            <ul class="text-gray-600 text-sm space-y-2.5">
+                                <li class="req-item"><span class="req-check">✓</span> Personal psychotherapy: 25 sessions (cumulative: 50 total)</li>
+                                <li class="req-item"><span class="req-check">✓</span> Breathwork experience: 25 sessions (cumulative: 40 total)</li>
+                                <li class="req-item"><span class="req-check">✓</span> Supervision: 100 hours individual (cumulative: 150 total)</li>
+                                <li class="req-item"><span class="req-check">✓</span> Personal development: 70 hours conferences/retreats/courses (cumulative: 150 total)</li>
+                                <li class="req-item"><span class="req-check">✓</span> Client contact hours: 150+ hours documented</li>
+                                <li class="req-item"><span class="req-check">✓</span> Breathwork facilitation: 150+ hours documented</li>
+                                <li class="req-item"><span class="req-check">✓</span> Case presentations: 5+ complex cases</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+</div><!-- end curriculum-vine-wrapper -->
+
 <!-- CTA Section -->
-<section class="py-20 bg-neutral-warm-50 text-center">
-    <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-serif font-bold text-indigo-deep-900 mb-4">Ready to Begin Your Journey?</h2>
-        <p class="text-neutral-warm-700 max-w-2xl mx-auto mb-8 text-lg">
-            Explore our full curriculum and see how each module builds your expertise as a transpersonal practitioner.
-        </p>
+<section class="bg-science-blue-900 text-white py-16">
+    <div class="container mx-auto px-6 text-center">
+        <h2 class="text-2xl font-serif font-bold mb-4">Ready to begin?</h2>
+        <p class="text-science-blue-200 max-w-2xl mx-auto mb-8">Explore our curriculum in detail or get in touch to find the right entry point for you.</p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/schedule.html" class="bg-white hover:bg-slate-100 text-science-blue-900 text-lg px-8 py-4 rounded-full font-medium transition-all shadow-lg flex items-center justify-center gap-2 group">
-                View Schedule <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+            <a href="/curriculum/" class="inline-block bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 rounded-full font-bold transition-transform hover:scale-105 shadow-lg">
+                View Curriculum
             </a>
-            <a href="/#contact" class="bg-white hover:bg-slate-100 text-violet-700 text-lg px-8 py-4 rounded-full font-medium transition-all shadow-lg flex items-center justify-center">
+            <a href="/#contact" class="inline-block bg-white/10 hover:bg-white/20 text-white px-8 py-3 rounded-full font-bold transition-all border border-white/30">
                 Talk to Admissions
             </a>
         </div>
     </div>
 </section>
+
+<script>
+function toggleLevel(id) {
+    const content = document.getElementById(id);
+    const icon = document.getElementById(id + '-icon');
+    const isExpanded = content.classList.contains('expanded');
+
+    if (isExpanded) {
+        content.classList.remove('expanded');
+        icon.classList.remove('rotated');
+    } else {
+        content.classList.add('expanded');
+        icon.classList.add('rotated');
+    }
+
+    // Trigger vine animation
+    if (window._vineAnimate) window._vineAnimate();
+}
+
+// ── Vine (same logic as curriculum page) ──
+(function() {
+    var wrapper   = document.getElementById('curriculumWrapper');
+    var svg       = document.getElementById('curriculumVineSvg');
+    var trunk     = document.getElementById('vineTrunk');
+    var branchesG = document.getElementById('vineBranches');
+    var leavesG   = document.getElementById('vineLeaves');
+    if (!wrapper || !svg) return;
+
+    var leafColors = ['#7fb069', '#88a580', '#6b8e6b', '#8b9d83', '#759e75', '#6d8b6d', '#9db19d'];
+    var animFrameId = null;
+
+    // Random seed per page load, stable across redraws
+    var _pageSeed = Math.floor(Math.random() * 2147483646) + 1;
+    var _seed = _pageSeed;
+    function seededRandom() { _seed = (_seed * 16807) % 2147483647; return (_seed - 1) / 2147483646; }
+
+    function ns(tag) { return document.createElementNS('http://www.w3.org/2000/svg', tag); }
+
+    function getTargetY() {
+        var wRect = wrapper.getBoundingClientRect();
+        var targetY = 0;
+        var sections = wrapper.querySelectorAll(':scope > section');
+        sections.forEach(function(sec) {
+            var hdr = sec.querySelector('.level-toggle');
+            if (hdr) {
+                var r = hdr.getBoundingClientRect();
+                targetY = r.top - wRect.top + r.height / 2;
+            }
+            var cnt = sec.querySelector('.level-content');
+            if (cnt && cnt.classList.contains('expanded')) {
+                var cr = cnt.getBoundingClientRect();
+                if (cr.height > 2) {
+                    targetY = Math.max(targetY, cr.bottom - wRect.top);
+                }
+            }
+        });
+        return Math.max(targetY, 50);
+    }
+
+    function drawTrunk(targetY) {
+        var baseX = 32;
+        var startY = 10;
+        var segments = Math.max(4, Math.ceil((targetY - startY) / 50));
+        var d = 'M ' + baseX + ' ' + startY;
+        for (var i = 0; i < segments; i++) {
+            var t = (i + 1) / segments;
+            var segY = startY + t * (targetY - startY);
+            var waveAmp = 12 + Math.sin(i * 0.7) * 8;
+            var waveSide = (i % 2 === 0 ? 1 : -1);
+            var cpY = startY + (i + 0.5) / segments * (targetY - startY);
+            var cpX = baseX + waveSide * waveAmp;
+            d += ' Q ' + cpX + ' ' + cpY + ', ' + (baseX + Math.sin((i + 1) * 0.7) * 5) + ' ' + segY;
+        }
+        trunk.setAttribute('d', d);
+        trunk.setAttribute('stroke-width', '4');
+        trunk.setAttribute('opacity', '0.65');
+    }
+
+    function addSmallBranches(targetY) {
+        var pathLength = trunk.getTotalLength();
+        if (pathLength < 10) return;
+
+        branchesG.innerHTML = '';
+        leavesG.innerHTML = '';
+
+        var allBranches = [];
+        var numBranches = Math.max(3, Math.floor(pathLength / 120));
+
+        for (var i = 0; i < numBranches; i++) {
+            var position = seededRandom() * (pathLength - 40) + 20;
+            var startPoint = trunk.getPointAtLength(position);
+            var nextPoint  = trunk.getPointAtLength(Math.min(position + 5, pathLength));
+            var tangentAngle = Math.atan2(nextPoint.y - startPoint.y, nextPoint.x - startPoint.x);
+
+            var biasRight = seededRandom() < 0.75;
+            var angleOffset = biasRight
+                ? (-Math.PI / 3 + seededRandom() * (Math.PI / 3))
+                : (Math.PI / 6 + seededRandom() * (Math.PI / 3));
+            var branchAngle = tangentAngle + angleOffset;
+
+            var branchLength = 60 + seededRandom() * 100;
+
+            var loopIntensity = 0.3 + seededRandom() * 0.4;
+            var cp1x = startPoint.x + Math.cos(branchAngle) * branchLength * 0.3;
+            var cp1y = startPoint.y + Math.sin(branchAngle) * branchLength * 0.3 + (seededRandom() - 0.5) * 25;
+            var midX = startPoint.x + Math.cos(branchAngle) * branchLength * 0.5;
+            var midY = startPoint.y + Math.sin(branchAngle) * branchLength * 0.5;
+            var perpAngle = branchAngle + Math.PI / 2;
+            var loopOffset = loopIntensity * branchLength * 0.4;
+            var loopX = midX + Math.cos(perpAngle) * loopOffset;
+            var loopY = midY + Math.sin(perpAngle) * loopOffset;
+            var endX = startPoint.x + Math.cos(branchAngle) * branchLength;
+            var endY = startPoint.y + Math.sin(branchAngle) * branchLength;
+
+            var branch = ns('path');
+            branch.setAttribute('d', 'M ' + startPoint.x + ' ' + startPoint.y + ' Q ' + cp1x + ' ' + cp1y + ', ' + loopX + ' ' + loopY + ' T ' + endX + ' ' + endY);
+            branch.setAttribute('class', 'vine-curr-branch');
+            branch.setAttribute('stroke-width', '2.5');
+            branch.setAttribute('opacity', '0.75');
+            branchesG.appendChild(branch);
+            allBranches.push({ path: branch, weight: 0.6 });
+
+            var numTertiary = seededRandom() < 0.6 ? 1 : 0;
+            for (var j = 0; j < numTertiary; j++) {
+                var t = 0.4 + seededRandom() * 0.4;
+                var tsx = (1-t)*(1-t)*startPoint.x + 2*(1-t)*t*cp1x + t*t*loopX;
+                var tsy = (1-t)*(1-t)*startPoint.y + 2*(1-t)*t*cp1y + t*t*loopY;
+                var ttx = 2*(1-t)*(cp1x - startPoint.x) + 2*t*(loopX - cp1x);
+                var tty = 2*(1-t)*(cp1y - startPoint.y) + 2*t*(loopY - cp1y);
+                var tBaseAngle = Math.atan2(tty, ttx);
+                var tSide = seededRandom() > 0.5 ? 1 : -1;
+                var tAngle = tBaseAngle + (Math.PI / 5 + seededRandom() * Math.PI / 8) * tSide;
+                var tLen = 25 + seededRandom() * 40;
+                // S-curve: two control points for a smooth cubic bezier
+                var tCurveIntensity = 0.3 + seededRandom() * 0.35;
+                var tCp1x = tsx + Math.cos(tAngle) * tLen * 0.35;
+                var tCp1y = tsy + Math.sin(tAngle) * tLen * 0.35 + (seededRandom() - 0.5) * 15;
+                var tMidX = tsx + Math.cos(tAngle) * tLen * 0.55;
+                var tMidY = tsy + Math.sin(tAngle) * tLen * 0.55;
+                var tPerpAngle = tAngle + Math.PI / 2;
+                var tLoopOff = tCurveIntensity * tLen * 0.4 * tSide;
+                var tCp2x = tMidX + Math.cos(tPerpAngle) * tLoopOff;
+                var tCp2y = tMidY + Math.sin(tPerpAngle) * tLoopOff;
+                var tEndX = tsx + Math.cos(tAngle) * tLen;
+                var tEndY = tsy + Math.sin(tAngle) * tLen;
+
+                var tBranch = ns('path');
+                tBranch.setAttribute('d', 'M ' + tsx + ' ' + tsy + ' C ' + tCp1x + ' ' + tCp1y + ', ' + tCp2x + ' ' + tCp2y + ', ' + tEndX + ' ' + tEndY);
+                tBranch.setAttribute('class', 'vine-curr-branch');
+                tBranch.setAttribute('stroke-width', '1.5');
+                tBranch.setAttribute('opacity', '0.65');
+                branchesG.appendChild(tBranch);
+                allBranches.push({ path: tBranch, weight: 0.3 });
+            }
+        }
+
+        allBranches.forEach(function(info) {
+            var bPath = info.path;
+            var bLen  = bPath.getTotalLength();
+            var numLeaves = Math.max(3, Math.floor(info.weight * 15));
+            for (var k = 0; k < numLeaves; k++) {
+                var pos = (bLen / numLeaves) * k + seededRandom() * 18;
+                var pt  = bPath.getPointAtLength(Math.min(pos, bLen - 5));
+                var npt = bPath.getPointAtLength(Math.min(pos + 3, bLen));
+                var tang = Math.atan2(npt.y - pt.y, npt.x - pt.x);
+                var side = (k % 2 === 0 ? 1 : -1);
+                var perpA = tang + (Math.PI / 2) * side;
+                var rndRot = (10 + seededRandom() * 35) * side;
+                var leafAngle = perpA * (180 / Math.PI) + rndRot;
+
+                var leaf = ns('g');
+                leaf.setAttribute('class', 'vine-curr-leaf');
+                leaf.setAttribute('transform', 'translate(' + pt.x + ',' + pt.y + ') rotate(' + leafAngle + ')');
+                leaf.setAttribute('opacity', '0.8');
+                var lp = ns('path');
+                var sz = 8 + seededRandom() * 5;
+                lp.setAttribute('d', 'M 0,0 Q '+(sz*0.4)+','+ (-sz*0.6)+' 0,'+(-sz)+' Q '+(-sz*0.4)+','+(-sz*0.6)+' 0,0');
+                lp.setAttribute('fill', leafColors[k % leafColors.length]);
+                lp.setAttribute('stroke', '#2d5016');
+                lp.setAttribute('stroke-width', '0.5');
+                lp.setAttribute('opacity', '0.85');
+                leaf.appendChild(lp);
+                leavesG.appendChild(leaf);
+            }
+        });
+    }
+
+    function drawVine() {
+        _seed = _pageSeed;
+        var wH = wrapper.offsetHeight;
+        svg.setAttribute('width', '70');
+        svg.setAttribute('height', wH);
+        svg.style.height = wH + 'px';
+
+        var targetY = getTargetY();
+        drawTrunk(targetY);
+        addSmallBranches(targetY);
+    }
+
+    function animateVine(duration) {
+        duration = duration || 650;
+        var start = Date.now();
+        function step() {
+            drawVine();
+            if (Date.now() - start < duration) {
+                animFrameId = requestAnimationFrame(step);
+            }
+        }
+        if (animFrameId) cancelAnimationFrame(animFrameId);
+        animFrameId = requestAnimationFrame(step);
+    }
+
+    window._vineAnimate = animateVine;
+    setTimeout(drawVine, 120);
+    window.addEventListener('resize', drawVine);
+})();
+</script>
