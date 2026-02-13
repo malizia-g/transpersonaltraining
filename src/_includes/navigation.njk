@@ -24,25 +24,29 @@
         <div class="hidden md:flex items-center gap-8">
             <!-- Training Dropdown -->
             <div class="dropdown">
-                <a href="/training/" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors flex items-center gap-1">
+                <button type="button" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
                     Training <i data-lucide="chevron-down" class="w-4 h-4"></i>
-                </a>
+                </button>
                 <div class="dropdown-menu">
-                    <a href="/schedule/" class="text-sm">
-                        <i data-lucide="calendar" class="w-4 h-4 submenu-icon"></i>
-                        <span>Schedule</span>
-                    </a>
-                    <a href="/teachers/" class="text-sm">
-                        <i data-lucide="users" class="w-4 h-4 submenu-icon"></i>
-                        <span>Our Teachers</span>
-                    </a>
-                    <a href="/training/" class="text-sm">
+                    <a href="/training_program/" class="text-sm">
                         <i data-lucide="compass" class="w-4 h-4 submenu-icon"></i>
-                        <span>Training</span>
+                        <span>Training Program</span>
                     </a>
                     <a href="/curriculum/" class="text-sm">
                         <i data-lucide="book-open" class="w-4 h-4 submenu-icon"></i>
                         <span>Curriculum</span>
+                    </a>
+                    <a href="/schedule/" class="text-sm">
+                        <i data-lucide="calendar" class="w-4 h-4 submenu-icon"></i>
+                        <span>Intensive Schedule</span>
+                    </a>
+                    <a href="/lectures-schedule/" class="text-sm">
+                        <i data-lucide="presentation" class="w-4 h-4 submenu-icon"></i>
+                        <span>Lectures Schedule</span>
+                    </a>
+                    <a href="/teachers/" class="text-sm">
+                        <i data-lucide="users" class="w-4 h-4 submenu-icon"></i>
+                        <span>Our Teachers</span>
                     </a>
                 </div>
             </div>
@@ -77,11 +81,12 @@
 
     <!-- Mobile Menu Dropdown -->
     <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full shadow-xl py-6 px-6 flex-col gap-4 z-20 border-t">
-        <a href="/training/" class="text-slate-200 py-2 border-b block transition-colors">Training</a>
-        <a href="/schedule/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Schedule</a>
-        <a href="/teachers/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Our Teachers</a>
-        <a href="/training/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Training</a>
+        <span class="text-slate-200 py-2 border-b block font-semibold">Training</span>
+        <a href="/training_program/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Training Program</a>
         <a href="/curriculum/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Curriculum</a>
+        <a href="/schedule/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Intensive Schedule</a>
+        <a href="/lectures-schedule/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Lectures Schedule</a>
+        <a href="/teachers/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Our Teachers</a>
         <a href="/techniques/" class="text-slate-200 py-2 border-b block transition-colors">Techniques</a>
         <a href="/transpersonal_therapy/" class="text-slate-200 py-2 border-b block transition-colors">Transpersonal Therapy</a>
         <a href="/TESTS/transpersonal_therapist.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ The Transpersonal Therapist</a>
