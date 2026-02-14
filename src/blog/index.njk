@@ -1,0 +1,116 @@
+---
+title: Blog
+layout: base.njk
+---
+
+<section class="py-0 bg-white" lang="en">
+  <div class="w-full h-64 md:h-80 overflow-hidden relative mb-8">
+    <img src="/assets/images/vineyard.jpg" alt="Nature" class="w-full h-full object-cover object-center" loading="lazy" />
+    <div class="absolute inset-0 bg-gradient-to-b from-black/30 to-transparent"></div>
+  </div>
+  <div class="container mx-auto px-6">
+    <h1 class="text-4xl md:text-5xl font-serif font-bold text-indigo-deep-900 mb-10 text-center">Blog</h1>
+    <div class="max-w-3xl mx-auto text-center mb-12 text-neutral-warm-700 text-lg">
+      <p>Insights, stories, and tools on transpersonal psychology, holistic therapy, spiritual psychotherapy training, integrative therapy education, and breathwork for anxiety.</p>
+    </div>
+    <!-- FILTRI (popolati JS) -->
+    <form id="blog-filters" class="mb-10 flex flex-wrap gap-4 justify-center">
+      <select id="filter-author" class="border rounded px-3 py-2"><option value="">All Authors</option></select>
+      <select id="filter-tag" class="border rounded px-3 py-2"><option value="">All Tags</option></select>
+      <input type="date" id="filter-date" class="border rounded px-3 py-2" placeholder="Date" />
+      <button type="reset" class="ml-2 px-4 py-2 rounded bg-neutral-warm-200 hover:bg-neutral-warm-300">Reset</button>
+    </form>
+    <div class="grid grid-cols-1 md:grid-cols-1 gap-10" id="blog-articles">
+      {% for post in collections.blog | reverse %}
+      <article class="bg-neutral-warm-50 rounded-2xl shadow-md p-8 flex flex-col gap-4 hover:shadow-xl transition-all relative">
+        <h2 class="text-2xl font-serif font-bold text-indigo-deep-900 mb-2">{{ post.data.title }}</h2>
+        <div class="text-sm text-neutral-warm-600 mb-2">
+          <span>By {{ post.data.author }}</span> &middot; <time datetime="{{ post.date | date('yyyy-MM-dd') }}">{{ post.date | date("dd MMM yyyy") }}</time>
+        </div>
+        <div class="text-xs text-neutral-warm-500 mb-2">{% if post.data.tags %}{{ post.data.tags | join(', ') }}{% endif %}</div>
+        <p class="text-neutral-warm-700">{{ post.data.description }}</p>
+        <button type="button" class="mt-2 text-amber-600 hover:underline font-medium text-left read-more-btn" data-article="article-{{ loop.index }}">Read more →</button>
+        <div id="article-{{ loop.index }}" class="article-content hidden mt-4 prose prose-neutral max-w-none">{{ post.templateContent | safe }}</div>
+      </article>
+      {% else %}
+      <p class="col-span-2 text-center text-neutral-warm-500">No articles published yet.</p>
+      {% endfor %}
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Accordion: mostra/nascondi testo articolo
+        document.querySelectorAll('.read-more-btn').forEach(function(btn) {
+          btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var content = document.getElementById(btn.getAttribute('data-article'));
+            // Chiudi tutti gli altri
+            document.querySelectorAll('.article-content').forEach(function(div) {
+              if (div !== content) div.classList.add('hidden');
+            });
+            if (content.classList.contains('hidden')) {
+              content.classList.remove('hidden');
+              btn.textContent = 'Read less ←';
+            } else {
+              content.classList.add('hidden');
+              btn.textContent = 'Read more →';
+            }
+          });
+        });
+        // Chiudi il testo se clicchi fuori
+        document.addEventListener('click', function(e) {
+          document.querySelectorAll('.article-content').forEach(function(div) {
+            if (!div.classList.contains('hidden')) div.classList.add('hidden');
+          });
+          document.querySelectorAll('.read-more-btn').forEach(function(btn) {
+            btn.textContent = 'Read more →';
+          });
+        });
+        // FILTRI: popola e filtra in tempo reale
+        const form = document.getElementById('blog-filters');
+        const cards = Array.from(document.querySelectorAll('#blog-articles article'));
+        // Popola filtri
+        const authors = new Set();
+        const tags = new Set();
+        cards.forEach(card => {
+          const author = card.querySelector('.text-sm span')?.textContent.trim();
+          if (author) authors.add(author);
+          (card.querySelector('.text-xs')?.textContent.split(',') || []).forEach(tag => {
+            if (tag.trim()) tags.add(tag.trim());
+          });
+        });
+        const authorSelect = document.getElementById('filter-author');
+        authors.forEach(author => {
+          const opt = document.createElement('option');
+          opt.value = author; opt.textContent = author;
+          authorSelect.appendChild(opt);
+        });
+        const tagSelect = document.getElementById('filter-tag');
+        tags.forEach(tag => {
+          const opt = document.createElement('option');
+          opt.value = tag; opt.textContent = tag;
+          tagSelect.appendChild(opt);
+        });
+        // Filtra card
+        form.addEventListener('input', function() {
+          const author = authorSelect.value;
+          const tag = tagSelect.value;
+          const date = document.getElementById('filter-date').value;
+          cards.forEach(function(card) {
+            let show = true;
+            const cardAuthor = card.querySelector('.text-sm span')?.textContent.trim();
+            const cardTags = (card.querySelector('.text-xs')?.textContent.split(',').map(t=>t.trim())) || [];
+            const cardDate = card.querySelector('time')?.getAttribute('datetime');
+            if (author && cardAuthor !== author) show = false;
+            if (tag && !cardTags.includes(tag)) show = false;
+            if (date && (!cardDate || !cardDate.startsWith(date))) show = false;
+            card.style.display = show ? '' : 'none';
+          });
+        });
+        form.addEventListener('reset', function() {
+          setTimeout(() => form.dispatchEvent(new Event('input')), 10);
+        });
+      });
+    </script>
+    </div>
+  </div>
+</section>

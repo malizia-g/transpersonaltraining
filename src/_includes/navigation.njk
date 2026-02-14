@@ -2,8 +2,8 @@
     <div class="container mx-auto px-6 flex justify-between items-center relative z-10">
         <!-- Logo (Desktop Only) -->
         <a href="/" class="hidden md:flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center opacity-90">
-                <i data-lucide="loader-pinwheel" class="text-white w-6 h-6"></i>
+            <div class="w-10 h-10 flex items-center justify-center bg-amber-500 rounded-full transition-transform duration-300 group hover:rotate-180">
+                <img src="/assets/images/logo.svg" alt="Logo" class="w-8 h-8 transition-transform duration-500 group-hover:rotate-180" style="display:block;" />
             </div>
             <span class="text-2xl font-serif font-bold tracking-wide text-white">
                 Transpersonal Training
@@ -12,8 +12,8 @@
 
         <!-- Logo (Mobile Only) -->
         <a href="/" class="flex md:hidden items-center gap-2 hover:opacity-80 transition-opacity">
-            <div class="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center opacity-90">
-                <i data-lucide="loader-pinwheel" class="text-white w-5 h-5"></i>
+            <div class="w-8 h-8 flex items-center justify-center bg-amber-500 rounded-full transition-transform duration-300 group hover:rotate-180">
+                <img src="/assets/images/logo.svg" alt="Logo" class="w-6 h-6 transition-transform duration-500 group-hover:rotate-180" style="display:block;" />
             </div>
             <span class="text-xl font-serif font-bold tracking-wide text-white">
                 Transpersonal Training
@@ -51,24 +51,29 @@
                 </div>
             </div>
 
-            <a href="/techniques/" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Techniques</a>
-            
-            <!-- Transpersonal Therapy Dropdown -->
+
+            <!-- Transpersonal Therapy Dropdown (con Techniques) -->
             <div class="dropdown">
-                <a href="/transpersonal_therapy/" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors flex items-center gap-1">
+                <button type="button" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
                     Transpersonal Therapy <i data-lucide="chevron-down" class="w-4 h-4"></i>
-                </a>
+                </button>
                 <div class="dropdown-menu">
                     <a href="/TESTS/transpersonal_therapist.html" class="text-sm">
                         <i data-lucide="stethoscope" class="w-4 h-4 submenu-icon"></i>
-                        <span>The Transpersonal Therapist</span>
+                        <span>What is Transpersonal Psychology</span>
                     </a>
                     <a href="/TESTS/client_model.html" class="text-sm">
                         <i data-lucide="user-check" class="w-4 h-4 submenu-icon"></i>
                         <span>Become a Client Model</span>
                     </a>
+                    <a href="/techniques/" class="text-sm">
+                        <i data-lucide="activity" class="w-4 h-4 submenu-icon"></i>
+                        <span>Techniques</span>
+                    </a>
                 </div>
             </div>
+
+            <a href="/blog/" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Blog</a>
 
             <a href="/#contact" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 rounded-full font-medium transition-transform hover:scale-105 shadow-md">Apply</a>
         </div>
@@ -87,10 +92,11 @@
         <a href="/schedule/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Intensive Schedule</a>
         <a href="/lectures-schedule/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Lectures Schedule</a>
         <a href="/teachers/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Our Teachers</a>
-        <a href="/techniques/" class="text-slate-200 py-2 border-b block transition-colors">Techniques</a>
-        <a href="/transpersonal_therapy/" class="text-slate-200 py-2 border-b block transition-colors">Transpersonal Therapy</a>
-        <a href="/TESTS/transpersonal_therapist.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ The Transpersonal Therapist</a>
+        <span class="text-slate-200 py-2 border-b block font-semibold">Transpersonal Therapy</span>
+        <a href="/TESTS/transpersonal_therapist.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ What is Transpersonal Psychology</a>
         <a href="/TESTS/client_model.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Become a Client Model</a>
+        <a href="/techniques/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Techniques</a>
+        <a href="/blog/" class="text-slate-200 py-2 border-b block transition-colors">Blog</a>
         <a href="/#contact" class="bg-amber-500 text-white px-6 py-3 rounded-md w-full mt-4 font-bold text-center block">Apply</a>
     </div>
 </nav>

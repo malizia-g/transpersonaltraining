@@ -9,7 +9,10 @@ module.exports = {
     'bg-science-blue-950/95',
     'backdrop-blur-sm',
     'shadow-lg',
-    'bg-transparent'
+    'bg-transparent',
+    'bg-contact-iris-50',
+    'bg-contact-iris-600',
+    'text-contact-iris-600',
   ],
   theme: {
     extend: {
@@ -60,6 +63,10 @@ module.exports = {
           700: '#5D584E',
           800: '#3F3A35',
           900: '#2B2825',
+        },
+        'contact-iris': {
+          50: '#f4f3ff',
+          600: '#541e86',     // Contact CTA background - deep purple
         },
         'indigo-deep': {
           50: '#F0F4FF',

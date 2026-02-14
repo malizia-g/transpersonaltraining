@@ -1,0 +1,29 @@
+---
+title: "The History of Transpersonal Psychology"
+author: Manal Al-Hammadi
+date: 2026-02-14
+description: "A journey through the origins and evolution of transpersonal psychology, from James and Jung to the present day."
+tags: [transpersonal, psychology, history, holistic therapy, spiritual psychotherapy, breathwork, integrative therapy]
+---
+
+**The History of Transpersonal Psychology**
+
+The history of transpersonal psychology is the story of Western psychology slowly warming up to something that contemplative traditions understood long ago: the human psyche has dimensions and depths that cannot be captured by studying only behavior or pathology. Tracing how the field emerged helps us understand not just where it came from, but why the demand for transpersonal therapy continues to grow.
+
+*The pioneers: James, Jung, and Assagioli – 1901 – 1940s*
+
+William James is often considered the grandfather of transpersonal psychology. His work The Varieties of Religious Experience (1902) argued that subjective spiritual experiences deserved serious psychological attention; a genuinely radical idea in a time where the field valued only the measurable. Remarkably, James used the term "trans-personal" in a 1905 lecture, long before anyone else picked it up in an academic context. Carl Jung, meanwhile, was developing his ideas about the archetypes, collective unconscious, and individuation; concepts that would become later on the pillars of transpersonal thought and essence. Roberto Assagioli, the Italian psychiatrist who created psychosynthesis, also laid the groundwork by explicitly including a spiritual dimension in his model of the psyche. Assagioli is often credited as one of the first to use the term "transpersonal" in a clinical context.
+
+*The Hunger for Something More – 1950s – 1960s*
+
+Abraham Maslow, a central figure in humanistic psychology, grew increasingly fascinated by what he called "peak experiences"; moments of intense joy, unity, and transcendence that the existing frameworks could not fully explain. By the late 1960s, Maslow sensed that even humanistic psychology, with all its emphasis on self-actualization, did not go far enough in honoring the spiritual dimension of human potential. Together with Anthony Sutich and Stanislav Grof, he began working toward a "fourth force" in psychology, after psychoanalysis, behaviorism, and humanistic psychology (Grof, 2008). This period also saw growing interest in experiential practices like psychedelics as a catalyst for expansion and breathwork while other experiences were being explored seriously in clinical contexts.
+
+*The Formal Formation – 1969 – 1990s*
+
+In 1969, the Journal of Transpersonal Psychology published its first issue, with Maslow and Sutich as founding editors. The Association for Transpersonal Psychology followed in 1972, and the International Transpersonal Psychology Association was established in 1973. For the first time, there was an organized institutional home, journals, associations, conferences, for studying spiritual experience, consciousness, and human growth with scholarly accuracy. This foundation made it possible for transpersonal psychology courses and education programs to develop over the following decades.
+
+Over the following decades, the field witnessed significant expansion. Institutions such as the California Institute of Integral Studies, Naropa University, Saybrook Graduate School, and JFK University began offering dedicated transpersonal psychology degree programs. Stanislav Grof's research into non-ordinary states of consciousness; particularly through his development of Holotropic Breathwork, brought body-centered experiential methods into clinical practice and laid the groundwork for modern breathwork. Ken Wilber contributed a wide-reaching philosophical model mapping human development from pre-personal to transpersonal stages. In 1993, a new diagnostic category called "Religious or Spiritual Problem" was approved for inclusion in the DSM-IV; a real landmark that signaled mainstream psychiatry was beginning to acknowledge what transpersonal practitioners had been working with for decades. Through all of this, holistic psychotherapy programs deepened their emphasis on self-inquiry alongside clinical skill as non-negotiable asset for the transpersonal practitioners.
+
+*The Second Wave – 2000s – Present*
+
+Perhaps the most important recent development is what scholars have called the "second wave" of transpersonal psychology. A large-scale bibliometric study by Hartelius and colleagues (2021), published in the Journal of Transpersonal Psychology, analyzed four decades of articles from the field's two principal journals. They found that the field has been gradually moving away from its original, narrower focus on altered states of consciousness toward a broader and more grounded orientation. This second wave puts bigger emphasis on understanding the whole person as part of larger living system, giving more weight to transformation rather than mere transcendence, and allows closer attention to embodiment, social context, ecology, and most importantly; diversity (Hartelius et al., 2021). David Furlong, in a 2024 paper in the Transpersonal Psychology Review, explored complementary landscape by examining how wave/particle duality in quantum physics might offer a framework for understanding transpersonal experiences of expanded consciousness; suggesting that consciousness itself may have both a bounded, "particle" state and an interconnected, "wave" state (Furlong, 2024). Meanwhile, renewed scientific interest in psychedelic-assisted therapy and the scientific acceptance of mindfulness-based interventions have brought many transpersonal ideas squarely into the mainstream. The demand for spiritual psychotherapy training and holistic therapy practitioners has never been more in demand.
