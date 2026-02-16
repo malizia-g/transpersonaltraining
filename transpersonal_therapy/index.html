@@ -53,6 +53,8 @@
     <!-- Stylesheets (load first for faster rendering) -->
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/style.css">
+        <link rel="icon" type="image/svg+xml" href="/assets/images/logo.svg">
+        <link rel="shortcut icon" type="image/svg+xml" href="/assets/images/logo.svg">
     
     <!-- Fonts (preconnect and async load) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -76,8 +78,8 @@
     <div class="container mx-auto px-6 flex justify-between items-center relative z-10">
         <!-- Logo (Desktop Only) -->
         <a href="/" class="hidden md:flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center opacity-90">
-                <i data-lucide="loader-pinwheel" class="text-white w-6 h-6"></i>
+            <div class="w-10 h-10 flex items-center justify-center bg-amber-500 rounded-full transition-transform duration-300 group hover:rotate-180">
+                <img src="/assets/images/logo.svg" alt="Logo" class="w-8 h-8 transition-transform duration-500 group-hover:rotate-180" style="display:block;" />
             </div>
             <span class="text-2xl font-serif font-bold tracking-wide text-white">
                 Transpersonal Training
@@ -86,8 +88,8 @@
 
         <!-- Logo (Mobile Only) -->
         <a href="/" class="flex md:hidden items-center gap-2 hover:opacity-80 transition-opacity">
-            <div class="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center opacity-90">
-                <i data-lucide="loader-pinwheel" class="text-white w-5 h-5"></i>
+            <div class="w-8 h-8 flex items-center justify-center bg-amber-500 rounded-full transition-transform duration-300 group hover:rotate-180">
+                <img src="/assets/images/logo.svg" alt="Logo" class="w-6 h-6 transition-transform duration-500 group-hover:rotate-180" style="display:block;" />
             </div>
             <span class="text-xl font-serif font-bold tracking-wide text-white">
                 Transpersonal Training
@@ -98,13 +100,25 @@
         <div class="hidden md:flex items-center gap-8">
             <!-- Training Dropdown -->
             <div class="dropdown">
-                <a href="/training/" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors flex items-center gap-1">
+                <button type="button" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
                     Training <i data-lucide="chevron-down" class="w-4 h-4"></i>
-                </a>
+                </button>
                 <div class="dropdown-menu">
+                    <a href="/training_program/" class="text-sm">
+                        <i data-lucide="compass" class="w-4 h-4 submenu-icon"></i>
+                        <span>Training Program</span>
+                    </a>
+                    <a href="/curriculum/" class="text-sm">
+                        <i data-lucide="book-open" class="w-4 h-4 submenu-icon"></i>
+                        <span>Curriculum</span>
+                    </a>
                     <a href="/schedule/" class="text-sm">
                         <i data-lucide="calendar" class="w-4 h-4 submenu-icon"></i>
-                        <span>Schedule</span>
+                        <span>Intensive Schedule</span>
+                    </a>
+                    <a href="/lectures-schedule/" class="text-sm">
+                        <i data-lucide="presentation" class="w-4 h-4 submenu-icon"></i>
+                        <span>Lectures Schedule</span>
                     </a>
                     <a href="/teachers/" class="text-sm">
                         <i data-lucide="users" class="w-4 h-4 submenu-icon"></i>
@@ -113,24 +127,29 @@
                 </div>
             </div>
 
-            <a href="/techniques/" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Techniques</a>
-            
-            <!-- Transpersonal Therapy Dropdown -->
+
+            <!-- Transpersonal Therapy Dropdown (con Techniques) -->
             <div class="dropdown">
-                <a href="/transpersonal_therapy/" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors flex items-center gap-1">
+                <button type="button" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
                     Transpersonal Therapy <i data-lucide="chevron-down" class="w-4 h-4"></i>
-                </a>
+                </button>
                 <div class="dropdown-menu">
                     <a href="/TESTS/transpersonal_therapist.html" class="text-sm">
                         <i data-lucide="stethoscope" class="w-4 h-4 submenu-icon"></i>
-                        <span>The Transpersonal Therapist</span>
+                        <span>What is Transpersonal Psychology</span>
                     </a>
                     <a href="/TESTS/client_model.html" class="text-sm">
                         <i data-lucide="user-check" class="w-4 h-4 submenu-icon"></i>
                         <span>Become a Client Model</span>
                     </a>
+                    <a href="/techniques/" class="text-sm">
+                        <i data-lucide="activity" class="w-4 h-4 submenu-icon"></i>
+                        <span>Techniques</span>
+                    </a>
                 </div>
             </div>
+
+            <a href="/blog/" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Blog</a>
 
             <a href="/#contact" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 rounded-full font-medium transition-transform hover:scale-105 shadow-md">Apply</a>
         </div>
@@ -143,13 +162,17 @@
 
     <!-- Mobile Menu Dropdown -->
     <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full shadow-xl py-6 px-6 flex-col gap-4 z-20 border-t">
-        <a href="/training/" class="text-slate-200 py-2 border-b block transition-colors">Training</a>
-        <a href="/schedule/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Schedule</a>
+        <span class="text-slate-200 py-2 border-b block font-semibold">Training</span>
+        <a href="/training_program/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Training Program</a>
+        <a href="/curriculum/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Curriculum</a>
+        <a href="/schedule/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Intensive Schedule</a>
+        <a href="/lectures-schedule/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Lectures Schedule</a>
         <a href="/teachers/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Our Teachers</a>
-        <a href="/techniques/" class="text-slate-200 py-2 border-b block transition-colors">Techniques</a>
-        <a href="/transpersonal_therapy/" class="text-slate-200 py-2 border-b block transition-colors">Transpersonal Therapy</a>
-        <a href="/TESTS/transpersonal_therapist.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ The Transpersonal Therapist</a>
+        <span class="text-slate-200 py-2 border-b block font-semibold">Transpersonal Therapy</span>
+        <a href="/TESTS/transpersonal_therapist.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ What is Transpersonal Psychology</a>
         <a href="/TESTS/client_model.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Become a Client Model</a>
+        <a href="/techniques/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Techniques</a>
+        <a href="/blog/" class="text-slate-200 py-2 border-b block transition-colors">Blog</a>
         <a href="/#contact" class="bg-amber-500 text-white px-6 py-3 rounded-md w-full mt-4 font-bold text-center block">Apply</a>
     </div>
 </nav>
@@ -166,12 +189,12 @@
             alt="Transpersonal therapy" 
             class="w-full h-full object-cover"
         />
-        <div class="absolute inset-0 bg-gradient-to-b from-indigo-950/70 via-indigo-900/50 to-slate-50"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-science-blue-900/70 via-science-blue-800/50 to-neutral-warm-50"></div>
     </div>
 
     <div class="relative z-10 container mx-auto px-6 text-center pt-20">
         <div class="animate-fade-in-up">
-            <span class="inline-block py-1 px-3 rounded-full bg-white/10 text-amber-300 backdrop-blur-md border border-white/20 text-sm font-medium mb-6 tracking-wider uppercase">
+            <span class="inline-block py-1 px-3 rounded-full bg-white/10 text-warm-yellow-200 backdrop-blur-md border border-white/20 text-sm font-medium mb-6 tracking-wider uppercase">
                 Holistic Healing
             </span>
             <h1 class="text-3xl md:text-5xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-lg">
@@ -184,14 +207,25 @@
     </div>
 </header>
 
+<!-- Breadcrumb -->
+<div class="bg-white border-b border-neutral-warm-200">
+    <div class="container mx-auto px-6 py-4">
+        <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
+            <a href="/" class="hover:text-science-blue-600 transition-colors">Home</a>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <span class="text-science-blue-800 font-medium">Transpersonal Therapy</span>
+        </div>
+    </div>
+</div>
+
 <!-- What is Transpersonal Therapy -->
 <section class="py-24 bg-white">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-serif font-bold text-indigo-950 mb-8 text-center">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-indigo-deep-900 mb-8 text-center">
                 What is Transpersonal Therapy?
             </h2>
-            <div class="prose prose-lg max-w-none text-slate-600">
+            <div class="prose prose-lg max-w-none text-neutral-warm-700">
                 <p class="text-xl leading-relaxed mb-6">
                     Transpersonal therapy is an integrative approach that honors the full spectrum of human experience, 
                     including spiritual, mystical, and transcendent dimensions of consciousness.
@@ -210,50 +244,50 @@
 </section>
 
 <!-- Key Principles -->
-<section class="py-24 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
+<section class="py-24 bg-gradient-to-br from-science-blue-50 via-violet-50 to-indigo-50">
     <div class="container mx-auto px-6">
         <div class="max-w-5xl mx-auto">
-            <h2 class="text-4xl font-serif font-bold text-indigo-950 mb-12 text-center">
+            <h2 class="text-4xl font-serif font-bold text-indigo-deep-900 mb-12 text-center">
                 Core Principles
             </h2>
             
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="bg-white p-8 rounded-2xl shadow-md">
-                    <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
-                        <i data-lucide="eye" class="w-6 h-6 text-indigo-600"></i>
+                    <div class="w-12 h-12 bg-science-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="eye" class="w-6 h-6 text-science-blue-600"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-indigo-950 mb-3">Holistic Perspective</h3>
-                    <p class="text-slate-600">
+                    <h3 class="text-xl font-bold text-indigo-deep-900 mb-3">Holistic Perspective</h3>
+                    <p class="text-neutral-warm-700">
                         Viewing the person as an interconnected whole—body, mind, emotions, and spirit.
                     </p>
                 </div>
 
                 <div class="bg-white p-8 rounded-2xl shadow-md">
-                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                        <i data-lucide="infinity" class="w-6 h-6 text-purple-600"></i>
+                    <div class="w-12 h-12 bg-violet-100 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="infinity" class="w-6 h-6 text-violet-600"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-indigo-950 mb-3">Transcendent Potential</h3>
-                    <p class="text-slate-600">
+                    <h3 class="text-xl font-bold text-indigo-deep-900 mb-3">Transcendent Potential</h3>
+                    <p class="text-neutral-warm-700">
                         Honoring experiences that go beyond ordinary consciousness and personal identity.
                     </p>
                 </div>
 
                 <div class="bg-white p-8 rounded-2xl shadow-md">
-                    <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
-                        <i data-lucide="heart" class="w-6 h-6 text-teal-600"></i>
+                    <div class="w-12 h-12 bg-accent-teal-100 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="heart" class="w-6 h-6 text-accent-teal-600"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-indigo-950 mb-3">Inner Healing Intelligence</h3>
-                    <p class="text-slate-600">
+                    <h3 class="text-xl font-bold text-indigo-deep-900 mb-3">Inner Healing Intelligence</h3>
+                    <p class="text-neutral-warm-700">
                         Trusting the inherent wisdom of the psyche to guide its own healing process.
                     </p>
                 </div>
 
                 <div class="bg-white p-8 rounded-2xl shadow-md">
-                    <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
-                        <i data-lucide="compass" class="w-6 h-6 text-amber-600"></i>
+                    <div class="w-12 h-12 bg-warm-yellow-100 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="compass" class="w-6 h-6 text-warm-yellow-600"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-indigo-950 mb-3">Spiritual Integration</h3>
-                    <p class="text-slate-600">
+                    <h3 class="text-xl font-bold text-indigo-deep-900 mb-3">Spiritual Integration</h3>
+                    <p class="text-neutral-warm-700">
                         Integrating spiritual experiences and insights into everyday life and personal growth.
                     </p>
                 </div>
@@ -263,16 +297,16 @@
 </section>
 
 <!-- Learn More -->
-<section class="py-24 bg-white">
+<section class="py-24 bg-contact-iris-600 text-white">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl font-serif font-bold text-indigo-950 mb-4">Dive Deeper</h2>
-            <p class="text-lg text-slate-600 mb-8">
+            <h2 class="text-3xl font-serif font-bold mb-4">Dive Deeper</h2>
+            <p class="text-lg text-white/80 mb-8">
                 Explore more about the transpersonal approach and how it can support your practice.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="/transpersonal_therapist.html" class="bg-indigo-900 hover:bg-indigo-800 text-white px-8 py-4 rounded-full font-medium transition-all shadow-lg">
-                    The Transpersonal Therapist
+                <a href="/transpersonal_therapist.html" class="bg-white hover:bg-slate-100 text-contact-iris-600 px-8 py-4 rounded-full font-medium transition-all shadow-lg">
+                    What is Transpersonal Psychology
                 </a>
                 <a href="/training.html" class="bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-full font-medium transition-all shadow-lg">
                     Our Training Programs
@@ -305,10 +339,11 @@
             <div>
                 <h4 class="text-white font-semibold mb-4">Training</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="/training.html" class="hover:text-white transition-colors">Our Training</a></li>
-                    <li><a href="/schedule.html" class="hover:text-white transition-colors">Schedule</a></li>
-                    <li><a href="/teachers.html" class="hover:text-white transition-colors">Our Teachers</a></li>
-                    <li><a href="/hero_journey.html" class="hover:text-white transition-colors">Hero's Journey</a></li>
+                    <li><a href="/training_program/" class="hover:text-white transition-colors">Training Program</a></li>
+                    <li><a href="/curriculum/" class="hover:text-white transition-colors">Curriculum</a></li>
+                    <li><a href="/schedule/" class="hover:text-white transition-colors">Intensive Schedule</a></li>
+                    <li><a href="/lectures-schedule/" class="hover:text-white transition-colors">Lectures Schedule</a></li>
+                    <li><a href="/teachers/" class="hover:text-white transition-colors">Our Teachers</a></li>
                 </ul>
             </div>
 
@@ -318,7 +353,7 @@
                 <ul class="space-y-2 text-sm">
                     <li><a href="/techniques.html" class="hover:text-white transition-colors">Techniques</a></li>
                     <li><a href="/transpersonal_therapy.html" class="hover:text-white transition-colors">Transpersonal Therapy</a></li>
-                    <li><a href="/transpersonal_therapist.html" class="hover:text-white transition-colors">The Therapist</a></li>
+                    <li><a href="/transpersonal_therapist.html" class="hover:text-white transition-colors">What is Transpersonal Psychology</a></li>
                     <li><a href="/client_model.html" class="hover:text-white transition-colors">Become a Client Model</a></li>
                 </ul>
             </div>
@@ -345,14 +380,6 @@
     </div>
 </footer>
 
-
-    <!-- Fixed Theme Switcher Button -->
-    <div id="theme-switcher-fixed">
-        <div class="theme-label" id="theme-label">School Lavender</div>
-        <button id="theme-btn-fixed" title="Switch theme" aria-label="Switch color theme">
-            <i data-lucide="palette" class="w-6 h-6 text-white"></i>
-        </button>
-    </div>
 
     <!-- Main application script -->
     <script type="module" src="/scripts/main.js"></script>

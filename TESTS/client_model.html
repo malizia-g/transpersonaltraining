@@ -37,7 +37,6 @@
         body.theme-earth { --theme-primary: #c2410c; --theme-darker: #7c2d12; --theme-light: #fdba74; --theme-primary-rgb: 194, 65, 12; }
         body.theme-alchemy { --theme-primary: #a21caf; --theme-darker: #701a75; --theme-light: #f0abfc; --theme-primary-rgb: 162, 28, 175; }
         
-        body[class*="theme-"] #navbar.bg-indigo-950\/95 { background-color: var(--theme-darker) !important; }
         body[class*="theme-"] .text-indigo-950 { color: var(--theme-darker) !important; }
         body[class*="theme-"] #mobile-menu { background-color: var(--theme-darker) !important; border-color: var(--theme-primary) !important; }
         
@@ -66,33 +65,11 @@
         .dropdown-menu a:last-child { border-radius: 0 0 0.75rem 0.75rem; }
         .dropdown-menu .submenu-icon { color: #94a3b8; transition: color 0.2s ease; }
         .dropdown-menu a:hover .submenu-icon { color: #f59e0b; }
-        
-        #theme-switcher-fixed {
-            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
-            display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-        }
-        
-        #theme-switcher-fixed button {
-            width: 56px; height: 56px; border-radius: 50%;
-            background: linear-gradient(135deg, var(--theme-primary), var(--theme-darker));
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); border: 3px solid white;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: all 0.3s ease;
-        }
-        
-        #theme-switcher-fixed button:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); }
-        
-        #theme-switcher-fixed .theme-label {
-            background-color: rgba(0, 0, 0, 0.8); color: white;
-            padding: 0.5rem 1rem; border-radius: 1.5rem;
-            font-size: 0.875rem; font-weight: 600; white-space: nowrap;
-            opacity: 1; pointer-events: none; transition: all 0.3s ease;
-        }
     </style>
 </head>
 <body class="font-sans text-slate-800 bg-slate-50 antialiased transition-colors duration-700">
 
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 bg-indigo-950/95 backdrop-blur-sm shadow-lg text-white/90">
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 bg-transparent text-white/90">
         <div class="container mx-auto px-6 flex justify-between items-center relative z-10">
             <a href="index.html" class="hidden md:flex items-center gap-2 hover:opacity-80 transition-opacity">
                 <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center opacity-90">
@@ -140,7 +117,7 @@
                     <div class="dropdown-menu">
                         <a href="transpersonal_therapist.html" class="text-sm">
                             <i data-lucide="stethoscope" class="w-4 h-4 submenu-icon"></i>
-                            <span>The Transpersonal Therapist</span>
+                            <span>What is Transpersonal Psychology</span>
                         </a>
                         <a href="client_model.html" class="text-sm">
                             <i data-lucide="user-check" class="w-4 h-4 submenu-icon"></i>
@@ -164,7 +141,7 @@
             <a href="teachers_testC.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Teachers - Layout C (Modal)</a>
             <a href="techniques.html" class="text-slate-200 py-2 border-b block transition-colors">Techniques</a>
             <a href="transpersonal_therapy.html" class="text-slate-200 py-2 border-b block transition-colors">Transpersonal Therapy</a>
-            <a href="transpersonal_therapist.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ The Transpersonal Therapist</a>
+            <a href="transpersonal_therapist.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ What is Transpersonal Psychology</a>
             <a href="client_model.html" class="text-amber-400 py-2 pl-4 border-b block transition-colors text-sm">→ Become a Client Model</a>
             <a href="index.html#contact" class="bg-amber-500 text-white px-6 py-3 rounded-md w-full mt-4 font-bold text-center block">Apply</a>
         </div>
@@ -279,14 +256,7 @@
         </div>
     </footer>
 
-    <div id="theme-switcher-fixed">
-        <div class="theme-label" id="theme-label">School Lavender</div>
-        <button id="theme-btn-fixed" title="Switch theme" aria-label="Switch color theme">
-            <i data-lucide="palette" class="w-6 h-6 text-white"></i>
-        </button>
-    </div>
 
-    <script src="theme-switcher.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             lucide.createIcons();
@@ -297,6 +267,26 @@
                   mobileMenu.classList.toggle('hidden');
                   mobileMenu.classList.toggle('flex');
               });
+            }
+            
+            // Navbar scroll effect
+            const navbar = document.getElementById('navbar');
+            if (navbar) {
+                const updateNavbar = () => {
+                    if (window.scrollY > 50) {
+                        // On scroll - show solid background
+                        navbar.classList.remove('bg-transparent');
+                        navbar.style.backgroundColor = 'rgba(15, 37, 64, 0.95)';
+                        navbar.classList.add('backdrop-blur-sm', 'shadow-lg');
+                    } else {
+                        // At top - make transparent
+                        navbar.classList.add('bg-transparent');
+                        navbar.style.backgroundColor = 'transparent';
+                        navbar.classList.remove('backdrop-blur-sm', 'shadow-lg');
+                    }
+                };
+                updateNavbar();
+                window.addEventListener('scroll', updateNavbar);
             }
         });
     </script>

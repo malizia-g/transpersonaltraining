@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Training Schedule | Transpersonal Training | Transpersonal Training</title>
+    <title>Intensive Schedule | Transpersonal Training | Transpersonal Training</title>
     
     <!-- Page Loader Styles (inline for immediate display) -->
     <style>
@@ -53,6 +53,8 @@
     <!-- Stylesheets (load first for faster rendering) -->
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/style.css">
+        <link rel="icon" type="image/svg+xml" href="/assets/images/logo.svg">
+        <link rel="shortcut icon" type="image/svg+xml" href="/assets/images/logo.svg">
     
     <!-- Fonts (preconnect and async load) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -76,8 +78,8 @@
     <div class="container mx-auto px-6 flex justify-between items-center relative z-10">
         <!-- Logo (Desktop Only) -->
         <a href="/" class="hidden md:flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center opacity-90">
-                <i data-lucide="loader-pinwheel" class="text-white w-6 h-6"></i>
+            <div class="w-10 h-10 flex items-center justify-center bg-amber-500 rounded-full transition-transform duration-300 group hover:rotate-180">
+                <img src="/assets/images/logo.svg" alt="Logo" class="w-8 h-8 transition-transform duration-500 group-hover:rotate-180" style="display:block;" />
             </div>
             <span class="text-2xl font-serif font-bold tracking-wide text-white">
                 Transpersonal Training
@@ -86,8 +88,8 @@
 
         <!-- Logo (Mobile Only) -->
         <a href="/" class="flex md:hidden items-center gap-2 hover:opacity-80 transition-opacity">
-            <div class="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center opacity-90">
-                <i data-lucide="loader-pinwheel" class="text-white w-5 h-5"></i>
+            <div class="w-8 h-8 flex items-center justify-center bg-amber-500 rounded-full transition-transform duration-300 group hover:rotate-180">
+                <img src="/assets/images/logo.svg" alt="Logo" class="w-6 h-6 transition-transform duration-500 group-hover:rotate-180" style="display:block;" />
             </div>
             <span class="text-xl font-serif font-bold tracking-wide text-white">
                 Transpersonal Training
@@ -98,13 +100,25 @@
         <div class="hidden md:flex items-center gap-8">
             <!-- Training Dropdown -->
             <div class="dropdown">
-                <a href="/training/" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors flex items-center gap-1">
+                <button type="button" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
                     Training <i data-lucide="chevron-down" class="w-4 h-4"></i>
-                </a>
+                </button>
                 <div class="dropdown-menu">
+                    <a href="/training_program/" class="text-sm">
+                        <i data-lucide="compass" class="w-4 h-4 submenu-icon"></i>
+                        <span>Training Program</span>
+                    </a>
+                    <a href="/curriculum/" class="text-sm">
+                        <i data-lucide="book-open" class="w-4 h-4 submenu-icon"></i>
+                        <span>Curriculum</span>
+                    </a>
                     <a href="/schedule/" class="text-sm">
                         <i data-lucide="calendar" class="w-4 h-4 submenu-icon"></i>
-                        <span>Schedule</span>
+                        <span>Intensive Schedule</span>
+                    </a>
+                    <a href="/lectures-schedule/" class="text-sm">
+                        <i data-lucide="presentation" class="w-4 h-4 submenu-icon"></i>
+                        <span>Lectures Schedule</span>
                     </a>
                     <a href="/teachers/" class="text-sm">
                         <i data-lucide="users" class="w-4 h-4 submenu-icon"></i>
@@ -113,24 +127,29 @@
                 </div>
             </div>
 
-            <a href="/techniques/" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Techniques</a>
-            
-            <!-- Transpersonal Therapy Dropdown -->
+
+            <!-- Transpersonal Therapy Dropdown (con Techniques) -->
             <div class="dropdown">
-                <a href="/transpersonal_therapy/" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors flex items-center gap-1">
+                <button type="button" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
                     Transpersonal Therapy <i data-lucide="chevron-down" class="w-4 h-4"></i>
-                </a>
+                </button>
                 <div class="dropdown-menu">
                     <a href="/TESTS/transpersonal_therapist.html" class="text-sm">
                         <i data-lucide="stethoscope" class="w-4 h-4 submenu-icon"></i>
-                        <span>The Transpersonal Therapist</span>
+                        <span>What is Transpersonal Psychology</span>
                     </a>
                     <a href="/TESTS/client_model.html" class="text-sm">
                         <i data-lucide="user-check" class="w-4 h-4 submenu-icon"></i>
                         <span>Become a Client Model</span>
                     </a>
+                    <a href="/techniques/" class="text-sm">
+                        <i data-lucide="activity" class="w-4 h-4 submenu-icon"></i>
+                        <span>Techniques</span>
+                    </a>
                 </div>
             </div>
+
+            <a href="/blog/" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Blog</a>
 
             <a href="/#contact" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 rounded-full font-medium transition-transform hover:scale-105 shadow-md">Apply</a>
         </div>
@@ -143,13 +162,17 @@
 
     <!-- Mobile Menu Dropdown -->
     <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full shadow-xl py-6 px-6 flex-col gap-4 z-20 border-t">
-        <a href="/training/" class="text-slate-200 py-2 border-b block transition-colors">Training</a>
-        <a href="/schedule/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Schedule</a>
+        <span class="text-slate-200 py-2 border-b block font-semibold">Training</span>
+        <a href="/training_program/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Training Program</a>
+        <a href="/curriculum/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Curriculum</a>
+        <a href="/schedule/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Intensive Schedule</a>
+        <a href="/lectures-schedule/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Lectures Schedule</a>
         <a href="/teachers/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Our Teachers</a>
-        <a href="/techniques/" class="text-slate-200 py-2 border-b block transition-colors">Techniques</a>
-        <a href="/transpersonal_therapy/" class="text-slate-200 py-2 border-b block transition-colors">Transpersonal Therapy</a>
-        <a href="/TESTS/transpersonal_therapist.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ The Transpersonal Therapist</a>
+        <span class="text-slate-200 py-2 border-b block font-semibold">Transpersonal Therapy</span>
+        <a href="/TESTS/transpersonal_therapist.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ What is Transpersonal Psychology</a>
         <a href="/TESTS/client_model.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Become a Client Model</a>
+        <a href="/techniques/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Techniques</a>
+        <a href="/blog/" class="text-slate-200 py-2 border-b block transition-colors">Blog</a>
         <a href="/#contact" class="bg-amber-500 text-white px-6 py-3 rounded-md w-full mt-4 font-bold text-center block">Apply</a>
     </div>
 </nav>
@@ -159,16 +182,16 @@
     <main>
         
 <!-- Hero Section -->
-<section id="hero-section" class="relative min-h-[50vh] flex items-center justify-center text-white pt-24 pb-16 bg-indigo-950">
+<section id="hero-section" class="relative min-h-[50vh] flex items-center justify-center text-white pt-24 pb-16 bg-science-blue-900">
     <div class="absolute inset-0 bg-gradient-to-b from-transparent to-indigo-950/50 z-0"></div>
     
     <div class="container mx-auto px-6 relative z-10 text-center">
         <div class="max-w-4xl mx-auto">
             <div class="mb-6 inline-block">
-                <i data-lucide="calendar-days" class="w-16 h-16 text-amber-400 mx-auto"></i>
+                <i data-lucide="calendar-days" class="w-16 h-16 text-warm-yellow-400 mx-auto"></i>
             </div>
             <h1 class="text-3xl md:text-5xl font-serif font-bold mb-6 leading-tight">
-                Training Schedule
+                Intensive Schedule
             </h1>
             <p class="text-xl md:text-2xl text-white/80 font-light leading-relaxed max-w-3xl mx-auto">
                 Plan your journey with our upcoming training sessions and workshops
@@ -178,32 +201,32 @@
 </section>
 
 <!-- Breadcrumb -->
-<div class="bg-white border-b border-slate-200">
+<div class="bg-white border-b border-neutral-warm-200">
     <div class="container mx-auto px-6 py-4">
-        <div class="flex items-center gap-2 text-sm text-slate-600">
-            <a href="/" class="hover:text-amber-600 transition-colors">Home</a>
+        <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
+            <a href="/" class="hover:text-science-blue-600 transition-colors">Home</a>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <a href="/training/" class="hover:text-amber-600 transition-colors">Training</a>
+            <span class="text-neutral-warm-500">Training</span>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-slate-900 font-medium">Schedule</span>
+            <span class="text-science-blue-800 font-medium">Intensive Schedule</span>
         </div>
     </div>
 </div>
 
 <!-- Schedule Content -->
-<section class="py-16 bg-gradient-to-b from-white to-slate-50">
+<section class="py-16 bg-gradient-to-b from-white to-neutral-warm-50">
     <div class="container mx-auto px-6">
         <div class="max-w-5xl mx-auto">
             
             <!-- Filters Section -->
-            <div id="filters-section" class="mb-8 bg-white rounded-xl shadow-md p-6 border border-slate-200">
+            <div id="filters-section" class="mb-8 bg-white rounded-xl shadow-md p-6 border border-neutral-warm-200">
                 <!-- Header Row with Title and Clear Button -->
                 <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center gap-2 text-slate-700">
+                    <div class="flex items-center gap-2 text-neutral-warm-700">
                         <i data-lucide="filter" class="w-5 h-5"></i>
                         <h3 class="font-semibold text-lg">Filter Events</h3>
                     </div>
-                    <button id="clear-filters-btn" class="px-4 py-2 bg-slate-200 text-slate-700 rounded-lg hover:bg-slate-300 transition-colors font-medium flex items-center gap-2">
+                    <button id="clear-filters-btn" class="px-4 py-2 bg-neutral-warm-200 text-neutral-warm-700 rounded-lg hover:bg-neutral-warm-300 transition-colors font-medium flex items-center gap-2">
                         <i data-lucide="x" class="w-4 h-4"></i>
                         Clear
                     </button>
@@ -213,8 +236,8 @@
                 <div class="flex flex-wrap gap-4">
                     <!-- Period Filter -->
                     <div class="flex-1 min-w-[200px]">
-                        <label for="filter-period" class="block text-sm font-medium text-slate-600 mb-1">Period</label>
-                        <select id="filter-period" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white text-slate-700">
+                        <label for="filter-period" class="block text-sm font-medium text-neutral-warm-600 mb-1">Period</label>
+                        <select id="filter-period" class="w-full px-3 py-2 border border-neutral-warm-300 rounded-lg focus:ring-2 focus:ring-science-blue-500 focus:border-science-blue-500 bg-white text-neutral-warm-700">
                             <option value="future">Future Events</option>
                             <option value="past">Past Events</option>
                             <option value="all">All Events</option>
@@ -223,33 +246,33 @@
                     
                     <!-- Type Filter -->
                     <div class="flex-1 min-w-[200px]">
-                        <label for="filter-type" class="block text-sm font-medium text-slate-600 mb-1">Type</label>
-                        <select id="filter-type" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white text-slate-700">
+                        <label for="filter-type" class="block text-sm font-medium text-neutral-warm-600 mb-1">Type</label>
+                        <select id="filter-type" class="w-full px-3 py-2 border border-neutral-warm-300 rounded-lg focus:ring-2 focus:ring-science-blue-500 focus:border-science-blue-500 bg-white text-neutral-warm-700">
                             <option value="">All Types</option>
                         </select>
                     </div>
                     
                     <!-- Facilitator Filter -->
                     <div class="flex-1 min-w-[200px]">
-                        <label for="filter-facilitator" class="block text-sm font-medium text-slate-600 mb-1">Facilitator</label>
-                        <select id="filter-facilitator" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white text-slate-700">
+                        <label for="filter-facilitator" class="block text-sm font-medium text-neutral-warm-600 mb-1">Facilitator</label>
+                        <select id="filter-facilitator" class="w-full px-3 py-2 border border-neutral-warm-300 rounded-lg focus:ring-2 focus:ring-science-blue-500 focus:border-science-blue-500 bg-white text-neutral-warm-700">
                             <option value="">All Facilitators</option>
                         </select>
                     </div>
                     
                     <!-- Location Filter -->
                     <div class="flex-1 min-w-[200px]">
-                        <label for="filter-location" class="block text-sm font-medium text-slate-600 mb-1">Location</label>
-                        <select id="filter-location" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white text-slate-700">
+                        <label for="filter-location" class="block text-sm font-medium text-neutral-warm-600 mb-1">Location</label>
+                        <select id="filter-location" class="w-full px-3 py-2 border border-neutral-warm-300 rounded-lg focus:ring-2 focus:ring-science-blue-500 focus:border-science-blue-500 bg-white text-neutral-warm-700">
                             <option value="">All Locations</option>
                         </select>
                     </div>
                 </div>
                 
                 <!-- Active Filters Count -->
-                <div id="filter-count" class="hidden mt-4 pt-4 border-t border-slate-200">
-                    <p class="text-sm text-slate-600">
-                        Showing <span id="filtered-count" class="font-semibold text-indigo-600">0</span> of <span id="total-count" class="font-semibold">0</span> events
+                <div id="filter-count" class="hidden mt-4 pt-4 border-t border-neutral-warm-200">
+                    <p class="text-sm text-neutral-warm-600">
+                        Showing <span id="filtered-count" class="font-semibold text-science-blue-600">0</span> of <span id="total-count" class="font-semibold">0</span> events
                     </p>
                 </div>
             </div>
@@ -614,7 +637,7 @@
                                 <div class="flex-1 min-w-0">
                                     <!-- Titolo -->
                                     <h3 class="text-lg font-serif font-bold text-slate-900 group-hover:text-indigo-700 transition-colors mb-2">
-                                        Option 2: Gestalt Therapy &amp; Grof® Breathwork
+                                        Option 2: Gestalt Therapy &amp; Grof® Breathwork  
                                     </h3>
                                     
                                     <!-- Info in colonna -->
@@ -2817,10 +2840,10 @@ Biechonski: “From Regression to Progression” </span>
 
             <!-- Filtered Empty State (hidden by default, shown by JS when filters return no results) -->
             <div id="empty-filtered-state" class="hidden">
-                <div class="bg-slate-100 border border-slate-200 rounded-xl p-12 text-center">
-                    <i data-lucide="filter-x" class="w-20 h-20 text-slate-400 mx-auto mb-4"></i>
-                    <h3 class="text-2xl font-serif font-bold text-slate-700 mb-2">No Matching Events</h3>
-                    <p class="text-slate-600">Try adjusting your filters to see more results.</p>
+                <div class="bg-neutral-warm-100 border border-neutral-warm-200 rounded-xl p-12 text-center">
+                    <i data-lucide="filter-x" class="w-20 h-20 text-neutral-warm-400 mx-auto mb-4"></i>
+                    <h3 class="text-2xl font-serif font-bold text-neutral-warm-700 mb-2">No Matching Events</h3>
+                    <p class="text-neutral-warm-600">Try adjusting your filters to see more results.</p>
                 </div>
             </div>
 
@@ -2854,10 +2877,11 @@ Biechonski: “From Regression to Progression” </span>
             <div>
                 <h4 class="text-white font-semibold mb-4">Training</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="/training.html" class="hover:text-white transition-colors">Our Training</a></li>
-                    <li><a href="/schedule.html" class="hover:text-white transition-colors">Schedule</a></li>
-                    <li><a href="/teachers.html" class="hover:text-white transition-colors">Our Teachers</a></li>
-                    <li><a href="/hero_journey.html" class="hover:text-white transition-colors">Hero's Journey</a></li>
+                    <li><a href="/training_program/" class="hover:text-white transition-colors">Training Program</a></li>
+                    <li><a href="/curriculum/" class="hover:text-white transition-colors">Curriculum</a></li>
+                    <li><a href="/schedule/" class="hover:text-white transition-colors">Intensive Schedule</a></li>
+                    <li><a href="/lectures-schedule/" class="hover:text-white transition-colors">Lectures Schedule</a></li>
+                    <li><a href="/teachers/" class="hover:text-white transition-colors">Our Teachers</a></li>
                 </ul>
             </div>
 
@@ -2867,7 +2891,7 @@ Biechonski: “From Regression to Progression” </span>
                 <ul class="space-y-2 text-sm">
                     <li><a href="/techniques.html" class="hover:text-white transition-colors">Techniques</a></li>
                     <li><a href="/transpersonal_therapy.html" class="hover:text-white transition-colors">Transpersonal Therapy</a></li>
-                    <li><a href="/transpersonal_therapist.html" class="hover:text-white transition-colors">The Therapist</a></li>
+                    <li><a href="/transpersonal_therapist.html" class="hover:text-white transition-colors">What is Transpersonal Psychology</a></li>
                     <li><a href="/client_model.html" class="hover:text-white transition-colors">Become a Client Model</a></li>
                 </ul>
             </div>
@@ -2894,14 +2918,6 @@ Biechonski: “From Regression to Progression” </span>
     </div>
 </footer>
 
-
-    <!-- Fixed Theme Switcher Button -->
-    <div id="theme-switcher-fixed">
-        <div class="theme-label" id="theme-label">School Lavender</div>
-        <button id="theme-btn-fixed" title="Switch theme" aria-label="Switch color theme">
-            <i data-lucide="palette" class="w-6 h-6 text-white"></i>
-        </button>
-    </div>
 
     <!-- Main application script -->
     <script type="module" src="/scripts/main.js"></script>

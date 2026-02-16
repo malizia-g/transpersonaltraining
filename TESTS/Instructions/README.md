@@ -1,34 +1,32 @@
-# TESTS - File di Test e Documentazione
+# transpersonaltraining
 
-Questa cartella contiene file di test, varianti sperimentali e documentazione di setup non essenziale.
+## Sfondo natura (immagine + video)
 
-## File HTML di Test
+- Immagine di fallback: l'hero usa una foto natura royalty-free da Unsplash (foresta/rigagnolo).
+- Video opzionale: è predisposto un `<video>` in [index.html](index.html) che si attiva se presente un URL valido. Per impostare un video personalizzato e con licenza libera, puoi definire `window.NATURE_VIDEO_URL` (ad es. in [script.js](script.js)):
 
-### teachers_testB.html
-Variante di test della pagina teachers con layout alternativo.
+```html
+<script>
+	// Sostituisci con un tuo video MP4 (muted, loop, playsinline)
+	window.NATURE_VIDEO_URL = 'https://www.w3schools.com/howto/rain.mp4';
+</script>
+```
 
-### teachers_testC.html
-Altra variante di test della pagina teachers.
+Il video è nascosto se l’utente preferisce “ridurre movimento” (prefers-reduced-motion) o se non disponibile; in quel caso resta l’immagine.
 
-### hero_journey.html
-Pagina standalone del viaggio dell'eroe - non integrata nel flusso principale.
+### Fonti consigliate (licenze libere)
+- Coverr (video): https://coverr.co/
+- Pexels (video): https://www.pexels.com/videos/
+- Pixabay (video): https://pixabay.com/videos/
+- Unsplash (immagini): https://unsplash.com/
 
-### client_model.html
-Modello per la gestione clienti - pagina sperimentale.
+Assicurati che l’asset scelto sia utilizzabile secondo la relativa licenza.
 
-### transpersonal_therapist.html
-Pagina informativa sui terapeuti transpersonali - non ancora integrata.
+## Anteprima locale
 
-## Documentazione Setup
+Avvia un server statico e apri il sito:
 
-### GOOGLE_APPS_SCRIPT_SETUP.md
-Istruzioni per configurare l'integrazione con Google Apps Script per lo schedule.
-
-### SCHEDULE_SETUP.md
-Documentazione per il setup del sistema di calendario/appuntamenti.
-
-## Note
-
-- Questi file sono mantenuti per riferimento ma non sono parte del flusso principale del sito
-- Possono essere eliminati o migrati in futuro
-- Non sono linkati dalla navigazione principale
+```bash
+python3 -m http.server 8000
+# poi apri http://localhost:8000
+```
