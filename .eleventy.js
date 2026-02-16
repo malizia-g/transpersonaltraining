@@ -1,8 +1,26 @@
+// RIMOSSA dichiarazione superflua di module.exports
 const markdownIt = require('markdown-it');
 const fs = require('fs');
 const path = require('path');
 
 module.exports = function(eleventyConfig) {
+  // Filtro Nunjucks per formattare le date (compatibile con il template blog)
+  eleventyConfig.addNunjucksFilter('date', function(date, format = 'yyyy-MM-dd') {
+    if (!date) return '';
+    const d = new Date(date);
+    // Formattazione semplice: yyyy-MM-dd o dd MMM yyyy
+    if (format === 'yyyy-MM-dd') {
+      return d.toISOString().slice(0, 10);
+    }
+    if (format === 'dd MMM yyyy') {
+      return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    }
+    return d.toLocaleDateString();
+  });
+  // Collezione blog: tutti i markdown in src/blog/
+  eleventyConfig.addCollection('blog', function(collectionApi) {
+    return collectionApi.getFilteredByGlob('src/blog/*.md');
+  });
   // Markdown instance
   const md = markdownIt({
     html: true,
