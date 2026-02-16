@@ -65,7 +65,7 @@ layout: base.njk
             btn.textContent = 'Read more →';
           });
         });
-        // FILTRI: popola e filtra in tempo reale
+        // FILTRI: popola filtri ma NON applica filtro iniziale
         const form = document.getElementById('blog-filters');
         const cards = Array.from(document.querySelectorAll('#blog-articles article'));
         // Popola filtri
@@ -90,7 +90,7 @@ layout: base.njk
           opt.value = tag; opt.textContent = tag;
           tagSelect.appendChild(opt);
         });
-        // Filtra card
+        // Filtra card SOLO dopo interazione utente
         form.addEventListener('input', function() {
           const author = authorSelect.value;
           const tag = tagSelect.value;
