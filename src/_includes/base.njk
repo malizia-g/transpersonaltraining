@@ -51,10 +51,10 @@
     </style>
     
     <!-- Stylesheets (load first for faster rendering) -->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="style.css">
-        <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
-        <link rel="shortcut icon" type="image/svg+xml" href="assets/images/logo.svg">
+    <link rel="stylesheet" href="{{ '/css/main.css' | url }}">
+    <link rel="stylesheet" href="{{ '/style.css' | url }}">
+        <link rel="icon" type="image/svg+xml" href="{{ '/assets/images/logo.svg' | url }}">
+        <link rel="shortcut icon" type="image/svg+xml" href="{{ '/assets/images/logo.svg' | url }}">
     
     <!-- Fonts (preconnect and async load) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -85,7 +85,7 @@
     {% include "footer.njk" %}
 
     <!-- Main application script -->
-    <script type="module" src="scripts/main.js"></script>
+    <script type="module" src="{{ '/scripts/main.js' | url }}"></script>
 
     {% block scripts %}{% endblock %}
     

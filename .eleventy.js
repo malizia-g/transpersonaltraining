@@ -69,6 +69,7 @@ module.exports = function(eleventyConfig) {
   
   // Configuration
   return {
+    pathPrefix: "/transpersonaltraining/",
     dir: {
       input: "src",          // Source files
       output: "_site",       // Built site
