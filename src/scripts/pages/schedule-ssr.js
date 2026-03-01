@@ -40,7 +40,8 @@ function parseDate(dateString) {
 // Extract year from date string
 function extractYear(dateString) {
     if (!dateString) return null;
-    const parts = dateString.split('.');
+    const firstDate = dateString.split('-')[0].trim();
+    const parts = firstDate.split('.');
     if (parts.length === 3) {
         return parseInt(parts[2]);
     }
@@ -118,68 +119,20 @@ function initializeFilters() {
     const clearBtn = document.getElementById('clear-filters-btn') || document.getElementById('clear-filters');
     
     if (!cards.length) return;
-    
-    // Collect unique values
-    const years = new Set();
-    const types = new Set();
-    const facilitators = new Set();
-    const locations = new Set();
-    
-    cards.forEach(card => {
-        const year = extractYear(card.dataset.date);
-        if (year) years.add(year);
-        
-        const type = card.dataset.type;
-        if (type) types.add(type);
-        
-        const facilitator = card.dataset.facilitator;
-        if (facilitator) facilitators.add(facilitator);
-        
-        const location = card.dataset.location;
-        if (location) locations.add(location);
-    });
-    
-    // Populate year filter (sorted descending)
+
     if (filterYear) {
-        Array.from(years).sort((a, b) => b - a).forEach(year => {
-            const option = document.createElement('option');
-            option.value = year;
-            option.textContent = year;
-            filterYear.appendChild(option);
-        });
         filterYear.addEventListener('change', applyFilters);
     }
-    
-    // Populate type filter
+
     if (filterType) {
-        Array.from(types).sort().forEach(type => {
-            const option = document.createElement('option');
-            option.value = type;
-            option.textContent = type;
-            filterType.appendChild(option);
-        });
         filterType.addEventListener('change', applyFilters);
     }
-    
-    // Populate facilitator filter
+
     if (filterFacilitator) {
-        Array.from(facilitators).sort().forEach(facilitator => {
-            const option = document.createElement('option');
-            option.value = facilitator;
-            option.textContent = facilitator;
-            filterFacilitator.appendChild(option);
-        });
         filterFacilitator.addEventListener('change', applyFilters);
     }
-    
-    // Populate location filter
+
     if (filterLocation) {
-        Array.from(locations).sort().forEach(location => {
-            const option = document.createElement('option');
-            option.value = location;
-            option.textContent = location;
-            filterLocation.appendChild(option);
-        });
         filterLocation.addEventListener('change', applyFilters);
     }
     
@@ -226,7 +179,8 @@ function applyFilters() {
     cards.forEach(card => {
         const cardDate = card.dataset.date || '';
         const cardYear = extractYear(cardDate);
-        const cardType = card.dataset.type || '';
+        const cardType1 = card.dataset.type1 || '';
+        const cardType2 = card.dataset.type2 || '';
         const cardFacilitator = card.dataset.facilitator || '';
         const cardLocation = card.dataset.location || '';
         const isFuture = isFutureEvent(cardDate);
@@ -235,7 +189,7 @@ function applyFilters() {
                             (selectedPeriod === 'future' && isFuture) ||
                             (selectedPeriod === 'past' && !isFuture);
         const matchesYear = !selectedYear || cardYear == selectedYear;
-        const matchesType = !selectedType || cardType === selectedType;
+        const matchesType = !selectedType || cardType1 === selectedType || cardType2 === selectedType;
         const matchesFacilitator = !selectedFacilitator || cardFacilitator === selectedFacilitator;
         const matchesLocation = !selectedLocation || cardLocation === selectedLocation;
         
