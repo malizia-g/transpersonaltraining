@@ -1,11 +1,311 @@
-<p><strong>The History of Transpersonal Psychology</strong></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The History of Transpersonal Psychology | Transpersonal Training</title>
+    
+    <!-- Page Loader Styles (inline for immediate display) -->
+    <style>
+        #page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease-out;
+        }
+        
+        #page-loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(102, 126, 234, 0.2);
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        .loader-text {
+            color: #334155;
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin-top: 1.5rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+    
+    <!-- Stylesheets (load first for faster rendering) -->
+    <link rel="stylesheet" href="/transpersonaltraining/css/main.css">
+    <link rel="stylesheet" href="/transpersonaltraining/style.css">
+        <link rel="icon" type="image/svg+xml" href="/transpersonaltraining/assets/images/logo.svg">
+        <link rel="shortcut icon" type="image/svg+xml" href="/transpersonaltraining/assets/images/logo.svg">
+    
+    <!-- Fonts (preconnect and async load) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet"></noscript>
+    
+    <!-- Lucide Icons (defer loading) -->
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+</head>
+<body class="font-sans text-slate-800 bg-slate-50 antialiased">
+
+    <!-- Page Loader -->
+    <div id="page-loader">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading...</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 bg-transparent text-white/90">
+    <div class="container mx-auto px-6 flex justify-between items-center relative z-10">
+        <!-- Logo (Desktop Only) -->
+        <a href="/transpersonaltraining/" class="hidden md:flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <div class="w-10 h-10 flex items-center justify-center bg-amber-500 rounded-full transition-transform duration-300 group hover:rotate-180">
+                <img src="/transpersonaltraining/assets/images/logo.svg" alt="Logo" class="w-8 h-8 transition-transform duration-500 group-hover:rotate-180" style="display:block;" />
+            </div>
+            <span class="text-2xl font-serif font-bold tracking-wide text-white">
+                Transpersonal Training
+            </span>
+        </a>
+
+        <!-- Logo (Mobile Only) -->
+        <a href="/transpersonaltraining/" class="flex md:hidden items-center gap-2 hover:opacity-80 transition-opacity">
+            <div class="w-8 h-8 flex items-center justify-center bg-amber-500 rounded-full transition-transform duration-300 group hover:rotate-180">
+                <img src="/transpersonaltraining/assets/images/logo.svg" alt="Logo" class="w-6 h-6 transition-transform duration-500 group-hover:rotate-180" style="display:block;" />
+            </div>
+            <span class="text-xl font-serif font-bold tracking-wide text-white">
+                Transpersonal Training
+            </span>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-8">
+            <!-- Training Dropdown -->
+            <div class="dropdown">
+                <button type="button" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
+                    Training <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="/transpersonaltraining/training_program/" class="text-sm">
+                        <i data-lucide="compass" class="w-4 h-4 submenu-icon"></i>
+                        <span>Training Program</span>
+                    </a>
+                    <a href="/transpersonaltraining/curriculum/" class="text-sm">
+                        <i data-lucide="book-open" class="w-4 h-4 submenu-icon"></i>
+                        <span>Curriculum</span>
+                    </a>
+                    <a href="/transpersonaltraining/schedule/" class="text-sm">
+                        <i data-lucide="calendar" class="w-4 h-4 submenu-icon"></i>
+                        <span>Intensive Schedule</span>
+                    </a>
+                    <a href="/transpersonaltraining/lectures-schedule/" class="text-sm">
+                        <i data-lucide="presentation" class="w-4 h-4 submenu-icon"></i>
+                        <span>Lectures Schedule</span>
+                    </a>
+                    <a href="/transpersonaltraining/teachers/" class="text-sm">
+                        <i data-lucide="users" class="w-4 h-4 submenu-icon"></i>
+                        <span>Our Teachers</span>
+                    </a>
+                </div>
+            </div>
+
+
+            <!-- Transpersonal Therapy Dropdown (con Techniques) -->
+            <div class="dropdown">
+                <button type="button" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
+                    Transpersonal Therapy <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="text-sm">
+                        <i data-lucide="stethoscope" class="w-4 h-4 submenu-icon"></i>
+                        <span>What is Transpersonal Psychology</span>
+                    </a>
+                    <a href="/transpersonaltraining/become-a-client-model/" class="text-sm">
+                        <i data-lucide="user-check" class="w-4 h-4 submenu-icon"></i>
+                        <span>Become a Client Model</span>
+                    </a>
+                    <a href="/transpersonaltraining/techniques/index.html" class="text-sm">
+                        <i data-lucide="activity" class="w-4 h-4 submenu-icon"></i>
+                        <span>Techniques</span>
+                    </a>
+                </div>
+            </div>
+
+            <a href="/transpersonaltraining/blog/index.html" class="nav-link text-sm font-medium hover:text-amber-400 transition-colors">Blog</a>
+
+            <a href="#contact" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 rounded-full font-medium transition-transform hover:scale-105 shadow-md">Apply</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+            <i data-lucide="menu" class="w-7 h-7"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Menu Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full shadow-xl py-6 px-6 flex-col gap-4 z-20 border-t">
+        <span class="text-slate-200 py-2 border-b block font-semibold">Training</span>
+        <a href="/transpersonaltraining/training_program/index.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Training Program</a>
+        <a href="/transpersonaltraining/curriculum/index.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Curriculum</a>
+        <a href="/transpersonaltraining/schedule/index.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Intensive Schedule</a>
+        <a href="/transpersonaltraining/lectures-schedule/index.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Lectures Schedule</a>
+        <a href="/transpersonaltraining/teachers/index.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Our Teachers</a>
+        <span class="text-slate-200 py-2 border-b block font-semibold">Transpersonal Therapy</span>
+        <a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ What is Transpersonal Psychology</a>
+        <a href="/transpersonaltraining/become-a-client-model/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Become a Client Model</a>
+        <a href="/transpersonaltraining/techniques/index.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Techniques</a>
+        <a href="/transpersonaltraining/blog/index.html" class="text-slate-200 py-2 border-b block transition-colors">Blog</a>
+        <a href="#contact" class="bg-amber-500 text-white px-6 py-3 rounded-md w-full mt-4 font-bold text-center block">Apply</a>
+    </div>
+</nav>
+
+
+    <!-- Main Content -->
+    <main>
+        
+<section class="py-0 bg-white" lang="en">
+  <div class="w-full h-56 md:h-72 overflow-hidden relative mb-8">
+    <img src="/transpersonaltraining/assets/images/vineyard.jpg" alt="Blog article" class="w-full h-full object-cover object-center" loading="lazy" />
+    <div class="absolute inset-0 bg-gradient-to-b from-black/35 to-transparent"></div>
+  </div>
+
+  <div class="container mx-auto px-6 pb-16">
+    <div class="max-w-4xl mx-auto">
+      <nav class="text-sm text-neutral-warm-600 mb-6 flex items-center gap-2">
+        <a href="/transpersonaltraining/blog/" class="hover:text-science-blue-700 transition-colors">Blog</a>
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+        <span class="text-neutral-warm-800 font-medium">The History of Transpersonal Psychology</span>
+      </nav>
+
+      <div class="mb-8 text-sm text-neutral-warm-600">
+        <span>By Manal Al-Hammadi</span>
+        <span> &middot; </span>
+        <time datetime="2026-02-14">14 Feb 2026</time>
+        <div class="mt-2 text-xs text-neutral-warm-500">transpersonal, psychology, history, holistic therapy, spiritual psychotherapy, breathwork, integrative therapy</div>
+      </div>
+
+      <article class="blog-article-content max-w-none">
+        <h1>The History of Transpersonal Psychology</h1>
 <p>The history of transpersonal psychology is the story of Western psychology slowly warming up to something that contemplative traditions understood long ago: the human psyche has dimensions and depths that cannot be captured by studying only behavior or pathology. Tracing how the field emerged helps us understand not just where it came from, but why the demand for transpersonal therapy continues to grow.</p>
-<p><em>The pioneers: James, Jung, and Assagioli – 1901 – 1940s</em></p>
+<h2>The pioneers: James, Jung, and Assagioli – 1901 – 1940s</h2>
 <p>William James is often considered the grandfather of transpersonal psychology. His work The Varieties of Religious Experience (1902) argued that subjective spiritual experiences deserved serious psychological attention; a genuinely radical idea in a time where the field valued only the measurable. Remarkably, James used the term &quot;trans-personal&quot; in a 1905 lecture, long before anyone else picked it up in an academic context. Carl Jung, meanwhile, was developing his ideas about the archetypes, collective unconscious, and individuation; concepts that would become later on the pillars of transpersonal thought and essence. Roberto Assagioli, the Italian psychiatrist who created psychosynthesis, also laid the groundwork by explicitly including a spiritual dimension in his model of the psyche. Assagioli is often credited as one of the first to use the term &quot;transpersonal&quot; in a clinical context.</p>
-<p><em>The Hunger for Something More – 1950s – 1960s</em></p>
+<h2>The Hunger for Something More – 1950s – 1960s</h2>
 <p>Abraham Maslow, a central figure in humanistic psychology, grew increasingly fascinated by what he called &quot;peak experiences&quot;; moments of intense joy, unity, and transcendence that the existing frameworks could not fully explain. By the late 1960s, Maslow sensed that even humanistic psychology, with all its emphasis on self-actualization, did not go far enough in honoring the spiritual dimension of human potential. Together with Anthony Sutich and Stanislav Grof, he began working toward a &quot;fourth force&quot; in psychology, after psychoanalysis, behaviorism, and humanistic psychology (Grof, 2008). This period also saw growing interest in experiential practices like psychedelics as a catalyst for expansion and breathwork while other experiences were being explored seriously in clinical contexts.</p>
-<p><em>The Formal Formation – 1969 – 1990s</em></p>
+<h2>The Formal Formation – 1969 – 1990s</h2>
 <p>In 1969, the Journal of Transpersonal Psychology published its first issue, with Maslow and Sutich as founding editors. The Association for Transpersonal Psychology followed in 1972, and the International Transpersonal Psychology Association was established in 1973. For the first time, there was an organized institutional home, journals, associations, conferences, for studying spiritual experience, consciousness, and human growth with scholarly accuracy. This foundation made it possible for transpersonal psychology courses and education programs to develop over the following decades.</p>
 <p>Over the following decades, the field witnessed significant expansion. Institutions such as the California Institute of Integral Studies, Naropa University, Saybrook Graduate School, and JFK University began offering dedicated transpersonal psychology degree programs. Stanislav Grof's research into non-ordinary states of consciousness; particularly through his development of Holotropic Breathwork, brought body-centered experiential methods into clinical practice and laid the groundwork for modern breathwork. Ken Wilber contributed a wide-reaching philosophical model mapping human development from pre-personal to transpersonal stages. In 1993, a new diagnostic category called &quot;Religious or Spiritual Problem&quot; was approved for inclusion in the DSM-IV; a real landmark that signaled mainstream psychiatry was beginning to acknowledge what transpersonal practitioners had been working with for decades. Through all of this, holistic psychotherapy programs deepened their emphasis on self-inquiry alongside clinical skill as non-negotiable asset for the transpersonal practitioners.</p>
-<p><em>The Second Wave – 2000s – Present</em></p>
+<h2>The Second Wave – 2000s – Present</h2>
 <p>Perhaps the most important recent development is what scholars have called the &quot;second wave&quot; of transpersonal psychology. A large-scale bibliometric study by Hartelius and colleagues (2021), published in the Journal of Transpersonal Psychology, analyzed four decades of articles from the field's two principal journals. They found that the field has been gradually moving away from its original, narrower focus on altered states of consciousness toward a broader and more grounded orientation. This second wave puts bigger emphasis on understanding the whole person as part of larger living system, giving more weight to transformation rather than mere transcendence, and allows closer attention to embodiment, social context, ecology, and most importantly; diversity (Hartelius et al., 2021). David Furlong, in a 2024 paper in the Transpersonal Psychology Review, explored complementary landscape by examining how wave/particle duality in quantum physics might offer a framework for understanding transpersonal experiences of expanded consciousness; suggesting that consciousness itself may have both a bounded, &quot;particle&quot; state and an interconnected, &quot;wave&quot; state (Furlong, 2024). Meanwhile, renewed scientific interest in psychedelic-assisted therapy and the scientific acceptance of mindfulness-based interventions have brought many transpersonal ideas squarely into the mainstream. The demand for spiritual psychotherapy training and holistic therapy practitioners has never been more in demand.</p>
+
+      </article>
+
+      <div class="mt-12">
+        <a href="/transpersonaltraining/blog/" class="inline-flex items-center gap-2 text-amber-700 hover:text-amber-800 font-medium">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          Back to Blog
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300 py-16">
+    <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-4 gap-12 border-b border-slate-800 pb-12 mb-12">
+            <!-- About Column -->
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center">
+                        <i data-lucide="loader-pinwheel" class="text-white w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-white font-bold text-lg">Transpersonal Training</h3>
+                </div>
+                <p class="text-sm leading-relaxed text-slate-400">
+                    Educating therapists for a revolution of consciousness through transpersonal psychotherapy and breathwork.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 class="text-white font-semibold mb-4">Training</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="training_program/index.html" class="hover:text-white transition-colors">Training Program</a></li>
+                    <li><a href="curriculum/index.html" class="hover:text-white transition-colors">Curriculum</a></li>
+                    <li><a href="schedule/index.html" class="hover:text-white transition-colors">Intensive Schedule</a></li>
+                    <li><a href="lectures-schedule/index.html" class="hover:text-white transition-colors">Lectures Schedule</a></li>
+                    <li><a href="teachers/index.html" class="hover:text-white transition-colors">Our Teachers</a></li>
+                </ul>
+            </div>
+
+            <!-- Resources -->
+            <div>
+                <h4 class="text-white font-semibold mb-4">Resources</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="techniques.html" class="hover:text-white transition-colors">Techniques</a></li>
+                    <li><a href="transpersonal_therapy.html" class="hover:text-white transition-colors">Transpersonal Therapy</a></li>
+                    <li><a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="hover:text-white transition-colors">What is Transpersonal Psychology</a></li>
+                    <li><a href="/transpersonaltraining/become-a-client-model/" class="hover:text-white transition-colors">Become a Client Model</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h4 class="text-white font-semibold mb-4">Connect</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#contact" class="hover:text-white transition-colors">Contact Us</a></li>
+                    <li><a href="https://transpersonal-training.com" class="hover:text-white transition-colors">Main Website</a></li>
+                    <li><a href="https://transpersonal-training.com/?page_id=3" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
+            <p>&copy; 2026 transpersonal-training.com — Educating therapists for a revolution of consciousness.</p>
+            <div class="flex gap-6 mt-4 md:mt-0">
+                <a href="https://transpersonal-training.com/?page_id=3" class="hover:text-slate-300">Privacy</a>
+                <a href="https://transpersonal-training.com/agreement-appendix" class="hover:text-slate-300">Agreement</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- Main application script -->
+    <script type="module" src="/transpersonaltraining/scripts/main.js"></script>
+
+    
+    
+    <!-- Remove loader when page is fully loaded -->
+    <script>
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('page-loader');
+            if (loader) {
+                loader.classList.add('hidden');
+                setTimeout(() => loader.remove(), 300);
+            }
+        });
+    </script>
+</body>
+</html>
