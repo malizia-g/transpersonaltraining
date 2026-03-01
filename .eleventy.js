@@ -44,6 +44,21 @@ module.exports = function(eleventyConfig) {
     if (!content) return '';
     return md.render(content);
   });
+
+  // Promote standalone markdown-styled title/subtitle paragraphs to semantic headings
+  eleventyConfig.addFilter('promoteMarkdownHeadings', function(html) {
+    if (!html) return '';
+
+    let output = html;
+
+    // First standalone bold paragraph -> H1
+    output = output.replace(/<p><strong>([\s\S]*?)<\/strong><\/p>/, '<h1>$1</h1>');
+
+    // Standalone italic paragraphs -> H2
+    output = output.replace(/<p><em>([\s\S]*?)<\/em><\/p>/g, '<h2>$1</h2>');
+
+    return output;
+  });
   
   // Copy static assets to output
   eleventyConfig.addPassthroughCopy("style.css");

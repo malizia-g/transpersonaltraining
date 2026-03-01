@@ -5,7 +5,7 @@ layout: base.njk
 
 <section class="py-0 bg-white" lang="en">
   <div class="w-full h-64 md:h-80 overflow-hidden relative mb-8">
-    <img src="/assets/images/vineyard.jpg" alt="Nature" class="w-full h-full object-cover object-center" loading="lazy" />
+    <img src="{{ '/assets/images/blog-hero.jpg' | url }}" alt="Transpersonal blog cover" class="w-full h-full object-cover object-center" loading="lazy" />
     <div class="absolute inset-0 bg-gradient-to-b from-black/30 to-transparent"></div>
   </div>
   <div class="container mx-auto px-6">
@@ -29,8 +29,7 @@ layout: base.njk
         </div>
         <div class="text-xs text-neutral-warm-500 mb-2">{% if post.data.tags %}{{ post.data.tags | join(', ') }}{% endif %}</div>
         <p class="text-neutral-warm-700">{{ post.data.description }}</p>
-        <button type="button" class="mt-2 text-amber-600 hover:underline font-medium text-left read-more-btn" data-article="article-{{ loop.index }}">Read more →</button>
-        <div id="article-{{ loop.index }}" class="article-content hidden mt-4 prose prose-neutral max-w-none">{{ post.templateContent | safe }}</div>
+        <a href="{{ post.url | url }}" class="mt-2 text-amber-600 hover:underline font-medium text-left">Read more →</a>
       </article>
       {% else %}
       <p class="col-span-2 text-center text-neutral-warm-500">No articles published yet.</p>
@@ -38,33 +37,6 @@ layout: base.njk
     </div>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        // Accordion: mostra/nascondi testo articolo
-        document.querySelectorAll('.read-more-btn').forEach(function(btn) {
-          btn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            var content = document.getElementById(btn.getAttribute('data-article'));
-            // Chiudi tutti gli altri
-            document.querySelectorAll('.article-content').forEach(function(div) {
-              if (div !== content) div.classList.add('hidden');
-            });
-            if (content.classList.contains('hidden')) {
-              content.classList.remove('hidden');
-              btn.textContent = 'Read less ←';
-            } else {
-              content.classList.add('hidden');
-              btn.textContent = 'Read more →';
-            }
-          });
-        });
-        // Chiudi il testo se clicchi fuori
-        document.addEventListener('click', function(e) {
-          document.querySelectorAll('.article-content').forEach(function(div) {
-            if (!div.classList.contains('hidden')) div.classList.add('hidden');
-          });
-          document.querySelectorAll('.read-more-btn').forEach(function(btn) {
-            btn.textContent = 'Read more →';
-          });
-        });
         // FILTRI: popola filtri ma NON applica filtro iniziale
         const form = document.getElementById('blog-filters');
         const cards = Array.from(document.querySelectorAll('#blog-articles article'));

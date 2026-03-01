@@ -1,0 +1,38 @@
+---
+layout: base.njk
+---
+
+<section class="py-0 bg-white" lang="en">
+  <div class="w-full h-56 md:h-72 overflow-hidden relative mb-8">
+    <img src="{{ '/assets/images/vineyard.jpg' | url }}" alt="Blog article" class="w-full h-full object-cover object-center" loading="lazy" />
+    <div class="absolute inset-0 bg-gradient-to-b from-black/35 to-transparent"></div>
+  </div>
+
+  <div class="container mx-auto px-6 pb-16">
+    <div class="max-w-4xl mx-auto">
+      <nav class="text-sm text-neutral-warm-600 mb-6 flex items-center gap-2">
+        <a href="{{ '/blog/' | url }}" class="hover:text-science-blue-700 transition-colors">Blog</a>
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+        <span class="text-neutral-warm-800 font-medium">{{ title }}</span>
+      </nav>
+
+      <div class="mb-8 text-sm text-neutral-warm-600">
+        {% if author %}<span>By {{ author }}</span>{% endif %}
+        {% if author and page.date %}<span> &middot; </span>{% endif %}
+        {% if page.date %}<time datetime="{{ page.date | date('yyyy-MM-dd') }}">{{ page.date | date('dd MMM yyyy') }}</time>{% endif %}
+        {% if tags %}<div class="mt-2 text-xs text-neutral-warm-500">{{ tags | join(', ') }}</div>{% endif %}
+      </div>
+
+      <article class="blog-article-content max-w-none">
+        {{ content | promoteMarkdownHeadings | safe }}
+      </article>
+
+      <div class="mt-12">
+        <a href="{{ '/blog/' | url }}" class="inline-flex items-center gap-2 text-amber-700 hover:text-amber-800 font-medium">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          Back to Blog
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
