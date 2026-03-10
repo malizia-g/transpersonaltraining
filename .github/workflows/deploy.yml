@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - test-11ty
+      - testImages
   workflow_dispatch:
 
 permissions:
