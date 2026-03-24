@@ -4,6 +4,26 @@ title: Become a Client Model
 description: "Experience transpersonal therapy as a client model. Support trainee therapists while receiving supervised sessions at reduced cost."
 ---
 
+<style>
+    .student-details {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+    }
+
+    .student-card.expanded .student-details {
+        max-height: 1000px;
+    }
+
+    .expand-icon {
+        transition: transform 0.3s ease;
+    }
+
+    .student-card.expanded .expand-icon {
+        transform: rotate(180deg);
+    }
+</style>
+
 <header class="relative min-h-[50vh] flex items-center justify-center text-white pt-24 pb-16 bg-science-blue-900">
     <div class="absolute inset-0 bg-gradient-to-b from-transparent to-indigo-950/50 z-0"></div>
     <div class="container mx-auto px-6 relative z-10 text-center">
@@ -15,7 +35,7 @@ description: "Experience transpersonal therapy as a client model. Support traine
                 Become a Client Model
             </h1>
             <p class="text-xl md:text-2xl text-white/80 font-light leading-relaxed max-w-3xl mx-auto">
-                Free supervised counselling and psychotherapy sessions with therapists in training.
+                Connect directly with our third-level students for supervised counselling and psychotherapy sessions.
             </p>
         </div>
     </div>
@@ -39,13 +59,13 @@ description: "Experience transpersonal therapy as a client model. Support traine
                 <div class="flex items-start gap-3">
                     <i data-lucide="message-circle-heart" class="w-5 h-5 text-science-blue-600 mt-1 flex-shrink-0"></i>
                     <p>
-                        Joining as a client model gives you access to free counselling or free psychotherapy sessions while helping our trainees develop practical counselling skills in a safe and supervised setting.
+                        As a client model, you can choose from available third-level students and contact them directly for supervised sessions.
                     </p>
                 </div>
                 <div class="flex items-start gap-3">
                     <i data-lucide="refresh-cw" class="w-5 h-5 text-violet-600 mt-1 flex-shrink-0"></i>
                     <p>
-                        Sessions focus on real life themes such as repeating cycles, behavioural patterns, emotional blocks, and personal growth goals. All work is supervised by experienced teachers.
+                        Student profiles include spoken languages, country, skills, bio, training, practice and BTH information so you can choose the best fit.
                     </p>
                 </div>
                 <div class="flex items-start gap-3">
@@ -58,6 +78,160 @@ description: "Experience transpersonal therapy as a client model. Support traine
         </div>
     </div>
 </section>
+
+<section class="py-16 bg-neutral-warm-50">
+    <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-indigo-deep-900 mb-4">Third-Level Students Available for Client Models</h2>
+                <p class="text-neutral-warm-700 leading-relaxed max-w-3xl mx-auto">
+                    This section is populated from a spreadsheet source and lists student therapists you can contact directly.
+                </p>
+            </div>
+
+            {% if clientModels and clientModels.length %}
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for student in clientModels %}
+                <article class="student-card bg-white border border-neutral-warm-200 rounded-2xl overflow-hidden shadow-sm">
+                    {% if student.picture_link %}
+                    <img
+                        src="{{ student.picture_link }}"
+                        alt="{{ student.name }}"
+                        class="w-full h-56 object-cover"
+                        loading="lazy"
+                    >
+                    {% else %}
+                    <div class="h-56 bg-neutral-warm-100 flex items-center justify-center text-neutral-warm-500">
+                        <i data-lucide="user" class="w-10 h-10"></i>
+                    </div>
+                    {% endif %}
+
+                    <div class="p-6">
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <h3 class="text-xl font-serif font-bold text-indigo-deep-900">{{ student.name }}</h3>
+                            <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-science-blue-100 text-science-blue-800">{{ student.status }}</span>
+                        </div>
+
+                        <ul class="space-y-2 text-sm text-neutral-warm-700 mb-4">
+                            {% if student.location %}
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-science-blue-600"></i>
+                                <span>{{ student.location }}</span>
+                            </li>
+                            {% endif %}
+                            {% if student.spoken_languages %}
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="languages" class="w-4 h-4 text-violet-600"></i>
+                                <span>{{ student.spoken_languages }}</span>
+                            </li>
+                            {% endif %}
+                        </ul>
+
+                        <button
+                            type="button"
+                            class="w-full mb-4 inline-flex items-center justify-between px-4 py-2 rounded-lg border border-neutral-warm-200 text-sm font-medium text-indigo-deep-900 hover:bg-neutral-warm-50 transition-colors"
+                            onclick="toggleStudentDetails(this)"
+                            aria-expanded="false"
+                        >
+                            <span>View full profile</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 expand-icon"></i>
+                        </button>
+
+                        <div class="student-details">
+                            <ul class="space-y-2 text-sm text-neutral-warm-700 mb-4">
+                                {% if student.country %}
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="flag" class="w-4 h-4 text-emerald-600"></i>
+                                    <span>Country: {{ student.country }}</span>
+                                </li>
+                                {% endif %}
+                                {% if student.intake_date %}
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="calendar" class="w-4 h-4 text-emerald-600"></i>
+                                    <span>Intake: {{ student.intake_date }}</span>
+                                </li>
+                                {% endif %}
+                                {% if student.skills %}
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="sparkles" class="w-4 h-4 text-science-blue-600"></i>
+                                    <span>{{ student.skills }}</span>
+                                </li>
+                                {% endif %}
+                                {% if student.bth %}
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="wind" class="w-4 h-4 text-violet-600"></i>
+                                    <span>BTH: {{ student.bth }}</span>
+                                </li>
+                                {% endif %}
+                            </ul>
+
+                            {% if student.bio %}
+                            <div class="mb-3">
+                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Bio</h4>
+                                <p class="text-neutral-warm-700 leading-relaxed text-sm">{{ student.bio }}</p>
+                            </div>
+                            {% endif %}
+
+                            {% if student.training %}
+                            <div class="mb-3">
+                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Training</h4>
+                                <p class="text-neutral-warm-700 leading-relaxed text-sm">{{ student.training }}</p>
+                            </div>
+                            {% endif %}
+
+                            {% if student.practice %}
+                            <div class="mb-4">
+                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Practice</h4>
+                                <p class="text-neutral-warm-700 leading-relaxed text-sm">{{ student.practice }}</p>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="space-y-2 text-sm">
+                            {% if student.email %}
+                            <a href="mailto:{{ student.email }}" class="inline-flex items-center gap-2 text-science-blue-700 hover:text-science-blue-800 transition-colors">
+                                <i data-lucide="mail" class="w-4 h-4"></i>
+                                <span>{{ student.email }}</span>
+                            </a>
+                            {% endif %}
+                            {% if student.phone %}
+                            <p class="inline-flex items-center gap-2 text-neutral-warm-700">
+                                <i data-lucide="phone" class="w-4 h-4"></i>
+                                <span>{{ student.phone }}</span>
+                            </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="max-w-3xl mx-auto bg-white border border-neutral-warm-200 rounded-2xl p-8 text-center">
+                <p class="text-neutral-warm-700 leading-relaxed">
+                    No student records are available yet. Add rows to your spreadsheet (or cache file) to populate this section.
+                </p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% block scripts %}
+<script>
+    function toggleStudentDetails(button) {
+        const card = button.closest('.student-card');
+        const isExpanded = card.classList.toggle('expanded');
+        button.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+        button.querySelector('span').textContent = isExpanded ? 'Hide full profile' : 'View full profile';
+
+        if (isExpanded && window.matchMedia('(max-width: 768px)').matches) {
+            setTimeout(() => {
+                card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 180);
+        }
+    }
+</script>
+{% endblock %}
 
 <section class="py-16 bg-gradient-to-br from-science-blue-50 via-violet-50 to-indigo-50">
     <div class="container mx-auto px-6">
