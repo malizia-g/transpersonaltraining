@@ -21,3 +21,6 @@ yarn-error.log*
 # Environment
 .env
 .env.local
+
+# Data cache files (generated during build)
+src/_data/*.cache.json

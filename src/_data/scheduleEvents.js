@@ -1,7 +1,10 @@
 // Fetch schedule events from Google Sheets during build time
 const https = require('https');
+const fs = require('fs');
+const path = require('path');
 
 const SHEET_JSON_URL = 'https://script.google.com/macros/s/AKfycbwF4y-K0oYh0Fd78xVezCcaGf7Ac5SglXAv0SUzcBJgqeg_kRXaLix3gSad8LAgg6oR/exec';
+const CACHE_FILE = path.join(__dirname, 'scheduleEvents.cache.json');
 
 module.exports = async function() {
   try {
@@ -65,11 +68,32 @@ module.exports = async function() {
     }));
     
     console.log(`Successfully fetched ${mappedData.length} schedule events`);
+
+    // Save cache for fallback
+    try {
+      fs.writeFileSync(CACHE_FILE, JSON.stringify(mappedData, null, 2));
+      console.log('✅ Schedule cache saved');
+    } catch (cacheErr) {
+      console.warn('⚠️ Could not save schedule cache:', cacheErr.message);
+    }
+
     return mappedData;
     
   } catch (error) {
     console.error('Error fetching schedule data:', error.message);
-    // Return empty array on error so build doesn't fail
+
+    // Fall back to cached data
+    if (fs.existsSync(CACHE_FILE)) {
+      try {
+        const cached = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf-8'));
+        console.log(`⚠️ Using cached schedule data (${cached.length} events)`);
+        return cached;
+      } catch (cacheErr) {
+        console.error('❌ Cache read failed:', cacheErr.message);
+      }
+    }
+
+    // Return empty array as last resort so build doesn't fail
     return [];
   }
 };

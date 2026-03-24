@@ -6,7 +6,11 @@ on:
       - main
       - test-11ty
       - testImages
+  schedule:
+    - cron: '0 6 * * *'
   workflow_dispatch:
+  repository_dispatch:
+    types: [rebuild-schedule]
 
 permissions:
   contents: write

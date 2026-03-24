@@ -1,6 +1,0 @@
-/* Base styles */
-
-/* Imposta lo scorrimento fluido per l'intera pagina */
-html { 
-    scroll-behavior: smooth; 
-}

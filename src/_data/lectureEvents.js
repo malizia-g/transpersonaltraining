@@ -1,7 +1,10 @@
 // Fetch lecture events from Google Sheets during build time
 const https = require('https');
+const fs = require('fs');
+const path = require('path');
 
 const LECTURES_JSON_URL = 'https://script.googleusercontent.com/macros/echo?user_content_key=AY5xjrTmj2Re30CmbE7pYXzu1-pvwai-Tppy8uZBeVccAbBmN25-WrzTrkJmh20AzApzekXwqfwIp515WQcXbp5fBSniRfA-EkPt-zygQv2W6h7E9GTj-HrGn29BthHo6J_jdjMTXlKyiYsMM8dBrJUXHUShd4jtoCU9Szi1DYUorS-dc2GBkBAbcOo2UnvYal6XZDF0Q4CoqS6TvyFG11yBJAOQS3l7j51GJfk5C4Wa4yHHXYemzGHO_6hZjQ8fBli58H7RvXoCe0zSSAdQMZU4m8Yq9PWFQWVmE55e2But&lib=M1jGRTx7dxs_SyOVE98XsSQ8mHdyRNTio';
+const CACHE_FILE = path.join(__dirname, 'lectureEvents.cache.json');
 
 function fetchUrl(url) {
   return new Promise((resolve, reject) => {
@@ -57,9 +60,31 @@ module.exports = async function() {
     });
 
     console.log(`Successfully fetched ${mapped.length} lecture events`);
+
+    // Save cache for fallback
+    try {
+      fs.writeFileSync(CACHE_FILE, JSON.stringify(mapped, null, 2));
+      console.log('✅ Lecture cache saved');
+    } catch (cacheErr) {
+      console.warn('⚠️ Could not save lecture cache:', cacheErr.message);
+    }
+
     return mapped;
   } catch (error) {
     console.error('Error fetching lecture data:', error.message);
+
+    // Fall back to cached data
+    if (fs.existsSync(CACHE_FILE)) {
+      try {
+        const cached = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf-8'));
+        console.log(`⚠️ Using cached lecture data (${cached.length} events)`);
+        return cached;
+      } catch (cacheErr) {
+        console.error('❌ Cache read failed:', cacheErr.message);
+      }
+    }
+
+    // Return empty array as last resort so build doesn't fail
     return [];
   }
 };
