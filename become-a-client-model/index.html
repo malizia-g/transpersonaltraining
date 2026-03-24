@@ -208,6 +208,26 @@
     <!-- Main Content -->
     <main>
         
+<style>
+    .student-details {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+    }
+
+    .student-card.expanded .student-details {
+        max-height: 1000px;
+    }
+
+    .expand-icon {
+        transition: transform 0.3s ease;
+    }
+
+    .student-card.expanded .expand-icon {
+        transform: rotate(180deg);
+    }
+</style>
+
 <header class="relative min-h-[50vh] flex items-center justify-center text-white pt-24 pb-16 bg-science-blue-900">
     <div class="absolute inset-0 bg-gradient-to-b from-transparent to-indigo-950/50 z-0"></div>
     <div class="container mx-auto px-6 relative z-10 text-center">
@@ -219,7 +239,7 @@
                 Become a Client Model
             </h1>
             <p class="text-xl md:text-2xl text-white/80 font-light leading-relaxed max-w-3xl mx-auto">
-                Free supervised counselling and psychotherapy sessions with therapists in training.
+                Connect directly with our third-level students for supervised counselling and psychotherapy sessions.
             </p>
         </div>
     </div>
@@ -243,13 +263,13 @@
                 <div class="flex items-start gap-3">
                     <i data-lucide="message-circle-heart" class="w-5 h-5 text-science-blue-600 mt-1 flex-shrink-0"></i>
                     <p>
-                        Joining as a client model gives you access to free counselling or free psychotherapy sessions while helping our trainees develop practical counselling skills in a safe and supervised setting.
+                        As a client model, you can choose from available third-level students and contact them directly for supervised sessions.
                     </p>
                 </div>
                 <div class="flex items-start gap-3">
                     <i data-lucide="refresh-cw" class="w-5 h-5 text-violet-600 mt-1 flex-shrink-0"></i>
                     <p>
-                        Sessions focus on real life themes such as repeating cycles, behavioural patterns, emotional blocks, and personal growth goals. All work is supervised by experienced teachers.
+                        Student profiles include spoken languages, country, skills, bio, training, practice and BTH information so you can choose the best fit.
                     </p>
                 </div>
                 <div class="flex items-start gap-3">
@@ -262,6 +282,44 @@
         </div>
     </div>
 </section>
+
+<section class="py-16 bg-neutral-warm-50">
+    <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-indigo-deep-900 mb-4">Third-Level Students Available for Client Models</h2>
+                <p class="text-neutral-warm-700 leading-relaxed max-w-3xl mx-auto">
+                    This section is populated from a spreadsheet source and lists student therapists you can contact directly.
+                </p>
+            </div>
+
+            
+            <div class="max-w-3xl mx-auto bg-white border border-neutral-warm-200 rounded-2xl p-8 text-center">
+                <p class="text-neutral-warm-700 leading-relaxed">
+                    No student records are available yet. Add rows to your spreadsheet (or cache file) to populate this section.
+                </p>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+<script>
+    function toggleStudentDetails(button) {
+        const card = button.closest('.student-card');
+        const isExpanded = card.classList.toggle('expanded');
+        button.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+        button.querySelector('span').textContent = isExpanded ? 'Hide full profile' : 'View full profile';
+
+        if (isExpanded && window.matchMedia('(max-width: 768px)').matches) {
+            setTimeout(() => {
+                card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 180);
+        }
+    }
+</script>
+
 
 <section class="py-16 bg-gradient-to-br from-science-blue-50 via-violet-50 to-indigo-50">
     <div class="container mx-auto px-6">
