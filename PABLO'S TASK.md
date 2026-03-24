@@ -1,6 +1,10 @@
-# Pablo's Task — Pending Items for Phase 1
+# Pablo's Task — Pending Items
 
-These are items that need your manual action to complete the Phase 1 SEO & deployment setup. The code changes have been made — these are configuration and external service tasks.
+These are items that need your manual action. The code changes have been made — these are configuration and external service tasks.
+
+---
+
+## Phase 1 — SEO & Deployment Setup
 
 ---
 
@@ -124,11 +128,65 @@ Edit these in the `---` front matter section of each HTML file in `src/`.
 
 ---
 
+## Phase 2 — FTP Deploy to Custom Hosting
+
+### 7. 🚀 Set Up FTP Deployment
+
+**Status:** ⏳ Pending  
+**Depends on:** Phase 1 DNS setup
+
+Once Phase 1 is complete and the site builds correctly, add FTP deployment so the site is deployed to your custom hosting provider automatically on every push to `main`.
+
+**Step 1: Add GitHub Secrets**
+
+Go to **Repository Settings → Secrets and variables → Actions** and add:
+
+| Secret | Value |
+|--------|-------|
+| `FTP_SERVER` | Your hosting provider's FTP server address (e.g., `ftp.transpersonal-training.com`) |
+| `FTP_USERNAME` | Your FTP username |
+| `FTP_PASSWORD` | Your FTP password |
+
+**Step 2: Add FTP Deploy step to workflow**
+
+Add this step to `.github/workflows/deploy.yml` after the existing deploy step:
+
+```yaml
+      - name: Deploy to Custom Hosting (FTP)
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./_site/
+          server-dir: /public_html/
+```
+
+**Step 3: Test**
+1. Trigger a manual workflow run from the **Actions** tab
+2. Verify the site is accessible at `transpersonal-training.com`
+3. Check that all pages, images, and styles load correctly
+
+**Notes:**
+- Adjust `server-dir` if your hosting uses a different public directory (e.g., `/htdocs/`, `/www/`)
+- If your hosting supports SFTP, consider using `SamKirkland/FTP-Deploy-Action@v4.3.5` with `protocol: sftp` for encrypted transfers
+- Once FTP deploy is working, you can remove the GitHub Pages deploy step and the `CNAME` file if you're not using GitHub Pages
+
+---
+
 ## Summary Checklist
 
+### Phase 1 — SEO & Deployment
 - [ ] Configure DNS for `transpersonal-training.com`
 - [ ] Create OG image (`src/assets/images/og-default.jpg`, 1200×630px)
 - [ ] Set up Google Search Console and submit sitemap
 - [ ] (Optional) Add Google Analytics tracking code
 - [ ] Review and update deploy workflow branch triggers
 - [ ] Review meta descriptions for brand voice accuracy
+
+### Phase 2 — FTP Deploy
+- [ ] Get FTP credentials from hosting provider
+- [ ] Add `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD` as GitHub Secrets
+- [ ] Add FTP Deploy step to `.github/workflows/deploy.yml`
+- [ ] Test FTP deployment via manual workflow trigger
+- [ ] Verify site loads correctly on custom hosting
