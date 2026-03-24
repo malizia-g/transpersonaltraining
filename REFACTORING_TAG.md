@@ -39,14 +39,15 @@ transpersonaltraining/
 │   ├── _data/                  # Dati strutturati
 │   │   ├── coreTeachers.json   # Lista docenti core
 │   │   ├── guestTeachers.json  # Lista docenti ospiti
+│   │   ├── scheduleEvents.js   # Fetch schedule from Google Sheets (with cache fallback)
+│   │   ├── lectureEvents.js    # Fetch lectures from Google Sheets (with cache fallback)
+│   │   ├── scheduleFilters.js  # Schedule filter options
+│   │   ├── lectureFilters.js   # Lecture filter options
+│   │   ├── teachers.js         # Teachers data
 │   │   └── bios/*.md           # Biografie in Markdown
 │   │
-│   ├── styles/                 # CSS modulare
-│   │   ├── base.css            # Reset e base styles
-│   │   ├── theme.css           # Variabili temi colore
-│   │   ├── main.css            # Entry point (con @tailwind)
-│   │   └── components/
-│   │       └── navigation.css  # Stili navbar/dropdown
+│   ├── styles/                 # CSS
+│   │   └── main.css            # All styles consolidated (Tailwind + components)
 │   │
 │   ├── scripts/                # JavaScript modulare
 │   │   ├── main.js            # Entry point
@@ -55,7 +56,8 @@ transpersonaltraining/
 │   │   │   ├── navigation.js  # Menu mobile, scroll navbar
 │   │   │   └── theme-switcher.js # Sistema temi
 │   │   └── pages/             # Script specifici per pagina
-│   │       ├── schedule.js    # Google Sheets integration
+│   │       ├── schedule-ssr.js # Schedule filters (SSR)
+│   │       ├── lectures-schedule.js # Lectures filters
 │   │       └── training.js    # Animazione vine
 │   │
 │   ├── assets/                # Media files
@@ -86,11 +88,6 @@ transpersonaltraining/
 │   ├── postcss.config.js     # Config PostCSS
 │   ├── package.json          # Dependencies e scripts
 │   └── .gitignore            # Esclude _site/ e node_modules/
-│
-└── Legacy Files (compatibilità temporanea)
-    ├── teachers.html         # Da migrare a Eleventy
-    ├── style.css             # CSS per teachers.html legacy
-    └── schedule-app.js       # Usato da schedule page
 ```
 
 ### Flusso di Build
@@ -130,8 +127,8 @@ npm run serve      # Alias per dev
 ### Integrazioni Esterne
 
 **Google Sheets API:**
-- File: `schedule-app.js` (449 righe)
-- Funzione: Caricamento dinamico calendario/appuntamenti
+- File: `src/_data/scheduleEvents.js` — Fetches schedule data at build time with cache fallback
+- File: `src/_data/lectureEvents.js` — Fetches lecture data at build time with cache fallback
 - Doc setup: `TESTS/GOOGLE_APPS_SCRIPT_SETUP.md`
 
 **CDN Dependencies:**
@@ -245,38 +242,14 @@ Questo tag marca il completamento delle Fasi 1-5 del refactoring:
 
 ### Priorità ALTA (subito)
 
-#### 1. Migrare teachers.html a Eleventy
-**Problema:** teachers.html (1,445 righe) è l'unico file HTML legacy nella root
-**Soluzione:**
-```bash
-# 1. Creare src/teachers.html con front matter
-# 2. Estrarre contenuto unico
-# 3. Usare layout: base.njk
-# 4. Testare funzionalità toggle bio
-# 5. Eliminare teachers.html dalla root
-# 6. Eliminare style.css (non più necessario)
-```
-**Impatto:** Completare migrazione a 100% Eleventy, eliminare duplicazione CSS
+#### 1. ~~Migrare teachers.html a Eleventy~~ ✅ COMPLETATO
+teachers.html è stato migrato a `src/teachers.html` con layout Eleventy. Il file legacy nella root è stato rimosso.
 
-#### 2. Risolvere Duplicazione style.css
-**Problema:** `style.css` nella root duplica `src/styles/*`
-**Opzioni:**
-- A) Eliminare dopo migrazione teachers.html ✅ (consigliata)
-- B) Hook Eleventy per sync automatico
-- C) Symlink (sconsigliato, problemi con _site/ clean)
+#### 2. ~~Risolvere Duplicazione style.css~~ ✅ COMPLETATO
+`style.css` dalla root è stato consolidato in `src/styles/main.css`. Tutte le componenti CSS sono ora inline nel singolo file main.css processato da Tailwind.
 
-**Attuale:** Mantenuto temporaneamente per compatibilità teachers.html
-
-#### 3. Fissare Versioni CDN
-**Problema:** Lucide usa `@latest` = breaking changes imprevedibili
-**Soluzione:**
-```html
-<!-- Da: -->
-<script src="https://unpkg.com/lucide@latest"></script>
-
-<!-- A: -->
-<script src="https://unpkg.com/lucide@0.294.0"></script>
-```
+#### 3. ~~Fissare Versioni CDN~~ ✅ COMPLETATO
+Lucide è stato fissato a v0.344.0.
 
 ### Priorità MEDIA (prossime settimane)
 
@@ -368,10 +341,8 @@ npx husky install
 
 ## ⚠️ Known Issues
 
-### 1. Style.css Duplicato
-**Descrizione:** style.css nella root duplica src/styles/*  
-**Motivo:** Compatibilità con teachers.html legacy  
-**Fix:** Da risolvere con migrazione teachers.html
+### 1. ~~Style.css Duplicato~~ ✅ RISOLTO
+Consolidato in `src/styles/main.css`. File legacy rimosso.
 
 ### 2. Browserslist Outdated
 **Warning durante build:**
@@ -383,14 +354,11 @@ Browserslist: caniuse-lite is outdated
 npx update-browserslist-db@latest
 ```
 
-### 3. CDN Lucide @latest
-**Rischio:** Breaking changes non controllati  
-**Fix:** Specificare versione fissa (vedi TODO #3)
+### 3. ~~CDN Lucide @latest~~ ✅ RISOLTO
+Fissato a v0.344.0.
 
-### 4. File Legacy JS nella Root
-**File:** schedule-app.js (449 righe)  
-**Motivo:** Usato da schedule page tramite tag script  
-**Fix:** Migrazione a Eleventy data file in corso (vedi SCHEDULE_MIGRATION_PLAN.md)
+### 4. ~~File Legacy JS nella Root~~ ✅ RISOLTO
+`schedule-app.js` rimosso. Schedule usa ora `src/_data/scheduleEvents.js` (build-time fetch con cache fallback).
 
 ---
 

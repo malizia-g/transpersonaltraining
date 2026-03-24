@@ -180,7 +180,7 @@ The schedule migration to build-time rendering is **already working** (`schedule
 
 ### 8. 🧹 Remove Legacy Files (Automated)
 
-**Status:** ⏳ Ready to implement
+**Status:** ✅ Done
 
 These files in the root directory are no longer needed — they've been replaced by the Eleventy-based architecture:
 
@@ -196,7 +196,7 @@ These files in the root directory are no longer needed — they've been replaced
 
 ### 9. 🔄 Add Cache Fallback (Automated)
 
-**Status:** ⏳ Ready to implement
+**Status:** ✅ Done
 
 Currently, if Google Sheets is unreachable during build, `scheduleEvents.js` returns an empty array (silent failure). This means the schedule page would be blank.
 
@@ -209,7 +209,7 @@ This applies to both `scheduleEvents.js` and `lectureEvents.js`.
 
 ### 10. ⏰ Add Scheduled & Webhook Rebuilds (Automated)
 
-**Status:** ⏳ Ready to implement
+**Status:** ✅ Done
 
 Update `.github/workflows/deploy.yml` to add:
 
@@ -330,10 +330,11 @@ function triggerGitHubRebuild() {
 - [ ] Verify site loads correctly on custom hosting
 
 ### Phase 3 — Cleanup & Automation
-- [ ] (Auto) Remove legacy files from root (`teachers.html`, `style.css`, `schedule-app.js`, `schedule_data.csv`)
-- [ ] (Auto) Remove old `src/scripts/pages/schedule.js` (replaced by `schedule-ssr.js`)
-- [ ] (Auto) Add cache fallback to `scheduleEvents.js` and `lectureEvents.js`
-- [ ] (Auto) Add daily rebuild cron + webhook trigger to deploy workflow
+- [x] (Auto) Remove legacy files from root (`teachers.html`, `style.css`, `schedule-app.js`, `schedule_data.csv`)
+- [x] (Auto) Remove old `src/scripts/pages/schedule.js` (replaced by `schedule-ssr.js`)
+- [x] (Auto) Consolidate CSS: inline all component styles into `main.css`, remove separate CSS files
+- [x] (Auto) Add cache fallback to `scheduleEvents.js` and `lectureEvents.js`
+- [x] (Auto) Add daily rebuild cron + webhook trigger to deploy workflow
 - [ ] (Pablo) Set up Google Apps Script rebuild button in spreadsheet
 - [ ] (Pablo) Create GitHub Personal Access Token for rebuild webhook
 - [ ] (Pablo) Decide on TESTS/ files: keep, migrate, or remove

@@ -7,7 +7,7 @@ on:
       - test-11ty
       - testImages
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '0 6 * * *'      # Daily rebuild at 6:00 UTC (8:00 CET / 7:00 GMT)
   workflow_dispatch:
   repository_dispatch:
     types: [rebuild-schedule]
