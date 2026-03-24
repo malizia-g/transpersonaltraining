@@ -1,32 +1,47 @@
 # transpersonaltraining
 
-## Sfondo natura (immagine + video)
+Professional transpersonal psychotherapy training website built with Eleventy + Tailwind CSS.
 
-- Immagine di fallback: l'hero usa una foto natura royalty-free da Unsplash (foresta/rigagnolo).
-- Video opzionale: è predisposto un `<video>` in [index.html](index.html) che si attiva se presente un URL valido. Per impostare un video personalizzato e con licenza libera, puoi definire `window.NATURE_VIDEO_URL` (ad es. in [script.js](script.js)):
-
-```html
-<script>
-	// Sostituisci con un tuo video MP4 (muted, loop, playsinline)
-	window.NATURE_VIDEO_URL = 'https://www.w3schools.com/howto/rain.mp4';
-</script>
-```
-
-Il video è nascosto se l’utente preferisce “ridurre movimento” (prefers-reduced-motion) o se non disponibile; in quel caso resta l’immagine.
-
-### Fonti consigliate (licenze libere)
-- Coverr (video): https://coverr.co/
-- Pexels (video): https://www.pexels.com/videos/
-- Pixabay (video): https://pixabay.com/videos/
-- Unsplash (immagini): https://unsplash.com/
-
-Assicurati che l’asset scelto sia utilizzabile secondo la relativa licenza.
-
-## Anteprima locale
-
-Avvia un server statico e apri il sito:
+## Quick Start
 
 ```bash
-python3 -m http.server 8000
-# poi apri http://localhost:8000
+npm install
+npm run dev        # Development (watch mode)
+npm run build      # Production build
 ```
+
+## Documentation
+
+All project documentation is in the [`docs/`](docs/) folder:
+
+| File | Description |
+|------|-------------|
+| [DOCUMENTATION.md](docs/DOCUMENTATION.md) | Architecture, build process, design system, integrations |
+| [FUTURE_IDEAS.md](docs/FUTURE_IDEAS.md) | Planned improvements and proposals |
+| [PABLO_TASKS.md](docs/PABLO_TASKS.md) | Pending manual tasks (DNS, FTP, Google setup) |
+
+## Stack
+
+- **Eleventy** 3.1.2 — Static site generator
+- **Tailwind CSS** 3.4.19 — Utility-first CSS
+- **Nunjucks** — Template engine
+- **Lucide** v0.344.0 — Icon library (CDN)
+- **Google Sheets** — Schedule/lecture data (fetched at build time)
+
+## Deploy
+
+Automated via GitHub Actions (`.github/workflows/deploy.yml`):
+- Push to `main` → build and deploy
+- Daily rebuild at 06:00 UTC
+- Manual trigger from GitHub Actions or Google Sheets button
+
+## Nature Background (image + video)
+
+The hero section uses a royalty-free nature photo from Unsplash as fallback. An optional `<video>` element activates if a valid URL is provided. The video is hidden if the user prefers reduced motion.
+
+### Recommended free sources
+- [Coverr](https://coverr.co/) (video)
+- [Pexels](https://www.pexels.com/videos/) (video)
+- [Pixabay](https://pixabay.com/videos/) (video)
+- [Unsplash](https://unsplash.com/) (images)
+

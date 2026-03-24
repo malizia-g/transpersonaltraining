@@ -1,4 +1,4 @@
-# Pablo's Task — Pending Items
+# Pablo's Tasks — Pending Items
 
 These are items that need your manual action. The code changes have been made — these are configuration and external service tasks.
 
@@ -33,7 +33,7 @@ You need to configure DNS records to point `transpersonal-training.com` to your 
 1. Configure DNS to point to your hosting provider's IP
 2. Upload the `_site/` folder contents to your web server's public directory
 3. A `CNAME` file has been added to `src/` — remove it if not using GitHub Pages
-4. You may need to set up FTP deployment in `.github/workflows/deploy.yml` (see Phase 2 in `SCHEDULE_MIGRATION_PLAN.md`)
+4. You may need to set up FTP deployment (see Phase 2 below)
 
 ---
 
@@ -176,60 +176,10 @@ Add this step to `.github/workflows/deploy.yml` after the existing deploy step:
 
 ## Phase 3 — Cleanup & Automation
 
-The schedule migration to build-time rendering is **already working** (`scheduleEvents.js` fetches from Google Sheets at build time, `schedule.html` pre-renders events server-side, `schedule-ssr.js` handles client-side filtering). Phase 3 finishes the job by removing legacy files, adding resilience, and setting up automated rebuilds.
-
-### 8. 🧹 Remove Legacy Files (Automated)
-
-**Status:** ✅ Done
-
-These files in the root directory are no longer needed — they've been replaced by the Eleventy-based architecture:
-
-| File | Lines | Replaced by |
-|------|-------|-------------|
-| `teachers.html` | 1,358 | `src/teachers.html` (Eleventy layout) |
-| `style.css` | 177 | `src/styles/` + Tailwind CSS |
-| `schedule-app.js` | 448 | `src/_data/scheduleEvents.js` + `schedule-ssr.js` |
-| `schedule_data.csv` | — | Google Sheets (live data source) |
-| `src/scripts/pages/schedule.js` | — | `src/scripts/pages/schedule-ssr.js` |
-
-**Action:** These can be deleted in a single commit. No other files reference them.
-
-### 9. 🔄 Add Cache Fallback (Automated)
-
-**Status:** ✅ Done
-
-Currently, if Google Sheets is unreachable during build, `scheduleEvents.js` returns an empty array (silent failure). This means the schedule page would be blank.
-
-**Improvement:**
-- Save fetched data to `src/_data/scheduleEvents.cache.json` on successful fetch
-- If fetch fails, fall back to cached data
-- Add cache file to `.gitignore` locally but commit it via GitHub Actions so it's always available
-
-This applies to both `scheduleEvents.js` and `lectureEvents.js`.
-
-### 10. ⏰ Add Scheduled & Webhook Rebuilds (Automated)
-
-**Status:** ✅ Done
-
-Update `.github/workflows/deploy.yml` to add:
-
-```yaml
-on:
-  push:
-    branches: [main]
-  schedule:
-    - cron: '0 6 * * *'      # Daily rebuild at 6:00 UTC
-  workflow_dispatch:            # Manual trigger (already exists)
-  repository_dispatch:
-    types: [rebuild-schedule]   # Webhook from Google Sheets
-```
-
-This ensures schedule data stays fresh even without manual pushes.
-
-### 11. 📊 Google Apps Script Rebuild Button (Pablo)
+### 8. 📊 Google Apps Script Rebuild Button
 
 **Status:** ⏳ Pending (manual setup)  
-**Depends on:** Step 10 (webhook trigger) + GitHub Personal Access Token
+**Depends on:** GitHub Personal Access Token
 
 Add a "🔄 Rebuild Website" button to the Google Sheets spreadsheet so schedule changes can be pushed to the live site with one click.
 
@@ -278,7 +228,7 @@ function triggerGitHubRebuild() {
       }
     );
     if (result.getResponseCode() === 204) {
-      ui.alert('✅ Rebuild started!\\n\\nThe site will be updated in 2-3 minutes.\\n\\nCheck: https://github.com/' + GITHUB_REPO + '/actions');
+      ui.alert('✅ Rebuild started!\n\nThe site will be updated in 2-3 minutes.\n\nCheck: https://github.com/' + GITHUB_REPO + '/actions');
     } else {
       throw new Error('Response: ' + result.getResponseCode());
     }
@@ -290,25 +240,17 @@ function triggerGitHubRebuild() {
 
 4. Save, reload the spreadsheet → "🌐 Website" menu appears
 
-### 12. 📁 Decide on TESTS/ and Root Docs (Pablo)
+### 9. 📁 Decide on TESTS/ Experimental Pages
 
 **Status:** ⏳ Decision needed
 
-**TESTS/ directory** contains experimental pages. Please decide for each:
+The `TESTS/` directory contains experimental HTML pages. Please decide for each:
 
 | File | Size | Decision needed |
 |------|------|-----------------|
 | `hero_journey.html` | 48KB | Keep as page? Integrate into site? Delete? |
 | `client_model.html` | 18KB | Already migrated to `src/client-model.html`? If so, delete |
 | `transpersonal_therapist.html` | 21KB | Integrate or delete? |
-| `Instructions/` | — | Keep for reference? Move to docs/? |
-| `idee future/` | — | Keep for planning? |
-
-**Root markdown files** — consider moving to a `docs/` folder:
-- `COLOR_PALETTE.md`, `COLOR_PALETTE_IMPLEMENTATION.md`
-- `Commitment - Team Roles.md`
-- `What is transpersonal psychology.md`
-- `SCHEDULE_MIGRATION_PLAN.md` (can be archived after Phase 3 completion)
 
 ---
 
@@ -330,12 +272,12 @@ function triggerGitHubRebuild() {
 - [ ] Verify site loads correctly on custom hosting
 
 ### Phase 3 — Cleanup & Automation
-- [x] (Auto) Remove legacy files from root (`teachers.html`, `style.css`, `schedule-app.js`, `schedule_data.csv`)
-- [x] (Auto) Remove old `src/scripts/pages/schedule.js` (replaced by `schedule-ssr.js`)
-- [x] (Auto) Consolidate CSS: inline all component styles into `main.css`, remove separate CSS files
-- [x] (Auto) Add cache fallback to `scheduleEvents.js` and `lectureEvents.js`
-- [x] (Auto) Add daily rebuild cron + webhook trigger to deploy workflow
+- [x] (Auto) Remove legacy files from root
+- [x] (Auto) Remove old `schedule.js` (replaced by `schedule-ssr.js`)
+- [x] (Auto) Consolidate CSS into `main.css`
+- [x] (Auto) Add cache fallback to data fetchers
+- [x] (Auto) Add daily rebuild cron + webhook trigger
+- [x] (Auto) Consolidate documentation into `docs/` folder
 - [ ] (Pablo) Set up Google Apps Script rebuild button in spreadsheet
 - [ ] (Pablo) Create GitHub Personal Access Token for rebuild webhook
-- [ ] (Pablo) Decide on TESTS/ files: keep, migrate, or remove
-- [ ] (Pablo) Clean up root markdown files (move docs to `docs/` folder?)
+- [ ] (Pablo) Decide on TESTS/ experimental HTML pages: keep, migrate, or remove
