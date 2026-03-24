@@ -3,6 +3,7 @@ name: Build and Deploy 11ty
 on:
   push:
     branches:
+      - main
       - test-11ty
       - testImages
   workflow_dispatch:

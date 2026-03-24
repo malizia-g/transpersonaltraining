@@ -17,6 +17,11 @@ module.exports = function(eleventyConfig) {
     }
     return d.toLocaleDateString();
   });
+  // Filter to check if a string starts with a prefix (used in sitemap)
+  eleventyConfig.addFilter('startsWith', function(str, prefix) {
+    if (!str || !prefix) return false;
+    return str.startsWith(prefix);
+  });
   // Collezione blog: tutti i markdown in src/blog/
   eleventyConfig.addCollection('blog', function(collectionApi) {
     return collectionApi.getFilteredByGlob('src/blog/*.md');
@@ -63,6 +68,7 @@ module.exports = function(eleventyConfig) {
   // Copy static assets to output
   eleventyConfig.addPassthroughCopy("style.css");
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
+  eleventyConfig.addPassthroughCopy({ "src/CNAME": "CNAME" });
   
   // Copy new scripts structure
   eleventyConfig.addPassthroughCopy({ "src/scripts": "scripts" });
@@ -84,7 +90,7 @@ module.exports = function(eleventyConfig) {
   
   // Configuration
   return {
-    pathPrefix: "/transpersonaltraining/",
+    pathPrefix: "/",
     dir: {
       input: "src",          // Source files
       output: "_site",       // Built site
