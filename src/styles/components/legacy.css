@@ -1,6 +1,7 @@
-/* style.css */
+/* Legacy styles migrated from root style.css */
+/* These styles were originally in the root style.css and are now part of the Tailwind build pipeline */
 
-/* Imposta lo scorrimento fluido per l'intera pagina */
+/* Smooth scrolling */
 html { scroll-behavior: smooth; }
 
 /* Theme color variables - Scientific Blue only */

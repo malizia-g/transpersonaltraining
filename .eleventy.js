@@ -66,24 +66,16 @@ module.exports = function(eleventyConfig) {
   });
   
   // Copy static assets to output
-  eleventyConfig.addPassthroughCopy("style.css");
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "src/CNAME": "CNAME" });
   
   // Copy new scripts structure
   eleventyConfig.addPassthroughCopy({ "src/scripts": "scripts" });
   
-  // Legacy JS files (for backwards compatibility with non-Eleventy pages)
-  eleventyConfig.addPassthroughCopy("schedule-app.js");
-  
-  // Legacy HTML page (to be migrated)
-  eleventyConfig.addPassthroughCopy("teachers.html");
-  
   // Test files (optional, in TESTS folder)
   eleventyConfig.addPassthroughCopy({ "TESTS": "TESTS" });
   
   // Watch for changes
-  eleventyConfig.addWatchTarget("style.css");
   eleventyConfig.addWatchTarget("src/styles/**/*.css");
   eleventyConfig.addWatchTarget("src/scripts/**/*.js");
   eleventyConfig.addWatchTarget("src/assets/**/*");

@@ -7,6 +7,7 @@
 @import './base.css';
 @import './theme.css';
 @import './components/navigation.css';
+@import './components/legacy.css';
 
 /* Schedule page - Description preview/expand */
 .description-preview {
