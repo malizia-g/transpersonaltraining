@@ -281,3 +281,4 @@ The `TESTS/` directory contains experimental HTML pages. Please decide for each:
 - [ ] (Pablo) Set up Google Apps Script rebuild button in spreadsheet
 - [ ] (Pablo) Create GitHub Personal Access Token for rebuild webhook
 - [ ] (Pablo) Decide on TESTS/ experimental HTML pages: keep, migrate, or remove
+- [ ] (Pablo) Re-add `src/CNAME` with `transpersonal-training.com` before merging `test-11ty` into `main` (removed temporarily for GitHub Pages preview)
