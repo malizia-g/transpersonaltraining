@@ -212,11 +212,31 @@ Schedule and lecture data is fetched from Google Sheets **at build time** (not c
 
 - `src/_data/scheduleEvents.js` — fetches schedule events
 - `src/_data/lectureEvents.js` — fetches lecture events
+- `src/_data/clientModels.js` — fetches client model/student therapist records
 
 Both use a **cache fallback** mechanism:
 1. On successful fetch → save to `*.cache.json`
 2. On fetch failure → read from cache
 3. If no cache available → return `[]`
+
+### Procedure For Adding New Student Profiles
+
+To add a new student to the “Become a Client Model” page:
+
+1. Add a new row in the source spreadsheet.
+2. Fill in the student fields using the existing column headers.
+3. Set the `id` column with a unique slug, for example `anna-keller`.
+4. Upload the student image to the shared Google Drive folder used for student images.
+5. Name the image file exactly like the student `id`, for example `anna-keller.jpg`.
+6. If no image is available yet, the site will fall back to `default.png`.
+7. Save the spreadsheet row and trigger the website rebuild if needed.
+
+Operational rules:
+
+- keep one image per student in the shared Drive folder
+- keep the filename aligned with the spreadsheet `id`
+- use lowercase ids with hyphens for consistency
+- if you manually provide a `picture_link`, it overrides the automatic image lookup
 
 Cache files are gitignored locally but committed by GitHub Actions.
 
