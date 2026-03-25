@@ -95,7 +95,7 @@ description: "Experience transpersonal therapy as a client model. Support traine
                 <article class="student-card bg-white border border-neutral-warm-200 rounded-2xl overflow-hidden shadow-sm">
                     {% if student.picture_link %}
                     <img
-                        src="{{ student.picture_link }}"
+                        src="{{ student.picture_link | url }}"
                         alt="{{ student.name }}"
                         class="w-full h-56 object-cover"
                         loading="lazy"

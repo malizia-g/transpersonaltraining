@@ -34,6 +34,8 @@ jobs:
       
       - name: Build 11ty site
         run: npm run build
+        env:
+          PATH_PREFIX: /transpersonaltraining/
       
       - name: Deploy to deploy branch
         uses: peaceiris/actions-gh-pages@v3
