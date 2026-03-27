@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Fetch client models from Google Apps Script during build time
-const SHEET_JSON_URL = 'https://script.googleusercontent.com/macros/echo?user_content_key=AWDtjMUyuiyYlfHt7pCtAor5otKhxtCfq0znz09ZOo9ErtGhaeSYpcKSgDBq0rF0mIj3DfMdMJgVAQ8zYjlIiwA3XC_YkxgBntldx8y2qJ0tIiytQ6q09h2OT4r0MjTspLq8qQcg6xqKJcpdtz2omby3K_0doLkKlgwNrE7LMwFQ1QehCBsOd-0TnIU3ZZRfoUqXqGIpBR3mhLn0ZHa9nG14nFJI-2-U-Bnnh9sH2ppYXHJ7JGWWfDYlxm1UGQ0CDd2UBMTpK8bYwpeWMGnALGsyvGojC8pxzwoJ_s7vwWcS&lib=MPEuo3nRl8JayOBpeNZqAjw8mHdyRNTio';
+const SHEET_JSON_URL = 'https://script.google.com/macros/s/AKfycbzyBD_kWrr6irrQcMSwOFtHxip3rfYpc1_2q0oscmKCHLJVFFSiGd4zAzsikgbXTEXKow/exec';
 const CACHE_FILE = path.join(__dirname, 'clientModels.cache.json');
 const IMAGES_OUTPUT_DIR = path.join(__dirname, '../../_site/assets/images/people/students');
 const LOCAL_IMAGE_PATH = '/assets/images/people/students';

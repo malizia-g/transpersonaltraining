@@ -3,7 +3,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-const LECTURES_JSON_URL = 'https://script.googleusercontent.com/macros/echo?user_content_key=AY5xjrTmj2Re30CmbE7pYXzu1-pvwai-Tppy8uZBeVccAbBmN25-WrzTrkJmh20AzApzekXwqfwIp515WQcXbp5fBSniRfA-EkPt-zygQv2W6h7E9GTj-HrGn29BthHo6J_jdjMTXlKyiYsMM8dBrJUXHUShd4jtoCU9Szi1DYUorS-dc2GBkBAbcOo2UnvYal6XZDF0Q4CoqS6TvyFG11yBJAOQS3l7j51GJfk5C4Wa4yHHXYemzGHO_6hZjQ8fBli58H7RvXoCe0zSSAdQMZU4m8Yq9PWFQWVmE55e2But&lib=M1jGRTx7dxs_SyOVE98XsSQ8mHdyRNTio';
+const LECTURES_JSON_URL = 'https://script.google.com/macros/s/AKfycbwr2rE4dFTkQ5ZJzHewA9jBxYmAbxgqTOX-Kd20dNyDi7xbkGWjOFBjdrhHEF0yK-9Ucg/exec';
 const CACHE_FILE = path.join(__dirname, 'lectureEvents.cache.json');
 
 function fetchUrl(url) {
