@@ -294,10 +294,656 @@
             </div>
 
             
-            <div class="max-w-3xl mx-auto bg-white border border-neutral-warm-200 rounded-2xl p-8 text-center">
-                <p class="text-neutral-warm-700 leading-relaxed">
-                    No student records are available yet. Add rows to your spreadsheet (or cache file) to populate this section.
-                </p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <article class="student-card bg-white border border-neutral-warm-200 rounded-2xl overflow-hidden shadow-sm">
+                    
+                    <img
+                        src="/transpersonaltraining/assets/images/people/students/anna-keller.png"
+                        alt="Anna Keller"
+                        class="w-full h-56 object-cover"
+                        loading="lazy"
+                    >
+                    
+
+                    <div class="p-6">
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <h3 class="text-xl font-serif font-bold text-indigo-deep-900">Anna Keller</h3>
+                            <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-science-blue-100 text-science-blue-800">active</span>
+                        </div>
+
+                        <ul class="space-y-2 text-sm text-neutral-warm-700 mb-4">
+                            
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-science-blue-600"></i>
+                                <span>Germany</span>
+                            </li>
+                            
+                            
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="languages" class="w-4 h-4 text-violet-600"></i>
+                                <span>German, English</span>
+                            </li>
+                            
+                        </ul>
+
+                        <button
+                            type="button"
+                            class="w-full mb-4 inline-flex items-center justify-between px-4 py-2 rounded-lg border border-neutral-warm-200 text-sm font-medium text-indigo-deep-900 hover:bg-neutral-warm-50 transition-colors"
+                            onclick="toggleStudentDetails(this)"
+                            aria-expanded="false"
+                        >
+                            <span>View full profile</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 expand-icon"></i>
+                        </button>
+
+                        <div class="student-details">
+                            <ul class="space-y-2 text-sm text-neutral-warm-700 mb-4">
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="flag" class="w-4 h-4 text-emerald-600"></i>
+                                    <span>Country: Germany</span>
+                                </li>
+                                
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="calendar" class="w-4 h-4 text-emerald-600"></i>
+                                    <span>Intake: Sat Dec 30 1899 22:34:46 GMT+0100 (Central European Standard Time)</span>
+                                </li>
+                                
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="sparkles" class="w-4 h-4 text-science-blue-600"></i>
+                                    <span>Trauma-informed presence, Somatic awareness</span>
+                                </li>
+                                
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="wind" class="w-4 h-4 text-violet-600"></i>
+                                    <span>BTH: Breathwork practitioner (training track)</span>
+                                </li>
+                                
+                            </ul>
+
+                            
+                            <div class="mb-3">
+                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Bio</h4>
+                                <p class="text-neutral-warm-700 leading-relaxed text-sm">Third-level student currently seeing model clients in a structured supervision track.</p>
+                            </div>
+                            
+
+                            
+                            <div class="mb-3">
+                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Training</h4>
+                                <p class="text-neutral-warm-700 leading-relaxed text-sm">Training includes relational counselling, archetypal approaches, and assessment.</p>
+                            </div>
+                            
+
+                            
+                            <div class="mb-4">
+                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Practice</h4>
+                                <p class="text-neutral-warm-700 leading-relaxed text-sm">Provides short-term process work with clear goals and follow-up.</p>
+                            </div>
+                            
+                        </div>
+
+                        <div class="space-y-2 text-sm">
+                            
+                            <a href="mailto:anna.keller@example.com" class="inline-flex items-center gap-2 text-science-blue-700 hover:text-science-blue-800 transition-colors">
+                                <i data-lucide="mail" class="w-4 h-4"></i>
+                                <span>anna.keller@example.com</span>
+                            </a>
+                            
+                            
+                            <p class="inline-flex items-center gap-2 text-neutral-warm-700">
+                                <i data-lucide="phone" class="w-4 h-4"></i>
+                                <span>+49 170 123 4567</span>
+                            </p>
+                            
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="student-card bg-white border border-neutral-warm-200 rounded-2xl overflow-hidden shadow-sm">
+                    
+                    <img
+                        src="/transpersonaltraining/assets/images/people/students/sofia-marin.png"
+                        alt="Sofia Marin"
+                        class="w-full h-56 object-cover"
+                        loading="lazy"
+                    >
+                    
+
+                    <div class="p-6">
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <h3 class="text-xl font-serif font-bold text-indigo-deep-900">Sofia Marin</h3>
+                            <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-science-blue-100 text-science-blue-800">active</span>
+                        </div>
+
+                        <ul class="space-y-2 text-sm text-neutral-warm-700 mb-4">
+                            
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-science-blue-600"></i>
+                                <span>Romania</span>
+                            </li>
+                            
+                            
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="languages" class="w-4 h-4 text-violet-600"></i>
+                                <span>Romanian, English</span>
+                            </li>
+                            
+                        </ul>
+
+                        <button
+                            type="button"
+                            class="w-full mb-4 inline-flex items-center justify-between px-4 py-2 rounded-lg border border-neutral-warm-200 text-sm font-medium text-indigo-deep-900 hover:bg-neutral-warm-50 transition-colors"
+                            onclick="toggleStudentDetails(this)"
+                            aria-expanded="false"
+                        >
+                            <span>View full profile</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 expand-icon"></i>
+                        </button>
+
+                        <div class="student-details">
+                            <ul class="space-y-2 text-sm text-neutral-warm-700 mb-4">
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="flag" class="w-4 h-4 text-emerald-600"></i>
+                                    <span>Country: Romania</span>
+                                </li>
+                                
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="calendar" class="w-4 h-4 text-emerald-600"></i>
+                                    <span>Intake: Sat Dec 30 1899 04:36:46 GMT+0100 (Central European Standard Time)</span>
+                                </li>
+                                
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="sparkles" class="w-4 h-4 text-science-blue-600"></i>
+                                    <span>Life transition support, Reflective dialogue</span>
+                                </li>
+                                
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="wind" class="w-4 h-4 text-violet-600"></i>
+                                    <span>BTH: Breathwork support participant</span>
+                                </li>
+                                
+                            </ul>
+
+                            
+                            <div class="mb-3">
+                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Bio</h4>
+                                <p class="text-neutral-warm-700 leading-relaxed text-sm">Third-level student working with clients on identity, direction, and emotional patterns.</p>
+                            </div>
+                            
+
+                            
+                            <div class="mb-3">
+                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Training</h4>
+                                <p class="text-neutral-warm-700 leading-relaxed text-sm">Completed third-level seminars on transpersonal counselling methods.</p>
+                            </div>
+                            
+
+                            
+                            <div class="mb-4">
+                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Practice</h4>
+                                <p class="text-neutral-warm-700 leading-relaxed text-sm">Runs supervised sessions for personal growth and integration.</p>
+                            </div>
+                            
+                        </div>
+
+                        <div class="space-y-2 text-sm">
+                            
+                            <a href="mailto:sofia.marin@example.com" class="inline-flex items-center gap-2 text-science-blue-700 hover:text-science-blue-800 transition-colors">
+                                <i data-lucide="mail" class="w-4 h-4"></i>
+                                <span>sofia.marin@example.com</span>
+                            </a>
+                            
+                            
+                            <p class="inline-flex items-center gap-2 text-neutral-warm-700">
+                                <i data-lucide="phone" class="w-4 h-4"></i>
+                                <span>+40 722 101 202</span>
+                            </p>
+                            
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="student-card bg-white border border-neutral-warm-200 rounded-2xl overflow-hidden shadow-sm">
+                    
+                    <img
+                        src="/transpersonaltraining/assets/images/people/students/luca-bianchi.png"
+                        alt="Luca Bianchi"
+                        class="w-full h-56 object-cover"
+                        loading="lazy"
+                    >
+                    
+
+                    <div class="p-6">
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <h3 class="text-xl font-serif font-bold text-indigo-deep-900">Luca Bianchi</h3>
+                            <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-science-blue-100 text-science-blue-800">approved</span>
+                        </div>
+
+                        <ul class="space-y-2 text-sm text-neutral-warm-700 mb-4">
+                            
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-science-blue-600"></i>
+                                <span>Switzerland</span>
+                            </li>
+                            
+                            
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="languages" class="w-4 h-4 text-violet-600"></i>
+                                <span>Italian, English, German</span>
+                            </li>
+                            
+                        </ul>
+
+                        <button
+                            type="button"
+                            class="w-full mb-4 inline-flex items-center justify-between px-4 py-2 rounded-lg border border-neutral-warm-200 text-sm font-medium text-indigo-deep-900 hover:bg-neutral-warm-50 transition-colors"
+                            onclick="toggleStudentDetails(this)"
+                            aria-expanded="false"
+                        >
+                            <span>View full profile</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 expand-icon"></i>
+                        </button>
+
+                        <div class="student-details">
+                            <ul class="space-y-2 text-sm text-neutral-warm-700 mb-4">
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="flag" class="w-4 h-4 text-emerald-600"></i>
+                                    <span>Country: Switzerland</span>
+                                </li>
+                                
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="calendar" class="w-4 h-4 text-emerald-600"></i>
+                                    <span>Intake: Sat Dec 30 1899 06:35:46 GMT+0100 (Central European Standard Time)</span>
+                                </li>
+                                
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="sparkles" class="w-4 h-4 text-science-blue-600"></i>
+                                    <span>Shadow work basics, Grounding techniques</span>
+                                </li>
+                                
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="wind" class="w-4 h-4 text-violet-600"></i>
+                                    <span>BTH: Breathwork facilitation in supervised settings</span>
+                                </li>
+                                
+                            </ul>
+
+                            
+                            <div class="mb-3">
+                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Bio</h4>
+                                <p class="text-neutral-warm-700 leading-relaxed text-sm">Third-level student with interest in integration after intensive experiences.</p>
+                            </div>
+                            
+
+                            
+                            <div class="mb-3">
+                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Training</h4>
+                                <p class="text-neutral-warm-700 leading-relaxed text-sm">Advanced training in transpersonal process facilitation and ethics.</p>
+                            </div>
+                            
+
+                            
+                            <div class="mb-4">
+                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Practice</h4>
+                                <p class="text-neutral-warm-700 leading-relaxed text-sm">Supports clients in growth-oriented and integration-focused sessions.</p>
+                            </div>
+                            
+                        </div>
+
+                        <div class="space-y-2 text-sm">
+                            
+                            <a href="mailto:luca.bianchi@example.com" class="inline-flex items-center gap-2 text-science-blue-700 hover:text-science-blue-800 transition-colors">
+                                <i data-lucide="mail" class="w-4 h-4"></i>
+                                <span>luca.bianchi@example.com</span>
+                            </a>
+                            
+                            
+                            <p class="inline-flex items-center gap-2 text-neutral-warm-700">
+                                <i data-lucide="phone" class="w-4 h-4"></i>
+                                <span>+39 347 555 8899</span>
+                            </p>
+                            
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="student-card bg-white border border-neutral-warm-200 rounded-2xl overflow-hidden shadow-sm">
+                    
+                    <img
+                        src="/transpersonaltraining/assets/images/people/students/maria-rossi.png"
+                        alt="Maria Rossi"
+                        class="w-full h-56 object-cover"
+                        loading="lazy"
+                    >
+                    
+
+                    <div class="p-6">
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <h3 class="text-xl font-serif font-bold text-indigo-deep-900">Maria Rossi</h3>
+                            <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-science-blue-100 text-science-blue-800">pending</span>
+                        </div>
+
+                        <ul class="space-y-2 text-sm text-neutral-warm-700 mb-4">
+                            
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-science-blue-600"></i>
+                                <span>Italy</span>
+                            </li>
+                            
+                            
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="languages" class="w-4 h-4 text-violet-600"></i>
+                                <span>Italian, English</span>
+                            </li>
+                            
+                        </ul>
+
+                        <button
+                            type="button"
+                            class="w-full mb-4 inline-flex items-center justify-between px-4 py-2 rounded-lg border border-neutral-warm-200 text-sm font-medium text-indigo-deep-900 hover:bg-neutral-warm-50 transition-colors"
+                            onclick="toggleStudentDetails(this)"
+                            aria-expanded="false"
+                        >
+                            <span>View full profile</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 expand-icon"></i>
+                        </button>
+
+                        <div class="student-details">
+                            <ul class="space-y-2 text-sm text-neutral-warm-700 mb-4">
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="flag" class="w-4 h-4 text-emerald-600"></i>
+                                    <span>Country: Italy</span>
+                                </li>
+                                
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="calendar" class="w-4 h-4 text-emerald-600"></i>
+                                    <span>Intake: Sat Dec 30 1899 13:36:46 GMT+0100 (Central European Standard Time)</span>
+                                </li>
+                                
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="sparkles" class="w-4 h-4 text-science-blue-600"></i>
+                                    <span>Empathic listening, Emotional regulation</span>
+                                </li>
+                                
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="wind" class="w-4 h-4 text-violet-600"></i>
+                                    <span>BTH: Breathwork assisted sessions (introductory level)</span>
+                                </li>
+                                
+                            </ul>
+
+                            
+                            <div class="mb-3">
+                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Bio</h4>
+                                <p class="text-neutral-warm-700 leading-relaxed text-sm">Third-level student focused on supportive sessions for anxiety and life transitions.</p>
+                            </div>
+                            
+
+                            
+                            <div class="mb-3">
+                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Training</h4>
+                                <p class="text-neutral-warm-700 leading-relaxed text-sm">Completed core transpersonal counselling modules and supervised triad work.</p>
+                            </div>
+                            
+
+                            
+                            <div class="mb-4">
+                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Practice</h4>
+                                <p class="text-neutral-warm-700 leading-relaxed text-sm">Offers weekly online sessions under faculty supervision.</p>
+                            </div>
+                            
+                        </div>
+
+                        <div class="space-y-2 text-sm">
+                            
+                            <a href="mailto:maria.rossi@example.com" class="inline-flex items-center gap-2 text-science-blue-700 hover:text-science-blue-800 transition-colors">
+                                <i data-lucide="mail" class="w-4 h-4"></i>
+                                <span>maria.rossi@example.com</span>
+                            </a>
+                            
+                            
+                            <p class="inline-flex items-center gap-2 text-neutral-warm-700">
+                                <i data-lucide="phone" class="w-4 h-4"></i>
+                                <span>+39 333 111 2233</span>
+                            </p>
+                            
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="student-card bg-white border border-neutral-warm-200 rounded-2xl overflow-hidden shadow-sm">
+                    
+                    <img
+                        src="/transpersonaltraining/assets/images/people/students/elena-ivanova.png"
+                        alt="Elena Ivanova"
+                        class="w-full h-56 object-cover"
+                        loading="lazy"
+                    >
+                    
+
+                    <div class="p-6">
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <h3 class="text-xl font-serif font-bold text-indigo-deep-900">Elena Ivanova</h3>
+                            <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-science-blue-100 text-science-blue-800">on-hold</span>
+                        </div>
+
+                        <ul class="space-y-2 text-sm text-neutral-warm-700 mb-4">
+                            
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-science-blue-600"></i>
+                                <span>Bulgaria</span>
+                            </li>
+                            
+                            
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="languages" class="w-4 h-4 text-violet-600"></i>
+                                <span>Bulgarian, English</span>
+                            </li>
+                            
+                        </ul>
+
+                        <button
+                            type="button"
+                            class="w-full mb-4 inline-flex items-center justify-between px-4 py-2 rounded-lg border border-neutral-warm-200 text-sm font-medium text-indigo-deep-900 hover:bg-neutral-warm-50 transition-colors"
+                            onclick="toggleStudentDetails(this)"
+                            aria-expanded="false"
+                        >
+                            <span>View full profile</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 expand-icon"></i>
+                        </button>
+
+                        <div class="student-details">
+                            <ul class="space-y-2 text-sm text-neutral-warm-700 mb-4">
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="flag" class="w-4 h-4 text-emerald-600"></i>
+                                    <span>Country: Bulgaria</span>
+                                </li>
+                                
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="calendar" class="w-4 h-4 text-emerald-600"></i>
+                                    <span>Intake: Sat Dec 30 1899 16:45:45 GMT+0100 (Central European Standard Time)</span>
+                                </li>
+                                
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="sparkles" class="w-4 h-4 text-science-blue-600"></i>
+                                    <span>Stress management, Stabilization skills</span>
+                                </li>
+                                
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="wind" class="w-4 h-4 text-violet-600"></i>
+                                    <span>BTH: Breathwork observer</span>
+                                </li>
+                                
+                            </ul>
+
+                            
+                            <div class="mb-3">
+                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Bio</h4>
+                                <p class="text-neutral-warm-700 leading-relaxed text-sm">Third-level student currently paused and resuming in the next intake.</p>
+                            </div>
+                            
+
+                            
+                            <div class="mb-3">
+                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Training</h4>
+                                <p class="text-neutral-warm-700 leading-relaxed text-sm">Completed foundation and intermediate practice requirements.</p>
+                            </div>
+                            
+
+                            
+                            <div class="mb-4">
+                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Practice</h4>
+                                <p class="text-neutral-warm-700 leading-relaxed text-sm">Practice resumes with supervised one-to-one sessions.</p>
+                            </div>
+                            
+                        </div>
+
+                        <div class="space-y-2 text-sm">
+                            
+                            <a href="mailto:elena.ivanova@example.com" class="inline-flex items-center gap-2 text-science-blue-700 hover:text-science-blue-800 transition-colors">
+                                <i data-lucide="mail" class="w-4 h-4"></i>
+                                <span>elena.ivanova@example.com</span>
+                            </a>
+                            
+                            
+                            <p class="inline-flex items-center gap-2 text-neutral-warm-700">
+                                <i data-lucide="phone" class="w-4 h-4"></i>
+                                <span>+359 88 123 4567</span>
+                            </p>
+                            
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="student-card bg-white border border-neutral-warm-200 rounded-2xl overflow-hidden shadow-sm">
+                    
+                    <img
+                        src="/transpersonaltraining/assets/images/people/students/thomas-reed.png"
+                        alt="Thomas Reed"
+                        class="w-full h-56 object-cover"
+                        loading="lazy"
+                    >
+                    
+
+                    <div class="p-6">
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <h3 class="text-xl font-serif font-bold text-indigo-deep-900">Thomas Reed</h3>
+                            <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-science-blue-100 text-science-blue-800">completed</span>
+                        </div>
+
+                        <ul class="space-y-2 text-sm text-neutral-warm-700 mb-4">
+                            
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-science-blue-600"></i>
+                                <span>United Kingdom</span>
+                            </li>
+                            
+                            
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="languages" class="w-4 h-4 text-violet-600"></i>
+                                <span>English</span>
+                            </li>
+                            
+                        </ul>
+
+                        <button
+                            type="button"
+                            class="w-full mb-4 inline-flex items-center justify-between px-4 py-2 rounded-lg border border-neutral-warm-200 text-sm font-medium text-indigo-deep-900 hover:bg-neutral-warm-50 transition-colors"
+                            onclick="toggleStudentDetails(this)"
+                            aria-expanded="false"
+                        >
+                            <span>View full profile</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 expand-icon"></i>
+                        </button>
+
+                        <div class="student-details">
+                            <ul class="space-y-2 text-sm text-neutral-warm-700 mb-4">
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="flag" class="w-4 h-4 text-emerald-600"></i>
+                                    <span>Country: United Kingdom</span>
+                                </li>
+                                
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="calendar" class="w-4 h-4 text-emerald-600"></i>
+                                    <span>Intake: Sun Dec 31 1899 07:44:45 GMT+0100 (Central European Standard Time)</span>
+                                </li>
+                                
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="sparkles" class="w-4 h-4 text-science-blue-600"></i>
+                                    <span>Integration coaching, Process reflection</span>
+                                </li>
+                                
+                                
+                                <li class="flex items-center gap-2">
+                                    <i data-lucide="wind" class="w-4 h-4 text-violet-600"></i>
+                                    <span>BTH: Breathwork co-facilitator (supervised)</span>
+                                </li>
+                                
+                            </ul>
+
+                            
+                            <div class="mb-3">
+                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Bio</h4>
+                                <p class="text-neutral-warm-700 leading-relaxed text-sm">Third-level student who completed his supervised model-client cycle.</p>
+                            </div>
+                            
+
+                            
+                            <div class="mb-3">
+                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Training</h4>
+                                <p class="text-neutral-warm-700 leading-relaxed text-sm">Finished full third-level supervised training sequence.</p>
+                            </div>
+                            
+
+                            
+                            <div class="mb-4">
+                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Practice</h4>
+                                <p class="text-neutral-warm-700 leading-relaxed text-sm">Provided structured support sessions and integration follow-up.</p>
+                            </div>
+                            
+                        </div>
+
+                        <div class="space-y-2 text-sm">
+                            
+                            <a href="mailto:thomas.reed@example.com" class="inline-flex items-center gap-2 text-science-blue-700 hover:text-science-blue-800 transition-colors">
+                                <i data-lucide="mail" class="w-4 h-4"></i>
+                                <span>thomas.reed@example.com</span>
+                            </a>
+                            
+                            
+                            <p class="inline-flex items-center gap-2 text-neutral-warm-700">
+                                <i data-lucide="phone" class="w-4 h-4"></i>
+                                <span>+44 7700 900123</span>
+                            </p>
+                            
+                        </div>
+                    </div>
+                </article>
+                
             </div>
             
         </div>
