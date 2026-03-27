@@ -240,11 +240,17 @@ Operational rules:
 
 Cache files are gitignored locally but committed by GitHub Actions.
 
-### Google Sheets API URL
+### Google Sheets API URLs
 
-The spreadsheet data is exported as JSON via a Google Apps Script web app. The URL is stored in:
-- Locally: `.env` file (`GOOGLE_SHEET_JSON_URL`)
-- CI/CD: GitHub Secrets
+The spreadsheet data is exported as JSON via Google Apps Script web apps. Each data file uses a stable `/exec` endpoint:
+
+| Data | File | Stable URL |
+|------|------|------------|
+| Client Models | `src/_data/clientModels.js` | `https://script.google.com/macros/s/AKfycbzyBD_kWrr6irrQcMSwOFtHxip3rfYpc1_2q0oscmKCHLJVFFSiGd4zAzsikgbXTEXKow/exec` |
+| Lecture Events | `src/_data/lectureEvents.js` | `https://script.google.com/macros/s/AKfycbwr2rE4dFTkQ5ZJzHewA9jBxYmAbxgqTOX-Kd20dNyDi7xbkGWjOFBjdrhHEF0yK-9Ucg/exec` |
+| Schedule Events | `src/_data/scheduleEvents.js` | `https://script.google.com/macros/s/AKfycbwF4y-K0oYh0Fd78xVezCcaGf7Ac5SglXAv0SUzcBJgqeg_kRXaLix3gSad8LAgg6oR/exec` |
+
+> **Important:** Always use the stable `/exec` URLs (format `script.google.com/macros/s/.../exec`). Never use the temporary `script.googleusercontent.com/macros/echo?user_content_key=...` redirect URLs — those tokens expire and cause fetches to return HTML instead of JSON.
 
 ### Spreadsheet Structure
 
