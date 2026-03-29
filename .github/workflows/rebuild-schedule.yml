@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout test-11ty branch
+      - name: Checkout staging branch
         uses: actions/checkout@v4
         with:
-          ref: test-11ty
+          ref: staging
           fetch-depth: 0
       
       - name: Setup Node.js

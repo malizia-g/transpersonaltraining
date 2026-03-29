@@ -88,20 +88,13 @@ Until you create this, social shares will show a broken image placeholder. The m
 
 ## 5. 🔄 Deploy Workflow — Branch Configuration
 
-**Status:** ⚠️ Review needed
+**Status:** ✅ Done
 
-The deploy workflow (`.github/workflows/deploy.yml`) currently triggers on:
-- `test-11ty` branch
-- `testImages` branch
-- `main` branch (newly added)
+The deploy workflow (`.github/workflows/deploy.yml`) now triggers on:
+- `staging` branch (integration/confirmed code → auto deploy)
+- `main` branch (stable releases)
 
-**Action needed:** Once you decide on your branching strategy, remove the test branches and keep only `main`:
-```yaml
-on:
-  push:
-    branches:
-      - main
-```
+Branch `test-11ty` has been renamed to `staging`. Old test branches (`testImages`, etc.) have been removed.
 
 ---
 
@@ -281,4 +274,4 @@ The `TESTS/` directory contains experimental HTML pages. Please decide for each:
 - [ ] (Pablo) Set up Google Apps Script rebuild button in spreadsheet
 - [ ] (Pablo) Create GitHub Personal Access Token for rebuild webhook
 - [ ] (Pablo) Decide on TESTS/ experimental HTML pages: keep, migrate, or remove
-- [ ] (Pablo) Re-add `src/CNAME` with `transpersonal-training.com` before merging `test-11ty` into `main` (removed temporarily for GitHub Pages preview)
+- [ ] (Pablo) Re-add `src/CNAME` with `transpersonal-training.com` before merging `staging` into `main` (removed temporarily for GitHub Pages preview)

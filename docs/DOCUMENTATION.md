@@ -62,12 +62,33 @@ src/assets/**/*      →  Copy          →  _site/assets/
 File: `.github/workflows/deploy.yml`
 
 Triggers:
-- Push to `main` (and `test-11ty`, `testImages` during development)
+- Push to `main` or `staging`
 - Daily cron at `0 6 * * *` (06:00 UTC / 08:00 CET)
 - Manual dispatch (`workflow_dispatch`)
 - Webhook from Google Sheets (`repository_dispatch: rebuild-schedule`)
 
 Deploys to the `deploy` branch via `peaceiris/actions-gh-pages`.
+
+### Branch Strategy
+
+```
+feature/xxx  ──▶  staging  ──▶  deploy (auto)
+                     │
+                     └──▶  main (confirmed releases)
+```
+
+| Branch | Purpose |
+|--------|----------|
+| `main` | Default branch — confirmed, stable code |
+| `staging` | Integration branch — merge confirmed work here, triggers deploy workflow automatically |
+| `deploy` | Auto-generated — contains the built `_site/` output for GitHub Pages. Never edit directly |
+| `working_on_*` / `feature/*` | Short-lived branches for specific tasks — always named after the activity (e.g. `feature/pdf-exporter`, `working_on_automations`) |
+
+**Workflow:**
+1. Create a branch from `staging` with a descriptive name (e.g. `feature/new-teachers-page`)
+2. Work on the branch, commit often
+3. Merge into `staging` when ready — this triggers the deploy action
+4. Periodically merge `staging` into `main` to keep the default branch up to date
 
 ---
 
