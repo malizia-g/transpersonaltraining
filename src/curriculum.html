@@ -543,13 +543,16 @@ function toggleLevel(id) {
     }
 
     /* ── Add secondary branches + tertiary + leaves (training-style) ── */
-    function addSmallBranches(targetY, skipLeaves) {
+    function addSmallBranches(targetY, skipLeaves, wW) {
         var pathLength = trunk.getTotalLength();
         if (pathLength < 10) return;
 
         branchesG.innerHTML = '';
         leavesG.innerHTML = '';
         trunkLeavesG.innerHTML = '';
+
+        // Available horizontal space to the right of trunk (baseX ≈ 32)
+        var rightSpace = (wW || 400) - 32;
 
         var allBranches = [];
         var numBranches = Math.max(3, Math.floor(pathLength / 120));
@@ -567,9 +570,9 @@ function toggleLevel(id) {
                 : (Math.PI / 6 + seededRandom() * (Math.PI / 3));
             var branchAngle = tangentAngle + angleOffset;
 
-            // Right-biased branches are longer so they extend under the content
+            // Right branches: 60-80% of available width, responsive to screen
             var branchLength = biasRight
-                ? (120 + seededRandom() * 180)
+                ? (rightSpace * (0.6 + seededRandom() * 0.2))
                 : (60 + seededRandom() * 80);
 
             // S-curve with loop
@@ -662,13 +665,14 @@ function toggleLevel(id) {
     function drawVine(skipLeaves) {
         _seed = _pageSeed;
         var wH = wrapper.offsetHeight;
-        svg.setAttribute('width', '400');
+        var wW = wrapper.offsetWidth;
+        svg.setAttribute('width', wW);
         svg.setAttribute('height', wH);
         svg.style.height = wH + 'px';
 
         var targetY = getTargetY();
         drawTrunk(targetY);
-        addSmallBranches(targetY, skipLeaves);
+        addSmallBranches(targetY, skipLeaves, wW);
     }
 
     /* ── Animation loop during expand/collapse ── */
