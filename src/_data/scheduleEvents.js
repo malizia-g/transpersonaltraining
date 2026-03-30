@@ -2,11 +2,22 @@
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
+const { hasSheetChanged } = require('./sheetTimestamps');
 
 const SHEET_JSON_URL = 'https://script.google.com/macros/s/AKfycbwF4y-K0oYh0Fd78xVezCcaGf7Ac5SglXAv0SUzcBJgqeg_kRXaLix3gSad8LAgg6oR/exec';
 const CACHE_FILE = path.join(__dirname, 'scheduleEvents.cache.json');
 
 module.exports = async function() {
+  // Check if sheet has changed before fetching
+  const changed = await hasSheetChanged('schedule');
+  if (!changed && fs.existsSync(CACHE_FILE)) {
+    try {
+      const cached = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf-8'));
+      console.log(`⚡ Schedule: using cache (${cached.length} events, sheet unchanged)`);
+      return cached;
+    } catch (e) { /* cache read failed, fetch anyway */ }
+  }
+
   try {
     console.log('Fetching schedule data from Google Sheets...');
     

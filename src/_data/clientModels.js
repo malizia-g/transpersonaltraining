@@ -2,6 +2,7 @@ const https = require('https');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const { hasSheetChanged } = require('./sheetTimestamps');
 
 // Fetch client models from Google Apps Script during build time
 const SHEET_JSON_URL = 'https://script.google.com/macros/s/AKfycbzyBD_kWrr6irrQcMSwOFtHxip3rfYpc1_2q0oscmKCHLJVFFSiGd4zAzsikgbXTEXKow/exec';
@@ -155,6 +156,13 @@ async function downloadStudentImages(students) {
 
       try {
         const destBase = path.join(IMAGES_OUTPUT_DIR, student.id);
+        // Skip download if image already exists locally
+        const existingFiles = ['.jpg', '.png', '.webp', '.gif']
+          .map(ext => destBase + ext)
+          .filter(f => fs.existsSync(f));
+        if (existingFiles.length > 0) {
+          return { id: student.id, localPath: LOCAL_IMAGE_PATH + '/' + path.basename(existingFiles[0]) };
+        }
         const fileName = await downloadFile(student.picture_link, destBase);
         return { id: student.id, localPath: LOCAL_IMAGE_PATH + '/' + fileName };
       } catch (err) {
@@ -175,6 +183,26 @@ async function downloadStudentImages(students) {
 }
 
 module.exports = async function() {
+  // Check if sheet has changed before fetching
+  const changed = await hasSheetChanged('clientModels');
+  if (!changed && fs.existsSync(CACHE_FILE)) {
+    try {
+      const cached = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf-8'));
+      console.log(`⚡ Client models: using cache (${cached.length} records, sheet unchanged)`);
+      // Still need to download images for _site output (which is cleaned each build)
+      console.log('Downloading student images from Drive (cached data)...');
+      var localPaths = await downloadStudentImages(cached);
+      var downloadCount = Object.keys(localPaths).length;
+      console.log('✅ Downloaded ' + downloadCount + '/' + cached.length + ' student images');
+      for (var j = 0; j < cached.length; j++) {
+        if (localPaths[cached[j].id]) {
+          cached[j].picture_link = localPaths[cached[j].id];
+        }
+      }
+      return cached;
+    } catch (e) { /* cache read failed, fetch anyway */ }
+  }
+
   // 1. Fetch data (or use cache)
   var mapped;
 

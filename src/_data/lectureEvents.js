@@ -2,6 +2,7 @@
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
+const { hasSheetChanged } = require('./sheetTimestamps');
 
 const LECTURES_JSON_URL = 'https://script.google.com/macros/s/AKfycbwr2rE4dFTkQ5ZJzHewA9jBxYmAbxgqTOX-Kd20dNyDi7xbkGWjOFBjdrhHEF0yK-9Ucg/exec';
 const CACHE_FILE = path.join(__dirname, 'lectureEvents.cache.json');
@@ -29,6 +30,16 @@ function fetchUrl(url) {
 }
 
 module.exports = async function() {
+  // Check if sheet has changed before fetching
+  const changed = await hasSheetChanged('lectures');
+  if (!changed && fs.existsSync(CACHE_FILE)) {
+    try {
+      const cached = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf-8'));
+      console.log(`⚡ Lectures: using cache (${cached.length} events, sheet unchanged)`);
+      return cached;
+    } catch (e) { /* cache read failed, fetch anyway */ }
+  }
+
   try {
     console.log('Fetching lecture data from Google Sheets...');
     const data = await fetchUrl(LECTURES_JSON_URL);

@@ -275,3 +275,4 @@ The `TESTS/` directory contains experimental HTML pages. Please decide for each:
 - [ ] (Pablo) Create GitHub Personal Access Token for rebuild webhook
 - [ ] (Pablo) Decide on TESTS/ experimental HTML pages: keep, migrate, or remove
 - [ ] (Pablo) Re-add `src/CNAME` with `transpersonal-training.com` before merging `staging` into `main` (removed temporarily for GitHub Pages preview)
+- [ ] (Pablo) Finish the PDF exporter — install `docs/curriculum-pdf-apps-script.js` into the Curriculum Spreadsheet's Apps Script editor, test both PDF outputs, and adjust styling/content as needed

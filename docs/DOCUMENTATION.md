@@ -17,7 +17,8 @@
 9. [SEO & Deployment](#seo--deployment)
 10. [Training Programme — Commitment & Roles](#training-programme--commitment--roles)
 11. [Transpersonal Psychology — Overview](#transpersonal-psychology--overview)
-12. [Refactoring History](#refactoring-history)
+12. [Curriculum PDF Generator](#curriculum-pdf-generator)
+13. [Refactoring History](#refactoring-history)
 
 ---
 
@@ -458,6 +459,81 @@ Completed refactoring phases:
 - ✅ CSS consolidated into single `main.css`
 - ✅ Cache fallback added to `scheduleEvents.js` and `lectureEvents.js`
 - ✅ Daily cron rebuild + webhook trigger added to deploy workflow
+
+---
+
+## Curriculum PDF Generator
+
+Script: `docs/curriculum-pdf-apps-script.js`
+
+A Google Apps Script that adds a **📄 Curriculum Tools** menu to the Curriculum Google Spreadsheet, allowing you to generate and download PDF documents directly from the spreadsheet data.
+
+### Setup
+
+1. Open the **Curriculum Spreadsheet** in Google Sheets
+2. Go to **Extensions → Apps Script**
+3. Delete any existing code (or create a new `.gs` file)
+4. Copy and paste the entire contents of `docs/curriculum-pdf-apps-script.js`
+5. Save (Ctrl+S)
+6. Reload the spreadsheet — a **📄 Curriculum Tools** menu will appear in the menu bar
+7. First use will prompt for Google authorization (access to Drive & Docs)
+
+### Menu Options
+
+| Action | Description |
+|--------|-------------|
+| **Generate Curriculum PDF (detailed)** | Full curriculum: cover page, table of contents, all modules with descriptions, sub-modules, hours breakdown, teachers, teaching strategy |
+| **Generate Program PDF (summary)** | Marketing overview: summary table by level, concise module list, experiential components |
+| **Preview JSON data** | Shows the parsed hierarchical JSON in a dialog (for debugging) |
+
+### How It Works
+
+1. Parses the spreadsheet into hierarchical JSON: **Levels → Sections → Modules → SubModules**
+2. Creates a temporary Google Doc with professional formatting (colors per level, styled tables)
+3. Exports the Doc as PDF
+4. Saves the PDF in the **same Google Drive folder** as the spreadsheet
+5. Shows a dialog with a download link
+6. Deletes the temporary Google Doc
+
+### Spreadsheet Structure Requirements
+
+The script expects these columns in order (A–P):
+
+| Column | Header |
+|--------|--------|
+| A | Level |
+| B | Year |
+| C | #Module |
+| D | Topic / Activity Focus |
+| E | Desc. |
+| F | Teaching strategy |
+| G | Hours |
+| H | Theory |
+| I | Group Therapy/supervision |
+| J | Breathwork |
+| K | Seminar |
+| L | Delivery Format |
+| M | EAP/EUROTAS Category |
+| N | Core Teacher |
+| O | Guest Teacher |
+| P | Compulsory |
+
+Row classification:
+- **Level headers** — Level = "L1", Topic = "L1: SELF DEVELOPMENT"
+- **Section headers** — Level set, no module number, no delivery format (e.g. "ONLINE LESSONS")
+- **Modules** — Module = integer (1, 2, 3…)
+- **Sub-modules** — Module = decimal (1.1, 1.2…)
+- **Cross-module activities** — Module = range (1-4, 4-9…)
+- **Standalone items** — No module, has delivery format (e.g. exams)
+- **Special notes** — Level = "L1.1" (decimal level)
+
+### Notes
+
+- The previous version of the PDF will be **trashed** (moved to bin) on re-generation
+- PDF generation takes ~10-20 seconds depending on data volume
+- Colors: L1 = green, L2 = blue, L3 = brown/gold
+
+---
 
 ### Performance Metrics
 
