@@ -526,17 +526,19 @@ function toggleLevel(id) {
         trunkLeavesG.innerHTML = '';
         var pathLength = trunk.getTotalLength();
         if (pathLength < 20) return;
-        var numLeaves = Math.max(2, Math.floor(pathLength / 80));
+        var numLeaves = Math.max(4, Math.floor(pathLength / 80) * 8);
         for (var k = 0; k < numLeaves; k++) {
-            var pos = 30 + (pathLength - 60) * (k / numLeaves) + seededRandom() * 20;
-            var pt  = trunk.getPointAtLength(Math.min(pos, pathLength - 5));
+            var pos = 15 + (pathLength - 30) * (k / numLeaves) + (seededRandom() - 0.5) * 14;
+            var pt  = trunk.getPointAtLength(Math.min(Math.max(pos, 5), pathLength - 5));
             var npt = trunk.getPointAtLength(Math.min(pos + 3, pathLength));
             var tang = Math.atan2(npt.y - pt.y, npt.x - pt.x);
             var side = (k % 2 === 0 ? 1 : -1);
             var perpA = tang + (Math.PI / 2) * side;
             var rndRot = (15 + seededRandom() * 30) * side;
             var leafAngle = perpA * (180 / Math.PI) + rndRot;
-            trunkLeavesG.appendChild(createLeaf(pt.x, pt.y, leafAngle, k, 0));
+            var r = seededRandom();
+            var sizeIdx = r < 0.5 ? 0 : (r < 0.85 ? 1 : 2);
+            trunkLeavesG.appendChild(createLeaf(pt.x, pt.y, leafAngle, k, sizeIdx));
         }
     }
 
@@ -565,7 +567,10 @@ function toggleLevel(id) {
                 : (Math.PI / 6 + seededRandom() * (Math.PI / 3));
             var branchAngle = tangentAngle + angleOffset;
 
-            var branchLength = 60 + seededRandom() * 100;
+            // Right-biased branches are longer so they extend under the content
+            var branchLength = biasRight
+                ? (120 + seededRandom() * 180)
+                : (60 + seededRandom() * 80);
 
             // S-curve with loop
             var loopIntensity = 0.3 + seededRandom() * 0.4;
@@ -588,10 +593,10 @@ function toggleLevel(id) {
             branchesG.appendChild(branch);
             allBranches.push({ path: branch, weight: 0.6, cp1x: cp1x, cp1y: cp1y, loopX: loopX, loopY: loopY, sx: startPoint.x, sy: startPoint.y });
 
-            // Tertiary branches (curved S-shape)
-            var numTertiary = seededRandom() < 0.6 ? 1 : 0;
+            // Tertiary branches (curved S-shape) — 1 to 2 per secondary branch
+            var numTertiary = 1 + (seededRandom() < 0.6 ? 1 : 0);
             for (var j = 0; j < numTertiary; j++) {
-                var t = 0.4 + seededRandom() * 0.4;
+                var t = 0.25 + seededRandom() * 0.55;
                 var tsx = (1-t)*(1-t)*startPoint.x + 2*(1-t)*t*cp1x + t*t*loopX;
                 var tsy = (1-t)*(1-t)*startPoint.y + 2*(1-t)*t*cp1y + t*t*loopY;
                 var ttx = 2*(1-t)*(cp1x - startPoint.x) + 2*t*(loopX - cp1x);
@@ -599,7 +604,7 @@ function toggleLevel(id) {
                 var tBaseAngle = Math.atan2(tty, ttx);
                 var tSide = seededRandom() > 0.5 ? 1 : -1;
                 var tAngle = tBaseAngle + (Math.PI / 5 + seededRandom() * Math.PI / 8) * tSide;
-                var tLen = 25 + seededRandom() * 40;
+                var tLen = 45 + seededRandom() * 55;
                 // S-curve: two control points for a smooth cubic bezier
                 var tCurveIntensity = 0.3 + seededRandom() * 0.35;
                 var tCp1x = tsx + Math.cos(tAngle) * tLen * 0.35;
@@ -657,7 +662,7 @@ function toggleLevel(id) {
     function drawVine(skipLeaves) {
         _seed = _pageSeed;
         var wH = wrapper.offsetHeight;
-        svg.setAttribute('width', '70');
+        svg.setAttribute('width', '400');
         svg.setAttribute('height', wH);
         svg.style.height = wH + 'px';
 
