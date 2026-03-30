@@ -239,8 +239,14 @@ description: "Explore our 4-year transpersonal psychotherapy training programme.
 
 <div class="curriculum-vine-wrapper" id="curriculumWrapper">
     <svg class="curriculum-vine-svg" id="curriculumVineSvg" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <symbol id="leaf-sm" viewBox="-4 -7 8 7"><path d="M 0,0 Q 2.4,-3.6 0,-6 Q -2.4,-3.6 0,0" stroke="#2d5016" stroke-width="0.5"/></symbol>
+            <symbol id="leaf-md" viewBox="-5 -10 10 10"><path d="M 0,0 Q 4,-5.4 0,-9 Q -4,-5.4 0,0" stroke="#2d5016" stroke-width="0.5"/></symbol>
+            <symbol id="leaf-lg" viewBox="-6 -13 12 13"><path d="M 0,0 Q 5.2,-7.8 0,-13 Q -5.2,-7.8 0,0" stroke="#2d5016" stroke-width="0.5"/></symbol>
+        </defs>
         <g id="vineBranches"></g>
         <path id="vineTrunk" class="vine-trunk" d=""/>
+        <g id="vineTrunkLeaves"></g>
         <g id="vineLeaves"></g>
     </svg>
 
@@ -625,10 +631,13 @@ function toggleLevel(id) {
     var svg       = document.getElementById('curriculumVineSvg');
     var trunk     = document.getElementById('vineTrunk');
     var branchesG = document.getElementById('vineBranches');
+    var trunkLeavesG = document.getElementById('vineTrunkLeaves');
     var leavesG   = document.getElementById('vineLeaves');
     if (!wrapper || !svg) return;
 
     var leafColors = ['#7fb069', '#88a580', '#6b8e6b', '#8b9d83', '#759e75', '#6d8b6d', '#9db19d'];
+    var leafSymbols = ['leaf-sm', 'leaf-md', 'leaf-lg'];
+    var leafSizes   = [12, 16, 22]; // width/height for each symbol
     var animFrameId = null;
 
     // Random seed per page load, stable across redraws
@@ -637,6 +646,24 @@ function toggleLevel(id) {
     function seededRandom() { _seed = (_seed * 16807) % 2147483647; return (_seed - 1) / 2147483646; }
 
     function ns(tag) { return document.createElementNS('http://www.w3.org/2000/svg', tag); }
+
+    /* ── Create a leaf using <use> referencing a <defs> symbol ── */
+    function createLeaf(x, y, angle, colorIdx, sizeIdx) {
+        var sym = leafSymbols[sizeIdx];
+        var sz  = leafSizes[sizeIdx];
+        var half = sz / 2;
+        var leaf = ns('use');
+        leaf.setAttribute('href', '#' + sym);
+        leaf.setAttribute('class', 'vine-curr-leaf');
+        leaf.setAttribute('width', sz);
+        leaf.setAttribute('height', sz);
+        leaf.setAttribute('x', -half);
+        leaf.setAttribute('y', -sz);
+        leaf.setAttribute('transform', 'translate(' + x + ',' + y + ') rotate(' + angle + ')');
+        leaf.setAttribute('fill', leafColors[colorIdx % leafColors.length]);
+        leaf.setAttribute('opacity', '0.82');
+        return leaf;
+    }
 
     function getTargetY() {
         var wRect = wrapper.getBoundingClientRect();
@@ -678,12 +705,32 @@ function toggleLevel(id) {
         trunk.setAttribute('opacity', '0.65');
     }
 
-    function addSmallBranches(targetY) {
+    /* ── Add leaves along the trunk ── */
+    function addTrunkLeaves() {
+        trunkLeavesG.innerHTML = '';
+        var pathLength = trunk.getTotalLength();
+        if (pathLength < 20) return;
+        var numLeaves = Math.max(2, Math.floor(pathLength / 80));
+        for (var k = 0; k < numLeaves; k++) {
+            var pos = 30 + (pathLength - 60) * (k / numLeaves) + seededRandom() * 20;
+            var pt  = trunk.getPointAtLength(Math.min(pos, pathLength - 5));
+            var npt = trunk.getPointAtLength(Math.min(pos + 3, pathLength));
+            var tang = Math.atan2(npt.y - pt.y, npt.x - pt.x);
+            var side = (k % 2 === 0 ? 1 : -1);
+            var perpA = tang + (Math.PI / 2) * side;
+            var rndRot = (15 + seededRandom() * 30) * side;
+            var leafAngle = perpA * (180 / Math.PI) + rndRot;
+            trunkLeavesG.appendChild(createLeaf(pt.x, pt.y, leafAngle, k, 0));
+        }
+    }
+
+    function addSmallBranches(targetY, skipLeaves) {
         var pathLength = trunk.getTotalLength();
         if (pathLength < 10) return;
 
         branchesG.innerHTML = '';
         leavesG.innerHTML = '';
+        trunkLeavesG.innerHTML = '';
 
         var allBranches = [];
         var numBranches = Math.max(3, Math.floor(pathLength / 120));
@@ -733,7 +780,6 @@ function toggleLevel(id) {
                 var tSide = seededRandom() > 0.5 ? 1 : -1;
                 var tAngle = tBaseAngle + (Math.PI / 5 + seededRandom() * Math.PI / 8) * tSide;
                 var tLen = 25 + seededRandom() * 40;
-                // S-curve: two control points for a smooth cubic bezier
                 var tCurveIntensity = 0.3 + seededRandom() * 0.35;
                 var tCp1x = tsx + Math.cos(tAngle) * tLen * 0.35;
                 var tCp1y = tsy + Math.sin(tAngle) * tLen * 0.35 + (seededRandom() - 0.5) * 15;
@@ -756,12 +802,16 @@ function toggleLevel(id) {
             }
         }
 
+        // Skip leaf creation during animation frames for performance
+        if (skipLeaves) return;
+
+        // Leaves along all branches — using <use> refs for lighter DOM
         allBranches.forEach(function(info) {
             var bPath = info.path;
             var bLen  = bPath.getTotalLength();
-            var numLeaves = Math.max(3, Math.floor(info.weight * 15));
+            var numLeaves = Math.max(3, Math.floor(info.weight * 28));
             for (var k = 0; k < numLeaves; k++) {
-                var pos = (bLen / numLeaves) * k + seededRandom() * 18;
+                var pos = (bLen / numLeaves) * k + seededRandom() * 12;
                 var pt  = bPath.getPointAtLength(Math.min(pos, bLen - 5));
                 var npt = bPath.getPointAtLength(Math.min(pos + 3, bLen));
                 var tang = Math.atan2(npt.y - pt.y, npt.x - pt.x);
@@ -770,24 +820,19 @@ function toggleLevel(id) {
                 var rndRot = (10 + seededRandom() * 35) * side;
                 var leafAngle = perpA * (180 / Math.PI) + rndRot;
 
-                var leaf = ns('g');
-                leaf.setAttribute('class', 'vine-curr-leaf');
-                leaf.setAttribute('transform', 'translate(' + pt.x + ',' + pt.y + ') rotate(' + leafAngle + ')');
-                leaf.setAttribute('opacity', '0.8');
-                var lp = ns('path');
-                var sz = 8 + seededRandom() * 5;
-                lp.setAttribute('d', 'M 0,0 Q '+(sz*0.4)+','+ (-sz*0.6)+' 0,'+(-sz)+' Q '+(-sz*0.4)+','+(-sz*0.6)+' 0,0');
-                lp.setAttribute('fill', leafColors[k % leafColors.length]);
-                lp.setAttribute('stroke', '#2d5016');
-                lp.setAttribute('stroke-width', '0.5');
-                lp.setAttribute('opacity', '0.85');
-                leaf.appendChild(lp);
-                leavesG.appendChild(leaf);
+                // Pick size: mostly small/medium, occasionally large
+                var r = seededRandom();
+                var sizeIdx = r < 0.4 ? 0 : (r < 0.8 ? 1 : 2);
+
+                leavesG.appendChild(createLeaf(pt.x, pt.y, leafAngle, k, sizeIdx));
             }
         });
+
+        // Leaves along the trunk
+        addTrunkLeaves();
     }
 
-    function drawVine() {
+    function drawVine(skipLeaves) {
         _seed = _pageSeed;
         var wH = wrapper.offsetHeight;
         svg.setAttribute('width', '70');
@@ -796,15 +841,17 @@ function toggleLevel(id) {
 
         var targetY = getTargetY();
         drawTrunk(targetY);
-        addSmallBranches(targetY);
+        addSmallBranches(targetY, skipLeaves);
     }
 
     function animateVine(duration) {
         duration = duration || 650;
         var start = Date.now();
         function step() {
-            drawVine();
-            if (Date.now() - start < duration) {
+            var elapsed = Date.now() - start;
+            var isLast = elapsed >= duration;
+            drawVine(!isLast);
+            if (!isLast) {
                 animFrameId = requestAnimationFrame(step);
             }
         }
