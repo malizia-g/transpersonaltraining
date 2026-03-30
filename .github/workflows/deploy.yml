@@ -31,6 +31,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
       
+      - name: Restore data cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            src/_data/*.cache.json
+          key: sheet-data-${{ runner.os }}
+          restore-keys: |
+            sheet-data-
+      
+      - name: Restore student images cache
+        uses: actions/cache@v4
+        with:
+          path: _site/assets/images/people/students
+          key: student-images-${{ runner.os }}
+          restore-keys: |
+            student-images-
+      
       - name: Build 11ty site
         run: npm run build
         env:

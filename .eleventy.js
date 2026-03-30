@@ -72,9 +72,6 @@ module.exports = function(eleventyConfig) {
   // Copy new scripts structure
   eleventyConfig.addPassthroughCopy({ "src/scripts": "scripts" });
   
-  // Experimental test pages (TESTS folder)
-  eleventyConfig.addPassthroughCopy({ "TESTS": "TESTS" });
-  
   // Watch for changes
   eleventyConfig.addWatchTarget("src/styles/**/*.css");
   eleventyConfig.addWatchTarget("src/scripts/**/*.js");
