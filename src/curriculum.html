@@ -643,22 +643,33 @@ function toggleLevel(id) {
                 if (dd < bestDist) { bestDist = dd; bestPos = s; }
             }
             var sp = trunk.getPointAtLength(bestPos);
-            var np = trunk.getPointAtLength(Math.min(bestPos + 5, pathLength));
-            // Nearly horizontal to the right, slight random angle
-            var hAngle = (seededRandom() - 0.5) * 0.3; // ±~8.5°
+            // Twisting long branch: multi-segment cubic Bézier
+            var hAngle = (seededRandom() - 0.5) * 0.25;
             var hLen = rightSpace * (0.6 + seededRandom() * 0.2);
-            var hCp1x = sp.x + Math.cos(hAngle) * hLen * 0.3;
-            var hCp1y = sp.y + Math.sin(hAngle) * hLen * 0.3 + (seededRandom() - 0.5) * 20;
-            var hMidX = sp.x + Math.cos(hAngle) * hLen * 0.55;
-            var hMidY = sp.y + Math.sin(hAngle) * hLen * 0.55;
-            var hLoopInt = 0.15 + seededRandom() * 0.25;
-            var hPerpA = hAngle + Math.PI / 2;
-            var hLoopX = hMidX + Math.cos(hPerpA) * hLoopInt * hLen * 0.3;
-            var hLoopY = hMidY + Math.sin(hPerpA) * hLoopInt * hLen * 0.3;
-            var hEndX = sp.x + Math.cos(hAngle) * hLen;
-            var hEndY = sp.y + Math.sin(hAngle) * hLen;
+            var segs = 5 + Math.floor(seededRandom() * 3); // 5-7 segments
+            var segLen = hLen / segs;
+            var d = 'M ' + sp.x + ' ' + sp.y;
+            var cx = sp.x, cy = sp.y;
+            var side = seededRandom() > 0.5 ? 1 : -1;
+            for (var si = 0; si < segs; si++) {
+                var frac = si / segs;
+                // Amplitude tapers: large in middle, smaller at ends
+                var amp = segLen * (0.35 + seededRandom() * 0.35) * (1 - Math.abs(frac - 0.5) * 1.2);
+                var drift = hAngle + (seededRandom() - 0.5) * 0.2;
+                var nx = cx + Math.cos(drift) * segLen;
+                var ny = cy + Math.sin(drift) * segLen;
+                var perpX = -Math.sin(drift);
+                var perpY = Math.cos(drift);
+                var c1x = cx + Math.cos(drift) * segLen * 0.33 + perpX * amp * side;
+                var c1y = cy + Math.sin(drift) * segLen * 0.33 + perpY * amp * side;
+                var c2x = cx + Math.cos(drift) * segLen * 0.66 + perpX * amp * side * 0.5;
+                var c2y = cy + Math.sin(drift) * segLen * 0.66 + perpY * amp * side * 0.5;
+                d += ' C ' + c1x + ' ' + c1y + ', ' + c2x + ' ' + c2y + ', ' + nx + ' ' + ny;
+                cx = nx; cy = ny;
+                side *= -1; // alternate direction
+            }
             var hBranch = ns('path');
-            hBranch.setAttribute('d', 'M ' + sp.x + ' ' + sp.y + ' Q ' + hCp1x + ' ' + hCp1y + ', ' + hLoopX + ' ' + hLoopY + ' T ' + hEndX + ' ' + hEndY);
+            hBranch.setAttribute('d', d);
             hBranch.setAttribute('class', 'vine-curr-branch');
             hBranch.setAttribute('stroke-width', '2');
             hBranch.setAttribute('opacity', '0.6');
