@@ -137,7 +137,7 @@ body[class*="theme-"] #mobile-menu a:hover {
 
 /* ── Vine (curriculum) ── */
 
-.curriculum-vine-wrapper { position: relative; overflow: hidden; }
+.curriculum-vine-wrapper { position: relative; }
 .curriculum-vine-svg {
     position: absolute; top: 0; left: 0; height: 100%;
     pointer-events: none; overflow: visible; z-index: 1;
