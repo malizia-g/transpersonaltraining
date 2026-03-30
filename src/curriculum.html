@@ -691,6 +691,6 @@ function toggleLevel(id) {
 
     window._vineAnimate = animateVine;
     setTimeout(drawVine, 120);
-    window.addEventListener('resize', drawVine);
+    window.addEventListener('resize', function() { drawVine(); });
 })();
 </script>

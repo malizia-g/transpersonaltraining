@@ -155,9 +155,6 @@ body[class*="theme-"] #mobile-menu a:hover {
 .vine-curr-leaf {
     filter: drop-shadow(0.5px 1px 1px rgba(0,0,0,0.15));
 }
-@media (max-width: 768px) {
-    .curriculum-vine-svg { display: none; }
-}
 
 /* ── Schedule page ── */
 
