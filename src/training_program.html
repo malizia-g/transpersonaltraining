@@ -752,10 +752,8 @@ function toggleLevel(id) {
                 : (Math.PI / 6 + seededRandom() * (Math.PI / 3));
             var branchAngle = tangentAngle + angleOffset;
 
-            // Right branches: 60-80% of available width, responsive to screen
-            var branchLength = biasRight
-                ? (rightSpace * (0.6 + seededRandom() * 0.2))
-                : (60 + seededRandom() * 80);
+            // Normal short branches
+            var branchLength = 60 + seededRandom() * 100;
 
             var loopIntensity = 0.3 + seededRandom() * 0.4;
             var cp1x = startPoint.x + Math.cos(branchAngle) * branchLength * 0.3;
@@ -810,6 +808,45 @@ function toggleLevel(id) {
                 allBranches.push({ path: tBranch, weight: 0.3 });
             }
         }
+
+        // ── Long horizontal branches: one per level section ──
+        var wRect = wrapper.getBoundingClientRect();
+        var sections = wrapper.querySelectorAll(':scope > section');
+        sections.forEach(function(sec) {
+            var hdr = sec.querySelector('.level-toggle');
+            if (!hdr) return;
+            var r = hdr.getBoundingClientRect();
+            var sectionY = r.top - wRect.top + r.height / 2;
+            // Find closest point on trunk
+            var bestDist = Infinity, bestPos = 0;
+            for (var s = 0; s < pathLength; s += 10) {
+                var pp = trunk.getPointAtLength(s);
+                var dd = Math.abs(pp.y - sectionY);
+                if (dd < bestDist) { bestDist = dd; bestPos = s; }
+            }
+            var sp = trunk.getPointAtLength(bestPos);
+            var np = trunk.getPointAtLength(Math.min(bestPos + 5, pathLength));
+            // Nearly horizontal to the right, slight random angle
+            var hAngle = (seededRandom() - 0.5) * 0.3; // ±~8.5°
+            var hLen = rightSpace * (0.6 + seededRandom() * 0.2);
+            var hCp1x = sp.x + Math.cos(hAngle) * hLen * 0.3;
+            var hCp1y = sp.y + Math.sin(hAngle) * hLen * 0.3 + (seededRandom() - 0.5) * 20;
+            var hMidX = sp.x + Math.cos(hAngle) * hLen * 0.55;
+            var hMidY = sp.y + Math.sin(hAngle) * hLen * 0.55;
+            var hLoopInt = 0.15 + seededRandom() * 0.25;
+            var hPerpA = hAngle + Math.PI / 2;
+            var hLoopX = hMidX + Math.cos(hPerpA) * hLoopInt * hLen * 0.3;
+            var hLoopY = hMidY + Math.sin(hPerpA) * hLoopInt * hLen * 0.3;
+            var hEndX = sp.x + Math.cos(hAngle) * hLen;
+            var hEndY = sp.y + Math.sin(hAngle) * hLen;
+            var hBranch = ns('path');
+            hBranch.setAttribute('d', 'M ' + sp.x + ' ' + sp.y + ' Q ' + hCp1x + ' ' + hCp1y + ', ' + hLoopX + ' ' + hLoopY + ' T ' + hEndX + ' ' + hEndY);
+            hBranch.setAttribute('class', 'vine-curr-branch');
+            hBranch.setAttribute('stroke-width', '2');
+            hBranch.setAttribute('opacity', '0.6');
+            branchesG.appendChild(hBranch);
+            allBranches.push({ path: hBranch, weight: 0.8 });
+        });
 
         // Skip leaf creation during animation frames for performance
         if (skipLeaves) return;
