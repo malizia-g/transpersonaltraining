@@ -38,13 +38,33 @@ jobs:
       - name: Restore student images cache
         uses: actions/cache@v4
         with:
-          path: _site/assets/images/people/students
+          path: .cache/student-images
           key: student-images-${{ runner.os }}
           restore-keys: |
             student-images-
       
-      - name: Build schedule page
-        run: npm run build
+      - name: Clean and build CSS
+        run: |
+          npm run clean
+          npm run build:css
+      
+      - name: Restore cached student images into _site
+        run: |
+          if [ -d ".cache/student-images" ] && [ "$(ls -A .cache/student-images 2>/dev/null)" ]; then
+            mkdir -p _site/assets/images/people/students
+            cp -r .cache/student-images/* _site/assets/images/people/students/
+            echo "✅ Restored $(ls _site/assets/images/people/students/ | wc -l) cached student images"
+          fi
+      
+      - name: Build Eleventy
+        run: npm run build:eleventy
+      
+      - name: Update student images cache
+        run: |
+          if [ -d "_site/assets/images/people/students" ] && [ "$(ls -A _site/assets/images/people/students 2>/dev/null)" ]; then
+            mkdir -p .cache/student-images
+            rsync -a _site/assets/images/people/students/ .cache/student-images/
+          fi
       
       - name: Update schedule in deploy branch
         run: |
