@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { hasSheetChanged } = require('./sheetTimestamps');
 
-const LECTURES_JSON_URL = 'https://script.google.com/macros/s/AKfycbwr2rE4dFTkQ5ZJzHewA9jBxYmAbxgqTOX-Kd20dNyDi7xbkGWjOFBjdrhHEF0yK-9Ucg/exec';
+const LECTURES_JSON_URL = 'https://script.google.com/macros/s/AKfycbyRGO028PWtWuqhz4GqKsdL4z-dsiI2RFocHhNbgPA8fjpm-y9j3ZLzX4TCYwYbMZ6i/exec?sheet=Lectures';
 const CACHE_FILE = path.join(__dirname, 'lectureEvents.cache.json');
 
 function fetchUrl(url) {

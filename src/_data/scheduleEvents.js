@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { hasSheetChanged } = require('./sheetTimestamps');
 
-const SHEET_JSON_URL = 'https://script.google.com/macros/s/AKfycbwF4y-K0oYh0Fd78xVezCcaGf7Ac5SglXAv0SUzcBJgqeg_kRXaLix3gSad8LAgg6oR/exec';
+const SHEET_JSON_URL = 'https://script.google.com/macros/s/AKfycbyRGO028PWtWuqhz4GqKsdL4z-dsiI2RFocHhNbgPA8fjpm-y9j3ZLzX4TCYwYbMZ6i/exec?sheet=Seminars';
 const CACHE_FILE = path.join(__dirname, 'scheduleEvents.cache.json');
 
 module.exports = async function() {
