@@ -464,7 +464,7 @@ Completed refactoring phases:
 
 ## Curriculum PDF Generator
 
-Script: `docs/curriculum-pdf-apps-script.js`
+Script: `docs/spreadsheet-automation/curriculum-pdf-apps-script.js`
 
 A Google Apps Script that adds a **📄 Curriculum Tools** menu to the Curriculum Google Spreadsheet, allowing you to generate and download PDF documents directly from the spreadsheet data.
 
@@ -473,7 +473,7 @@ A Google Apps Script that adds a **📄 Curriculum Tools** menu to the Curriculu
 1. Open the **Curriculum Spreadsheet** in Google Sheets
 2. Go to **Extensions → Apps Script**
 3. Delete any existing code (or create a new `.gs` file)
-4. Copy and paste the entire contents of `docs/curriculum-pdf-apps-script.js`
+4. Copy and paste the entire contents of `docs/spreadsheet-automation/curriculum-pdf-apps-script.js`
 5. Save (Ctrl+S)
 6. Reload the spreadsheet — a **📄 Curriculum Tools** menu will appear in the menu bar
 7. First use will prompt for Google authorization (access to Drive & Docs)

@@ -1,23 +1,17 @@
 /**
  * ═══════════════════════════════════════════════════════════════════
- *  Email Tools — Brevo Integration
+ *  Email Tools — Configuration & Brevo Integration
  *  Google Apps Script — paste into your spreadsheet's script editor
  * ═══════════════════════════════════════════════════════════════════
  *
- *  Adds a "📧 Email Tools" menu to the spreadsheet with:
- *    • Send Schedule      — upcoming training events
- *    • Send Lectures      — upcoming lectures
- *    • Send to Level      — filtered by L1/L2/L3
- *    • Test Email         — send test to yourself
- *    • Manage Contacts    — open Contacts tab
+ *  Handles configuration, email composition and sending via Brevo API.
+ *  Requires: menu.js (getContacts_, menu actions, etc.)
  *
  *  SETUP:
  *    1. Go to Project Settings (⚙️) → Script Properties
  *    2. Add property: BREVO_API_KEY = your Brevo API key
  *    3. Add property: SENDER_EMAIL   = verified sender email
  *    4. Add property: SENDER_NAME    = sender display name
- *    5. Create a "Contacts" tab with columns:
- *       Name | Email | Level | Status | Consent Date
  */
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -38,91 +32,72 @@ function getConfig_() {
     apiKey: apiKey,
     senderEmail: props.getProperty('SENDER_EMAIL') || 'noreply@transpersonaltraining.eu',
     senderName: props.getProperty('SENDER_NAME') || 'Transpersonal Training',
+    siteUrl: props.getProperty('SITE_URL') || 'https://malizia-g.github.io/transpersonaltraining/',
+    logoUrl: props.getProperty('LOGO_URL') || 'https://malizia-g.github.io/transpersonaltraining/assets/images/logo.svg',
+    heroImageUrl: props.getProperty('EMAIL_HERO_URL') || 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80',
     brevoUrl: 'https://api.brevo.com/v3/smtp/email',
     contactsSheet: 'Contacts',
-    scheduleSheet: 'Schedule',
+    scheduleSheet: props.getProperty('SCHEDULE_SHEET') || 'Seminars',
     lecturesSheet: 'Lectures'
   };
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   MENU
-   ═══════════════════════════════════════════════════════════════════ */
-
-function onOpen() {
-  SpreadsheetApp.getUi()
-    .createMenu('📧 Email Tools')
-    .addItem('Send Schedule (upcoming events)', 'sendScheduleEmail')
-    .addItem('Send Lectures (upcoming lectures)', 'sendLecturesEmail')
-    .addSeparator()
-    .addItem('Send to Level L1', 'sendToL1')
-    .addItem('Send to Level L2', 'sendToL2')
-    .addItem('Send to Level L3', 'sendToL3')
-    .addSeparator()
-    .addItem('✉️ Test Email (send to myself)', 'sendTestEmail')
-    .addItem('📋 Open Contacts Tab', 'openContactsTab')
-    .addToUi();
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   CONTACTS
-   ═══════════════════════════════════════════════════════════════════ */
-
 /**
- * Get contacts from the Contacts sheet.
- * Columns: Name | Email | Level | Status | Consent Date
- * Only returns contacts with Status = "Active" and a Consent Date.
+ * Return the first matching sheet by name.
+ * @param {GoogleAppsScript.Spreadsheet.Spreadsheet} ss
+ * @param {Array<string>} names
+ * @return {GoogleAppsScript.Spreadsheet.Sheet|null}
  */
-function getContacts_(filterLevel) {
-  var config = getConfig_();
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheetByName(config.contactsSheet);
-  if (!sheet) {
-    throw new Error(
-      'Sheet "' + config.contactsSheet + '" not found.\n' +
-      'Create a tab named "Contacts" with columns:\n' +
-      'Name | Email | Level | Status | Consent Date'
-    );
+function getFirstExistingSheet_(ss, names) {
+  for (var i = 0; i < names.length; i++) {
+    var name = String(names[i] || '').trim();
+    if (!name) continue;
+    var s = ss.getSheetByName(name);
+    if (s) return s;
   }
-
-  var data = sheet.getDataRange().getValues();
-  var contacts = [];
-
-  for (var i = 1; i < data.length; i++) { // skip header row
-    var name = String(data[i][0] || '').trim();
-    var email = String(data[i][1] || '').trim();
-    var level = String(data[i][2] || '').trim().toUpperCase();
-    var status = String(data[i][3] || '').trim().toLowerCase();
-    var consent = data[i][4];
-
-    // GDPR: only include active contacts with consent
-    if (!email || status !== 'active' || !consent) continue;
-
-    // Filter by level if specified
-    if (filterLevel && level !== filterLevel.toUpperCase()) continue;
-
-    contacts.push({ name: name, email: email, level: level });
-  }
-
-  return contacts;
+  return null;
 }
 
-function openContactsTab() {
-  var config = getConfig_();
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheetByName(config.contactsSheet);
-  if (!sheet) {
-    // Create the Contacts tab if it doesn't exist
-    sheet = ss.insertSheet(config.contactsSheet);
-    sheet.getRange('A1:E1').setValues([['Name', 'Email', 'Level', 'Status', 'Consent Date']]);
-    sheet.getRange('A1:E1').setFontWeight('bold');
-    sheet.setColumnWidth(1, 150);
-    sheet.setColumnWidth(2, 250);
-    sheet.setColumnWidth(3, 80);
-    sheet.setColumnWidth(4, 80);
-    sheet.setColumnWidth(5, 120);
+/* ═══════════════════════════════════════════════════════════════════
+   DATE HELPERS
+   ═══════════════════════════════════════════════════════════════════ */
+
+/** Parse a single date in DD.MM.YYYY format */
+function parseDate_(str) {
+  if (str instanceof Date && !isNaN(str.getTime())) {
+    return new Date(str.getFullYear(), str.getMonth(), str.getDate());
   }
-  ss.setActiveSheet(sheet);
+
+  var s = String(str || '').trim();
+  if (!s) return null;
+
+  // Accept DD.MM.YYYY, DD/MM/YYYY, DD-MM-YYYY
+  var parts = s.match(/(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{4})/);
+  if (parts) {
+    return new Date(parseInt(parts[3], 10), parseInt(parts[2], 10) - 1, parseInt(parts[1], 10));
+  }
+
+  // Accept YYYY-MM-DD
+  var isoParts = s.match(/(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if (isoParts) {
+    return new Date(parseInt(isoParts[1], 10), parseInt(isoParts[2], 10) - 1, parseInt(isoParts[3], 10));
+  }
+
+  return null;
+}
+
+/** Parse date range like "29.02.2024 - 03.03.2024", return the END date */
+function parseDateRange_(str) {
+  if (str instanceof Date && !isNaN(str.getTime())) {
+    return new Date(str.getFullYear(), str.getMonth(), str.getDate());
+  }
+
+  var s = String(str);
+  // Try range format first
+  var match = s.match(/\d{1,2}[.\/-]\d{1,2}[.\/-]\d{4}\s*[\-–—]\s*(\d{1,2}[.\/-]\d{1,2}[.\/-]\d{4})/);
+  if (match) return parseDate_(match[1]);
+  // Fall back to single date
+  return parseDate_(s);
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -130,13 +105,13 @@ function openContactsTab() {
    ═══════════════════════════════════════════════════════════════════ */
 
 /**
- * Get upcoming schedule events from the Schedule sheet.
+ * Get upcoming schedule events from the Seminars/Schedule sheet.
  * Expected columns: Date | Facilitator | Title | Description | Module | Location | Type1 | Type2
  */
 function getScheduleEvents_() {
   var config = getConfig_();
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheetByName(config.scheduleSheet);
+  var sheet = getFirstExistingSheet_(ss, [config.scheduleSheet, 'Seminars', 'Schedule']);
   if (!sheet) return [];
 
   var data = sheet.getDataRange().getValues();
@@ -145,11 +120,12 @@ function getScheduleEvents_() {
   today.setHours(0, 0, 0, 0);
 
   for (var i = 1; i < data.length; i++) {
-    var dateStr = String(data[i][0] || '').trim();
+    var rawDate = data[i][0];
+    var dateStr = String(rawDate || '').trim();
     if (!dateStr) continue;
 
     // Try to parse the end date from a range like "20.06.2025 - 22.06.2025"
-    var endDate = parseDateRange_(dateStr);
+    var endDate = parseDateRange_(rawDate);
     if (endDate && endDate >= today) {
       events.push({
         date: dateStr,
@@ -183,10 +159,11 @@ function getLectureEvents_() {
   today.setHours(0, 0, 0, 0);
 
   for (var i = 1; i < data.length; i++) {
-    var dateStr = String(data[i][0] || '').trim();
+    var rawDate = data[i][0];
+    var dateStr = String(rawDate || '').trim();
     if (!dateStr) continue;
 
-    var d = parseDate_(dateStr);
+    var d = parseDate_(rawDate);
     if (d && d >= today) {
       events.push({
         date: dateStr,
@@ -205,48 +182,44 @@ function getLectureEvents_() {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   DATE HELPERS
-   ═══════════════════════════════════════════════════════════════════ */
-
-/** Parse a single date in DD.MM.YYYY format */
-function parseDate_(str) {
-  var parts = String(str).match(/(\d{2})\.(\d{2})\.(\d{4})/);
-  if (!parts) return null;
-  return new Date(parseInt(parts[3]), parseInt(parts[2]) - 1, parseInt(parts[1]));
-}
-
-/** Parse date range like "29.02.2024 - 03.03.2024", return the END date */
-function parseDateRange_(str) {
-  var s = String(str);
-  // Try range format first
-  var match = s.match(/\d{2}\.\d{2}\.\d{4}\s*-\s*(\d{2}\.\d{2}\.\d{4})/);
-  if (match) return parseDate_(match[1]);
-  // Fall back to single date
-  return parseDate_(s);
-}
-
-/* ═══════════════════════════════════════════════════════════════════
    HTML EMAIL TEMPLATES
    ═══════════════════════════════════════════════════════════════════ */
 
 function buildEmailHeader_(title) {
+  var config = getConfig_();
+
   return '<!DOCTYPE html>' +
     '<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">' +
     '<style>' +
-    'body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; }' +
+    'body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #eef2ef; color: #1f2f24; }' +
     '.container { max-width: 600px; margin: 0 auto; background: #ffffff; }' +
-    '.header { background: #1a1a2e; color: #ffffff; padding: 30px; text-align: center; }' +
-    '.header h1 { margin: 0; font-size: 24px; font-weight: 300; letter-spacing: 1px; }' +
+    '.hero { width: 100%; line-height: 0; }' +
+    '.hero img { width: 100%; max-height: 260px; object-fit: cover; display: block; }' +
+    '.header { background: linear-gradient(180deg, #19352a 0%, #12251d 100%); color: #ffffff; padding: 26px 30px 30px; text-align: center; }' +
+    '.logo-wrap { display: inline-block; background: #0e1f18; border: 1px solid rgba(255,255,255,0.18); border-radius: 12px; padding: 8px 12px; margin-bottom: 14px; }' +
+    '.logo-wrap img { display: block; width: 130px; max-width: 100%; height: auto; }' +
+    '.kicker { margin: 0; font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; color: #b9d2c2; }' +
+    '.header h1 { margin: 8px 0 0; font-size: 28px; font-weight: 600; letter-spacing: 0.2px; }' +
+    '.header p { margin: 9px 0 0; font-size: 14px; color: #d8e7de; }' +
+    '.campaign-title { margin: 14px auto 0; display: inline-block; font-size: 12px; color: #d9ece0; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 999px; padding: 6px 12px; }' +
     '.content { padding: 30px; }' +
-    '.event { border-left: 3px solid #6c63ff; padding: 15px 20px; margin-bottom: 20px; background: #fafafa; }' +
-    '.event h3 { margin: 0 0 8px 0; color: #1a1a2e; font-size: 16px; }' +
-    '.event .meta { color: #666; font-size: 13px; margin-bottom: 6px; }' +
+    '.intro { color: #425648; font-size: 14px; margin: 0 0 20px; }' +
+    '.event { border-left: 4px solid #4f8466; padding: 15px 20px; margin-bottom: 18px; background: #f7fbf8; border-radius: 0 8px 8px 0; }' +
+    '.event h3 { margin: 0 0 8px 0; color: #1a2d22; font-size: 16px; }' +
+    '.event .meta { color: #566a5c; font-size: 13px; margin-bottom: 6px; }' +
     '.event .desc { color: #444; font-size: 14px; line-height: 1.5; }' +
-    '.footer { background: #f0f0f0; padding: 20px 30px; text-align: center; font-size: 12px; color: #888; }' +
-    '.footer a { color: #6c63ff; }' +
+    '.footer { background: #edf3ef; padding: 20px 30px; text-align: center; font-size: 12px; color: #627767; }' +
+    '.footer a { color: #2f6f4f; }' +
     '</style></head><body>' +
     '<div class="container">' +
-    '<div class="header"><h1>' + escapeHtml_(title) + '</h1></div>' +
+    '<div class="hero"><img src="' + escapeHtml_(config.heroImageUrl) + '" alt="Forest landscape" /></div>' +
+    '<div class="header">' +
+    '<div class="logo-wrap"><a href="' + escapeHtml_(config.siteUrl) + '" target="_blank" rel="noopener noreferrer"><img src="' + escapeHtml_(config.logoUrl) + '" alt="Transpersonal Training" /></a></div>' +
+    '<p class="kicker">Transpersonal Training</p>' +
+    '<h1>Next Events</h1>' +
+    '<p>Discover upcoming modules, lectures and live sessions.</p>' +
+    '<div class="campaign-title">' + escapeHtml_(title) + '</div>' +
+    '</div>' +
     '<div class="content">';
 }
 
@@ -272,7 +245,7 @@ function buildScheduleHtml_(events) {
   if (events.length === 0) {
     html += '<p>No upcoming events scheduled at this time.</p>';
   } else {
-    html += '<p>Here are the upcoming training events:</p>';
+    html += '<p class="intro">Here are the upcoming training events:</p>';
     for (var i = 0; i < events.length; i++) {
       var e = events[i];
       html += '<div class="event">';
@@ -297,7 +270,7 @@ function buildLecturesHtml_(events) {
   if (events.length === 0) {
     html += '<p>No upcoming lectures scheduled at this time.</p>';
   } else {
-    html += '<p>Here are the upcoming lectures:</p>';
+    html += '<p class="intro">Here are the upcoming lectures:</p>';
     for (var i = 0; i < events.length; i++) {
       var e = events[i];
       html += '<div class="event">';
@@ -366,6 +339,67 @@ function sendViaBrevo_(recipients, subject, htmlContent) {
     Logger.log('❌ Brevo error: ' + code + ' — ' + body);
     throw new Error('Brevo API error (' + code + '): ' + body);
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CONTACTS
+   ═══════════════════════════════════════════════════════════════════ */
+
+/**
+ * Get contacts from the Contacts sheet.
+ * Columns: Name | Email | Level | Status | Consent Date
+ * Only returns contacts with Status = "Active" and a Consent Date.
+ */
+function getContacts_(filterLevel) {
+  var config = getConfig_();
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(config.contactsSheet);
+  if (!sheet) {
+    throw new Error(
+      'Sheet "' + config.contactsSheet + '" not found.\n' +
+      'Create a tab named "Contacts" with columns:\n' +
+      'Name | Email | Level | Status | Consent Date'
+    );
+  }
+
+  var data = sheet.getDataRange().getValues();
+  var contacts = [];
+
+  for (var i = 1; i < data.length; i++) { // skip header row
+    var name = String(data[i][0] || '').trim();
+    var email = String(data[i][1] || '').trim();
+    var level = String(data[i][2] || '').trim().toUpperCase();
+    var status = String(data[i][3] || '').trim().toLowerCase();
+    var consent = data[i][4];
+
+    // GDPR: only include active contacts with consent
+    if (!email || status !== 'active' || !consent) continue;
+
+    // Filter by level if specified
+    if (filterLevel && level !== filterLevel.toUpperCase()) continue;
+
+    contacts.push({ name: name, email: email, level: level });
+  }
+
+  return contacts;
+}
+
+function openContactsTab() {
+  var config = getConfig_();
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(config.contactsSheet);
+  if (!sheet) {
+    // Create the Contacts tab if it doesn't exist
+    sheet = ss.insertSheet(config.contactsSheet);
+    sheet.getRange('A1:E1').setValues([['Name', 'Email', 'Level', 'Status', 'Consent Date']]);
+    sheet.getRange('A1:E1').setFontWeight('bold');
+    sheet.setColumnWidth(1, 150);
+    sheet.setColumnWidth(2, 250);
+    sheet.setColumnWidth(3, 80);
+    sheet.setColumnWidth(4, 80);
+    sheet.setColumnWidth(5, 120);
+  }
+  ss.setActiveSheet(sheet);
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -513,68 +547,4 @@ function sendTestEmail() {
   } catch (e) {
     ui.alert('❌ Error: ' + e.message);
   }
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   WEB APP — JSON API
-   ═══════════════════════════════════════════════════════════════════
-   Deploy as Web App to expose sheet data as JSON.
-   Usage:
-     GET <url>                → data from the active sheet
-     GET <url>?sheet=Schedule → data from the "Schedule" sheet
-   ═══════════════════════════════════════════════════════════════════ */
-
-function doGet(e) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-
-  // Use the ?sheet= parameter if provided, otherwise fall back to the active sheet
-  var sheetName = (e && e.parameter && e.parameter.sheet)
-    ? e.parameter.sheet
-    : null;
-
-  var sheet = sheetName
-    ? ss.getSheetByName(sheetName)
-    : ss.getActiveSheet();
-
-  if (!sheet) {
-    return ContentService.createTextOutput(
-      JSON.stringify({ error: 'Sheet "' + sheetName + '" not found.' })
-    ).setMimeType(ContentService.MimeType.JSON);
-  }
-
-  // Get all data from the sheet
-  var data = sheet.getDataRange().getValues();
-
-  // Get headers (first row) — used as JSON keys
-  var headers = data[0];
-
-  var jsonData = [];
-
-  for (var i = 1; i < data.length; i++) {
-    var row = data[i];
-
-    // Skip completely empty rows
-    if (row.every(function(cell) {
-      return cell === '' || cell === null || cell === undefined;
-    })) {
-      continue;
-    }
-
-    // Build object dynamically from headers
-    var rowData = {};
-    for (var j = 0; j < headers.length; j++) {
-      var key = headers[j].toString().toLowerCase().trim();
-      if (key) {
-        rowData[key] = row[j] ? row[j].toString() : '';
-      }
-    }
-
-    // Only add rows that have at least a date
-    if (rowData.date) {
-      jsonData.push(rowData);
-    }
-  }
-
-  return ContentService.createTextOutput(JSON.stringify(jsonData))
-    .setMimeType(ContentService.MimeType.JSON);
 }

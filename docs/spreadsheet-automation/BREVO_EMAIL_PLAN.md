@@ -87,6 +87,33 @@ Spreadsheet → Apps Script (parse events + build HTML) → Brevo API → Email 
 - Server Brevo nell'UE
 - Nessun dato trasferito fuori dall'UE
 
+## Setup Script Properties (Apps Script)
+
+1. Aprire l'editor Apps Script del foglio di calcolo
+2. **Project Settings** (⚙️) → **Script Properties** → aggiungere:
+   - `BREVO_API_KEY` — chiave API Brevo (da SMTP & API nella dashboard)
+   - `SENDER_EMAIL` — email mittente verificata su Brevo
+   - `SENDER_NAME` — nome mittente (es. `Transpersonal Training`)
+
+> ⚠️ **Non salvare mai la API key nel codice sorgente o nel repository.**
+
+## Gestione Contatti — Opzioni
+
+### Opzione A: Tab "Contacts" nello Spreadsheet (attuale)
+- Colonne: Name | Email | Level | Status | Consent Date
+- Lo script legge i contatti direttamente dal foglio
+- Solo contatti con Status = "Active" e Consent Date compilata
+
+### Opzione B: Liste Brevo (consigliata per scalabilità)
+- Gestire i contatti nella dashboard Brevo (Contacts → Lists)
+- Creare liste per livello (es. "L1 Students", "L2 Students", "L3 Students")
+- Nello script usare l'API Campaigns (`/v3/emailCampaigns`) con `listIds` per inviare a una lista intera
+- Vantaggi: gestione unsubscribe automatica, analytics integrati, nessun tab Contacts necessario
+
+### Opzione C: Ibrido
+- Tenere il tab Contacts nello spreadsheet per comodità
+- Sincronizzare periodicamente verso Brevo via API (`/v3/contacts`)
+
 ## Verifica
 
 - [ ] Invio email di test a sé stessi
