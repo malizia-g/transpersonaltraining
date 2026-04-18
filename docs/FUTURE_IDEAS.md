@@ -16,7 +16,6 @@
 8. [Testing](#testing)
 9. [SEO & Accessibility Enhancements](#seo--accessibility-enhancements)
 10. [TESTS/ Experimental Pages](#tests-experimental-pages)
-11. [Clasp — Auto-deploy Apps Script](#clasp--auto-deploy-apps-script)
 
 ---
 
@@ -268,55 +267,7 @@ The `TESTS/` folder contains experimental HTML pages. Decision needed:
 
 ---
 
-## Clasp — Auto-deploy Apps Script
-
-### The Problem
-
-Manually copy-pasting `.js` files from `docs/spreadsheet-automation/` into the Google Apps Script editor every time they change is tedious and error-prone.
-
-### Solution: `@google/clasp`
-
-Google's official CLI for Apps Script. Push local files directly to the GAS project.
-
-```bash
-npm install -g @google/clasp
-clasp login
-clasp clone <SCRIPT_ID>   # one-time setup
-clasp push                 # send files → GAS
-```
-
-### Setup Steps
-
-1. Enable "Google Apps Script API" at [script.google.com/home/usersettings](https://script.google.com/home/usersettings)
-2. Get the Script ID from the GAS project: Settings (⚙️) → IDs
-3. Add a `.clasp.json` in `docs/spreadsheet-automation/`:
-   ```json
-   { "scriptId": "YOUR_SCRIPT_ID", "rootDir": "." }
-   ```
-4. Add an `appsscript.json` manifest:
-   ```json
-   {
-     "timeZone": "Europe/Rome",
-     "dependencies": {},
-     "exceptionLogging": "STACKDRIVER",
-     "runtimeVersion": "V8",
-     "webapp": { "executeAs": "USER_DEPLOYING", "access": "ANYONE_ANONYMOUS" }
-   }
-   ```
-5. Add npm script: `"push:gas": "cd docs/spreadsheet-automation && clasp push"`
-
-### Optional: GitHub Action Auto-push
-
-Trigger `clasp push` automatically when files in `docs/spreadsheet-automation/` change on `staging`.
-Requires storing clasp credentials as GitHub Secrets.
-
-### Checklist
-
-- [ ] Enable Apps Script API
-- [ ] `clasp login` + `clasp clone`
-- [ ] Add `.clasp.json` and `appsscript.json` to `docs/spreadsheet-automation/`
-- [ ] Add `push:gas` npm script
-- [ ] (Optional) GitHub Action for auto-push on staging
+> **Note:** Spreadsheet automation (Apps Script files, Brevo email plan, clasp setup) has been moved to the orphan branch [`gas-automation`](https://github.com/malizia-g/transpersonaltraining/tree/gas-automation).
 
 ---
 
