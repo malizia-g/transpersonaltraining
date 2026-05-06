@@ -2,7 +2,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-const CURRICULUM_JSON_URL = 'https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnTEfu1SkNFguCcs6d6xEV0YCMy58rkQ17nv3qfzXgbUSGNueLTyGRRUp3SHa5X5uYTVfynsoeFgd-syDI07TMpbDdKVceUwNQ2H2l8hfgttgkNb-_WLL1JbLsTwvnZmFWOfxJvkCYBY2uLT3TLg0tDoD8CDa9XnW_h9ygPNOu2madXVxPZUgjVRX-rpelIOxur6Cgoi2AwFdiagizJ2xs7bvPwRgjH-hsQ0jVvGS40Ym6dH36jla-rABW42Z-I6CvyZHUK9V8cpjHBPcTSOQInda0HH1w&lib=MH22ekMWpk3hvjZrINFFapw8mHdyRNTio';
+const CURRICULUM_JSON_URL = 'https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnT9zQZMPfwAwsUoI5lYR8qrlW8V1lH-_9lS5l0D4FYpZFGWuLV4kxsK976Gog2y0qQRLiX7flsLYlu1IfCDH5J0o8cctKcJuPNa3uY_Sac5RnzE6GcJmiOHSqXFe4xIUYFjN60vY6ulJPCgZN5WcvmlhPHCZJotSrWPj0GbOqV3xQjuHPIW0xDm7K1XHk0l8Ny2si2lG53YtYdzmBc0LbzNsWD3yIKBaOuNU0WwNI40W6kg4UEGYnsB8m59NVFLPJKBirZLs_Tm5SVtd82LBsK4YqlPFw&lib=MH22ekMWpk3hvjZrINFFapw8mHdyRNTio';
 const CACHE_FILE = path.join(__dirname, 'curriculumData.cache.json');
 
 function fetchUrl(url, redirectsLeft = 5) {
