@@ -122,14 +122,14 @@ function normalizeModule(rawModule, index) {
   const topic = pickFirstString(rawModule, ['topic', 'title', 'name', 'module']);
   const description = pickFirstString(rawModule, ['description', 'desc', 'summary', 'content']);
   const hours = pickFirstString(rawModule, ['hours', 'totalHours', 'moduleHours', 'hour']);
-  const teachingStrategy = pickFirstString(rawModule, [
-    'teachingStrategy',
-    'teaching strategy',
+  const deliveryFormat = pickFirstString(rawModule, [
     'deliveryFormat',
     'delivery format',
+    'teachingStrategy',
+    'teaching strategy',
     'strategy'
   ]);
-  const number = pickFirstString(rawModule, ['number', 'moduleNumber', 'module number', 'id']);
+  const number = pickFirstString(rawModule, ['number', 'moduleNumber', 'module number', 'module', 'id']);
 
   const rawSubModules = [
     ...asArray(rawModule?.subModules),
@@ -141,7 +141,7 @@ function normalizeModule(rawModule, index) {
     .map((subModule, subIndex) => normalizeSubModule(subModule, subIndex))
     .filter(Boolean);
 
-  if (!topic && !description && !hours && !teachingStrategy && subModules.length === 0) {
+  if (!topic && !description && !hours && !deliveryFormat && subModules.length === 0) {
     return null;
   }
 
@@ -150,7 +150,7 @@ function normalizeModule(rawModule, index) {
     topic: topic || `Module ${index + 1}`,
     description,
     hours,
-    teachingStrategy,
+    deliveryFormat,
     subModules
   };
 }
@@ -160,23 +160,156 @@ function sectionLooksLikePractical(section) {
   return /experiential\s*\/?\s*personal\s*\/?\s*group\s*work/i.test(sectionTitle);
 }
 
-function normalizePracticalItem(item, index) {
+function sectionLooksLikeExamination(section) {
+  const sectionTitle = pickFirstString(section, ['title', 'name', 'section', 'label']);
+  return /examin/i.test(sectionTitle);
+}
+
+function itemLooksLikeExamination(item) {
   const topic = pickFirstString(item, ['topic', 'title', 'name', 'module']);
-  const teachingStrategy = pickFirstString(item, [
-    'teachingStrategy',
-    'teaching strategy',
+  const deliveryFormat = pickFirstString(item, [
     'deliveryFormat',
     'delivery format',
+    'teachingStrategy',
+    'teaching strategy',
     'strategy'
   ]);
 
-  if (!topic && !teachingStrategy) {
+  return /examin/i.test(`${topic} ${deliveryFormat}`);
+}
+
+function extractSectionItems(section) {
+  return []
+    .concat(asArray(section?.activities))
+    .concat(asArray(section?.items))
+    .concat(asArray(section?.modules));
+}
+
+function dedupeSupplementaryItems(items) {
+  const seen = new Set();
+
+  return items.filter((item) => {
+    const key = `${item.topic}::${item.deliveryFormat}`;
+    if (seen.has(key)) {
+      return false;
+    }
+    seen.add(key);
+    return true;
+  });
+}
+
+function saveCurriculumCache(normalized) {
+  try {
+    fs.writeFileSync(CACHE_FILE, JSON.stringify(normalized, null, 2));
+    console.log(`✅ Curriculum cache saved (${normalized.levels.length} levels, ${normalized.totalModules} modules)`);
+  } catch (cacheError) {
+    console.warn('⚠️ Could not save curriculum cache:', cacheError.message);
+  }
+}
+
+function normalizePracticalItem(item, index) {
+  const topic = pickFirstString(item, ['topic', 'title', 'name', 'module']);
+  const deliveryFormat = pickFirstString(item, [
+    'deliveryFormat',
+    'delivery format',
+    'teachingStrategy',
+    'teaching strategy',
+    'strategy'
+  ]);
+
+  if (!topic && !deliveryFormat) {
     return null;
   }
 
   return {
     topic: topic || `Experiential item ${index + 1}`,
-    teachingStrategy
+    deliveryFormat
+  };
+}
+
+function getItemModuleCode(item) {
+  return pickFirstString(item, ['module', 'number', 'moduleNumber', 'module number', 'id']);
+}
+
+function getModuleRangeUpperBound(moduleCode) {
+  const integerValue = cleanText(moduleCode);
+  if (/^\d+$/.test(integerValue)) {
+    return Number(integerValue);
+  }
+
+  const rangeMatch = integerValue.match(/^(\d+)\s*-\s*(\d+)$/);
+  if (rangeMatch) {
+    return Number(rangeMatch[2]);
+  }
+
+  return null;
+}
+
+function itemLooksLikeModuleRecord(item) {
+  return /^\d+$/.test(getItemModuleCode(item));
+}
+
+function compareModuleNumbers(left, right) {
+  const leftValue = getModuleRangeUpperBound(left.number);
+  const rightValue = getModuleRangeUpperBound(right.number);
+
+  if (leftValue !== null && rightValue !== null) {
+    return leftValue - rightValue;
+  }
+
+  return left.number.localeCompare(right.number, undefined, { numeric: true });
+}
+
+function extractLevelModules(level) {
+  const rawModules = []
+    .concat(asArray(level?.modules))
+    .concat(asArray(level?.items))
+    .concat(asArray(level?.activities))
+    .concat(asArray(level?.sections).flatMap(extractSectionItems))
+    .filter(itemLooksLikeModuleRecord);
+
+  const seen = new Set();
+
+  return rawModules
+    .map((item, index) => normalizeModule({
+      ...item,
+      number: getItemModuleCode(item)
+    }, index))
+    .filter(Boolean)
+    .filter((module) => {
+      const key = `${module.number}::${module.topic}`;
+      if (seen.has(key)) {
+        return false;
+      }
+
+      seen.add(key);
+      return true;
+    })
+    .sort(compareModuleNumbers);
+}
+
+function normalizeSectionedCurriculum(rawLevels) {
+  const levels = rawLevels
+    .map((level, index) => {
+      const practicalItems = extractPracticalItems(level);
+      const examinationItems = extractExaminationItems(level);
+      const label = pickFirstString(level, ['label', 'level', 'id']) || `Level ${index + 1}`;
+      const title = pickFirstString(level, ['title', 'name', 'heading']) || 'Curriculum Level';
+
+      return {
+        id: `level${index + 1}`,
+        label,
+        title,
+        modules: extractLevelModules(level),
+        practicalItems: dedupeSupplementaryItems(practicalItems),
+        examinationItems: dedupeSupplementaryItems(examinationItems)
+      };
+    })
+    .filter((level) => level.modules.length > 0 || level.practicalItems.length > 0 || level.examinationItems.length > 0);
+
+  return {
+    levels,
+    totalModules: levels.reduce((sum, level) => sum + level.modules.length, 0)
   };
 }
 
@@ -187,23 +320,51 @@ function extractPracticalItems(level) {
 
   const sectionPractical = asArray(level?.sections)
     .filter(sectionLooksLikePractical)
-    .flatMap((section) => {
-      return []
-        .concat(asArray(section?.activities))
-        .concat(asArray(section?.items))
-        .concat(asArray(section?.modules));
-    });
+    .flatMap(extractSectionItems);
 
   return directPractical
     .concat(sectionPractical)
+    .filter((item) => !itemLooksLikeModuleRecord(item))
+    .filter((item) => !itemLooksLikeExamination(item))
     .map((item, index) => normalizePracticalItem(item, index))
+    .filter(Boolean)
+    .filter((item) => !itemLooksLikeExamination(item))
     .filter(Boolean);
+}
+
+function extractExaminationItems(level) {
+  const directExaminations = asArray(level?.examination)
+    .concat(asArray(level?.examinations))
+    .concat(asArray(level?.examinationItems))
+    .concat(asArray(level?.assessments));
+
+  const practicalExaminations = asArray(level?.practical)
+    .concat(asArray(level?.practicalItems))
+    .concat(asArray(level?.experiential))
+    .concat(
+      asArray(level?.sections)
+        .filter(sectionLooksLikePractical)
+        .flatMap(extractSectionItems)
+    )
+    .filter(itemLooksLikeExamination);
+
+  const sectionExaminations = asArray(level?.sections)
+    .filter(sectionLooksLikeExamination)
+    .flatMap(extractSectionItems);
+
+  return dedupeSupplementaryItems(
+    directExaminations
+      .concat(practicalExaminations)
+      .concat(sectionExaminations)
+      .map((item, index) => normalizePracticalItem(item, index))
+      .filter(Boolean)
+  );
 }
 
 function extractModules(level) {
   const fromLevel = asArray(level?.modules);
   const fromSections = asArray(level?.sections)
-    .filter((section) => !sectionLooksLikePractical(section))
+    .filter((section) => !sectionLooksLikePractical(section) && !sectionLooksLikeExamination(section))
     .flatMap((section) => []
       .concat(asArray(section?.modules))
       .concat(asArray(section?.items))
@@ -248,10 +409,15 @@ function extractLevels(rawData) {
 function normalizeCurriculum(rawData) {
   const rawLevels = extractLevels(rawData);
 
+  if (rawLevels.some((level) => asArray(level?.sections).length > 0)) {
+    return normalizeSectionedCurriculum(rawLevels);
+  }
+
   const levels = rawLevels
     .map((level, index) => {
       const modules = extractModules(level);
       const practicalItems = extractPracticalItems(level);
+      const examinationItems = extractExaminationItems(level);
       const label = pickFirstString(level, ['label', 'level', 'id']) || `Level ${index + 1}`;
       const title = pickFirstString(level, ['title', 'name', 'heading']) || 'Curriculum Level';
 
@@ -260,10 +426,11 @@ function normalizeCurriculum(rawData) {
         label,
         title,
         modules,
-        practicalItems
+        practicalItems: dedupeSupplementaryItems(practicalItems),
+        examinationItems
       };
     })
-    .filter((level) => level.modules.length > 0 || level.practicalItems.length > 0);
+    .filter((level) => level.modules.length > 0 || level.practicalItems.length > 0 || level.examinationItems.length > 0);
 
   const totalModules = levels.reduce((sum, level) => sum + level.modules.length, 0);
 
@@ -283,23 +450,21 @@ module.exports = async function () {
       throw new Error('Curriculum JSON parsed but contains no levels');
     }
 
-    try {
-      fs.writeFileSync(CACHE_FILE, JSON.stringify(normalized, null, 2));
-      console.log(`✅ Curriculum cache saved (${normalized.levels.length} levels, ${normalized.totalModules} modules)`);
-    } catch (cacheError) {
-      console.warn('⚠️ Could not save curriculum cache:', cacheError.message);
-    }
+    saveCurriculumCache(normalized);
 
     return normalized;
   } catch (error) {
-    console.error('Error fetching curriculum data:', error.message);
+    console.error('Error loading curriculum data:', error.message);
 
     if (fs.existsSync(CACHE_FILE)) {
       try {
         const cached = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf-8'));
-        if (Array.isArray(cached?.levels) && cached.levels.length > 0) {
-          console.log(`⚠️ Using cached curriculum data (${cached.levels.length} levels)`);
-          return cached;
+        const normalizedCache = normalizeCurriculum(cached);
+        if (Array.isArray(normalizedCache?.levels) && normalizedCache.levels.length > 0) {
+          saveCurriculumCache(normalizedCache);
+
+          console.log(`⚠️ Using cached curriculum data (${normalizedCache.levels.length} levels)`);
+          return normalizedCache;
         }
       } catch (cacheError) {
         console.error('❌ Cache read failed:', cacheError.message);

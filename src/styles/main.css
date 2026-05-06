@@ -108,10 +108,10 @@ body[class*="theme-"] #mobile-menu a:hover {
     letter-spacing: 0.1em;
 }
 .module-number {
-    width: 44px; height: 44px; min-width: 44px;
+    width: 30px; height: 30px; min-width: 30px;
     border-radius: 50%; display: flex;
     align-items: center; justify-content: center;
-    font-weight: 700; font-size: 1rem; color: white; flex-shrink: 0;
+    font-weight: 700; font-size: 0.75rem; color: white; flex-shrink: 0;
 }
 .level-content {
     max-height: 0; overflow: hidden; opacity: 0;
