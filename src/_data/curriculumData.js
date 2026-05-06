@@ -80,17 +80,41 @@ function pickFirstString(obj, keys) {
   return '';
 }
 
+function normalizeTopicList(rawSub, description) {
+  const topicList = []
+    .concat(asArray(rawSub?.topics))
+    .concat(asArray(rawSub?.items))
+    .concat(asArray(rawSub?.points))
+    .map(cleanText)
+    .filter(Boolean);
+
+  if (topicList.length > 0) {
+    return topicList;
+  }
+
+  if (!description || !description.includes('\n')) {
+    return [];
+  }
+
+  return description
+    .split(/\r?\n/)
+    .map(cleanText)
+    .filter(Boolean);
+}
+
 function normalizeSubModule(rawSub, index) {
   const topic = pickFirstString(rawSub, ['topic', 'title', 'name', 'module', 'subModule', 'submodule']);
   const description = pickFirstString(rawSub, ['description', 'desc', 'summary', 'content']);
+  const topics = normalizeTopicList(rawSub, description);
 
-  if (!topic && !description) {
+  if (!topic && !description && topics.length === 0) {
     return null;
   }
 
   return {
     topic: topic || `Sub-module ${index + 1}`,
-    description
+    description,
+    topics
   };
 }
 
