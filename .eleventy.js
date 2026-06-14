@@ -1,9 +1,24 @@
-// RIMOSSA dichiarazione superflua di module.exports
+const pluginSEO = require('eleventy-plugin-seo');
 const markdownIt = require('markdown-it');
 const fs = require('fs');
 const path = require('path');
+const seo = require('./src/_data/seo');
 
 module.exports = function(eleventyConfig) {
+  eleventyConfig.addPlugin(pluginSEO, seo);
+
+  function validateBlogPost(post) {
+    const missing = [];
+    if (!post?.data?.description) missing.push('description');
+    if (!post?.data?.image) missing.push('image');
+
+    if (missing.length > 0) {
+      throw new Error(
+        `Blog post ${post.inputPath} is missing required front matter: ${missing.join(', ')}`
+      );
+    }
+  }
+
   // Filtro Nunjucks per formattare le date (compatibile con il template blog)
   eleventyConfig.addNunjucksFilter('date', function(date, format = 'yyyy-MM-dd') {
     if (!date) return '';
@@ -24,7 +39,9 @@ module.exports = function(eleventyConfig) {
   });
   // Collezione blog: tutti i markdown in src/blog/
   eleventyConfig.addCollection('blog', function(collectionApi) {
-    return collectionApi.getFilteredByGlob('src/blog/*.md');
+    const posts = collectionApi.getFilteredByGlob('src/blog/*.md');
+    posts.forEach(validateBlogPost);
+    return posts;
   });
   // Markdown instance
   const md = markdownIt({

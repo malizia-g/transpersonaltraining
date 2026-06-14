@@ -10,6 +10,45 @@ npm run dev        # Development (watch mode)
 npm run build      # Production build
 ```
 
+## How to Add an Article
+
+To add a new blog article:
+
+1. Create a new Markdown file inside `src/blog/`.
+2. Add the required front matter at the top of the file:
+	- `title`
+	- `author`
+	- `date`
+	- `description`
+	- `image`
+	- `tags`
+3. Place the article image inside `src/assets/images/`.
+4. Use the image path in the `image` field, for example: `/assets/images/my-new-article.jpg`
+5. Write the article content below the front matter in Markdown.
+6. Run `npm run build` to make sure the article passes validation and is generated correctly.
+
+Example:
+
+```md
+---
+title: "My New Article"
+author: Your Name
+date: 2026-02-14
+description: "A short summary of the article for SEO and blog previews."
+image: /assets/images/my-new-article.jpg
+tags: [transpersonal, psychology, training]
+---
+
+Your article content starts here.
+```
+
+Notes:
+
+- The `description` field is required for SEO and blog previews.
+- The `image` field is required for the article card and social sharing metadata.
+- Tags should be written as a list inside square brackets.
+- Use a short, clear description because it is reused in search and social previews.
+
 ## Documentation
 
 All project documentation is in the [`docs/`](docs/) folder:

@@ -3,6 +3,7 @@ title: "How Transpersonal Psychology Differs from Other Approaches"
 author: Manal Al-Hammadi
 date: 2026-02-14
 description: "A clear comparison between transpersonal psychology and other therapeutic modalities, highlighting its unique holistic and integrative approach."
+image: /assets/images/vineyard.jpg
 tags: [transpersonal, psychology, holistic therapy, integrative therapy, psychotherapy, comparison]
 ---
 

@@ -3,32 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} | Transpersonal Training</title>
-
-    {# SEO Meta Tags #}
-    {% if description %}
-    <meta name="description" content="{{ description }}">
-    {% endif %}
-    <link rel="canonical" href="https://transpersonal-training.com{{ page.url }}">
-
-    {# Open Graph / Facebook #}
-    <meta property="og:type" content="{{ ogType if ogType else 'website' }}">
-    <meta property="og:url" content="https://transpersonal-training.com{{ page.url }}">
-    <meta property="og:title" content="{{ title }} | Transpersonal Training">
-    {% if description %}
-    <meta property="og:description" content="{{ description }}">
-    {% endif %}
-    <meta property="og:site_name" content="Transpersonal Training">
-    <meta property="og:locale" content="en_GB">
-    <meta property="og:image" content="https://transpersonal-training.com{{ '/assets/images/og-default.jpg' | url }}">
-
-    {# Twitter Card #}
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ title }} | Transpersonal Training">
-    {% if description %}
-    <meta name="twitter:description" content="{{ description }}">
-    {% endif %}
-    <meta name="twitter:image" content="https://transpersonal-training.com{{ '/assets/images/og-default.jpg' | url }}">
+    {% set excerpt = excerpt or description %}
+    {% set ogtype = ogtype or ogType or ('article' if page.url != '/blog/' and (page.url | startsWith('/blog/')) else 'website') %}
+    {% seo "" %}
 
     {# JSON-LD Structured Data #}
     {% if page.url == "/" %}

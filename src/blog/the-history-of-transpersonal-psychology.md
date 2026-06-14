@@ -3,6 +3,7 @@ title: "The History of Transpersonal Psychology"
 author: Manal Al-Hammadi
 date: 2026-02-14
 description: "A journey through the origins and evolution of transpersonal psychology, from James and Jung to the present day."
+image: /assets/images/blog-hero.jpg
 tags: [transpersonal, psychology, history, holistic therapy, spiritual psychotherapy, breathwork, integrative therapy]
 ---
 
