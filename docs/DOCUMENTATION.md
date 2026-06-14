@@ -375,11 +375,24 @@ Site deploys to `transpersonal-training.com`. `pathPrefix` is `"/"`.
 
 ### Meta Tags
 
-SEO meta tags (Open Graph, Twitter Cards, canonical URL, description) are configured in `src/_includes/base.njk` using front matter variables `description` and `ogType`.
+SEO meta tags (title, description, canonical URL, Open Graph, Twitter Cards) are generated through `eleventy-plugin-seo`.
+
+Implementation:
+- Plugin registration: `.eleventy.js`
+- Global defaults: `src/_data/seo.js`
+- Rendering hook in shared layout: `src/_includes/base.njk`
+- Page-level overrides via front matter: `title`, `description`, `author`, `image`, `ogtype`
+
+Compatibility note:
+- Existing pages that still use `description` and `ogType` continue to work because the base layout maps them to the plugin inputs.
 
 ### OG Image
 
-Needs to be created: `src/assets/images/og-default.jpg` (1200×630px)
+Fallback OG image: `src/assets/images/og-default.jpg`
+
+Blog note:
+- Blog posts can override the fallback image with a page-level `image` field in front matter.
+- `src/_includes/blog_article.njk` also reuses that same `image` value for the article hero when present.
 
 ### Sitemap
 
