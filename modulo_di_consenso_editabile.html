@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo & Video Release Form - Editable Template</title>
+  <!-- Tailwind CSS per uno stile moderno ed elegante -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f3f4f6;
+    }
+
+    /* Stili specifici per l'area della pagina A4 */
+    .a4-page {
+      background: white;
+      width: 210mm;
+      min-height: 297mm;
+      padding: 15mm;
+      margin: 20px auto;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    /* Campi di input espandibili ed editabili al click */
+    .editable-line {
+      border-bottom: 1px solid #cbd5e1;
+      display: inline-block;
+      min-width: 10px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .editable-line:focus {
+      border-bottom-color: #1a365d;
+      background-color: #f8fafc;
+    }
+
+    /* Stili ottimizzati per la stampa */
+    @media print {
+      body {
+        background-color: white;
+        margin: 0;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .a4-page {
+        box-shadow: none;
+        margin: 0;
+        width: 100%;
+        min-height: 100%;
+        padding: 10mm;
+      }
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased pb-12">
+
+  <!-- BARRA DI CONTROLLO SUPERIORE (Nascosta durante la stampa) -->
+  <div class="no-print bg-slate-900 text-white p-4 sticky top-0 z-50 shadow-md">
+    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <h1 class="font-semibold text-lg">Editor Modulo di Consenso (Versione Minimal)</h1>
+        <p class="text-xs text-slate-400">Clicca su qualsiasi testo per modificarlo. Compila i campi della firma prima di stampare o lasciali vuoti.</p>
+      </div>
+      <div class="flex gap-3">
+        <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium text-sm transition-all shadow shadow-blue-500/20">
+          Stampa o Salva come PDF
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOCUMENTO A4 -->
+  <div class="a4-page flex flex-col justify-between">
+    
+    <div>
+      <!-- INTESTAZIONE -->
+      <div class="text-center mb-6">
+        <div contenteditable="true" class="text-xs tracking-wider uppercase font-semibold text-slate-500 focus:bg-slate-50 focus:outline-none p-1 rounded">
+          Transpersonal Training — International School of Transpersonal Psychology
+        </div>
+        <h2 contenteditable="true" class="text-2xl font-bold text-[#1A365D] mt-1 focus:bg-slate-50 focus:outline-none p-1 rounded">
+          Photo, Video & Image Release and Consent Form
+        </h2>
+        <div class="w-full h-[2px] bg-[#1A365D] mt-2 mb-3"></div>
+        <p contenteditable="true" class="text-xs italic text-slate-600 leading-relaxed max-w-3xl mx-auto focus:bg-slate-50 focus:outline-none p-1 rounded">
+          This release form grants Transpersonal Training permission to use photographs, videos, and other visual media featuring the undersigned individual for promotional, educational, and informational purposes.
+        </p>
+      </div>
+
+      <!-- ACCORDO DI RILASCIO (10 PUNTI SU 2 COLONNE PER MASSIMIZZARE LO SPAZIO) -->
+      <div class="mb-6">
+        <div class="flex items-center gap-2 border-b-2 border-[#1A365D] pb-1 mb-4">
+          <span contenteditable="true" class="text-sm font-bold uppercase tracking-wider text-[#1A365D] focus:outline-none">Release Agreement Terms</span>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-x-8 gap-y-3.5 text-[11px] leading-relaxed text-slate-700">
+          <!-- Punto 1 -->
+          <div class="flex gap-1.5 align-top">
+            <span class="font-bold text-[#1A365D]">1.</span>
+            <p contenteditable="true" class="focus:bg-slate-50 focus:outline-none rounded"><strong>Use of Images:</strong> Permission to photograph, record, or film me during training sessions, workshops, and lectures, and use my likeness, voice, or statements in any media (including websites, social media, marketing, and presentations).</p>
+          </div>
+          <!-- Punto 2 -->
+          <div class="flex gap-1.5 align-top">
+            <span class="font-bold text-[#1A365D]">2.</span>
+            <p contenteditable="true" class="focus:bg-slate-50 focus:outline-none rounded"><strong>Editing Rights:</strong> The Organization may crop, alter, retouch, composite, or edit images, provided alterations do not misrepresent the Releasor.</p>
+          </div>
+          <!-- Punto 3 -->
+          <div class="flex gap-1.5 align-top">
+            <span class="font-bold text-[#1A365D]">3.</span>
+            <p contenteditable="true" class="focus:bg-slate-50 focus:outline-none rounded"><strong>No Compensation:</strong> I will not receive any financial compensation or royalty for the use of my image, now or in the future.</p>
+          </div>
+          <!-- Punto 4 -->
+          <div class="flex gap-1.5 align-top">
+            <span class="font-bold text-[#1A365D]">4.</span>
+            <p contenteditable="true" class="focus:bg-slate-50 focus:outline-none rounded"><strong>No Prior Approval:</strong> I waive any right to inspect or approve the finished products or advertising copy using my image.</p>
+          </div>
+          <!-- Punto 5 -->
+          <div class="flex gap-1.5 align-top">
+            <span class="font-bold text-[#1A365D]">5.</span>
+            <p contenteditable="true" class="focus:bg-slate-50 focus:outline-none rounded"><strong>Duration:</strong> This release is valid in perpetuity from the signing date, unless revoked in writing (as described in Section 8).</p>
+          </div>
+          <!-- Punto 6 -->
+          <div class="flex gap-1.5 align-top">
+            <span class="font-bold text-[#1A365D]">6.</span>
+            <p contenteditable="true" class="focus:bg-slate-50 focus:outline-none rounded"><strong>Ownership:</strong> All media produced remains the exclusive property of the Organization. I claim no ownership rights.</p>
+          </div>
+          <!-- Punto 7 -->
+          <div class="flex gap-1.5 align-top">
+            <span class="font-bold text-[#1A365D]">7.</span>
+            <p contenteditable="true" class="focus:bg-slate-50 focus:outline-none rounded"><strong>Representations:</strong> I am at least 18 years of age, legally competent, and signing voluntarily with full understanding of these terms.</p>
+          </div>
+          <!-- Punto 8 -->
+          <div class="flex gap-1.5 align-top">
+            <span class="font-bold text-[#1A365D]">8.</span>
+            <p contenteditable="true" class="focus:bg-slate-50 focus:outline-none rounded"><strong>Revocation:</strong> I may revoke consent in writing. The Organization will stop future use but has no obligation to remove existing, published, or distributed materials.</p>
+          </div>
+          <!-- Punto 9 -->
+          <div class="flex gap-1.5 align-top">
+            <span class="font-bold text-[#1A365D]">9.</span>
+            <p contenteditable="true" class="focus:bg-slate-50 focus:outline-none rounded"><strong>Limitation of Liability:</strong> I release and hold harmless the Organization from any claims or actions arising from the authorized use of my image.</p>
+          </div>
+          <!-- Punto 10 -->
+          <div class="flex gap-1.5 align-top">
+            <span class="font-bold text-[#1A365D]">10.</span>
+            <p contenteditable="true" class="focus:bg-slate-50 focus:outline-none rounded"><strong>Governing Law:</strong> Governed by and construed in accordance with the laws of the jurisdiction of the Organization's registration.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEZIONE UNICA DI SOTTOSCRIZIONE E ACCORDO -->
+      <div class="mt-8 bg-slate-50 p-5 rounded-xl border border-slate-200">
+        <div class="flex items-center gap-2 border-b border-[#1A365D] pb-1.5 mb-3">
+          <span contenteditable="true" class="text-sm font-bold uppercase tracking-wider text-[#1A365D] focus:outline-none">Consent Acknowledgment & Signature</span>
+        </div>
+        
+        <p contenteditable="true" class="text-xs italic text-slate-600 leading-relaxed mb-5 focus:bg-white focus:outline-none p-1 rounded">
+          By signing below, I confirm that I have read, understood, and agree to all the terms stated in this Photo, Video & Image Release and Consent Form. I certify that I am at least 18 years of age.
+        </p>
+
+        <!-- Campi di firma e contatto integrati in un'unica griglia pulita -->
+        <div class="grid grid-cols-2 gap-x-8 gap-y-4 text-xs">
+          <div class="flex items-end">
+            <span class="text-slate-600 font-semibold whitespace-nowrap mr-2">Full Printed Name:</span>
+            <span contenteditable="true" class="editable-line flex-1 px-1 h-5"></span>
+          </div>
+          <div class="flex items-end">
+            <span class="text-slate-600 font-semibold whitespace-nowrap mr-2">Signature:</span>
+            <span contenteditable="true" class="editable-line flex-1 px-1 h-5"></span>
+          </div>
+          <div class="flex items-end">
+            <span class="text-slate-600 font-semibold whitespace-nowrap mr-2">Email Address:</span>
+            <span contenteditable="true" class="editable-line flex-1 px-1 h-5"></span>
+          </div>
+          <div class="flex items-end">
+            <span class="text-slate-600 font-semibold whitespace-nowrap mr-2">Phone / Contact:</span>
+            <span contenteditable="true" class="editable-line flex-1 px-1 h-5"></span>
+          </div>
+          <div class="flex items-end">
+            <span class="text-slate-600 font-semibold whitespace-nowrap mr-2">Date of Signature:</span>
+            <span contenteditable="true" class="editable-line flex-1 px-1 h-5"></span>
+          </div>
+          <div class="flex items-end">
+            <span class="text-slate-600 font-semibold whitespace-nowrap mr-2">Role (e.g. Student, Guest):</span>
+            <span contenteditable="true" class="editable-line flex-1 px-1 h-5"></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PIÈ DI PAGINA (CONTATTI & NOTE DI CHIUSURA) -->
+    <div class="mt-8 border-t border-slate-300 pt-4">
+      <div class="text-center text-[10px] text-slate-500 space-y-1">
+        <div class="flex justify-center items-center gap-3">
+          <strong contenteditable="true" class="text-slate-700 focus:outline-none">Transpersonal Training</strong>
+          <span>•</span>
+          <div>Email: <span contenteditable="true" class="editable-line px-1 min-w-[120px]">[insert contact email]</span></div>
+          <span>•</span>
+          <div>Website: <span contenteditable="true" class="editable-line px-1 min-w-[120px]">transpersonaltraining.com</span></div>
+        </div>
+        <p contenteditable="true" class="italic text-slate-400 mt-1 focus:outline-none">
+          This form may be signed in paper or digitally. Digital signatures (typed name + date via email confirmation) are accepted. Retain a copy for your records.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
