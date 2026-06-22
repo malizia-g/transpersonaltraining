@@ -24,7 +24,7 @@ ogtype: website
     </form>
     <div class="grid grid-cols-1 md:grid-cols-1 gap-10" id="blog-articles">
       {% for post in collections.blog | reverse %}
-      <article class="bg-neutral-warm-50 rounded-2xl shadow-md p-5 sm:p-8 flex flex-col gap-4 hover:shadow-xl transition-all relative">
+      <article class="bg-neutral-warm-50 rounded-2xl shadow-md p-5 sm:p-8 flex flex-col gap-4 hover:shadow-xl transition-all relative" data-author="{{ post.data.author }}" data-tags="{% if post.data.tags %}{{ post.data.tags | join('|') }}{% endif %}" data-date="{{ post.date | date('yyyy-MM-dd') }}">
         <div class="flex flex-wrap items-start gap-4 sm:flex-nowrap">
           {% if post.data.image %}
           <img src="{{ post.data.image | url }}" alt="{{ post.data.title }}" class="w-20 h-20 sm:w-32 sm:h-32 object-cover rounded-xl flex-shrink-0" loading="lazy" />
@@ -59,12 +59,11 @@ ogtype: website
         // Popola filtri
         const authors = new Set();
         const tags = new Set();
+        const cardTags = card => (card.dataset.tags || '').split('|').map(t => t.trim()).filter(Boolean);
         cards.forEach(card => {
-          const author = card.querySelector('.text-sm span')?.textContent.trim();
+          const author = (card.dataset.author || '').trim();
           if (author) authors.add(author);
-          (card.querySelector('.text-xs')?.textContent.split(',') || []).forEach(tag => {
-            if (tag.trim()) tags.add(tag.trim());
-          });
+          cardTags(card).forEach(tag => tags.add(tag));
         });
         const authorSelect = document.getElementById('filter-author');
         authors.forEach(author => {
@@ -85,11 +84,10 @@ ogtype: website
           const date = document.getElementById('filter-date').value;
           cards.forEach(function(card) {
             let show = true;
-            const cardAuthor = card.querySelector('.text-sm span')?.textContent.trim();
-            const cardTags = (card.querySelector('.text-xs')?.textContent.split(',').map(t=>t.trim())) || [];
-            const cardDate = card.querySelector('time')?.getAttribute('datetime');
+            const cardAuthor = (card.dataset.author || '').trim();
+            const cardDate = card.dataset.date;
             if (author && cardAuthor !== author) show = false;
-            if (tag && !cardTags.includes(tag)) show = false;
+            if (tag && !cardTags(card).includes(tag)) show = false;
             if (date && (!cardDate || !cardDate.startsWith(date))) show = false;
             card.style.display = show ? '' : 'none';
           });

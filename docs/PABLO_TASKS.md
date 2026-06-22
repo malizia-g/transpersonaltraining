@@ -19,9 +19,9 @@ These items directly affect content accuracy, information architecture, protecte
 **Status:** Pending
 
 Actions:
-- Review the Home page text for tone, clarity, and accuracy
-- Replace or approve the current Home page photos
-- Confirm that the hero message, CTA, and supporting sections match the current offer
+- [ ] Review the Home page text for tone, clarity, and accuracy
+- [ ] Replace or approve the current Home page photos
+- [ ] Confirm that the hero message, CTA, and supporting sections match the current offer
 
 Reason:
 - The homepage is the main entry point and must reflect the final positioning before launch
@@ -33,9 +33,9 @@ Reason:
 **Status:** Pending
 
 Actions:
-- Decide on a clearer name for the current Program page
-- Update navigation, internal links, page headings, and SEO text accordingly
-- Make sure the distinction between Program and Curriculum is obvious to visitors
+- [ ] Decide on a clearer name for the current Program page
+- [ ] Update navigation, internal links, page headings, and SEO text accordingly
+- [ ] Make sure the distinction between Program and Curriculum is obvious to visitors
 
 Reason:
 - The current naming risks confusing users about whether they are looking at the overview or the detailed curriculum
@@ -47,10 +47,10 @@ Reason:
 **Status:** Pending
 
 Actions:
-- Complete the Curriculum Spreadsheet with the final data
-- Ensure the Curriculum page is populated from the spreadsheet data
-- Test the Curriculum page after the spreadsheet is finalized
-- Verify the exported structure matches the intended public presentation
+- [ ] Complete the Curriculum Spreadsheet with the final data
+- [ ] Ensure the Curriculum page is populated from the spreadsheet data
+- [ ] Test the Curriculum page after the spreadsheet is finalized
+- [ ] Verify the exported structure matches the intended public presentation
 
 Reason:
 - Curriculum content must be accurate and maintainable before the site is published
@@ -62,10 +62,10 @@ Reason:
 **Status:** Pending
 
 Actions:
-- Clean up the Schedule spreadsheet data structure and content
-- Verify dates, labels, filters, and event grouping
-- Test the Schedule page end to end after the spreadsheet update
-- Confirm that the public schedule renders correctly on desktop and mobile
+- [ ] Clean up the Schedule spreadsheet data structure and content
+- [ ] Verify dates, labels, filters, and event grouping
+- [ ] Test the Schedule page end to end after the spreadsheet update
+- [ ] Confirm that the public schedule renders correctly on desktop and mobile
 
 Reason:
 - The schedule is operational content and must be reliable at launch
@@ -77,11 +77,11 @@ Reason:
 **Status:** Pending
 
 Actions:
-- Clean up the Lectures spreadsheet data and publishing flow
-- Decide what lecture information is public and what requires restricted access
-- Review and approve the login approach described in [docs/GOOGLE_OAUTH_LOGIN_PLAN.md](docs/GOOGLE_OAUTH_LOGIN_PLAN.md)
-- Implement or finalize the access-control approach before publishing protected lecture content
-- Test the Lectures page with the final data and access rules
+- [ ] Clean up the Lectures spreadsheet data and publishing flow
+- [ ] Decide what lecture information is public and what requires restricted access
+- [ ] Review and approve the login approach described in [docs/GOOGLE_OAUTH_LOGIN_PLAN.md](docs/GOOGLE_OAUTH_LOGIN_PLAN.md)
+- [ ] Implement or finalize the access-control approach before publishing protected lecture content
+- [ ] Test the Lectures page with the final data and access rules
 
 Reason:
 - Lecture data appears to require controlled access, so this is a launch decision, not a post-launch detail
@@ -93,9 +93,9 @@ Reason:
 **Status:** Pending
 
 Actions:
-- Remove guest teachers or any non-core teachers from the public Teachers page
-- Review bios, ordering, and images for the remaining core faculty
-- Confirm the page matches the intended public positioning
+- [ ] Remove guest teachers or any non-core teachers from the public Teachers page
+- [ ] Review bios, ordering, and images for the remaining core faculty
+- [ ] Confirm the page matches the intended public positioning
 
 Reason:
 - The faculty page must reflect the final public-facing teaching team
@@ -107,9 +107,9 @@ Reason:
 **Status:** Pending
 
 Actions:
-- Review and rewrite the page text where needed
-- Fix all internal and external links
-- Confirm the page aligns with the overall message of the website
+- [ ] Review and rewrite the page text where needed
+- [ ] Fix all internal and external links
+- [ ] Confirm the page aligns with the overall message of the website
 
 Reason:
 - Weak copy or broken links on core explanatory pages reduce trust at launch
@@ -121,9 +121,9 @@ Reason:
 **Status:** Pending
 
 Actions:
-- Collect the relevant information from the current students
-- Rewrite and structure the page text using the confirmed data
-- Check that the page clearly explains the process, expectations, and value
+- [ ] Collect the relevant information from the current students
+- [ ] Rewrite and structure the page text using the confirmed data
+- [ ] Check that the page clearly explains the process, expectations, and value
 
 Reason:
 - This page depends on real operational information and should not go live with placeholder or incomplete details
@@ -135,9 +135,9 @@ Reason:
 **Status:** Pending
 
 Actions:
-- Define the full page structure
-- Prepare the final content for all techniques to be presented
-- Write, review, and test the page as a complete deliverable
+- [ ] Define the full page structure
+- [ ] Prepare the final content for all techniques to be presented
+- [ ] Write, review, and test the page as a complete deliverable
 
 Reason:
 - The page is not ready and should not be treated as a small polish task
@@ -149,11 +149,11 @@ Reason:
 **Status:** Pending
 
 Actions:
-- Decide whether the site will go live via GitHub Pages or custom hosting with FTP or SFTP
-- Configure the production domain `transpersonal-training.com`
-- If using GitHub Pages, set the custom domain and enforce HTTPS
-- If using custom hosting, add the deployment secrets and deployment step
-- Run a final production deployment test before launch
+- [ ] Decide whether the site will go live via GitHub Pages or custom hosting with FTP or SFTP
+- [ ] Configure the production domain `transpersonal-training.com`
+- [ ] If using GitHub Pages, set the custom domain and enforce HTTPS
+- [ ] If using custom hosting, add the deployment secrets and deployment step
+- [ ] Run a final production deployment test before launch
 
 Reason:
 - The site cannot go live until the production hosting path is confirmed and tested
@@ -172,9 +172,9 @@ File needed:
 - `src/assets/images/og-default.jpg`
 
 Actions:
-- Create a 1200 x 630 social sharing image
-- Use the final logo, title, and brand message
-- Save it to the expected path so link previews work correctly
+- [ ] Create a 1200 x 630 social sharing image
+- [ ] Use the final logo, title, and brand message
+- [ ] Save it to the expected path so link previews work correctly
 
 Reason:
 - Without this image, social previews will be broken or low quality
@@ -186,9 +186,9 @@ Reason:
 **Status:** Review recommended
 
 Actions:
-- Review page descriptions for clarity, search intent, and tone of voice
-- Update any copy that does not match the final messaging
-- Re-check key pages after renaming or restructuring content
+- [ ] Review page descriptions for clarity, search intent, and tone of voice
+- [ ] Update any copy that does not match the final messaging
+- [ ] Re-check key pages after renaming or restructuring content
 
 Reason:
 - Final SEO copy should match the real public offer at launch
@@ -200,9 +200,9 @@ Reason:
 **Status:** Pending when domain is ready
 
 Actions:
-- Add the production domain to Google Search Console
-- Verify ownership
-- Submit the sitemap after the live site is online
+- [ ] Add the production domain to Google Search Console
+- [ ] Verify ownership
+- [ ] Submit the sitemap after the live site is online
 
 Reason:
 - This helps search indexing and gives visibility into launch issues
@@ -214,8 +214,8 @@ Reason:
 **Status:** Pending
 
 Actions:
-- Re-add `src/CNAME` with `transpersonal-training.com` before the final production merge if GitHub Pages is used
-- Skip this if the final hosting path does not use GitHub Pages
+- [ ] Re-add `src/CNAME` with `transpersonal-training.com` before the final production merge if GitHub Pages is used
+- [ ] Skip this if the final hosting path does not use GitHub Pages
 
 Reason:
 - The domain configuration must match the chosen deployment method
@@ -227,9 +227,9 @@ Reason:
 **Status:** Decision needed
 
 Actions:
-- Review the HTML files in `TESTS/`
-- Decide whether each one should be kept, migrated, or deleted
-- Remove anything that should not be part of the project long term
+- [ ] Review the HTML files in `TESTS/`
+- [ ] Decide whether each one should be kept, migrated, or deleted
+- [ ] Remove anything that should not be part of the project long term
 
 Reason:
 - The repository should be clean before launch and not contain misleading legacy experiments
@@ -245,9 +245,9 @@ These items are valuable, but they do not need to block the first public release
 **Status:** Pending
 
 Actions:
-- Define how new blog articles should be drafted, reviewed, and published
-- Decide whether Google Docs is sufficient or whether a backend or CMS is needed
-- Compare editorial simplicity, permissions, and maintenance cost before choosing
+- [ ] Define how new blog articles should be drafted, reviewed, and published
+- [ ] Decide whether Google Docs is sufficient or whether a backend or CMS is needed
+- [ ] Compare editorial simplicity, permissions, and maintenance cost before choosing
 
 Reason:
 - This is important for content operations, but it can be finalized after the site is live if the current article volume is low
@@ -259,9 +259,9 @@ Reason:
 **Status:** Optional
 
 Actions:
-- Create a GA4 property
-- Add the measurement code to the site
-- Confirm that tracking is compliant with the preferred privacy approach
+- [ ] Create a GA4 property
+- [ ] Add the measurement code to the site
+- [ ] Confirm that tracking is compliant with the preferred privacy approach
 
 Reason:
 - Useful for measurement, but not required to publish the website
@@ -273,9 +273,9 @@ Reason:
 **Status:** Pending
 
 Actions:
-- Create a GitHub Personal Access Token for rebuild triggers
-- Add the rebuild action to the spreadsheet Apps Script
-- Test that a spreadsheet-side rebuild can update the site safely
+- [ ] Create a GitHub Personal Access Token for rebuild triggers
+- [ ] Add the rebuild action to the spreadsheet Apps Script
+- [ ] Test that a spreadsheet-side rebuild can update the site safely
 
 Reason:
 - Helpful for operations, but not essential for the first release
@@ -287,9 +287,9 @@ Reason:
 **Status:** Pending
 
 Actions:
-- Install `docs/spreadsheet-automation/curriculum-pdf-apps-script.js` into the Curriculum Spreadsheet Apps Script editor
-- Test both PDF outputs
-- Adjust styling and exported content as needed
+- [ ] Install `docs/spreadsheet-automation/curriculum-pdf-apps-script.js` into the Curriculum Spreadsheet Apps Script editor
+- [ ] Test both PDF outputs
+- [ ] Adjust styling and exported content as needed
 
 Reason:
 - Useful for admin workflow, but not required for the public website to launch
