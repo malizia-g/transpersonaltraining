@@ -16,12 +16,12 @@ These items directly affect content accuracy, information architecture, protecte
 
 ### 1. Review the Home page content and imagery
 
-**Status:** Pending
+**Status:** Active
 
 Actions:
-- [ ] Review the Home page text for tone, clarity, and accuracy
+- [x] Review the Home page text for tone, clarity, and accuracy
 - [ ] Replace or approve the current Home page photos
-- [ ] Confirm that the hero message, CTA, and supporting sections match the current offer
+- [x] Confirm that the hero message, CTA, and supporting sections match the current offer
 
 Reason:
 - The homepage is the main entry point and must reflect the final positioning before launch
@@ -30,12 +30,13 @@ Reason:
 
 ### 2. Rename the Program page to avoid confusion with Curriculum
 
-**Status:** Pending
+**Status:** Done
 
 Actions:
-- [ ] Decide on a clearer name for the current Program page
-- [ ] Update navigation, internal links, page headings, and SEO text accordingly
-- [ ] Make sure the distinction between Program and Curriculum is obvious to visitors
+- [x] Decide on a clearer name for the current Program page
+- [x] Update navigation, internal links, page headings, and SEO text accordingly
+- [x] Make sure the distinction between Program and Curriculum is obvious to visitors
+- [ ] Check SEO
 
 Reason:
 - The current naming risks confusing users about whether they are looking at the overview or the detailed curriculum
@@ -96,6 +97,7 @@ Actions:
 - [ ] Remove guest teachers or any non-core teachers from the public Teachers page
 - [ ] Review bios, ordering, and images for the remaining core faculty
 - [ ] Confirm the page matches the intended public positioning
+- [ ] Get the right pictures from the teachers
 
 Reason:
 - The faculty page must reflect the final public-facing teaching team
