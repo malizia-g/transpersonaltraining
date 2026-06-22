@@ -49,6 +49,10 @@ function mapItem(item) {
     bio_summary: item.bio_summary || item['bio summary'] || '',
     focus_area: item.focus_area || item['focus area'] || '',
     picture_link: item.picture_link || item['picture link'] || item.image || '',
+    website: item.website || '',
+    skill_1: item.skill_1 || item.skill1 || item['skill 1'] || '',
+    skill_2: item.skill_2 || item.skill2 || item['skill 2'] || '',
+    skill_3: item.skill_3 || item.skill3 || item['skill 3'] || '',
   };
 }
 

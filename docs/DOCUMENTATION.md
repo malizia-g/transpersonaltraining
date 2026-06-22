@@ -566,4 +566,18 @@ Row classification:
 
 ---
 
-*Last updated: March 2026*
+### Client Model Status Chip Colors
+
+Defined in `src/become-a-client-model.html` via `if/elif` blocks (full class strings required for Tailwind JIT scanning).
+
+| Status | Color | Tailwind Classes | Reasoning |
+|--------|-------|-----------------|-----------|
+| **Active** | Emerald green | `bg-emerald-100 text-emerald-700` | Currently in training — vibrant positive |
+| **Approved** | Science-blue | `bg-science-blue-100 text-science-blue-700` | Accepted — matches page primary |
+| **Pending** | Amber | `bg-amber-100 text-amber-700` | Waiting — caution/neutral warmth |
+| **On Hold** | Orange | `bg-orange-100 text-orange-700` | Paused — gentle warning tone |
+| **Completed** | Teal | `bg-teal-100 text-teal-700` | Finished — positive but distinct from active |
+
+---
+
+*Last updated: June 2026*
