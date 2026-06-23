@@ -18,14 +18,14 @@
 
 <meta property="og:url" content="https://transpersonal-training.com/blog/">
 <meta property="og:description" content="Insights, stories, and tools on transpersonal psychology, holistic therapy, spiritual psychotherapy training, integrative therapy education, and breathwork for anxiety.">
-<meta property="og:image" content="https://transpersonal-training.com/assets/images/og-default.jpg">
+<meta property="og:image" content="https://transpersonal-training.com/assets/images/Graphics/og-default.jpg">
 
 <meta name="twitter:card" content="summary_large_image">
 
 <meta name="twitter:url" content="https://transpersonal-training.com/blog/">
 <meta name="twitter:title" content="Blog | Transpersonal Training">
 <meta name="twitter:description" content="Insights, stories, and tools on transpersonal psychology, holistic therapy, spiritual psychotherapy training, integrative therapy education, and breathwork for anxiety.">
-<meta name="twitter:image" content="https://transpersonal-training.com/assets/images/og-default.jpg">
+<meta name="twitter:image" content="https://transpersonal-training.com/assets/images/Graphics/og-default.jpg">
 
 
 
@@ -168,7 +168,7 @@
                         <i data-lucide="user-check" class="w-4 h-4 submenu-icon"></i>
                         <span>Become a Client Model</span>
                     </a>
-                    <a href="/transpersonaltraining/techniques/index.html" class="text-sm">
+                    <a href="/transpersonaltraining/techniques/" class="text-sm">
                         <i data-lucide="activity" class="w-4 h-4 submenu-icon"></i>
                         <span>Techniques</span>
                     </a>
@@ -197,7 +197,7 @@
         <span class="text-slate-200 py-2 border-b block font-semibold">Transpersonal Therapy</span>
         <a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ What is Transpersonal Psychology</a>
         <a href="/transpersonaltraining/become-a-client-model/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Become a Client Model</a>
-        <a href="/transpersonaltraining/techniques/index.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Techniques</a>
+        <a href="/transpersonaltraining/techniques/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Techniques</a>
         <a href="/transpersonaltraining/blog/index.html" class="text-slate-200 py-2 border-b block transition-colors">Blog</a>
         <a href="#contact" class="bg-amber-500 text-white px-6 py-3 rounded-md w-full mt-4 font-bold text-center block">Apply</a>
     </div>
@@ -209,7 +209,7 @@
         
 <section class="py-0 pb-10 md:pb-14 bg-white" lang="en">
   <div class="w-full h-64 md:h-80 overflow-hidden relative mb-8">
-    <img src="/transpersonaltraining/assets/images/blog-hero.jpg" alt="Transpersonal blog cover" class="w-full h-full object-cover object-center" loading="lazy" />
+    <img src="/transpersonaltraining/assets/images/Headers/blog-hero.jpg" alt="Transpersonal blog cover" class="w-full h-full object-cover object-center" loading="lazy" />
     <div class="absolute inset-0 bg-gradient-to-b from-black/30 to-transparent"></div>
   </div>
   <div class="container mx-auto px-6">
@@ -226,10 +226,10 @@
     </form>
     <div class="grid grid-cols-1 md:grid-cols-1 gap-10" id="blog-articles">
       
-      <article class="bg-neutral-warm-50 rounded-2xl shadow-md p-5 sm:p-8 flex flex-col gap-4 hover:shadow-xl transition-all relative">
+      <article class="bg-neutral-warm-50 rounded-2xl shadow-md p-5 sm:p-8 flex flex-col gap-4 hover:shadow-xl transition-all relative" data-author="Manal Al-Hammadi" data-tags="transpersonal|psychology|history|holistic therapy|spiritual psychotherapy|breathwork|integrative therapy" data-date="2026-02-14">
         <div class="flex flex-wrap items-start gap-4 sm:flex-nowrap">
           
-          <img src="/transpersonaltraining/assets/images/blog-hero.jpg" alt="The History of Transpersonal Psychology" class="w-20 h-20 sm:w-32 sm:h-32 object-cover rounded-xl flex-shrink-0" loading="lazy" />
+          <img src="/transpersonaltraining/assets/images/Headers/blog-hero.jpg" alt="The History of Transpersonal Psychology" class="w-20 h-20 sm:w-32 sm:h-32 object-cover rounded-xl flex-shrink-0" loading="lazy" />
           
           <div class="min-w-0 flex-1 sm:flex sm:flex-col">
             <h2 class="text-xl sm:text-2xl font-serif font-bold text-indigo-deep-900 mb-2 leading-tight">The History of Transpersonal Psychology</h2>
@@ -250,7 +250,7 @@
         <a href="/transpersonaltraining/blog/the-history-of-transpersonal-psychology/" class="sm:hidden mt-2 text-amber-600 hover:underline font-medium text-left">Read more →</a>
       </article>
       
-      <article class="bg-neutral-warm-50 rounded-2xl shadow-md p-5 sm:p-8 flex flex-col gap-4 hover:shadow-xl transition-all relative">
+      <article class="bg-neutral-warm-50 rounded-2xl shadow-md p-5 sm:p-8 flex flex-col gap-4 hover:shadow-xl transition-all relative" data-author="Manal Al-Hammadi" data-tags="transpersonal|psychology|holistic therapy|integrative therapy|psychotherapy|comparison" data-date="2026-02-14">
         <div class="flex flex-wrap items-start gap-4 sm:flex-nowrap">
           
           <img src="/transpersonaltraining/assets/images/vineyard.jpg" alt="How Transpersonal Psychology Differs from Other Approaches" class="w-20 h-20 sm:w-32 sm:h-32 object-cover rounded-xl flex-shrink-0" loading="lazy" />
@@ -283,12 +283,11 @@
         // Popola filtri
         const authors = new Set();
         const tags = new Set();
+        const cardTags = card => (card.dataset.tags || '').split('|').map(t => t.trim()).filter(Boolean);
         cards.forEach(card => {
-          const author = card.querySelector('.text-sm span')?.textContent.trim();
+          const author = (card.dataset.author || '').trim();
           if (author) authors.add(author);
-          (card.querySelector('.text-xs')?.textContent.split(',') || []).forEach(tag => {
-            if (tag.trim()) tags.add(tag.trim());
-          });
+          cardTags(card).forEach(tag => tags.add(tag));
         });
         const authorSelect = document.getElementById('filter-author');
         authors.forEach(author => {
@@ -309,11 +308,10 @@
           const date = document.getElementById('filter-date').value;
           cards.forEach(function(card) {
             let show = true;
-            const cardAuthor = card.querySelector('.text-sm span')?.textContent.trim();
-            const cardTags = (card.querySelector('.text-xs')?.textContent.split(',').map(t=>t.trim())) || [];
-            const cardDate = card.querySelector('time')?.getAttribute('datetime');
+            const cardAuthor = (card.dataset.author || '').trim();
+            const cardDate = card.dataset.date;
             if (author && cardAuthor !== author) show = false;
-            if (tag && !cardTags.includes(tag)) show = false;
+            if (tag && !cardTags(card).includes(tag)) show = false;
             if (date && (!cardDate || !cardDate.startsWith(date))) show = false;
             card.style.display = show ? '' : 'none';
           });
@@ -350,11 +348,11 @@
             <div>
                 <h4 class="text-white font-semibold mb-4">Training</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="training-overview/index.html" class="hover:text-white transition-colors">Training Overview</a></li>
-                    <li><a href="curriculum/index.html" class="hover:text-white transition-colors">Curriculum</a></li>
-                    <li><a href="schedule/index.html" class="hover:text-white transition-colors">Intensive Schedule</a></li>
-                    <li><a href="lectures-schedule/index.html" class="hover:text-white transition-colors">Lectures Schedule</a></li>
-                    <li><a href="teachers/index.html" class="hover:text-white transition-colors">Our Teachers</a></li>
+                    <li><a href="/transpersonaltraining/training-overview/" class="hover:text-white transition-colors">Training Overview</a></li>
+                    <li><a href="/transpersonaltraining/curriculum/" class="hover:text-white transition-colors">Curriculum</a></li>
+                    <li><a href="/transpersonaltraining/schedule/" class="hover:text-white transition-colors">Intensive Schedule</a></li>
+                    <li><a href="/transpersonaltraining/lectures-schedule/" class="hover:text-white transition-colors">Lectures Schedule</a></li>
+                    <li><a href="/transpersonaltraining/teachers/" class="hover:text-white transition-colors">Our Teachers</a></li>
                 </ul>
             </div>
 
@@ -362,8 +360,8 @@
             <div>
                 <h4 class="text-white font-semibold mb-4">Resources</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="techniques.html" class="hover:text-white transition-colors">Techniques</a></li>
-                    <li><a href="transpersonal_therapy.html" class="hover:text-white transition-colors">Transpersonal Therapy</a></li>
+                    <li><a href="/transpersonaltraining/techniques/" class="hover:text-white transition-colors">Techniques</a></li>
+                    <li><a href="/transpersonaltraining/transpersonal_therapy/" class="hover:text-white transition-colors">Transpersonal Therapy</a></li>
                     <li><a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="hover:text-white transition-colors">What is Transpersonal Psychology</a></li>
                     <li><a href="/transpersonaltraining/become-a-client-model/" class="hover:text-white transition-colors">Become a Client Model</a></li>
                 </ul>
