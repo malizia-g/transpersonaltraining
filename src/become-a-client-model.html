@@ -128,7 +128,7 @@ description: "Experience transpersonal therapy as a client model. Support traine
                             {% if student.location %}
                             <li class="flex items-center gap-2">
                                 <i data-lucide="map-pin" class="w-4 h-4 text-science-blue-600"></i>
-                                <span>{{ student.location }}</span>
+                                <span>{{ student.location }}{% if student.city %} – {{ student.city }}{% endif %}</span>
                             </li>
                             {% endif %}
                             {% if student.spoken_languages %}
@@ -182,9 +182,12 @@ description: "Experience transpersonal therapy as a client model. Support traine
                                 </li>
                                 {% endif %}
                                 {% if student.bth %}
-                                <li class="flex items-center gap-2">
-                                    <i data-lucide="wind" class="w-4 h-4 text-violet-600"></i>
-                                    <span>BTH: {{ student.bth }}</span>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="wind" class="w-4 h-4 text-violet-600 mt-0.5 flex-shrink-0"></i>
+                                    <div>
+                                        <span class="font-medium text-neutral-warm-800">Breathwork</span>
+                                        <p class="mt-1 text-neutral-warm-700 whitespace-pre-line">{{ student.bth }}</p>
+                                    </div>
                                 </li>
                                 {% endif %}
                             </ul>
@@ -211,22 +214,22 @@ description: "Experience transpersonal therapy as a client model. Support traine
                             {% endif %}
                         </div>
 
-                        <div class="space-y-2 text-sm">
+                        <div class="flex flex-col gap-2 text-sm">
                             {% if student.email %}
-                            <a href="mailto:{{ student.email }}" class="inline-flex items-center gap-2 text-science-blue-700 hover:text-science-blue-800 transition-colors">
-                                <i data-lucide="mail" class="w-4 h-4"></i>
+                            <a href="mailto:{{ student.email }}" class="flex items-center gap-2 text-science-blue-700 hover:text-science-blue-800 transition-colors">
+                                <i data-lucide="mail" class="w-4 h-4 shrink-0"></i>
                                 <span>{{ student.email }}</span>
                             </a>
                             {% endif %}
                             {% if student.phone %}
-                            <p class="inline-flex items-center gap-2 text-neutral-warm-700">
-                                <i data-lucide="phone" class="w-4 h-4"></i>
+                            <p class="flex items-center gap-2 text-neutral-warm-700">
+                                <i data-lucide="phone" class="w-4 h-4 shrink-0"></i>
                                 <span>{{ student.phone }}</span>
                             </p>
                             {% endif %}
                             {% if student.website %}
-                            <a href="{{ student.website }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-science-blue-700 hover:text-science-blue-800 transition-colors">
-                                <i data-lucide="globe" class="w-4 h-4"></i>
+                            <a href="{{ student.website }}" target="_blank" rel="noopener" class="flex items-center gap-2 text-science-blue-700 hover:text-science-blue-800 transition-colors">
+                                <i data-lucide="globe" class="w-4 h-4 shrink-0"></i>
                                 <span>{{ student.website | replace("https://", "") | replace("http://", "") | replace("www.", "") }}</span>
                             </a>
                             {% endif %}

@@ -5,7 +5,7 @@
     "role": "Head East",
     "location": "Moldova",
     "credentials": "MA Transpersonal Psychotherapist EUROTAS",
-    "image": "https://transpersonal-training.com/wp-content/uploads/2023/04/Lyudmila.jpg",
+    "image": "/assets/images/People/teachers/lyudmila-skartsesku.jpg",
     "website": "https://arasco.org/",
     "type": "core"
   },
@@ -15,7 +15,7 @@
     "role": "Head West",
     "location": "Germany",
     "credentials": "Anthropologist & Psychologist M.A.",
-    "image": "https://transpersonal-training.com/wp-content/uploads/2020/11/Kati_Wortelkamp-1.jpg",
+    "image": "/assets/images/People/teachers/kati-wortelkamp.jpg",
     "website": "http://www.kati-wortelkamp.de",
     "type": "core"
   },
@@ -25,7 +25,7 @@
     "role": "Core Teacher",
     "location": "Estonia",
     "credentials": "Expert in transpersonal psychology and academic research",
-    "image": "https://transpersonal-training.com/wp-content/uploads/2020/12/jure-biechonski.jpg",
+    "image": "/assets/images/People/teachers/jure-biechonski.jpg",
     "type": "core"
   },
   {
@@ -34,7 +34,7 @@
     "role": "Core Teacher",
     "location": "Germany",
     "credentials": "Psychologist BSc, Transpersonal Breathwork Practitioner",
-    "image": "https://transpersonal-training.com/wp-content/uploads/2023/09/Lilian.jpg",
+    "image": "/assets/images/People/teachers/lilian-gscheidel.jpg",
     "website": "http://www.wandel-zart-und-wild.de",
     "type": "core"
   },
@@ -44,7 +44,7 @@
     "role": "Core Teacher",
     "location": "Yemen / Poland",
     "credentials": "Psychedelic Integration Facilitator & Educator",
-    "image": "https://transpersonal-training.com/wp-content/uploads/2025/03/Manal_Klein.jpg",
+    "image": "/assets/images/People/teachers/manal-al-hammadi.jpg",
     "type": "core"
   },
   {
@@ -53,7 +53,7 @@
     "role": "Core Teacher",
     "location": "Spain",
     "credentials": "Ph.D. Consciousness Studies - Author & Researcher",
-    "image": "https://transpersonal-training.com/wp-content/uploads/2020/12/Tina-Linhard.jpg",
+    "image": "/assets/images/People/teachers/tina-lindhard.jpg",
     "website": "http://tinalindhard.com/",
     "type": "core"
   }

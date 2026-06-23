@@ -19,6 +19,13 @@ const MIME_TO_EXT = {
   'image/gif': '.gif',
 };
 
+function normalizeUrl(value) {
+  const url = String(value || '').trim();
+  if (!url) return '';
+  if (/^https?:\/\//i.test(url)) return url;
+  return 'https://' + url;
+}
+
 function normalizeStatus(value) {
   const raw = String(value || '').trim().toLowerCase();
   if (!raw) return 'pending';
@@ -37,6 +44,7 @@ function mapItem(item) {
     email: item.email || '',
     phone: item.phone || '',
     country,
+    city: item.city || '',
     location: item.location || country,
     intake_date: item.intake_date || item['intake date'] || '',
     status: normalizeStatus(item.status),
@@ -49,7 +57,7 @@ function mapItem(item) {
     bio_summary: item.bio_summary || item['bio summary'] || '',
     focus_area: item.focus_area || item['focus area'] || '',
     picture_link: item.picture_link || item['picture link'] || item.image || '',
-    website: item.website || '',
+    website: normalizeUrl(item.website),
     skill_1: item.skill_1 || item.skill1 || item['skill 1'] || '',
     skill_2: item.skill_2 || item.skill2 || item['skill 2'] || '',
     skill_3: item.skill_3 || item.skill3 || item['skill 3'] || '',
