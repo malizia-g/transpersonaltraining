@@ -4,8 +4,13 @@ title: "Training Overview"
 description: "Explore our transpersonal psychotherapy training programme philosophy, commitment structure, and admission requirements."
 ---
 
+{% set philosophy = 'training-overview/01-philosophy.md' | pageContent %}
+{% set programOverview = 'training-overview/02-program-overview.md' | pageContent %}
+{% set eligibility = 'training-overview/03-eligibility.md' | pageContent %}
+{% set commitmentCards = 'training-overview/commitment' | pageContentDir %}
+{% set admissions = 'training-overview/admissions' | pageContentDir %}
+
 <style>
-    /* Training Overview-specific overrides */
     .level-card:hover {
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
     }
@@ -14,9 +19,9 @@ description: "Explore our transpersonal psychotherapy training programme philoso
 <!-- Hero Section -->
 <header class="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 z-0">
-        <img 
-            src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=2000&q=80" 
-            alt="Journey landscape" 
+        <img
+            src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=2000&q=80"
+            alt="Journey landscape"
             class="w-full h-full object-cover"
         />
         <div class="absolute inset-0 bg-gradient-to-b from-science-blue-900/70 via-science-blue-800/50 to-neutral-warm-50"></div>
@@ -61,11 +66,11 @@ description: "Explore our transpersonal psychotherapy training programme philoso
                 <div class="bg-science-blue-600 text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-md">
                     <i data-lucide="heart-handshake" class="w-6 h-6"></i>
                 </div>
-                <h2 class="text-2xl md:text-3xl font-serif font-bold text-slate-800">Training Philosophy</h2>
+                <h2 class="text-2xl md:text-3xl font-serif font-bold text-slate-800">{{ philosophy.data.heading }}</h2>
             </div>
-            <p class="text-gray-700 text-lg leading-relaxed">
-                We recognize that healing and consciousness development require integration of psychotherapeutic expertise with understanding of transpersonal dimensions of human experience. Our training prepares practitioners who are capable of working with clients across the full spectrum of psychological and spiritual needs; from symptom relief to consciousness expansion and authentic self-realization. This requires synchronized development of rigorous psychotherapeutic skills and deep personal understanding of different states of consciousness.
-            </p>
+            <div class="text-gray-700 text-lg leading-relaxed">
+                {{ philosophy.html | safe }}
+            </div>
         </div>
     </div>
 </section>
@@ -83,119 +88,22 @@ description: "Explore our transpersonal psychotherapy training programme philoso
                 </div>
                 <h2 class="text-2xl md:text-3xl font-serif font-bold text-slate-800">Your Commitment Structure</h2>
             </div>
-
             <p class="text-gray-700 text-lg leading-relaxed mb-8">
-                Our training asks for consistent engagement in learning, self-development, and supervised practice. The structure below preserves the full level-based pathway so expectations are clear from the beginning.
+                Our training asks for consistent engagement in learning, self-development, and supervised practice.
             </p>
 
             <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+                {% for card in commitmentCards %}
+                <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm{% if loop.last or (loop.index == 3) %} md:col-span-2{% endif %}">
                     <h3 class="font-serif font-bold text-slate-800 text-xl mb-4 flex items-center gap-2">
-                        <i data-lucide="graduation-cap" class="w-5 h-5 text-science-blue-600"></i>
-                        Learning
+                        <i data-lucide="{{ card.data.icon }}" class="w-5 h-5 {{ card.data.icon_color }}"></i>
+                        {{ card.data.heading }}
                     </h3>
-                    <ul class="text-gray-700 text-sm space-y-3 leading-relaxed list-disc pl-5">
-                        <li>
-                            Weekly Online Lessons
-                            <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-600">
-                                <li>2 hours each week</li>
-                                <li>40 lessons per year (80 hours)</li>
-                            </ul>
-                        </li>
-                        <li>
-                            Bi-Weekly Peer Group Meetings
-                            <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-600">
-                                <li>Group discussion and homework integration</li>
-                                <li>From Level 1: proposed practice for better outcomes</li>
-                                <li>From Level 2: 20 meetings, usually around 2 hours each</li>
-                            </ul>
-                        </li>
-                        <li>
-                            Interview Between Levels
-                            <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-600">
-                                <li>Psychological and knowledge interview</li>
-                                <li>Between Level 1 and Level 2</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
-                    <h3 class="font-serif font-bold text-slate-800 text-xl mb-4 flex items-center gap-2">
-                        <i data-lucide="heart-pulse" class="w-5 h-5 text-accent-teal-600"></i>
-                        Self-Development
-                    </h3>
-                    <ul class="text-gray-700 text-sm space-y-3 leading-relaxed list-disc pl-5">
-                        <li>
-                            Therapy with a Transpersonal Therapist
-                            <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-600">
-                                <li>Level 1: 10h</li>
-                                <li>Level 2: 20h</li>
-                                <li>Level 3: 20h</li>
-                            </ul>
-                        </li>
-                        <li>
-                            Residential Trainings
-                            <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-600">
-                                <li>4 weekends per year (Thursday to Sunday)</li>
-                                <li>30 hours each = 120 hours/year = 480 hours in 4 years</li>
-                            </ul>
-                        </li>
-                        <li>150 hours of personal development (conferences, summer school, retreats)</li>
-                        <li>40 sessions of Holotropic Breathwork practice</li>
-                    </ul>
-                </div>
-
-                <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm md:col-span-2">
-                    <h3 class="font-serif font-bold text-slate-800 text-xl mb-4 flex items-center gap-2">
-                        <i data-lucide="shield-check" class="w-5 h-5 text-amber-600"></i>
-                        Supervision
-                    </h3>
-
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div class="rounded-lg border border-slate-200 p-4 bg-slate-50">
-                            <h4 class="font-semibold text-slate-800 mb-2">School Track</h4>
-                            <ul class="text-gray-700 text-sm space-y-2 leading-relaxed list-disc pl-5">
-                                <li>
-                                    Complete 50 hours of supervision for personal transpersonal psychotherapy practice with clients
-                                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-600">
-                                        <li>20 from Level 2</li>
-                                        <li>30 from Level 3</li>
-                                    </ul>
-                                </li>
-                                <li>This can also be done with Holotropic Breathwork floating</li>
-                                <li>50 hours of sessions with model clients</li>
-                            </ul>
-                        </div>
-
-                        <div class="rounded-lg border border-slate-200 p-4 bg-slate-50">
-                            <h4 class="font-semibold text-slate-800 mb-2">EUROTAS Track</h4>
-                            <ul class="text-gray-700 text-sm space-y-2 leading-relaxed list-disc pl-5">
-                                <li>
-                                    Complete 150 hours of supervision for personal transpersonal psychotherapy practice with clients
-                                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-600">
-                                        <li>50 from Level 2</li>
-                                        <li>100 from Level 3 (or after Level 3)</li>
-                                    </ul>
-                                </li>
-                                <li>Clients can be people from Level 1 or model clients</li>
-                                <li>+ 300 hours of clinical practice/internships (individual and group practice)</li>
-                            </ul>
-                        </div>
+                    <div class="text-gray-700 text-sm space-y-2 leading-relaxed commitment-content">
+                        {{ card.html | safe }}
                     </div>
                 </div>
-
-                <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm md:col-span-2">
-                    <h3 class="font-serif font-bold text-slate-800 text-xl mb-4 flex items-center gap-2">
-                        <i data-lucide="timer" class="w-5 h-5 text-science-blue-600"></i>
-                        Duration by Level
-                    </h3>
-                    <ul class="text-gray-700 text-sm space-y-2 leading-relaxed list-disc pl-5">
-                        <li>1st Level: 1 year - Self-Development</li>
-                        <li>2nd Level: 1.5 years - Counselling Skills</li>
-                        <li>3rd Level: 1.5 years - Psychotherapy Skills</li>
-                    </ul>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -212,21 +120,15 @@ description: "Explore our transpersonal psychotherapy training programme philoso
                 <div class="bg-accent-teal-500 text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-md">
                     <i data-lucide="compass" class="w-6 h-6"></i>
                 </div>
-                <h2 class="text-2xl md:text-3xl font-serif font-bold text-slate-800">Program Overview</h2>
+                <h2 class="text-2xl md:text-3xl font-serif font-bold text-slate-800">{{ programOverview.data.heading }}</h2>
             </div>
-            <div class="space-y-5">
-                <p class="text-gray-700 text-lg leading-relaxed">
-                    Our postgraduate program in transpersonal psychotherapy training represents a holistic approach to developing professional competence in transpersonal psychotherapy and Holotropic Breathwork. This program is designed not only for mental health professionals, educators, and practitioners but as well as, individuals motivated for self-development who are seeking to deepen their theoretical understanding and psychotherapeutic application of transpersonal psychology; a field that recognizes the spiritual dimension as integral to healing, psychological well-being and self-development.
-                </p>
-                <p class="text-gray-700 text-lg leading-relaxed">
-                    Transpersonal psychotherapy training integrates contemporary research in psychology with established wisdom traditions, creating a comprehensive framework for understanding human consciousness, transformation, and healing. Our approach to holistic therapy acknowledges that self-development is not relying on symptomatic relief alone, but rather a process of psychological maturation and spiritual awakening that supports individuals steering through their hero journey; the archetypal process of personal transformation and growth.
-                </p>
+            <div class="space-y-5 text-gray-700 text-lg leading-relaxed">
+                {{ programOverview.html | safe }}
             </div>
         </div>
     </div>
 </section>
 
-<!-- Divider -->
 <div class="border-t border-slate-200"></div>
 
 <!-- Eligibility Section -->
@@ -240,22 +142,18 @@ description: "Explore our transpersonal psychotherapy training programme philoso
                 <div class="bg-science-blue-600 text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-md">
                     <i data-lucide="shield-check" class="w-6 h-6"></i>
                 </div>
-                <h2 class="text-2xl md:text-3xl font-serif font-bold text-slate-800">Eligibility</h2>
+                <h2 class="text-2xl md:text-3xl font-serif font-bold text-slate-800">{{ eligibility.data.heading }}</h2>
             </div>
 
             <div class="bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
-                <h4 class="font-serif font-bold text-slate-800 text-xl mb-4">General Eligibility (All Levels)</h4>
-                <p class="text-gray-700 text-base mb-5">Applicants should demonstrate:</p>
-                <ul class="text-gray-600 text-sm space-y-3 mb-6">
-                    <li class="flex gap-3"><span class="text-science-blue-500 font-bold mt-0.5">•</span> Master's Degree in relevant field (Required for those aiming to get certified)</li>
-                    <li class="flex gap-3"><span class="text-science-blue-500 font-bold mt-0.5">•</span> Emotional stability and psychological readiness to engage in intensive experiential and reflective learning</li>
-                    <li class="flex gap-3"><span class="text-science-blue-500 font-bold mt-0.5">•</span> Capacity for self-reflection, personal responsibility, and relational maturity</li>
-                    <li class="flex gap-3"><span class="text-science-blue-500 font-bold mt-0.5">•</span> Openness to working with altered states of consciousness within a structured, ethical, and supervised context</li>
-                    <li class="flex gap-3"><span class="text-science-blue-500 font-bold mt-0.5">•</span> Willingness to engage in personal therapy and supervision as part of professional formation</li>
-                </ul>
+                <h4 class="font-serif font-bold text-slate-800 text-xl mb-4">{{ eligibility.data.subheading }}</h4>
+                <p class="text-gray-700 text-base mb-5">{{ eligibility.data.intro }}</p>
+                <div class="text-gray-600 text-sm space-y-3 mb-6 eligibility-content">
+                    {{ eligibility.html | safe }}
+                </div>
                 <div class="bg-amber-50 border-l-4 border-amber-400 rounded-r-lg p-4">
                     <p class="text-gray-700 text-sm leading-relaxed">
-                        <strong class="text-amber-700">Note:</strong> This training is experiential and may involve deep emotional and psychological processes. Applicants with acute, unmanaged psychiatric conditions that could be destabilized by non-ordinary states of consciousness may be advised to defer participation until clinically appropriate.
+                        <strong class="text-amber-700">Note:</strong> {{ eligibility.data.note }}
                     </p>
                 </div>
             </div>
@@ -263,7 +161,6 @@ description: "Explore our transpersonal psychotherapy training programme philoso
     </div>
 </section>
 
-<!-- Divider -->
 <div class="border-t border-slate-200"></div>
 
 <!-- Admissions Section -->
@@ -281,63 +178,29 @@ description: "Explore our transpersonal psychotherapy training programme philoso
             </div>
 
             <div class="grid gap-8">
-
-                <!-- Level 1: Open Admission -->
+                {% for adm in admissions %}
                 <div class="bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
-                    <div class="flex items-center gap-3 mb-2">
-                        <span class="text-xs font-bold uppercase text-accent-teal-600 tracking-wider">Level 1</span>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-xs font-bold uppercase tracking-wider
+                            {% if loop.index == 1 %}text-accent-teal-600
+                            {% elif loop.index == 2 %}text-science-blue-600
+                            {% else %}text-amber-600{% endif %}">
+                            {{ adm.data.level }}
+                        </span>
                         <span class="text-xs text-gray-400">—</span>
-                        <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Open Admission</span>
+                        <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ adm.data.label }}</span>
                     </div>
+                    {% if adm.data.who_can_apply %}
                     <p class="text-gray-700 text-sm mb-4">
-                        <strong>Who Can Apply:</strong> Anyone interested in transpersonal psychology, consciousness exploration, and personal development. No formal prerequisites required.
+                        <strong>Who Can Apply:</strong> {{ adm.data.who_can_apply }}
                     </p>
+                    {% endif %}
                     <h4 class="font-semibold text-slate-700 text-sm mb-3">Requirements</h4>
-                    <ol class="text-gray-600 text-sm space-y-2 list-decimal list-inside">
-                        <li>Completed application form with personal statement</li>
-                        <li>Brief CV or professional background</li>
-                        <li>Psychological Biography</li>
-                        <li>Phone/video interview with program coordinator</li>
-                        <li>Demonstrated interest in consciousness and personal growth</li>
-                    </ol>
-                </div>
-
-                <!-- Level 2: Counseling Track -->
-                <div class="bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="text-xs font-bold uppercase text-science-blue-600 tracking-wider">Level 2</span>
-                        <span class="text-xs text-gray-400">—</span>
-                        <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Counseling Track</span>
+                    <div class="text-gray-600 text-sm space-y-2 admissions-content">
+                        {{ adm.html | safe }}
                     </div>
-                    <h4 class="font-semibold text-slate-700 text-sm mb-3">Requirements</h4>
-                    <ol class="text-gray-600 text-sm space-y-2 list-decimal list-inside">
-                        <li>Level 1 completion documentation</li>
-                        <li>Personal statement describing professional goals</li>
-                        <li>Professional references (minimum 2)</li>
-                        <li>Interview with program coordinator</li>
-                        <li>Commitment to personal ongoing development and supervision</li>
-                    </ol>
                 </div>
-
-                <!-- Level 3: Psychotherapy Track -->
-                <div class="bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="text-xs font-bold uppercase text-amber-600 tracking-wider">Level 3</span>
-                        <span class="text-xs text-gray-400">—</span>
-                        <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Psychotherapy Track</span>
-                    </div>
-                    <h4 class="font-semibold text-slate-700 text-sm mb-3">Requirements</h4>
-                    <ol class="text-gray-600 text-sm space-y-2 list-decimal list-inside">
-                        <li>Level 1 and 2 completions</li>
-                        <li>Minimum 1-year clinical professional experience</li>
-                        <li>Documented transpersonal or consciousness-based work experience</li>
-                        <li>Clinical supervisor recommendation</li>
-                        <li>Detailed professional statement and clinical goals</li>
-                        <li>Comprehensive interview with faculty panel</li>
-                        <li>Commitment to ongoing personal therapy and supervision</li>
-                    </ol>
-                </div>
-
+                {% endfor %}
             </div>
         </div>
     </div>

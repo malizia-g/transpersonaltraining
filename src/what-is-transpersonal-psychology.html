@@ -4,6 +4,10 @@ title: What is Transpersonal Psychology
 description: "An introduction to transpersonal psychology — the branch of psychology that integrates spiritual and transcendent aspects of human experience with modern science."
 ---
 
+{% set s1 = 'what-is-transpersonal-psychology/01-understanding-the-field.md' | pageContent %}
+{% set s2 = 'what-is-transpersonal-psychology/02-science-and-spirit.md' | pageContent %}
+{% set s3 = 'what-is-transpersonal-psychology/03-why-it-matters.md' | pageContent %}
+
 <header class="relative min-h-[50vh] flex items-center justify-center text-white pt-24 pb-16 bg-science-blue-900">
 	<div class="absolute inset-0 bg-gradient-to-b from-transparent to-indigo-950/50 z-0"></div>
 	<div class="container mx-auto px-6 relative z-10 text-center">
@@ -37,20 +41,9 @@ description: "An introduction to transpersonal psychology — the branch of psyc
 <section class="py-16 bg-white">
 	<div class="container mx-auto px-6">
 		<div class="max-w-4xl mx-auto">
-			<h2 class="text-3xl md:text-4xl font-serif font-bold text-indigo-deep-900 mb-8">Understanding the Field</h2>
+			<h2 class="text-3xl md:text-4xl font-serif font-bold text-indigo-deep-900 mb-8">{{ s1.data.heading }}</h2>
 			<div class="space-y-6 text-neutral-warm-700 leading-relaxed">
-				<p>
-					If you have ever felt that traditional therapy was missing something — that it speaks well to behavior and cognition but not to meaning, spirituality, or your deepest questions about identity — you are not alone. That experience is one of the roots of transpersonal psychology.
-				</p>
-				<p>
-					After two decades of research on the field, Glenn Hartelius proposed a definition that is widely cited: transpersonal psychology is a transformative psychology of the whole person, in an interconnected and evolving world, with special attention to consciousness states and developmental stages beyond conventional views of self.
-				</p>
-				<p>
-					At its core, this perspective recognizes that human beings are not only cognition and behavior. We are also capable of growth, connection, transcendence, and meaning. The word “transpersonal” means “beyond the personal,” but it does not dismiss the personal dimension. It expands it.
-				</p>
-				<p>
-					Experiences such as mystical states, meditative awareness, peak moments, and a felt interconnection with life are treated as meaningful parts of psychological life. This is why transpersonal psychology is often linked with a whole-person, holistic orientation that includes body, mind, and spirit.
-				</p>
+				{{ s1.html | safe }}
 			</div>
 		</div>
 	</div>
@@ -59,18 +52,13 @@ description: "An introduction to transpersonal psychology — the branch of psyc
 <section class="py-16 bg-gradient-to-br from-science-blue-50 via-violet-50 to-indigo-50">
 	<div class="container mx-auto px-6">
 		<div class="max-w-4xl mx-auto">
-			<h2 class="text-3xl md:text-4xl font-serif font-bold text-indigo-deep-900 mb-8">A Bridge Between Science and Spirit</h2>
+			<h2 class="text-3xl md:text-4xl font-serif font-bold text-indigo-deep-900 mb-8">{{ s2.data.heading }}</h2>
 			<div class="space-y-6 text-neutral-warm-700 leading-relaxed">
-				<p>
-					Many people discover transpersonal psychology while searching for holistic counseling or trying to understand a powerful inner experience that traditional models cannot fully hold.
-				</p>
-				<p>
-					In practice, the field integrates clinical rigor with contemplative and wisdom traditions. It does not set science and spirituality against each other: it treats them as complementary ways of understanding the psyche and human development.
-				</p>
+				{{ s2.html | safe }}
 				<blockquote class="border-l-4 border-science-blue-400 pl-6 italic text-neutral-warm-800">
-					“Transpersonal psychology was the first field within psychology to publish research on mindfulness and Eastern spiritual practices, the first to pioneer studies on the potential value of psychedelics, and the first to conceptualize spirituality as a human capacity separate from religion.”
+					{{ s2.data.blockquote }}
 				</blockquote>
-				<p class="text-sm text-neutral-warm-600">International Journal of Transpersonal Studies, Aims & Scope</p>
+				<p class="text-sm text-neutral-warm-600">{{ s2.data.blockquote_source }}</p>
 			</div>
 		</div>
 	</div>
@@ -79,14 +67,9 @@ description: "An introduction to transpersonal psychology — the branch of psyc
 <section class="py-16 bg-white">
 	<div class="container mx-auto px-6">
 		<div class="max-w-4xl mx-auto">
-			<h2 class="text-3xl md:text-4xl font-serif font-bold text-indigo-deep-900 mb-8">Why It Matters Today</h2>
+			<h2 class="text-3xl md:text-4xl font-serif font-bold text-indigo-deep-900 mb-8">{{ s3.data.heading }}</h2>
 			<div class="space-y-6 text-neutral-warm-700 leading-relaxed">
-				<p>
-					Contemporary transpersonal work supports people who seek not only symptom reduction, but deeper integration and transformation. It is especially relevant when psychological healing and spiritual questions overlap.
-				</p>
-				<p>
-					This orientation informs our training: an integrative pathway where personal work, clinical competence, and transpersonal understanding develop together.
-				</p>
+				{{ s3.html | safe }}
 			</div>
 
 			<div class="mt-10 flex flex-col sm:flex-row gap-4">

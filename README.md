@@ -10,6 +10,16 @@ npm run dev        # Development (watch mode)
 npm run build      # Production build
 ```
 
+## How to Edit Page Content
+
+All editorial text on the site lives in `src/content/`, organised in folders by page. Edit any `.md` file there and the change will be reflected on the next build.
+
+See [docs/CONTENT_EDITING.md](docs/CONTENT_EDITING.md) for the full guide, including:
+- Folder structure (which file controls which section)
+- How to edit prose, cards, blockquotes, and lists
+- YAML front matter syntax rules
+- How to add, remove, or reorder cards
+
 ## How to Add an Article
 
 To add a new blog article:
@@ -55,6 +65,7 @@ All project documentation is in the [`docs/`](docs/) folder:
 
 | File | Description |
 |------|-------------|
+| [CONTENT_EDITING.md](docs/CONTENT_EDITING.md) | How to edit page content via Markdown files |
 | [DOCUMENTATION.md](docs/DOCUMENTATION.md) | Architecture, build process, design system, integrations |
 | [FUTURE_IDEAS.md](docs/FUTURE_IDEAS.md) | Planned improvements and proposals |
 | [PABLO_TASKS.md](docs/PABLO_TASKS.md) | Pending manual tasks (DNS, FTP, Google setup) |

@@ -4,6 +4,9 @@ title: Our Teachers
 description: "Meet the experienced faculty of transpersonal psychologists, breathwork facilitators, and therapists guiding our training programme."
 ---
 
+{% set coreIntro = 'teachers/01-core-intro.md' | pageContent %}
+{% set guestIntro = 'teachers/02-guest-intro.md' | pageContent %}
+
 <style>
     /* Teacher Card Styles */
     .teacher-card {
@@ -186,9 +189,9 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
         <div class="text-center max-w-3xl mx-auto mb-16">
             <div class="inline-flex items-center gap-2 mb-4">
                 <i data-lucide="star" class="w-8 h-8 text-warm-yellow-500"></i>
-                <h2 class="text-4xl font-serif font-bold text-indigo-deep-900">Core Teachers</h2>
+                <h2 class="text-4xl font-serif font-bold text-indigo-deep-900">{{ coreIntro.data.heading }}</h2>
             </div>
-            <p class="text-indigo-deep-900/70 text-lg">The heart of our training program, bringing decades of experience in transpersonal psychotherapy and breathwork</p>
+            <p class="text-indigo-deep-900/70 text-lg">{{ coreIntro.data.description }}</p>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -278,9 +281,9 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
         <div class="text-center max-w-3xl mx-auto mb-16">
             <div class="inline-flex items-center gap-2 mb-4">
                 <i data-lucide="users" class="w-8 h-8 text-violet-600"></i>
-                <h2 class="text-4xl font-serif font-bold text-indigo-deep-900">Methodology Guest Teachers</h2>
+                <h2 class="text-4xl font-serif font-bold text-indigo-deep-900">{{ guestIntro.data.heading }}</h2>
             </div>
-            <p class="text-indigo-deep-900/70 text-lg">International experts sharing specialized knowledge and diverse methodologies</p>
+            <p class="text-indigo-deep-900/70 text-lg">{{ guestIntro.data.description }}</p>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">

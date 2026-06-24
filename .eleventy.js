@@ -1,10 +1,14 @@
 const pluginSEO = require('eleventy-plugin-seo');
 const markdownIt = require('markdown-it');
+const matter = require('gray-matter');
 const fs = require('fs');
 const path = require('path');
 const seo = require('./src/_data/seo');
 
 module.exports = function(eleventyConfig) {
+  // Exclude content MD files from being processed as Eleventy pages
+  eleventyConfig.ignores.add("src/content/**");
+
   eleventyConfig.addPlugin(pluginSEO, seo);
 
   function validateBlogPost(post) {
@@ -73,6 +77,37 @@ module.exports = function(eleventyConfig) {
     return md.render(content);
   });
 
+  // Read a content MD file and return { html, data }
+  // filename is relative to src/content/ (e.g. 'home/welcome.md')
+  eleventyConfig.addFilter('pageContent', function(filename) {
+    try {
+      const contentPath = path.join(__dirname, 'src/content', filename);
+      const raw = fs.readFileSync(contentPath, 'utf-8');
+      const parsed = matter(raw);
+      return { html: md.render(parsed.content), data: parsed.data };
+    } catch (error) {
+      return { html: '', data: {} };
+    }
+  });
+
+  // Read all MD files in a content directory and return sorted array of { filename, html, data }
+  // dir is relative to src/content/ (e.g. 'techniques/cards')
+  eleventyConfig.addFilter('pageContentDir', function(dir) {
+    try {
+      const contentDir = path.join(__dirname, 'src/content', dir);
+      const files = fs.readdirSync(contentDir)
+        .filter(f => f.endsWith('.md'))
+        .sort();
+      return files.map(filename => {
+        const raw = fs.readFileSync(path.join(contentDir, filename), 'utf-8');
+        const parsed = matter(raw);
+        return { filename, html: md.render(parsed.content), data: parsed.data };
+      });
+    } catch (error) {
+      return [];
+    }
+  });
+
   // Promote standalone markdown-styled title/subtitle paragraphs to semantic headings
   eleventyConfig.addFilter('promoteMarkdownHeadings', function(html) {
     if (!html) return '';
@@ -99,6 +134,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addWatchTarget("src/styles/**/*.css");
   eleventyConfig.addWatchTarget("src/scripts/**/*.js");
   eleventyConfig.addWatchTarget("src/assets/**/*");
+  eleventyConfig.addWatchTarget("src/content/**/*.md");
   
   // Configuration
   return {

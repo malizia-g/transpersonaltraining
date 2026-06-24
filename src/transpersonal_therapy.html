@@ -4,12 +4,15 @@ title: "Transpersonal Therapy"
 description: "Learn about transpersonal therapy — an integrative approach that honours the spiritual dimension of human experience alongside psychological well-being."
 ---
 
+{% set whatIs = 'transpersonal-therapy/01-what-is.md' | pageContent %}
+{% set principles = 'transpersonal-therapy/principles' | pageContentDir %}
+
 <!-- Hero Section -->
 <header class="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 z-0">
-        <img 
-            src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=2000&q=80" 
-            alt="Transpersonal therapy" 
+        <img
+            src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=2000&q=80"
+            alt="Transpersonal therapy"
             class="w-full h-full object-cover"
         />
         <div class="absolute inset-0 bg-gradient-to-b from-science-blue-900/70 via-science-blue-800/50 to-neutral-warm-50"></div>
@@ -46,74 +49,33 @@ description: "Learn about transpersonal therapy — an integrative approach that
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto">
             <h2 class="text-4xl md:text-5xl font-serif font-bold text-indigo-deep-900 mb-8 text-center">
-                What is Transpersonal Therapy?
+                {{ whatIs.data.heading }}
             </h2>
             <div class="prose prose-lg max-w-none text-neutral-warm-700">
-                <p class="text-xl leading-relaxed mb-6">
-                    Transpersonal therapy is an integrative approach that honors the full spectrum of human experience, 
-                    including spiritual, mystical, and transcendent dimensions of consciousness.
-                </p>
-                <p class="leading-relaxed mb-6">
-                    It goes beyond traditional therapeutic models by recognizing that healing and growth can emerge 
-                    from experiences that transcend the individual ego and connect us to something larger than ourselves.
-                </p>
-                <p class="leading-relaxed">
-                    This approach integrates insights from depth psychology, meditation practices, breathwork, 
-                    shamanic traditions, and contemporary neuroscience to support profound transformation and wholeness.
-                </p>
+                {{ whatIs.html | safe }}
             </div>
         </div>
     </div>
 </section>
 
-<!-- Key Principles -->
+<!-- Core Principles -->
 <section class="py-24 bg-gradient-to-br from-science-blue-50 via-violet-50 to-indigo-50">
     <div class="container mx-auto px-6">
         <div class="max-w-5xl mx-auto">
             <h2 class="text-4xl font-serif font-bold text-indigo-deep-900 mb-12 text-center">
                 Core Principles
             </h2>
-            
+
             <div class="grid md:grid-cols-2 gap-8">
+                {% for p in principles %}
                 <div class="bg-white p-8 rounded-2xl shadow-md">
-                    <div class="w-12 h-12 bg-science-blue-100 rounded-lg flex items-center justify-center mb-4">
-                        <i data-lucide="eye" class="w-6 h-6 text-science-blue-600"></i>
+                    <div class="w-12 h-12 {{ p.data.icon_bg }} rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="{{ p.data.icon }}" class="w-6 h-6 {{ p.data.icon_color }}"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-indigo-deep-900 mb-3">Holistic Perspective</h3>
-                    <p class="text-neutral-warm-700">
-                        Viewing the person as an interconnected whole—body, mind, emotions, and spirit.
-                    </p>
+                    <h3 class="text-xl font-bold text-indigo-deep-900 mb-3">{{ p.data.title }}</h3>
+                    <div class="text-neutral-warm-700">{{ p.html | safe }}</div>
                 </div>
-
-                <div class="bg-white p-8 rounded-2xl shadow-md">
-                    <div class="w-12 h-12 bg-violet-100 rounded-lg flex items-center justify-center mb-4">
-                        <i data-lucide="infinity" class="w-6 h-6 text-violet-600"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-indigo-deep-900 mb-3">Transcendent Potential</h3>
-                    <p class="text-neutral-warm-700">
-                        Honoring experiences that go beyond ordinary consciousness and personal identity.
-                    </p>
-                </div>
-
-                <div class="bg-white p-8 rounded-2xl shadow-md">
-                    <div class="w-12 h-12 bg-accent-teal-100 rounded-lg flex items-center justify-center mb-4">
-                        <i data-lucide="heart" class="w-6 h-6 text-accent-teal-600"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-indigo-deep-900 mb-3">Inner Healing Intelligence</h3>
-                    <p class="text-neutral-warm-700">
-                        Trusting the inherent wisdom of the psyche to guide its own healing process.
-                    </p>
-                </div>
-
-                <div class="bg-white p-8 rounded-2xl shadow-md">
-                    <div class="w-12 h-12 bg-warm-yellow-100 rounded-lg flex items-center justify-center mb-4">
-                        <i data-lucide="compass" class="w-6 h-6 text-warm-yellow-600"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-indigo-deep-900 mb-3">Spiritual Integration</h3>
-                    <p class="text-neutral-warm-700">
-                        Integrating spiritual experiences and insights into everyday life and personal growth.
-                    </p>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
