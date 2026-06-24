@@ -2,4 +2,4 @@ If you want to become a transpersonal psychotherapist and your purpose in life i
 
 The training is a creative, innovative approach to psychotherapy and counselling, integrating developmental, relational and archetypal perspectives over a four year course.
 
-Our team of teachers have extensive experience in the fields of Transpersonal Psychology/Psychotherapy and Holotropic Breathwork® respectively Grof®Breathwork. The program is based on criteria recognized by the Global Transpersonal Network EUROTAS.
+Our team of teachers have extensive experience in the fields of Transpersonal Psychotherapy and Holotropic Breathwork. The program is based on criteria recognized by the Global Transpersonal Network EUROTAS.
