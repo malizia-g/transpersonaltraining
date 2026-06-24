@@ -19,21 +19,25 @@ layout: base.njk
       <div class="mb-8 flex flex-wrap items-start gap-4 sm:flex-nowrap sm:gap-6">
         {% if image %}
         <figure class="w-20 h-20 sm:w-32 sm:h-32 flex-shrink-0 overflow-hidden rounded-2xl shadow-md">
-          <img src="{{ image | url }}" alt="{{ title }}" class="w-full h-full object-cover" loading="lazy" />
+          <img src="{{ image | blogImage | url }}" alt="{{ title }}" class="w-full h-full object-cover" loading="lazy" />
         </figure>
         {% endif %}
 
         <div class="min-w-0 flex-1">
           <h1 class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-indigo-deep-900 mb-3 leading-tight">{{ title }}</h1>
           <div class="hidden sm:block text-xs sm:text-sm text-neutral-warm-600 leading-relaxed">
-            {% if author %}<span>By {{ author }}</span>{% endif %}
+            {% if author %}
+              <span>By {% if authorUrl %}<a href="{{ authorUrl }}" target="_blank" rel="noopener noreferrer" class="hover:text-science-blue-700 underline underline-offset-2 transition-colors">{{ author }}</a>{% else %}{{ author }}{% endif %}</span>
+            {% endif %}
             {% if author and page.date %}<span> &middot; </span>{% endif %}
             {% if page.date %}<time datetime="{{ page.date | date('yyyy-MM-dd') }}">{{ page.date | date('dd MMM yyyy') }}</time>{% endif %}
             {% if tags %}<div class="mt-2 text-xs text-neutral-warm-500">{{ tags | join(', ') }}</div>{% endif %}
           </div>
         </div>
         <div class="basis-full sm:hidden text-xs text-neutral-warm-600 leading-relaxed">
-          {% if author %}<span>By {{ author }}</span>{% endif %}
+          {% if author %}
+            <span>By {% if authorUrl %}<a href="{{ authorUrl }}" target="_blank" rel="noopener noreferrer" class="hover:text-science-blue-700 underline underline-offset-2 transition-colors">{{ author }}</a>{% else %}{{ author }}{% endif %}</span>
+          {% endif %}
           {% if author and page.date %}<span> &middot; </span>{% endif %}
           {% if page.date %}<time datetime="{{ page.date | date('yyyy-MM-dd') }}">{{ page.date | date('dd MMM yyyy') }}</time>{% endif %}
           {% if tags %}<div class="mt-2 text-xs text-neutral-warm-500">{{ tags | join(', ') }}</div>{% endif %}
@@ -42,6 +46,13 @@ layout: base.njk
 
       {% if description %}
       <p class="mb-8 text-lg leading-relaxed text-neutral-warm-700">{{ description }}</p>
+      {% endif %}
+
+      {% if sourceUrl %}
+      <div class="mb-8 flex items-center gap-2 text-sm text-neutral-warm-600 bg-neutral-warm-50 border border-neutral-warm-200 rounded-lg px-4 py-3">
+        <i data-lucide="external-link" class="w-4 h-4 flex-shrink-0 text-amber-600"></i>
+        <span>Originally published on <a href="{{ sourceUrl }}" target="_blank" rel="noopener noreferrer" class="text-amber-700 hover:text-amber-800 font-medium underline underline-offset-2 transition-colors">{{ source if source else sourceUrl }}</a></span>
+      </div>
       {% endif %}
 
       <article class="blog-article-content max-w-none">

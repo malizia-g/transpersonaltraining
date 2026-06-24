@@ -32,6 +32,12 @@ module.exports = function(eleventyConfig) {
     }
     return d.toLocaleDateString();
   });
+  // Reconstruct full path for blog post images (frontmatter stores only filename)
+  eleventyConfig.addFilter('blogImage', function(filename) {
+    if (!filename) return '';
+    return `/assets/images/blog/${filename}`;
+  });
+
   // Filter to check if a string starts with a prefix (used in sitemap)
   eleventyConfig.addFilter('startsWith', function(str, prefix) {
     if (!str || !prefix) return false;

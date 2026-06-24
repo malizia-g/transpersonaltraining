@@ -27,21 +27,23 @@ ogtype: website
       <article class="bg-neutral-warm-50 rounded-2xl shadow-md p-5 sm:p-8 flex flex-col gap-4 hover:shadow-xl transition-all relative" data-author="{{ post.data.author }}" data-tags="{% if post.data.tags %}{{ post.data.tags | join('|') }}{% endif %}" data-date="{{ post.date | date('yyyy-MM-dd') }}">
         <div class="flex flex-wrap items-start gap-4 sm:flex-nowrap">
           {% if post.data.image %}
-          <img src="{{ post.data.image | url }}" alt="{{ post.data.title }}" class="w-20 h-20 sm:w-32 sm:h-32 object-cover rounded-xl flex-shrink-0" loading="lazy" />
+          <img src="{{ post.data.image | blogImage | url }}" alt="{{ post.data.title }}" class="w-20 h-20 sm:w-32 sm:h-32 object-cover rounded-xl flex-shrink-0" loading="lazy" />
           {% endif %}
           <div class="min-w-0 flex-1 sm:flex sm:flex-col">
             <h2 class="text-xl sm:text-2xl font-serif font-bold text-indigo-deep-900 mb-2 leading-tight">{{ post.data.title }}</h2>
             <div class="hidden sm:block text-xs sm:text-sm text-neutral-warm-600 mb-2 leading-relaxed">
-              <span>By {{ post.data.author }}</span> &middot; <time datetime="{{ post.date | date('yyyy-MM-dd') }}">{{ post.date | date("dd MMM yyyy") }}</time>
+              <span>By {% if post.data.authorUrl %}<a href="{{ post.data.authorUrl }}" target="_blank" rel="noopener noreferrer" class="hover:text-science-blue-700 underline underline-offset-2 transition-colors">{{ post.data.author }}</a>{% else %}{{ post.data.author }}{% endif %}</span> &middot; <time datetime="{{ post.date | date('yyyy-MM-dd') }}">{{ post.date | date("dd MMM yyyy") }}</time>
             </div>
             <div class="hidden sm:block text-xs text-neutral-warm-500 leading-relaxed">{% if post.data.tags %}{{ post.data.tags | join(', ') }}{% endif %}</div>
+            {% if post.data.sourceUrl %}<div class="hidden sm:flex items-center gap-1 mt-1 text-xs text-amber-700"><i data-lucide="external-link" class="w-3 h-3"></i><span>Via <a href="{{ post.data.sourceUrl }}" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-amber-800 transition-colors">{{ post.data.source if post.data.source else post.data.sourceUrl }}</a></span></div>{% endif %}
             <a href="{{ post.url | url }}" class="hidden sm:inline-flex mt-3 text-amber-600 hover:underline font-medium text-left">Read more →</a>
           </div>
           <div class="basis-full sm:hidden">
             <div class="text-xs text-neutral-warm-600 mb-2 leading-relaxed">
-              <span>By {{ post.data.author }}</span> &middot; <time datetime="{{ post.date | date('yyyy-MM-dd') }}">{{ post.date | date("dd MMM yyyy") }}</time>
+              <span>By {% if post.data.authorUrl %}<a href="{{ post.data.authorUrl }}" target="_blank" rel="noopener noreferrer" class="hover:text-science-blue-700 underline underline-offset-2 transition-colors">{{ post.data.author }}</a>{% else %}{{ post.data.author }}{% endif %}</span> &middot; <time datetime="{{ post.date | date('yyyy-MM-dd') }}">{{ post.date | date("dd MMM yyyy") }}</time>
             </div>
             <div class="text-xs text-neutral-warm-500 leading-relaxed">{% if post.data.tags %}{{ post.data.tags | join(', ') }}{% endif %}</div>
+            {% if post.data.sourceUrl %}<div class="flex items-center gap-1 mt-1 text-xs text-amber-700"><i data-lucide="external-link" class="w-3 h-3"></i><span>Via <a href="{{ post.data.sourceUrl }}" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-amber-800 transition-colors">{{ post.data.source if post.data.source else post.data.sourceUrl }}</a></span></div>{% endif %}
           </div>
         </div>
         <p class="text-neutral-warm-700">{{ post.data.description }}</p>
