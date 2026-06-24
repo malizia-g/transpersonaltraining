@@ -6,64 +6,61 @@ All editorial content on this site is stored as Markdown files inside `src/conte
 
 ## Folder Structure
 
-```
-src/content/
-├── home/                          ← Homepage
-│   ├── welcome.md                 ← Welcome section paragraphs
-│   ├── for-you.md                 ← "Is this programme for you?" list
-│   ├── quote.md                   ← Pull quote box
-│   └── cards/
-│       ├── 01-mind-body-spirit.md
-│       ├── 02-holotropic-breathwork.md
-│       └── 03-accredited-qualification.md
-│
-├── what-is-transpersonal-psychology/
-│   ├── 01-understanding-the-field.md
-│   ├── 02-science-and-spirit.md    ← Includes blockquote + source
-│   └── 03-why-it-matters.md
-│
-├── transpersonal-therapy/
-│   ├── 01-what-is.md
-│   └── principles/
-│       ├── 01-holistic.md
-│       ├── 02-transcendent.md
-│       ├── 03-inner-healing.md
-│       └── 04-spiritual.md
-│
-├── training-overview/
-│   ├── 01-philosophy.md
-│   ├── 02-program-overview.md
-│   ├── 03-eligibility.md
-│   ├── commitment/
-│   │   ├── 01-learning.md
-│   │   ├── 02-self-development.md
-│   │   ├── 03-supervision.md
-│   │   └── 04-duration.md
-│   └── admissions/
-│       ├── 01-level-1.md
-│       ├── 02-level-2.md
-│       └── 03-level-3.md
-│
-├── techniques/
-│   ├── 00-intro.md
-│   └── cards/
-│       ├── 01-breathwork.md
-│       ├── 02-gestalt.md
-│       ├── 03-somatic.md
-│       └── 04-shamanic.md
-│
-├── become-a-client-model/
-│   ├── intro/
-│   │   ├── 01-counselling.md
-│   │   ├── 02-profiles.md
-│   │   └── 03-breathwork.md
-│   ├── 01-what-to-look-for.md
-│   └── 02-cta.md
-│
-└── teachers/
-    ├── 01-core-intro.md
-    └── 02-guest-intro.md
-```
+- [**home/**](../src/content/home/) — Homepage
+  - [welcome.md](../src/content/home/welcome.md) — Welcome section paragraphs
+  - [for-you.md](../src/content/home/for-you.md) — "Is this programme for you?" list
+  - [quote.md](../src/content/home/quote.md) — Pull quote box
+  - [**cards/**](../src/content/home/cards/)
+    - [01-mind-body-spirit.md](../src/content/home/cards/01-mind-body-spirit.md)
+    - [02-holotropic-breathwork.md](../src/content/home/cards/02-holotropic-breathwork.md)
+    - [03-accredited-qualification.md](../src/content/home/cards/03-accredited-qualification.md)
+
+- [**what-is-transpersonal-psychology/**](../src/content/what-is-transpersonal-psychology/)
+  - [01-understanding-the-field.md](../src/content/what-is-transpersonal-psychology/01-understanding-the-field.md)
+  - [02-science-and-spirit.md](../src/content/what-is-transpersonal-psychology/02-science-and-spirit.md) — Includes blockquote + source
+  - [03-why-it-matters.md](../src/content/what-is-transpersonal-psychology/03-why-it-matters.md)
+
+- [**transpersonal-therapy/**](../src/content/transpersonal-therapy/)
+  - [01-what-is.md](../src/content/transpersonal-therapy/01-what-is.md)
+  - [**principles/**](../src/content/transpersonal-therapy/principles/)
+    - [01-holistic.md](../src/content/transpersonal-therapy/principles/01-holistic.md)
+    - [02-transcendent.md](../src/content/transpersonal-therapy/principles/02-transcendent.md)
+    - [03-inner-healing.md](../src/content/transpersonal-therapy/principles/03-inner-healing.md)
+    - [04-spiritual.md](../src/content/transpersonal-therapy/principles/04-spiritual.md)
+
+- [**training-overview/**](../src/content/training-overview/)
+  - [01-philosophy.md](../src/content/training-overview/01-philosophy.md)
+  - [02-program-overview.md](../src/content/training-overview/02-program-overview.md)
+  - [03-eligibility.md](../src/content/training-overview/03-eligibility.md)
+  - [**commitment/**](../src/content/training-overview/commitment/)
+    - [01-learning.md](../src/content/training-overview/commitment/01-learning.md)
+    - [02-self-development.md](../src/content/training-overview/commitment/02-self-development.md)
+    - [03-supervision.md](../src/content/training-overview/commitment/03-supervision.md)
+    - [04-duration.md](../src/content/training-overview/commitment/04-duration.md)
+  - [**admissions/**](../src/content/training-overview/admissions/)
+    - [01-level-1.md](../src/content/training-overview/admissions/01-level-1.md)
+    - [02-level-2.md](../src/content/training-overview/admissions/02-level-2.md)
+    - [03-level-3.md](../src/content/training-overview/admissions/03-level-3.md)
+
+- [**techniques/**](../src/content/techniques/)
+  - [00-intro.md](../src/content/techniques/00-intro.md)
+  - [**cards/**](../src/content/techniques/cards/)
+    - [01-breathwork.md](../src/content/techniques/cards/01-breathwork.md)
+    - [02-gestalt.md](../src/content/techniques/cards/02-gestalt.md)
+    - [03-somatic.md](../src/content/techniques/cards/03-somatic.md)
+    - [04-shamanic.md](../src/content/techniques/cards/04-shamanic.md)
+
+- [**become-a-client-model/**](../src/content/become-a-client-model/)
+  - [**intro/**](../src/content/become-a-client-model/intro/)
+    - [01-counselling.md](../src/content/become-a-client-model/intro/01-counselling.md)
+    - [02-profiles.md](../src/content/become-a-client-model/intro/02-profiles.md)
+    - [03-breathwork.md](../src/content/become-a-client-model/intro/03-breathwork.md)
+  - [01-what-to-look-for.md](../src/content/become-a-client-model/01-what-to-look-for.md)
+  - [02-cta.md](../src/content/become-a-client-model/02-cta.md)
+
+- [**teachers/**](../src/content/teachers/)
+  - [01-core-intro.md](../src/content/teachers/01-core-intro.md)
+  - [02-guest-intro.md](../src/content/teachers/02-guest-intro.md)
 
 ---
 
