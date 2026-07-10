@@ -4,7 +4,10 @@ layout: base.njk
 
 <section class="py-0 bg-white" lang="en">
   <div class="w-full h-56 md:h-72 overflow-hidden relative mb-8">
-    <img src="{{ '/assets/images/Headers/blog-hero.jpg' | url }}" alt="Transpersonal blog cover" class="w-full h-full object-cover object-center" loading="lazy" />
+    <picture>
+      <source srcset="{{ '/assets/images/Headers/blog-hero.webp' | url }}" type="image/webp">
+      <img src="{{ '/assets/images/Headers/blog-hero.jpg' | url }}" alt="Transpersonal blog cover" class="w-full h-full object-cover object-center" loading="lazy" />
+    </picture>
     <div class="absolute inset-0 bg-gradient-to-b from-black/35 to-transparent"></div>
   </div>
 

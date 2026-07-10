@@ -4,7 +4,7 @@ author: Manal Al-Hammadi
 authorUrl: https://manalpsychotherapy.com/
 date: 2026-02-14
 description: "A clear comparison between transpersonal psychology and other therapeutic modalities, highlighting its unique holistic and integrative approach."
-image: vineyard.jpg
+image: threshold-doorway-light.jpg
 source: manalpsychotherapy.com
 sourceUrl: https://manalpsychotherapy.com/
 tags: [transpersonal, psychology, holistic therapy, integrative therapy, psychotherapy, comparison]

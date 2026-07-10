@@ -4,7 +4,7 @@ author: Manal Al-Hammadi
 authorUrl: https://manalpsychotherapy.com/
 date: 2026-02-14
 description: "A journey through the origins and evolution of transpersonal psychology, from James and Jung to the present day."
-image: blog-hero.jpg
+image: laughing-buddha-garden.jpg
 source: manalpsychotherapy.com
 sourceUrl: https://manalpsychotherapy.com/
 tags: [transpersonal, psychology, history, holistic therapy, spiritual psychotherapy, breathwork, integrative therapy]
