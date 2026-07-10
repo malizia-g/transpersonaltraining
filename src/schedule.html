@@ -230,42 +230,34 @@ description: "View upcoming residential training weekends and intensive seminars
     </div>
 </section>
 
-<!-- The Venue -->
-<section id="venue" class="scroll-mt-24 py-20 bg-white border-t border-neutral-warm-200">
+<!-- The Venues (teaser) -->
+<section class="py-16 bg-white border-t border-neutral-warm-200">
     <div class="container mx-auto px-6">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center max-w-3xl mx-auto mb-12">
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-6 items-center">
+            <div class="grid grid-cols-2 gap-4">
+                <picture>
+                    <source srcset="/assets/images/Headers/hero-homepage-venue-exterior.webp" type="image/webp">
+                    <img src="/assets/images/Headers/hero-homepage-venue-exterior.jpg" alt="The seminar house in the Black Forest" class="w-full h-40 object-cover rounded-2xl shadow-md" loading="lazy">
+                </picture>
+                <picture>
+                    <source srcset="/assets/images/Venue/monteverdi-cypress-farmhouse.webp" type="image/webp">
+                    <img src="/assets/images/Venue/monteverdi-cypress-farmhouse.jpg" alt="Farmhouse and cypresses at the Tenuta di Monteverdi" class="w-full h-40 object-cover rounded-2xl shadow-md" loading="lazy">
+                </picture>
+            </div>
+            <div>
                 <span class="inline-block py-1 px-3 rounded-full bg-science-blue-50 text-science-blue-700 border border-science-blue-100 text-sm font-medium mb-4 tracking-wider uppercase">
                     Where we gather
                 </span>
-                <h2 class="text-3xl md:text-4xl font-serif font-bold text-indigo-deep-900 mb-4">
-                    The Venue
+                <h2 class="text-2xl md:text-3xl font-serif font-bold text-indigo-deep-900 mb-3">
+                    Two inspiring venues
                 </h2>
-                <p class="text-lg text-neutral-warm-700 leading-relaxed">
-                    Our residential intensives take place in a welcoming house set within the forest &mdash; a quiet, natural setting with shared living spaces, a sunlit terrace and a garden. A place designed to support deep work, rest and community.
+                <p class="text-lg text-neutral-warm-700 leading-relaxed mb-6">
+                    Our residential intensives are held in a house in the Black Forest (Todtmoos, Germany) and at the Tenuta di Monteverdi estate in Tuscany, Italy.
                 </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-6 items-stretch">
-                <picture class="md:row-span-2">
-                    <source srcset="/assets/images/Headers/hero-homepage-venue-exterior.webp" type="image/webp">
-                    <img src="/assets/images/Headers/hero-homepage-venue-exterior.jpg" alt="The seminar house in the forest" class="w-full h-64 md:h-full object-cover rounded-2xl shadow-md" loading="lazy">
-                </picture>
-
-                <div class="grid grid-cols-2 gap-6">
-                    <picture>
-                        <source srcset="/assets/images/Venue/venue-terrace-dining.webp" type="image/webp">
-                        <img src="/assets/images/Venue/venue-terrace-dining.jpg" alt="Shared dining on the terrace" class="w-full h-40 md:h-52 object-cover rounded-2xl shadow-md" loading="lazy">
-                    </picture>
-                    <picture>
-                        <source srcset="/assets/images/Venue/venue-garden-lantern.webp" type="image/webp">
-                        <img src="/assets/images/Venue/venue-garden-lantern.jpg" alt="A lantern in the garden at dusk" class="w-full h-40 md:h-52 object-cover rounded-2xl shadow-md" loading="lazy">
-                    </picture>
-                    <picture class="col-span-2">
-                        <source srcset="/assets/images/Venue/venue-common-room.webp" type="image/webp">
-                        <img src="/assets/images/Venue/venue-common-room.jpg" alt="An informal common room for gathering" class="w-full h-40 md:h-52 object-cover rounded-2xl shadow-md" loading="lazy">
-                    </picture>
-                </div>
+                <a href="{{ '/venues/' | url }}" class="inline-flex items-center gap-2 text-science-blue-700 hover:text-science-blue-800 font-medium underline underline-offset-4">
+                    Explore our venues
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
             </div>
         </div>
     </div>
