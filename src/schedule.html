@@ -230,6 +230,47 @@ description: "View upcoming residential training weekends and intensive seminars
     </div>
 </section>
 
+<!-- The Venue -->
+<section class="py-20 bg-white border-t border-neutral-warm-200">
+    <div class="container mx-auto px-6">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="inline-block py-1 px-3 rounded-full bg-science-blue-50 text-science-blue-700 border border-science-blue-100 text-sm font-medium mb-4 tracking-wider uppercase">
+                    Where we gather
+                </span>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-indigo-deep-900 mb-4">
+                    The Venue
+                </h2>
+                <p class="text-lg text-neutral-warm-700 leading-relaxed">
+                    Our residential intensives take place in a welcoming house set within the forest &mdash; a quiet, natural setting with shared living spaces, a sunlit terrace and a garden. A place designed to support deep work, rest and community.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 items-stretch">
+                <picture class="md:row-span-2">
+                    <source srcset="/assets/images/Headers/hero-homepage-venue-exterior.webp" type="image/webp">
+                    <img src="/assets/images/Headers/hero-homepage-venue-exterior.jpg" alt="The seminar house in the forest" class="w-full h-64 md:h-full object-cover rounded-2xl shadow-md" loading="lazy">
+                </picture>
+
+                <div class="grid grid-cols-2 gap-6">
+                    <picture>
+                        <source srcset="/assets/images/Venue/venue-terrace-dining.webp" type="image/webp">
+                        <img src="/assets/images/Venue/venue-terrace-dining.jpg" alt="Shared dining on the terrace" class="w-full h-40 md:h-52 object-cover rounded-2xl shadow-md" loading="lazy">
+                    </picture>
+                    <picture>
+                        <source srcset="/assets/images/Venue/venue-garden-lantern.webp" type="image/webp">
+                        <img src="/assets/images/Venue/venue-garden-lantern.jpg" alt="A lantern in the garden at dusk" class="w-full h-40 md:h-52 object-cover rounded-2xl shadow-md" loading="lazy">
+                    </picture>
+                    <picture class="col-span-2">
+                        <source srcset="/assets/images/Venue/venue-common-room.webp" type="image/webp">
+                        <img src="/assets/images/Venue/venue-common-room.jpg" alt="An informal common room for gathering" class="w-full h-40 md:h-52 object-cover rounded-2xl shadow-md" loading="lazy">
+                    </picture>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 {% block scripts %}
 <script src="../scripts/pages/schedule-ssr.js"></script>
 {% endblock %}
