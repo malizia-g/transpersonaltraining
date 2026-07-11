@@ -58,8 +58,8 @@
         .loader-spinner {
             width: 50px;
             height: 50px;
-            border: 4px solid rgba(102, 126, 234, 0.2);
-            border-top-color: #667eea;
+            border: 4px solid rgba(201, 164, 92, 0.25);
+            border-top-color: #C9A45C;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
@@ -87,8 +87,8 @@
     <!-- Fonts (preconnect and async load) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet"></noscript>
     
     <!-- Lucide Icons (defer loading) -->
     <script src="https://unpkg.com/lucide@0.344.0" defer></script>
@@ -223,23 +223,23 @@
     <div class="absolute inset-0 bg-gradient-to-b from-black/30 to-transparent"></div>
   </div>
   <div class="container mx-auto px-6">
-    <h1 class="text-4xl md:text-5xl font-serif font-bold text-indigo-deep-900 mb-10 text-center">Blog</h1>
+    <h1 class="p4-display text-4xl md:text-5xl font-medium text-[#0F2540] mb-10 text-center">Blog</h1>
     <div class="max-w-3xl mx-auto text-center mb-12 text-neutral-warm-700 text-lg">
       <p>Insights, stories, and tools on transpersonal psychology, holistic therapy, spiritual psychotherapy training, integrative therapy education, and breathwork for anxiety.</p>
     </div>
     <!-- FILTRI (popolati JS) -->
     <form id="blog-filters" class="mb-10 flex flex-wrap gap-4 justify-center">
-      <select id="filter-author" class="border rounded px-3 py-2"><option value="">All Authors</option></select>
-      <select id="filter-tag" class="border rounded px-3 py-2"><option value="">All Tags</option></select>
-      <input type="date" id="filter-date" class="border rounded px-3 py-2" placeholder="Date" />
-      <button type="reset" class="ml-2 px-4 py-2 rounded bg-neutral-warm-200 hover:bg-neutral-warm-300">Reset</button>
+      <select id="filter-author" class="border px-3 py-2"><option value="">All Authors</option></select>
+      <select id="filter-tag" class="border px-3 py-2"><option value="">All Tags</option></select>
+      <input type="date" id="filter-date" class="border px-3 py-2" placeholder="Date" />
+      <button type="reset" class="ml-2 px-4 py-2 bg-neutral-warm-200 hover:bg-neutral-warm-300">Reset</button>
     </form>
     <div class="grid grid-cols-1 md:grid-cols-1 gap-10" id="blog-articles">
       
-      <article class="bg-neutral-warm-50 rounded-2xl shadow-md p-5 sm:p-8 flex flex-col gap-4 hover:shadow-xl transition-all relative" data-author="Mario Lorenzetti" data-tags="shamanism|medicine wheel|transpersonal psychology|holotropic breathwork|Jung|indigenous wisdom|archetypes|Cherokee" data-date="2026-03-01">
+      <article class="bg-neutral-warm-50 border border-neutral-warm-200 shadow-md p-5 sm:p-8 flex flex-col gap-4 hover:shadow-xl transition-all relative" data-author="Mario Lorenzetti" data-tags="shamanism|medicine wheel|transpersonal psychology|holotropic breathwork|Jung|indigenous wisdom|archetypes|Cherokee" data-date="2026-03-01">
         <div class="flex flex-wrap items-start gap-4 sm:flex-nowrap">
           
-          <img src="/transpersonaltraining/preview-proposta4/assets/images/blog/medicine-wheel-sami-drum.jpg" alt="The Medicine Wheel and the Cartography of the Shamanic Universe" class="w-20 h-20 sm:w-32 sm:h-32 object-cover rounded-xl flex-shrink-0" loading="lazy" />
+          <img src="/transpersonaltraining/preview-proposta4/assets/images/blog/medicine-wheel-sami-drum.jpg" alt="The Medicine Wheel and the Cartography of the Shamanic Universe" class="w-20 h-20 sm:w-32 sm:h-32 object-cover flex-shrink-0" loading="lazy" />
           
           <div class="min-w-0 flex-1 sm:flex sm:flex-col">
             <h2 class="text-xl sm:text-2xl font-serif font-bold text-indigo-deep-900 mb-2 leading-tight">The Medicine Wheel and the Cartography of the Shamanic Universe</h2>
@@ -247,25 +247,25 @@
               <span>By <a href="https://mariolorenzetti.org/" target="_blank" rel="noopener noreferrer" class="hover:text-science-blue-700 underline underline-offset-2 transition-colors">Mario Lorenzetti</a></span> &middot; <time datetime="2026-03-01">01 Mar 2026</time>
             </div>
             <div class="hidden sm:block text-xs text-neutral-warm-500 leading-relaxed">shamanism, medicine wheel, transpersonal psychology, holotropic breathwork, Jung, indigenous wisdom, archetypes, Cherokee</div>
-            <div class="hidden sm:flex items-center gap-1 mt-1 text-xs text-amber-700"><i data-lucide="external-link" class="w-3 h-3"></i><span>Via <a href="https://mariolorenzetti.org/wp-content/uploads/2026/03/MarioLorenzetti_The-medicine-wheel-and-the-cartography-of-the-shamanic-universe.pdf" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-amber-800 transition-colors">mariolorenzetti.org</a></span></div>
-            <a href="/transpersonaltraining/preview-proposta4/blog/the-medicine-wheel-and-the-cartography-of-the-shamanic-universe/" class="hidden sm:inline-flex mt-3 text-amber-600 hover:underline font-medium text-left">Read more →</a>
+            <div class="hidden sm:flex items-center gap-1 mt-1 text-xs text-[#9A7734]"><i data-lucide="external-link" class="w-3 h-3"></i><span>Via <a href="https://mariolorenzetti.org/wp-content/uploads/2026/03/MarioLorenzetti_The-medicine-wheel-and-the-cartography-of-the-shamanic-universe.pdf" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-[#7A5E29] transition-colors">mariolorenzetti.org</a></span></div>
+            <a href="/transpersonaltraining/preview-proposta4/blog/the-medicine-wheel-and-the-cartography-of-the-shamanic-universe/" class="hidden sm:inline-flex mt-3 text-[#9A7734] hover:underline font-medium text-left">Read more →</a>
           </div>
           <div class="basis-full sm:hidden">
             <div class="text-xs text-neutral-warm-600 mb-2 leading-relaxed">
               <span>By <a href="https://mariolorenzetti.org/" target="_blank" rel="noopener noreferrer" class="hover:text-science-blue-700 underline underline-offset-2 transition-colors">Mario Lorenzetti</a></span> &middot; <time datetime="2026-03-01">01 Mar 2026</time>
             </div>
             <div class="text-xs text-neutral-warm-500 leading-relaxed">shamanism, medicine wheel, transpersonal psychology, holotropic breathwork, Jung, indigenous wisdom, archetypes, Cherokee</div>
-            <div class="flex items-center gap-1 mt-1 text-xs text-amber-700"><i data-lucide="external-link" class="w-3 h-3"></i><span>Via <a href="https://mariolorenzetti.org/wp-content/uploads/2026/03/MarioLorenzetti_The-medicine-wheel-and-the-cartography-of-the-shamanic-universe.pdf" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-amber-800 transition-colors">mariolorenzetti.org</a></span></div>
+            <div class="flex items-center gap-1 mt-1 text-xs text-[#9A7734]"><i data-lucide="external-link" class="w-3 h-3"></i><span>Via <a href="https://mariolorenzetti.org/wp-content/uploads/2026/03/MarioLorenzetti_The-medicine-wheel-and-the-cartography-of-the-shamanic-universe.pdf" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-[#7A5E29] transition-colors">mariolorenzetti.org</a></span></div>
           </div>
         </div>
         <p class="text-neutral-warm-700">A transpersonal and holotropic exploration of the Native American medicine wheel, its cosmological framework, and its deep connections to Jung&#39;s individuation process and Holotropic Breathwork.</p>
-        <a href="/transpersonaltraining/preview-proposta4/blog/the-medicine-wheel-and-the-cartography-of-the-shamanic-universe/" class="sm:hidden mt-2 text-amber-600 hover:underline font-medium text-left">Read more →</a>
+        <a href="/transpersonaltraining/preview-proposta4/blog/the-medicine-wheel-and-the-cartography-of-the-shamanic-universe/" class="sm:hidden mt-2 text-[#9A7734] hover:underline font-medium text-left">Read more →</a>
       </article>
       
-      <article class="bg-neutral-warm-50 rounded-2xl shadow-md p-5 sm:p-8 flex flex-col gap-4 hover:shadow-xl transition-all relative" data-author="Manal Al-Hammadi" data-tags="transpersonal|psychology|history|holistic therapy|spiritual psychotherapy|breathwork|integrative therapy" data-date="2026-02-14">
+      <article class="bg-neutral-warm-50 border border-neutral-warm-200 shadow-md p-5 sm:p-8 flex flex-col gap-4 hover:shadow-xl transition-all relative" data-author="Manal Al-Hammadi" data-tags="transpersonal|psychology|history|holistic therapy|spiritual psychotherapy|breathwork|integrative therapy" data-date="2026-02-14">
         <div class="flex flex-wrap items-start gap-4 sm:flex-nowrap">
           
-          <img src="/transpersonaltraining/preview-proposta4/assets/images/blog/laughing-buddha-garden.jpg" alt="The History of Transpersonal Psychology" class="w-20 h-20 sm:w-32 sm:h-32 object-cover rounded-xl flex-shrink-0" loading="lazy" />
+          <img src="/transpersonaltraining/preview-proposta4/assets/images/blog/laughing-buddha-garden.jpg" alt="The History of Transpersonal Psychology" class="w-20 h-20 sm:w-32 sm:h-32 object-cover flex-shrink-0" loading="lazy" />
           
           <div class="min-w-0 flex-1 sm:flex sm:flex-col">
             <h2 class="text-xl sm:text-2xl font-serif font-bold text-indigo-deep-900 mb-2 leading-tight">The History of Transpersonal Psychology</h2>
@@ -273,25 +273,25 @@
               <span>By <a href="https://manalpsychotherapy.com/" target="_blank" rel="noopener noreferrer" class="hover:text-science-blue-700 underline underline-offset-2 transition-colors">Manal Al-Hammadi</a></span> &middot; <time datetime="2026-02-14">14 Feb 2026</time>
             </div>
             <div class="hidden sm:block text-xs text-neutral-warm-500 leading-relaxed">transpersonal, psychology, history, holistic therapy, spiritual psychotherapy, breathwork, integrative therapy</div>
-            <div class="hidden sm:flex items-center gap-1 mt-1 text-xs text-amber-700"><i data-lucide="external-link" class="w-3 h-3"></i><span>Via <a href="https://manalpsychotherapy.com/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-amber-800 transition-colors">manalpsychotherapy.com</a></span></div>
-            <a href="/transpersonaltraining/preview-proposta4/blog/the-history-of-transpersonal-psychology/" class="hidden sm:inline-flex mt-3 text-amber-600 hover:underline font-medium text-left">Read more →</a>
+            <div class="hidden sm:flex items-center gap-1 mt-1 text-xs text-[#9A7734]"><i data-lucide="external-link" class="w-3 h-3"></i><span>Via <a href="https://manalpsychotherapy.com/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-[#7A5E29] transition-colors">manalpsychotherapy.com</a></span></div>
+            <a href="/transpersonaltraining/preview-proposta4/blog/the-history-of-transpersonal-psychology/" class="hidden sm:inline-flex mt-3 text-[#9A7734] hover:underline font-medium text-left">Read more →</a>
           </div>
           <div class="basis-full sm:hidden">
             <div class="text-xs text-neutral-warm-600 mb-2 leading-relaxed">
               <span>By <a href="https://manalpsychotherapy.com/" target="_blank" rel="noopener noreferrer" class="hover:text-science-blue-700 underline underline-offset-2 transition-colors">Manal Al-Hammadi</a></span> &middot; <time datetime="2026-02-14">14 Feb 2026</time>
             </div>
             <div class="text-xs text-neutral-warm-500 leading-relaxed">transpersonal, psychology, history, holistic therapy, spiritual psychotherapy, breathwork, integrative therapy</div>
-            <div class="flex items-center gap-1 mt-1 text-xs text-amber-700"><i data-lucide="external-link" class="w-3 h-3"></i><span>Via <a href="https://manalpsychotherapy.com/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-amber-800 transition-colors">manalpsychotherapy.com</a></span></div>
+            <div class="flex items-center gap-1 mt-1 text-xs text-[#9A7734]"><i data-lucide="external-link" class="w-3 h-3"></i><span>Via <a href="https://manalpsychotherapy.com/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-[#7A5E29] transition-colors">manalpsychotherapy.com</a></span></div>
           </div>
         </div>
         <p class="text-neutral-warm-700">A journey through the origins and evolution of transpersonal psychology, from James and Jung to the present day.</p>
-        <a href="/transpersonaltraining/preview-proposta4/blog/the-history-of-transpersonal-psychology/" class="sm:hidden mt-2 text-amber-600 hover:underline font-medium text-left">Read more →</a>
+        <a href="/transpersonaltraining/preview-proposta4/blog/the-history-of-transpersonal-psychology/" class="sm:hidden mt-2 text-[#9A7734] hover:underline font-medium text-left">Read more →</a>
       </article>
       
-      <article class="bg-neutral-warm-50 rounded-2xl shadow-md p-5 sm:p-8 flex flex-col gap-4 hover:shadow-xl transition-all relative" data-author="Manal Al-Hammadi" data-tags="transpersonal|psychology|holistic therapy|integrative therapy|psychotherapy|comparison" data-date="2026-02-14">
+      <article class="bg-neutral-warm-50 border border-neutral-warm-200 shadow-md p-5 sm:p-8 flex flex-col gap-4 hover:shadow-xl transition-all relative" data-author="Manal Al-Hammadi" data-tags="transpersonal|psychology|holistic therapy|integrative therapy|psychotherapy|comparison" data-date="2026-02-14">
         <div class="flex flex-wrap items-start gap-4 sm:flex-nowrap">
           
-          <img src="/transpersonaltraining/preview-proposta4/assets/images/blog/threshold-doorway-light.jpg" alt="How Transpersonal Psychology Differs from Other Approaches" class="w-20 h-20 sm:w-32 sm:h-32 object-cover rounded-xl flex-shrink-0" loading="lazy" />
+          <img src="/transpersonaltraining/preview-proposta4/assets/images/blog/threshold-doorway-light.jpg" alt="How Transpersonal Psychology Differs from Other Approaches" class="w-20 h-20 sm:w-32 sm:h-32 object-cover flex-shrink-0" loading="lazy" />
           
           <div class="min-w-0 flex-1 sm:flex sm:flex-col">
             <h2 class="text-xl sm:text-2xl font-serif font-bold text-indigo-deep-900 mb-2 leading-tight">How Transpersonal Psychology Differs from Other Approaches</h2>
@@ -299,19 +299,19 @@
               <span>By <a href="https://manalpsychotherapy.com/" target="_blank" rel="noopener noreferrer" class="hover:text-science-blue-700 underline underline-offset-2 transition-colors">Manal Al-Hammadi</a></span> &middot; <time datetime="2026-02-14">14 Feb 2026</time>
             </div>
             <div class="hidden sm:block text-xs text-neutral-warm-500 leading-relaxed">transpersonal, psychology, holistic therapy, integrative therapy, psychotherapy, comparison</div>
-            <div class="hidden sm:flex items-center gap-1 mt-1 text-xs text-amber-700"><i data-lucide="external-link" class="w-3 h-3"></i><span>Via <a href="https://manalpsychotherapy.com/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-amber-800 transition-colors">manalpsychotherapy.com</a></span></div>
-            <a href="/transpersonaltraining/preview-proposta4/blog/how-transpersonal-psychology-differs/" class="hidden sm:inline-flex mt-3 text-amber-600 hover:underline font-medium text-left">Read more →</a>
+            <div class="hidden sm:flex items-center gap-1 mt-1 text-xs text-[#9A7734]"><i data-lucide="external-link" class="w-3 h-3"></i><span>Via <a href="https://manalpsychotherapy.com/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-[#7A5E29] transition-colors">manalpsychotherapy.com</a></span></div>
+            <a href="/transpersonaltraining/preview-proposta4/blog/how-transpersonal-psychology-differs/" class="hidden sm:inline-flex mt-3 text-[#9A7734] hover:underline font-medium text-left">Read more →</a>
           </div>
           <div class="basis-full sm:hidden">
             <div class="text-xs text-neutral-warm-600 mb-2 leading-relaxed">
               <span>By <a href="https://manalpsychotherapy.com/" target="_blank" rel="noopener noreferrer" class="hover:text-science-blue-700 underline underline-offset-2 transition-colors">Manal Al-Hammadi</a></span> &middot; <time datetime="2026-02-14">14 Feb 2026</time>
             </div>
             <div class="text-xs text-neutral-warm-500 leading-relaxed">transpersonal, psychology, holistic therapy, integrative therapy, psychotherapy, comparison</div>
-            <div class="flex items-center gap-1 mt-1 text-xs text-amber-700"><i data-lucide="external-link" class="w-3 h-3"></i><span>Via <a href="https://manalpsychotherapy.com/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-amber-800 transition-colors">manalpsychotherapy.com</a></span></div>
+            <div class="flex items-center gap-1 mt-1 text-xs text-[#9A7734]"><i data-lucide="external-link" class="w-3 h-3"></i><span>Via <a href="https://manalpsychotherapy.com/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-[#7A5E29] transition-colors">manalpsychotherapy.com</a></span></div>
           </div>
         </div>
         <p class="text-neutral-warm-700">A clear comparison between transpersonal psychology and other therapeutic modalities, highlighting its unique holistic and integrative approach.</p>
-        <a href="/transpersonaltraining/preview-proposta4/blog/how-transpersonal-psychology-differs/" class="sm:hidden mt-2 text-amber-600 hover:underline font-medium text-left">Read more →</a>
+        <a href="/transpersonaltraining/preview-proposta4/blog/how-transpersonal-psychology-differs/" class="sm:hidden mt-2 text-[#9A7734] hover:underline font-medium text-left">Read more →</a>
       </article>
       
     </div>
@@ -368,62 +368,62 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-300 py-16">
+    <footer class="bg-[#0B1B30] text-[#B9C4D2] py-16">
     <div class="container mx-auto px-6">
-        <div class="grid md:grid-cols-4 gap-12 border-b border-slate-800 pb-12 mb-12">
+        <div class="grid md:grid-cols-4 gap-12 border-b border-white/10 pb-12 mb-12">
             <!-- About Column -->
             <div>
                 <div class="flex items-center gap-2 mb-4">
-                    <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center">
-                        <i data-lucide="loader-pinwheel" class="text-white w-6 h-6"></i>
+                    <div class="w-10 h-10 flex items-center justify-center bg-[#C9A45C] rounded-full">
+                        <img src="/transpersonaltraining/preview-proposta4/assets/images/Graphics/logo.svg" alt="Logo" class="w-8 h-8" style="display:block;" />
                     </div>
-                    <h3 class="text-white font-bold text-lg">Transpersonal Training</h3>
+                    <h3 class="p4-display text-white font-semibold text-xl tracking-wide">Transpersonal Training</h3>
                 </div>
-                <p class="text-sm leading-relaxed text-slate-400">
+                <p class="text-sm leading-relaxed text-[#8FA0B3]">
                     Educating therapists for a revolution of consciousness through transpersonal psychotherapy and breathwork.
                 </p>
             </div>
 
             <!-- Quick Links -->
             <div>
-                <h4 class="text-white font-semibold mb-4">Training</h4>
+                <h4 class="p4-kicker text-[#C9A45C] mb-5">Training</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="/transpersonaltraining/preview-proposta4/training-overview/" class="hover:text-white transition-colors">Training Overview</a></li>
-                    <li><a href="/transpersonaltraining/preview-proposta4/curriculum/" class="hover:text-white transition-colors">Curriculum</a></li>
-                    <li><a href="/transpersonaltraining/preview-proposta4/schedule/" class="hover:text-white transition-colors">Intensive Schedule</a></li>
-                    <li><a href="/transpersonaltraining/preview-proposta4/lectures-schedule/" class="hover:text-white transition-colors">Lectures Schedule</a></li>
-                    <li><a href="/transpersonaltraining/preview-proposta4/teachers/" class="hover:text-white transition-colors">Our Teachers</a></li>
+                    <li><a href="/transpersonaltraining/preview-proposta4/training-overview/" class="hover:text-[#C9A45C] transition-colors">Training Overview</a></li>
+                    <li><a href="/transpersonaltraining/preview-proposta4/curriculum/" class="hover:text-[#C9A45C] transition-colors">Curriculum</a></li>
+                    <li><a href="/transpersonaltraining/preview-proposta4/schedule/" class="hover:text-[#C9A45C] transition-colors">Intensive Schedule</a></li>
+                    <li><a href="/transpersonaltraining/preview-proposta4/lectures-schedule/" class="hover:text-[#C9A45C] transition-colors">Lectures Schedule</a></li>
+                    <li><a href="/transpersonaltraining/preview-proposta4/teachers/" class="hover:text-[#C9A45C] transition-colors">Our Teachers</a></li>
                 </ul>
             </div>
 
             <!-- Resources -->
             <div>
-                <h4 class="text-white font-semibold mb-4">Resources</h4>
+                <h4 class="p4-kicker text-[#C9A45C] mb-5">Resources</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="/transpersonaltraining/preview-proposta4/techniques/" class="hover:text-white transition-colors">Techniques</a></li>
-                    <li><a href="/transpersonaltraining/preview-proposta4/transpersonal_therapy/" class="hover:text-white transition-colors">Transpersonal Therapy</a></li>
-                    <li><a href="/transpersonaltraining/preview-proposta4/what-is-transpersonal-psychology/" class="hover:text-white transition-colors">What is Transpersonal Psychology</a></li>
-                    <li><a href="/transpersonaltraining/preview-proposta4/become-a-client-model/" class="hover:text-white transition-colors">Become a Client Model</a></li>
+                    <li><a href="/transpersonaltraining/preview-proposta4/techniques/" class="hover:text-[#C9A45C] transition-colors">Techniques</a></li>
+                    <li><a href="/transpersonaltraining/preview-proposta4/transpersonal_therapy/" class="hover:text-[#C9A45C] transition-colors">Transpersonal Therapy</a></li>
+                    <li><a href="/transpersonaltraining/preview-proposta4/what-is-transpersonal-psychology/" class="hover:text-[#C9A45C] transition-colors">What is Transpersonal Psychology</a></li>
+                    <li><a href="/transpersonaltraining/preview-proposta4/become-a-client-model/" class="hover:text-[#C9A45C] transition-colors">Become a Client Model</a></li>
                 </ul>
             </div>
 
             <!-- Contact -->
             <div>
-                <h4 class="text-white font-semibold mb-4">Connect</h4>
+                <h4 class="p4-kicker text-[#C9A45C] mb-5">Connect</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="#contact" class="hover:text-white transition-colors">Contact Us</a></li>
-                    <li><a href="https://transpersonal-training.com" class="hover:text-white transition-colors">Main Website</a></li>
-                    <li><a href="https://transpersonal-training.com/?page_id=3" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                    <li><a href="#contact" class="hover:text-[#C9A45C] transition-colors">Contact Us</a></li>
+                    <li><a href="https://transpersonal-training.com" class="hover:text-[#C9A45C] transition-colors">Main Website</a></li>
+                    <li><a href="https://transpersonal-training.com/?page_id=3" class="hover:text-[#C9A45C] transition-colors">Privacy Policy</a></li>
                 </ul>
             </div>
         </div>
 
         <!-- Bottom Bar -->
-        <div class="flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
+        <div class="flex flex-col md:flex-row justify-between items-center text-xs text-[#7185A0]">
             <p>&copy; 2026 transpersonal-training.com — Educating therapists for a revolution of consciousness.</p>
             <div class="flex gap-6 mt-4 md:mt-0">
-                <a href="https://transpersonal-training.com/?page_id=3" class="hover:text-slate-300">Privacy</a>
-                <a href="https://transpersonal-training.com/agreement-appendix" class="hover:text-slate-300">Agreement</a>
+                <a href="https://transpersonal-training.com/?page_id=3" class="hover:text-[#C9A45C]">Privacy</a>
+                <a href="https://transpersonal-training.com/agreement-appendix" class="hover:text-[#C9A45C]">Agreement</a>
             </div>
         </div>
     </div>

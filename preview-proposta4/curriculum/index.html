@@ -58,8 +58,8 @@
         .loader-spinner {
             width: 50px;
             height: 50px;
-            border: 4px solid rgba(102, 126, 234, 0.2);
-            border-top-color: #667eea;
+            border: 4px solid rgba(201, 164, 92, 0.25);
+            border-top-color: #C9A45C;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
@@ -87,8 +87,8 @@
     <!-- Fonts (preconnect and async load) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet"></noscript>
     
     <!-- Lucide Icons (defer loading) -->
     <script src="https://unpkg.com/lucide@0.344.0" defer></script>
@@ -243,15 +243,17 @@
                 class="w-full h-full object-cover"
             />
         </picture>
-        <div class="absolute inset-0 bg-gradient-to-b from-science-blue-900/70 via-science-blue-800/50 to-neutral-warm-50"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/85 via-[#0F2540]/45 to-neutral-warm-50"></div>
     </div>
 
     <div class="relative z-10 container mx-auto px-6 text-center pt-20">
         <div class="animate-fade-in-up">
-            <span class="inline-block py-1 px-3 rounded-full bg-white/10 text-warm-yellow-200 backdrop-blur-md border border-white/20 text-sm font-medium mb-6 tracking-wider uppercase">
-                3 Levels • 15 Modules
-            </span>
-            <h1 class="text-3xl md:text-5xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-lg">
+            <p class="p4-kicker text-[#C9A45C] mb-6 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
+                3 Levels &middot; 15 Modules
+                <span class="p4-hairline"></span>
+            </p>
+            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] mb-6 leading-tight drop-shadow-md">
                 Curriculum
             </h1>
             <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
@@ -277,15 +279,16 @@
 <!-- Our Hero Journey Section -->
 <section class="py-16 bg-white relative overflow-x-clip">
     <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-5 pointer-events-none">
-        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-accent-teal-400 blur-3xl"></div>
+        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#C9A45C] blur-3xl"></div>
     </div>
     <div class="container mx-auto px-6 relative z-10">
         <div class="max-w-4xl mx-auto">
-            <div class="flex items-center gap-3 mb-8">
-                <div class="bg-amber-500 text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-md">
-                    <i data-lucide="route" class="w-6 h-6"></i>
-                </div>
-                <h2 class="text-2xl md:text-3xl font-serif font-bold text-slate-800">Our Hero Journey</h2>
+            <div class="mb-8">
+                <p class="p4-kicker text-[#9A7734] mb-3 flex items-center gap-4">
+                    <span class="p4-hairline"></span>
+                    The path
+                </p>
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540]">Our Hero Journey</h2>
             </div>
 
             <div class="curriculum-vine-wrapper" id="curriculumWrapper">
@@ -305,16 +308,10 @@
                     
                     
                     
-                        
-                        
-                        
-                        
-                        
-                    
-                    <div class="bg-white/25 backdrop-blur-sm rounded-xl border border-slate-200/40 shadow-sm overflow-hidden">
+                    <div class="bg-white/25 backdrop-blur-sm border border-slate-200/40 shadow-sm overflow-hidden">
                         <div class="level-toggle flex items-center gap-4 p-6 cursor-pointer" onclick="toggleLevel('level1')">
-                            <div class="bg-accent-teal-500 text-white w-12 h-12 min-w-[3rem] rounded-full flex items-center justify-center shadow-md flex-shrink-0">
-                                <i data-lucide="sprout" class="w-6 h-6"></i>
+                            <div class="w-12 h-12 min-w-[3rem] border border-[#C9A45C] flex items-center justify-center flex-shrink-0">
+                                <span class="p4-display text-2xl font-medium text-[#9A7734] leading-none">I</span>
                             </div>
                             <div class="flex-1">
                                 <h3 class="font-serif font-bold text-black text-lg md:text-xl leading-tight flex items-baseline gap-2">
@@ -324,15 +321,15 @@
                                 </h3>
                             </div>
                             <div class="flex items-center gap-3 flex-shrink-0">
-                                <span class="module-count bg-accent-teal-100 text-accent-teal-700 hidden sm:inline-block">4 modules</span>
-                                <i data-lucide="chevron-down" class="w-5 h-5 text-accent-teal-500 toggle-icon rotated" id="level1-icon"></i>
+                                <span class="module-count bg-[#0F2540]/5 text-[#0F2540] hidden sm:inline-block">4 modules</span>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-[#9A7734] toggle-icon rotated" id="level1-icon"></i>
                             </div>
                         </div>
                         <div class="level-content expanded" id="level1">
                             <div class="px-6 pb-6">
                                 <div class="space-y-6">
                                     
-                                    <div class="level-card bg-neutral-warm-50 rounded-lg p-4 border border-dashed border-slate-300">
+                                    <div class="level-card bg-neutral-warm-50 p-4 border border-dashed border-slate-300">
                                         <h4 class="font-serif font-bold text-slate-800 text-sm mb-3 flex items-center gap-2">
                                             <i data-lucide="book-open" class="w-4 h-4 text-slate-600"></i>
                                             <span>Lessons</span>
@@ -355,13 +352,13 @@
                                                 
                                                 <div class="mt-3 flex flex-wrap gap-2 text-xs">
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="clock-3" class="w-3.5 h-3.5"></i>
                                                         20
                                                     </span>
                                                     
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
                                                         Weekly Online (2 hrs)
                                                     </span>
@@ -374,7 +371,7 @@
                                                     <div class="space-y-3">
                                                         
                                                         
-                                                        <div class="rounded-md border border-slate-200 bg-white/70 overflow-hidden">
+                                                        <div class="border border-slate-200 bg-white/70 overflow-hidden">
                                                             <button
                                                                 type="button"
                                                                 class="submodule-toggle w-full flex items-center justify-between gap-3 px-4 py-3 text-left"
@@ -432,13 +429,13 @@
                                                 
                                                 <div class="mt-3 flex flex-wrap gap-2 text-xs">
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="clock-3" class="w-3.5 h-3.5"></i>
                                                         20
                                                     </span>
                                                     
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
                                                         Weekly Online (2 hrs)
                                                     </span>
@@ -451,7 +448,7 @@
                                                     <div class="space-y-3">
                                                         
                                                         
-                                                        <div class="rounded-md border border-slate-200 bg-white/70 overflow-hidden">
+                                                        <div class="border border-slate-200 bg-white/70 overflow-hidden">
                                                             <button
                                                                 type="button"
                                                                 class="submodule-toggle w-full flex items-center justify-between gap-3 px-4 py-3 text-left"
@@ -513,13 +510,13 @@
                                                 
                                                 <div class="mt-3 flex flex-wrap gap-2 text-xs">
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="clock-3" class="w-3.5 h-3.5"></i>
                                                         20
                                                     </span>
                                                     
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
                                                         Weekly Online (2 hrs)
                                                     </span>
@@ -532,7 +529,7 @@
                                                     <div class="space-y-3">
                                                         
                                                         
-                                                        <div class="rounded-md border border-slate-200 bg-white/70 overflow-hidden">
+                                                        <div class="border border-slate-200 bg-white/70 overflow-hidden">
                                                             <button
                                                                 type="button"
                                                                 class="submodule-toggle w-full flex items-center justify-between gap-3 px-4 py-3 text-left"
@@ -598,13 +595,13 @@
                                                 
                                                 <div class="mt-3 flex flex-wrap gap-2 text-xs">
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="clock-3" class="w-3.5 h-3.5"></i>
                                                         20
                                                     </span>
                                                     
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
                                                         Weekly Online (2 hrs)
                                                     </span>
@@ -617,7 +614,7 @@
                                                     <div class="space-y-3">
                                                         
                                                         
-                                                        <div class="rounded-md border border-slate-200 bg-white/70 overflow-hidden">
+                                                        <div class="border border-slate-200 bg-white/70 overflow-hidden">
                                                             <button
                                                                 type="button"
                                                                 class="submodule-toggle w-full flex items-center justify-between gap-3 px-4 py-3 text-left"
@@ -668,7 +665,7 @@
                                     
 
                                     
-                                    <div class="level-card bg-neutral-warm-50 rounded-lg p-4 border border-dashed border-slate-300">
+                                    <div class="level-card bg-neutral-warm-50 p-4 border border-dashed border-slate-300">
                                         <div class="mb-4">
                                             <h4 class="font-serif font-bold text-black text-base md:text-lg leading-tight flex items-baseline gap-2 flex-wrap">
                                                 <i data-lucide="person-standing" class="w-5 h-5 text-black"></i>
@@ -677,28 +674,28 @@
                                         </div>
                                         <div class="grid gap-2 sm:grid-cols-2">
                                             
-                                            <div class="rounded-md bg-white/70 p-2.5">
+                                            <div class="bg-white/70 p-2.5">
                                                 <p class="text-xs font-semibold text-slate-700 leading-snug">Peer Discussion of lessons and homeworks</p>
                                                 
                                                 <p class="text-xs text-gray-600 mt-1 leading-snug">Monthly Online (2 hrs)</p>
                                                 
                                             </div>
                                             
-                                            <div class="rounded-md bg-white/70 p-2.5">
+                                            <div class="bg-white/70 p-2.5">
                                                 <p class="text-xs font-semibold text-slate-700 leading-snug">Introductory breathwork with grounded physiological understanding</p>
                                                 
                                                 <p class="text-xs text-gray-600 mt-1 leading-snug">4 Residentials (Thurs-Sun)</p>
                                                 
                                             </div>
                                             
-                                            <div class="rounded-md bg-white/70 p-2.5">
+                                            <div class="bg-white/70 p-2.5">
                                                 <p class="text-xs font-semibold text-slate-700 leading-snug">Personal Exploration &amp; Foundational Grounding</p>
                                                 
                                                 <p class="text-xs text-gray-600 mt-1 leading-snug">1:1 Sessions</p>
                                                 
                                             </div>
                                             
-                                            <div class="rounded-md bg-white/70 p-2.5">
+                                            <div class="bg-white/70 p-2.5">
                                                 <p class="text-xs font-semibold text-slate-700 leading-snug">Daily practice (20 mins daily breathwork, meditation, etc.)</p>
                                                 
                                                 <p class="text-xs text-gray-600 mt-1 leading-snug">Self Practice</p>
@@ -710,7 +707,7 @@
                                     
 
                                     
-                                    <div class="level-card bg-neutral-warm-50 rounded-lg p-4 border border-dashed border-slate-300">
+                                    <div class="level-card bg-neutral-warm-50 p-4 border border-dashed border-slate-300">
                                         <div class="mb-4">
                                             <h4 class="font-serif font-bold text-black text-base md:text-lg leading-tight flex items-baseline gap-2 flex-wrap">
                                                 <i data-lucide="clipboard-check" class="w-5 h-5 text-black"></i>
@@ -720,7 +717,7 @@
                                         <div class="space-y-2">
                                             
                                             <div class="rounded-md bg-white/70 p-2.5 flex items-start gap-2.5">
-                                                <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-slate-200 text-slate-600 flex-shrink-0">
+                                                <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#C9A45C]/20 text-[#9A7734] flex-shrink-0">
                                                     <i data-lucide="check" class="w-3.5 h-3.5"></i>
                                                 </span>
                                                 <div>
@@ -740,17 +737,10 @@
                     </div>
                     
                     
-                    
-                        
-                        
-                        
-                        
-                        
-                    
-                    <div class="bg-white/25 backdrop-blur-sm rounded-xl border border-slate-200/40 shadow-sm overflow-hidden">
+                    <div class="bg-white/25 backdrop-blur-sm border border-slate-200/40 shadow-sm overflow-hidden">
                         <div class="level-toggle flex items-center gap-4 p-6 cursor-pointer" onclick="toggleLevel('level2')">
-                            <div class="bg-science-blue-600 text-white w-12 h-12 min-w-[3rem] rounded-full flex items-center justify-center shadow-md flex-shrink-0">
-                                <i data-lucide="users" class="w-6 h-6"></i>
+                            <div class="w-12 h-12 min-w-[3rem] border border-[#C9A45C] flex items-center justify-center flex-shrink-0">
+                                <span class="p4-display text-2xl font-medium text-[#9A7734] leading-none">II</span>
                             </div>
                             <div class="flex-1">
                                 <h3 class="font-serif font-bold text-black text-lg md:text-xl leading-tight flex items-baseline gap-2">
@@ -760,15 +750,15 @@
                                 </h3>
                             </div>
                             <div class="flex items-center gap-3 flex-shrink-0">
-                                <span class="module-count bg-science-blue-100 text-science-blue-700 hidden sm:inline-block">6 modules</span>
-                                <i data-lucide="chevron-down" class="w-5 h-5 text-science-blue-500 toggle-icon" id="level2-icon"></i>
+                                <span class="module-count bg-[#0F2540]/5 text-[#0F2540] hidden sm:inline-block">6 modules</span>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-[#9A7734] toggle-icon" id="level2-icon"></i>
                             </div>
                         </div>
                         <div class="level-content" id="level2">
                             <div class="px-6 pb-6">
                                 <div class="space-y-6">
                                     
-                                    <div class="level-card bg-neutral-warm-50 rounded-lg p-4 border border-dashed border-slate-300">
+                                    <div class="level-card bg-neutral-warm-50 p-4 border border-dashed border-slate-300">
                                         <h4 class="font-serif font-bold text-slate-800 text-sm mb-3 flex items-center gap-2">
                                             <i data-lucide="book-open" class="w-4 h-4 text-slate-600"></i>
                                             <span>Lessons</span>
@@ -791,13 +781,13 @@
                                                 
                                                 <div class="mt-3 flex flex-wrap gap-2 text-xs">
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="clock-3" class="w-3.5 h-3.5"></i>
                                                         20
                                                     </span>
                                                     
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
                                                         Weekly Online (2 hrs)
                                                     </span>
@@ -810,7 +800,7 @@
                                                     <div class="space-y-3">
                                                         
                                                         
-                                                        <div class="rounded-md border border-slate-200 bg-white/70 overflow-hidden">
+                                                        <div class="border border-slate-200 bg-white/70 overflow-hidden">
                                                             <button
                                                                 type="button"
                                                                 class="submodule-toggle w-full flex items-center justify-between gap-3 px-4 py-3 text-left"
@@ -862,13 +852,13 @@
                                                 
                                                 <div class="mt-3 flex flex-wrap gap-2 text-xs">
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="clock-3" class="w-3.5 h-3.5"></i>
                                                         20
                                                     </span>
                                                     
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
                                                         Weekly Online (2 hrs)
                                                     </span>
@@ -881,7 +871,7 @@
                                                     <div class="space-y-3">
                                                         
                                                         
-                                                        <div class="rounded-md border border-slate-200 bg-white/70 overflow-hidden">
+                                                        <div class="border border-slate-200 bg-white/70 overflow-hidden">
                                                             <button
                                                                 type="button"
                                                                 class="submodule-toggle w-full flex items-center justify-between gap-3 px-4 py-3 text-left"
@@ -921,13 +911,13 @@
                                                 
                                                 <div class="mt-3 flex flex-wrap gap-2 text-xs">
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="clock-3" class="w-3.5 h-3.5"></i>
                                                         20
                                                     </span>
                                                     
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
                                                         Weekly Online (2 hrs)
                                                     </span>
@@ -956,13 +946,13 @@
                                                 
                                                 <div class="mt-3 flex flex-wrap gap-2 text-xs">
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="clock-3" class="w-3.5 h-3.5"></i>
                                                         20
                                                     </span>
                                                     
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
                                                         Weekly Online (2 hrs)
                                                     </span>
@@ -991,13 +981,13 @@
                                                 
                                                 <div class="mt-3 flex flex-wrap gap-2 text-xs">
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="clock-3" class="w-3.5 h-3.5"></i>
                                                         20
                                                     </span>
                                                     
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
                                                         Weekly Online (2 hrs)
                                                     </span>
@@ -1026,13 +1016,13 @@
                                                 
                                                 <div class="mt-3 flex flex-wrap gap-2 text-xs">
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="clock-3" class="w-3.5 h-3.5"></i>
                                                         20
                                                     </span>
                                                     
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
                                                         Weekly Online (2 hrs)
                                                     </span>
@@ -1050,7 +1040,7 @@
                                     
 
                                     
-                                    <div class="level-card bg-neutral-warm-50 rounded-lg p-4 border border-dashed border-slate-300">
+                                    <div class="level-card bg-neutral-warm-50 p-4 border border-dashed border-slate-300">
                                         <div class="mb-4">
                                             <h4 class="font-serif font-bold text-black text-base md:text-lg leading-tight flex items-baseline gap-2 flex-wrap">
                                                 <i data-lucide="person-standing" class="w-5 h-5 text-black"></i>
@@ -1059,35 +1049,35 @@
                                         </div>
                                         <div class="grid gap-2 sm:grid-cols-2">
                                             
-                                            <div class="rounded-md bg-white/70 p-2.5">
+                                            <div class="bg-white/70 p-2.5">
                                                 <p class="text-xs font-semibold text-slate-700 leading-snug">Deepening Personal Process &amp; Shadow Work</p>
                                                 
                                                 <p class="text-xs text-gray-600 mt-1 leading-snug">6 Residentials (Thurs-Sun)</p>
                                                 
                                             </div>
                                             
-                                            <div class="rounded-md bg-white/70 p-2.5">
+                                            <div class="bg-white/70 p-2.5">
                                                 <p class="text-xs font-semibold text-slate-700 leading-snug">Deepening Personal Process &amp; Shadow Work</p>
                                                 
                                                 <p class="text-xs text-gray-600 mt-1 leading-snug">1:1 Sessions</p>
                                                 
                                             </div>
                                             
-                                            <div class="rounded-md bg-white/70 p-2.5">
+                                            <div class="bg-white/70 p-2.5">
                                                 <p class="text-xs font-semibold text-slate-700 leading-snug">Peer Group Meetings &amp; Early Case Discussions and homeworks</p>
                                                 
                                                 <p class="text-xs text-gray-600 mt-1 leading-snug">Bi-Weekly Online (2 hrs)</p>
                                                 
                                             </div>
                                             
-                                            <div class="rounded-md bg-white/70 p-2.5">
+                                            <div class="bg-white/70 p-2.5">
                                                 <p class="text-xs font-semibold text-slate-700 leading-snug">Transpersonal Counselling Practice (with models/L1 students)</p>
                                                 
                                                 <p class="text-xs text-gray-600 mt-1 leading-snug">1:1 Sessions w/ Clients</p>
                                                 
                                             </div>
                                             
-                                            <div class="rounded-md bg-white/70 p-2.5">
+                                            <div class="bg-white/70 p-2.5">
                                                 <p class="text-xs font-semibold text-slate-700 leading-snug">Clinical Supervision for Counselling Practice</p>
                                                 
                                                 <p class="text-xs text-gray-600 mt-1 leading-snug">1:1 or Group Sessions</p>
@@ -1099,7 +1089,7 @@
                                     
 
                                     
-                                    <div class="level-card bg-neutral-warm-50 rounded-lg p-4 border border-dashed border-slate-300">
+                                    <div class="level-card bg-neutral-warm-50 p-4 border border-dashed border-slate-300">
                                         <div class="mb-4">
                                             <h4 class="font-serif font-bold text-black text-base md:text-lg leading-tight flex items-baseline gap-2 flex-wrap">
                                                 <i data-lucide="clipboard-check" class="w-5 h-5 text-black"></i>
@@ -1109,7 +1099,7 @@
                                         <div class="space-y-2">
                                             
                                             <div class="rounded-md bg-white/70 p-2.5 flex items-start gap-2.5">
-                                                <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-slate-200 text-slate-600 flex-shrink-0">
+                                                <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#C9A45C]/20 text-[#9A7734] flex-shrink-0">
                                                     <i data-lucide="check" class="w-3.5 h-3.5"></i>
                                                 </span>
                                                 <div>
@@ -1129,17 +1119,10 @@
                     </div>
                     
                     
-                    
-                        
-                        
-                        
-                        
-                        
-                    
-                    <div class="bg-white/25 backdrop-blur-sm rounded-xl border border-slate-200/40 shadow-sm overflow-hidden">
+                    <div class="bg-white/25 backdrop-blur-sm border border-slate-200/40 shadow-sm overflow-hidden">
                         <div class="level-toggle flex items-center gap-4 p-6 cursor-pointer" onclick="toggleLevel('level3')">
-                            <div class="bg-amber-500 text-white w-12 h-12 min-w-[3rem] rounded-full flex items-center justify-center shadow-md flex-shrink-0">
-                                <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                            <div class="w-12 h-12 min-w-[3rem] border border-[#C9A45C] flex items-center justify-center flex-shrink-0">
+                                <span class="p4-display text-2xl font-medium text-[#9A7734] leading-none">III</span>
                             </div>
                             <div class="flex-1">
                                 <h3 class="font-serif font-bold text-black text-lg md:text-xl leading-tight flex items-baseline gap-2">
@@ -1149,15 +1132,15 @@
                                 </h3>
                             </div>
                             <div class="flex items-center gap-3 flex-shrink-0">
-                                <span class="module-count bg-amber-100 text-amber-700 hidden sm:inline-block">5 modules</span>
-                                <i data-lucide="chevron-down" class="w-5 h-5 text-amber-500 toggle-icon" id="level3-icon"></i>
+                                <span class="module-count bg-[#0F2540]/5 text-[#0F2540] hidden sm:inline-block">5 modules</span>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-[#9A7734] toggle-icon" id="level3-icon"></i>
                             </div>
                         </div>
                         <div class="level-content" id="level3">
                             <div class="px-6 pb-6">
                                 <div class="space-y-6">
                                     
-                                    <div class="level-card bg-neutral-warm-50 rounded-lg p-4 border border-dashed border-slate-300">
+                                    <div class="level-card bg-neutral-warm-50 p-4 border border-dashed border-slate-300">
                                         <h4 class="font-serif font-bold text-slate-800 text-sm mb-3 flex items-center gap-2">
                                             <i data-lucide="book-open" class="w-4 h-4 text-slate-600"></i>
                                             <span>Lessons</span>
@@ -1180,13 +1163,13 @@
                                                 
                                                 <div class="mt-3 flex flex-wrap gap-2 text-xs">
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="clock-3" class="w-3.5 h-3.5"></i>
                                                         20
                                                     </span>
                                                     
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
                                                         Weekly Online (2 hrs)
                                                     </span>
@@ -1215,13 +1198,13 @@
                                                 
                                                 <div class="mt-3 flex flex-wrap gap-2 text-xs">
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="clock-3" class="w-3.5 h-3.5"></i>
                                                         20
                                                     </span>
                                                     
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
                                                         Weekly Online (2 hrs)
                                                     </span>
@@ -1250,13 +1233,13 @@
                                                 
                                                 <div class="mt-3 flex flex-wrap gap-2 text-xs">
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="clock-3" class="w-3.5 h-3.5"></i>
                                                         20
                                                     </span>
                                                     
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
                                                         Weekly Online (2 hrs)
                                                     </span>
@@ -1285,13 +1268,13 @@
                                                 
                                                 <div class="mt-3 flex flex-wrap gap-2 text-xs">
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="clock-3" class="w-3.5 h-3.5"></i>
                                                         20
                                                     </span>
                                                     
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
                                                         Weekly Online (2 hrs)
                                                     </span>
@@ -1318,13 +1301,13 @@
                                                 
                                                 <div class="mt-3 flex flex-wrap gap-2 text-xs">
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="clock-3" class="w-3.5 h-3.5"></i>
                                                         580
                                                     </span>
                                                     
                                                     
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-200 text-black font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
                                                         <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
                                                         Clinical Environment
                                                     </span>
@@ -1342,7 +1325,7 @@
                                     
 
                                     
-                                    <div class="level-card bg-neutral-warm-50 rounded-lg p-4 border border-dashed border-slate-300">
+                                    <div class="level-card bg-neutral-warm-50 p-4 border border-dashed border-slate-300">
                                         <div class="mb-4">
                                             <h4 class="font-serif font-bold text-black text-base md:text-lg leading-tight flex items-baseline gap-2 flex-wrap">
                                                 <i data-lucide="person-standing" class="w-5 h-5 text-black"></i>
@@ -1351,35 +1334,35 @@
                                         </div>
                                         <div class="grid gap-2 sm:grid-cols-2">
                                             
-                                            <div class="rounded-md bg-white/70 p-2.5">
+                                            <div class="bg-white/70 p-2.5">
                                                 <p class="text-xs font-semibold text-slate-700 leading-snug">Hypnotherapy, Trauma Integration &amp; Systemic Work</p>
                                                 
                                                 <p class="text-xs text-gray-600 mt-1 leading-snug">6 Residentials (Thurs-Sun)</p>
                                                 
                                             </div>
                                             
-                                            <div class="rounded-md bg-white/70 p-2.5">
+                                            <div class="bg-white/70 p-2.5">
                                                 <p class="text-xs font-semibold text-slate-700 leading-snug">Peer Group Meetings &amp; Advanced Clinical Presentations</p>
                                                 
                                                 <p class="text-xs text-gray-600 mt-1 leading-snug">Bi-Weekly Online (2 hrs)</p>
                                                 
                                             </div>
                                             
-                                            <div class="rounded-md bg-white/70 p-2.5">
+                                            <div class="bg-white/70 p-2.5">
                                                 <p class="text-xs font-semibold text-slate-700 leading-snug">Advanced Clinical Supervision</p>
                                                 
                                                 <p class="text-xs text-gray-600 mt-1 leading-snug">1:1 or Group Sessions</p>
                                                 
                                             </div>
                                             
-                                            <div class="rounded-md bg-white/70 p-2.5">
+                                            <div class="bg-white/70 p-2.5">
                                                 <p class="text-xs font-semibold text-slate-700 leading-snug">Final Integration &amp; Identity Transformation</p>
                                                 
                                                 <p class="text-xs text-gray-600 mt-1 leading-snug">1:1 Sessions</p>
                                                 
                                             </div>
                                             
-                                            <div class="rounded-md bg-white/70 p-2.5">
+                                            <div class="bg-white/70 p-2.5">
                                                 <p class="text-xs font-semibold text-slate-700 leading-snug">Advanced Psychotherapy Practice</p>
                                                 
                                                 <p class="text-xs text-gray-600 mt-1 leading-snug">1:1 Sessions w/ Clients</p>
@@ -1405,15 +1388,20 @@
 </section>
 
 <!-- CTA Section -->
-<section class="bg-contact-iris-600 text-white py-16">
+<section class="bg-gradient-to-br from-[#0F2540] to-[#12305A] text-white py-16">
     <div class="container mx-auto px-6 text-center">
-        <h3 class="text-2xl font-serif font-bold mb-4">Ready to begin?</h3>
-        <p class="text-white/80 max-w-2xl mx-auto mb-8">Explore our training overview or get in touch to find the right entry point for you.</p>
+        <p class="p4-kicker text-[#C9A45C] mb-4 flex items-center justify-center gap-4">
+            <span class="p4-hairline"></span>
+            Next step
+            <span class="p4-hairline"></span>
+        </p>
+        <h3 class="p4-display text-3xl md:text-4xl font-medium mb-4 text-[#FDFBF5]">Ready to begin?</h3>
+        <p class="text-[#E9EDF2]/80 max-w-2xl mx-auto mb-8">Explore our training overview or get in touch to find the right entry point for you.</p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="training-overview.html" class="inline-block bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 rounded-full font-bold transition-transform hover:scale-105 shadow-lg">
+            <a href="training-overview.html" class="inline-block bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-8 py-3 font-medium tracking-wide transition-all shadow-lg hover:shadow-xl">
                 Training Overview
             </a>
-            <a href="#contact" class="inline-block bg-white/10 hover:bg-white/20 text-white px-8 py-3 rounded-full font-bold transition-all border border-white/30">
+            <a href="#contact" class="inline-block border border-[#FDFBF5]/60 hover:border-[#C9A45C] text-[#FDFBF5] hover:text-[#C9A45C] px-8 py-3 font-medium tracking-wide transition-all">
                 Talk to Admissions
             </a>
         </div>
@@ -1707,62 +1695,62 @@ function toggleSubModule(id) {
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-300 py-16">
+    <footer class="bg-[#0B1B30] text-[#B9C4D2] py-16">
     <div class="container mx-auto px-6">
-        <div class="grid md:grid-cols-4 gap-12 border-b border-slate-800 pb-12 mb-12">
+        <div class="grid md:grid-cols-4 gap-12 border-b border-white/10 pb-12 mb-12">
             <!-- About Column -->
             <div>
                 <div class="flex items-center gap-2 mb-4">
-                    <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center">
-                        <i data-lucide="loader-pinwheel" class="text-white w-6 h-6"></i>
+                    <div class="w-10 h-10 flex items-center justify-center bg-[#C9A45C] rounded-full">
+                        <img src="/transpersonaltraining/preview-proposta4/assets/images/Graphics/logo.svg" alt="Logo" class="w-8 h-8" style="display:block;" />
                     </div>
-                    <h3 class="text-white font-bold text-lg">Transpersonal Training</h3>
+                    <h3 class="p4-display text-white font-semibold text-xl tracking-wide">Transpersonal Training</h3>
                 </div>
-                <p class="text-sm leading-relaxed text-slate-400">
+                <p class="text-sm leading-relaxed text-[#8FA0B3]">
                     Educating therapists for a revolution of consciousness through transpersonal psychotherapy and breathwork.
                 </p>
             </div>
 
             <!-- Quick Links -->
             <div>
-                <h4 class="text-white font-semibold mb-4">Training</h4>
+                <h4 class="p4-kicker text-[#C9A45C] mb-5">Training</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="/transpersonaltraining/preview-proposta4/training-overview/" class="hover:text-white transition-colors">Training Overview</a></li>
-                    <li><a href="/transpersonaltraining/preview-proposta4/curriculum/" class="hover:text-white transition-colors">Curriculum</a></li>
-                    <li><a href="/transpersonaltraining/preview-proposta4/schedule/" class="hover:text-white transition-colors">Intensive Schedule</a></li>
-                    <li><a href="/transpersonaltraining/preview-proposta4/lectures-schedule/" class="hover:text-white transition-colors">Lectures Schedule</a></li>
-                    <li><a href="/transpersonaltraining/preview-proposta4/teachers/" class="hover:text-white transition-colors">Our Teachers</a></li>
+                    <li><a href="/transpersonaltraining/preview-proposta4/training-overview/" class="hover:text-[#C9A45C] transition-colors">Training Overview</a></li>
+                    <li><a href="/transpersonaltraining/preview-proposta4/curriculum/" class="hover:text-[#C9A45C] transition-colors">Curriculum</a></li>
+                    <li><a href="/transpersonaltraining/preview-proposta4/schedule/" class="hover:text-[#C9A45C] transition-colors">Intensive Schedule</a></li>
+                    <li><a href="/transpersonaltraining/preview-proposta4/lectures-schedule/" class="hover:text-[#C9A45C] transition-colors">Lectures Schedule</a></li>
+                    <li><a href="/transpersonaltraining/preview-proposta4/teachers/" class="hover:text-[#C9A45C] transition-colors">Our Teachers</a></li>
                 </ul>
             </div>
 
             <!-- Resources -->
             <div>
-                <h4 class="text-white font-semibold mb-4">Resources</h4>
+                <h4 class="p4-kicker text-[#C9A45C] mb-5">Resources</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="/transpersonaltraining/preview-proposta4/techniques/" class="hover:text-white transition-colors">Techniques</a></li>
-                    <li><a href="/transpersonaltraining/preview-proposta4/transpersonal_therapy/" class="hover:text-white transition-colors">Transpersonal Therapy</a></li>
-                    <li><a href="/transpersonaltraining/preview-proposta4/what-is-transpersonal-psychology/" class="hover:text-white transition-colors">What is Transpersonal Psychology</a></li>
-                    <li><a href="/transpersonaltraining/preview-proposta4/become-a-client-model/" class="hover:text-white transition-colors">Become a Client Model</a></li>
+                    <li><a href="/transpersonaltraining/preview-proposta4/techniques/" class="hover:text-[#C9A45C] transition-colors">Techniques</a></li>
+                    <li><a href="/transpersonaltraining/preview-proposta4/transpersonal_therapy/" class="hover:text-[#C9A45C] transition-colors">Transpersonal Therapy</a></li>
+                    <li><a href="/transpersonaltraining/preview-proposta4/what-is-transpersonal-psychology/" class="hover:text-[#C9A45C] transition-colors">What is Transpersonal Psychology</a></li>
+                    <li><a href="/transpersonaltraining/preview-proposta4/become-a-client-model/" class="hover:text-[#C9A45C] transition-colors">Become a Client Model</a></li>
                 </ul>
             </div>
 
             <!-- Contact -->
             <div>
-                <h4 class="text-white font-semibold mb-4">Connect</h4>
+                <h4 class="p4-kicker text-[#C9A45C] mb-5">Connect</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="#contact" class="hover:text-white transition-colors">Contact Us</a></li>
-                    <li><a href="https://transpersonal-training.com" class="hover:text-white transition-colors">Main Website</a></li>
-                    <li><a href="https://transpersonal-training.com/?page_id=3" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                    <li><a href="#contact" class="hover:text-[#C9A45C] transition-colors">Contact Us</a></li>
+                    <li><a href="https://transpersonal-training.com" class="hover:text-[#C9A45C] transition-colors">Main Website</a></li>
+                    <li><a href="https://transpersonal-training.com/?page_id=3" class="hover:text-[#C9A45C] transition-colors">Privacy Policy</a></li>
                 </ul>
             </div>
         </div>
 
         <!-- Bottom Bar -->
-        <div class="flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
+        <div class="flex flex-col md:flex-row justify-between items-center text-xs text-[#7185A0]">
             <p>&copy; 2026 transpersonal-training.com — Educating therapists for a revolution of consciousness.</p>
             <div class="flex gap-6 mt-4 md:mt-0">
-                <a href="https://transpersonal-training.com/?page_id=3" class="hover:text-slate-300">Privacy</a>
-                <a href="https://transpersonal-training.com/agreement-appendix" class="hover:text-slate-300">Agreement</a>
+                <a href="https://transpersonal-training.com/?page_id=3" class="hover:text-[#C9A45C]">Privacy</a>
+                <a href="https://transpersonal-training.com/agreement-appendix" class="hover:text-[#C9A45C]">Agreement</a>
             </div>
         </div>
     </div>
