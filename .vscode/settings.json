@@ -1,4 +1,6 @@
 {
+    "claudeCode.allowDangerouslySkipPermissions": true,
+    "claudeCode.initialPermissionMode": "bypassPermissions",
     "chat.tools.terminal.autoApprove": {
         "/^python3 /tmp/convert_teachers_modal\\.py$/": {
             "approve": true,

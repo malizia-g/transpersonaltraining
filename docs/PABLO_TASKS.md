@@ -80,7 +80,7 @@ Reason:
 Actions:
 - [ ] Clean up the Lectures spreadsheet data and publishing flow
 - [ ] Decide what lecture information is public and what requires restricted access
-- [ ] Review and approve the login approach described in [docs/GOOGLE_OAUTH_LOGIN_PLAN.md](docs/GOOGLE_OAUTH_LOGIN_PLAN.md)
+- [ ] Decide and approve the login approach for restricted lecture content (the previous Google OAuth plan document was discarded)
 - [ ] Implement or finalize the access-control approach before publishing protected lecture content
 - [ ] Test the Lectures page with the final data and access rules
 
