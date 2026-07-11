@@ -21,7 +21,7 @@ layout: base.njk
 
       <div class="mb-8 flex flex-wrap items-start gap-4 sm:flex-nowrap sm:gap-6">
         {% if image %}
-        <figure class="w-20 h-20 sm:w-32 sm:h-32 flex-shrink-0 overflow-hidden rounded-2xl shadow-md">
+        <figure class="w-20 h-20 sm:w-32 sm:h-32 flex-shrink-0 overflow-hidden shadow-md">
           <img src="{{ image | blogImage | url }}" alt="{{ title }}" class="w-full h-full object-cover" loading="lazy" />
         </figure>
         {% endif %}
@@ -52,9 +52,9 @@ layout: base.njk
       {% endif %}
 
       {% if sourceUrl %}
-      <div class="mb-8 flex items-center gap-2 text-sm text-neutral-warm-600 bg-neutral-warm-50 border border-neutral-warm-200 rounded-lg px-4 py-3">
-        <i data-lucide="external-link" class="w-4 h-4 flex-shrink-0 text-amber-600"></i>
-        <span>Originally published on <a href="{{ sourceUrl }}" target="_blank" rel="noopener noreferrer" class="text-amber-700 hover:text-amber-800 font-medium underline underline-offset-2 transition-colors">{{ source if source else sourceUrl }}</a></span>
+      <div class="mb-8 flex items-center gap-2 text-sm text-neutral-warm-600 bg-neutral-warm-50 border border-neutral-warm-200 px-4 py-3">
+        <i data-lucide="external-link" class="w-4 h-4 flex-shrink-0 text-[#9A7734]"></i>
+        <span>Originally published on <a href="{{ sourceUrl }}" target="_blank" rel="noopener noreferrer" class="text-[#9A7734] hover:text-[#7A5E29] font-medium underline underline-offset-2 transition-colors">{{ source if source else sourceUrl }}</a></span>
       </div>
       {% endif %}
 
@@ -63,7 +63,7 @@ layout: base.njk
       </article>
 
       <div class="mt-12">
-        <a href="{{ '/blog/' | url }}" class="inline-flex items-center gap-2 text-amber-700 hover:text-amber-800 font-medium">
+        <a href="{{ '/blog/' | url }}" class="inline-flex items-center gap-2 text-[#9A7734] hover:text-[#7A5E29] font-medium">
           <i data-lucide="arrow-left" class="w-4 h-4"></i>
           Back to Blog
         </a>

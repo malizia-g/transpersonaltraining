@@ -10,14 +10,16 @@ description: "Weekly online lecture schedule for transpersonal psychotherapy tra
         <source srcset="{{ '/assets/images/Headers/hero-lectures-group-listening.webp' | url }}" type="image/webp">
         <img src="{{ '/assets/images/Headers/hero-lectures-group-listening.jpg' | url }}" alt="Group seated and listening during a lecture" class="absolute inset-0 w-full h-full object-cover z-0">
     </picture>
-    <div class="absolute inset-0 bg-gradient-to-b from-science-blue-900/75 via-science-blue-900/60 to-indigo-950/75 z-0"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/80 via-[#0F2540]/60 to-[#0F2540]/80 z-0"></div>
 
     <div class="container mx-auto px-6 relative z-10 text-center">
         <div class="max-w-4xl mx-auto">
-            <div class="mb-6 inline-block">
-                <i data-lucide="presentation" class="w-16 h-16 text-warm-yellow-400 mx-auto"></i>
-            </div>
-            <h1 class="text-3xl md:text-5xl font-serif font-bold mb-6 leading-tight">
+            <p class="p4-kicker text-[#C9A45C] mb-6 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
+                Online lectures
+                <span class="p4-hairline"></span>
+            </p>
+            <h1 class="p4-display text-4xl md:text-6xl font-medium mb-6 leading-tight text-[#FDFBF5]">
                 Lectures Schedule
             </h1>
             <p class="text-xl md:text-2xl text-white/80 font-light leading-relaxed max-w-3xl mx-auto">
@@ -46,13 +48,13 @@ description: "Weekly online lecture schedule for transpersonal psychotherapy tra
         <div class="max-w-5xl mx-auto">
 
             <!-- Filters Section -->
-            <div id="filters-section" class="mb-8 bg-white rounded-xl shadow-md p-6 border border-neutral-warm-200">
+            <div id="filters-section" class="mb-8 bg-white shadow-md p-6 border border-neutral-warm-200">
                 <div class="flex items-center justify-between mb-4">
                     <div class="flex items-center gap-2 text-neutral-warm-700">
                         <i data-lucide="filter" class="w-5 h-5"></i>
                         <h3 class="font-semibold text-lg">Filter Lectures</h3>
                     </div>
-                    <button id="clear-filters-btn" class="px-4 py-2 bg-neutral-warm-200 text-neutral-warm-700 rounded-lg hover:bg-neutral-warm-300 transition-colors font-medium flex items-center gap-2">
+                    <button id="clear-filters-btn" class="px-4 py-2 bg-neutral-warm-200 text-neutral-warm-700 hover:bg-neutral-warm-300 transition-colors font-medium flex items-center gap-2">
                         <i data-lucide="x" class="w-4 h-4"></i>
                         Clear
                     </button>
@@ -62,7 +64,7 @@ description: "Weekly online lecture schedule for transpersonal psychotherapy tra
                     <!-- Module Filter -->
                     <div class="flex-1 min-w-[200px]">
                         <label for="filter-module" class="block text-sm font-medium text-neutral-warm-600 mb-1">Module</label>
-                        <select id="filter-module" class="w-full px-3 py-2 border border-neutral-warm-300 rounded-lg focus:ring-2 focus:ring-science-blue-500 focus:border-science-blue-500 bg-white text-neutral-warm-700">
+                        <select id="filter-module" class="w-full px-3 py-2 border border-neutral-warm-300 focus:ring-2 focus:ring-science-blue-500 focus:border-science-blue-500 bg-white text-neutral-warm-700">
                             <option value="">All Modules</option>
                             {% for mod in lectureFilters.modules %}
                             <option value="{{ mod }}">Module {{ mod }}</option>
@@ -73,7 +75,7 @@ description: "Weekly online lecture schedule for transpersonal psychotherapy tra
                     <!-- Teacher Filter -->
                     <div class="flex-1 min-w-[200px]">
                         <label for="filter-teacher" class="block text-sm font-medium text-neutral-warm-600 mb-1">Teacher</label>
-                        <select id="filter-teacher" class="w-full px-3 py-2 border border-neutral-warm-300 rounded-lg focus:ring-2 focus:ring-science-blue-500 focus:border-science-blue-500 bg-white text-neutral-warm-700">
+                        <select id="filter-teacher" class="w-full px-3 py-2 border border-neutral-warm-300 focus:ring-2 focus:ring-science-blue-500 focus:border-science-blue-500 bg-white text-neutral-warm-700">
                             <option value="">All Teachers</option>
                             {% for teacher in lectureFilters.teachers %}
                             <option value="{{ teacher }}">{{ teacher }}</option>
@@ -84,7 +86,7 @@ description: "Weekly online lecture schedule for transpersonal psychotherapy tra
                     <!-- Search Filter -->
                     <div class="flex-1 min-w-[200px]">
                         <label for="filter-search" class="block text-sm font-medium text-neutral-warm-600 mb-1">Search</label>
-                        <input id="filter-search" type="text" placeholder="Search by title or teacher…" class="w-full px-3 py-2 border border-neutral-warm-300 rounded-lg focus:ring-2 focus:ring-science-blue-500 focus:border-science-blue-500 bg-white text-neutral-warm-700">
+                        <input id="filter-search" type="text" placeholder="Search by title or teacher…" class="w-full px-3 py-2 border border-neutral-warm-300 focus:ring-2 focus:ring-science-blue-500 focus:border-science-blue-500 bg-white text-neutral-warm-700">
                     </div>
                 </div>
 
@@ -100,7 +102,7 @@ description: "Weekly online lecture schedule for transpersonal psychotherapy tra
             <div id="lectures-list" class="space-y-6">
                 {% if lectureEvents.length > 0 %}
                     {% for lecture in lectureEvents %}
-                    <div class="lecture-card group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 overflow-hidden hover:border-indigo-300"
+                    <div class="lecture-card group bg-white shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 overflow-hidden hover:border-[#C9A45C]"
                          data-module="{{ lecture.module }}"
                          data-teacher1="{{ lecture.teacher1 }}"
                          data-teacher2="{{ lecture.teacher2 }}"
@@ -108,13 +110,13 @@ description: "Weekly online lecture schedule for transpersonal psychotherapy tra
                          data-date="{{ lecture.date }}">
 
                         <!-- Colored header bar -->
-                        <div class="h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-amber-500"></div>
+                        <div class="h-1 bg-gradient-to-r from-[#0F2540] via-[#1E40AF] to-[#C9A45C]"></div>
 
                         <div class="p-4">
                             <div class="flex justify-between items-start gap-3">
                                 <!-- Left: Title + Info -->
                                 <div class="flex-1 min-w-0">
-                                    <h3 class="text-lg font-serif font-bold text-slate-900 group-hover:text-indigo-700 transition-colors mb-2">
+                                    <h3 class="text-lg font-serif font-bold text-slate-900 group-hover:text-[#1E40AF] transition-colors mb-2">
                                         {{ lecture.title }}
                                     </h3>
 
@@ -124,13 +126,13 @@ description: "Weekly online lecture schedule for transpersonal psychotherapy tra
                                         <div class="flex items-center gap-3 flex-wrap">
                                             {% if lecture.date %}
                                             <div class="flex items-center gap-1.5">
-                                                <i data-lucide="calendar" class="w-3.5 h-3.5 text-indigo-600 flex-shrink-0"></i>
+                                                <i data-lucide="calendar" class="w-3.5 h-3.5 text-[#1E40AF] flex-shrink-0"></i>
                                                 <span class="text-xs text-slate-700">{{ lecture.date }}</span>
                                             </div>
                                             {% endif %}
                                             {% if lecture.startHour %}
                                             <div class="flex items-center gap-1.5">
-                                                <i data-lucide="clock" class="w-3.5 h-3.5 text-emerald-600 flex-shrink-0"></i>
+                                                <i data-lucide="clock" class="w-3.5 h-3.5 text-[#0F2540] flex-shrink-0"></i>
                                                 <span class="text-xs text-slate-700">{{ lecture.startHour }}{% if lecture.finishHour %} – {{ lecture.finishHour }}{% endif %}</span>
                                             </div>
                                             {% endif %}
@@ -141,12 +143,12 @@ description: "Weekly online lecture schedule for transpersonal psychotherapy tra
                                         {% if lecture.teacher1 %}
                                         <div class="flex items-center gap-3 flex-wrap">
                                             <div class="flex items-center gap-1.5">
-                                                <i data-lucide="user" class="w-3.5 h-3.5 text-purple-600 flex-shrink-0"></i>
+                                                <i data-lucide="user" class="w-3.5 h-3.5 text-[#9A7734] flex-shrink-0"></i>
                                                 <span class="text-xs text-slate-700">{{ lecture.teacher1 }}</span>
                                             </div>
                                             {% if lecture.teacher2 %}
                                             <div class="flex items-center gap-1.5">
-                                                <i data-lucide="user" class="w-3.5 h-3.5 text-purple-400 flex-shrink-0"></i>
+                                                <i data-lucide="user" class="w-3.5 h-3.5 text-[#C9A45C] flex-shrink-0"></i>
                                                 <span class="text-xs text-slate-700">{{ lecture.teacher2 }}</span>
                                             </div>
                                             {% endif %}
@@ -158,14 +160,14 @@ description: "Weekly online lecture schedule for transpersonal psychotherapy tra
                                 <!-- Right: Module badge + Video button -->
                                 <div class="flex flex-col items-end gap-2 flex-shrink-0">
                                     {% if lecture.module %}
-                                    <span class="px-3 py-1 bg-gradient-to-r from-teal-100 to-teal-50 text-teal-800 text-xs font-semibold rounded-full border border-teal-200 whitespace-nowrap">
+                                    <span class="px-3 py-1 bg-[#0F2540]/10 text-[#0F2540] text-xs font-semibold uppercase tracking-wider border border-[#0F2540]/25 whitespace-nowrap">
                                         Module {{ lecture.module }}
                                     </span>
                                     {% endif %}
 
                                     {% if lecture.videoLink %}
                                     <button onclick="toggleInlineVideo(this, '{{ lecture.videoLink }}')"
-                                            class="video-toggle-btn flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs font-semibold rounded-full hover:from-red-600 hover:to-red-700 transition-all shadow-sm hover:shadow-md">
+                                            class="video-toggle-btn flex items-center gap-1.5 px-3 py-1.5 bg-[#C9A45C] text-[#0F2540] text-xs font-semibold hover:bg-[#B8934B] transition-all shadow-sm hover:shadow-md">
                                         <i data-lucide="play-circle" class="w-3.5 h-3.5"></i>
                                         <span>Watch</span>
                                     </button>
@@ -180,7 +182,7 @@ description: "Weekly online lecture schedule for transpersonal psychotherapy tra
                                     {{ lecture.description }}
                                 </div>
                                 <button onclick="toggleLectureDescription('{{ loop.index }}')"
-                                        class="mt-1 flex items-center gap-1 text-indigo-600 hover:text-indigo-800 text-xs font-semibold transition-colors">
+                                        class="mt-1 flex items-center gap-1 text-[#1E40AF] hover:text-[#0F2540] text-xs font-semibold transition-colors">
                                     <span id="ltext-{{ loop.index }}">Read more</span>
                                     <i id="licon-{{ loop.index }}" data-lucide="chevron-down" class="w-3 h-3 transition-transform duration-200"></i>
                                 </button>
@@ -189,16 +191,16 @@ description: "Weekly online lecture schedule for transpersonal psychotherapy tra
 
                             <!-- Inline Video (hidden by default) -->
                             {% if lecture.videoLink %}
-                            <div class="video-container hidden mt-3 rounded-lg overflow-hidden bg-black">
+                            <div class="video-container hidden mt-3 overflow-hidden bg-black">
                                 <video controls preload="none" class="w-full" style="max-height:450px">
                                     <source src="{{ lecture.videoLink }}" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
-                                <div class="video-error hidden text-center py-6 bg-slate-100 rounded-lg">
+                                <div class="video-error hidden text-center py-6 bg-slate-100">
                                     <i data-lucide="video-off" class="w-10 h-10 text-slate-400 mx-auto mb-2"></i>
                                     <p class="text-slate-600 text-sm mb-3">Video cannot be played directly in the browser.</p>
                                     <a href="{{ lecture.videoLink }}" target="_blank" rel="noopener noreferrer"
-                                       class="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 text-white text-sm rounded-full hover:bg-indigo-700 transition-colors font-semibold">
+                                       class="inline-flex items-center gap-1.5 px-4 py-2 bg-[#1E40AF] text-white text-sm hover:bg-[#0F2540] transition-colors font-semibold">
                                         <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                                         Open Video Externally
                                     </a>
@@ -209,7 +211,7 @@ description: "Weekly online lecture schedule for transpersonal psychotherapy tra
                     </div>
                     {% endfor %}
                 {% else %}
-                    <div class="bg-neutral-warm-100 border border-neutral-warm-200 rounded-xl p-12 text-center">
+                    <div class="bg-neutral-warm-100 border border-neutral-warm-200 p-12 text-center">
                         <i data-lucide="video-off" class="w-20 h-20 text-neutral-warm-400 mx-auto mb-4"></i>
                         <h3 class="text-2xl font-serif font-bold text-neutral-warm-700 mb-2">No Lectures Available</h3>
                         <p class="text-neutral-warm-600">Check back soon for upcoming lectures and recorded sessions.</p>
@@ -219,7 +221,7 @@ description: "Weekly online lecture schedule for transpersonal psychotherapy tra
 
             <!-- Filtered Empty State -->
             <div id="empty-filtered-state" class="hidden">
-                <div class="bg-neutral-warm-100 border border-neutral-warm-200 rounded-xl p-12 text-center">
+                <div class="bg-neutral-warm-100 border border-neutral-warm-200 p-12 text-center">
                     <i data-lucide="filter-x" class="w-20 h-20 text-neutral-warm-400 mx-auto mb-4"></i>
                     <h3 class="text-2xl font-serif font-bold text-neutral-warm-700 mb-2">No Matching Lectures</h3>
                     <p class="text-neutral-warm-600">Try adjusting your filters to see more results.</p>

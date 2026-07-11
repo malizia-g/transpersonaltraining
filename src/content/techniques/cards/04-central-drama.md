@@ -1,7 +1,7 @@
 ---
 icon: drama
-icon_color: text-violet-600
-icon_bg: bg-violet-100
+icon_color: text-[#0F2540]
+icon_bg: bg-[#0F2540]/10
 title: Central Drama & Shadow Work
 image: /assets/images/Techniques/technique-psychodrama-stage-b
 image_position: object-center

@@ -1,7 +1,7 @@
 ---
 icon: compass
-icon_color: text-warm-yellow-600
-icon_bg: bg-warm-yellow-100
+icon_color: text-[#9A7734]
+icon_bg: bg-[#C9A45C]/20
 title: Spiritual Integration
 ---
 

@@ -71,7 +71,7 @@ body[class*="theme-"] #mobile-menu a:hover {
     position: absolute; top: 100%; left: 50%; margin-top: 0.75rem;
     transform: translateX(-50%) translateY(5px);
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
-    backdrop-filter: blur(20px); border-radius: 0.75rem;
+    backdrop-filter: blur(20px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.3);
     min-width: 240px; opacity: 0; visibility: hidden;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 100;
@@ -91,8 +91,6 @@ body[class*="theme-"] #mobile-menu a:hover {
     transition: color 0.2s ease;
 }
 .dropdown-menu a:hover { color: #9A7734; }
-.dropdown-menu a:first-child { border-radius: 0.75rem 0.75rem 0 0; }
-.dropdown-menu a:last-child { border-radius: 0 0 0.75rem 0.75rem; }
 .dropdown-menu .submenu-icon { color: #94a3b8; transition: color 0.2s ease; }
 .dropdown-menu a:hover .submenu-icon { color: #9A7734; }
 
@@ -137,7 +135,7 @@ body[class*="theme-"] #mobile-menu a:hover {
 .toggle-icon.rotated { transform: rotate(180deg); }
 .module-count {
     font-size: 0.75rem; padding: 0.25rem 0.75rem;
-    border-radius: 9999px; font-weight: 600;
+    font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
 }
 
 /* Requirement items (training program) */
@@ -179,6 +177,61 @@ body[class*="theme-"] #mobile-menu a:hover {
     display: block;
     -webkit-line-clamp: unset;
     max-height: none;
+}
+
+/* ── Proposta 4 editorial style (shared site-wide) ── */
+
+.p4-display { font-family: 'Cormorant Garamond', Georgia, serif; }
+.p4-kicker {
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+.p4-hairline {
+    display: inline-block;
+    width: 4rem;
+    height: 1px;
+    background: #C9A45C;
+    vertical-align: middle;
+}
+.p4-dropcap p:first-child::first-letter {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 3.6em;
+    line-height: 0.8;
+    float: left;
+    padding-right: 0.14em;
+    color: #1E40AF;
+    font-weight: 500;
+}
+.p4-welcome p + p { margin-top: 1.1rem; }
+.p4-foryou ul { list-style: none; margin: 0; padding: 0; }
+.p4-foryou ul li {
+    position: relative;
+    padding: 1.15rem 0 1.15rem 2.4rem;
+    border-bottom: 1px solid rgba(15, 37, 64, 0.15);
+    line-height: 1.65;
+}
+.p4-foryou ul li:first-child { border-top: 1px solid rgba(15, 37, 64, 0.15); }
+.p4-foryou ul li::before {
+    content: '✦';
+    position: absolute;
+    left: 0.2rem;
+    top: 1.15rem;
+    color: #9A7734;
+    font-size: 0.9rem;
+}
+.p4-filmstrip::-webkit-scrollbar { height: 8px; }
+.p4-filmstrip::-webkit-scrollbar-track { background: rgba(15, 37, 64, 0.08); border-radius: 999px; }
+.p4-filmstrip::-webkit-scrollbar-thumb { background: rgba(154, 119, 52, 0.55); border-radius: 999px; }
+/* Fixed-background parallax; iOS ignores background-attachment: fixed, so fall back to scroll there */
+.p4-parallax {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+@media (hover: none), (max-width: 768px) {
+    .p4-parallax { background-attachment: scroll; }
 }
 
 /* ── Blog article typography ── */

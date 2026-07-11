@@ -85,7 +85,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        serif: ['Merriweather', 'serif'],
+        serif: ['Cormorant Garamond', 'Georgia', 'serif'],
       },
       animation: {
         'fade-in-up': 'fadeInUp 1s ease-out forwards',

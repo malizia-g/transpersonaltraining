@@ -10,63 +10,6 @@ ogType: website
 {% set quote = 'home/quote.md' | pageContent %}
 {% set homeCards = 'home/cards' | pageContentDir %}
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
-
-<style>
-    .p4-display { font-family: 'Cormorant Garamond', Georgia, serif; }
-    .p4-kicker {
-        letter-spacing: 0.35em;
-        text-transform: uppercase;
-        font-size: 0.78rem;
-        font-weight: 600;
-    }
-    .p4-hairline {
-        display: inline-block;
-        width: 4rem;
-        height: 1px;
-        background: #C9A45C;
-        vertical-align: middle;
-    }
-    .p4-dropcap p:first-child::first-letter {
-        font-family: 'Cormorant Garamond', Georgia, serif;
-        font-size: 3.6em;
-        line-height: 0.8;
-        float: left;
-        padding-right: 0.14em;
-        color: #1E40AF;
-        font-weight: 500;
-    }
-    .p4-welcome p + p { margin-top: 1.1rem; }
-    .p4-foryou ul { list-style: none; margin: 0; padding: 0; }
-    .p4-foryou ul li {
-        position: relative;
-        padding: 1.15rem 0 1.15rem 2.4rem;
-        border-bottom: 1px solid rgba(15, 37, 64, 0.15);
-        line-height: 1.65;
-    }
-    .p4-foryou ul li:first-child { border-top: 1px solid rgba(15, 37, 64, 0.15); }
-    .p4-foryou ul li::before {
-        content: '✦';
-        position: absolute;
-        left: 0.2rem;
-        top: 1.15rem;
-        color: #9A7734;
-        font-size: 0.9rem;
-    }
-    .p4-filmstrip::-webkit-scrollbar { height: 8px; }
-    .p4-filmstrip::-webkit-scrollbar-track { background: rgba(15, 37, 64, 0.08); border-radius: 999px; }
-    .p4-filmstrip::-webkit-scrollbar-thumb { background: rgba(154, 119, 52, 0.55); border-radius: 999px; }
-    /* Fixed-background parallax; iOS ignores background-attachment: fixed, so fall back to scroll there */
-    .p4-parallax {
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-    }
-    @media (hover: none), (max-width: 768px) {
-        .p4-parallax { background-attachment: scroll; }
-    }
-</style>
-
 <!-- ═══════════ HERO — video threshold ═══════════ -->
 <header class="relative min-h-[92vh] flex items-end overflow-hidden bg-[#0F2540]">
     <div class="absolute inset-0 z-0">
@@ -253,10 +196,10 @@ ogType: website
             <div class="relative order-2 lg:order-1 m-4">
                 <div id="foryou-frame" class="w-full aspect-[4/5] overflow-hidden shadow-lg">
                     <picture>
-                        <source srcset="{{ '/assets/images/Symbolic/symbolic-contemplation-doorway.webp' | url }}" type="image/webp">
+                        <source srcset="{{ '/assets/images/Symbolic/symbolic-backlit-doorway.webp' | url }}" type="image/webp">
                         <img id="foryou-parallax"
-                             src="{{ '/assets/images/Symbolic/symbolic-contemplation-doorway.jpg' | url }}"
-                             alt="A person in quiet contemplation by a doorway"
+                             src="{{ '/assets/images/Symbolic/symbolic-backlit-doorway.jpg' | url }}"
+                             alt="A figure standing in a backlit doorway"
                              class="w-full h-[115%] object-cover will-change-transform"
                              loading="lazy">
                     </picture>

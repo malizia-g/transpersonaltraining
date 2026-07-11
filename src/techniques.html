@@ -18,15 +18,17 @@ description: "Discover the therapeutic techniques used in our training: holotrop
                 class="w-full h-full object-cover"
             />
         </picture>
-        <div class="absolute inset-0 bg-gradient-to-b from-science-blue-900/70 via-science-blue-800/50 to-neutral-warm-50"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/85 via-[#0F2540]/45 to-neutral-warm-50"></div>
     </div>
 
     <div class="relative z-10 container mx-auto px-6 text-center pt-20">
         <div class="animate-fade-in-up">
-            <span class="inline-block py-1 px-3 rounded-full bg-white/10 text-warm-yellow-200 backdrop-blur-md border border-white/20 text-sm font-medium mb-6 tracking-wider uppercase">
+            <p class="p4-kicker text-[#C9A45C] mb-6 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
                 Therapeutic Methods
-            </span>
-            <h1 class="text-3xl md:text-5xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-lg">
+                <span class="p4-hairline"></span>
+            </p>
+            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] mb-6 leading-tight drop-shadow-md">
                 Our Techniques
             </h1>
             <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
@@ -51,7 +53,7 @@ description: "Discover the therapeutic techniques used in our training: holotrop
 <section class="py-24 bg-white">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto text-center mb-16">
-            <h2 class="text-4xl md:text-5xl font-serif font-bold text-indigo-deep-900 mb-6">
+            <h2 class="p4-display text-4xl md:text-5xl font-medium text-[#0F2540] mb-6">
                 {{ intro.data.heading }}
             </h2>
             <div class="text-lg text-neutral-warm-700 leading-relaxed">
@@ -61,7 +63,7 @@ description: "Discover the therapeutic techniques used in our training: holotrop
 
         <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {% for card in cards %}
-            <div class="bg-neutral-warm-100 rounded-2xl border border-neutral-warm-200 overflow-hidden">
+            <div class="bg-neutral-warm-100 border border-neutral-warm-200 overflow-hidden">
                 {% if card.data.image %}
                 <picture>
                     <source srcset="{{ card.data.image }}.webp" type="image/webp">
@@ -69,7 +71,7 @@ description: "Discover the therapeutic techniques used in our training: holotrop
                 </picture>
                 {% endif %}
                 <div class="p-8">
-                    <div class="w-16 h-16 {{ card.data.icon_bg }} rounded-xl flex items-center justify-center mb-6">
+                    <div class="w-16 h-16 {{ card.data.icon_bg }} flex items-center justify-center mb-6">
                         <i data-lucide="{{ card.data.icon }}" class="w-8 h-8 {{ card.data.icon_color }}"></i>
                     </div>
                     <h3 class="text-2xl font-serif font-bold text-indigo-deep-900 mb-4">{{ card.data.title }}</h3>
@@ -85,7 +87,12 @@ description: "Discover the therapeutic techniques used in our training: holotrop
 <section class="py-24 bg-neutral-warm-50">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-serif font-bold text-indigo-deep-900 mb-4">
+            <p class="p4-kicker text-[#9A7734] mb-4 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
+                In practice
+                <span class="p4-hairline"></span>
+            </p>
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-4">
                 The Work in Practice
             </h2>
             <p class="text-lg text-neutral-warm-700 leading-relaxed">
@@ -107,7 +114,7 @@ description: "Discover the therapeutic techniques used in our training: holotrop
             {% for img in galleryImages %}
             <picture>
                 <source srcset="{{ ('/assets/images/Techniques/' ~ img[0] ~ '.webp') | url }}" type="image/webp">
-                <img src="{{ ('/assets/images/Techniques/' ~ img[0] ~ '.jpg') | url }}" alt="{{ img[1] }}" class="w-full h-48 object-cover {{ img[2] }} rounded-xl shadow-sm" loading="lazy">
+                <img src="{{ ('/assets/images/Techniques/' ~ img[0] ~ '.jpg') | url }}" alt="{{ img[1] }}" class="w-full h-48 object-cover {{ img[2] }} shadow-sm" loading="lazy">
             </picture>
             {% endfor %}
         </div>
@@ -115,13 +122,18 @@ description: "Discover the therapeutic techniques used in our training: holotrop
 </section>
 
 <!-- CTA Section -->
-<section class="py-20 bg-contact-iris-600 text-white text-center">
+<section class="py-20 bg-gradient-to-br from-[#0F2540] to-[#12305A] text-white text-center">
     <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-serif font-bold mb-4">Experience These Techniques</h2>
-        <p class="text-white/80 max-w-2xl mx-auto mb-8 text-lg">
+        <p class="p4-kicker text-[#C9A45C] mb-4 flex items-center justify-center gap-4">
+            <span class="p4-hairline"></span>
+            Join us
+            <span class="p4-hairline"></span>
+        </p>
+        <h2 class="p4-display text-3xl md:text-4xl font-medium mb-4 text-[#FDFBF5]">Experience These Techniques</h2>
+        <p class="text-[#E9EDF2]/80 max-w-2xl mx-auto mb-8 text-lg">
             Join our training programs to learn and practice these transformative therapeutic approaches.
         </p>
-        <a href="training.html" class="inline-block bg-white hover:bg-slate-100 text-contact-iris-600 px-8 py-4 rounded-full font-medium text-lg transition-transform hover:scale-105 shadow-lg">
+        <a href="training.html" class="inline-block bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
             Explore Training Programs
         </a>
     </div>

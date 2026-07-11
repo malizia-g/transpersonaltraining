@@ -34,14 +34,16 @@ description: "Experience transpersonal therapy as a client model. Support traine
             <source srcset="{{ '/assets/images/Headers/hero-client-model-flowers.webp' | url }}" type="image/webp">
             <img src="{{ '/assets/images/Headers/hero-client-model-flowers.jpg' | url }}" alt="Wildflowers in the garden of the seminar house" class="w-full h-full object-cover object-center">
         </picture>
-        <div class="absolute inset-0 bg-gradient-to-b from-science-blue-900/75 via-science-blue-900/60 to-indigo-950/70"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/80 via-[#0F2540]/60 to-[#0F2540]/80"></div>
     </div>
     <div class="container mx-auto px-6 relative z-10 text-center">
         <div class="max-w-4xl mx-auto">
-            <div class="mb-6 inline-block">
-                <i data-lucide="user-check" class="w-16 h-16 text-warm-yellow-400 mx-auto"></i>
-            </div>
-            <h1 class="text-3xl md:text-5xl font-serif font-bold mb-6 leading-tight">
+            <p class="p4-kicker text-[#C9A45C] mb-6 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
+                Supervised practice
+                <span class="p4-hairline"></span>
+            </p>
+            <h1 class="p4-display text-4xl md:text-6xl font-medium mb-6 leading-tight text-[#FDFBF5]">
                 Become a Client Model
             </h1>
             <p class="text-xl md:text-2xl text-white/80 font-light leading-relaxed max-w-3xl mx-auto">
@@ -64,7 +66,7 @@ description: "Experience transpersonal therapy as a client model. Support traine
 <section class="py-16 bg-white">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-serif font-bold text-indigo-deep-900 mb-8">Free Counselling and Supervised Practice</h2>
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-8">Free Counselling and Supervised Practice</h2>
             <div class="space-y-6 text-neutral-warm-700 leading-relaxed">
                 {% for item in introItems %}
                 <div class="flex items-start gap-3">
@@ -81,7 +83,7 @@ description: "Experience transpersonal therapy as a client model. Support traine
     <div class="container mx-auto px-6">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-10">
-                <h2 class="text-3xl md:text-4xl font-serif font-bold text-indigo-deep-900 mb-4">Third-Level Students Available for Client Models</h2>
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-4">Third-Level Students Available for Client Models</h2>
                 <p class="text-neutral-warm-700 leading-relaxed max-w-3xl mx-auto">
                     This section is populated from a spreadsheet source and lists student therapists you can contact directly.
                 </p>
@@ -90,7 +92,7 @@ description: "Experience transpersonal therapy as a client model. Support traine
             {% if clientModels and clientModels.length %}
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {% for student in clientModels %}
-                <article class="student-card bg-white border border-neutral-warm-200 rounded-2xl overflow-hidden shadow-sm">
+                <article class="student-card bg-white border border-neutral-warm-200 overflow-hidden shadow-sm">
                     {% if student.picture_link %}
                     <img
                         src="{{ student.picture_link | url }}"
@@ -108,17 +110,17 @@ description: "Experience transpersonal therapy as a client model. Support traine
                         <div class="flex items-center justify-between gap-3 mb-4">
                             <h3 class="text-xl font-serif font-bold text-indigo-deep-900">{{ student.name }}</h3>
                             {% if student.status == 'active' %}
-                            <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700">Active</span>
+                            <span class="text-xs font-medium px-2.5 py-1 uppercase tracking-wider bg-emerald-100 text-emerald-700">Active</span>
                             {% elif student.status == 'approved' %}
-                            <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-science-blue-100 text-science-blue-700">Approved</span>
+                            <span class="text-xs font-medium px-2.5 py-1 uppercase tracking-wider bg-science-blue-100 text-science-blue-700">Approved</span>
                             {% elif student.status == 'pending' %}
-                            <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-amber-100 text-amber-700">Pending</span>
+                            <span class="text-xs font-medium px-2.5 py-1 uppercase tracking-wider bg-[#C9A45C]/20 text-[#9A7734]">Pending</span>
                             {% elif student.status == 'on-hold' %}
-                            <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-orange-100 text-orange-700">On Hold</span>
+                            <span class="text-xs font-medium px-2.5 py-1 uppercase tracking-wider bg-orange-100 text-orange-700">On Hold</span>
                             {% elif student.status == 'completed' %}
-                            <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-teal-100 text-teal-700">Completed</span>
+                            <span class="text-xs font-medium px-2.5 py-1 uppercase tracking-wider bg-[#0F2540]/10 text-[#0F2540]">Completed</span>
                             {% else %}
-                            <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-neutral-100 text-neutral-600">{{ student.status }}</span>
+                            <span class="text-xs font-medium px-2.5 py-1 uppercase tracking-wider bg-neutral-100 text-neutral-600">{{ student.status }}</span>
                             {% endif %}
                         </div>
 
@@ -131,7 +133,7 @@ description: "Experience transpersonal therapy as a client model. Support traine
                             {% endif %}
                             {% if student.spoken_languages %}
                             <li class="flex items-center gap-2">
-                                <i data-lucide="languages" class="w-4 h-4 text-violet-600"></i>
+                                <i data-lucide="languages" class="w-4 h-4 text-[#9A7734]"></i>
                                 <span>{{ student.spoken_languages }}</span>
                             </li>
                             {% endif %}
@@ -139,7 +141,7 @@ description: "Experience transpersonal therapy as a client model. Support traine
 
                         <button
                             type="button"
-                            class="w-full mb-4 inline-flex items-center justify-between px-4 py-2 rounded-lg border border-neutral-warm-200 text-sm font-medium text-indigo-deep-900 hover:bg-neutral-warm-50 transition-colors"
+                            class="w-full mb-4 inline-flex items-center justify-between px-4 py-2 border border-neutral-warm-200 text-sm font-medium text-indigo-deep-900 hover:bg-neutral-warm-50 transition-colors"
                             onclick="toggleStudentDetails(this)"
                             aria-expanded="false"
                         >
@@ -151,13 +153,13 @@ description: "Experience transpersonal therapy as a client model. Support traine
                             <ul class="space-y-2 text-sm text-neutral-warm-700 mb-4">
                                 {% if student.country %}
                                 <li class="flex items-center gap-2">
-                                    <i data-lucide="flag" class="w-4 h-4 text-emerald-600"></i>
+                                    <i data-lucide="flag" class="w-4 h-4 text-science-blue-600"></i>
                                     <span>Country: {{ student.country }}</span>
                                 </li>
                                 {% endif %}
                                 {% if student.intake_date %}
                                 <li class="flex items-center gap-2">
-                                    <i data-lucide="calendar" class="w-4 h-4 text-emerald-600"></i>
+                                    <i data-lucide="calendar" class="w-4 h-4 text-science-blue-600"></i>
                                     <span>Intake: {{ student.intake_date }}</span>
                                 </li>
                                 {% endif %}
@@ -181,7 +183,7 @@ description: "Experience transpersonal therapy as a client model. Support traine
                                 {% endif %}
                                 {% if student.bth %}
                                 <li class="flex items-start gap-2">
-                                    <i data-lucide="wind" class="w-4 h-4 text-violet-600 mt-0.5 flex-shrink-0"></i>
+                                    <i data-lucide="wind" class="w-4 h-4 text-[#9A7734] mt-0.5 flex-shrink-0"></i>
                                     <div>
                                         <span class="font-medium text-neutral-warm-800">Breathwork</span>
                                         <p class="mt-1 text-neutral-warm-700 whitespace-pre-line">{{ student.bth }}</p>
@@ -237,7 +239,7 @@ description: "Experience transpersonal therapy as a client model. Support traine
                 {% endfor %}
             </div>
             {% else %}
-            <div class="max-w-3xl mx-auto bg-white border border-neutral-warm-200 rounded-2xl p-8 text-center">
+            <div class="max-w-3xl mx-auto bg-white border border-neutral-warm-200 p-8 text-center">
                 <p class="text-neutral-warm-700 leading-relaxed">
                     No student records are available yet. Add rows to your spreadsheet (or cache file) to populate this section.
                 </p>
@@ -264,10 +266,10 @@ description: "Experience transpersonal therapy as a client model. Support traine
 </script>
 {% endblock %}
 
-<section class="py-16 bg-gradient-to-br from-science-blue-50 via-violet-50 to-indigo-50">
+<section class="py-16 bg-neutral-warm-100">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-serif font-bold text-indigo-deep-900 mb-8">{{ whatToLook.data.heading }}</h2>
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-8">{{ whatToLook.data.heading }}</h2>
             <p class="text-neutral-warm-700 leading-relaxed mb-6">{{ whatToLook.data.intro }}</p>
             <div class="text-neutral-warm-700 leading-relaxed what-to-look-content">
                 {{ whatToLook.html | safe }}
@@ -279,10 +281,10 @@ description: "Experience transpersonal therapy as a client model. Support traine
 <section class="py-16 bg-white">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto">
-            <div class="bg-neutral-warm-100 border border-neutral-warm-200 rounded-2xl p-8 md:p-10">
-                <h3 class="text-2xl md:text-3xl font-serif font-bold text-indigo-deep-900 mb-4">{{ cta.data.heading }}</h3>
+            <div class="bg-neutral-warm-100 border border-neutral-warm-200 p-8 md:p-10">
+                <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-4">{{ cta.data.heading }}</h3>
                 <p class="text-neutral-warm-700 leading-relaxed mb-6">{{ cta.data.body }}</p>
-                <a href="mailto:{{ cta.data.email }}" class="inline-flex items-center gap-2 bg-science-blue-600 hover:bg-science-blue-700 text-white px-6 py-3 rounded-full font-medium transition-colors">
+                <a href="mailto:{{ cta.data.email }}" class="inline-flex items-center gap-2 bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-6 py-3 font-medium tracking-wide transition-all shadow-lg hover:shadow-xl">
                     <i data-lucide="mail" class="w-4 h-4"></i>
                     {{ cta.data.cta_label }}
                 </a>

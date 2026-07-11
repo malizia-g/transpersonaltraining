@@ -1,7 +1,7 @@
 ---
 icon: wind
-icon_color: text-accent-teal-600
-icon_bg: bg-accent-teal-100
+icon_color: text-science-blue-600
+icon_bg: bg-science-blue-100
 title: Holotropic Breathwork
 image: /assets/images/Techniques/technique-mandala-breathwork
 image_position: object-center
