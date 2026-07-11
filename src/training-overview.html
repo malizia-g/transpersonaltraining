@@ -27,15 +27,17 @@ description: "Explore our transpersonal psychotherapy training programme philoso
                 class="w-full h-full object-cover"
             />
         </picture>
-        <div class="absolute inset-0 bg-gradient-to-b from-science-blue-900/70 via-science-blue-800/50 to-neutral-warm-50"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/85 via-[#0F2540]/45 to-neutral-warm-50"></div>
     </div>
 
     <div class="relative z-10 container mx-auto px-6 text-center pt-20">
         <div class="animate-fade-in-up">
-            <span class="inline-block py-1 px-3 rounded-full bg-white/10 text-warm-yellow-200 backdrop-blur-md border border-white/20 text-sm font-medium mb-6 tracking-wider uppercase">
-                3 Levels • 500+ Hours
-            </span>
-            <h1 class="text-3xl md:text-5xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-lg">
+            <p class="p4-kicker text-[#C9A45C] mb-6 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
+                3 Levels &middot; 500+ Hours
+                <span class="p4-hairline"></span>
+            </p>
+            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] mb-6 leading-tight drop-shadow-md">
                 Training Overview
             </h1>
             <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
@@ -65,11 +67,12 @@ description: "Explore our transpersonal psychotherapy training programme philoso
     </div>
     <div class="container mx-auto px-6 relative z-10">
         <div class="max-w-4xl mx-auto">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="bg-science-blue-600 text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-md">
-                    <i data-lucide="heart-handshake" class="w-6 h-6"></i>
-                </div>
-                <h2 class="text-2xl md:text-3xl font-serif font-bold text-slate-800">{{ philosophy.data.heading }}</h2>
+            <div class="mb-6">
+                <p class="p4-kicker text-[#9A7734] mb-3 flex items-center gap-4">
+                    <span class="p4-hairline"></span>
+                    Philosophy
+                </p>
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540]">{{ philosophy.data.heading }}</h2>
             </div>
             <div class="text-gray-700 text-lg leading-relaxed">
                 {{ philosophy.html | safe }}
@@ -81,15 +84,16 @@ description: "Explore our transpersonal psychotherapy training programme philoso
 <!-- Commitment Structure -->
 <section class="py-14 bg-neutral-warm-50 relative overflow-hidden">
     <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-5 pointer-events-none">
-        <div class="absolute top-0 -right-24 w-96 h-96 rounded-full bg-accent-teal-400 blur-3xl"></div>
+        <div class="absolute top-0 -right-24 w-96 h-96 rounded-full bg-[#C9A45C] blur-3xl"></div>
     </div>
     <div class="container mx-auto px-6 relative z-10">
         <div class="max-w-4xl mx-auto">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="bg-amber-500 text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-md">
-                    <i data-lucide="list-checks" class="w-6 h-6"></i>
-                </div>
-                <h2 class="text-2xl md:text-3xl font-serif font-bold text-slate-800">Your Commitment Structure</h2>
+            <div class="mb-6">
+                <p class="p4-kicker text-[#9A7734] mb-3 flex items-center gap-4">
+                    <span class="p4-hairline"></span>
+                    Commitment
+                </p>
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540]">Your Commitment Structure</h2>
             </div>
             <p class="text-gray-700 text-lg leading-relaxed mb-8">
                 Our training asks for consistent engagement in learning, self-development, and supervised practice.
@@ -97,7 +101,7 @@ description: "Explore our transpersonal psychotherapy training programme philoso
 
             <div class="grid md:grid-cols-2 gap-6">
                 {% for card in commitmentCards %}
-                <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm{% if loop.last or (loop.index == 3) %} md:col-span-2{% endif %}">
+                <div class="bg-white border border-slate-200 p-6 shadow-sm{% if loop.last or (loop.index == 3) %} md:col-span-2{% endif %}">
                     <h3 class="font-serif font-bold text-slate-800 text-xl mb-4 flex items-center gap-2">
                         <i data-lucide="{{ card.data.icon }}" class="w-5 h-5 {{ card.data.icon_color }}"></i>
                         {{ card.data.heading }}
@@ -115,15 +119,16 @@ description: "Explore our transpersonal psychotherapy training programme philoso
 <!-- Program Overview -->
 <section class="py-16 bg-neutral-warm-50 relative overflow-hidden">
     <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-5 pointer-events-none">
-        <div class="absolute bottom-0 -left-24 w-96 h-96 rounded-full bg-accent-teal-400 blur-3xl"></div>
+        <div class="absolute bottom-0 -left-24 w-96 h-96 rounded-full bg-[#C9A45C] blur-3xl"></div>
     </div>
     <div class="container mx-auto px-6 relative z-10">
         <div class="max-w-4xl mx-auto">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="bg-accent-teal-500 text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-md">
-                    <i data-lucide="compass" class="w-6 h-6"></i>
-                </div>
-                <h2 class="text-2xl md:text-3xl font-serif font-bold text-slate-800">{{ programOverview.data.heading }}</h2>
+            <div class="mb-6">
+                <p class="p4-kicker text-[#9A7734] mb-3 flex items-center gap-4">
+                    <span class="p4-hairline"></span>
+                    The programme
+                </p>
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540]">{{ programOverview.data.heading }}</h2>
             </div>
             <div class="space-y-5 text-gray-700 text-lg leading-relaxed">
                 {{ programOverview.html | safe }}
@@ -141,22 +146,23 @@ description: "Explore our transpersonal psychotherapy training programme philoso
     </div>
     <div class="container mx-auto px-6 relative z-10">
         <div class="max-w-4xl mx-auto">
-            <div class="flex items-center gap-3 mb-8">
-                <div class="bg-science-blue-600 text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-md">
-                    <i data-lucide="shield-check" class="w-6 h-6"></i>
-                </div>
-                <h2 class="text-2xl md:text-3xl font-serif font-bold text-slate-800">{{ eligibility.data.heading }}</h2>
+            <div class="mb-8">
+                <p class="p4-kicker text-[#9A7734] mb-3 flex items-center gap-4">
+                    <span class="p4-hairline"></span>
+                    Eligibility
+                </p>
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540]">{{ eligibility.data.heading }}</h2>
             </div>
 
-            <div class="bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
+            <div class="bg-white border border-slate-200 p-8 shadow-sm">
                 <h4 class="font-serif font-bold text-slate-800 text-xl mb-4">{{ eligibility.data.subheading }}</h4>
                 <p class="text-gray-700 text-base mb-5">{{ eligibility.data.intro }}</p>
                 <div class="text-gray-600 text-sm space-y-3 mb-6 eligibility-content">
                     {{ eligibility.html | safe }}
                 </div>
-                <div class="bg-amber-50 border-l-4 border-amber-400 rounded-r-lg p-4">
+                <div class="bg-[#C9A45C]/10 border-l-4 border-[#C9A45C] p-4">
                     <p class="text-gray-700 text-sm leading-relaxed">
-                        <strong class="text-amber-700">Note:</strong> {{ eligibility.data.note }}
+                        <strong class="text-[#9A7734]">Note:</strong> {{ eligibility.data.note }}
                     </p>
                 </div>
             </div>
@@ -169,25 +175,23 @@ description: "Explore our transpersonal psychotherapy training programme philoso
 <!-- Admissions Section -->
 <section class="py-16 bg-white relative overflow-hidden">
     <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-5 pointer-events-none">
-        <div class="absolute bottom-0 -left-24 w-96 h-96 rounded-full bg-accent-teal-400 blur-3xl"></div>
+        <div class="absolute bottom-0 -left-24 w-96 h-96 rounded-full bg-[#C9A45C] blur-3xl"></div>
     </div>
     <div class="container mx-auto px-6 relative z-10">
         <div class="max-w-4xl mx-auto">
-            <div class="flex items-center gap-3 mb-8">
-                <div class="bg-accent-teal-500 text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-md">
-                    <i data-lucide="clipboard-list" class="w-6 h-6"></i>
-                </div>
-                <h2 class="text-2xl md:text-3xl font-serif font-bold text-slate-800">Admissions</h2>
+            <div class="mb-8">
+                <p class="p4-kicker text-[#9A7734] mb-3 flex items-center gap-4">
+                    <span class="p4-hairline"></span>
+                    Admissions
+                </p>
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540]">Admissions</h2>
             </div>
 
             <div class="grid gap-8">
                 {% for adm in admissions %}
-                <div class="bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
+                <div class="bg-white border border-slate-200 p-8 shadow-sm">
                     <div class="flex items-center gap-3 mb-4">
-                        <span class="text-xs font-bold uppercase tracking-wider
-                            {% if loop.index == 1 %}text-accent-teal-600
-                            {% elif loop.index == 2 %}text-science-blue-600
-                            {% else %}text-amber-600{% endif %}">
+                        <span class="text-xs font-bold uppercase tracking-wider text-[#9A7734]">
                             {{ adm.data.level }}
                         </span>
                         <span class="text-xs text-gray-400">—</span>
@@ -210,15 +214,20 @@ description: "Explore our transpersonal psychotherapy training programme philoso
 </section>
 
 <!-- CTA Section -->
-<section class="bg-contact-iris-600 text-white py-16">
+<section class="bg-gradient-to-br from-[#0F2540] to-[#12305A] text-white py-16">
     <div class="container mx-auto px-6 text-center">
-        <h2 class="text-2xl font-serif font-bold mb-4">Ready to begin?</h2>
-        <p class="text-white/80 max-w-2xl mx-auto mb-8">Explore our curriculum in detail or get in touch to find the right entry point for you.</p>
+        <p class="p4-kicker text-[#C9A45C] mb-4 flex items-center justify-center gap-4">
+            <span class="p4-hairline"></span>
+            Next step
+            <span class="p4-hairline"></span>
+        </p>
+        <h2 class="p4-display text-3xl md:text-4xl font-medium mb-4 text-[#FDFBF5]">Ready to begin?</h2>
+        <p class="text-[#E9EDF2]/80 max-w-2xl mx-auto mb-8">Explore our curriculum in detail or get in touch to find the right entry point for you.</p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="curriculum.html" class="inline-block bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 rounded-full font-bold transition-transform hover:scale-105 shadow-lg">
+            <a href="curriculum.html" class="inline-block bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-8 py-3 font-medium tracking-wide transition-all shadow-lg hover:shadow-xl">
                 View Curriculum
             </a>
-            <a href="#contact" class="inline-block bg-white/10 hover:bg-white/20 text-white px-8 py-3 rounded-full font-bold transition-all border border-white/30">
+            <a href="#contact" class="inline-block border border-[#FDFBF5]/60 hover:border-[#C9A45C] text-[#FDFBF5] hover:text-[#C9A45C] px-8 py-3 font-medium tracking-wide transition-all">
                 Talk to Admissions
             </a>
         </div>

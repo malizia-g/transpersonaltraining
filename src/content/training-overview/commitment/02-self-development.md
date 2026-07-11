@@ -1,7 +1,7 @@
 ---
 heading: Self-Development
 icon: heart-pulse
-icon_color: text-accent-teal-600
+icon_color: text-science-blue-600
 ---
 
 - **Therapy with a Transpersonal Therapist**

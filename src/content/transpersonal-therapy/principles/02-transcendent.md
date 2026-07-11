@@ -1,7 +1,7 @@
 ---
 icon: infinity
-icon_color: text-violet-600
-icon_bg: bg-violet-100
+icon_color: text-[#0F2540]
+icon_bg: bg-[#0F2540]/10
 title: Transcendent Potential
 ---
 

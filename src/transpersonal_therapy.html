@@ -18,15 +18,17 @@ description: "Learn about transpersonal therapy — an integrative approach that
                 class="w-full h-full object-cover"
             />
         </picture>
-        <div class="absolute inset-0 bg-gradient-to-b from-science-blue-900/70 via-science-blue-800/50 to-neutral-warm-50"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/85 via-[#0F2540]/45 to-neutral-warm-50"></div>
     </div>
 
     <div class="relative z-10 container mx-auto px-6 text-center pt-20">
         <div class="animate-fade-in-up">
-            <span class="inline-block py-1 px-3 rounded-full bg-white/10 text-warm-yellow-200 backdrop-blur-md border border-white/20 text-sm font-medium mb-6 tracking-wider uppercase">
+            <p class="p4-kicker text-[#C9A45C] mb-6 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
                 Holistic Healing
-            </span>
-            <h1 class="text-3xl md:text-5xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-lg">
+                <span class="p4-hairline"></span>
+            </p>
+            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] mb-6 leading-tight drop-shadow-md">
                 Transpersonal Therapy
             </h1>
             <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
@@ -51,7 +53,7 @@ description: "Learn about transpersonal therapy — an integrative approach that
 <section class="py-24 bg-white">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-serif font-bold text-indigo-deep-900 mb-8 text-center">
+            <h2 class="p4-display text-4xl md:text-5xl font-medium text-[#0F2540] mb-8 text-center">
                 {{ whatIs.data.heading }}
             </h2>
             <div class="prose prose-lg max-w-none text-neutral-warm-700">
@@ -62,17 +64,22 @@ description: "Learn about transpersonal therapy — an integrative approach that
 </section>
 
 <!-- Core Principles -->
-<section class="py-24 bg-gradient-to-br from-science-blue-50 via-violet-50 to-indigo-50">
+<section class="py-24 bg-neutral-warm-100">
     <div class="container mx-auto px-6">
         <div class="max-w-5xl mx-auto">
-            <h2 class="text-4xl font-serif font-bold text-indigo-deep-900 mb-12 text-center">
+            <p class="p4-kicker text-[#9A7734] mb-4 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
+                Foundations
+                <span class="p4-hairline"></span>
+            </p>
+            <h2 class="p4-display text-4xl md:text-5xl font-medium text-[#0F2540] mb-12 text-center">
                 Core Principles
             </h2>
 
             <div class="grid md:grid-cols-2 gap-8">
                 {% for p in principles %}
-                <div class="bg-white p-8 rounded-2xl shadow-md">
-                    <div class="w-12 h-12 {{ p.data.icon_bg }} rounded-lg flex items-center justify-center mb-4">
+                <div class="bg-white p-8 shadow-md border border-neutral-warm-200">
+                    <div class="w-12 h-12 {{ p.data.icon_bg }} flex items-center justify-center mb-4">
                         <i data-lucide="{{ p.data.icon }}" class="w-6 h-6 {{ p.data.icon_color }}"></i>
                     </div>
                     <h3 class="text-xl font-bold text-indigo-deep-900 mb-3">{{ p.data.title }}</h3>
@@ -85,18 +92,23 @@ description: "Learn about transpersonal therapy — an integrative approach that
 </section>
 
 <!-- Learn More -->
-<section class="py-24 bg-contact-iris-600 text-white">
+<section class="py-24 bg-gradient-to-br from-[#0F2540] to-[#12305A] text-white">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl font-serif font-bold mb-4">Dive Deeper</h2>
-            <p class="text-lg text-white/80 mb-8">
+            <p class="p4-kicker text-[#C9A45C] mb-4 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
+                Go further
+                <span class="p4-hairline"></span>
+            </p>
+            <h2 class="p4-display text-3xl md:text-4xl font-medium mb-4 text-[#FDFBF5]">Dive Deeper</h2>
+            <p class="text-lg text-[#E9EDF2]/80 mb-8">
                 Explore more about the transpersonal approach and how it can support your practice.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="{{ '/what-is-transpersonal-psychology/' | url }}" class="bg-white hover:bg-slate-100 text-contact-iris-600 px-8 py-4 rounded-full font-medium transition-all shadow-lg">
+                <a href="{{ '/what-is-transpersonal-psychology/' | url }}" class="bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-8 py-4 font-medium tracking-wide transition-all shadow-lg hover:shadow-xl">
                     What is Transpersonal Psychology
                 </a>
-                <a href="training.html" class="bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-full font-medium transition-all shadow-lg">
+                <a href="training.html" class="border border-[#FDFBF5]/60 hover:border-[#C9A45C] text-[#FDFBF5] hover:text-[#C9A45C] px-8 py-4 font-medium tracking-wide transition-all">
                     Our Training Programs
                 </a>
             </div>

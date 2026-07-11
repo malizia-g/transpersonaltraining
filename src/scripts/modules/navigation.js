@@ -17,26 +17,26 @@ export function initMobileMenu() {
 
 /**
  * Initialize navbar scroll effect
- * Makes navbar transparent at top, solid on scroll
+ * Transparent and roomy at the top; solid blue and compressed on scroll
  */
 export function initNavbarScroll() {
     const navbar = document.getElementById('navbar');
     if (!navbar) return;
-    
+
     // Initialize navbar state on page load
     const updateNavbarStyle = () => {
         const scrollClasses = ['shadow-lg'];
-        
+
         if (window.scrollY > 50) {
-            // On scroll - show solid background with backdrop blur
-            navbar.classList.remove('bg-transparent');
+            // On scroll - solid background, backdrop blur, compressed padding
+            navbar.classList.remove('bg-transparent', 'py-6');
             navbar.style.backgroundColor = 'rgba(15, 37, 64, 0.95)';
-            navbar.classList.add('backdrop-blur-sm', ...scrollClasses);
+            navbar.classList.add('backdrop-blur-sm', 'py-1.5', ...scrollClasses);
         } else {
-            // At top - make transparent
-            navbar.classList.add('bg-transparent');
+            // At top - transparent and roomy
+            navbar.classList.add('bg-transparent', 'py-6');
             navbar.style.backgroundColor = 'transparent';
-            navbar.classList.remove('backdrop-blur-sm', ...scrollClasses);
+            navbar.classList.remove('backdrop-blur-sm', 'py-1.5', ...scrollClasses);
         }
     };
     

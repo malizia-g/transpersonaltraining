@@ -1,7 +1,7 @@
 ---
 heading: Supervision
 icon: shield-check
-icon_color: text-amber-600
+icon_color: text-[#9A7734]
 school_track_heading: School Track
 eurotas_track_heading: EUROTAS Track
 ---

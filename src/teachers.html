@@ -11,7 +11,6 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
     /* Teacher Card Styles */
     .teacher-card {
         background: white;
-        border-radius: 1rem;
         overflow: hidden;
         transition: all 0.3s ease;
         cursor: pointer;
@@ -48,23 +47,23 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
     }
     
     .badge-core {
-        background: linear-gradient(135deg, #FCD34D, #FBB03E);
-        color: #1E3A8A;
+        background: #C9A45C;
+        color: #0F2540;
         padding: 0.25rem 0.75rem;
-        border-radius: 1rem;
         font-size: 0.75rem;
         font-weight: 600;
         text-transform: uppercase;
+        letter-spacing: 0.08em;
     }
-    
+
     .badge-guest {
-        background: linear-gradient(135deg, #7C3AED, #6D28D9);
-        color: white;
+        background: #0F2540;
+        color: #FDFBF5;
         padding: 0.25rem 0.75rem;
-        border-radius: 1rem;
         font-size: 0.75rem;
         font-weight: 600;
         text-transform: uppercase;
+        letter-spacing: 0.08em;
     }
     
     /* Tab Navigation Styles */
@@ -155,15 +154,17 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
                 class="w-full h-full object-cover object-center"
             />
         </picture>
-        <div class="absolute inset-0 bg-gradient-to-b from-science-blue-900/70 via-science-blue-800/50 to-neutral-warm-50"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/85 via-[#0F2540]/45 to-neutral-warm-50"></div>
     </div>
 
     <div class="relative z-10 container mx-auto px-6 text-center pt-20">
         <div class="animate-fade-in-up">
-            <span class="inline-block py-1 px-3 rounded-full bg-white/10 text-warm-yellow-200 backdrop-blur-md border border-white/20 text-sm font-medium mb-6 tracking-wider uppercase">
+            <p class="p4-kicker text-[#C9A45C] mb-6 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
                 Our Faculty
-            </span>
-            <h1 class="text-3xl md:text-5xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-lg">
+                <span class="p4-hairline"></span>
+            </p>
+            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] mb-6 leading-tight drop-shadow-md">
                 Meet Our Teachers
             </h1>
             <p class="text-xl md:text-2xl text-neutral-warm-200 max-w-3xl mx-auto font-light leading-relaxed">
@@ -190,10 +191,12 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
 <section class="py-24 bg-white">
     <div class="container mx-auto px-6">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <div class="inline-flex items-center gap-2 mb-4">
-                <i data-lucide="star" class="w-8 h-8 text-warm-yellow-500"></i>
-                <h2 class="text-4xl font-serif font-bold text-indigo-deep-900">{{ coreIntro.data.heading }}</h2>
-            </div>
+            <p class="p4-kicker text-[#9A7734] mb-4 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
+                Core faculty
+                <span class="p4-hairline"></span>
+            </p>
+            <h2 class="p4-display text-4xl md:text-5xl font-medium text-[#0F2540] mb-4">{{ coreIntro.data.heading }}</h2>
             <p class="text-indigo-deep-900/70 text-lg">{{ coreIntro.data.description }}</p>
         </div>
 
@@ -209,7 +212,7 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
                         <i data-lucide="chevron-down" class="w-5 h-5 text-science-blue-400 bio-icon"></i>
                     </div>
                     <h3 class="text-2xl font-serif font-bold text-indigo-deep-900 mb-1">{{ teacher.name }}</h3>
-                    <p class="text-warm-yellow-600 font-medium mb-3">{{ teacher.role }}</p>
+                    <p class="text-[#9A7734] font-medium mb-3">{{ teacher.role }}</p>
                     <p class="text-neutral-warm-600 text-sm">{{ teacher.credentials }}</p>
                 </div>
                 <div class="teacher-bio">
@@ -240,7 +243,7 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
                         </div>
                         {% if teacher.website %}
                         <div class="mt-4">
-                            <a href="{{ teacher.website }}" target="_blank" class="inline-flex items-center gap-2 text-warm-yellow-600 hover:text-warm-yellow-700 font-medium">
+                            <a href="{{ teacher.website }}" target="_blank" class="inline-flex items-center gap-2 text-[#9A7734] hover:text-[#7A5E29] font-medium">
                                 <i data-lucide="globe" class="w-4 h-4"></i>
                                 {{ teacher.website | replace('https://', '') | replace('http://', '') | replace('www.', '') | truncate(30) }}
                             </a>
@@ -282,10 +285,12 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
 <section class="py-24 bg-neutral-warm-50">
     <div class="container mx-auto px-6">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <div class="inline-flex items-center gap-2 mb-4">
-                <i data-lucide="users" class="w-8 h-8 text-violet-600"></i>
-                <h2 class="text-4xl font-serif font-bold text-indigo-deep-900">{{ guestIntro.data.heading }}</h2>
-            </div>
+            <p class="p4-kicker text-[#9A7734] mb-4 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
+                Guest faculty
+                <span class="p4-hairline"></span>
+            </p>
+            <h2 class="p4-display text-4xl md:text-5xl font-medium text-[#0F2540] mb-4">{{ guestIntro.data.heading }}</h2>
             <p class="text-indigo-deep-900/70 text-lg">{{ guestIntro.data.description }}</p>
         </div>
 
@@ -298,10 +303,10 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
                 <div class="p-4">
                     <div class="flex items-center justify-between mb-2">
                         <span class="badge-guest">Guest</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-violet-400 bio-icon"></i>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-[#9A7734] bio-icon"></i>
                     </div>
                     <h3 class="text-lg font-serif font-bold text-indigo-deep-900 mb-1">{{ teacher.name }}</h3>
-                    <p class="text-violet-600 font-medium text-sm">{{ teacher.location }}</p>
+                    <p class="text-[#9A7734] font-medium text-sm">{{ teacher.location }}</p>
                 </div>
                 <div class="teacher-bio">
                     <!-- Tab Navigation -->
@@ -362,13 +367,18 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
 </section>
 
 <!-- CTA Section -->
-<section class="py-24 bg-contact-iris-600 text-white relative overflow-hidden">
+<section class="py-24 bg-gradient-to-br from-[#0F2540] to-[#12305A] text-white relative overflow-hidden">
     <div class="container mx-auto px-6 text-center relative z-10">
-        <h2 class="text-4xl md:text-5xl font-serif font-bold mb-6">Learn from the Best</h2>
-        <p class="text-xl text-white/80 max-w-2xl mx-auto mb-10">
+        <p class="p4-kicker text-[#C9A45C] mb-5 flex items-center justify-center gap-4">
+            <span class="p4-hairline"></span>
+            Join us
+            <span class="p4-hairline"></span>
+        </p>
+        <h2 class="p4-display text-4xl md:text-5xl font-medium mb-6 text-[#FDFBF5]">Learn from the Best</h2>
+        <p class="text-xl text-[#E9EDF2]/80 max-w-2xl mx-auto mb-10">
             Join our internationally recognized training program and study with experienced teachers from around the world
         </p>
-        <a href="#contact" class="inline-flex items-center gap-2 bg-white hover:bg-slate-100 text-contact-iris-600 px-8 py-4 rounded-full font-semibold text-lg transition-all hover:scale-105 shadow-xl">
+        <a href="#contact" class="inline-flex items-center gap-2 bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
             <span>Apply to Our Program</span>
             <i data-lucide="arrow-right" class="w-5 h-5"></i>
         </a>

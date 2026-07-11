@@ -6,6 +6,8 @@ module.exports = {
     "./src/scripts/**/*.js"
   ],
   safelist: [
+    'py-1.5',
+    'py-6',
     'bg-science-blue-950/95',
     'backdrop-blur-sm',
     'shadow-lg',
@@ -83,7 +85,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        serif: ['Merriweather', 'serif'],
+        serif: ['Cormorant Garamond', 'Georgia', 'serif'],
       },
       animation: {
         'fade-in-up': 'fadeInUp 1s ease-out forwards',
