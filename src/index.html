@@ -36,7 +36,7 @@ ogType: website
 
     <div class="relative z-10 container mx-auto px-6 pb-16 pt-40">
         <div class="max-w-3xl animate-fade-in-up">
-            <p class="p4-kicker text-[#C9A45C] mb-7 flex items-center gap-4">
+            <p class="p4-kicker text-[#C9A45C] mb-7 flex items-center justify-center md:justify-start gap-4">
                 <span class="p4-hairline"></span>
                 A four-year path &middot; 2027&ndash;2030
             </p>
@@ -88,7 +88,7 @@ ogType: website
     <div class="container mx-auto px-6">
         <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
             <div class="lg:col-span-6">
-                <p class="p4-kicker text-[#9A7734] mb-6 flex items-center gap-4">
+                <p class="p4-kicker text-[#9A7734] mb-6 flex items-center justify-center md:justify-start gap-4">
                     <span class="p4-hairline"></span> Welcome to our school
                 </p>
                 <h2 class="p4-display text-4xl md:text-6xl font-medium text-indigo-deep-900 leading-[1.08] mb-8">
@@ -159,18 +159,18 @@ ogType: website
             <div class="bg-[#FFFEF9] flex flex-col items-center text-center hover:bg-white transition-colors duration-300">
                 <p class="p4-display text-5xl text-[#C9A45C] pt-8">{{ romans[loop.index0] }}</p>
                 {% if loop.index0 == 0 %}
-                <picture>
+                <picture class="w-full block mt-6">
                     <source srcset="{{ '/assets/images/Community/community-embrace-support.webp' | url }}" type="image/webp">
                     <img src="{{ '/assets/images/Community/community-embrace-support.jpg' | url }}"
                          alt="A group embrace during a seminar"
-                         class="w-full h-52 object-cover object-[50%_25%] mt-6" loading="lazy">
+                         class="w-full h-52 object-cover object-[50%_25%]" loading="lazy">
                 </picture>
                 {% elif loop.index0 == 1 %}
-                <picture>
+                <picture class="w-full block mt-6">
                     <source srcset="{{ '/assets/images/Techniques/technique-mandala-drawing.webp' | url }}" type="image/webp">
                     <img src="{{ '/assets/images/Techniques/technique-mandala-drawing.jpg' | url }}"
                          alt="Hands gathered around a mandala during integration work"
-                         class="w-full h-52 object-cover mt-6" loading="lazy">
+                         class="w-full h-52 object-cover" loading="lazy">
                 </picture>
                 {% else %}
                 <div class="w-full h-52 bg-[#0F2540] flex items-center justify-center p-8 mt-6">
@@ -207,7 +207,7 @@ ogType: website
                 <div class="absolute -inset-4 border border-[#C9A45C]/60 pointer-events-none" aria-hidden="true"></div>
             </div>
             <div class="order-1 lg:order-2">
-                <p class="p4-kicker text-[#9A7734] mb-6 flex items-center gap-4">
+                <p class="p4-kicker text-[#9A7734] mb-6 flex items-center justify-center md:justify-start gap-4">
                     <span class="p4-hairline"></span> An honest question
                 </p>
                 <h2 class="p4-display text-4xl md:text-5xl font-medium text-indigo-deep-900 leading-tight mb-6">

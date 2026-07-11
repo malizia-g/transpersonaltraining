@@ -7,4 +7,4 @@ label: Counseling Track
 2. Personal statement describing professional goals
 3. Professional references (minimum 2)
 4. Interview with program coordinator
-5. Commitment to personal ongoing development and supervision
+5. Agreement to begin supervised practice hours under a Level 2 mentor

@@ -9,4 +9,4 @@ label: Psychotherapy Track
 4. Clinical supervisor recommendation
 5. Detailed professional statement and clinical goals
 6. Comprehensive interview with faculty panel
-7. Commitment to ongoing personal therapy and supervision
+7. Agreement to the training's ethical and confidentiality code for supervised clinical practice

@@ -195,6 +195,9 @@ body[class*="theme-"] #mobile-menu a:hover {
     background: #C9A45C;
     vertical-align: middle;
 }
+@media (max-width: 767px) {
+    .p4-hairline { width: 1.5rem; }
+}
 .p4-dropcap p:first-child::first-letter {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 3.6em;
