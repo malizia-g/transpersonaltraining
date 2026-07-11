@@ -102,7 +102,8 @@
     </div>
 
     <!-- Navigation -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 bg-transparent text-slate-100/90">
+    
+<nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 bg-transparent text-slate-100/90">
     <div class="container mx-auto px-6 flex justify-between items-center relative z-10">
         <!-- Logo (Desktop Only) -->
         <a href="/transpersonaltraining/" class="hidden md:flex items-center gap-2 hover:opacity-80 transition-opacity">
@@ -160,10 +161,10 @@
             </div>
 
 
-            <!-- Transpersonal Therapy Dropdown (con Techniques) -->
+            <!-- Resources Dropdown (con Techniques) -->
             <div class="dropdown">
                 <button type="button" class="nav-link text-sm font-medium hover:text-[#C9A45C] transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
-                    Transpersonal Therapy <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    Resources <i data-lucide="chevron-down" class="w-4 h-4"></i>
                 </button>
                 <div class="dropdown-menu">
                     <a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="text-sm">
@@ -183,7 +184,7 @@
 
             <a href="/transpersonaltraining/blog/index.html" class="nav-link text-sm font-medium hover:text-[#C9A45C] transition-colors">Blog</a>
 
-            <a href="#contact" class="bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-6 py-2 font-medium tracking-wide transition-colors shadow-md">Apply</a>
+            <a href="/transpersonaltraining/#contact" class="bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-6 py-2 font-medium tracking-wide transition-colors shadow-md">Apply</a>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -201,12 +202,12 @@
         <a href="/transpersonaltraining/venues/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Venues</a>
         <a href="/transpersonaltraining/lectures-schedule/index.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Lectures Schedule</a>
         <a href="/transpersonaltraining/teachers/index.html" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Our Teachers</a>
-        <span class="text-slate-200 py-2 border-b block font-semibold">Transpersonal Therapy</span>
+        <span class="text-slate-200 py-2 border-b block font-semibold">Resources</span>
         <a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ What is Transpersonal Psychology</a>
         <a href="/transpersonaltraining/become-a-client-model/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Become a Client Model</a>
         <a href="/transpersonaltraining/techniques/" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Techniques</a>
         <a href="/transpersonaltraining/blog/index.html" class="text-slate-200 py-2 border-b block transition-colors">Blog</a>
-        <a href="#contact" class="bg-[#C9A45C] text-[#0F2540] px-6 py-3 w-full mt-4 font-bold text-center block">Apply</a>
+        <a href="/transpersonaltraining/#contact" class="bg-[#C9A45C] text-[#0F2540] px-6 py-3 w-full mt-4 font-bold text-center block">Apply</a>
     </div>
 </nav>
 
@@ -284,9 +285,10 @@
     <div class="container mx-auto px-6 relative z-10">
         <div class="max-w-4xl mx-auto">
             <div class="mb-8">
-                <p class="p4-kicker text-[#9A7734] mb-3 flex items-center gap-4">
+                <p class="p4-kicker text-[#9A7734] mb-3 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
                     <span class="p4-hairline"></span>
                     The path
+                    <span class="p4-hairline md:hidden"></span>
                 </p>
                 <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540]">Our Hero Journey</h2>
             </div>
@@ -1695,7 +1697,8 @@ function toggleSubModule(id) {
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#0B1B30] text-[#B9C4D2] py-16">
+    
+<footer class="bg-[#0B1B30] text-[#B9C4D2] py-16">
     <div class="container mx-auto px-6">
         <div class="grid md:grid-cols-4 gap-12 border-b border-white/10 pb-12 mb-12">
             <!-- About Column -->
@@ -1728,7 +1731,7 @@ function toggleSubModule(id) {
                 <h4 class="p4-kicker text-[#C9A45C] mb-5">Resources</h4>
                 <ul class="space-y-2 text-sm">
                     <li><a href="/transpersonaltraining/techniques/" class="hover:text-[#C9A45C] transition-colors">Techniques</a></li>
-                    <li><a href="/transpersonaltraining/transpersonal_therapy/" class="hover:text-[#C9A45C] transition-colors">Transpersonal Therapy</a></li>
+                    <li><a href="/transpersonaltraining/venues/" class="hover:text-[#C9A45C] transition-colors">Venues</a></li>
                     <li><a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="hover:text-[#C9A45C] transition-colors">What is Transpersonal Psychology</a></li>
                     <li><a href="/transpersonaltraining/become-a-client-model/" class="hover:text-[#C9A45C] transition-colors">Become a Client Model</a></li>
                 </ul>
@@ -1738,9 +1741,9 @@ function toggleSubModule(id) {
             <div>
                 <h4 class="p4-kicker text-[#C9A45C] mb-5">Connect</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="#contact" class="hover:text-[#C9A45C] transition-colors">Contact Us</a></li>
-                    <li><a href="https://transpersonal-training.com" class="hover:text-[#C9A45C] transition-colors">Main Website</a></li>
-                    <li><a href="https://transpersonal-training.com/?page_id=3" class="hover:text-[#C9A45C] transition-colors">Privacy Policy</a></li>
+                    <li><a href="/transpersonaltraining/#contact" class="hover:text-[#C9A45C] transition-colors">Contact Us</a></li>
+                    <li><a href="/transpersonaltraining/" class="hover:text-[#C9A45C] transition-colors">Home</a></li>
+                    <li><button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="hover:text-[#C9A45C] transition-colors text-left bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy Policy</button></li>
                 </ul>
             </div>
         </div>
@@ -1749,12 +1752,59 @@ function toggleSubModule(id) {
         <div class="flex flex-col md:flex-row justify-between items-center text-xs text-[#7185A0]">
             <p>&copy; 2026 transpersonal-training.com — Educating therapists for a revolution of consciousness.</p>
             <div class="flex gap-6 mt-4 md:mt-0">
-                <a href="https://transpersonal-training.com/?page_id=3" class="hover:text-[#C9A45C]">Privacy</a>
+                <button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="hover:text-[#C9A45C] bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy</button>
                 <a href="https://transpersonal-training.com/agreement-appendix" class="hover:text-[#C9A45C]">Agreement</a>
             </div>
         </div>
     </div>
 </footer>
+
+<!-- Privacy Policy Modal -->
+<dialog id="privacy-modal" class="max-w-2xl w-[92vw] p-0 backdrop:bg-[#0B1B30]/70 shadow-2xl">
+    <div class="bg-[#FFFEF9] max-h-[85vh] overflow-y-auto">
+        <div class="sticky top-0 bg-[#0F2540] text-[#FDFBF5] px-6 py-5 flex items-center justify-between">
+            <h2 class="p4-display text-2xl font-medium">Privacy Policy</h2>
+            <button type="button" onclick="document.getElementById('privacy-modal').close()" aria-label="Close" class="text-[#FDFBF5] hover:text-[#C9A45C] bg-transparent border-none cursor-pointer p-1">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <div class="px-6 md:px-8 py-8 space-y-5 text-neutral-warm-700 leading-relaxed text-sm md:text-base">
+            <p>
+                This website does not use cookies, analytics, tracking pixels or any similar technology, and it does not
+                collect, store or process any personal data through your simple use of these pages. There is nothing to
+                consent to and nothing to opt out of — no data is gathered by browsing this site.
+            </p>
+            <h3 class="text-lg font-semibold text-indigo-deep-900">If you contact us or apply</h3>
+            <p>
+                The only personal data we ever receive is what you choose to send us directly — for example through the
+                application form or by writing to
+                <a href="mailto:info@transpersonal-training.com" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4">info@transpersonal-training.com</a>.
+                In that case, the following applies in accordance with the EU General Data Protection Regulation
+                (Regulation (EU) 2016/679, "GDPR"):
+            </p>
+            <ul class="list-disc list-inside space-y-2">
+                <li><span class="font-medium text-neutral-warm-800">Data controller:</span> Transpersonal Training, reachable at the email address above.</li>
+                <li><span class="font-medium text-neutral-warm-800">Categories of data processed:</span> the name, email address and any other information you voluntarily include in your message or application.</li>
+                <li><span class="font-medium text-neutral-warm-800">Purpose and legal basis:</span> responding to your enquiry and assessing applications, on the basis of your consent (Art. 6(1)(a) GDPR) and, where applicable, to take pre-contractual steps at your request (Art. 6(1)(b) GDPR).</li>
+                <li><span class="font-medium text-neutral-warm-800">Retention:</span> your data is kept only for as long as necessary to handle your enquiry or application, and is then deleted.</li>
+                <li><span class="font-medium text-neutral-warm-800">Recipients:</span> your data is not sold or shared with third parties, save where strictly necessary to respond to you (e.g. our email provider) or where required by law.</li>
+                <li><span class="font-medium text-neutral-warm-800">Your rights:</span> under Articles 15–22 GDPR you may request access to, rectification or erasure of your data, restriction of or objection to its processing, and data portability, and you may lodge a complaint with your national data protection authority at any time. To exercise these rights, simply email us at the address above.</li>
+            </ul>
+            <p class="text-xs text-neutral-warm-500 pt-2 border-t border-neutral-warm-200">
+                Last updated 2026.
+            </p>
+        </div>
+    </div>
+</dialog>
+<script>
+    (function () {
+        var dialog = document.getElementById('privacy-modal');
+        if (!dialog) return;
+        dialog.addEventListener('click', function (e) {
+            if (e.target === dialog) dialog.close();
+        });
+    })();
+</script>
 
 
     <!-- Main application script -->
