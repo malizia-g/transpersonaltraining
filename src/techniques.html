@@ -11,9 +11,9 @@ description: "Discover the therapeutic techniques used in our training: holotrop
 <header class="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 z-0">
         <picture>
-            <source srcset="/assets/images/Headers/hero-techniques-somatic-bodywork.webp" type="image/webp">
+            <source srcset="{{ '/assets/images/Headers/hero-techniques-somatic-bodywork.webp' | url }}" type="image/webp">
             <img
-                src="/assets/images/Headers/hero-techniques-somatic-bodywork.jpg"
+                src="{{ '/assets/images/Headers/hero-techniques-somatic-bodywork.jpg' | url }}"
                 alt="Somatic bodywork during a transpersonal training seminar"
                 class="w-full h-full object-cover"
             />
@@ -64,8 +64,8 @@ description: "Discover the therapeutic techniques used in our training: holotrop
             <div class="bg-neutral-warm-100 rounded-2xl border border-neutral-warm-200 overflow-hidden">
                 {% if card.data.image %}
                 <picture>
-                    <source srcset="{{ card.data.image }}.webp" type="image/webp">
-                    <img src="{{ card.data.image }}.jpg" alt="{{ card.data.title }}" class="w-full h-48 object-cover {{ card.data.image_position or 'object-center' }}" loading="lazy">
+                    <source srcset="{{ (card.data.image ~ '.webp') | url }}" type="image/webp">
+                    <img src="{{ (card.data.image ~ '.jpg') | url }}" alt="{{ card.data.title }}" class="w-full h-48 object-cover {{ card.data.image_position or 'object-center' }}" loading="lazy">
                 </picture>
                 {% endif %}
                 <div class="p-8">
@@ -106,8 +106,8 @@ description: "Discover the therapeutic techniques used in our training: holotrop
             ] %}
             {% for img in galleryImages %}
             <picture>
-                <source srcset="/assets/images/Techniques/{{ img[0] }}.webp" type="image/webp">
-                <img src="/assets/images/Techniques/{{ img[0] }}.jpg" alt="{{ img[1] }}" class="w-full h-48 object-cover {{ img[2] }} rounded-xl shadow-sm" loading="lazy">
+                <source srcset="{{ ('/assets/images/Techniques/' ~ img[0] ~ '.webp') | url }}" type="image/webp">
+                <img src="{{ ('/assets/images/Techniques/' ~ img[0] ~ '.jpg') | url }}" alt="{{ img[1] }}" class="w-full h-48 object-cover {{ img[2] }} rounded-xl shadow-sm" loading="lazy">
             </picture>
             {% endfor %}
         </div>
