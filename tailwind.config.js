@@ -6,6 +6,8 @@ module.exports = {
     "./src/scripts/**/*.js"
   ],
   safelist: [
+    'py-1.5',
+    'py-6',
     'bg-science-blue-950/95',
     'backdrop-blur-sm',
     'shadow-lg',

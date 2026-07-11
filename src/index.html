@@ -10,164 +10,234 @@ ogType: website
 {% set quote = 'home/quote.md' | pageContent %}
 {% set homeCards = 'home/cards' | pageContentDir %}
 
-<!-- Hero Section -->
-<header class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
-    <!-- Background Media with Overlay -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+<style>
+    .p4-display { font-family: 'Cormorant Garamond', Georgia, serif; }
+    .p4-kicker {
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        font-size: 0.78rem;
+        font-weight: 600;
+    }
+    .p4-hairline {
+        display: inline-block;
+        width: 4rem;
+        height: 1px;
+        background: #C9A45C;
+        vertical-align: middle;
+    }
+    .p4-dropcap p:first-child::first-letter {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 3.6em;
+        line-height: 0.8;
+        float: left;
+        padding-right: 0.14em;
+        color: #1E40AF;
+        font-weight: 500;
+    }
+    .p4-welcome p + p { margin-top: 1.1rem; }
+    .p4-foryou ul { list-style: none; margin: 0; padding: 0; }
+    .p4-foryou ul li {
+        position: relative;
+        padding: 1.15rem 0 1.15rem 2.4rem;
+        border-bottom: 1px solid rgba(15, 37, 64, 0.15);
+        line-height: 1.65;
+    }
+    .p4-foryou ul li:first-child { border-top: 1px solid rgba(15, 37, 64, 0.15); }
+    .p4-foryou ul li::before {
+        content: '✦';
+        position: absolute;
+        left: 0.2rem;
+        top: 1.15rem;
+        color: #9A7734;
+        font-size: 0.9rem;
+    }
+    .p4-filmstrip::-webkit-scrollbar { height: 8px; }
+    .p4-filmstrip::-webkit-scrollbar-track { background: rgba(15, 37, 64, 0.08); border-radius: 999px; }
+    .p4-filmstrip::-webkit-scrollbar-thumb { background: rgba(154, 119, 52, 0.55); border-radius: 999px; }
+    /* Fixed-background parallax; iOS ignores background-attachment: fixed, so fall back to scroll there */
+    .p4-parallax {
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+    @media (hover: none), (max-width: 768px) {
+        .p4-parallax { background-attachment: scroll; }
+    }
+</style>
+
+<!-- ═══════════ HERO — video threshold ═══════════ -->
+<header class="relative min-h-[92vh] flex items-end overflow-hidden bg-[#0F2540]">
     <div class="absolute inset-0 z-0">
-        <!-- Video Background -->
-        <video id="hero-video" 
-               class="absolute inset-0 w-full h-full object-cover z-10" 
-               autoplay 
-               muted 
-               loop 
-               playsinline
-               poster=""
-               src="assets/videos/forest-stream.mp4">
-        </video>
-        
-        <!-- Fallback Image (shown only if video fails to load) -->
+        <!-- Fallback image (shown only if the video fails to load) -->
         <picture>
-            <source srcset="/assets/images/Headers/hero-homepage-venue-exterior.webp" type="image/webp">
-            <img
-                src="/assets/images/Headers/hero-homepage-venue-exterior.jpg"
-                alt="The seminar house in the forest"
-                class="absolute inset-0 w-full h-full object-cover z-0"
-                id="hero-image"
-            />
+            <source srcset="{{ '/assets/images/Headers/hero-homepage-venue-exterior.webp' | url }}" type="image/webp">
+            <img src="{{ '/assets/images/Headers/hero-homepage-venue-exterior.jpg' | url }}"
+                 alt="The seminar house in the forest"
+                 class="absolute inset-0 w-full h-full object-cover z-0"
+                 id="hero-image">
         </picture>
-        
-        <!-- Overlay Gradient -->
-        <div class="absolute inset-0 bg-gradient-to-b from-science-blue-900/70 via-science-blue-800/50 to-neutral-warm-50 z-20"></div>
+        <!-- Video background -->
+        <video id="hero-video"
+               class="absolute inset-0 w-full h-full object-cover z-10"
+               autoplay
+               muted
+               loop
+               playsinline
+               src="{{ '/assets/videos/forest-stream.mp4' | url }}">
+        </video>
+        <div class="absolute inset-0 z-20 bg-gradient-to-b from-[#0F2540]/90 via-[#0F2540]/40 to-neutral-warm-50"></div>
+        <div class="absolute inset-0 z-20 bg-gradient-to-r from-[#0F2540]/70 via-[#0F2540]/20 to-transparent"></div>
     </div>
 
-    <!-- Content -->
-    <div class="relative z-10 container mx-auto px-6 text-center pt-20">
-        <div class="animate-fade-in-up">
-            <span class="inline-block py-1 px-3 rounded-full bg-white/10 text-warm-yellow-200 backdrop-blur-md border border-white/20 text-sm font-medium mb-6 tracking-wider uppercase">
-                Professional Training &middot; 2027&ndash;2030
-            </span>
-            <h1 class="text-3xl md:text-5xl font-serif font-bold text-slate-100 mb-6 leading-tight drop-shadow-lg">
-                Educating Therapists for a Revolution of Consciousness
-            </h1>
-            <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
-                A four-year, EUROTAS-accredited training in Transpersonal Psychotherapy, Counselling &amp; Holotropic Breathwork &mdash; delivered online, with in-person intensives across Western Europe.
+    <div class="relative z-10 container mx-auto px-6 pb-16 pt-40">
+        <div class="max-w-3xl animate-fade-in-up">
+            <p class="p4-kicker text-[#C9A45C] mb-7 flex items-center gap-4">
+                <span class="p4-hairline"></span>
+                A four-year path &middot; 2027&ndash;2030
             </p>
-            <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#contact" class="bg-white hover:bg-slate-100 text-science-blue-900 px-8 py-4 rounded-full font-medium text-lg transition-transform hover:scale-105 shadow-lg hover:shadow-xl">
-                    Apply for the 2027&ndash;2030 Cohort
+            <h1 class="p4-display text-5xl md:text-7xl font-medium text-[#FDFBF5] leading-[1.05] mb-7 drop-shadow-md">
+                Educating therapists for a<br class="hidden md:block">
+                <em class="text-[#C9A45C]">revolution of consciousness</em>
+            </h1>
+            <p class="text-lg md:text-xl text-[#E9EDF2] max-w-2xl font-light leading-relaxed mb-10">
+                A EUROTAS-accredited training in Transpersonal Psychotherapy, Counselling &amp; Holotropic Breathwork &mdash; online lectures, in-person intensives across Western Europe.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="#contact" class="bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-10 py-4 font-medium text-lg tracking-wide text-center transition-all shadow-lg hover:shadow-xl">
+                    Apply for the 2027&ndash;2030 cohort
                 </a>
-                <a href="curriculum/index.html" class="bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-full font-medium text-lg transition-all shadow-lg hover:shadow-xl">
-                    Explore the Curriculum
+                <a href="curriculum/index.html" class="border border-[#FDFBF5]/60 hover:border-[#C9A45C] bg-[#0F2540]/30 text-[#FDFBF5] hover:text-[#C9A45C] px-10 py-4 font-medium text-lg tracking-wide text-center transition-all">
+                    Explore the curriculum
                 </a>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Welcome Section -->
-<section id="welcome" class="py-24 bg-white">
+<!-- Fact strip -->
+<div class="bg-neutral-warm-50">
     <div class="container mx-auto px-6">
-        <div class="max-w-4xl mx-auto text-center mb-16">
-            <h2 class="text-4xl md:text-5xl font-serif font-bold text-indigo-deep-900 mb-6">
-                Welcome to our School
-            </h2>
-            <div class="space-y-4 text-lg text-neutral-warm-700 leading-relaxed">
-                {{ welcome.html | safe }}
-                <p class="font-medium text-indigo-deep-900">
-                    <a href="{{ '/lectures-schedule/' | url }}" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4">Online lectures</a>
-                    and
-                    <a href="{{ '/schedule/' | url }}" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4">intensive seminars</a>
-                    in Western Europe.<br>
-                    2027 – 2030
-                </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 py-10 border-b border-neutral-warm-200">
+            <div class="flex items-center gap-3">
+                <i data-lucide="award" class="w-8 h-8 text-science-blue-600 shrink-0"></i>
+                <p class="text-sm text-neutral-warm-700 leading-snug"><span class="block font-semibold text-indigo-deep-900">EUROTAS accredited</span>recognised qualification</p>
             </div>
-
-            <div class="mt-12 grid md:grid-cols-2 gap-8 items-stretch">
-                <div class="grid grid-cols-2 gap-4">
-                    <picture>
-                        <source srcset="/assets/images/Community/community-group-laughter.webp" type="image/webp">
-                        <img src="/assets/images/Community/community-group-laughter.jpg" alt="Participants sharing authentic laughter during a seminar" class="w-full h-44 md:h-52 object-cover object-top rounded-2xl shadow-md" loading="lazy">
-                    </picture>
-                    <picture>
-                        <source srcset="/assets/images/Community/community-pair-mirroring.webp" type="image/webp">
-                        <img src="/assets/images/Community/community-pair-mirroring.jpg" alt="Two participants in a mirroring exercise" class="w-full h-44 md:h-52 object-cover object-top rounded-2xl shadow-md" loading="lazy">
-                    </picture>
-                    <picture>
-                        <source srcset="/assets/images/Community/community-group-circle-standing.webp" type="image/webp">
-                        <img src="/assets/images/Community/community-group-circle-standing.jpg" alt="Group standing together in a learning circle" class="w-full h-44 md:h-52 object-cover object-top rounded-2xl shadow-md" loading="lazy">
-                    </picture>
-                    <picture>
-                        <source srcset="/assets/images/Community/community-walking-exercise-a.webp" type="image/webp">
-                        <img src="/assets/images/Community/community-walking-exercise-a.jpg" alt="Participants during a walking exercise outdoors" class="w-full h-44 md:h-52 object-cover object-top rounded-2xl shadow-md" loading="lazy">
-                    </picture>
-                </div>
-
-                <div class="text-left bg-indigo-50 border border-indigo-200 rounded-xl p-6 md:p-8 shadow-sm h-full flex flex-col justify-center">
-                    <p class="text-sm uppercase tracking-wider text-science-blue-700 font-semibold mb-3">{{ quote.data.label }}</p>
-                    <p class="text-xl md:text-2xl font-serif text-indigo-deep-900 leading-relaxed">
-                        "{{ quote.data.quote }}"
-                    </p>
-                    <p class="mt-4 text-neutral-warm-700">
-                        {{ quote.data.attribution }}
-                    </p>
-                </div>
+            <div class="flex items-center gap-3">
+                <i data-lucide="calendar-range" class="w-8 h-8 text-science-blue-600 shrink-0"></i>
+                <p class="text-sm text-neutral-warm-700 leading-snug"><span class="block font-semibold text-indigo-deep-900">Four years</span>2027 &ndash; 2030</p>
             </div>
-
-            <div class="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                <picture>
-                    <source srcset="/assets/images/Community/community-art-exercise-a.webp" type="image/webp">
-                    <img src="/assets/images/Community/community-art-exercise-a.jpg" alt="Participants during a group art exercise" class="w-full h-36 object-cover rounded-xl shadow-sm" loading="lazy">
-                </picture>
-                <picture>
-                    <source srcset="/assets/images/Community/community-break-terrace-watermelon.webp" type="image/webp">
-                    <img src="/assets/images/Community/community-break-terrace-watermelon.jpg" alt="Shared break on the terrace in golden light" class="w-full h-36 object-cover rounded-xl shadow-sm" loading="lazy">
-                </picture>
-                <picture>
-                    <source srcset="/assets/images/Community/community-group-sharing-smiles.webp" type="image/webp">
-                    <img src="/assets/images/Community/community-group-sharing-smiles.jpg" alt="Group sharing a warm moment together" class="w-full h-36 object-cover object-top rounded-xl shadow-sm" loading="lazy">
-                </picture>
-                <picture>
-                    <source srcset="/assets/images/Community/community-pair-holding-close.webp" type="image/webp">
-                    <img src="/assets/images/Community/community-pair-holding-close.jpg" alt="Two participants in a supportive holding exercise" class="w-full h-36 object-cover object-top rounded-xl shadow-sm" loading="lazy">
-                </picture>
-                <picture>
-                    <source srcset="/assets/images/Community/community-pair-movement-a.webp" type="image/webp">
-                    <img src="/assets/images/Community/community-pair-movement-a.jpg" alt="Pair engaged in a movement exercise" class="w-full h-36 object-cover object-top rounded-xl shadow-sm" loading="lazy">
-                </picture>
-                <picture>
-                    <source srcset="/assets/images/Community/community-walking-exercise-b.webp" type="image/webp">
-                    <img src="/assets/images/Community/community-walking-exercise-b.jpg" alt="Participants walking together during an exercise" class="w-full h-36 object-cover object-top rounded-xl shadow-sm" loading="lazy">
-                </picture>
+            <div class="flex items-center gap-3">
+                <i data-lucide="laptop" class="w-8 h-8 text-science-blue-600 shrink-0"></i>
+                <p class="text-sm text-neutral-warm-700 leading-snug"><span class="block font-semibold text-indigo-deep-900">Online lectures</span>study from anywhere</p>
             </div>
-
-            <div class="mt-12 text-left bg-indigo-50 border border-indigo-200 rounded-xl p-8 md:p-10">
-                <h3 class="text-2xl md:text-3xl font-serif font-bold text-indigo-deep-900 mb-6">{{ forYou.data.heading }}</h3>
-                <p class="text-neutral-warm-700 leading-relaxed mb-4">{{ forYou.data.intro }}</p>
-                <div class="for-you-content text-neutral-warm-700 leading-relaxed">
-                    {{ forYou.html | safe }}
-                </div>
+            <div class="flex items-center gap-3">
+                <i data-lucide="tent-tree" class="w-8 h-8 text-science-blue-600 shrink-0"></i>
+                <p class="text-sm text-neutral-warm-700 leading-snug"><span class="block font-semibold text-indigo-deep-900">In-person intensives</span>across Western Europe</p>
             </div>
         </div>
+    </div>
+</div>
 
-        <div class="grid md:grid-cols-3 gap-8">
-            {% set cardImages = [
-                '/assets/images/Community/community-facilitator-instructions.jpg',
-                '/assets/images/Community/community-pair-holding-a.jpg',
-                '/assets/images/Community/community-pair-exercise-standing.jpg'
-            ] %}
-            {% for card in homeCards %}
-            <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 border-t-4 {{ card.data.border_color }}">
-                <img
-                    src="{{ cardImages[loop.index0] }}"
-                    alt="{{ card.data.title }}"
-                    class="w-full h-44 object-cover object-top rounded-xl mb-6"
-                    loading="lazy"
-                >
-                <div class="space-y-3">
-                    <div class="flex items-start gap-3">
-                        <i data-lucide="{{ card.data.icon }}" class="w-5 h-5 {{ card.data.icon_color }} shrink-0 mt-1"></i>
-                        <h3 class="text-2xl font-serif font-bold text-indigo-deep-900">{{ card.data.title }}</h3>
+<!-- ═══════════ WELCOME — editorial split ═══════════ -->
+<section id="welcome" class="bg-neutral-warm-50 py-20 md:py-28">
+    <div class="container mx-auto px-6">
+        <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
+            <div class="lg:col-span-6">
+                <p class="p4-kicker text-[#9A7734] mb-6 flex items-center gap-4">
+                    <span class="p4-hairline"></span> Welcome to our school
+                </p>
+                <h2 class="p4-display text-4xl md:text-6xl font-medium text-indigo-deep-900 leading-[1.08] mb-8">
+                    A profession of the mind, learned with the whole&nbsp;heart
+                </h2>
+                <div class="p4-welcome p4-dropcap text-lg text-neutral-warm-700 leading-relaxed">
+                    {{ welcome.html | safe }}
+                </div>
+                <p class="mt-8 text-indigo-deep-900 font-medium">
+                    <a href="{{ '/lectures-schedule/' | url }}" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4 decoration-2">Online lectures</a>
+                    and
+                    <a href="{{ '/schedule/' | url }}" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4 decoration-2">intensive seminars</a>
+                    in Western Europe &middot; 2027&ndash;2030
+                </p>
+            </div>
+            <div class="lg:col-span-6 relative pb-16 pr-4 md:pr-10">
+                <picture>
+                    <source srcset="{{ '/assets/images/Community/community-group-laughter.webp' | url }}" type="image/webp">
+                    <img src="{{ '/assets/images/Community/community-group-laughter.jpg' | url }}"
+                         alt="Participants sharing authentic laughter during a seminar"
+                         class="w-full aspect-[4/5] object-cover object-top shadow-xl">
+                </picture>
+                <figure class="absolute -bottom-2 -left-2 md:left-auto md:-right-2 w-48 md:w-60 rotate-[-4deg]">
+                    <div class="bg-white p-2.5 pb-4 shadow-2xl border border-neutral-warm-200">
+                        <picture>
+                            <source srcset="{{ '/assets/images/Community/community-break-terrace-watermelon.webp' | url }}" type="image/webp">
+                            <img src="{{ '/assets/images/Community/community-break-terrace-watermelon.jpg' | url }}"
+                                 alt="A shared break on the terrace in golden light"
+                                 class="w-full h-32 md:h-40 object-cover">
+                        </picture>
+                        <figcaption class="p4-display italic text-sm text-neutral-warm-700 mt-2 text-center">life between the lessons</figcaption>
                     </div>
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ QUOTE — mandala band with parallax ═══════════ -->
+<section class="relative py-28 md:py-40 overflow-hidden p4-parallax" style="background-image: url('{{ '/assets/images/Symbolic/symbolic-mandala-collection.jpg' | url }}');">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/90 via-[#12305A]/80 to-[#0F2540]/90"></div>
+    <div class="relative container mx-auto px-6">
+        <div class="max-w-3xl mx-auto text-center">
+            <p class="p4-kicker text-[#C9A45C] mb-10">{{ quote.data.label }}</p>
+            <p class="p4-display text-3xl md:text-5xl italic font-medium text-[#FDFBF5] leading-[1.25]">
+                &ldquo;{{ quote.data.quote }}&rdquo;
+            </p>
+            <p class="mt-10 text-[#B9C6D8]">{{ quote.data.attribution }}</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ THREE ROOTS ═══════════ -->
+<section class="bg-neutral-warm-100 py-20 md:py-28">
+    <div class="container mx-auto px-6">
+        <div class="max-w-2xl mx-auto text-center mb-16">
+            <p class="p4-kicker text-[#9A7734] mb-6 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span> What you will find here <span class="p4-hairline"></span>
+            </p>
+            <h2 class="p4-display text-4xl md:text-6xl font-medium text-indigo-deep-900 leading-tight">
+                Three roots of the training
+            </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-px max-w-6xl mx-auto bg-[#C9A45C]/30 border border-[#C9A45C]/30">
+            {% set romans = ['I', 'II', 'III'] %}
+            {% for card in homeCards %}
+            <div class="bg-[#FFFEF9] flex flex-col hover:bg-white transition-colors duration-300">
+                {% if loop.index0 == 0 %}
+                <picture>
+                    <source srcset="{{ '/assets/images/Community/community-embrace-support.webp' | url }}" type="image/webp">
+                    <img src="{{ '/assets/images/Community/community-embrace-support.jpg' | url }}"
+                         alt="A group embrace during a seminar"
+                         class="w-full h-52 object-cover object-[50%_25%]" loading="lazy">
+                </picture>
+                {% elif loop.index0 == 1 %}
+                <picture>
+                    <source srcset="{{ '/assets/images/Techniques/technique-mandala-drawing.webp' | url }}" type="image/webp">
+                    <img src="{{ '/assets/images/Techniques/technique-mandala-drawing.jpg' | url }}"
+                         alt="Hands gathered around a mandala during integration work"
+                         class="w-full h-52 object-cover" loading="lazy">
+                </picture>
+                {% else %}
+                <div class="w-full h-52 bg-[#0F2540] flex items-center justify-center p-8">
+                    <img src="{{ '/assets/images/Graphics/eurotas-symbol.png' | url }}"
+                         alt="EUROTAS — European Transpersonal Association symbol"
+                         class="max-h-full w-auto object-contain" loading="lazy">
+                </div>
+                {% endif %}
+                <div class="p-10 md:p-12 pt-8 flex flex-col grow">
+                    <p class="p4-display text-5xl text-[#C9A45C] mb-6">{{ romans[loop.index0] }}</p>
+                    <h3 class="p4-display text-3xl font-medium text-indigo-deep-900 mb-5 leading-snug">{{ card.data.title }}</h3>
                     <div class="text-neutral-warm-700 leading-relaxed">{{ card.html | safe }}</div>
                 </div>
             </div>
@@ -176,41 +246,148 @@ ogType: website
     </div>
 </section>
 
-<!-- Contact CTA -->
-<section id="contact" class="py-20 bg-contact-iris-600 text-slate-100">
+<!-- ═══════════ IS THIS FOR YOU ═══════════ -->
+<section class="bg-neutral-warm-50 py-20 md:py-28">
     <div class="container mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center max-w-6xl mx-auto">
+            <div class="relative order-2 lg:order-1 m-4">
+                <div id="foryou-frame" class="w-full aspect-[4/5] overflow-hidden shadow-lg">
+                    <picture>
+                        <source srcset="{{ '/assets/images/Symbolic/symbolic-contemplation-doorway.webp' | url }}" type="image/webp">
+                        <img id="foryou-parallax"
+                             src="{{ '/assets/images/Symbolic/symbolic-contemplation-doorway.jpg' | url }}"
+                             alt="A person in quiet contemplation by a doorway"
+                             class="w-full h-[115%] object-cover will-change-transform"
+                             loading="lazy">
+                    </picture>
+                </div>
+                <div class="absolute -inset-4 border border-[#C9A45C]/60 pointer-events-none" aria-hidden="true"></div>
+            </div>
+            <div class="order-1 lg:order-2">
+                <p class="p4-kicker text-[#9A7734] mb-6 flex items-center gap-4">
+                    <span class="p4-hairline"></span> An honest question
+                </p>
+                <h2 class="p4-display text-4xl md:text-5xl font-medium text-indigo-deep-900 leading-tight mb-6">
+                    {{ forYou.data.heading }}
+                </h2>
+                <p class="text-neutral-warm-700 text-lg mb-8">{{ forYou.data.intro }}</p>
+                <div class="p4-foryou text-neutral-warm-800">
+                    {{ forYou.html | safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ MOMENTS — film strip ═══════════ -->
+<section class="bg-neutral-warm-50 pb-20 md:pb-28">
+    <div class="container mx-auto px-6 mb-10">
+        <div class="max-w-6xl mx-auto flex items-center gap-6 border-t border-neutral-warm-200 pt-10">
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-indigo-deep-900 whitespace-nowrap">Moments from our seminars</h2>
+            <span class="hidden md:block h-px flex-1 bg-[#C9A45C]/50" aria-hidden="true"></span>
+        </div>
+    </div>
+    <div class="p4-filmstrip overflow-x-auto snap-x snap-mandatory pb-4">
+        <div class="flex gap-3 px-6 w-max">
+            <picture class="snap-start shrink-0">
+                <source srcset="{{ '/assets/images/Community/community-group-sharing-smiles.webp' | url }}" type="image/webp">
+                <img src="{{ '/assets/images/Community/community-group-sharing-smiles.jpg' | url }}" alt="Group sharing a warm moment together" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+            </picture>
+            <picture class="snap-start shrink-0">
+                <source srcset="{{ '/assets/images/Community/community-pair-mirroring.webp' | url }}" type="image/webp">
+                <img src="{{ '/assets/images/Community/community-pair-mirroring.jpg' | url }}" alt="Two participants in a mirroring exercise" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+            </picture>
+            <picture class="snap-start shrink-0">
+                <source srcset="{{ '/assets/images/Community/community-group-circle-standing.webp' | url }}" type="image/webp">
+                <img src="{{ '/assets/images/Community/community-group-circle-standing.jpg' | url }}" alt="Group standing together in a learning circle" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+            </picture>
+            <picture class="snap-start shrink-0">
+                <source srcset="{{ '/assets/images/Techniques/technique-trust-walk-pair.webp' | url }}" type="image/webp">
+                <img src="{{ '/assets/images/Techniques/technique-trust-walk-pair.jpg' | url }}" alt="A trust walk exercise in pairs" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+            </picture>
+            <picture class="snap-start shrink-0">
+                <source srcset="{{ '/assets/images/Venue/venue-terrace-dining.webp' | url }}" type="image/webp">
+                <img src="{{ '/assets/images/Venue/venue-terrace-dining.jpg' | url }}" alt="Shared dinner on the terrace of the seminar house" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+            </picture>
+            <picture class="snap-start shrink-0">
+                <source srcset="{{ '/assets/images/Techniques/technique-somatic-bodywork.webp' | url }}" type="image/webp">
+                <img src="{{ '/assets/images/Techniques/technique-somatic-bodywork.jpg' | url }}" alt="Somatic bodywork practice" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+            </picture>
+            <picture class="snap-start shrink-0">
+                <source srcset="{{ '/assets/images/Community/community-art-exercise-a.webp' | url }}" type="image/webp">
+                <img src="{{ '/assets/images/Community/community-art-exercise-a.jpg' | url }}" alt="Participants during a group art exercise" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+            </picture>
+            <picture class="snap-start shrink-0">
+                <source srcset="{{ '/assets/images/Venue/venue-garden-lantern.webp' | url }}" type="image/webp">
+                <img src="{{ '/assets/images/Venue/venue-garden-lantern.jpg' | url }}" alt="A lantern in the garden of the seminar house at dusk" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+            </picture>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<section id="contact" class="relative py-24 md:py-32 overflow-hidden p4-parallax border-t border-[#C9A45C]/25" style="background-image: url('{{ '/assets/images/Headers/hero-contact-todtmoos.jpg' | url }}');">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/85 via-[#0F2540]/55 to-[#0F2540]/90"></div>
+    <div class="relative container mx-auto px-6">
         <div class="max-w-2xl mx-auto text-center">
-            <h2 class="text-4xl font-serif font-bold mb-6">Ready to Begin Your Journey?</h2>
-            <p class="text-xl text-slate-200 mb-10">
+            <p class="p4-kicker text-[#C9A45C] mb-8 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
+                Applications open
+                <span class="p4-hairline"></span>
+            </p>
+            <h2 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] mb-6 drop-shadow-md">Ready to begin<br>your journey?</h2>
+            <p class="text-lg text-[#D5DEE9] mb-14 drop-shadow">
                 Applications for the 2027&ndash;2030 cohort are open. Tell us a little about yourself and we'll be in touch.
             </p>
 
-            <form action="mailto:info@transpersonal-training.com" method="post" enctype="text/plain" class="text-left bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 md:p-8 shadow-lg space-y-5">
+            <form action="mailto:info@transpersonal-training.com" method="post" enctype="text/plain" class="text-left border border-[#C9A45C]/40 bg-[#0B1B30]/85 backdrop-blur-md p-6 md:p-10 space-y-6 shadow-2xl">
                 <div>
-                    <label for="apply-name" class="block text-sm font-medium text-slate-100 mb-2">Name</label>
+                    <label for="apply-name" class="block p4-kicker !text-xs text-[#C9A45C] mb-3">Name</label>
                     <input type="text" id="apply-name" name="name" required
-                           class="w-full rounded-lg border border-white/30 bg-white/90 text-slate-800 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white">
+                           class="w-full bg-transparent border-0 border-b border-[#C9A45C]/40 text-[#EDF2F8] px-1 py-3 focus:outline-none focus:border-[#C9A45C] transition-colors placeholder:text-[#7C8DA3]"
+                           placeholder="Your full name">
                 </div>
                 <div>
-                    <label for="apply-email" class="block text-sm font-medium text-slate-100 mb-2">Email</label>
+                    <label for="apply-email" class="block p4-kicker !text-xs text-[#C9A45C] mb-3">Email</label>
                     <input type="email" id="apply-email" name="email" required
-                           class="w-full rounded-lg border border-white/30 bg-white/90 text-slate-800 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white">
+                           class="w-full bg-transparent border-0 border-b border-[#C9A45C]/40 text-[#EDF2F8] px-1 py-3 focus:outline-none focus:border-[#C9A45C] transition-colors placeholder:text-[#7C8DA3]"
+                           placeholder="you@example.com">
                 </div>
                 <div>
-                    <label for="apply-why" class="block text-sm font-medium text-slate-100 mb-2">Why this training calls to you</label>
+                    <label for="apply-why" class="block p4-kicker !text-xs text-[#C9A45C] mb-3">Why this training calls to you</label>
                     <textarea id="apply-why" name="why" rows="4" required
-                              class="w-full rounded-lg border border-white/30 bg-white/90 text-slate-800 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white"></textarea>
+                              class="w-full bg-transparent border-0 border-b border-[#C9A45C]/40 text-[#EDF2F8] px-1 py-3 focus:outline-none focus:border-[#C9A45C] transition-colors placeholder:text-[#7C8DA3]"
+                              placeholder="A few honest words are enough"></textarea>
                 </div>
                 <button type="submit"
-                        class="w-full bg-white hover:bg-slate-100 text-contact-iris-600 px-8 py-4 rounded-full font-medium text-lg transition-transform hover:scale-105 shadow-lg hover:shadow-xl">
-                    Submit Application
+                        class="w-full bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
+                    Submit application
                 </button>
             </form>
 
-            <p class="mt-6 text-slate-200">
+            <p class="mt-10 text-[#D5DEE9]">
                 Or email us directly at
-                <a href="mailto:info@transpersonal-training.com" class="underline underline-offset-4 hover:text-white">info@transpersonal-training.com</a>
+                <a href="mailto:info@transpersonal-training.com" class="text-[#C9A45C] underline underline-offset-8 decoration-[#C9A45C]/40 hover:text-[#E0BE78]">info@transpersonal-training.com</a>
             </p>
         </div>
     </div>
 </section>
+
+<script>
+    // Gentle parallax on the "Is this programme for you?" image
+    (function () {
+        const img = document.getElementById('foryou-parallax');
+        const frame = document.getElementById('foryou-frame');
+        if (!img || !frame) return;
+        const update = () => {
+            const r = frame.getBoundingClientRect();
+            if (r.bottom < 0 || r.top > window.innerHeight) return;
+            const progress = (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight;
+            const shift = Math.max(-15, Math.min(0, -7.5 + progress * 8));
+            img.style.transform = 'translateY(' + shift + '%)';
+        };
+        update();
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update, { passive: true });
+    })();
+</script>

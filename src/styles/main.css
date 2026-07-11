@@ -18,15 +18,15 @@ html {
     --color-primary-dark: #1E3A8A;
     --color-primary-light: #3B82F6;
     --color-indigo-deep: #312E81;
-    --color-cta: #FCD34D;
-    --color-cta-hover: #FBB03E;
+    --color-cta: #C9A45C;
+    --color-cta-hover: #B8934B;
     --color-accent-teal: #2DD4BF;
     --color-bg-light: #FFFEF9;
     --color-bg-darker: #F3EBE0;
     --color-text-dark: #1F2937;
     --color-text-light: #5D584E;
     --color-primary-rgb: 30, 64, 175;
-    --color-cta-rgb: 252, 211, 77;
+    --color-cta-rgb: 201, 164, 92;
 
     /* Theme switcher variables */
     --theme-primary: #1E3A8A;
@@ -90,11 +90,11 @@ body[class*="theme-"] #mobile-menu a:hover {
     padding: 1rem 1.25rem; color: #1e293b; font-weight: 500;
     transition: color 0.2s ease;
 }
-.dropdown-menu a:hover { color: #f59e0b; }
+.dropdown-menu a:hover { color: #9A7734; }
 .dropdown-menu a:first-child { border-radius: 0.75rem 0.75rem 0 0; }
 .dropdown-menu a:last-child { border-radius: 0 0 0.75rem 0.75rem; }
 .dropdown-menu .submenu-icon { color: #94a3b8; transition: color 0.2s ease; }
-.dropdown-menu a:hover .submenu-icon { color: #f59e0b; }
+.dropdown-menu a:hover .submenu-icon { color: #9A7734; }
 
 /* ── Level cards & Accordion (curriculum, training) ── */
 
