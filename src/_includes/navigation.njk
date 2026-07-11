@@ -1,3 +1,4 @@
+{% set contactHref = '#contact' if page.url == '/' else (('/' | url) ~ '#contact') %}
 <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 bg-transparent text-slate-100/90">
     <div class="container mx-auto px-6 flex justify-between items-center relative z-10">
         <!-- Logo (Desktop Only) -->
@@ -56,10 +57,10 @@
             </div>
 
 
-            <!-- Transpersonal Therapy Dropdown (con Techniques) -->
+            <!-- Resources Dropdown (con Techniques) -->
             <div class="dropdown">
                 <button type="button" class="nav-link text-sm font-medium hover:text-[#C9A45C] transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
-                    Transpersonal Therapy <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    Resources <i data-lucide="chevron-down" class="w-4 h-4"></i>
                 </button>
                 <div class="dropdown-menu">
                     <a href="{{ '/what-is-transpersonal-psychology/' | url }}" class="text-sm">
@@ -79,7 +80,7 @@
 
             <a href="{{ '/blog/index.html' | url }}" class="nav-link text-sm font-medium hover:text-[#C9A45C] transition-colors">Blog</a>
 
-            <a href="#contact" class="bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-6 py-2 font-medium tracking-wide transition-colors shadow-md">Apply</a>
+            <a href="{{ contactHref }}" class="bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-6 py-2 font-medium tracking-wide transition-colors shadow-md">Apply</a>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -97,11 +98,11 @@
         <a href="{{ '/venues/' | url }}" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Venues</a>
         <a href="{{ '/lectures-schedule/index.html' | url }}" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Lectures Schedule</a>
         <a href="{{ '/teachers/index.html' | url }}" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Our Teachers</a>
-        <span class="text-slate-200 py-2 border-b block font-semibold">Transpersonal Therapy</span>
+        <span class="text-slate-200 py-2 border-b block font-semibold">Resources</span>
         <a href="{{ '/what-is-transpersonal-psychology/' | url }}" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ What is Transpersonal Psychology</a>
         <a href="{{ '/become-a-client-model/' | url }}" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Become a Client Model</a>
         <a href="{{ '/techniques/' | url }}" class="text-slate-200 py-2 pl-4 border-b block transition-colors text-sm">→ Techniques</a>
         <a href="{{ '/blog/index.html' | url }}" class="text-slate-200 py-2 border-b block transition-colors">Blog</a>
-        <a href="#contact" class="bg-[#C9A45C] text-[#0F2540] px-6 py-3 w-full mt-4 font-bold text-center block">Apply</a>
+        <a href="{{ contactHref }}" class="bg-[#C9A45C] text-[#0F2540] px-6 py-3 w-full mt-4 font-bold text-center block">Apply</a>
     </div>
 </nav>

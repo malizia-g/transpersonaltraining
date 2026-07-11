@@ -249,3 +249,11 @@ body[class*="theme-"] #mobile-menu a:hover {
     .blog-article-content h1 { @apply text-4xl; }
     .blog-article-content h2 { @apply text-2xl; }
 }
+
+/* ── Privacy policy modal (native <dialog>) ── */
+
+#privacy-modal {
+    border: none;
+    margin: auto;
+    border-radius: 2px;
+}

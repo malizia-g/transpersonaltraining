@@ -106,9 +106,9 @@ ogType: website
             </div>
             <div class="lg:col-span-6 relative pb-16 pr-4 md:pr-10">
                 <picture>
-                    <source srcset="{{ '/assets/images/Community/community-group-laughter.webp' | url }}" type="image/webp">
-                    <img src="{{ '/assets/images/Community/community-group-laughter.jpg' | url }}"
-                         alt="Participants sharing authentic laughter during a seminar"
+                    <source srcset="{{ '/assets/images/Community/community-hug-embrace.webp' | url }}" type="image/webp">
+                    <img src="{{ '/assets/images/Community/community-hug-embrace.jpg' | url }}"
+                         alt="A warm group hug during a seminar"
                          class="w-full aspect-[4/5] object-cover object-top shadow-xl">
                 </picture>
                 <figure class="absolute -bottom-2 -left-2 md:left-auto md:-right-2 w-48 md:w-60 rotate-[-4deg]">
@@ -156,30 +156,30 @@ ogType: website
         <div class="grid md:grid-cols-3 gap-px max-w-6xl mx-auto bg-[#C9A45C]/30 border border-[#C9A45C]/30">
             {% set romans = ['I', 'II', 'III'] %}
             {% for card in homeCards %}
-            <div class="bg-[#FFFEF9] flex flex-col hover:bg-white transition-colors duration-300">
+            <div class="bg-[#FFFEF9] flex flex-col items-center text-center hover:bg-white transition-colors duration-300">
+                <p class="p4-display text-5xl text-[#C9A45C] pt-8">{{ romans[loop.index0] }}</p>
                 {% if loop.index0 == 0 %}
                 <picture>
                     <source srcset="{{ '/assets/images/Community/community-embrace-support.webp' | url }}" type="image/webp">
                     <img src="{{ '/assets/images/Community/community-embrace-support.jpg' | url }}"
                          alt="A group embrace during a seminar"
-                         class="w-full h-52 object-cover object-[50%_25%]" loading="lazy">
+                         class="w-full h-52 object-cover object-[50%_25%] mt-6" loading="lazy">
                 </picture>
                 {% elif loop.index0 == 1 %}
                 <picture>
                     <source srcset="{{ '/assets/images/Techniques/technique-mandala-drawing.webp' | url }}" type="image/webp">
                     <img src="{{ '/assets/images/Techniques/technique-mandala-drawing.jpg' | url }}"
                          alt="Hands gathered around a mandala during integration work"
-                         class="w-full h-52 object-cover" loading="lazy">
+                         class="w-full h-52 object-cover mt-6" loading="lazy">
                 </picture>
                 {% else %}
-                <div class="w-full h-52 bg-[#0F2540] flex items-center justify-center p-8">
+                <div class="w-full h-52 bg-[#0F2540] flex items-center justify-center p-8 mt-6">
                     <img src="{{ '/assets/images/Graphics/eurotas-symbol.png' | url }}"
                          alt="EUROTAS — European Transpersonal Association symbol"
                          class="max-h-full w-auto object-contain" loading="lazy">
                 </div>
                 {% endif %}
                 <div class="p-10 md:p-12 pt-8 flex flex-col grow">
-                    <p class="p4-display text-5xl text-[#C9A45C] mb-6">{{ romans[loop.index0] }}</p>
                     <h3 class="p4-display text-3xl font-medium text-indigo-deep-900 mb-5 leading-snug">{{ card.data.title }}</h3>
                     <div class="text-neutral-warm-700 leading-relaxed">{{ card.html | safe }}</div>
                 </div>
@@ -233,8 +233,8 @@ ogType: website
     <div class="p4-filmstrip overflow-x-auto snap-x snap-mandatory pb-4">
         <div class="flex gap-3 px-6 w-max">
             <picture class="snap-start shrink-0">
-                <source srcset="{{ '/assets/images/Community/community-group-sharing-smiles.webp' | url }}" type="image/webp">
-                <img src="{{ '/assets/images/Community/community-group-sharing-smiles.jpg' | url }}" alt="Group sharing a warm moment together" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <source srcset="{{ '/assets/images/Techniques/technique-bodywork-holding.webp' | url }}" type="image/webp">
+                <img src="{{ '/assets/images/Techniques/technique-bodywork-holding.jpg' | url }}" alt="Group bodywork and holding exercise" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="{{ '/assets/images/Community/community-pair-mirroring.webp' | url }}" type="image/webp">
@@ -249,8 +249,8 @@ ogType: website
                 <img src="{{ '/assets/images/Techniques/technique-trust-walk-pair.jpg' | url }}" alt="A trust walk exercise in pairs" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
-                <source srcset="{{ '/assets/images/Venue/venue-terrace-dining.webp' | url }}" type="image/webp">
-                <img src="{{ '/assets/images/Venue/venue-terrace-dining.jpg' | url }}" alt="Shared dinner on the terrace of the seminar house" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <source srcset="{{ '/assets/images/Community/community-walking-exercise-b.webp' | url }}" type="image/webp">
+                <img src="{{ '/assets/images/Community/community-walking-exercise-b.jpg' | url }}" alt="Community walking exercise" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="{{ '/assets/images/Techniques/technique-somatic-bodywork.webp' | url }}" type="image/webp">
@@ -263,6 +263,22 @@ ogType: website
             <picture class="snap-start shrink-0">
                 <source srcset="{{ '/assets/images/Venue/venue-garden-lantern.webp' | url }}" type="image/webp">
                 <img src="{{ '/assets/images/Venue/venue-garden-lantern.jpg' | url }}" alt="A lantern in the garden of the seminar house at dusk" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+            </picture>
+            <picture class="snap-start shrink-0">
+                <source srcset="{{ '/assets/images/Community/community-terrace-watching.webp' | url }}" type="image/webp">
+                <img src="{{ '/assets/images/Community/community-terrace-watching.jpg' | url }}" alt="Participants watching attentively on the terrace" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+            </picture>
+            <picture class="snap-start shrink-0">
+                <source srcset="{{ '/assets/images/Community/community-terrace-speaking.webp' | url }}" type="image/webp">
+                <img src="{{ '/assets/images/Community/community-terrace-speaking.jpg' | url }}" alt="A participant speaking to the group on the terrace" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+            </picture>
+            <picture class="snap-start shrink-0">
+                <source srcset="{{ '/assets/images/Symbolic/symbolic-garden-flowers.webp' | url }}" type="image/webp">
+                <img src="{{ '/assets/images/Symbolic/symbolic-garden-flowers.jpg' | url }}" alt="Wildflowers in the seminar house garden" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+            </picture>
+            <picture class="snap-start shrink-0">
+                <source srcset="{{ '/assets/images/Symbolic/symbolic-garden-flowers-lantern.webp' | url }}" type="image/webp">
+                <img src="{{ '/assets/images/Symbolic/symbolic-garden-flowers-lantern.jpg' | url }}" alt="Wildflowers with the garden lantern in the background" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
         </div>
     </div>
@@ -306,6 +322,12 @@ ogType: website
                         class="w-full bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
                     Submit application
                 </button>
+                <p class="text-xs text-[#9DAEC2] leading-relaxed">
+                    By submitting this form you consent to Transpersonal Training processing the personal data you provide
+                    solely to respond to your enquiry, in accordance with the GDPR (Regulation (EU) 2016/679). See our
+                    <button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="underline underline-offset-4 hover:text-[#C9A45C] bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy Policy</button>
+                    for details on your rights.
+                </p>
             </form>
 
             <p class="mt-10 text-[#D5DEE9]">
