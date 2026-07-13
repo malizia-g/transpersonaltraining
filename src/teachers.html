@@ -411,24 +411,7 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
                     </div>
                 </div>
                 <div class="teacher-bio">
-                    <!-- Tab Navigation -->
-                    <div class="tab-navigation">
-                        <button class="tab-button active" onclick="switchTab(event, 'bio-{{ teacher.id }}')">
-                            <i data-lucide="book-open" class="w-5 h-5"></i>
-                            <span>Bio</span>
-                        </button>
-                        <button class="tab-button" onclick="switchTab(event, 'training-{{ teacher.id }}')">
-                            <i data-lucide="award" class="w-5 h-5"></i>
-                            <span>Training</span>
-                        </button>
-                        <button class="tab-button" onclick="switchTab(event, 'practice-{{ teacher.id }}')">
-                            <i data-lucide="briefcase" class="w-5 h-5"></i>
-                            <span>Practice</span>
-                        </button>
-                    </div>
-
-                    <!-- Biography Tab -->
-                    <div id="bio-{{ teacher.id }}" class="tab-content active">
+                    <div class="p-4 pt-2">
                         <div class="prose prose-sm max-w-none text-neutral-warm-700">
                             {% if teacher.bio %}
                                 {{ teacher.bio | markdown | safe }}
@@ -444,30 +427,6 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
                             </a>
                         </div>
                         {% endif %}
-                    </div>
-
-                    <!-- Training Tab -->
-                    <div id="training-{{ teacher.id }}" class="tab-content">
-                        <div class="prose prose-sm max-w-none text-neutral-warm-700">
-                            {% if teacher.credentials_detail %}
-                                {{ teacher.credentials_detail | markdown | safe }}
-                            {% else %}
-                                <p class="text-slate-600">Training information coming soon</p>
-                            {% endif %}
-                        </div>
-                    </div>
-
-                    <!-- Practice Tab -->
-                    <div id="practice-{{ teacher.id }}" class="tab-content">
-                        <div class="prose prose-sm max-w-none text-neutral-warm-700">
-                            {% if teacher.experience %}
-                                {{ teacher.experience | markdown | safe }}
-                            {% elif teacher.publications %}
-                                {{ teacher.publications | markdown | safe }}
-                            {% else %}
-                                <p class="text-slate-600">Practice information coming soon</p>
-                            {% endif %}
-                        </div>
                     </div>
                 </div>
             </div>

@@ -1,12 +1,13 @@
 ---
 id: mario-lorenzetti
 name: Mario Lorenzetti
+role: Guest Teacher
 location: Italy
 credentials: "Transpersonal Psychology Trainer & Holotropic Breathwork Facilitator"
 image: /assets/images/People/teachers/mario-lorenzetti.jpg
 website: http://www.mariolorenzetti.org
-section: alumni
-order: 8
+section: guest
+order: 7
 ---
 
 ## Biography
