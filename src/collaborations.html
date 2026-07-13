@@ -1,0 +1,172 @@
+---
+layout: base.njk
+title: "Collaborations"
+description: "The institutes, schools and teachers we work with — past, present and future. Our partner network across the transpersonal world, and an open invitation to link up."
+---
+
+{% macro collabCard(c) %}
+<article class="bg-white border border-neutral-warm-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-6 flex flex-col h-full">
+    <div class="flex items-start gap-4 mb-4">
+        <div class="w-12 h-12 flex-shrink-0 rounded-full bg-[#C9A45C]/15 flex items-center justify-center">
+            <i data-lucide="{{ c.icon or 'building-2' }}" class="w-6 h-6 text-[#9A7734]"></i>
+        </div>
+        <div class="min-w-0">
+            <h3 class="p4-display text-xl font-medium text-[#0F2540] leading-snug">{{ c.name }}</h3>
+            {% if c.kind or c.location %}
+            <p class="text-sm text-neutral-warm-500 mt-1">
+                {%- if c.kind %}{{ c.kind }}{% endif -%}
+                {%- if c.kind and c.location %} &middot; {% endif -%}
+                {%- if c.location %}{{ c.location }}{% endif -%}
+            </p>
+            {% endif %}
+            {% if c.comingSoon %}
+            <span class="inline-block mt-2 text-xs font-semibold uppercase tracking-wide text-[#9A7734] bg-[#C9A45C]/15 px-2 py-0.5">Coming soon</span>
+            {% endif %}
+        </div>
+    </div>
+    {% if c.description %}
+    <div class="prose prose-sm max-w-none text-neutral-warm-700 leading-relaxed flex-grow">{{ c.description | safe }}</div>
+    {% endif %}
+    {% if c.url %}
+    <a href="{{ c.url }}" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-2 text-[#9A7734] hover:text-[#7A5E29] font-medium text-sm">
+        <i data-lucide="globe" class="w-4 h-4"></i>
+        Visit website
+    </a>
+    {% endif %}
+</article>
+{% endmacro %}
+
+<!-- Hero Section -->
+<header class="relative h-[55vh] min-h-[440px] flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        <picture>
+            <source srcset="{{ '/assets/images/Community/community-group-circle-standing.webp' | url }}" type="image/webp">
+            <img src="{{ '/assets/images/Community/community-group-circle-standing.jpg' | url }}" alt="Seminar participants standing together in a circle" class="w-full h-full object-cover object-center">
+        </picture>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/85 via-[#0F2540]/45 to-neutral-warm-50"></div>
+    </div>
+
+    <div class="relative z-10 container mx-auto px-6 text-center pt-20">
+        <div class="animate-fade-in-up">
+            <p class="p4-kicker text-[#C9A45C] mb-6 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
+                Our network
+                <span class="p4-hairline"></span>
+            </p>
+            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] mb-6 leading-tight drop-shadow-md">
+                Collaborations
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
+                The institutes, schools and friends we walk with &mdash; past, present and future
+            </p>
+        </div>
+    </div>
+</header>
+
+<!-- Breadcrumb -->
+<div class="bg-white border-b border-neutral-warm-200">
+    <div class="container mx-auto px-6 py-4">
+        <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
+            <a href="{{ '/' | url }}" class="hover:text-science-blue-600 transition-colors">Home</a>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <span class="text-neutral-warm-500">Resources</span>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <span class="text-science-blue-800 font-medium">Collaborations</span>
+        </div>
+    </div>
+</div>
+
+<!-- Intro -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto text-center">
+            <p class="text-lg md:text-xl text-neutral-warm-700 leading-relaxed">
+                Transpersonal work has always grown through relationship. Our school is part of a
+                living web of institutes, training schools and teachers across Europe and beyond &mdash;
+                colleagues who share standards, students and a common vision of psychotherapy as a path
+                of consciousness. Here we honour that network: the partners we work with today, those we
+                have collaborated with over the years, and the connections still to come.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Present -->
+{% if collaborations.present.length %}
+<section id="present" class="scroll-mt-24 py-16 md:py-20 bg-neutral-warm-50 border-t border-neutral-warm-200">
+    <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto text-center mb-14">
+            <p class="p4-kicker text-[#9A7734] mb-4 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
+                Present
+                <span class="p4-hairline"></span>
+            </p>
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-4">Current partners &amp; network</h2>
+            <p class="text-neutral-warm-600 text-lg">The institutes and networks we actively collaborate with today.</p>
+        </div>
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for c in collaborations.present %}{{ collabCard(c) }}{% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Past -->
+{% if collaborations.past.length %}
+<section id="past" class="scroll-mt-24 py-16 md:py-20 bg-white border-t border-neutral-warm-200">
+    <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto text-center mb-14">
+            <p class="p4-kicker text-[#9A7734] mb-4 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
+                Past
+                <span class="p4-hairline"></span>
+            </p>
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-4">Those we have walked with</h2>
+            <p class="text-neutral-warm-600 text-lg">Schools and teachers who have contributed to our community over the years.</p>
+        </div>
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for c in collaborations.past %}{{ collabCard(c) }}{% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Future -->
+{% if collaborations.future.length %}
+<section id="future" class="scroll-mt-24 py-16 md:py-20 bg-neutral-warm-50 border-t border-neutral-warm-200">
+    <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto text-center mb-14">
+            <p class="p4-kicker text-[#9A7734] mb-4 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
+                Future
+                <span class="p4-hairline"></span>
+            </p>
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-4">Emerging collaborations</h2>
+            <p class="text-neutral-warm-600 text-lg">New partnerships taking shape as the school grows.</p>
+        </div>
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for c in collaborations.future %}{{ collabCard(c) }}{% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- CTA: reciprocal link / partner with us -->
+<section class="py-16 md:py-20 bg-[#0F2540] text-center">
+    <div class="container mx-auto px-6 max-w-2xl">
+        <div class="w-14 h-14 mx-auto mb-6 rounded-full bg-[#C9A45C]/20 flex items-center justify-center">
+            <i data-lucide="handshake" class="w-7 h-7 text-[#C9A45C]"></i>
+        </div>
+        <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#FDFBF5] mb-4">Let&rsquo;s link up</h2>
+        <p class="text-slate-300 text-lg leading-relaxed mb-8">
+            Are you a partner school, a teacher or a friend of the school? We would love to celebrate
+            our connection here &mdash; and to link between our websites, so students and colleagues can
+            find their way from one to the other. Send us your website and the wording you&rsquo;d like,
+            and we&rsquo;ll add you to this page.
+        </p>
+        <a href="mailto:office@transpersonal-training.com?subject=Collaboration%20%26%20link%20exchange" class="inline-flex items-center gap-2 bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
+            <i data-lucide="mail" class="w-5 h-5"></i>
+            Get in touch
+        </a>
+    </div>
+</section>

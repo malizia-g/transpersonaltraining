@@ -47,6 +47,14 @@ module.exports = function(eleventyConfig) {
     if (!str || !prefix) return false;
     return str.startsWith(prefix);
   });
+
+  // Extract the YouTube video id from any common YouTube URL form
+  // (watch?v=, youtu.be/, embed/). Returns '' if not a YouTube URL.
+  eleventyConfig.addFilter('youtubeId', function(url) {
+    if (!url) return '';
+    const match = String(url).match(/(?:youtu\.be\/|[?&]v=|\/embed\/)([A-Za-z0-9_-]{6,})/);
+    return match ? match[1] : '';
+  });
   // Collezione blog: tutti i markdown in src/blog/
   eleventyConfig.addCollection('blog', function(collectionApi) {
     const posts = collectionApi.getFilteredByGlob('src/blog/*.md');

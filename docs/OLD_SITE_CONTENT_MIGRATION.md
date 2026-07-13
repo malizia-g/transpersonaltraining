@@ -406,7 +406,7 @@ should not be listed as active faculty anywhere.
 | Legal entities / data controller | Footer + privacy modal + /accreditation/ | edit | E/F |
 | East programme history | About/history blurb or blog post + 301s | to write | B/G |
 | Guest faculty names (curated) | Teachers page footer block | edit | F |
-| Reading lists / videos | /resources/ or blog posts | optional | G |
+| Reading lists / videos | /resources/ (**BUILT** Jul 2026, data-driven; 3 live videos + ~20 books) | ✅ page live | G |
 | Newsletter (CleverReach!) | Phase I platform decision | decision | I |
 | Payment / portal | Portal decision | decision | B2 |
 

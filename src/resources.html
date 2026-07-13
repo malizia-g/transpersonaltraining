@@ -1,0 +1,186 @@
+---
+layout: base.njk
+title: "Recommended Reading & Watching"
+description: "Books, authors and talks we recommend for exploring transpersonal psychology, holotropic states, myth, shamanism and the path of consciousness."
+---
+
+<!-- Hero Section -->
+<header class="relative h-[55vh] min-h-[440px] flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        <picture>
+            <source srcset="{{ '/assets/images/Symbolic/symbolic-contemplation-doorway.webp' | url }}" type="image/webp">
+            <img src="{{ '/assets/images/Symbolic/symbolic-contemplation-doorway.jpg' | url }}" alt="A quiet, light-filled doorway inviting contemplation" class="w-full h-full object-cover object-center">
+        </picture>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/85 via-[#0F2540]/45 to-neutral-warm-50"></div>
+    </div>
+
+    <div class="relative z-10 container mx-auto px-6 text-center pt-20">
+        <div class="animate-fade-in-up">
+            <p class="p4-kicker text-[#C9A45C] mb-6 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
+                Resources
+                <span class="p4-hairline"></span>
+            </p>
+            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] mb-6 leading-tight drop-shadow-md">
+                Recommended Reading &amp; Watching
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
+                Books, voices and talks that have shaped our path &mdash; an invitation to explore further
+            </p>
+        </div>
+    </div>
+</header>
+
+<!-- Breadcrumb -->
+<div class="bg-white border-b border-neutral-warm-200">
+    <div class="container mx-auto px-6 py-4">
+        <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
+            <a href="{{ '/' | url }}" class="hover:text-science-blue-600 transition-colors">Home</a>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <span class="text-neutral-warm-500">Resources</span>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <span class="text-science-blue-800 font-medium">Recommended Reading</span>
+        </div>
+    </div>
+</div>
+
+<!-- Intro -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto text-center">
+            <p class="text-lg md:text-xl text-neutral-warm-700 leading-relaxed">
+                Transpersonal psychology is a wide landscape &mdash; part psychology, part philosophy,
+                part contemplative practice. Below is a starting library of the books and thinkers we
+                return to again and again, grouped by theme, together with a few talks worth your time.
+                It is a living selection, refreshed as our own reading does.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Recommended Reading -->
+{% if readingResources.categories.length %}
+<section id="reading" class="scroll-mt-24 py-16 md:py-20 bg-neutral-warm-50 border-t border-neutral-warm-200">
+    <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto text-center mb-14">
+            <p class="p4-kicker text-[#9A7734] mb-4 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
+                Read
+                <span class="p4-hairline"></span>
+            </p>
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-4">Recommended reading</h2>
+            <p class="text-neutral-warm-600 text-lg">A themed library for the transpersonal path.</p>
+        </div>
+
+        <div class="max-w-6xl mx-auto space-y-14">
+            {% for group in readingResources.categories %}
+            <div>
+                <h3 class="p4-display text-2xl font-medium text-[#0F2540] mb-6 pb-3 border-b border-neutral-warm-300 flex items-center gap-3">
+                    <i data-lucide="book-marked" class="w-6 h-6 text-[#9A7734]"></i>
+                    {{ group.category }}
+                </h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {% for book in group.items %}
+                    <article class="bg-white border border-neutral-warm-200 shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
+                        <h4 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">{{ book.title }}</h4>
+                        {% if book.author %}<p class="text-[#9A7734] text-sm font-medium mt-1">{{ book.author }}</p>{% endif %}
+                        {% if book.note %}<p class="text-neutral-warm-600 text-sm mt-3 leading-relaxed flex-grow">{{ book.note }}</p>{% endif %}
+                        {% if book.url %}
+                        <a href="{{ book.url }}" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-2 text-science-blue-700 hover:text-science-blue-800 font-medium text-sm">
+                            <i data-lucide="external-link" class="w-4 h-4"></i>
+                            Find the book
+                        </a>
+                        {% endif %}
+                    </article>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Watch -->
+{% if readingResources.videos.length %}
+<section id="watch" class="scroll-mt-24 py-16 md:py-20 bg-white border-t border-neutral-warm-200">
+    <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+            <p class="p4-kicker text-[#9A7734] mb-4 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
+                Watch
+                <span class="p4-hairline"></span>
+            </p>
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-4">Talks &amp; documentaries</h2>
+            <p class="text-neutral-warm-600 text-lg">Voices from the field, in their own words.</p>
+            {% if readingResources.pendingVideos %}
+            <p class="text-sm text-neutral-warm-500 mt-4">Some links are still being migrated from our previous website &mdash; check back soon.</p>
+            {% endif %}
+        </div>
+
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for video in readingResources.videos %}
+            <article class="bg-neutral-warm-50 border border-neutral-warm-200 shadow-sm hover:shadow-md transition-shadow p-6 flex flex-col h-full">
+                <div class="w-12 h-12 flex-shrink-0 rounded-full bg-[#C9A45C]/15 flex items-center justify-center mb-4">
+                    <i data-lucide="play-circle" class="w-6 h-6 text-[#9A7734]"></i>
+                </div>
+                <h3 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">{{ video.title }}</h3>
+                {% if video.source %}<p class="text-neutral-warm-500 text-sm mt-1">{{ video.source }}</p>{% endif %}
+                {% if video.note %}<p class="text-neutral-warm-600 text-sm mt-3 leading-relaxed flex-grow">{{ video.note }}</p>{% endif %}
+                {% set ytid = video.url | youtubeId %}
+                {% if ytid %}
+                <button type="button" onclick="openResourceVideo('{{ ytid }}')" class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] text-sm font-semibold transition-all shadow-sm hover:shadow-md self-start">
+                    <i data-lucide="play-circle" class="w-4 h-4"></i>
+                    Watch
+                </button>
+                {% elif video.url %}
+                <a href="{{ video.url }}" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-2 text-science-blue-700 hover:text-science-blue-800 font-medium text-sm">
+                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                    Watch
+                </a>
+                {% else %}
+                <span class="mt-4 inline-block text-xs font-semibold uppercase tracking-wide text-[#9A7734] bg-[#C9A45C]/15 px-2 py-0.5 self-start">Link coming</span>
+                {% endif %}
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- CTA -->
+<section class="py-16 md:py-20 bg-neutral-warm-50 border-t border-neutral-warm-200 text-center">
+    <div class="container mx-auto px-6 max-w-2xl">
+        <p class="p4-kicker text-[#9A7734] mb-4 flex items-center justify-center gap-4">
+            <span class="p4-hairline"></span>
+            Keep exploring
+            <span class="p4-hairline"></span>
+        </p>
+        <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-4">Have a recommendation?</h2>
+        <p class="text-neutral-warm-700 text-lg leading-relaxed mb-8">
+            This list grows with our community. If there is a book or talk that changed the way you see
+            the psyche, we would love to hear about it &mdash; and you might also enjoy our
+            <a href="{{ '/blog/index.html' | url }}" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4">blog</a>.
+        </p>
+        <a href="mailto:office@transpersonal-training.com?subject=A%20reading%20recommendation" class="inline-flex items-center gap-2 bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
+            <i data-lucide="mail" class="w-5 h-5"></i>
+            Share a recommendation
+        </a>
+    </div>
+</section>
+
+<!-- Video popup modal (opened by the "Watch" buttons above) -->
+<dialog id="resource-video-modal" class="w-[92vw] max-w-3xl p-0 bg-transparent backdrop:bg-[#0B1B30]/80">
+    <div class="relative bg-black shadow-2xl">
+        <button type="button" onclick="closeResourceVideo()" aria-label="Close video" class="absolute top-2 right-2 z-10 bg-black/60 hover:bg-black/80 text-white rounded-full p-1.5 transition-colors border-none cursor-pointer">
+            <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+        <div class="aspect-video w-full">
+            <iframe id="rv-iframe" class="w-full h-full block" src="about:blank" title="Video player" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+        </div>
+    </div>
+</dialog>
+
+{% block scripts %}
+<script src="../scripts/pages/resources.js"></script>
+{% endblock %}

@@ -330,6 +330,16 @@ as a starting point, but the list will be **refreshed** — treat the old conten
 the final selection. Long-tail SEO value (book/author queries), and cheap E-E-A-T. Place it in
 the content backlog (P2), link it from the footer Resources column and relevant blog posts.
 
+> **BUILT (Jul 2026):** data-driven page live at `/resources/` (source `src/resources.html`,
+> data `src/_data/readingResources.js`), linked from the Resources nav dropdown + footer.
+> Seeded with a themed starter library of ~20 recognised transpersonal classics (grouped into
+> 9 categories) + a "Talks & documentaries" section with **3 live, verified video links** (Grof
+> — Omega Institute; Campbell & Moyers — *Power of Myth* Ep.1; Mindell — *Process Psychology & the
+> Dream Body*). Add a book/video by appending one object to the arrays in `readingResources.js`
+> (no template change); a video with an empty `url` auto-shows a "Link coming" chip. **Still to
+> do:** let Fabio review/refresh the book curation and add more videos from the old `/information/`
+> page if wanted.
+
 ---
 
 ## Phase H — Off-Page SEO & Authority
@@ -342,7 +352,12 @@ Timing note: the domain does not change at cutover, so links pointed at `transpe
 - **Teacher network:** every core and guest teacher with a website links to the school ("I teach at…"). Manal and Mario already republish content — formalize reciprocal links.
 - **Directories:** EAP, national transpersonal associations, breathwork directories (e.g. breathwork alliance lists), therapy-training directories, GoodTherapy-style course listings, Psychology Today (where applicable).
 - **Guest articles:** offer teachers' articles to established outlets (transpersonal journals, EUROTAS newsletter, therapy blogs) with a bio link.
-- **Google Business Profile:** create one for the school (education category). Even without a public campus it enables reviews and Maps presence; encourage students to leave Google reviews. Consider venue-tagged posts around each intensive.
+- **Google Business Profile & reviews:**
+  - [ ] Create the profile (education category); verify it (postcard/phone/email per Google's flow)
+  - [ ] Fill in description, website link, photos, course info — even without a public campus it enables reviews and Maps presence
+  - [ ] Set up a simple review-ask flow: email/WhatsApp message with a direct review link sent to each cohort within 1–2 weeks of course/seminar completion
+  - [ ] Respond to every review (thanks / address concerns) — signals activity to Google and reassures prospects
+  - [ ] Consider venue-tagged posts around each intensive
 - **Monitor:** Ahrefs Webmaster Tools (free) quarterly for new/lost links.
 
 ---
@@ -361,6 +376,16 @@ Timing note: the domain does not change at cutover, so links pointed at `transpe
 > and points to the homepage or a relevant page. Fill in the Status column as you go. When a
 > partnership or teaching relationship is no longer current, mark it so we don't publish it on the
 > Accreditation/Teachers pages.
+>
+> **Ready-to-send outreach copy:** email + WhatsApp templates (address people by first name) are in
+> **[BACKLINK_OUTREACH_TEMPLATES.md](BACKLINK_OUTREACH_TEMPLATES.md)**.
+>
+> **Public showcase for the ask:** the reciprocal offer is now backed by a live, data-driven
+> **Collaborations page** (`/collaborations/`, source `src/collaborations.html` +
+> `src/_data/collaborations/*.md`) grouping partners into **present / past / future**. Add a
+> partner by dropping one `.md` file in that folder. ⚠️ The 7 partner institutes below are seeded
+> there as *present* from the old site — **confirm each is still an active partner before this page
+> goes to production** (same open item as the migration doc §2.7).
 
 ### The single most valuable target
 

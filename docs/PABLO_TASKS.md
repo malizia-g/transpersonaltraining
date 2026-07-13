@@ -132,17 +132,18 @@ Reason:
 
 ---
 
-### 9. Build the Techniques page from scratch
+### 9. Review the Techniques page
 
 **Status:** Pending
 
 Actions:
-- [ ] Define the full page structure
-- [ ] Prepare the final content for all techniques to be presented
-- [ ] Write, review, and test the page as a complete deliverable
+- [x] Define the full page structure
+- [x] Prepare the content for all techniques presented
+- [ ] Review the page copy, images, and technique descriptions for accuracy
+- [ ] Test the page as a complete deliverable
 
 Reason:
-- The page is not ready and should not be treated as a small polish task
+- The page has already been built (structure, copy, and imagery are in place), but it still needs Pablo's review before launch
 
 ---
 
@@ -402,7 +403,7 @@ These items have already been handled and do not need further action unless requ
 - [ ] Revise the Transpersonal Therapy text and links
 - [ ] Collect current student information for Become a Client Model
 - [ ] Finalize the Become a Client Model text
-- [ ] Build the Techniques page completely
+- [ ] Review the Techniques page (copy, images, technique descriptions)
 - [ ] Choose the production deployment path
 - [ ] Configure the production domain
 - [ ] Run a final production deployment test
