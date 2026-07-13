@@ -298,6 +298,68 @@ Reason:
 
 ---
 
+## New tasks from old-site content integration (July 2026)
+
+These came out of the old-site → new-site content review ([OLD_SITE_CONTENT_MIGRATION.md](OLD_SITE_CONTENT_MIGRATION.md)) and Pablo's answers. Everything that was *clear* has already been applied to the site on branch `old-website-info-integrations`; the items below are the ones that still need a decision, an account, or external action.
+
+### P0 — Blockers created/confirmed by the review
+
+**20. Choose and finalize the single legal entity + GDPR details.**
+Pablo confirmed there will be **one** entity (do not name multiple). As a placeholder the site now uses "Eastwest Transpersonal Training School" in the footer and as the GDPR data controller in the privacy modal.
+- [ ] Confirm the definitive registered legal name
+- [ ] Add registered address (at least city/country) and any registration number to the privacy modal
+- [ ] Update the footer + privacy modal once confirmed
+Reason: the privacy policy names a data controller for GDPR — it must be the real legal entity.
+
+**21. Decide the payment method.**
+Pablo: online payment is **not** available for now (old Stripe checkout dropped). The site currently says enrolment/payment is arranged directly with the office.
+- [ ] Decide the future payment processor (Stripe or other)
+- [ ] Until then, keep the "arranged with the office" wording (Training Overview → Fees)
+
+**22. "Psychotherapist" title — copy audit.**
+Pablo flagged that "psychotherapist" is a legally protected title in some countries and the school is only *working toward* EAP compliance. A caveat is now shown on the Curriculum and Training Overview pages.
+- [ ] Audit existing copy that implies graduates become "psychotherapists" (e.g. homepage welcome text, JSON-LD `occupationalCategory`) and soften where needed for legal safety.
+
+### P1 — Accounts & channels to create, then wire up
+
+**23. Create and link social/newsletter channels.**
+Facebook already exists and is now linked (footer + homepage + JSON-LD `sameAs`). Still to create:
+- [ ] Instagram account → add to footer + homepage + JSON-LD `sameAs`
+- [ ] Substack → add to footer + relevant CTAs
+- [ ] WhatsApp and/or Telegram contact (Telegram is important for Russian-speaking Eastern applicants) → add to contact section + footer
+
+**24. Choose the Eastern in-person venue.**
+The Venues page now has an "Eastern track venue — coming soon" section (placeholder, no photos).
+- [ ] Confirm the Eastern venue (city/country)
+- [ ] Replace the "coming soon" placeholder with real copy + photos (new shot-list item)
+
+**25. Build the `/apply/` page (with East/West selector).**
+Pablo wants applicants to choose "Apply for West" or "Apply for East." The homepage contact form now has a West/East track selector as an interim measure.
+- [ ] Build a dedicated `/apply/` page with the track choice, the full enrolment-options matrix, fees, and the process/timeline (see Marketing plan Phase A2)
+- [ ] Confirm the definitive enrolment-options list (full training / self-development L1 only / single lecture €45 / single seminar on request — identical East & West)
+
+**26. Provide official certificate wording (optional but useful).**
+Pablo: no exact official title yet ("is it important?"). It is not a blocker, but a fixed wording lets us use `educationalCredentialAwarded` verbatim in schema and keep page copy consistent.
+- [ ] If/when the exact certificate titles are fixed, send them so the Curriculum/Training Overview copy and the homepage JSON-LD can match.
+
+**27. Build the Accreditation page (EUROTAS).**
+The current official EUROTAS PDF was located during the review:
+`https://eurotas.world/wp-content/uploads/2021/08/General-Criteria-for-ESTP-Certification.pdf`
+(landing page: `https://eurotas.world/eurotas-certifications-for-professionals/`).
+- [ ] Build the Accreditation page (Marketing Phase F) linking this PDF, explaining TREE membership (still accurate per Pablo), and restating the per-level breathwork requirement.
+
+### P2 — After launch / dependent on hosting
+
+**28. Set up 301 redirects for old East URLs.**
+- [ ] `/program/`, `/archive-2021/`…`/archive-2025/` and the Russian-language event pages → map to the new integrated-programme page / `/schedule/` / homepage (depends on the hosting decision, task 10 + Marketing open decision #4).
+
+**29. Partner & faculty backlink outreach.**
+Pablo asked for the full list of partner institutes and faculty so he can check they link back to the school. The list lives in **[MARKETING_AND_SEO.md → Backlinks & Partner Outreach](MARKETING_AND_SEO.md#backlinks--partner-outreach)**.
+- [ ] Work through that list; confirm which of the 7 partner institutes are still active before any are published on the Accreditation page
+- [ ] Note any *new* partner institutes to add
+
+---
+
 ## Already Completed in the Codebase
 
 These items have already been handled and do not need further action unless requirements change.

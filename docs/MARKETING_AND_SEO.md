@@ -1,7 +1,8 @@
 # Marketing & SEO Plan — Transpersonal Training
 
 > Complete, prioritized roadmap for marketing the school and optimizing the website for search.
-> Companion documents: [PABLO_TASKS.md](PABLO_TASKS.md) (launch blockers), [FUTURE_IDEAS.md](FUTURE_IDEAS.md) (technical backlog).
+> Companion documents: [PABLO_TASKS.md](PABLO_TASKS.md) (launch blockers), [FUTURE_IDEAS.md](FUTURE_IDEAS.md) (technical backlog),
+> [OLD_SITE_CONTENT_MIGRATION.md](OLD_SITE_CONTENT_MIGRATION.md) (old-site content gap analysis: fees, enrollment options, certificates, partners, contacts — feeds Phases A/B/F and adds open decisions 10–16).
 >
 > Preliminary SEO research (keyword volumes, clusters, competitors) lives in the shared
 > [Google Drive SEO folder](https://drive.google.com/drive/u/1/folders/1V3B3Ou0l_iZ-n1tkCS_HriQqGO9hIDTU):
@@ -320,6 +321,15 @@ Google weighs expertise/authoritativeness heavily for health-adjacent topics (th
 
 Guest/republished posts (Manal, Mario) are good for relationships and content volume, but: always add `rel=canonical` to the original (E), always add an author box linking their site, and keep the ratio ≥1 original : 1 syndicated.
 
+### G4. Resources / Recommended Reading page
+
+**Confirmed with Pablo (Jul 2026):** build a public "Resources" page. The old site's
+`/information/` page had a 10-category recommended-reading list and a set of videos (Grof,
+Campbell, the Mindells, shamanism/psychedelics documentaries). Port **some** of the old videos
+as a starting point, but the list will be **refreshed** — treat the old content as a seed, not
+the final selection. Long-tail SEO value (book/author queries), and cheap E-E-A-T. Place it in
+the content backlog (P2), link it from the footer Resources column and relevant blog posts.
+
 ---
 
 ## Phase H — Off-Page SEO & Authority
@@ -334,6 +344,80 @@ Timing note: the domain does not change at cutover, so links pointed at `transpe
 - **Guest articles:** offer teachers' articles to established outlets (transpersonal journals, EUROTAS newsletter, therapy blogs) with a bio link.
 - **Google Business Profile:** create one for the school (education category). Even without a public campus it enables reviews and Maps presence; encourage students to leave Google reviews. Consider venue-tagged posts around each intensive.
 - **Monitor:** Ahrefs Webmaster Tools (free) quarterly for new/lost links.
+
+---
+
+## Backlinks & Partner Outreach
+
+> **Shareable worksheet for collaborators.** This is the concrete companion to Phase H. The goal
+> is simple: every partner institute and every teacher who has a website should link back to
+> `https://transpersonal-training.com` — a plain followed link with natural anchor text like
+> "I teach at Eastwest Transpersonal Training School" or "In partnership with Eastwest
+> Transpersonal Training School." These topical, relationship-based links are the single most
+> valuable SEO asset available to a school in this niche.
+>
+> **How to use this table:** for each row, (1) check whether a link to us already exists on their
+> site, (2) if not, ask them to add one, (3) confirm the link is *followed* (not `rel="nofollow"`)
+> and points to the homepage or a relevant page. Fill in the Status column as you go. When a
+> partnership or teaching relationship is no longer current, mark it so we don't publish it on the
+> Accreditation/Teachers pages.
+
+### The single most valuable target
+
+| Target | Why | Status |
+|--------|-----|--------|
+| **EUROTAS** (eurotas.world) | Ensure the school is listed on the accredited-schools / members pages with a **followed** link. Most authoritative, most topical link available. | ☐ confirm listing + link |
+
+### Partner institutes (from the old site — confirm each is still active before publishing)
+
+Pablo to confirm both **(a) still an active partner** and **(b) links back to us**. Website URLs
+to be filled in during outreach.
+
+| Institute | Location | Still active? | Links back to us? |
+|-----------|----------|---------------|-------------------|
+| International Institute for Consciousness Exploration & Psychotherapy | Freiburg, Germany | ☐ | ☐ |
+| Transpersonal Psychotherapy School | Milan, Italy | ☐ | ☐ |
+| Integral Transpersonal Institute | Milan, Italy | ☐ | ☐ |
+| Inner Arts Institute | Watertown, MA, USA | ☐ | ☐ |
+| School of Transpersonal Psychology & Hypnotherapy "Teadlik Mina" | Estonia | ☐ | ☐ |
+| Latvian Transpersonal Education Institute | Latvia | ☐ | ☐ |
+| Holos Transpersonal Training School | Romania | ☐ | ☐ |
+| *(new partners not on the old list — add here)* | | ☐ | ☐ |
+
+### Faculty with a known website (reciprocal-link asks)
+
+These teachers already have a personal/professional site in our data — the easiest wins, since
+the relationship already exists. Ask each to add "I teach at Eastwest Transpersonal Training
+School" with a followed link.
+
+| Teacher | Role | Website (from site data) | Links back to us? |
+|---------|------|--------------------------|-------------------|
+| Kati Wortelkamp | Head West (core) | kati-wortelkamp.de | ☐ |
+| Lyudmila Skartsesku | Head East (core) | arasco.org | ☐ |
+| Manal Al-Hammadi | Core | manalpsychotherapy.com | ☐ |
+| Mario Lorenzetti | Guest | mariolorenzetti.org | ☐ |
+| Tina Lindhard | Guest | tinalindhard.com | ☐ |
+| Stefan Dressler | Guest | essence-sd.de | ☐ |
+| Lilian Gscheidel | Alumni faculty | wandel-zart-und-wild.de | ☐ |
+
+### Faculty / past collaborators without a website on file
+
+Named on the old site and worth a backlink ask if they have a site (find URL during outreach).
+This is also the list Pablo asked for, to check who links back. **Exclude Maria Kühl-Weigmann
+(deceased 2023) from outreach.**
+
+Bernadette Blin, Gabriel Fernandez-Borsot, Dr. Ingo Benjamin Jahrsetz, Prof. Jure Biechonski,
+Nicolás Cambas, Rainer Pervöltz, Stephan Schillinger, Samvedam B. Randles, Pier Luigi Lattuada,
+Dr. Serge Obolensky Beddington-Behrens, Dr. Kirsten E. Cameron, Vladimir Maykov, Lev Belogorodskii,
+Liudmila Serbina, Cristina Revenco, Dario Giuffrida, Dennis Johnson, Erik Andersen, Cathy Geils,
+Charlotte Kihl, Ingrida Indane, Rita Aguila, Lydia Maidan, Vera Covaliciuc.
+
+### Other backlink sources (from Phase H, restated for the worksheet)
+
+- [ ] EAP and national transpersonal associations directory listings
+- [ ] Breathwork directories (breathwork alliance–style lists), therapy-training directories, GoodTherapy-style course listings
+- [ ] Google Business Profile (enables reviews + Maps)
+- [ ] Guest articles in transpersonal journals / EUROTAS newsletter with a bio link
 
 ---
 
@@ -412,14 +496,14 @@ Only after Phases A–I are live (paid traffic into a leaky funnel is burned mon
 
 These block specific steps; everything else can proceed.
 
-1. **Form backend** (blocks step 4): Brevo forms vs Formspree/Tally vs embedded Google Form. *Recommendation: Brevo, since it also covers Phase I.*
+1. **Form backend** (blocks step 4): Brevo forms vs Formspree/Tally vs embedded Google Form. *Recommendation: Brevo, since it also covers Phase I.* → **RESOLVED (Jul 2026): Brevo.** Pablo confirmed migrating the newsletter to Brevo. ⚠️ There is an existing subscriber list on **CleverReach** (the old site's newsletter, Jan 2024 – Jun 2026) — plan an export/import with double-opt-in re-confirmation as part of the Brevo setup.
 2. **Analytics tool** (blocks step 12): cookieless (Plausible/Cloudflare) vs GA4+consent banner. *Recommendation: cookieless.*
 3. **Student portal fate at migration** (blocks steps 3 and 17–18): keep WordPress on a subdomain vs replace before cutover. This interacts with PABLO task 5 (lectures login) and task 10 (hosting).
 4. **Hosting/CDN** (blocks steps 3 and 18): GitHub Pages alone cannot do 301 redirects — put Cloudflare in front, or switch to Netlify/Cloudflare Pages?
-5. **Fees transparency** (affects steps 5–6): publish fees, a range, or "on request"? *Recommendation: at least a range — it qualifies leads and is heavily searched.*
+5. **Fees transparency** (affects steps 5–6): publish fees, a range, or "on request"? *Recommendation: at least a range — it qualifies leads and is heavily searched.* → **RESOLVED (Jul 2026): publish exact prices.** €489/module (East) · €689/module (West) · €45/single lecture · single seminar on request. Now shown on Training Overview → Fees. Discounts (financial hardship, on request) and referral (one free module per new student introduced) are published too. Online payment is **not** available yet — enrolment is arranged with the office (see PABLO task 21).
 6. **Who writes content** (blocks steps 15 and 21): Fabio, teachers on rotation, syndication from Manal/Mario, or a hired writer?
 7. **Social ownership** (blocks steps 14 and 25): who runs Instagram/LinkedIn week to week? If nobody, defer Phase J rather than doing it badly.
-8. **Italian-language market:** the keyword sheet contains `Respirazione olotropica`; venues include Tuscany. Add an Italian section (`/it/` + hreflang) or stay English-only? *Recommendation: English-only until the cohort fills, then reassess.*
+8. **Language / international markets:** Add other-language sections (`/it/`, `/ru/` + hreflang) or stay English-only? *Recommendation: English-only until the cohort fills, then reassess.* → **RESOLVED (Jul 2026): English-only for now.** Confirmed by Pablo, even though the 2027–2030 cohort now has a live Russian-language Eastern track (Russian speakers will rely on browser/Google translation for the moment). A Russian landing page *may* come later but is explicitly out of scope for launch. Keep an eye on the widened audience: the Eastern track opens up Russian-language / Eastern-Europe demand that the current English-only SEO plan does not capture.
 9. **Ads budget** (blocks step 27): is there any budget for a Google Ads pilot in 2026–27?
 
 ---

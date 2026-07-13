@@ -97,6 +97,11 @@ description: "Detailed curriculum for transpersonal psychotherapy training. Topi
 
                 <div class="space-y-6 relative" style="z-index: 2;">
                     {% set romans = ['I', 'II', 'III', 'IV', 'V'] %}
+                    {% set levelCerts = [
+                        { title: 'Certificate of Attendance', body: 'Level 1 can be taken on its own as a standalone year of self-development — no obligation to continue.' },
+                        { title: 'Certificate in Transpersonal Counselling Skills', body: 'Awarded through a EUROTAS-accredited institute, with credits toward EUROTAS certification.' },
+                        { title: 'Certificate as Transpersonal Psychotherapy & Holotropic Breathwork Facilitator', body: 'With an optional EUROTAS certification track. Please note: “psychotherapist” is a legally protected title in some countries (for example Italy). We are working toward EAP compliance, but at present no transpersonal school is EAP-accredited — please check the psychotherapy regulations in your own country before using the title professionally.' }
+                    ] %}
                     {% for level in curriculumData.levels %}
                     {% set isFirst = loop.first %}
                     <div class="bg-white/25 backdrop-blur-sm border border-slate-200/40 shadow-sm overflow-hidden">
@@ -119,6 +124,17 @@ description: "Detailed curriculum for transpersonal psychotherapy training. Topi
                         <div class="level-content{% if isFirst %} expanded{% endif %}" id="{{ level.id }}">
                             <div class="px-6 pb-6">
                                 <div class="space-y-6">
+                                    {% set cert = levelCerts[loop.index0] %}
+                                    {% if cert %}
+                                    <div class="flex items-start gap-3 bg-[#C9A45C]/10 border-l-4 border-[#C9A45C] p-4">
+                                        <i data-lucide="award" class="w-5 h-5 text-[#9A7734] flex-shrink-0 mt-0.5"></i>
+                                        <div>
+                                            <p class="text-xs font-semibold uppercase tracking-wider text-[#9A7734] mb-1">What you earn</p>
+                                            <p class="font-serif font-bold text-black text-sm md:text-base leading-snug">{{ cert.title }}</p>
+                                            <p class="text-xs md:text-sm text-black/80 leading-relaxed mt-1">{{ cert.body }}</p>
+                                        </div>
+                                    </div>
+                                    {% endif %}
                                     {% if level.modules.length > 0 %}
                                     <div class="level-card bg-neutral-warm-50 p-4 border border-dashed border-slate-300">
                                         <h4 class="font-serif font-bold text-slate-800 text-sm mb-3 flex items-center gap-2">
