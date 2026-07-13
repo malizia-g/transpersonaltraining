@@ -6,6 +6,7 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
 
 {% set coreIntro = 'teachers/01-core-intro.md' | pageContent %}
 {% set guestIntro = 'teachers/02-guest-intro.md' | pageContent %}
+{% set alumniIntro = 'teachers/03-alumni-intro.md' | pageContent %}
 
 <style>
     /* Teacher Card Styles */
@@ -29,7 +30,14 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
         object-fit: cover;
         transition: transform 0.3s ease;
     }
-    
+
+    /* Compact (alumni) cards: the image wrapper sets the real height via
+       Tailwind, so the image must fill it rather than being clipped out of
+       a taller fixed-height box (which crops off the bottom of the face). */
+    .teacher-card-compact .teacher-img {
+        height: 100%;
+    }
+
     .teacher-card:hover .teacher-img {
         transform: scale(1.05);
     }
@@ -193,7 +201,7 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
         <div class="text-center max-w-3xl mx-auto mb-16">
             <p class="p4-kicker text-[#9A7734] mb-4 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
-                Core faculty
+                {{ coreIntro.data.kicker }}
                 <span class="p4-hairline"></span>
             </p>
             <h2 class="p4-display text-4xl md:text-5xl font-medium text-[#0F2540] mb-4">{{ coreIntro.data.heading }}</h2>
@@ -287,7 +295,7 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
         <div class="text-center max-w-3xl mx-auto mb-16">
             <p class="p4-kicker text-[#9A7734] mb-4 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
-                Guest faculty
+                {{ guestIntro.data.kicker }}
                 <span class="p4-hairline"></span>
             </p>
             <h2 class="p4-display text-4xl md:text-5xl font-medium text-[#0F2540] mb-4">{{ guestIntro.data.heading }}</h2>
@@ -334,8 +342,16 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
                                 {{ teacher.id | getBio | safe }}
                             {% endif %}
                         </div>
+                        {% if teacher.website %}
+                        <div class="mt-4">
+                            <a href="{{ teacher.website }}" target="_blank" class="inline-flex items-center gap-2 text-[#9A7734] hover:text-[#7A5E29] font-medium">
+                                <i data-lucide="globe" class="w-4 h-4"></i>
+                                {{ teacher.website | replace('https://', '') | replace('http://', '') | replace('www.', '') | truncate(30) }}
+                            </a>
+                        </div>
+                        {% endif %}
                     </div>
-                    
+
                     <!-- Training Tab -->
                     <div id="training-{{ teacher.id }}" class="tab-content">
                         <div class="prose prose-sm max-w-none text-neutral-warm-700">
@@ -346,7 +362,101 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
                             {% endif %}
                         </div>
                     </div>
-                    
+
+                    <!-- Practice Tab -->
+                    <div id="practice-{{ teacher.id }}" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-neutral-warm-700">
+                            {% if teacher.experience %}
+                                {{ teacher.experience | markdown | safe }}
+                            {% elif teacher.publications %}
+                                {{ teacher.publications | markdown | safe }}
+                            {% else %}
+                                <p class="text-slate-600">Practice information coming soon</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- "Who Has Taught With Us" Section -->
+<section class="py-24 bg-white">
+    <div class="container mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <p class="p4-kicker text-[#9A7734] mb-4 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
+                {{ alumniIntro.data.kicker }}
+                <span class="p4-hairline"></span>
+            </p>
+            <h2 class="p4-display text-4xl md:text-5xl font-medium text-[#0F2540] mb-4">{{ alumniIntro.data.heading }}</h2>
+            <p class="text-indigo-deep-900/70 text-lg">{{ alumniIntro.data.description }}</p>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {% for teacher in teachers.alumni %}
+            <div class="teacher-card teacher-card-compact" onclick="toggleBio(this)">
+                <div class="overflow-hidden h-28 sm:h-32">
+                    <img src="{{ teacher.image | url }}" alt="{{ teacher.name }}" class="teacher-img">
+                </div>
+                <div class="p-3">
+                    <div class="flex items-start justify-between gap-2">
+                        <div>
+                            <h3 class="text-sm font-serif font-bold text-indigo-deep-900 leading-tight line-clamp-2">{{ teacher.name }}</h3>
+                            <p class="text-[#9A7734] text-xs mt-0.5">{{ teacher.location }}</p>
+                        </div>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-neutral-warm-400 bio-icon mt-0.5 flex-shrink-0"></i>
+                    </div>
+                </div>
+                <div class="teacher-bio">
+                    <!-- Tab Navigation -->
+                    <div class="tab-navigation">
+                        <button class="tab-button active" onclick="switchTab(event, 'bio-{{ teacher.id }}')">
+                            <i data-lucide="book-open" class="w-5 h-5"></i>
+                            <span>Bio</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'training-{{ teacher.id }}')">
+                            <i data-lucide="award" class="w-5 h-5"></i>
+                            <span>Training</span>
+                        </button>
+                        <button class="tab-button" onclick="switchTab(event, 'practice-{{ teacher.id }}')">
+                            <i data-lucide="briefcase" class="w-5 h-5"></i>
+                            <span>Practice</span>
+                        </button>
+                    </div>
+
+                    <!-- Biography Tab -->
+                    <div id="bio-{{ teacher.id }}" class="tab-content active">
+                        <div class="prose prose-sm max-w-none text-neutral-warm-700">
+                            {% if teacher.bio %}
+                                {{ teacher.bio | markdown | safe }}
+                            {% else %}
+                                {{ teacher.id | getBio | safe }}
+                            {% endif %}
+                        </div>
+                        {% if teacher.website %}
+                        <div class="mt-4">
+                            <a href="{{ teacher.website }}" target="_blank" class="inline-flex items-center gap-2 text-[#9A7734] hover:text-[#7A5E29] font-medium">
+                                <i data-lucide="globe" class="w-4 h-4"></i>
+                                {{ teacher.website | replace('https://', '') | replace('http://', '') | replace('www.', '') | truncate(30) }}
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Training Tab -->
+                    <div id="training-{{ teacher.id }}" class="tab-content">
+                        <div class="prose prose-sm max-w-none text-neutral-warm-700">
+                            {% if teacher.credentials_detail %}
+                                {{ teacher.credentials_detail | markdown | safe }}
+                            {% else %}
+                                <p class="text-slate-600">Training information coming soon</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
                     <!-- Practice Tab -->
                     <div id="practice-{{ teacher.id }}" class="tab-content">
                         <div class="prose prose-sm max-w-none text-neutral-warm-700">

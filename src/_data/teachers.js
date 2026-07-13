@@ -1,77 +1,65 @@
 const fs = require('fs');
 const path = require('path');
+const matter = require('gray-matter');
 
+// Every teacher lives in its own Markdown file under _data/teachers/, with a
+// `section: core|guest|alumni` field in its frontmatter. That field is what
+// decides which part of the Teachers page a person appears in — moving
+// someone between sections (or reordering them) only ever means editing
+// that file, never the template.
 module.exports = function() {
-  const biosDir = path.join(__dirname, 'bios');
-  const coreTeachersPath = path.join(__dirname, 'coreTeachers.json');
-  const guestTeachersPath = path.join(__dirname, 'guestTeachers.json');
-  
-  // Read JSON files
-  const coreTeachers = JSON.parse(fs.readFileSync(coreTeachersPath, 'utf-8'));
-  const guestTeachers = JSON.parse(fs.readFileSync(guestTeachersPath, 'utf-8'));
-  
-  // Function to parse markdown bio files
-  function parseBioFile(filePath) {
-    const content = fs.readFileSync(filePath, 'utf-8');
+  const teachersDir = path.join(__dirname, 'teachers');
+
+  const files = fs.readdirSync(teachersDir).filter(file => file.endsWith('.md'));
+
+  function parseSections(content) {
     const sections = {};
-    
-    // Split by ## headers
     const parts = content.split(/^##\s+/m);
-    
-    // First part before any header (if exists)
+
     if (parts[0].trim()) {
       sections.intro = parts[0].trim();
     }
-    
-    // Parse each section
+
     for (let i = 1; i < parts.length; i++) {
       const lines = parts[i].split('\n');
       const title = lines[0].trim();
       const body = lines.slice(1).join('\n').trim();
-      
-      // Normalize section names
+
       const normalizedTitle = title.toLowerCase()
         .replace(/[\s&\/]+/g, '_')
         .replace(/[^a-z0-9_]/g, '');
-      
+
       sections[normalizedTitle] = body;
     }
-    
+
     return sections;
   }
-  
-  // Read all bio files
-  const bioFiles = fs.readdirSync(biosDir).filter(file => file.endsWith('.md'));
-  const bios = {};
-  
-  bioFiles.forEach(file => {
-    const id = file.replace('.md', '');
-    const filePath = path.join(biosDir, file);
-    bios[id] = parseBioFile(filePath);
+
+  const all = files.map(file => {
+    const raw = fs.readFileSync(path.join(teachersDir, file), 'utf-8');
+    const { data, content } = matter(raw);
+    const sections = parseSections(content);
+
+    return {
+      ...data,
+      id: data.id || file.replace(/\.md$/, ''),
+      bio: sections.biography || sections.intro || '',
+      credentials_detail: sections.credentials || '',
+      experience: sections.experience || '',
+      publications: sections.selected_publications || sections.publications || '',
+    };
   });
-  
-  // Merge bio data with teacher data
-  function enrichTeacher(teacher) {
-    const bio = bios[teacher.id];
-    if (bio) {
-      return {
-        ...teacher,
-        bio: bio.biography || bio.intro || '',
-        credentials_detail: bio.credentials || bio.academic_degrees_certificates || '',
-        experience: bio.experience || '',
-        publications: bio.selected_publications || bio.publications || ''
-      };
-    }
-    return teacher;
+
+  function bySection(section) {
+    return all
+      .filter(teacher => teacher.section === section)
+      .sort((a, b) => (a.order ?? 999) - (b.order ?? 999) || a.name.localeCompare(b.name));
   }
-  
-  // Enrich all teachers
-  const enrichedCore = coreTeachers.map(enrichTeacher);
-  const enrichedGuest = guestTeachers.map(enrichTeacher);
-  
+
   return {
-    core: enrichedCore,
-    guest: enrichedGuest,
-    all: [...enrichedCore, ...enrichedGuest]
+    core: bySection('core'),
+    guest: bySection('guest'),
+    alumni: bySection('alumni'),
+    all,
   };
 };
