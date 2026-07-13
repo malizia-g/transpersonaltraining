@@ -1,11 +1,12 @@
 ---
 id: ingo-jahrsetz
 name: Dr. Ingo Benjamin Jahrsetz
+role: Guest Teacher
 location: Germany
 credentials: "Trainer, Supervisor, Transpersonal Psychotherapist"
 image: /assets/images/People/teachers/ingo-benjamin-jahrsetz.jpg
-section: alumni
-order: 3
+section: guest
+order: 9
 ---
 
 ## Biography

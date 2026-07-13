@@ -1,11 +1,12 @@
 ---
 id: rainer-pervoltz
 name: Rainer Pervöltz
+role: Guest Teacher
 location: Germany
 credentials: "Therapist, Supervisor, Teacher"
 image: /assets/images/People/teachers/rainer-pervoltz.jpg
-section: alumni
-order: 13
+section: guest
+order: 8
 ---
 
 ## Biography

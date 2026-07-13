@@ -1,12 +1,13 @@
 ---
 id: stefan-dressler
 name: Stefan Dressler
+role: Guest Teacher
 location: Germany
 credentials: "M.D., Specialist in Psychiatry and Psychotherapy"
 image: /assets/images/People/teachers/stefan-dressler.jpg
 website: http://www.essence-sd.de
-section: alumni
-order: 11
+section: guest
+order: 10
 ---
 
 ## Biography
