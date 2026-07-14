@@ -120,27 +120,38 @@ description: "Books, authors and talks we recommend for exploring transpersonal 
 
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {% for video in readingResources.videos %}
-            <article class="bg-neutral-warm-50 border border-neutral-warm-200 shadow-sm hover:shadow-md transition-shadow p-6 flex flex-col h-full">
-                <div class="w-12 h-12 flex-shrink-0 rounded-full bg-[#C9A45C]/15 flex items-center justify-center mb-4">
-                    <i data-lucide="play-circle" class="w-6 h-6 text-[#9A7734]"></i>
-                </div>
-                <h3 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">{{ video.title }}</h3>
-                {% if video.source %}<p class="text-neutral-warm-500 text-sm mt-1">{{ video.source }}</p>{% endif %}
-                {% if video.note %}<p class="text-neutral-warm-600 text-sm mt-3 leading-relaxed flex-grow">{{ video.note }}</p>{% endif %}
-                {% set ytid = video.url | youtubeId %}
+            {% set ytid = video.url | youtubeId %}
+            <article class="bg-neutral-warm-50 border border-neutral-warm-200 shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col h-full">
                 {% if ytid %}
-                <button type="button" onclick="openResourceVideo('{{ ytid }}')" class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] text-sm font-semibold transition-all shadow-sm hover:shadow-md self-start">
-                    <i data-lucide="play-circle" class="w-4 h-4"></i>
-                    Watch
+                <button type="button" onclick="openResourceVideo('{{ ytid }}')" aria-label="Watch: {{ video.title }}" class="group relative block w-full aspect-video bg-[#0F2540] overflow-hidden">
+                    <img src="https://img.youtube.com/vi/{{ ytid }}/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    <span class="absolute inset-0 bg-[#0F2540]/20 group-hover:bg-[#0F2540]/10 transition-colors flex items-center justify-center">
+                        <i data-lucide="play-circle" class="w-14 h-14 text-white drop-shadow-lg"></i>
+                    </span>
                 </button>
-                {% elif video.url %}
-                <a href="{{ video.url }}" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-2 text-science-blue-700 hover:text-science-blue-800 font-medium text-sm">
-                    <i data-lucide="external-link" class="w-4 h-4"></i>
-                    Watch
-                </a>
                 {% else %}
-                <span class="mt-4 inline-block text-xs font-semibold uppercase tracking-wide text-[#9A7734] bg-[#C9A45C]/15 px-2 py-0.5 self-start">Link coming</span>
+                <div class="w-full aspect-video bg-[#C9A45C]/15 flex items-center justify-center">
+                    <i data-lucide="play-circle" class="w-10 h-10 text-[#9A7734]"></i>
+                </div>
                 {% endif %}
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">{{ video.title }}</h3>
+                    {% if video.source %}<p class="text-neutral-warm-500 text-sm mt-1">{{ video.source }}</p>{% endif %}
+                    {% if video.note %}<p class="text-neutral-warm-600 text-sm mt-3 leading-relaxed flex-grow">{{ video.note }}</p>{% endif %}
+                    {% if ytid %}
+                    <button type="button" onclick="openResourceVideo('{{ ytid }}')" class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] text-sm font-semibold transition-all shadow-sm hover:shadow-md self-start">
+                        <i data-lucide="play-circle" class="w-4 h-4"></i>
+                        Watch
+                    </button>
+                    {% elif video.url %}
+                    <a href="{{ video.url }}" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-2 text-science-blue-700 hover:text-science-blue-800 font-medium text-sm">
+                        <i data-lucide="external-link" class="w-4 h-4"></i>
+                        Watch
+                    </a>
+                    {% else %}
+                    <span class="mt-4 inline-block text-xs font-semibold uppercase tracking-wide text-[#9A7734] bg-[#C9A45C]/15 px-2 py-0.5 self-start">Link coming</span>
+                    {% endif %}
+                </div>
             </article>
             {% endfor %}
         </div>

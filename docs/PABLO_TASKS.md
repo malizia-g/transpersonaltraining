@@ -349,6 +349,13 @@ The current official EUROTAS PDF was located during the review:
 (landing page: `https://eurotas.world/eurotas-certifications-for-professionals/`).
 - [ ] Build the Accreditation page (Marketing Phase F) linking this PDF, explaining TREE membership (still accurate per Pablo), and restating the per-level breathwork requirement.
 
+**30. Load the Recommended Reading page from a spreadsheet.**
+The `/resources/` Recommended Reading & Watching page (books + videos) currently pulls from a static data file (`src/_data/readingResources.js`).
+- [ ] Create a Recommended Reading spreadsheet (same fields as the current data file: category, title, author, note, url for books; title, source, note, url for videos)
+- [ ] Wire the page to build from the spreadsheet, following the same source-of-truth pattern as Curriculum/Schedule/Lectures
+- [ ] Test the page after the spreadsheet is finalized
+Reason: keeps the reading/watching list editable by Pablo without a code change, consistent with how other dynamic content is managed.
+
 ### P2 — After launch / dependent on hosting
 
 **28. Set up 301 redirects for old East URLs.**
