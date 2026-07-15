@@ -5,6 +5,7 @@ role: Head West
 location: Germany
 credentials: "Anthropologist & Psychologist M.A."
 image: /assets/images/People/teachers/kati-wortelkamp.jpg
+imagePosition: center top
 website: http://www.kati-wortelkamp.de
 section: core
 order: 1
