@@ -317,8 +317,9 @@ function toggleExpandable(id) {
         icon.classList.add('rotated');
     }
 
-    // Trigger vine animation
-    if (window._vineAnimate) window._vineAnimate();
+    // Trigger vine animation — pass the toggled element so the vine can wait for
+    // its own max-height transition to finish (see comment on growVine).
+    if (window._vineAnimate) window._vineAnimate(content);
 }
 
 function toggleLevel(id) {
@@ -329,7 +330,7 @@ function toggleSubModule(id) {
     toggleExpandable(id);
 }
 
-// ── Curriculum Vine (training-style) ──
+// ── Curriculum Vine (optimized: math-based geometry, pooled DOM nodes, progressive leaf reveal) ──
 (function() {
     var wrapper   = document.getElementById('curriculumWrapper');
     var svg       = document.getElementById('curriculumVineSvg');
@@ -342,7 +343,6 @@ function toggleSubModule(id) {
     var leafColors = ['#7fb069', '#88a580', '#6b8e6b', '#8b9d83', '#759e75', '#6d8b6d', '#9db19d'];
     var leafSymbols = ['leaf-sm', 'leaf-md', 'leaf-lg'];
     var leafSizes   = [12, 16, 22]; // width/height for each symbol
-    var animFrameId = null;
 
     // Random seed per page load, stable across redraws
     var _pageSeed = Math.floor(Math.random() * 2147483646) + 1;
@@ -351,25 +351,259 @@ function toggleSubModule(id) {
 
     function ns(tag) { return document.createElementNS('http://www.w3.org/2000/svg', tag); }
 
-    /* ── Create a leaf using <use> referencing a <defs> symbol ── */
-    function createLeaf(x, y, angle, colorIdx, sizeIdx) {
-        var sym = leafSymbols[sizeIdx];
-        var sz  = leafSizes[sizeIdx];
-        var half = sz / 2;
-        var leaf = ns('use');
-        leaf.setAttribute('href', '#' + sym);
-        leaf.setAttribute('class', 'vine-curr-leaf');
-        leaf.setAttribute('width', sz);
-        leaf.setAttribute('height', sz);
-        leaf.setAttribute('x', -half);
-        leaf.setAttribute('y', -sz);
-        leaf.setAttribute('transform', 'translate(' + x + ',' + y + ') rotate(' + angle + ')');
-        leaf.setAttribute('fill', leafColors[colorIdx % leafColors.length]);
-        leaf.setAttribute('opacity', '0.82');
-        return leaf;
+    /* ── Pure-math curve helpers. Positions/tangents are computed from the same control
+       points used to build each path's "d" string, so placing leaves never needs to ask
+       the DOM "where is this point" (getPointAtLength/getTotalLength force a synchronous
+       layout on every call — with hundreds of branches and thousands of leaves that adds
+       up to a multi-second stall). ── */
+    function quadPoint(p0, cp, p1, t) {
+        var mt = 1 - t;
+        return { x: mt * mt * p0.x + 2 * mt * t * cp.x + t * t * p1.x, y: mt * mt * p0.y + 2 * mt * t * cp.y + t * t * p1.y };
+    }
+    function quadTangent(p0, cp, p1, t) {
+        var mt = 1 - t;
+        return Math.atan2(2 * mt * (cp.y - p0.y) + 2 * t * (p1.y - cp.y), 2 * mt * (cp.x - p0.x) + 2 * t * (p1.x - cp.x));
+    }
+    function cubicPoint(p0, c1, c2, p1, t) {
+        var mt = 1 - t, a = mt * mt * mt, b = 3 * mt * mt * t, c = 3 * mt * t * t, d = t * t * t;
+        return { x: a * p0.x + b * c1.x + c * c2.x + d * p1.x, y: a * p0.y + b * c1.y + c * c2.y + d * p1.y };
+    }
+    function cubicTangent(p0, c1, c2, p1, t) {
+        var mt = 1 - t;
+        var dx = 3 * mt * mt * (c1.x - p0.x) + 6 * mt * t * (c2.x - c1.x) + 3 * t * t * (p1.x - c2.x);
+        var dy = 3 * mt * mt * (c1.y - p0.y) + 6 * mt * t * (c2.y - c1.y) + 3 * t * t * (p1.y - c2.y);
+        return Math.atan2(dy, dx);
+    }
+    // A "chain" walks a sequence of quadratics end-to-end — used for the trunk (many
+    // segments) and for secondary branches (two quadratics joined by an SVG "T" reflection).
+    function chainPointAt(segs, u) {
+        var n = segs.length, scaled = Math.min(Math.max(u, 0), 1) * n, idx = Math.min(Math.floor(scaled), n - 1);
+        var s = segs[idx];
+        return quadPoint(s.p0, s.cp, s.p1, scaled - idx);
+    }
+    function chainTangentAt(segs, u) {
+        var n = segs.length, scaled = Math.min(Math.max(u, 0), 1) * n, idx = Math.min(Math.floor(scaled), n - 1);
+        var s = segs[idx];
+        return quadTangent(s.p0, s.cp, s.p1, scaled - idx);
+    }
+    function curvePointAt(curve, t) {
+        return curve.type === 'cubic' ? cubicPoint(curve.p0, curve.c1, curve.c2, curve.p1, t) : chainPointAt(curve.segs, t);
+    }
+    function curveTangentAt(curve, t) {
+        return curve.type === 'cubic' ? cubicTangent(curve.p0, curve.c1, curve.c2, curve.p1, t) : chainTangentAt(curve.segs, t);
     }
 
-    /* ── Determine how far the vine should grow ── */
+    /* ── Pooled DOM sync: grow/shrink a container to the target child count, reusing
+       existing nodes instead of clearing + recreating everything on every redraw. ── */
+    function syncPoolSize(container, tag, count) {
+        while (container.children.length < count) container.appendChild(ns(tag));
+        while (container.children.length > count) container.removeChild(container.lastElementChild);
+    }
+
+    function applyLeafAttrs(el, leaf) {
+        var sym = leafSymbols[leaf.sizeIdx];
+        var sz  = leafSizes[leaf.sizeIdx];
+        el.setAttribute('href', '#' + sym);
+        el.setAttribute('class', 'vine-curr-leaf');
+        el.setAttribute('width', sz);
+        el.setAttribute('height', sz);
+        el.setAttribute('x', -sz / 2);
+        el.setAttribute('y', -sz);
+        el.setAttribute('transform', 'translate(' + leaf.x + ',' + leaf.y + ') rotate(' + leaf.angle + ')');
+        el.setAttribute('fill', leafColors[leaf.colorIdx % leafColors.length]);
+        el.setAttribute('opacity', '0.82');
+    }
+
+    /* ── Trunk geometry: builds the "d" string for rendering and keeps the per-segment
+       control points around so later point/tangent queries stay DOM-free. ── */
+    function buildTrunk(targetY) {
+        var baseX = 32, startY = 10;
+        var segments = Math.max(4, Math.ceil((targetY - startY) / 50));
+        var d = 'M ' + baseX + ' ' + startY;
+        var segs = [];
+        var prev = { x: baseX, y: startY };
+        for (var i = 0; i < segments; i++) {
+            var t = (i + 1) / segments;
+            var segY = startY + t * (targetY - startY);
+            var waveAmp = 12 + Math.sin(i * 0.7) * 8;
+            var waveSide = (i % 2 === 0 ? 1 : -1);
+            var cpY = startY + (i + 0.5) / segments * (targetY - startY);
+            var cp = { x: baseX + waveSide * waveAmp, y: cpY };
+            var endPt = { x: baseX + Math.sin((i + 1) * 0.7) * 5, y: segY };
+            d += ' Q ' + cp.x + ' ' + cp.y + ', ' + endPt.x + ' ' + endPt.y;
+            segs.push({ p0: prev, cp: cp, p1: endPt });
+            prev = endPt;
+        }
+        trunk.setAttribute('d', d);
+        trunk.setAttribute('stroke-width', '4');
+        trunk.setAttribute('opacity', '0.65');
+        // A real arc length isn't worth a DOM read for a decorative vine — this wave-corrected
+        // estimate over the vertical span is close enough to drive the density formulas below.
+        var approxLength = Math.max((targetY - startY) * 1.08, 1);
+        return { segs: segs, approxLength: approxLength };
+    }
+
+    function addTrunkLeaves(trunkInfo, leafData) {
+        var pathLength = trunkInfo.approxLength;
+        if (pathLength < 20) return;
+        var numLeaves = Math.max(4, Math.floor(pathLength / 80) * 8);
+        for (var k = 0; k < numLeaves; k++) {
+            var pos = 15 + (pathLength - 30) * (k / numLeaves) + (seededRandom() - 0.5) * 14;
+            var u = Math.min(Math.max(pos, 5), pathLength - 5) / pathLength;
+            var pt = chainPointAt(trunkInfo.segs, u);
+            var tang = chainTangentAt(trunkInfo.segs, u);
+            var side = (k % 2 === 0 ? 1 : -1);
+            var perpA = tang + (Math.PI / 2) * side;
+            var rndRot = (15 + seededRandom() * 30) * side;
+            var leafAngle = perpA * (180 / Math.PI) + rndRot;
+            var r = seededRandom();
+            var sizeIdx = r < 0.5 ? 0 : (r < 0.85 ? 1 : 2);
+            leafData.push({ x: pt.x, y: pt.y, angle: leafAngle, colorIdx: k, sizeIdx: sizeIdx, group: 'trunk' });
+        }
+    }
+
+    /* ── Secondary + tertiary branches. All control points are known in closed form at
+       creation time, so leaf placement along a branch is pure math too. ── */
+    function buildBranches(trunkInfo, wW) {
+        var pathLength = trunkInfo.approxLength;
+        var descriptors = [];
+        if (pathLength < 10) return descriptors;
+
+        var numBranches = Math.max(3, Math.floor(pathLength / 120));
+
+        for (var i = 0; i < numBranches; i++) {
+            var position = seededRandom() * (pathLength - 40) + 20;
+            var u = position / pathLength;
+            var startPoint = chainPointAt(trunkInfo.segs, u);
+            var tangentAngle = chainTangentAt(trunkInfo.segs, u);
+
+            // Bias branches to the right (like training page)
+            var biasRight = seededRandom() < 0.75;
+            var angleOffset = biasRight
+                ? (-Math.PI / 3 + seededRandom() * (Math.PI / 3))
+                : (Math.PI / 6 + seededRandom() * (Math.PI / 3));
+            var branchAngle = tangentAngle + angleOffset;
+            var branchLength = 60 + seededRandom() * 100;
+            // Right-going branches reach further under the text, so give them more reach
+            if (biasRight) branchLength += 30 + seededRandom() * 50;
+
+            // S-curve with loop
+            var loopIntensity = 0.3 + seededRandom() * 0.4;
+            var cp1 = {
+                x: startPoint.x + Math.cos(branchAngle) * branchLength * 0.3,
+                y: startPoint.y + Math.sin(branchAngle) * branchLength * 0.3 + (seededRandom() - 0.5) * 25
+            };
+            var midX = startPoint.x + Math.cos(branchAngle) * branchLength * 0.5;
+            var midY = startPoint.y + Math.sin(branchAngle) * branchLength * 0.5;
+            var perpAngle = branchAngle + Math.PI / 2;
+            var loopOffset = loopIntensity * branchLength * 0.4;
+            var loopPt = { x: midX + Math.cos(perpAngle) * loopOffset, y: midY + Math.sin(perpAngle) * loopOffset };
+            var endPt = { x: startPoint.x + Math.cos(branchAngle) * branchLength, y: startPoint.y + Math.sin(branchAngle) * branchLength };
+            // SVG's "T" command reflects the previous control point about the shared joint
+            var reflectedCp = { x: 2 * loopPt.x - cp1.x, y: 2 * loopPt.y - cp1.y };
+
+            var d = 'M ' + startPoint.x + ' ' + startPoint.y + ' Q ' + cp1.x + ' ' + cp1.y + ', ' + loopPt.x + ' ' + loopPt.y + ' T ' + endPt.x + ' ' + endPt.y;
+            var curve = { type: 'chain', segs: [{ p0: startPoint, cp: cp1, p1: loopPt }, { p0: loopPt, cp: reflectedCp, p1: endPt }] };
+            descriptors.push({ d: d, strokeWidth: 2.5, opacity: 0.75, curve: curve, length: branchLength, weight: 0.6 });
+
+            // Tertiary branches (curved S-shape) — right-going branches get a couple extra
+            var numTertiary = biasRight
+                ? (2 + (seededRandom() < 0.5 ? 1 : 0))
+                : (1 + (seededRandom() < 0.6 ? 1 : 0));
+            for (var j = 0; j < numTertiary; j++) {
+                var t = 0.25 + seededRandom() * 0.55;
+                var tStart = quadPoint(startPoint, cp1, loopPt, t);
+                var tangDir = quadTangent(startPoint, cp1, loopPt, t);
+                var tSide = seededRandom() > 0.5 ? 1 : -1;
+                var tAngle = tangDir + (Math.PI / 5 + seededRandom() * Math.PI / 8) * tSide;
+                var tLen = 45 + seededRandom() * 55;
+                var tCurveIntensity = 0.3 + seededRandom() * 0.35;
+                var tCp1 = { x: tStart.x + Math.cos(tAngle) * tLen * 0.35, y: tStart.y + Math.sin(tAngle) * tLen * 0.35 + (seededRandom() - 0.5) * 15 };
+                var tMidX = tStart.x + Math.cos(tAngle) * tLen * 0.55;
+                var tMidY = tStart.y + Math.sin(tAngle) * tLen * 0.55;
+                var tPerpAngle = tAngle + Math.PI / 2;
+                var tLoopOff = tCurveIntensity * tLen * 0.4 * tSide;
+                var tCp2 = { x: tMidX + Math.cos(tPerpAngle) * tLoopOff, y: tMidY + Math.sin(tPerpAngle) * tLoopOff };
+                var tEnd = { x: tStart.x + Math.cos(tAngle) * tLen, y: tStart.y + Math.sin(tAngle) * tLen };
+
+                var tD = 'M ' + tStart.x + ' ' + tStart.y + ' C ' + tCp1.x + ' ' + tCp1.y + ', ' + tCp2.x + ' ' + tCp2.y + ', ' + tEnd.x + ' ' + tEnd.y;
+                descriptors.push({
+                    d: tD, strokeWidth: 1.5, opacity: 0.65,
+                    curve: { type: 'cubic', p0: tStart, c1: tCp1, c2: tCp2, p1: tEnd },
+                    length: tLen, weight: 0.3
+                });
+            }
+        }
+        return descriptors;
+    }
+
+    function renderBranches(descriptors) {
+        syncPoolSize(branchesG, 'path', descriptors.length);
+        var children = branchesG.children;
+        for (var i = 0; i < descriptors.length; i++) {
+            var el = children[i], b = descriptors[i];
+            el.setAttribute('d', b.d);
+            el.setAttribute('class', 'vine-curr-branch');
+            el.setAttribute('stroke-width', b.strokeWidth);
+            el.setAttribute('opacity', b.opacity);
+        }
+    }
+
+    function buildBranchLeaves(descriptors, leafData) {
+        descriptors.forEach(function(b) {
+            var numLeaves = Math.max(3, Math.floor(b.weight * 28));
+            for (var k = 0; k < numLeaves; k++) {
+                var dist = (b.length / numLeaves) * k + seededRandom() * 12;
+                var t = Math.min(Math.max(dist / b.length, 0), 1);
+                var pt = curvePointAt(b.curve, t);
+                var tang = curveTangentAt(b.curve, t);
+                var side = (k % 2 === 0 ? 1 : -1);
+                var perpA = tang + (Math.PI / 2) * side;
+                var rndRot = (10 + seededRandom() * 35) * side;
+                var leafAngle = perpA * (180 / Math.PI) + rndRot;
+                var r = seededRandom();
+                var sizeIdx = r < 0.4 ? 0 : (r < 0.8 ? 1 : 2);
+                leafData.push({ x: pt.x, y: pt.y, angle: leafAngle, colorIdx: k, sizeIdx: sizeIdx, group: 'branch' });
+            }
+        });
+    }
+
+    /* ── Progressive leaf reveal. Leaf positions are cheap pure math now, but inserting
+       thousands of DOM nodes in a single frame is still real work, so they're dripped in
+       a few hundred at a time across frames instead of dumped in one shot. ── */
+    var LEAF_CHUNK = 180;
+    var leafQueue = [];
+    var leafInsertFrame = null;
+    var trunkLeafCount = 0, branchLeafCount = 0;
+
+    function scheduleLeafReveal(leafData) {
+        if (leafInsertFrame) cancelAnimationFrame(leafInsertFrame);
+        leafQueue = leafData;
+        trunkLeafCount = 0;
+        branchLeafCount = 0;
+        step();
+        function step() {
+            var chunk = leafQueue.splice(0, LEAF_CHUNK);
+            for (var i = 0; i < chunk.length; i++) {
+                var leaf = chunk[i];
+                var container = leaf.group === 'trunk' ? trunkLeavesG : leavesG;
+                var index = leaf.group === 'trunk' ? trunkLeafCount++ : branchLeafCount++;
+                var el = container.children[index];
+                if (!el) { el = ns('use'); container.appendChild(el); }
+                applyLeafAttrs(el, leaf);
+            }
+            if (leafQueue.length > 0) {
+                leafInsertFrame = requestAnimationFrame(step);
+            } else {
+                syncPoolSize(trunkLeavesG, 'use', trunkLeafCount);
+                syncPoolSize(leavesG, 'use', branchLeafCount);
+                leafInsertFrame = null;
+            }
+        }
+    }
+
+    /* ── Determine how far the vine should grow (real layout read — unavoidable, but
+       cheap: a handful of elements, not thousands). ── */
     function getTargetY() {
         var wRect = wrapper.getBoundingClientRect();
         var targetY = 0;
@@ -388,196 +622,81 @@ function toggleSubModule(id) {
         return Math.max(targetY, 50);
     }
 
-    /* ── Draw the principal trunk ── */
-    function drawTrunk(targetY) {
-        var baseX = 32;
-        var startY = 10;
-        var segments = Math.max(4, Math.ceil((targetY - startY) / 50));
-        var d = 'M ' + baseX + ' ' + startY;
-        for (var i = 0; i < segments; i++) {
-            var t = (i + 1) / segments;
-            var segY = startY + t * (targetY - startY);
-            var waveAmp = 12 + Math.sin(i * 0.7) * 8;
-            var waveSide = (i % 2 === 0 ? 1 : -1);
-            var cpY = startY + (i + 0.5) / segments * (targetY - startY);
-            var cpX = baseX + waveSide * waveAmp;
-            d += ' Q ' + cpX + ' ' + cpY + ', ' + (baseX + Math.sin((i + 1) * 0.7) * 5) + ' ' + segY;
-        }
-        trunk.setAttribute('d', d);
-        trunk.setAttribute('stroke-width', '4');
-        trunk.setAttribute('opacity', '0.65');
-    }
+    /* ── Growth loop: redraws the trunk/branches every frame (cheap now — pure math)
+       for a live "growing" effect, and finalizes the leaves exactly when the real
+       accordion animation ends. That moment is detected via the "transitionend" event
+       on the toggled element itself rather than a guessed duration: the accordion's
+       max-height transition targets a fixed 12000px regardless of real content height,
+       so on collapse the box sits at full height for most of the transition and only
+       shrinks in its last stretch — a fixed-duration or "height stopped changing for a
+       few frames" heuristic would finalize too early and miss that shrink entirely. A
+       timeout remains as a fallback in case the transition never fires (e.g. no actual
+       style change on a redundant toggle). ── */
+    var growthFrameId = null;
+    var pendingCleanup = null;
 
-    /* ── Add leaves along the trunk ── */
-    function addTrunkLeaves() {
-        trunkLeavesG.innerHTML = '';
-        var pathLength = trunk.getTotalLength();
-        if (pathLength < 20) return;
-        var numLeaves = Math.max(4, Math.floor(pathLength / 80) * 8);
-        for (var k = 0; k < numLeaves; k++) {
-            var pos = 15 + (pathLength - 30) * (k / numLeaves) + (seededRandom() - 0.5) * 14;
-            var pt  = trunk.getPointAtLength(Math.min(Math.max(pos, 5), pathLength - 5));
-            var npt = trunk.getPointAtLength(Math.min(pos + 3, pathLength));
-            var tang = Math.atan2(npt.y - pt.y, npt.x - pt.x);
-            var side = (k % 2 === 0 ? 1 : -1);
-            var perpA = tang + (Math.PI / 2) * side;
-            var rndRot = (15 + seededRandom() * 30) * side;
-            var leafAngle = perpA * (180 / Math.PI) + rndRot;
-            var r = seededRandom();
-            var sizeIdx = r < 0.5 ? 0 : (r < 0.85 ? 1 : 2);
-            trunkLeavesG.appendChild(createLeaf(pt.x, pt.y, leafAngle, k, sizeIdx));
-        }
-    }
+    function growVine(transitionEl) {
+        if (growthFrameId) cancelAnimationFrame(growthFrameId);
+        if (leafInsertFrame) { cancelAnimationFrame(leafInsertFrame); leafInsertFrame = null; }
+        if (pendingCleanup) { pendingCleanup(); pendingCleanup = null; }
 
-    /* ── Add secondary branches + tertiary + leaves (training-style) ── */
-    function addSmallBranches(targetY, skipLeaves, wW) {
-        var pathLength = trunk.getTotalLength();
-        if (pathLength < 10) return;
+        var lastTrunkInfo = null, lastBranches = null, done = false;
 
-        branchesG.innerHTML = '';
-        leavesG.innerHTML = '';
-        trunkLeavesG.innerHTML = '';
-
-        // Available horizontal space to the right of trunk (baseX ≈ 32)
-        var rightSpace = (wW || 400) - 32;
-
-        var allBranches = [];
-        var numBranches = Math.max(3, Math.floor(pathLength / 120));
-
-        for (var i = 0; i < numBranches; i++) {
-            var position = seededRandom() * (pathLength - 40) + 20;
-            var startPoint = trunk.getPointAtLength(position);
-            var nextPoint  = trunk.getPointAtLength(Math.min(position + 5, pathLength));
-            var tangentAngle = Math.atan2(nextPoint.y - startPoint.y, nextPoint.x - startPoint.x);
-
-            // Bias branches to the right (like training page)
-            var biasRight = seededRandom() < 0.75;
-            var angleOffset = biasRight
-                ? (-Math.PI / 3 + seededRandom() * (Math.PI / 3))
-                : (Math.PI / 6 + seededRandom() * (Math.PI / 3));
-            var branchAngle = tangentAngle + angleOffset;
-
-            // Normal short branches
-            var branchLength = 60 + seededRandom() * 100;
-
-            // S-curve with loop
-            var loopIntensity = 0.3 + seededRandom() * 0.4;
-            var cp1x = startPoint.x + Math.cos(branchAngle) * branchLength * 0.3;
-            var cp1y = startPoint.y + Math.sin(branchAngle) * branchLength * 0.3 + (seededRandom() - 0.5) * 25;
-            var midX = startPoint.x + Math.cos(branchAngle) * branchLength * 0.5;
-            var midY = startPoint.y + Math.sin(branchAngle) * branchLength * 0.5;
-            var perpAngle = branchAngle + Math.PI / 2;
-            var loopOffset = loopIntensity * branchLength * 0.4;
-            var loopX = midX + Math.cos(perpAngle) * loopOffset;
-            var loopY = midY + Math.sin(perpAngle) * loopOffset;
-            var endX = startPoint.x + Math.cos(branchAngle) * branchLength;
-            var endY = startPoint.y + Math.sin(branchAngle) * branchLength;
-
-            var branch = ns('path');
-            branch.setAttribute('d', 'M ' + startPoint.x + ' ' + startPoint.y + ' Q ' + cp1x + ' ' + cp1y + ', ' + loopX + ' ' + loopY + ' T ' + endX + ' ' + endY);
-            branch.setAttribute('class', 'vine-curr-branch');
-            branch.setAttribute('stroke-width', '2.5');
-            branch.setAttribute('opacity', '0.75');
-            branchesG.appendChild(branch);
-            allBranches.push({ path: branch, weight: 0.6, cp1x: cp1x, cp1y: cp1y, loopX: loopX, loopY: loopY, sx: startPoint.x, sy: startPoint.y });
-
-            // Tertiary branches (curved S-shape) — 1 to 2 per secondary branch
-            var numTertiary = 1 + (seededRandom() < 0.6 ? 1 : 0);
-            for (var j = 0; j < numTertiary; j++) {
-                var t = 0.25 + seededRandom() * 0.55;
-                var tsx = (1-t)*(1-t)*startPoint.x + 2*(1-t)*t*cp1x + t*t*loopX;
-                var tsy = (1-t)*(1-t)*startPoint.y + 2*(1-t)*t*cp1y + t*t*loopY;
-                var ttx = 2*(1-t)*(cp1x - startPoint.x) + 2*t*(loopX - cp1x);
-                var tty = 2*(1-t)*(cp1y - startPoint.y) + 2*t*(loopY - cp1y);
-                var tBaseAngle = Math.atan2(tty, ttx);
-                var tSide = seededRandom() > 0.5 ? 1 : -1;
-                var tAngle = tBaseAngle + (Math.PI / 5 + seededRandom() * Math.PI / 8) * tSide;
-                var tLen = 45 + seededRandom() * 55;
-                // S-curve: two control points for a smooth cubic bezier
-                var tCurveIntensity = 0.3 + seededRandom() * 0.35;
-                var tCp1x = tsx + Math.cos(tAngle) * tLen * 0.35;
-                var tCp1y = tsy + Math.sin(tAngle) * tLen * 0.35 + (seededRandom() - 0.5) * 15;
-                var tMidX = tsx + Math.cos(tAngle) * tLen * 0.55;
-                var tMidY = tsy + Math.sin(tAngle) * tLen * 0.55;
-                var tPerpAngle = tAngle + Math.PI / 2;
-                var tLoopOff = tCurveIntensity * tLen * 0.4 * tSide;
-                var tCp2x = tMidX + Math.cos(tPerpAngle) * tLoopOff;
-                var tCp2y = tMidY + Math.sin(tPerpAngle) * tLoopOff;
-                var tEndX = tsx + Math.cos(tAngle) * tLen;
-                var tEndY = tsy + Math.sin(tAngle) * tLen;
-
-                var tBranch = ns('path');
-                tBranch.setAttribute('d', 'M ' + tsx + ' ' + tsy + ' C ' + tCp1x + ' ' + tCp1y + ', ' + tCp2x + ' ' + tCp2y + ', ' + tEndX + ' ' + tEndY);
-                tBranch.setAttribute('class', 'vine-curr-branch');
-                tBranch.setAttribute('stroke-width', '1.5');
-                tBranch.setAttribute('opacity', '0.65');
-                branchesG.appendChild(tBranch);
-                allBranches.push({ path: tBranch, weight: 0.3 });
-            }
+        function rebuild() {
+            var wW = wrapper.offsetWidth;
+            var targetY = getTargetY();
+            _seed = _pageSeed;
+            svg.setAttribute('width', wW);
+            svg.setAttribute('height', wrapper.offsetHeight);
+            svg.style.height = wrapper.offsetHeight + 'px';
+            lastTrunkInfo = buildTrunk(targetY);
+            lastBranches = buildBranches(lastTrunkInfo, wW);
+            renderBranches(lastBranches);
         }
 
-        // Skip leaf creation during animation frames for performance
-        if (skipLeaves) return;
-
-        // Leaves along all branches — using <use> refs for lighter DOM
-        allBranches.forEach(function(info) {
-            var bPath = info.path;
-            var bLen  = bPath.getTotalLength();
-            var numLeaves = Math.max(3, Math.floor(info.weight * 28));
-            for (var k = 0; k < numLeaves; k++) {
-                var pos = (bLen / numLeaves) * k + seededRandom() * 12;
-                var pt  = bPath.getPointAtLength(Math.min(pos, bLen - 5));
-                var npt = bPath.getPointAtLength(Math.min(pos + 3, bLen));
-                var tang = Math.atan2(npt.y - pt.y, npt.x - pt.x);
-                var side = (k % 2 === 0 ? 1 : -1);
-                var perpA = tang + (Math.PI / 2) * side;
-                var rndRot = (10 + seededRandom() * 35) * side;
-                var leafAngle = perpA * (180 / Math.PI) + rndRot;
-
-                // Pick size: mostly small/medium, occasionally large
-                var r = seededRandom();
-                var sizeIdx = r < 0.4 ? 0 : (r < 0.8 ? 1 : 2);
-
-                leavesG.appendChild(createLeaf(pt.x, pt.y, leafAngle, k, sizeIdx));
-            }
-        });
-
-        // Leaves along the trunk
-        addTrunkLeaves();
-    }
-
-    /* ── Main draw ── */
-    function drawVine(skipLeaves) {
-        _seed = _pageSeed;
-        var wH = wrapper.offsetHeight;
-        var wW = wrapper.offsetWidth;
-        svg.setAttribute('width', wW);
-        svg.setAttribute('height', wH);
-        svg.style.height = wH + 'px';
-
-        var targetY = getTargetY();
-        drawTrunk(targetY);
-        addSmallBranches(targetY, skipLeaves, wW);
-    }
-
-    /* ── Animation loop during expand/collapse ── */
-    function animateVine(duration) {
-        duration = duration || 650;
-        var start = Date.now();
-        function step() {
-            var elapsed = Date.now() - start;
-            var isLast = elapsed >= duration;
-            drawVine(!isLast);
-            if (!isLast) {
-                animFrameId = requestAnimationFrame(step);
-            }
+        function frameLoop() {
+            rebuild();
+            if (!done) growthFrameId = requestAnimationFrame(frameLoop);
         }
-        if (animFrameId) cancelAnimationFrame(animFrameId);
-        animFrameId = requestAnimationFrame(step);
+
+        function finalize() {
+            if (done) return;
+            done = true;
+            if (growthFrameId) { cancelAnimationFrame(growthFrameId); growthFrameId = null; }
+            if (pendingCleanup) { pendingCleanup(); pendingCleanup = null; }
+            rebuild(); // one last authoritative measurement once the transition has truly ended
+            var leafData = [];
+            buildBranchLeaves(lastBranches, leafData);
+            addTrunkLeaves(lastTrunkInfo, leafData);
+            scheduleLeafReveal(leafData);
+        }
+
+        growthFrameId = requestAnimationFrame(frameLoop);
+
+        if (transitionEl) {
+            var onEnd = function(e) {
+                if (e.target === transitionEl && e.propertyName === 'max-height') finalize();
+            };
+            transitionEl.addEventListener('transitionend', onEnd);
+            var safety = setTimeout(finalize, 900);
+            pendingCleanup = function() {
+                transitionEl.removeEventListener('transitionend', onEnd);
+                clearTimeout(safety);
+            };
+        } else {
+            // No accordion transition to wait for (initial load / resize) — settle quickly.
+            var quick = setTimeout(finalize, 100);
+            pendingCleanup = function() { clearTimeout(quick); };
+        }
     }
 
-    window._vineAnimate = animateVine;
-    setTimeout(drawVine, 120);
-    window.addEventListener('resize', function() { drawVine(); });
+    window._vineAnimate = growVine;
+    setTimeout(function() { growVine(); }, 120);
+
+    var resizeTimer = null;
+    window.addEventListener('resize', function() {
+        if (resizeTimer) clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() { growVine(); }, 150);
+    });
 })();
 </script>

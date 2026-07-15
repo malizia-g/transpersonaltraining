@@ -157,10 +157,6 @@ body[class*="theme-"] #mobile-menu a:hover {
 .vine-curr-branch {
     fill: none; stroke: #5D4037;
     stroke-linecap: round; stroke-linejoin: round;
-    filter: drop-shadow(0.5px 0.5px 1px rgba(0,0,0,0.1));
-}
-.vine-curr-leaf {
-    filter: drop-shadow(0.5px 1px 1px rgba(0,0,0,0.15));
 }
 
 /* ── Schedule page ── */
