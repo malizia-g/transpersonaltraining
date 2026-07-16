@@ -40,7 +40,7 @@ var FOLDER_NAME = 'Signed Enrolment Agreements';
 // The master enrolment agreement Google Doc. The website pulls its text from
 // here at build time, so this Doc is the single source of truth — edit the
 // contract there, never in the website code.
-var AGREEMENT_DOC_ID = '1e3C_S2Es7M0S4oqVfct_1J9mELFJcILazjW9SkmC91U';
+var AGREEMENT_DOC_ID = '1Gyu8MRYX9StBSReQPbCymDVo2hKrxfZNmUgDFs2b_eE';
 // Everything from a heading containing this phrase up to the next big heading is
 // left out of the website copy — that's the internal "notes for the school".
 var SKIP_SECTION_FROM = 'Notes for the school';
@@ -95,6 +95,109 @@ function doGet(e) {
     }
   }
   return json_({ status: 'ok', info: 'Website forms endpoint is live. Use POST to submit.' });
+}
+
+// ---- ONE-OFF: put the {{placeholders}} into the master Doc -----------------
+/**
+ * Run this ONCE, by hand, from the Apps Script editor: pick
+ * setupAgreementPlaceholders in the function dropdown and press Run. It edits
+ * the master agreement Doc so the website can fill it in per applicant:
+ *
+ *   - the student details table gets {{fullName}}, {{dob}}, … in its empty cells
+ *   - "Track: ☐ Western ☐ Eastern"      becomes "Track: {{track}}"
+ *   - "How you are joining" + its boxes  become "Subscription intent: {{joining}}"
+ *   - "Intended start date / cohort"     is removed (the website dropped it)
+ *   - the header Date and the student's signature Name get {{today}}/{{fullName}}
+ *
+ * Safe to run twice — it looks for what it hasn't done yet. It writes to a
+ * contract, so check the result: if anything looks wrong, the Doc's
+ * File → Version history restores the previous version in two clicks.
+ * Check View → Logs afterwards to see exactly what it changed.
+ */
+function setupAgreementPlaceholders() {
+  var doc = DocumentApp.openById(AGREEMENT_DOC_ID);
+  var body = doc.getBody();
+  var did = [];
+
+  // 1. Details table — match on the label in the left cell, so this doesn't
+  //    depend on row order.
+  var FIELDS = {
+    'Full legal name': '{{fullName}}',
+    'Date of birth': '{{dob}}',
+    'Nationality': '{{nationality}}',
+    'Country of residence': '{{countryResidence}}',
+    'Full postal address': '{{address}}',
+    'Email': '{{email}}',
+    'Telephone / WhatsApp': '{{phone}}'
+  };
+  var tables = body.getTables();
+  for (var t = 0; t < tables.length; t++) {
+    for (var r = 0; r < tables[t].getNumRows(); r++) {
+      var row = tables[t].getRow(r);
+      if (row.getNumCells() < 2) continue;
+      var placeholder = FIELDS[row.getCell(0).getText().trim()];
+      if (placeholder) {
+        row.getCell(1).setText(placeholder);
+        did.push(row.getCell(0).getText().trim() + ' → ' + placeholder);
+      }
+    }
+  }
+
+  // 2. Header date. Targeted at the "Document version" line, because
+  //    "Date: ____" also appears in the signature block.
+  var paragraphs = body.getParagraphs();
+  for (var i = 0; i < paragraphs.length; i++) {
+    if (paragraphs[i].getText().indexOf('Document version') !== -1) {
+      paragraphs[i].replaceText('_{3,}', '{{today}}');
+      did.push('header date → {{today}}');
+    }
+  }
+
+  // 3. Track, subscription intent, and the fields the website no longer asks for.
+  var remove = [];
+  paragraphs = body.getParagraphs();
+  for (var j = 0; j < paragraphs.length; j++) {
+    var p = paragraphs[j];
+    var text = p.getText().trim();
+
+    if (text.indexOf('Track:') === 0) {
+      p.replaceText('☐\\s*Western\\s*☐\\s*Eastern', '{{track}}');
+      did.push('track → {{track}}');
+
+    } else if (text.indexOf('How you are joining') === 0) {
+      p.clear();
+      p.appendText('Subscription intent (optional): ').setBold(true);
+      p.appendText('{{joining}}').setBold(false);
+      did.push('joining → {{joining}}');
+
+    // Only the joining checkboxes — the consent boxes in sections 6-8 also
+    // start with ☐ and must survive.
+    } else if (/^☐\s*(Full training|Self-development only|Single lectures)/.test(text)) {
+      remove.push(p);
+    } else if (text.indexOf('Intended start date') === 0) {
+      remove.push(p);
+    }
+  }
+  for (var k = 0; k < remove.length; k++) {
+    did.push('removed: ' + remove[k].getText().trim().substring(0, 40));
+    remove[k].removeFromParent();
+  }
+
+  // 4. The student's name on the signature line (not the School's).
+  for (var s = 0; s < tables.length; s++) {
+    if (tables[s].getText().indexOf('THE STUDENT') === -1) continue;
+    for (var sr = 0; sr < tables[s].getNumRows(); sr++) {
+      var cell = tables[s].getRow(sr).getCell(0);
+      if (cell.getText().trim().indexOf('Name:') === 0) {
+        cell.replaceText('_{3,}', '{{fullName}}');
+        did.push('signature name → {{fullName}}');
+      }
+    }
+  }
+
+  doc.saveAndClose();
+  Logger.log('Done:\n  ' + did.join('\n  '));
+  return did;
 }
 
 // ---- Google Doc → clean HTML ----------------------------------------------
