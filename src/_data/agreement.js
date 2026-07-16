@@ -23,10 +23,15 @@ const CACHE_FILE = path.join(__dirname, 'agreement.cache.json');
 const FALLBACK_FILE = path.join(__dirname, 'agreement-fallback.html');
 const TIMEOUT_MS = 15000;
 
-// A contract with no placeholders would print with the applicant's name, address
-// and date of birth simply missing — worse than not publishing at all, and easy
+// A contract with no placeholders would print with the applicant's name, contact
+// and chosen track simply missing — worse than not publishing at all, and easy
 // to cause by editing the Doc. Treat it as a failed fetch rather than publish it.
-const REQUIRED_PLACEHOLDERS = ['fullName', 'email', 'today'];
+//
+// These four are the ones a blank breaks outright: who is signing, how to reach
+// them, when, and which track — the track also decides which fee applies. The
+// rest of the fields aren't listed, so the school can still restructure the Doc
+// without the build refusing it.
+const REQUIRED_PLACEHOLDERS = ['fullName', 'email', 'today', 'track'];
 
 function get(url, redirectsLeft = 5) {
     return new Promise((resolve, reject) => {

@@ -11,5 +11,5 @@
 // FORMS_ENDPOINT in the environment overrides it, if you'd rather set it there.
 
 module.exports = {
-    endpoint: process.env.FORMS_ENDPOINT || 'https://script.google.com/macros/s/AKfycbzvBoWMzUkTqL7LRYcrd_cW-fhV2RmaxGo2ot6tRIoUF8zI5Hq9fPNQRgRDSaFn434sOQ/exec'
+    endpoint: process.env.FORMS_ENDPOINT || 'https://script.google.com/macros/s/AKfycbz3_5iqEy03cS-ZtF6_MRhywaZ9arElRUM5xfUWFe4PS9WAeZ5jnJW1Yz2umgMCdESmUg/exec'
 };

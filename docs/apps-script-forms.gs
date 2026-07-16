@@ -160,8 +160,14 @@ function setupAgreementPlaceholders() {
     var p = paragraphs[j];
     var text = p.getText().trim();
 
+    // Rebuilt rather than pattern-matched: the checkboxes are separated by
+    // non-breaking spaces, and replaceText uses RE2, whose \s — unlike
+    // JavaScript's — does not match them. Rewriting the line sidesteps
+    // whatever whitespace the Doc happens to contain.
     if (text.indexOf('Track:') === 0) {
-      p.replaceText('☐\\s*Western\\s*☐\\s*Eastern', '{{track}}');
+      p.clear();
+      p.appendText('Track: ').setBold(true);
+      p.appendText('{{track}}').setBold(false);
       did.push('track → {{track}}');
 
     } else if (text.indexOf('How you are joining') === 0) {
