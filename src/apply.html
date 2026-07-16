@@ -1,0 +1,252 @@
+---
+layout: base.njk
+title: "Apply"
+description: "Apply to the transpersonal psychotherapy, counselling and Holotropic Breathwork training. Fill in your details, download your personalised enrolment agreement to print and sign, then upload the signed copy."
+---
+
+<style>
+    /* --- Application form + printable agreement --- */
+    .field-label { font-size: 0.875rem; font-weight: 500; color: #3F3A35; margin-bottom: 0.35rem; display: block; }
+    .field-input,
+    .field-select {
+        width: 100%; border: 1px solid #E5D4C1; background: #fff; padding: 0.6rem 0.75rem;
+        font-size: 0.95rem; color: #2B2825; transition: border-color .15s, box-shadow .15s;
+    }
+    .field-input:focus, .field-select:focus {
+        outline: none; border-color: #C9A45C; box-shadow: 0 0 0 3px rgba(201,164,92,.18);
+    }
+    .field-error { border-color: #b91c1c !important; }
+    .req::after { content: " *"; color: #b91c1c; }
+
+    /* The printable agreement */
+    .agreement-doc { color: #1a1a1a; font-size: 0.9rem; line-height: 1.55; }
+    .agreement-doc h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.7rem; font-weight: 700; color: #0F2540; margin: 0 0 .6rem; }
+    .agreement-doc h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; font-weight: 700; color: #0F2540; margin: 1.6rem 0 .6rem; }
+    .agreement-doc h3 { font-weight: 700; font-size: 1rem; margin: 1.2rem 0 .5rem; color: #0F2540; }
+    .agreement-doc p { margin: 0 0 .7rem; }
+    .agreement-doc ul { margin: 0 0 .7rem 1.25rem; list-style: disc; }
+    .agreement-doc li { margin-bottom: .3rem; }
+    .agreement-doc table { border-collapse: collapse; width: 100%; margin: .5rem 0 1rem; }
+    .agreement-doc td { border: 1px solid #999; padding: .45rem .6rem; vertical-align: top; }
+    .agreement-doc hr { border: none; border-top: 1px solid #ddd; margin: 1.3rem 0; }
+    .agreement-doc .fld { font-weight: 600; }
+    .agreement-doc .box { display: inline-block; width: 1em; }
+    .agreement-doc blockquote { border-left: 4px solid #C9A45C; padding-left: 1rem; margin: 0 0 .7rem; color: #333; }
+    .agreement-doc .sigline { display:block; margin-top:1.2rem; }
+    .agreement-doc .fill { color:#9A5B00; }
+
+    /* Print: show only the agreement.
+       Everything that is not the document is display:none'd — the site chrome
+       (nav/footer/loader) plus every .no-print block. #step2 keeps Tailwind's
+       .hidden until the agreement is generated, so printing early prints nothing. */
+    @media print {
+        body { background: #fff !important; }
+        nav, footer, #page-loader, .no-print { display: none !important; }
+        #step2 { background: #fff !important; padding: 0 !important; margin: 0 !important; }
+        #step2 .container { padding: 0 !important; max-width: none !important; }
+        #step2 .max-w-3xl { max-width: none !important; }
+        #agreementPrintable { border: none !important; box-shadow: none !important; padding: 0 !important; margin: 0 !important; }
+        @page { margin: 16mm; }
+        .agreement-doc { font-size: 11pt; }
+        .agreement-doc h1, .agreement-doc h2 { break-after: avoid; }
+        .agreement-doc table, .agreement-doc blockquote, .agreement-doc ul { break-inside: avoid; }
+    }
+</style>
+
+<!-- Hero -->
+<header class="relative min-h-[42vh] flex items-center justify-center text-white pt-28 pb-16 bg-[#0F2540] overflow-hidden no-print">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#0B1B30] via-[#0F2540] to-[#0B1B30] z-0"></div>
+    <div class="container mx-auto px-6 relative z-10 text-center">
+        <div class="max-w-3xl mx-auto">
+            <p class="p4-kicker text-[#C9A45C] mb-6 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
+                Enrolment
+                <span class="p4-hairline"></span>
+            </p>
+            <h1 class="p4-display text-3xl md:text-5xl font-medium mb-6 leading-tight text-[#FDFBF5]">Apply to the training</h1>
+            <p class="text-lg text-white/80 font-light leading-relaxed max-w-2xl mx-auto">
+                Fill in your details, download your personalised enrolment agreement to print and sign, then upload the signed copy.
+            </p>
+        </div>
+    </div>
+</header>
+
+<!-- Breadcrumb -->
+<div class="bg-white border-b border-neutral-warm-200 no-print">
+    <div class="container mx-auto px-6 py-4">
+        <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
+            <a href="{{ '/' | url }}" class="hover:text-science-blue-600 transition-colors">Home</a>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <span class="text-science-blue-800 font-medium">Apply</span>
+        </div>
+    </div>
+</div>
+
+<!-- How it works -->
+<section class="py-14 bg-white no-print">
+    <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="border border-neutral-warm-200 p-6">
+                    <div class="w-9 h-9 border border-[#C9A45C] flex items-center justify-center text-[#9A7734] font-semibold mb-4">1</div>
+                    <h3 class="font-serif font-bold text-[#0F2540] text-lg mb-2">Fill in your details</h3>
+                    <p class="text-sm text-neutral-warm-700 leading-relaxed">Complete the short application form below.</p>
+                </div>
+                <div class="border border-neutral-warm-200 p-6">
+                    <div class="w-9 h-9 border border-[#C9A45C] flex items-center justify-center text-[#9A7734] font-semibold mb-4">2</div>
+                    <h3 class="font-serif font-bold text-[#0F2540] text-lg mb-2">Download &amp; sign</h3>
+                    <p class="text-sm text-neutral-warm-700 leading-relaxed">Generate your personalised enrolment agreement (PDF), print it, read it and sign it by hand.</p>
+                </div>
+                <div class="border border-neutral-warm-200 p-6">
+                    <div class="w-9 h-9 border border-[#C9A45C] flex items-center justify-center text-[#9A7734] font-semibold mb-4">3</div>
+                    <h3 class="font-serif font-bold text-[#0F2540] text-lg mb-2">Upload the signed copy</h3>
+                    <p class="text-sm text-neutral-warm-700 leading-relaxed">Scan or photograph the signed agreement and upload it — it goes straight to the school.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STEP 1 — Application form -->
+<section class="pb-8 bg-white no-print">
+    <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-2">1. Your details</h2>
+            <p class="text-sm text-neutral-warm-600 mb-6">Fields marked <span class="text-red-700">*</span> are required. Your details are used to prepare your agreement and are sent to the school office when you generate it, so we know your application is on its way.</p>
+
+            <form id="applicationForm" data-persist="apply" novalidate class="grid md:grid-cols-2 gap-5">
+                <div class="md:col-span-2">
+                    <label class="field-label req" for="fullName">Full legal name</label>
+                    <input class="field-input" id="fullName" name="fullName" type="text" autocomplete="name" required>
+                </div>
+                <div>
+                    <label class="field-label req" for="dob">Date of birth</label>
+                    <input class="field-input" id="dob" name="dob" type="date" required>
+                </div>
+                <div>
+                    <label class="field-label req" for="nationality">Nationality</label>
+                    <input class="field-input" id="nationality" name="nationality" type="text" required>
+                </div>
+                <div>
+                    <label class="field-label req" for="countryResidence">Country of residence</label>
+                    <input class="field-input" id="countryResidence" name="countryResidence" type="text" autocomplete="country-name" required>
+                </div>
+                <div>
+                    <label class="field-label req" for="email">Email</label>
+                    <input class="field-input" id="email" name="email" type="email" autocomplete="email" required>
+                </div>
+                <div class="md:col-span-2">
+                    <label class="field-label req" for="address">Full postal address</label>
+                    <input class="field-input" id="address" name="address" type="text" autocomplete="street-address" required>
+                </div>
+                <div>
+                    <label class="field-label req" for="phone">Telephone / WhatsApp</label>
+                    <input class="field-input" id="phone" name="phone" type="tel" autocomplete="tel" required>
+                </div>
+                <div>
+                    <label class="field-label req" for="track">Track</label>
+                    <select class="field-select" id="track" name="track" required>
+                        <option value="">Choose…</option>
+                        <option value="Western">Western</option>
+                        <option value="Eastern">Eastern</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="field-label" for="joining">Subscription intent <span class="text-neutral-warm-500 font-normal">(optional)</span></label>
+                    <select class="field-select" id="joining" name="joining">
+                        <option value="">Not sure yet</option>
+                        <option value="Full training (all levels, toward professional certification)">Full training (all levels)</option>
+                        <option value="Self-development only (Level 1, no obligation to continue)">Self-development only (Level 1)</option>
+                        <option value="Single lectures">Single lectures</option>
+                        <option value="Single seminar(s)">Single seminar(s)</option>
+                    </select>
+                </div>
+
+                <div class="md:col-span-2 mt-2">
+                    <button type="submit" class="inline-flex items-center gap-2 bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-6 py-3 font-medium tracking-wide transition-all shadow-lg hover:shadow-xl">
+                        <i data-lucide="file-text" class="w-4 h-4"></i>
+                        Generate my agreement
+                    </button>
+                    <p id="formHint" class="text-xs text-red-700 mt-3 hidden">Please complete the required fields above.</p>
+                    <p class="text-xs text-neutral-warm-500 mt-3">
+                        Your answers are also kept in this browser as you type, so you won&rsquo;t lose them if the page closes or reloads.
+                        <button type="button" data-clear-persist="apply" class="underline underline-offset-2 hover:text-[#9A7734]">Clear saved answers</button>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- STEP 2 — Generated agreement (hidden until generated) -->
+<section id="step2" class="py-8 bg-neutral-warm-100 hidden">
+    <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto">
+            <div class="no-print mb-6">
+                <h2 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-2">2. Your enrolment agreement</h2>
+                <p class="text-sm text-neutral-warm-700 mb-4">Your details have been filled in below. <strong>Print</strong> opens your browser&rsquo;s print dialog &mdash; the sharpest result, and you can also choose &ldquo;Save as PDF&rdquo; there. <strong>Download PDF</strong> saves a copy straight to your device. Then read it, sign it by hand, and continue to step 3.</p>
+                <div class="flex flex-wrap gap-3">
+                    <button type="button" id="printBtn" class="inline-flex items-center gap-2 bg-[#0F2540] hover:bg-[#0B1B30] text-white px-6 py-3 font-medium tracking-wide transition-all shadow-lg">
+                        <i data-lucide="printer" class="w-4 h-4"></i>
+                        Print agreement
+                    </button>
+                    <button type="button" id="downloadBtn" class="inline-flex items-center gap-2 border border-[#0F2540]/40 hover:border-[#9A7734] text-[#0F2540] hover:text-[#9A7734] px-6 py-3 font-medium tracking-wide transition-all disabled:opacity-60 disabled:cursor-not-allowed">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span id="downloadBtnLabel">Download PDF</span>
+                    </button>
+                    <a href="#step3" class="inline-flex items-center gap-2 border border-[#0F2540]/40 hover:border-[#9A7734] text-[#0F2540] hover:text-[#9A7734] px-6 py-3 font-medium tracking-wide transition-all">
+                        I&rsquo;ve signed it — go to upload
+                        <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                    </a>
+                </div>
+                <p id="downloadNote" class="text-sm mt-3 hidden"></p>
+                <p class="text-xs text-neutral-warm-500 mt-3">Note: the school still needs to complete the items shown in [brackets] (legal seat, governing law, refund terms). This draft is for review and signature; the final version will be confirmed by the office.</p>
+            </div>
+
+            <!-- Printable document — text comes from the master Google Doc
+                 (src/_data/agreement.js). The {{placeholders}} inside are filled
+                 in per applicant by src/scripts/pages/apply.js. -->
+            <div id="agreementPrintable" class="bg-white border border-neutral-warm-200 shadow-sm p-8 md:p-12">
+                <div class="agreement-doc"></div>
+            </div>
+            <template id="agreementTemplate">{{ agreement.html | safe }}</template>
+        </div>
+    </div>
+</section>
+
+<!-- STEP 3 — Upload signed copy -->
+<section id="step3" class="py-12 bg-white no-print">
+    <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-2">3. Upload your signed agreement</h2>
+            <p class="text-sm text-neutral-warm-700 mb-6">Scan or photograph every signed page as a single PDF (preferred) or image, then upload it. It is sent securely to the school office.</p>
+
+            <form id="uploadForm" class="bg-neutral-warm-100 border border-neutral-warm-200 p-6 md:p-8 space-y-5">
+                <div>
+                    <label class="field-label req" for="upEmail">Your email</label>
+                    <input class="field-input" id="upEmail" name="upEmail" type="email" required>
+                    <p class="text-xs text-neutral-warm-600 mt-2">
+                        Please use <strong>the same email address you entered in step 1</strong> &mdash; it is what links your signed agreement to your application.
+                    </p>
+                </div>
+                <div>
+                    <label class="field-label req" for="signedFile">Signed agreement (PDF, JPG or PNG, max 15&nbsp;MB)</label>
+                    <input class="field-input" id="signedFile" name="signedFile" type="file" accept="application/pdf,image/jpeg,image/png" required>
+                </div>
+                <div>
+                    <button type="submit" id="uploadBtn" class="inline-flex items-center gap-2 bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-6 py-3 font-medium tracking-wide transition-all shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed">
+                        <i data-lucide="upload" class="w-4 h-4"></i>
+                        <span id="uploadBtnLabel">Upload signed agreement</span>
+                    </button>
+                </div>
+                <div id="uploadStatus" class="text-sm hidden"></div>
+            </form>
+
+            <p class="text-xs text-neutral-warm-500 mt-4">Prefer email? You can also send your signed agreement to <a href="mailto:office@transpersonal-training.com" class="underline hover:text-[#9A7734]">office@transpersonal-training.com</a>.</p>
+        </div>
+    </div>
+</section>
+
+{% block scripts %}
+<script src="../scripts/pages/apply.js"></script>
+{% endblock %}

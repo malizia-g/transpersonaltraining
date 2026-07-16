@@ -58,7 +58,7 @@
       "educationalLevel": "Professional",
       "educationalCredentialAwarded": "Certificate as Transpersonal Psychotherapy & Holotropic Breathwork Facilitator (EUROTAS-accredited), with an optional EUROTAS certification track",
       "timeRequired": "P4Y",
-      "occupationalCategory": "Transpersonal Psychotherapist",
+      "occupationalCategory": "Transpersonal Psychotherapy & Breathwork Facilitator",
       "teaches": ["Transpersonal Psychology", "Holotropic Breathwork", "Counselling Skills", "Psychotherapy"],
       "availableLanguage": "English",
       "inLanguage": "en",
@@ -152,6 +152,9 @@
 
     <!-- Footer -->
     {% include "footer.njk" %}
+
+    <!-- Where the forms post to (set in src/_data/forms.js) -->
+    <script>window.FORMS_ENDPOINT = {{ forms.endpoint | dump | safe }};</script>
 
     <!-- Main application script -->
     <script type="module" src="{{ '/scripts/main.js' | url }}"></script>
