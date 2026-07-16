@@ -10,7 +10,8 @@ window.toggleLectureDescription = function(cardId) {
     const isExpanded = descEl.dataset.expanded === 'true';
 
     if (isExpanded) {
-        descEl.style.maxHeight = '3.6em';
+        descEl.classList.add('whitespace-nowrap', 'text-ellipsis');
+        descEl.style.maxHeight = '1.5em';
         descEl.dataset.expanded = 'false';
         textEl.textContent = 'Read more';
         iconEl.style.transform = '';
