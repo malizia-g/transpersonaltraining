@@ -7,6 +7,9 @@ const path = require('path');
 const TIMESTAMPS_URL = 'https://script.google.com/macros/s/AKfycbwHywVdKwfFubk5KfrsBJ7Iw5q4YjTYapeFRdN_MCt650qz4U3J9fQp0rtXBi018Iw/exec';
 const TIMESTAMPS_CACHE = path.join(__dirname, 'sheetTimestamps.cache.json');
 
+// Escape hatch for when a sheet's remote timestamp stops tracking real edits.
+const FORCE_FETCH = process.env.FORCE_FETCH === '1' || process.env.FORCE_FETCH === 'true';
+
 function fetchUrl(url) {
   return new Promise((resolve, reject) => {
     const req = https.get(url, {
@@ -60,10 +63,18 @@ function saveTimestamps(timestamps) {
 
 /**
  * Check if a specific sheet has changed since last build.
+ * Does not record the new timestamp: call commitSheetTimestamp() once the fetch
+ * has succeeded, otherwise a failed fetch would mark stale cache as current and
+ * the data would never be re-fetched again.
  * @param {string} sheetKey - 'schedule', 'lectures', or 'clientModels'
  * @returns {Promise<boolean>} true if data should be re-fetched
  */
 async function hasSheetChanged(sheetKey) {
+  if (FORCE_FETCH) {
+    console.log(`  ⏩ FORCE_FETCH — fetching "${sheetKey}" regardless of timestamp`);
+    return true;
+  }
+
   const remote = await getRemoteTimestamps();
   if (!remote || !remote[sheetKey]) {
     // Can't determine — fetch to be safe
@@ -81,10 +92,21 @@ async function hasSheetChanged(sheetKey) {
   }
 
   console.log(`  🔄 "${sheetKey}" changed: ${savedTs || '(no cache)'} → ${remoteTs}`);
-  // Save updated timestamp
-  saved[sheetKey] = remoteTs;
-  saveTimestamps(saved);
   return true;
 }
 
-module.exports = { hasSheetChanged };
+/**
+ * Record a sheet's remote timestamp. Call only after the data has been fetched
+ * and cached successfully.
+ * @param {string} sheetKey - 'schedule', 'lectures', or 'clientModels'
+ */
+async function commitSheetTimestamp(sheetKey) {
+  const remote = await getRemoteTimestamps();
+  if (!remote || !remote[sheetKey]) return;
+
+  const saved = getSavedTimestamps();
+  saved[sheetKey] = remote[sheetKey];
+  saveTimestamps(saved);
+}
+
+module.exports = { hasSheetChanged, commitSheetTimestamp };

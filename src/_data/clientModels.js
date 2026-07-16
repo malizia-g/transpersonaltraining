@@ -2,7 +2,7 @@ const https = require('https');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const { hasSheetChanged } = require('./sheetTimestamps');
+const { hasSheetChanged, commitSheetTimestamp } = require('./sheetTimestamps');
 
 // Fetch client models from Google Apps Script during build time
 const SHEET_JSON_URL = 'https://script.google.com/macros/s/AKfycbzyBD_kWrr6irrQcMSwOFtHxip3rfYpc1_2q0oscmKCHLJVFFSiGd4zAzsikgbXTEXKow/exec';
@@ -230,6 +230,8 @@ module.exports = async function() {
     } catch (cacheError) {
       console.warn('⚠️ Could not save client models cache:', cacheError.message);
     }
+
+    await commitSheetTimestamp('clientModels');
   } catch (error) {
     console.error('Error fetching client models:', error.message);
 

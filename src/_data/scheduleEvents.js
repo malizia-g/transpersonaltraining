@@ -2,7 +2,7 @@
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
-const { hasSheetChanged } = require('./sheetTimestamps');
+const { hasSheetChanged, commitSheetTimestamp } = require('./sheetTimestamps');
 
 const SHEET_JSON_URL = 'https://script.google.com/macros/s/AKfycbyRGO028PWtWuqhz4GqKsdL4z-dsiI2RFocHhNbgPA8fjpm-y9j3ZLzX4TCYwYbMZ6i/exec?sheet=Seminars';
 const CACHE_FILE = path.join(__dirname, 'scheduleEvents.cache.json');
@@ -87,6 +87,8 @@ module.exports = async function() {
     } catch (cacheErr) {
       console.warn('⚠️ Could not save schedule cache:', cacheErr.message);
     }
+
+    await commitSheetTimestamp('schedule');
 
     return mappedData;
     
