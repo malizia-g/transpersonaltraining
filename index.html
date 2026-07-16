@@ -80,7 +80,7 @@
       "educationalLevel": "Professional",
       "educationalCredentialAwarded": "Certificate as Transpersonal Psychotherapy & Holotropic Breathwork Facilitator (EUROTAS-accredited), with an optional EUROTAS certification track",
       "timeRequired": "P4Y",
-      "occupationalCategory": "Transpersonal Psychotherapist",
+      "occupationalCategory": "Transpersonal Psychotherapy & Breathwork Facilitator",
       "teaches": ["Transpersonal Psychology", "Holotropic Breathwork", "Counselling Skills", "Psychotherapy"],
       "availableLanguage": "English",
       "inLanguage": "en",
@@ -332,7 +332,7 @@
                 A EUROTAS-accredited training in Transpersonal Psychotherapy, Counselling &amp; Holotropic Breathwork&reg; &mdash; shared online lectures for one international East&ndash;West community, with in-person intensives held in Europe.
             </p>
             <div class="flex flex-col sm:flex-row gap-4">
-                <a href="#contact" class="bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-10 py-4 font-medium text-lg tracking-wide text-center transition-all shadow-lg hover:shadow-xl">
+                <a href="/transpersonaltraining/apply/" class="bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-10 py-4 font-medium text-lg tracking-wide text-center transition-all shadow-lg hover:shadow-xl">
                     Apply for the 2027&ndash;2030 cohort
                 </a>
                 <a href="curriculum/index.html" class="border border-[#FDFBF5]/60 hover:border-[#C9A45C] bg-[#0F2540]/30 text-[#FDFBF5] hover:text-[#C9A45C] px-10 py-4 font-medium text-lg tracking-wide text-center transition-all">
@@ -615,50 +615,45 @@
         <div class="max-w-2xl mx-auto text-center">
             <p class="p4-kicker text-[#C9A45C] mb-8 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
-                Applications open
+                Get in touch
                 <span class="p4-hairline"></span>
             </p>
-            <h2 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] mb-6 drop-shadow-md">Ready to begin<br>your journey?</h2>
+            <h2 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] mb-6 drop-shadow-md">Have a question?<br>Write to us.</h2>
             <p class="text-lg text-[#D5DEE9] mb-14 drop-shadow">
-                Applications for the 2027&ndash;2030 cohort are open. Tell us a little about yourself and we'll be in touch.
+                Ask us anything about the training, the intensives, or the right entry point for you &mdash; a real person reads every message.
+                Ready to enrol? <a href="/transpersonaltraining/apply/" class="text-[#C9A45C] underline underline-offset-4 decoration-[#C9A45C]/40 hover:text-[#E0BE78]">Start your application</a>.
             </p>
 
-            <form action="mailto:office@transpersonal-training.com" method="post" enctype="text/plain" class="text-left border border-[#C9A45C]/40 bg-[#0B1B30]/85 backdrop-blur-md p-6 md:p-10 space-y-6 shadow-2xl">
-                <div>
-                    <span class="block p4-kicker !text-xs text-[#C9A45C] mb-3">Which track are you applying for?</span>
-                    <div class="grid grid-cols-2 gap-3">
-                        <label class="flex items-center gap-2 border border-[#C9A45C]/40 px-4 py-3 cursor-pointer hover:border-[#C9A45C] transition-colors">
-                            <input type="radio" name="track" value="West (English)" required class="accent-[#C9A45C]">
-                            <span class="text-[#EDF2F8] text-sm">West &middot; English</span>
-                        </label>
-                        <label class="flex items-center gap-2 border border-[#C9A45C]/40 px-4 py-3 cursor-pointer hover:border-[#C9A45C] transition-colors">
-                            <input type="radio" name="track" value="East (Russian)" class="accent-[#C9A45C]">
-                            <span class="text-[#EDF2F8] text-sm">East &middot; Russian</span>
-                        </label>
-                    </div>
+            <form id="contactForm" action="mailto:office@transpersonal-training.com" method="post" enctype="text/plain" data-persist="contact" class="text-left border border-[#C9A45C]/40 bg-[#0B1B30]/85 backdrop-blur-md p-6 md:p-10 space-y-6 shadow-2xl">
+                <!-- Honeypot: hidden from people, catnip for bots. Anything typed
+                     here means the submission is discarded server-side. -->
+                <div class="hidden" aria-hidden="true">
+                    <label for="contact-website">Leave this field empty</label>
+                    <input type="text" id="contact-website" name="website" tabindex="-1" autocomplete="off">
                 </div>
                 <div>
-                    <label for="apply-name" class="block p4-kicker !text-xs text-[#C9A45C] mb-3">Name</label>
-                    <input type="text" id="apply-name" name="name" required
+                    <label for="contact-name" class="block p4-kicker !text-xs text-[#C9A45C] mb-3">Name</label>
+                    <input type="text" id="contact-name" name="name" required
                            class="w-full bg-transparent border-0 border-b border-[#C9A45C]/40 text-[#EDF2F8] px-1 py-3 focus:outline-none focus:border-[#C9A45C] transition-colors placeholder:text-[#7C8DA3]"
                            placeholder="Your full name">
                 </div>
                 <div>
-                    <label for="apply-email" class="block p4-kicker !text-xs text-[#C9A45C] mb-3">Email</label>
-                    <input type="email" id="apply-email" name="email" required
+                    <label for="contact-email" class="block p4-kicker !text-xs text-[#C9A45C] mb-3">Email</label>
+                    <input type="email" id="contact-email" name="email" required
                            class="w-full bg-transparent border-0 border-b border-[#C9A45C]/40 text-[#EDF2F8] px-1 py-3 focus:outline-none focus:border-[#C9A45C] transition-colors placeholder:text-[#7C8DA3]"
                            placeholder="you@example.com">
                 </div>
                 <div>
-                    <label for="apply-why" class="block p4-kicker !text-xs text-[#C9A45C] mb-3">Why this training calls to you</label>
-                    <textarea id="apply-why" name="why" rows="4" required
+                    <label for="contact-message" class="block p4-kicker !text-xs text-[#C9A45C] mb-3">Your message</label>
+                    <textarea id="contact-message" name="message" rows="4" required
                               class="w-full bg-transparent border-0 border-b border-[#C9A45C]/40 text-[#EDF2F8] px-1 py-3 focus:outline-none focus:border-[#C9A45C] transition-colors placeholder:text-[#7C8DA3]"
-                              placeholder="A few honest words are enough"></textarea>
+                              placeholder="How can we help?"></textarea>
                 </div>
-                <button type="submit"
-                        class="w-full bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
-                    Submit application
+                <button type="submit" id="contactBtn"
+                        class="w-full bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed">
+                    <span id="contactBtnLabel">Send message</span>
                 </button>
+                <div id="contactStatus" class="text-sm hidden"></div>
                 <p class="text-xs text-[#9DAEC2] leading-relaxed">
                     By submitting this form you consent to Transpersonal Training processing the personal data you provide
                     solely to respond to your enquiry, in accordance with the GDPR (Regulation (EU) 2016/679). See our
@@ -704,6 +699,10 @@
         window.addEventListener('resize', update, { passive: true });
     })();
 </script>
+
+
+<script src="/transpersonaltraining/scripts/pages/contact.js"></script>
+
 
     </main>
 
@@ -826,6 +825,9 @@
     })();
 </script>
 
+
+    <!-- Where the forms post to (set in src/_data/forms.js) -->
+    <script>window.FORMS_ENDPOINT = "https://script.google.com/macros/s/AKfycbzvBoWMzUkTqL7LRYcrd_cW-fhV2RmaxGo2ot6tRIoUF8zI5Hq9fPNQRgRDSaFn434sOQ/exec";</script>
 
     <!-- Main application script -->
     <script type="module" src="/transpersonaltraining/scripts/main.js"></script>
