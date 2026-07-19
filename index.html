@@ -296,23 +296,40 @@
 <!-- ═══════════ HERO — video threshold ═══════════ -->
 <header class="relative min-h-[92vh] flex items-end overflow-hidden bg-[#0F2540]">
     <div class="absolute inset-0 z-0">
-        <!-- Fallback image (shown only if the video fails to load) -->
+        <!-- Poster: first frame of the video, shown while it loads (and kept
+             when the video is skipped on slow/data-saver connections) -->
         <picture>
-            <source srcset="/transpersonaltraining/assets/images/Headers/hero-homepage-venue-exterior.webp" type="image/webp">
-            <img src="/transpersonaltraining/assets/images/Headers/hero-homepage-venue-exterior.jpg"
-                 alt="The seminar house in the forest"
+            <source srcset="/transpersonaltraining/assets/images/Headers/hero-homepage-stream.webp" type="image/webp">
+            <img src="/transpersonaltraining/assets/images/Headers/hero-homepage-stream.jpg"
+                 alt="A mountain stream rushing through a rocky gorge"
                  class="absolute inset-0 w-full h-full object-cover z-0"
                  id="hero-image">
         </picture>
-        <!-- Video background -->
+        <!-- Video background: the source is picked by the script below based
+             on screen size and connection quality -->
         <video id="hero-video"
                class="absolute inset-0 w-full h-full object-cover z-10"
                autoplay
                muted
                loop
-               playsinline
-               src="/transpersonaltraining/assets/videos/forest-stream.mp4">
+               playsinline>
         </video>
+        <script>
+        (function () {
+            // Adaptive hero video: 540p for small screens or 3g networks,
+            // 720p otherwise. No video at all — the poster image stays — for
+            // 2g, data-saver or reduced-motion users. navigator.connection
+            // only exists in Chromium browsers; elsewhere screen size decides.
+            var conn = navigator.connection || {};
+            var type = conn.effectiveType || '';
+            if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            if (conn.saveData || type === '2g' || type === 'slow-2g') return;
+            var small = matchMedia('(max-width: 767px)').matches;
+            var file = (small || type === '3g') ? 'hero-540.mp4' : 'hero-720.mp4';
+            document.getElementById('hero-video').src =
+                '/transpersonaltraining/assets/videos/' + file;
+        })();
+        </script>
         <div class="absolute inset-0 z-20 bg-gradient-to-b from-[#0F2540]/90 via-[#0F2540]/40 to-neutral-warm-50"></div>
         <div class="absolute inset-0 z-20 bg-gradient-to-r from-[#0F2540]/70 via-[#0F2540]/20 to-transparent"></div>
     </div>
