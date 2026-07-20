@@ -8,7 +8,7 @@ layout: base.njk
       <source srcset="{{ '/assets/images/Headers/blog-hero.webp' | url }}" type="image/webp">
       <img src="{{ '/assets/images/Headers/blog-hero.jpg' | url }}" alt="Transpersonal blog cover" class="w-full h-full object-cover object-center" loading="lazy" />
     </picture>
-    <div class="absolute inset-0 bg-gradient-to-b from-black/35 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent via-70% to-white"></div>
   </div>
 
   <div class="container mx-auto px-6 pb-16">
@@ -22,7 +22,7 @@ layout: base.njk
       <div class="mb-8 flex flex-wrap items-start gap-4 sm:flex-nowrap sm:gap-6">
         {% if image %}
         <figure class="w-20 h-20 sm:w-32 sm:h-32 flex-shrink-0 overflow-hidden shadow-md">
-          <img src="{{ image | blogImage | url }}" alt="{{ title }}" class="w-full h-full object-cover" loading="lazy" />
+          <img src="{{ image | blogImage | url }}" alt="{{ imageAlt or title }}" class="w-full h-full object-cover" loading="lazy" />
         </figure>
         {% endif %}
 
@@ -59,7 +59,7 @@ layout: base.njk
       {% endif %}
 
       <article class="blog-article-content max-w-none">
-        {{ content | promoteMarkdownHeadings | safe }}
+        {{ content | promoteMarkdownHeadings(title) | safe }}
       </article>
 
       <div class="mt-12">

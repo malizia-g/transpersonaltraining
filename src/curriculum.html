@@ -1,7 +1,7 @@
 ---
 layout: base.njk
-title: "Curriculum"
-description: "Detailed curriculum for transpersonal psychotherapy training. Topics include consciousness studies, breathwork, developmental psychology, and therapeutic practice."
+title: "Transpersonal Psychotherapy Curriculum"
+description: "All modules across three levels: consciousness studies, counselling skills, Holotropic Breathwork, trauma-informed practice and clinical assessment."
 ---
 
 <style>
@@ -33,7 +33,7 @@ description: "Detailed curriculum for transpersonal psychotherapy training. Topi
                 class="w-full h-full object-cover"
             />
         </picture>
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/85 via-[#0F2540]/45 to-neutral-warm-50"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/85 via-[#0F2540]/70 via-75% to-neutral-warm-50"></div>
     </div>
 
     <div class="relative z-10 container mx-auto px-6 text-center pt-20">
@@ -57,7 +57,7 @@ description: "Detailed curriculum for transpersonal psychotherapy training. Topi
 <div class="bg-white border-b border-neutral-warm-200">
     <div class="container mx-auto px-6 py-4">
         <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
-            <a href="index.html" class="hover:text-science-blue-600 transition-colors">Home</a>
+            <a href="{{ '/' | url }}" class="hover:text-science-blue-600 transition-colors">Home</a>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
             <span class="text-neutral-warm-500">Training</span>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
@@ -100,7 +100,7 @@ description: "Detailed curriculum for transpersonal psychotherapy training. Topi
                     {% set levelCerts = [
                         { title: 'Certificate of Attendance', body: 'Level 1 can be taken on its own as a standalone year of self-development — no obligation to continue.' },
                         { title: 'Certificate in Transpersonal Counselling Skills', body: 'Awarded through a EUROTAS-accredited institute, with credits toward EUROTAS certification.' },
-                        { title: 'Certificate as Transpersonal Psychotherapy & Holotropic Breathwork Facilitator', body: 'With an optional EUROTAS certification track. Please note: “psychotherapist” is a legally protected title in many countries (for example Germany, France, Italy and Austria). We are working toward EAP compliance, but at present no transpersonal school is EAP-accredited — please check the psychotherapy regulations in the country where you intend to practise before using the title professionally. <a href="/legal-notice/" class="text-[#9A7734] hover:text-[#C9A45C] underline underline-offset-2 font-medium">Read the full legal notice</a>.' }
+                        { title: 'Certificate as Transpersonal Psychotherapy & Holotropic Breathwork Facilitator', body: 'With an optional EUROTAS certification track. Please note: “psychotherapist” is a legally protected title in many countries (for example Germany, France, Italy and Austria). Please check the psychotherapy regulations in the country where you intend to practise before using the title professionally. <a href="/legal-notice/" class="text-[#9A7734] hover:text-[#C9A45C] underline underline-offset-2 font-medium">Read the full legal notice</a>.' }
                     ] %}
                     {% for level in curriculumData.levels %}
                     {% set isFirst = loop.first %}
@@ -288,7 +288,7 @@ description: "Detailed curriculum for transpersonal psychotherapy training. Topi
         <h3 class="p4-display text-3xl md:text-4xl font-medium mb-4 text-[#FDFBF5]">Ready to begin?</h3>
         <p class="text-[#E9EDF2]/80 max-w-2xl mx-auto mb-8">Explore our training overview or get in touch to find the right entry point for you.</p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="{{ '/training-overview/index.html' | url }}" class="inline-block bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-8 py-3 font-medium tracking-wide transition-all shadow-lg hover:shadow-xl">
+            <a href="{{ '/training-overview/' | url }}" class="inline-block bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-8 py-3 font-medium tracking-wide transition-all shadow-lg hover:shadow-xl">
                 Training Overview
             </a>
             <a href="{{ '/' | url }}#contact" class="inline-block border border-[#FDFBF5]/60 hover:border-[#C9A45C] text-[#FDFBF5] hover:text-[#C9A45C] px-8 py-3 font-medium tracking-wide transition-all">

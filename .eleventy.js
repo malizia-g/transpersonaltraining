@@ -116,14 +116,23 @@ module.exports = function(eleventyConfig) {
     }
   });
 
-  // Promote standalone markdown-styled title/subtitle paragraphs to semantic headings
-  eleventyConfig.addFilter('promoteMarkdownHeadings', function(html) {
+  // Promote standalone markdown-styled title/subtitle paragraphs to semantic headings.
+  //
+  // Pass the page title so the opening bold line can be reconciled with it: the
+  // layout already renders the title as the page's only <h1>, so promoting this
+  // one to <h1> too gave every post two — and when the bold line just repeats the
+  // title, the reader saw the same heading printed twice.
+  eleventyConfig.addFilter('promoteMarkdownHeadings', function(html, pageTitle) {
     if (!html) return '';
 
-    let output = html;
+    const stripTags = (s) => s.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
 
-    // First standalone bold paragraph -> H1
-    output = output.replace(/<p><strong>([\s\S]*?)<\/strong><\/p>/, '<h1>$1</h1>');
+    let output = html.replace(/<p><strong>([\s\S]*?)<\/strong><\/p>/, (match, inner) => {
+      if (pageTitle && stripTags(inner).toLowerCase() === String(pageTitle).trim().toLowerCase()) {
+        return '';
+      }
+      return `<h2>${inner}</h2>`;
+    });
 
     // Standalone italic paragraphs -> H2
     output = output.replace(/<p><em>([\s\S]*?)<\/em><\/p>/g, '<h2>$1</h2>');

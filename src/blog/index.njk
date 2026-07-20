@@ -1,7 +1,7 @@
 ---
-title: Blog
+title: "Our Hero's Journey Blog"
 layout: base.njk
-description: Insights, stories, and tools on transpersonal psychology, holistic therapy, spiritual psychotherapy training, integrative therapy education, and breathwork for anxiety.
+description: "Articles on transpersonal psychology, holistic therapy, spiritual psychotherapy training, integrative therapy education and breathwork for anxiety."
 ogtype: website
 ---
 
@@ -11,7 +11,7 @@ ogtype: website
       <source srcset="{{ '/assets/images/Headers/blog-hero.webp' | url }}" type="image/webp">
       <img src="{{ '/assets/images/Headers/blog-hero.jpg' | url }}" alt="Transpersonal blog cover" class="w-full h-full object-cover object-center" loading="lazy" />
     </picture>
-    <div class="absolute inset-0 bg-gradient-to-b from-black/30 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent via-70% to-white"></div>
   </div>
   <div class="container mx-auto px-6">
     <h1 class="p4-display text-4xl md:text-5xl font-medium text-[#0F2540] mb-10 text-center">Blog</h1>
@@ -30,7 +30,7 @@ ogtype: website
       <article class="bg-neutral-warm-50 border border-neutral-warm-200 shadow-md p-5 sm:p-8 flex flex-col gap-4 hover:shadow-xl transition-all relative" data-author="{{ post.data.author }}" data-tags="{% if post.data.tags %}{{ post.data.tags | join('|') }}{% endif %}" data-date="{{ post.date | date('yyyy-MM-dd') }}">
         <div class="flex flex-wrap items-start gap-4 sm:flex-nowrap">
           {% if post.data.image %}
-          <img src="{{ post.data.image | blogImage | url }}" alt="{{ post.data.title }}" class="w-20 h-20 sm:w-32 sm:h-32 object-cover flex-shrink-0" loading="lazy" />
+          <img src="{{ post.data.image | blogImage | url }}" alt="{{ post.data.imageAlt or post.data.title }}" class="w-20 h-20 sm:w-32 sm:h-32 object-cover flex-shrink-0" loading="lazy" />
           {% endif %}
           <div class="min-w-0 flex-1 sm:flex sm:flex-col">
             <h2 class="text-xl sm:text-2xl font-serif font-bold text-indigo-deep-900 mb-2 leading-tight">{{ post.data.title }}</h2>

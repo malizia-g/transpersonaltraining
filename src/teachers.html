@@ -1,7 +1,7 @@
 ---
 layout: base.njk
-title: Our Teachers
-description: "Meet the experienced faculty of transpersonal psychologists, breathwork facilitators, and therapists guiding our training programme."
+title: "Transpersonal Psychotherapy Teachers"
+description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skartsesku, Kati Wortelkamp, Stefan Dressler and more transpersonal psychotherapists."
 ---
 
 {% set coreIntro = 'teachers/01-core-intro.md' | pageContent %}
@@ -162,7 +162,7 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
                 class="w-full h-full object-cover object-center"
             />
         </picture>
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/85 via-[#0F2540]/45 to-neutral-warm-50"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/85 via-[#0F2540]/70 via-75% to-neutral-warm-50"></div>
     </div>
 
     <div class="relative z-10 container mx-auto px-6 text-center pt-20">
@@ -186,7 +186,7 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
 <div class="bg-white border-b border-neutral-warm-200">
     <div class="container mx-auto px-6 py-4">
         <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
-            <a href="index.html" class="hover:text-science-blue-600 transition-colors">Home</a>
+            <a href="{{ '/' | url }}" class="hover:text-science-blue-600 transition-colors">Home</a>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
             <span class="text-neutral-warm-500">Training</span>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
@@ -210,7 +210,7 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for teacher in teachers.core %}
-            <div class="teacher-card" onclick="toggleBio(this)">
+            <div class="teacher-card" id="{{ teacher.id }}" onclick="toggleBio(this)">
                 <div class="overflow-hidden">
                     <img src="{{ teacher.image | url }}" alt="{{ teacher.name }}" class="teacher-img"{% if teacher.imagePosition %} style="object-position: {{ teacher.imagePosition }};"{% endif %}>
                 </div>
@@ -304,7 +304,7 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
 
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {% for teacher in teachers.guest %}
-            <div class="teacher-card" onclick="toggleBio(this)">
+            <div class="teacher-card" id="{{ teacher.id }}" onclick="toggleBio(this)">
                 <div class="overflow-hidden h-56">
                     <img src="{{ teacher.image | url }}" alt="{{ teacher.name }}" class="teacher-img"{% if teacher.imagePosition %} style="object-position: {{ teacher.imagePosition }};"{% endif %}>
                 </div>
@@ -397,7 +397,7 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {% for teacher in teachers.alumni %}
-            <div class="teacher-card teacher-card-compact" onclick="toggleBio(this)">
+            <div class="teacher-card teacher-card-compact" id="{{ teacher.id }}" onclick="toggleBio(this)">
                 <div class="overflow-hidden h-28 sm:h-32">
                     <img src="{{ teacher.image | url }}" alt="{{ teacher.name }}" class="teacher-img"{% if teacher.imagePosition %} style="object-position: {{ teacher.imagePosition }};"{% endif %}>
                 </div>
@@ -511,4 +511,25 @@ description: "Meet the experienced faculty of transpersonal psychologists, breat
             lucide.createIcons();
         }
     }
+
+    /* The old WordPress site had one page per teacher (/kati-wortelkamp/ etc.); those URLs
+       301 to /teachers/#<id>, so a visitor arriving from Google on a teacher's name has to
+       land on that teacher's card already open, not on 32 collapsed ones. */
+    function openTeacherFromHash() {
+        const id = decodeURIComponent(window.location.hash.replace('#', ''));
+        if (!id) return;
+        const card = document.getElementById(id);
+        if (!card || !card.classList.contains('teacher-card')) return;
+
+        const bio = card.querySelector('.teacher-bio');
+        if (bio) {
+            bio.classList.add('active');
+            card.classList.add('expanded');
+            if (window.lucide) lucide.createIcons();
+        }
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    window.addEventListener('DOMContentLoaded', openTeacherFromHash);
+    window.addEventListener('hashchange', openTeacherFromHash);
 </script>

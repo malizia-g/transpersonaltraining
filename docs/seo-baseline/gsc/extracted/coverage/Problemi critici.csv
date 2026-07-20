@@ -1,0 +1,12 @@
+Ragione,Sorgente,Convalida,Pagine
+Pagina alternativa con tag canonical appropriato,Sito web,Non iniziata,53
+Non trovata (404),Sito web,Non iniziata,39
+Bloccata a causa di un accesso non autorizzato (403),Sito web,Non iniziata,16
+Pagina duplicata senza URL canonico selezionato dall'utente,Sito web,Non iniziata,11
+Bloccata da robots.txt,Sito web,Non iniziata,8
+Pagina con reindirizzamento,Sito web,Non iniziata,6
+Soft 404,Sito web,Non iniziata,3
+"Esclusa in base al tag ""noindex""",Sito web,Non iniziata,2
+Errore del server (5xx),Sito web,Non iniziata,1
+"Pagina scansionata, ma attualmente non indicizzata",Sistemi di Google,Non iniziata,378
+"Pagina duplicata, Google ha scelto una pagina canonica diversa da quella specificata dall'utente",Sistemi di Google,Non iniziata,14

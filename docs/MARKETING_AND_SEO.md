@@ -15,6 +15,34 @@
 
 ---
 
+## Progress log — what is actually done
+
+> Updated 2026-07-20. This section is the quick status; the phase sections below hold the detail.
+> Several items in the original audit are now stale — they are struck through where superseded.
+
+**Done**
+
+| Stage 1 step | What happened |
+|---|---|
+| 1 — Search Console | ✅ Domain property verified and active |
+| 2 — Baseline snapshot | ✅ Measured and analysed → **[seo-baseline/BASELINE.md](seo-baseline/BASELINE.md)**. 347 clicks / 17,448 impressions / 255 indexed pages / 7 referring domains |
+| 3 — URL inventory + redirect map | ✅ 574 old URLs inventoried, 301 map drafted and prioritized by real click/backlink data → [seo-baseline/REDIRECT_MAP.md](seo-baseline/REDIRECT_MAP.md). Portal question answered (already on `student.`). **Only the hosting choice still blocks it** |
+| 3c — Protect bio-page traffic | ✅ Old teacher URLs 301 to `/teachers/#<id>`; the page now expands the right teacher from the URL fragment |
+| 4 — Real form backend | ✅ **Built and live.** Google Apps Script web app → contact messages and applications land in a spreadsheet, signed agreements in Drive, notification email to the office. Honeypot, GDPR consent text and on-page success/error feedback all present. `mailto:` survives only as a no-JS fallback. See [APPLICATION_PAGE_SETUP.md](APPLICATION_PAGE_SETUP.md) |
+| 5 — `/apply/` page | ✅ **Built.** 3-step flow: details → generated enrolment agreement (from the master Google Doc) → signed-copy upload |
+| Resources page | ✅ `/resources/` live (Phase G4) |
+| Collaborations page | ✅ `/collaborations/` live (Phase H) |
+
+**Next up, in order**
+
+1. **Hosting decision** — the single remaining blocker on the redirect map (recommendation: Cloudflare Pages, [Open Decisions #4](#open-decisions-for-fabio))
+2. **Email marketing (Phase I)** — Brevo account, CleverReach list migration, newsletter signup on the site, programme-PDF lead magnet. *This, not the form backend, is what Brevo is for*
+3. **Urgent hygiene, independent of the cutover** — secure the `test.` subdomain ([PABLO 31](PABLO_TASKS.md)), portal SEO hygiene ([PABLO 33](PABLO_TASKS.md)), recover the missing West Program PDF ([PABLO 34](PABLO_TASKS.md))
+4. **Analytics (step 12)** — free if Cloudflare Pages is chosen
+5. **On-page SEO (Phase D)** — the keyword map is still entirely unimplemented, and the baseline confirms nothing commercial ranks
+
+---
+
 ## Table of Contents
 
 1. [Where We Stand (Audit Summary)](#1-where-we-stand-audit-summary)
@@ -52,11 +80,19 @@
 | Keyword research | Done (Drive sheets above) — volumes, difficulty, intent, awareness stages, page clusters |
 | Privacy | GDPR privacy modal; site currently uses no cookies/tracking |
 
+> **Baseline measured (Jul 2026).** Search Console data for the old site is now in
+> **[seo-baseline/BASELINE.md](seo-baseline/BASELINE.md)** — read it alongside this section, it
+> corrects two assumptions below. In short: 347 clicks / 17,448 impressions over 6 months, 255 pages
+> indexed, 7 referring domains. **64% of clicks go to teacher bio pages** (teacher-name searches,
+> positions 3–8); commercial keywords rank at positions 50–88 with zero clicks. Two undocumented
+> subdomains exist: `student.` (the portal, already separated) and `test.` (a public indexed staging
+> copy — fix now).
+
 ### Critical gaps found in the audit
 
 1. **The production domain still serves the old WordPress site.** `transpersonal-training.com` currently runs WordPress (Enfold theme, MEC events, a full student portal with login/dashboard/payment pages, yearly archive pages, Russian-language event pages). The new Eleventy site is not live. Launching without a redirect plan will throw away every existing backlink and ranking, and will break the student portal. → Phase B.
-2. **The conversion path is broken.** The only contact/application mechanism is a `<form action="mailto:...">` ([index.html:304](../src/index.html#L304)). `mailto:` forms silently fail for most users (no configured mail client, popup blocked, no feedback). All marketing spend/effort funnels into a form that loses leads. → Phase A.
-3. **Zero measurement.** No analytics, no Search Console. We cannot see what works. → Phase C.
+2. ~~**The conversion path is broken.** The only contact/application mechanism is a `<form action="mailto:...">`.~~ → **RESOLVED (Jul 2026).** Both the homepage contact form and the new `/apply/` page now POST to a Google Apps Script web app that writes to a spreadsheet, saves signed agreements to Drive and emails the office; `mailto:` remains only as a no-JS fallback. Every Phase A1 requirement is met — feedback on the page, honeypot, GDPR consent, durable storage. Remaining: name the processor in the privacy modal (see Phase A1).
+3. ~~**Zero measurement.** No analytics, no Search Console.~~ → **PARTLY RESOLVED (Jul 2026):** Search Console verified, and the old site's baseline is measured ([BASELINE.md](seo-baseline/BASELINE.md)). **Analytics is still missing** → Phase C2.
 4. **Keyword map not implemented.** Every row in the Cluster Keywords Map is "To Do": page titles/H1s/copy don't yet target the researched keywords, and three mapped pages don't exist yet (Courses/Hero Journey, Transpersonal Therapist, FAQ). → Phase D.
 5. **Duplicate-content risk on the blog.** 2 of 3 posts are republished from the authors' own sites (manalpsychotherapy.com, mariolorenzetti.org) with no `rel=canonical` pointing anywhere. Google may ignore or penalize them. → Phase G.
 6. **Structured data stops at the homepage.** No `Event` schema on the schedule (free rich-result opportunity for seminars), no `Person` for teachers, no `BlogPosting`, no `FAQPage`, no `BreadcrumbList`. → Phase D/E.
@@ -102,11 +138,13 @@ Everything in this stage can be completed and tested before touching DNS or host
 
 | # | Step | Phase | Effort | Depends on |
 |---|------|-------|--------|------------|
-| 1 | Verify the domain in Google Search Console **now** (DNS TXT record — works while WP is live, preserves history, and unlocks the old site's query data and Links report, which feed the redirect map) | C | S | DNS access |
-| 2 | Baseline snapshot of the old site: GSC top queries/pages, backlinks (Ahrefs Webmaster Tools), current rankings for the 10 priority keywords | B/C | S | step 1 |
-| 3 | WordPress URL inventory + 301 redirect map; decide student-portal fate; choose hosting/CDN that can serve redirects | B | M | portal & hosting decisions |
-| 4 | Replace the `mailto:` form with a real form backend; test delivery end-to-end to office@transpersonal-training.com | A | S | provider decision |
-| 5 | Build the dedicated `/apply/` page (process, requirements, fees indication, form) | A | M | content from Pablo/Fabio |
+| 1 | ✅ **DONE (Jul 2026)** — domain verified in Google Search Console | C | S | — |
+| 2 | ✅ **DONE (Jul 2026)** — baseline captured and analysed: **[seo-baseline/BASELINE.md](seo-baseline/BASELINE.md)**. 347 clicks / 17,448 impressions / 255 indexed pages / 7 referring domains. *(Ahrefs cross-check still pending)* | B/C | S | step 1 |
+| 3 | 🟡 WordPress URL inventory ✅ (574 URLs) + 301 redirect map ✅ drafted and data-prioritized ([seo-baseline/REDIRECT_MAP.md](seo-baseline/REDIRECT_MAP.md)); portal fate ✅ largely answered (already on `student.` subdomain); **still blocked on the hosting/CDN choice** | B | M | hosting decision |
+| 3b | 🔴 **NEW — urgent, independent of the cutover:** `test.transpersonal-training.com` is publicly indexed with a full duplicate of the site (402 impressions). Add HTTP auth or `noindex`+`Disallow`, then request removal in GSC | E | S | server access |
+| 3c | ✅ **DONE (Jul 2026)** — bio-page traffic protection. Bio pages are **64% of all organic clicks**. Decision (Fabio): no per-teacher pages; all 32 old URLs 301 to **`/teachers/#<id>`**, and the page now expands the right teacher from the URL fragment. Viable because all 32 bios are server-rendered into that page's HTML. Residual risk tracked as [PABLO task 32](PABLO_TASKS.md) | D/F | S | — |
+| 4 | ✅ **DONE (Jul 2026)** — real form backend live (Apps Script → Sheets + Drive + notification email). `mailto:` kept only as a no-JS fallback | A | S | — |
+| 5 | ✅ **DONE (Jul 2026)** — `/apply/` page built: details → generated enrolment agreement → signed-copy upload | A | M | — |
 | 6 | Create the missing money pages: Courses/Hero Journey, Transpersonal Therapist (career), FAQ, Fees & Dates | D | L | content |
 | 7 | Implement the Cluster Keywords Map on all existing pages (titles, H1, descriptions, copy) | D | M | — |
 | 8 | Expand structured data: `Event` (schedule), `Person` (teachers), `BlogPosting`, `FAQPage`, `BreadcrumbList`, enrich `Course` | D | M | — |
@@ -149,24 +187,45 @@ Effort: S = hours, M = days, L = a week+.
 
 Nothing else in this plan pays off while leads leak out of a broken form. Steps 1–3 of Stage 1 are data gathering — **this is the first thing to actually build**, and it can be built and tested in full while the old site still serves the domain.
 
-### A1. Real form backend
+### A1. Real form backend — ✅ BUILT (Jul 2026)
 
-- Replace `<form action="mailto:...">` on the homepage (and any future Apply page) with a static-site-friendly form service. Candidates:
-  - **Brevo forms** — free tier, doubles as the email-marketing platform (Phase I) → leads land directly in a contact list. Recommended if Brevo is confirmed for email.
-  - **Formspree / Web3Forms / Tally** — 5-minute setup, forwards to `office@transpersonal-training.com`.
-  - **Google Forms (embedded)** — zero cost, ugly but workable; data in Sheets fits the existing Sheets-driven workflow.
-- Requirements whichever tool wins: success/error feedback on the page, spam protection (honeypot), GDPR consent checkbox, notification email to the school, and the submission stored somewhere durable (not only email).
-- Update the privacy modal to name the form processor.
+**Solution chosen: a Google Apps Script web app**, not a third-party form service. One script serves
+both forms and writes into one spreadsheet; full documentation in
+[APPLICATION_PAGE_SETUP.md](APPLICATION_PAGE_SETUP.md).
 
-### A2. Dedicated `/apply/` page
+| What | Where it lands |
+|------|----------------|
+| Homepage contact message | `Contact` tab in the forms spreadsheet + email to the office |
+| Application details (`/apply/` step 1) | `Applications` tab |
+| Signed agreement (`/apply/` step 3) | PDF in a Drive folder + link written into that applicant's row |
 
-Right now "Apply" is a scroll-to-contact anchor. High-intent visitors need one page that closes:
+Why this rather than Brevo forms: the school already runs on Google Sheets (curriculum, schedule,
+lectures), so leads land inside the same workflow the office already uses, one applicant to one row,
+and the signed-agreement upload — which no generic form service does — comes for free.
 
-- Admission requirements (already drafted in `src/content/training-overview/admissions/`)
-- Process timeline: enquiry → interview → enrolment; key dates for the 2027 cohort
-- Fees (or at least a range + payment options) — cost is a top pre-application search; competitors that hide fees lose applicants
-- The application form itself + a low-commitment alternative ("book a 20-minute call")
-- FAQ excerpt + testimonial
+All Phase A1 requirements are met: on-page success/error feedback, honeypot spam trap, GDPR consent
+text at the form, notification email, and durable storage in Sheets/Drive rather than email alone.
+The endpoint lives in [src/_data/forms.js](../src/_data/forms.js) (overridable via `FORMS_ENDPOINT`);
+`mailto:` survives in the markup purely as a no-JavaScript fallback.
+
+**Still to do on this item:**
+- [ ] **Name the processors in the privacy modal.** It currently says only "our email provider"
+      generically. GDPR expects the real ones: Google (Apps Script / Sheets / Drive), plus Brevo once
+      email marketing goes live, plus the host once chosen.
+- [ ] Re-test delivery end-to-end after the hosting cutover (the endpoint is called from the browser,
+      so a domain change shouldn't matter, but confirm).
+
+### A2. Dedicated `/apply/` page — ✅ BUILT (Jul 2026)
+
+`/apply/` ([src/apply.html](../src/apply.html)) is a 3-step flow: applicant details → the enrolment
+agreement generated in-browser from the master Google Doc → upload of the hand-signed copy. Fees are
+published on Training Overview (exact prices, Open Decision 5).
+
+**Still to do on this item:**
+- [ ] Add the low-commitment alternative — "book a 20-minute call" — for visitors not ready to apply
+- [ ] Add an FAQ excerpt and a testimonial to the page (Phase F trust signals)
+- [ ] Fill the remaining `[…]` placeholders in the agreement Doc and get the lawyer review
+      (blocks real use — see [PABLO task 22](PABLO_TASKS.md) and the legal-notice work)
 
 ### A3. Secondary conversions everywhere
 
@@ -181,6 +240,11 @@ The old site has years of history, backlinks, and indexed URLs. A naive cutover 
 Timing: **B1 and B2 are Stage 1 preparation work** — do them early, while WordPress still serves the domain. **B3 is the Stage 2 cutover itself** and only runs once everything in Stage 1 is verified.
 
 ### B1. Inventory (before touching anything)
+
+> **✅ Sitemap inventory captured (2026-07-20):** 574 indexable URLs pulled from `/wp-sitemap.xml`
+> into [seo-baseline/raw/](seo-baseline/) with a classified draft map in
+> [seo-baseline/REDIRECT_MAP.md](seo-baseline/REDIRECT_MAP.md). Still pending: GSC "Pages" +
+> Links exports to catch non-sitemap URLs and backlinked pages.
 
 - Export all indexed URLs: WP sitemaps (`/wp-sitemap.xml` — posts, pages, events, portfolio, categories, tags), plus GSC "Pages" report once access exists, plus a `site:transpersonal-training.com` check.
 - Identify which old URLs have backlinks (free: GSC Links report + Ahrefs Webmaster Tools).
@@ -209,6 +273,10 @@ Timing: **B1 and B2 are Stage 1 preparation work** — do them early, while Word
 ### C1. Google Search Console (+ Bing Webmaster Tools)
 
 Domain-level verification (DNS TXT), email alerts on. This is free, takes an hour, and is the single most important SEO tool. **Do it now, as Stage 1 step 1** — a domain property covers the old WordPress site and the future site alike, so verifying today gives immediate access to the old site's query data and Links report (the raw material for the B1/B2 baseline and the redirect map) and preserves history across the cutover. The sitemap gets submitted at cutover (step 19).
+
+> **✅ DONE (Jul 2026):** Search Console is verified and active. Next: pull the baseline exports —
+> the exact export checklist lives in [seo-baseline/README.md](seo-baseline/README.md); drop the
+> files in `docs/seo-baseline/gsc/`. (Confirm the property is a *Domain* property, not URL-prefix.)
 
 ### C2. Analytics — privacy-consistent choice
 
@@ -273,6 +341,8 @@ High-value keywords not yet mapped to any page (from Selecting Keywords, all low
 
 ## Phase E — Technical SEO & Performance
 
+- 🔴 **Secure the `test.` subdomain (urgent, do first).** `test.transpersonal-training.com` is publicly reachable and indexed by Google — a full WordPress duplicate of the school site (`/about/`, `/apply/`, `/courses/`), 8 pages, 402 impressions, 5 clicks. It competes with the real site for the same terms and exposes an unfinished environment in search results. Fix: HTTP auth (best) or `noindex` + `Disallow: /` in its robots.txt, then a removal request in GSC. Independent of the migration.
+- **Existing 404s:** GSC reports **39 URLs already returning 404** on the live site. Export them (Indicizzazione → Pagine → "Non trovata (404)") and fix or redirect them *before* cutover, so they don't get misattributed to the migration.
 - **404 page:** create `src/404.html` with navigation and search-relevant links (GitHub Pages serves `/404.html` automatically).
 - **Canonical for syndicated posts:** the two republished articles must emit `<link rel="canonical">` to the original URLs (add a `canonicalUrl` front-matter field rendered in `base.njk`/`blog_article.njk`), or be rewritten into substantially different pieces. Otherwise they waste crawl budget and can drag site quality.
 - **URL consistency:** `navigation.njk` links to both `/curriculum/` and `/curriculum/index.html` forms. Normalize everything to the trailing-slash form (one URL = one page).
@@ -290,7 +360,7 @@ High-value keywords not yet mapped to any page (from Selecting Keywords, all low
 Google weighs expertise/authoritativeness heavily for health-adjacent topics (this is a psychotherapy school — YMYL territory). Trust signals also convert humans.
 
 - **Accreditation page (new):** what EUROTAS/EAP accreditation means, certification path hours (already documented in DOCUMENTATION.md), logos, links to the EUROTAS listing. Targets `eurotas accredited psychotherapy schools`, `transpersonal psychology degree europe`.
-- **Teacher bios:** expand with credentials, publications, years of practice; link each teacher's personal site (and get a link back — Phase H). Add `Person` schema (D3).
+- **Teacher bios — the highest-value SEO asset on the site.** The GSC baseline shows bio pages earn **64% of all organic clicks** at positions 3–8, and carry most of the backlink profile ([BASELINE.md](seo-baseline/BASELINE.md) Findings 1 & 4). They stay consolidated on the single `/teachers/` page (Fabio's decision — old URLs 301 to `/teachers/#<id>`), so that page has to carry the weight: (a) expand each bio with credentials, publications, years of practice; (b) link each teacher's personal site and get a link back (Phase H); (c) add `Person` schema per teacher (D3) — this matters more now that there's one URL, since the schema is what tells Google the page covers 32 distinct people; (d) **write the `/teachers/` title and meta description so they can rank for personal names**, not just for "our teachers"; (e) if dedicated pages become necessary, the ranked shortlist is in [PABLO task 32](PABLO_TASKS.md) — `/pier-luigi-lattuada/` alone draws 4,850 impressions at 0.02% CTR, the single biggest untapped opportunity in the data.
 - **Testimonials & alumni stories:** collect 5–10 short quotes (with photo + name + cohort, with consent) from current East/West students; place on Home, Training Overview, Apply. Later: 2–3 long-form alumni interviews as blog posts ("From nurse to transpersonal therapist").
 - **Photos of real seminars:** already shot and releases confirmed (see `photo_updating` branch work) — real people in real venues outperform stock everywhere.
 - **About/Contact completeness:** physical address (at least city/country), responsible persons, email — reassures both Google and applicants.
@@ -450,6 +520,33 @@ Charlotte Kihl, Ingrida Indane, Rita Aguila, Lydia Maidan, Vera Covaliciuc.
 
 The single highest-ROI channel for a school with a long decision cycle (people consider a 4-year training for months). A Brevo integration plan already exists in the `gas-automation` orphan branch.
 
+> **Scope note (Jul 2026):** the form backend is already built on Apps Script (A1), so **Brevo is not
+> needed for forms** — it is needed for *email marketing*: the newsletter, the welcome sequence, the
+> nurture flow, and the CleverReach list migration. The two systems connect at one point: after Apps
+> Script saves a submission, it also calls Brevo's API to add the contact — only when the person
+> ticked a separate marketing-consent box. Enquiry consent and marketing consent are different things
+> under GDPR and must stay separate checkboxes.
+
+### I0. Setup order (start here)
+
+1. [ ] **Create the Brevo account** on the free tier (300 emails/day) with `office@transpersonal-training.com`.
+2. [ ] **Authenticate the sending domain** — add Brevo's SPF, DKIM and DMARC records to
+       `transpersonal-training.com` DNS. Skipping this is the main reason school newsletters land in
+       spam. If DNS moves to Cloudflare for hosting (Open Decision 4), do both DNS jobs in one sitting.
+3. [ ] **Create the lists:** `Newsletter`, `Applicants`, `Enquiries`, `Students`, and
+       `CleverReach-import` kept separate until re-confirmed.
+4. [ ] **Migrate the CleverReach list** (Jan 2024 – Jun 2026 subscribers): export from CleverReach,
+       import into Brevo, then send **one re-permission email** and keep only those who click. Do not
+       silently move them into the active list — the original consent was given to a different sender
+       and platform, and Brevo's deliverability suffers badly on a cold imported list.
+5. [ ] **Add a marketing-consent checkbox** (separate from the existing GDPR enquiry consent) to the
+       homepage contact form and `/apply/`, defaulted to unticked.
+6. [ ] **Extend the Apps Script** to POST the contact to Brevo when that box is ticked
+       (`POST https://api.brevo.com/v3/contacts` with the API key in Script Properties, never in the
+       repo — the forms endpoint is public).
+7. [ ] **Add a newsletter signup block** — the site has none anywhere today. Footer + end of blog posts.
+8. [ ] **Update the privacy modal** to name Brevo as a processor (see A1).
+
 - **Platform:** Brevo (free tier: 300 emails/day, forms, automation). EU-based, GDPR-friendly.
 - **Lead magnets:**
   1. **Programme PDF** — the Curriculum PDF generator already produces a "Program PDF (summary)"; gate it behind an email form ("Get the full programme brochure").
@@ -502,16 +599,21 @@ Only after Phases A–I are live (paid traffic into a leaky funnel is burned mon
 
 ## KPIs & Review Cadence
 
-| KPI | Source | Baseline | Check |
-|-----|--------|----------|-------|
+Baselines below are **measured**, from [seo-baseline/BASELINE.md](seo-baseline/BASELINE.md)
+(6 months to 2026-07-18, old WordPress site). The migration's first job is not to lose them.
+
+| KPI | Source | Baseline (Jul 2026) | Check |
+|-----|--------|---------------------|-------|
 | Qualified applications / enquiries | Form backend | 0 (broken form) | Weekly |
-| Organic clicks & impressions | GSC | — (new site) | Monthly |
-| Rankings for the 10 priority keywords (D1 table) | GSC / free rank checker | — | Monthly |
-| Email list size & open rate | Brevo | 0 | Monthly |
+| Organic clicks & impressions | GSC | **347 clicks / 17,448 impr** per 6 months (~58 clicks/mo) | Monthly |
+| Rankings for the 10 priority keywords (D1 table) | GSC / free rank checker | **nothing ranks** — commercial terms sit at positions 50–88, zero clicks | Monthly |
+| Teacher-name rankings (bio pages) | GSC | **positions 3–8, 228 clicks** = 64% of all traffic — protect at cutover | Monthly |
+| Email list size & open rate | Brevo | 0 (CleverReach list to migrate) | Monthly |
 | Event registrations | Form/Brevo | — | Per event |
-| Indexed pages & coverage errors | GSC | — | Weekly for 6 weeks post-migration, then monthly |
-| Referring domains | Ahrefs Webmaster Tools | ~unknown (audit in B1) | Quarterly |
-| Core Web Vitals (mobile) | PageSpeed Insights | — | After Phase E, then quarterly |
+| Indexed pages & coverage errors | GSC | **255 indexed / 531 not** (39 live 404s to clean) | Weekly for 6 weeks post-migration, then monthly |
+| Referring domains | Ahrefs Webmaster Tools | **7** (all faculty/partner sites; EUROTAS not linking) | Quarterly |
+| Average CTR / position | GSC | 1.99% / 12.6 | Monthly |
+| Core Web Vitals (mobile) | PageSpeed Insights | — (mobile is 48% of clicks at position 7.7) | After Phase E, then quarterly |
 
 **Cadence:** 30-minute monthly review (GSC + analytics + application count) → pick the top 3 actions for next month. Quarterly: revisit this document, update the Cluster Keywords Map statuses, re-run the competitor sheet.
 
@@ -521,10 +623,25 @@ Only after Phases A–I are live (paid traffic into a leaky funnel is burned mon
 
 These block specific steps; everything else can proceed.
 
-1. **Form backend** (blocks step 4): Brevo forms vs Formspree/Tally vs embedded Google Form. *Recommendation: Brevo, since it also covers Phase I.* → **RESOLVED (Jul 2026): Brevo.** Pablo confirmed migrating the newsletter to Brevo. ⚠️ There is an existing subscriber list on **CleverReach** (the old site's newsletter, Jan 2024 – Jun 2026) — plan an export/import with double-opt-in re-confirmation as part of the Brevo setup.
+1. ~~**Form backend** (blocks step 4): Brevo forms vs Formspree/Tally vs embedded Google Form.~~ → **RESOLVED and BUILT (Jul 2026): Google Apps Script**, not Brevo forms. One script writes contact messages and applications into a spreadsheet and signed agreements into Drive, which keeps leads inside the Sheets workflow the office already uses and supports the file upload no generic form service offers. See Phase A1. **Brevo is still confirmed for email marketing** (Pablo) — a different job, see Phase I0. ⚠️ The existing **CleverReach** list (Jan 2024 – Jun 2026) needs an export/import plus a re-permission email before it can be mailed.
 2. **Analytics tool** (blocks step 12): cookieless (Plausible/Cloudflare) vs GA4+consent banner. *Recommendation: cookieless.*
-3. **Student portal fate at migration** (blocks steps 3 and 17–18): keep WordPress on a subdomain vs replace before cutover. This interacts with PABLO task 5 (lectures login) and task 10 (hosting).
-4. **Hosting/CDN** (blocks steps 3 and 18): GitHub Pages alone cannot do 301 redirects — put Cloudflare in front, or switch to Netlify/Cloudflare Pages?
+3. **Student portal fate at migration** (blocks steps 3 and 17–18): keep WordPress on a subdomain vs replace before cutover. This interacts with PABLO task 5 (lectures login) and task 10 (hosting). → **LARGELY RESOLVED (Jul 2026) by the GSC data:** the portal already runs on its own host, `student.transpersonal-training.com` (WordPress + Tutor LMS), so the cutover doesn't touch it. Remaining work is only 301-ing the ~12 legacy portal paths still on the root domain (`/login/`, `/payment/`, `/dashboard-page/`…) to their `student.` equivalents. Whether to *eventually* replace Tutor LMS with the new restricted-lectures approach is now a separate, non-blocking decision.
+4. **Hosting/CDN** (blocks steps 3 and 18): GitHub Pages alone cannot do 301 redirects — put Cloudflare in front, or switch to Netlify/Cloudflare Pages? → **RECOMMENDATION (Jul 2026): move to Cloudflare Pages**, keeping the existing GitHub Actions build.
+
+   The redirect map needs roughly **60 rules** (15 page rules + 32 bio anchors + 12 portal paths + pattern rules). That number is what decides this:
+
+   | Option | Redirects | Verdict |
+   |--------|-----------|---------|
+   | **GitHub Pages alone** | none (only client-side meta-refresh hacks, which don't pass ranking signals) | ❌ not viable — this is the whole reason the decision exists |
+   | **Cloudflare in front of GitHub Pages** | Bulk Redirects / Redirect Rules, but the *free* plan's allowance is small relative to 60 rules | ⚠️ workable only if we compress to pattern rules, or pay |
+   | **Cloudflare Pages** | native `_redirects` file, supports far more rules than we need; free, unlimited bandwidth | ✅ **recommended** |
+   | **Netlify** | native `_redirects`, equally capable and best-documented | ✅ good alternative; free tier has bandwidth/build-minute caps Cloudflare doesn't |
+
+   **Why Cloudflare Pages specifically:** it settles three open items in one move — hosting, the 301s, and **Open Decision 2 (analytics)**, because Cloudflare Web Analytics is free and cookieless, which is exactly the privacy-consistent option Phase C recommends and keeps the "no tracking" promise in the privacy modal true. It also puts DNS, the redirects and the CDN in one place for cutover day, which matters when the change has to be fast and reversible.
+
+   **Migration effort is small.** Keep [.github/workflows/deploy.yml](../.github/workflows/deploy.yml) exactly as it is — the Sheets fetching, the data and student-image caches, and the `repository_dispatch` rebuild trigger all keep working. Only the last step changes: instead of `peaceiris/actions-gh-pages` publishing to the `deploy` branch, run a `wrangler pages deploy _site` step. Also set `PATH_PREFIX` to `/` (it is currently `/transpersonaltraining/` for the GitHub project-site path) and add the `_redirects` file generated from [seo-baseline/REDIRECT_MAP.md](seo-baseline/REDIRECT_MAP.md). If GitHub Pages is kept for staging, nothing else needs to change.
+
+   **Caveat to check before committing:** confirm Cloudflare Pages' free-plan build/deploy limits suit a site that rebuilds on every Sheets change, and that `student.transpersonal-training.com` (the portal, on its own host) keeps resolving correctly once DNS moves to Cloudflare — it must be left untouched.
 5. **Fees transparency** (affects steps 5–6): publish fees, a range, or "on request"? *Recommendation: at least a range — it qualifies leads and is heavily searched.* → **RESOLVED (Jul 2026): publish exact prices.** €489/module (East) · €689/module (West) · €45/single lecture · single seminar on request. Now shown on Training Overview → Fees. Discounts (financial hardship, on request) and referral (one free module per new student introduced) are published too. Online payment is **not** available yet — enrolment is arranged with the office (see PABLO task 21).
 6. **Who writes content** (blocks steps 15 and 21): Fabio, teachers on rotation, syndication from Manal/Mario, or a hired writer?
 7. **Social ownership** (blocks steps 14 and 25): who runs Instagram/LinkedIn week to week? If nobody, defer Phase J rather than doing it badly.
@@ -533,4 +650,4 @@ These block specific steps; everything else can proceed.
 
 ---
 
-*Last updated: July 2026*
+*Last updated: 20 July 2026*

@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 \"/tmp/claude-1000/-workspaces-transpersonaltraining/9b89edc6-1982-4532-a04f-db41ba60bff6/scratchpad/process_images.py\")",
+      "Bash(timeout 200 npm run build)",
+      "Bash(echo \"build exit=$?\")",
+      "Bash(git add *)",
+      "Bash(git commit -q -m ' *)",
+      "Bash(git push *)",
+      "WebFetch(domain:www.grimaldisavelli.com)"
+    ]
+  }
+}

@@ -3,8 +3,9 @@ title: "The History of Transpersonal Psychology"
 author: Manal Al-Hammadi
 authorUrl: https://manalpsychotherapy.com/
 date: 2026-02-14
-description: "A journey through the origins and evolution of transpersonal psychology, from James and Jung to the present day."
+description: "The origins and evolution of transpersonal psychology, from William James and Jung to Maslow, Grof, Wilber and the empirical second wave of today."
 image: laughing-buddha-garden.jpg
+imageAlt: "A weathered stone laughing Buddha statue half-hidden among soft green garden foliage"
 source: manalpsychotherapy.com
 sourceUrl: https://manalpsychotherapy.com/
 tags: [transpersonal, psychology, history, holistic therapy, spiritual psychotherapy, breathwork, integrative therapy]

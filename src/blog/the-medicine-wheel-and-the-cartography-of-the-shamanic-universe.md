@@ -3,8 +3,9 @@ title: "The Medicine Wheel and the Cartography of the Shamanic Universe"
 author: Mario Lorenzetti
 authorUrl: https://mariolorenzetti.org/
 date: 2026-03-01
-description: "A transpersonal and holotropic exploration of the Native American medicine wheel, its cosmological framework, and its deep connections to Jung's individuation process and Holotropic Breathwork."
+description: "The Native American medicine wheel and its cosmology, read through Jung's individuation process and the cartography of Holotropic Breathwork."
 image: medicine-wheel-sami-drum.jpg
+imageAlt: "A Sámi shaman drum with red ochre figures of people, animals and sun symbols arranged in three horizontal bands across the skin"
 source: mariolorenzetti.org
 sourceUrl: https://mariolorenzetti.org/wp-content/uploads/2026/03/MarioLorenzetti_The-medicine-wheel-and-the-cartography-of-the-shamanic-universe.pdf
 tags: [shamanism, medicine wheel, transpersonal psychology, holotropic breathwork, Jung, indigenous wisdom, archetypes, Cherokee]

@@ -27,3 +27,7 @@ yarn-error.log*
 
 # Data cache files (generated during build)
 src/_data/*.cache.json
+
+# Claude Code local/runtime state (not shared config)
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
