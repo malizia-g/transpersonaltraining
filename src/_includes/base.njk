@@ -5,7 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% set excerpt = excerpt or description %}
     {% set ogtype = ogtype or ogType or ('article' if page.url != '/blog/' and (page.url | startsWith('/blog/')) else 'website') %}
-    {% seo "" %}
+    <title>{% pageTitle "" %}</title>
+
+    <meta name="description" content="{% pageDescription "" %}">
+    <meta name="robots" content="{% metaRobots "" %}">
+    <meta name="author" content="{% metaAuthor "" %}">
+
+    {# Syndicated blog posts set sourceUrl to the original article. Canonical then
+       points there instead of at our copy — Google's recommended pattern for
+       republished content — so the copy doesn't compete with (or get penalized
+       against) the original for ranking. #}
+    {% if sourceUrl %}
+    <link rel="canonical" href="{{ sourceUrl }}">
+    {% else %}
+    <link rel="canonical" href="{% canonicalURL "" %}">
+    {% endif %}
+
+    {% openGraph "" %}
+    {% twitterCard "" %}
 
     {# JSON-LD Structured Data #}
     {% if page.url == "/" %}

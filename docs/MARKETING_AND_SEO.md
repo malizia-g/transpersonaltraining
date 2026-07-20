@@ -2,7 +2,8 @@
 
 > Complete, prioritized roadmap for marketing the school and optimizing the website for search.
 > Companion documents: [PABLO_TASKS.md](PABLO_TASKS.md) (launch blockers), [FUTURE_IDEAS.md](FUTURE_IDEAS.md) (technical backlog),
-> [OLD_SITE_CONTENT_MIGRATION.md](OLD_SITE_CONTENT_MIGRATION.md) (old-site content gap analysis: fees, enrollment options, certificates, partners, contacts — feeds Phases A/B/F and adds open decisions 10–16).
+> [OLD_SITE_CONTENT_MIGRATION.md](OLD_SITE_CONTENT_MIGRATION.md) (old-site content gap analysis: fees, enrollment options, certificates, partners, contacts — feeds Phases A/B/F and adds open decisions 10–16),
+> [SEO_KEYWORD_MAP.md](SEO_KEYWORD_MAP.md) (**current source of truth for page ↔ keyword assignments** — supersedes the D1 table below and the Drive Cluster Keywords Map, both written when the site had a different page structure; also holds the long-tail phrase coverage audit).
 >
 > Preliminary SEO research (keyword volumes, clusters, competitors) lives in the shared
 > [Google Drive SEO folder](https://drive.google.com/drive/u/1/folders/1V3B3Ou0l_iZ-n1tkCS_HriQqGO9hIDTU):
@@ -39,7 +40,7 @@
 2. **Email marketing (Phase I)** — Brevo account, CleverReach list migration, newsletter signup on the site, programme-PDF lead magnet. *This, not the form backend, is what Brevo is for*
 3. **Urgent hygiene, independent of the cutover** — secure the `test.` subdomain ([PABLO 31](PABLO_TASKS.md)), portal SEO hygiene ([PABLO 33](PABLO_TASKS.md)), recover the missing West Program PDF ([PABLO 34](PABLO_TASKS.md))
 4. **Analytics (step 12)** — free if Cloudflare Pages is chosen
-5. **On-page SEO (Phase D)** — the keyword map is still entirely unimplemented, and the baseline confirms nothing commercial ranks
+5. **On-page SEO (Phase D)** — 🟡 **partly done (Jul 2026):** titles/descriptions for 13 of ~15 mapped pages now match [SEO_KEYWORD_MAP.md](SEO_KEYWORD_MAP.md) (D2's first checklist item). Still open: H1s and body copy haven't been audited against the map (D2's other checklist items), the FAQ and Transpersonal Therapist (career) pages don't exist yet, and the long-tail phrase audit found real gaps (see [SEO_KEYWORD_MAP.md § Long-tail phrase coverage](SEO_KEYWORD_MAP.md#long-tail-phrase-coverage)). The baseline still confirms nothing commercial ranks yet — titles alone don't move that; it needs indexing time plus the remaining D2 items
 
 ---
 
@@ -93,8 +94,8 @@
 1. **The production domain still serves the old WordPress site.** `transpersonal-training.com` currently runs WordPress (Enfold theme, MEC events, a full student portal with login/dashboard/payment pages, yearly archive pages, Russian-language event pages). The new Eleventy site is not live. Launching without a redirect plan will throw away every existing backlink and ranking, and will break the student portal. → Phase B.
 2. ~~**The conversion path is broken.** The only contact/application mechanism is a `<form action="mailto:...">`.~~ → **RESOLVED (Jul 2026).** Both the homepage contact form and the new `/apply/` page now POST to a Google Apps Script web app that writes to a spreadsheet, saves signed agreements to Drive and emails the office; `mailto:` remains only as a no-JS fallback. Every Phase A1 requirement is met — feedback on the page, honeypot, GDPR consent, durable storage. Remaining: name the processor in the privacy modal (see Phase A1).
 3. ~~**Zero measurement.** No analytics, no Search Console.~~ → **PARTLY RESOLVED (Jul 2026):** Search Console verified, and the old site's baseline is measured ([BASELINE.md](seo-baseline/BASELINE.md)). **Analytics is still missing** → Phase C2.
-4. **Keyword map not implemented.** Every row in the Cluster Keywords Map is "To Do": page titles/H1s/copy don't yet target the researched keywords, and three mapped pages don't exist yet (Courses/Hero Journey, Transpersonal Therapist, FAQ). → Phase D.
-5. **Duplicate-content risk on the blog.** 2 of 3 posts are republished from the authors' own sites (manalpsychotherapy.com, mariolorenzetti.org) with no `rel=canonical` pointing anywhere. Google may ignore or penalize them. → Phase G.
+4. 🟡 **Keyword map partly implemented (Jul 2026).** Titles/descriptions were rewritten for 13 of ~15 pages to match [SEO_KEYWORD_MAP.md](SEO_KEYWORD_MAP.md) (which itself supersedes the stale Drive Cluster Keywords Map — the sheet's 13 "pages" don't match the site's 18 real ones). Not done: H1s and body copy haven't been checked against target keywords page by page; `/venues/` title is deliberately still generic pending [PABLO task 36](PABLO_TASKS.md) (Eastern venue placeholder); of the three planned new pages, the Hero's Journey angle shipped as a **blog post** (`/blog/the-heros-journey-in-transpersonal-work/`, byline Fabio Malizia) rather than the dedicated pillar page the map originally specified, and **Transpersonal Therapist (career) and FAQ still don't exist**. A long-tail phrase audit against the Longtail Keywords doc also found real content gaps — see [SEO_KEYWORD_MAP.md § Long-tail phrase coverage](SEO_KEYWORD_MAP.md#long-tail-phrase-coverage). → Phase D.
+5. ~~**Duplicate-content risk on the blog.** 2 of 3 posts are republished from the authors' own sites (manalpsychotherapy.com, mariolorenzetti.org) with no `rel=canonical` pointing anywhere. Google may ignore or penalize them.~~ → **RESOLVED (Jul 2026).** The premise only held for one post: Mario Lorenzetti's medicine-wheel piece is genuinely republished from `mariolorenzetti.org`, and now emits `rel=canonical` to the original there. Manal Al-Hammadi's two posts were never syndicated — she wrote them directly for this blog — so the `source`/`sourceUrl` front matter that wrongly implied otherwise (and the "Originally published on…" badge it drove) has been removed from both; they now self-canonicalize like any original post, and her byline still links to her site as an author credit. Mechanism: `base.njk` emits `rel=canonical` to `sourceUrl` when a post sets it, else to the page's own URL — any future republished post is covered automatically just by setting `sourceUrl`. See Phase G3.
 6. **Structured data stops at the homepage.** No `Event` schema on the schedule (free rich-result opportunity for seminars), no `Person` for teachers, no `BlogPosting`, no `FAQPage`, no `BreadcrumbList`. → Phase D/E.
 7. **No social presence linked anywhere.** `sameAs: []` is empty in the JSON-LD; footer has no social icons; no profiles to point to. → Phase J.
 8. **No email capture.** No newsletter, no lead magnet — visitors who aren't ready to apply today are lost forever. → Phase I.
@@ -115,6 +116,15 @@
 | 4 | Build a long-term audience | Email list growth |
 
 ### Audience personas (from the Longtail Keywords doc)
+
+> **Reference, not a to-do.** Unlike the "Business goals" table above (marked *proposed — confirm*),
+> nothing here needs an action from Fabio/Pablo by itself. It's the lens other phases are already
+> written through: it says *who* a page or blog post is for and *how close to applying* they are
+> (TOFU = just discovering the topic, MOFU = comparing options, BOFU = ready to apply), so that
+> Phase D copy and Phase G blog topics get matched to the right audience instead of guessed at. The
+> five personas below are our synthesis of the Longtail doc's 7 keyword categories — read literally,
+> it groups by search intent, not by person; category 3 ("not satisfied with classical
+> psychotherapy") and category 2 ("personal therapy") both feed persona 4 here, for example.
 
 1. **Aspiring transpersonal psychotherapists** — professionals seeking rigorous, EUROTAS-accredited training. Highest value; lowest volume. BOFU pages: Training Overview, Curriculum, Fees, Apply.
 2. **Aspiring counsellors** — career-changers wanting holistic counselling certification. BOFU/MOFU.
@@ -148,7 +158,7 @@ Everything in this stage can be completed and tested before touching DNS or host
 | 6 | Create the missing money pages: Courses/Hero Journey, Transpersonal Therapist (career), FAQ, Fees & Dates | D | L | content |
 | 7 | Implement the Cluster Keywords Map on all existing pages (titles, H1, descriptions, copy) | D | M | — |
 | 8 | Expand structured data: `Event` (schedule), `Person` (teachers), `BlogPosting`, `FAQPage`, `BreadcrumbList`, enrich `Course` | D | M | — |
-| 9 | Technical SEO hygiene: 404 page, canonical for syndicated posts, nav URL consistency, self-hosted fonts/icons, Agreement page rebuilt into the new site, dynamic copyright year | E | M | — |
+| 9 | 🟡 Technical SEO hygiene: ✅ 404 page, ✅ canonical for syndicated posts, ✅ nav URL consistency — still open: self-hosted fonts/icons, Agreement page rebuilt into the new site, dynamic copyright year | E | M | — |
 | 10 | Image SEO & performance: `@11ty/eleventy-img` pipeline, alt-text audit, lazy loading; Lighthouse ≥ 90 on mobile | E | M | — |
 | 11 | Trust layer: Accreditation page, testimonials collected from current students, teacher bios enriched with credentials | F | M | testimonials collection |
 | 12 | Integrate cookieless analytics into the build + define conversion events (starts collecting automatically at cutover) | C | S | tool decision |
@@ -297,9 +307,14 @@ Track as events: application form submitted, contact form submitted, programme-P
 
 ## Phase D — On-Page SEO (Keyword Implementation)
 
-This turns the Drive research into actual rankings. Work page by page through the [Cluster Keywords Map](https://docs.google.com/spreadsheets/d/1vyGrnHLGvWC4gvbL3UU0zgpHoGUVsnvc2H2yaulVxyg), updating its Status column as pages ship.
+This turns the Drive research into actual rankings.
 
-### D1. Page ↔ keyword assignments (condensed from the sheet)
+> ⚠️ **The table below is the original plan and is now stale** — it was written against 13 "pages"
+> from the Drive sheet that don't line up with the site's actual 18 pages. **Work from
+> [SEO_KEYWORD_MAP.md](SEO_KEYWORD_MAP.md) instead** — it resolves the mapping and is kept current;
+> this table is left here for the original reasoning only (working titles/hooks, priority order).
+
+### D1. Page ↔ keyword assignments (condensed from the sheet — superseded, see note above)
 
 | Priority | Page | Primary keyword target | Working title/hook (from sheet) |
 |----------|------|------------------------|--------------------------------|
@@ -344,7 +359,7 @@ High-value keywords not yet mapped to any page (from Selecting Keywords, all low
 - 🔴 **Secure the `test.` subdomain (urgent, do first).** `test.transpersonal-training.com` is publicly reachable and indexed by Google — a full WordPress duplicate of the school site (`/about/`, `/apply/`, `/courses/`), 8 pages, 402 impressions, 5 clicks. It competes with the real site for the same terms and exposes an unfinished environment in search results. Fix: HTTP auth (best) or `noindex` + `Disallow: /` in its robots.txt, then a removal request in GSC. Independent of the migration.
 - **Existing 404s:** GSC reports **39 URLs already returning 404** on the live site. Export them (Indicizzazione → Pagine → "Non trovata (404)") and fix or redirect them *before* cutover, so they don't get misattributed to the migration.
 - **404 page:** create `src/404.html` with navigation and search-relevant links (GitHub Pages serves `/404.html` automatically).
-- **Canonical for syndicated posts:** the two republished articles must emit `<link rel="canonical">` to the original URLs (add a `canonicalUrl` front-matter field rendered in `base.njk`/`blog_article.njk`), or be rewritten into substantially different pieces. Otherwise they waste crawl budget and can drag site quality.
+- ~~**Canonical for syndicated posts:** the two republished articles must emit `<link rel="canonical">` to the original URLs...~~ → **DONE (Jul 2026).** Only Mario's post was actually syndicated; it now points `rel=canonical` at `mariolorenzetti.org`. Manal's two posts were original-for-this-site, so the incorrect `sourceUrl` was removed from them instead — they self-canonicalize. `base.njk` derives canonical from a post's `sourceUrl` front matter automatically, so this doesn't need repeating per post.
 - **URL consistency:** `navigation.njk` links to both `/curriculum/` and `/curriculum/index.html` forms. Normalize everything to the trailing-slash form (one URL = one page).
 - **Self-host fonts & icons:** download Inter + Cormorant Garamond as woff2 (google-webfonts-helper), serve from `/assets/fonts/`; bundle the ~6 Lucide icons actually used as inline SVG or a local file instead of the 300 KB unpkg script. Fixes the GDPR inconsistency (item 9 of the audit), removes 3 third-party DNS connections, improves LCP.
 - **Image pipeline:** adopt `@11ty/eleventy-img` (already in FUTURE_IDEAS): responsive `srcset`, AVIF/WebP, width/height attributes (prevents CLS), `loading="lazy"` below the fold.
@@ -389,7 +404,9 @@ Google weighs expertise/authoritativeness heavily for health-adjacent topics (th
 
 ### G3. Syndication policy
 
-Guest/republished posts (Manal, Mario) are good for relationships and content volume, but: always add `rel=canonical` to the original (E), always add an author box linking their site, and keep the ratio ≥1 original : 1 syndicated.
+Guest/republished posts are good for relationships and content volume, but: always add `rel=canonical` to the original (E) — automatic now, just set `sourceUrl` in front matter — and always add an author box linking their site, and keep the ratio ≥1 original : 1 syndicated.
+
+**Correction (Jul 2026):** of the current three posts, only Mario Lorenzetti's is actually syndicated from his own site (`mariolorenzetti.org`) and carries `sourceUrl` + canonical accordingly. Manal Al-Hammadi's two posts were originally mislabeled the same way, but she wrote both directly for this blog — they're original content, not reprints, so `sourceUrl` was removed and they don't get an "Originally published on…" badge. Her author byline still links to `manalpsychotherapy.com` as a credit, independent of syndication status. Ratio today: 2 original (Manal ×2) : 1 syndicated (Mario) — already inside policy, without even counting the new Fabio-authored post (G2 item 3, now published).
 
 ### G4. Resources / Recommended Reading page
 

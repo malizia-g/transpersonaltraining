@@ -95,9 +95,129 @@ Worth a page when there is capacity to write one — all low difficulty:
   the explicit focus of `/what-is-transpersonal-psychology/`
 - `transpersonal psychology degree europe` (difficulty 5) and `eurotas accredited psychotherapy
   schools` — an **Accreditation page** would own both (Marketing plan Phase F)
-- `hero journey` — 3,600/mo, difficulty 19, the biggest volume in the research. Content already exists
-  in `src/curriculum.html` and `src/content/training-overview/02-program-overview.md` but is not
-  developed enough to rank
+- `hero journey` — 3,600/mo, difficulty 19, the biggest volume in the research. Partly addressed
+  (Jul 2026): a blog post now exists — `/blog/the-heros-journey-in-transpersonal-work/`, "The Hero's
+  Journey in Transpersonal Work", byline Fabio Malizia — but it shipped under a different URL and
+  title than this map originally specified (`/blog/the-heros-journey/`, "The Hero's Journey &
+  Personal Transformation"), and the exact phrase "hero journey"/"hero's journey" carries the
+  keyword rather than being the title's leading phrase. Worth deciding whether to retitle/rename for
+  the exact-match SEO benefit, or treat the current title as final and accept the softer match.
+  `src/curriculum.html` and `02-program-overview.md` still carry supporting content.
+
+## Long-tail phrase coverage
+
+> Audit against the Drive [SEO Longtail Keywords](https://docs.google.com/document/d/10fWmPbUOrqP2YLXMonK9G3jaxAPJA8mnzzj9SohCjKE)
+> doc (41 phrases across 7 audience categories — its own numbering skips "7"). Checked against actual
+> page/blog copy, not just titles. *Audited 2026-07-20.*
+>
+> ✅ = the phrase's intent is directly addressed by existing content · 🟡 = the topic is touched but not
+> this specific angle or wording · ❌ = nothing on the site addresses this search intent at all.
+
+### 1. Personal Growth — persona 5, TOFU
+
+| Phrase | Status | Note |
+|---|---|---|
+| courses for deep spiritual awakening and integration | 🟡 | "spiritual awakening" appears (2 files) but no page frames Level 1 this way |
+| hero's journey workshops for self-discovery | 🟡 | covered by the new blog post, but as an article, not a "workshop"; "self-discovery" isn't used |
+| holotropic breathwork retreats for personal transformation | 🟡 | `/schedule/` + `/venues/` cover the logistics, "personal transformation" isn't tied to them |
+| training in expanded states of consciousness for beginners | ❌ | site only ever says "non-ordinary states," never "expanded states"; nothing is framed "for beginners" |
+| transpersonal development programs for inner peace | ❌ | "inner peace" appears nowhere on the site |
+
+### 2. Personal Therapy — persona 4, TOFU (searchers want to *book a session*, not enrol)
+
+| Phrase | Status | Note |
+|---|---|---|
+| transpersonal therapists specializing in spiritual crisis | 🟡 | `/become-a-client-model/` mentions spiritual crisis, framed as free trainee sessions, not "find a specialist" |
+| holotropic breathwork sessions for trauma healing | 🟡 | "trauma" is common (13 files) but almost always training-context, not a "book a session" page |
+| find a therapist who uses shamanic and integral methods | ❌ | no therapist-finder / directory intent exists anywhere |
+| body-oriented psychotherapy for emotional release | ❌ | — |
+| transpersonal counseling for existential depression | ❌ | "existential depression" — zero hits |
+| integration therapy for psychedelic or breathwork experiences | ❌ | "integration therapy" — zero hits (though "psychedelic" itself appears 5×) |
+
+**Structural note:** this whole category is a weaker fit for the site as it stands — the school sells
+*training*, not therapy sessions, and `/become-a-client-model/` is the only page positioned to capture
+this intent at all. Closing these gaps may mean deciding how far to lean into "book a session with a
+trainee" as a page, rather than just adding copy.
+
+### 3. Not satisfied with classical psychotherapy — persona 4, TOFU (best-covered category)
+
+| Phrase | Status | Note |
+|---|---|---|
+| alternatives to talk therapy for deep healing | 🟡 | conceptually covered by `how-transpersonal-psychology-differs.md`, exact phrase not used |
+| psychotherapy that includes the spiritual dimension | ✅ | effectively the thesis of that post + `/what-is-transpersonal-psychology/` |
+| why classical therapy isn't working for my spiritual anxiety | 🟡 | the answer exists, not phrased as this question — good future blog title (personal, TOFU) |
+| holistic mental health approaches beyond CBT | ✅ | the post explicitly discusses CBT's limits |
+| therapy focusing on soul and consciousness rather than just symptoms | ✅ | `/what-is-transpersonal-psychology/`'s description says almost exactly this |
+| somatic and breathwork based therapy vs traditional analysis | 🟡 | both sides exist on the site (Techniques; the differs post) but never as one head-to-head comparison |
+
+### 4. Counselling School — persona 2, BOFU/MOFU
+
+| Phrase | Status | Note |
+|---|---|---|
+| certification in transpersonal counseling and guidance | ✅ | = Curriculum Level 2, "Counselling Skills & Professional Facilitation" |
+| how to become a spiritual counselor with european accreditation | 🟡 | EUROTAS is mentioned; no page tells the "how to become" career story |
+| holistic counseling training programs online and in person | ✅ | Training Overview explains online lectures + in-person intensives |
+| counseling schools that teach breathwork and meditation | 🟡 | true, but never stated as one combined value proposition |
+| career change to transpersonal counseling therapist | ❌ | this is exactly the still-unbuilt **Transpersonal Therapist (career) page** |
+| EUROTAS accredited counseling skills training | ✅ | Curriculum Level 2 description says close to this verbatim |
+
+### 5. Psychotherapy School — persona 1, BOFU
+
+| Phrase | Status | Note |
+|---|---|---|
+| comprehensive training in transpersonal psychotherapy Europe | ✅ | Homepage + Training Overview |
+| post-graduate certificate in integral transpersonal psychology | 🟡 | certificates are described per level; "post-graduate" and "integral" framing aren't used |
+| psychotherapy schools teaching Grof breathwork and biotransenergetics | 🟡 | "biotransenergetics" only appears in 2 teacher bios, not on Curriculum/Training Overview |
+| become a certified transpersonal psychotherapist eurotas | ✅ | Curriculum Level 3 + EUROTAS mentioned throughout |
+| integral psychotherapy training for mental health professionals | 🟡 | audience isn't explicitly addressed as "mental health professionals" |
+| clinical training in consciousness-based psychotherapy | 🟡 | "clinical" framing is thin |
+
+### 6. Eurotas Certification — persona 1, BOFU (structurally the weakest category)
+
+| Phrase | Status | Note |
+|---|---|---|
+| how to get eurotas transpersonal psychotherapist certification | 🟡 | — |
+| eurotas accredited training institutes for breathwork and therapy | 🟡 | — |
+| european transpersonal association certification requirements | ❌ | — |
+| accredited path to become a eurotas certified therapist | 🟡 | — |
+| transpersonal psychology training recognized by eurotas global network | 🟡 | — |
+| psychotherapy certification valid in europe transpersonal field | ❌ | — |
+
+EUROTAS itself is mentioned on Training Overview, Curriculum and `/collaborations/`, so this category
+isn't invisible — but every phrase in it wants a single authoritative landing page, and that page (the
+**Accreditation page**, [PABLO task 27](PABLO_TASKS.md), Marketing plan Phase F) still doesn't exist.
+Building it would move most of this row from 🟡 to ✅ in one page.
+
+### 8. Breathwork Techniques — persona 3, MOFU
+
+| Phrase | Status | Note |
+|---|---|---|
+| holotropic breathwork certification training europe | ✅ | Techniques + Curriculum Level 3 |
+| grof breathwork facilitator training requirements | 🟡 | facilitator path exists (Level 3); Grof isn't consistently named on `/techniques/` itself |
+| transpersonal breathwork techniques for trauma release | 🟡 | — |
+| safe methods for inducing altered states through breath | ❌ | no safety-framed content |
+| breathing practices for self-realization | 🟡 | "self-realization" appears once, not developed |
+| difference between conscious connected breathing and holotropic breathwork | ❌ | "conscious connected breathing" — zero hits; a clean, specific future blog title |
+
+### Where the real gaps concentrate
+
+Not 41 scattered problems — three root causes:
+
+1. **No Accreditation page** (Phase F) — accounts for essentially all of category 6 and part of 5.
+2. **No Transpersonal Therapist / career page** (Phase D) — accounts for the career-change phrases in
+   categories 4 and 5.
+3. **"Personal Therapy" (category 2) is a weak fit for a training-school site** — needs a strategy
+   decision (lean into it via Become a Client Model, or accept it's out of scope), not just copy.
+
+Fully missing (❌) phrases, for reference: *expanded states of consciousness for beginners*, *inner
+peace*, *find a therapist who uses shamanic and integral methods*, *body-oriented psychotherapy for
+emotional release*, *transpersonal counseling for existential depression*, *integration therapy for
+psychedelic or breathwork experiences*, *career change to transpersonal counseling therapist*,
+*european transpersonal association certification requirements*, *psychotherapy certification valid in
+europe transpersonal field*, *safe methods for inducing altered states through breath*, *difference
+between conscious connected breathing and holotropic breathwork*.
+
+---
 
 ### Open decision — the `/training-overview/` URL
 
