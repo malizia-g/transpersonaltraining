@@ -94,6 +94,20 @@ body[class*="theme-"] #mobile-menu a:hover {
 .dropdown-menu .submenu-icon { color: #94a3b8; transition: color 0.2s ease; }
 .dropdown-menu a:hover .submenu-icon { color: #9A7734; }
 
+/* Mobile submenu icons */
+#mobile-menu .submenu-icon { color: rgba(226, 232, 240, 0.6); flex-shrink: 0; transition: color 0.2s ease; }
+#mobile-menu a:hover .submenu-icon { color: inherit; }
+
+/* Mobile menu scrolling: the menu is taller than a phone viewport, so it must
+   scroll internally. max-height is set in JS from the live navbar height.
+   overscroll-behavior stops the swipe from chaining to the page underneath. */
+#mobile-menu {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+}
+body.mobile-menu-open { overflow: hidden; }
+
 /* ── Level cards & Accordion (curriculum, training) ── */
 
 .level-card {

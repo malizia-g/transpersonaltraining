@@ -1,5 +1,5 @@
 ---
-heading: Eligibility
+heading: Who This Training Is For
 subheading: General Eligibility (All Levels)
 intro: "Applicants should demonstrate:"
 note: "This training is experiential and may involve deep emotional and psychological processes. Applicants with acute, unmanaged psychiatric conditions that could be destabilized by non-ordinary states of consciousness may be advised to defer participation until clinically appropriate."

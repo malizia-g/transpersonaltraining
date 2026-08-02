@@ -1,6 +1,7 @@
 ---
 level: "Level 3"
 label: Psychotherapy Track
+note_anchor: "#psychotherapy-note"
 ---
 
 1. Level 1 and 2 completions

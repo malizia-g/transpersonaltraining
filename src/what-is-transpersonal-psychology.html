@@ -4,6 +4,7 @@ title: "What is Transpersonal Psychology?"
 description: "Non-ordinary states of consciousness and soul as embodied psychology. Transpersonal psychotherapy: rigorous, evidence-based, and who it's for."
 ---
 
+{% set abstract = 'what-is-transpersonal-psychology/00-abstract.md' | pageContent %}
 {% set s1 = 'what-is-transpersonal-psychology/01-understanding-the-field.md' | pageContent %}
 {% set s2 = 'what-is-transpersonal-psychology/02-science-and-spirit.md' | pageContent %}
 {% set s3 = 'what-is-transpersonal-psychology/03-why-it-matters.md' | pageContent %}
@@ -14,7 +15,7 @@ description: "Non-ordinary states of consciousness and soul as embodied psycholo
 		<img src="{{ '/assets/images/Headers/hero-what-is-tp-window-forest.jpg' | url }}" alt="Open window looking onto the forest" class="absolute inset-0 w-full h-full object-cover z-0">
 	</picture>
 	<div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/80 via-[#0F2540]/60 to-[#0F2540]/80 z-0"></div>
-	<div class="container mx-auto px-6 relative z-10 text-center">
+	<div class="container mx-auto px-6 relative z-10 text-center pt-20">
 		<div class="max-w-4xl mx-auto">
 			<p class="p4-kicker text-[#C9A45C] mb-6 flex items-center justify-center gap-4">
 				<span class="p4-hairline"></span>
@@ -27,7 +28,6 @@ description: "Non-ordinary states of consciousness and soul as embodied psycholo
 			<p class="text-xl md:text-2xl text-white/80 font-light leading-relaxed max-w-3xl mx-auto">
 				Exploring the crossroad of human psychology and spiritual experience.
 			</p>
-			<p class="mt-4 text-white/70 text-sm md:text-base">By Manal Al-Hammadi</p>
 		</div>
 	</div>
 </header>
@@ -41,6 +41,14 @@ description: "Non-ordinary states of consciousness and soul as embodied psycholo
 		</div>
 	</div>
 </div>
+
+<section class="py-12 bg-white border-b border-neutral-warm-200">
+	<div class="container mx-auto px-6">
+		<div class="max-w-3xl mx-auto text-center text-lg text-neutral-warm-600 leading-relaxed">
+			{{ abstract.html | safe }}
+		</div>
+	</div>
+</section>
 
 <section class="py-16 bg-white">
 	<div class="container mx-auto px-6">
