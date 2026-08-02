@@ -1,7 +1,11 @@
 ---
-heading: Training Philosophy
+heading: Being in Your Essence
 ---
 
-We recognize that healing and consciousness development require integration of psychotherapeutic expertise with understanding of transpersonal dimensions of human experience. Our training prepares practitioners who are capable of working with clients across the full spectrum of psychological and spiritual needs; from symptom relief to consciousness expansion and authentic self-realization. This requires synchronized development of rigorous psychotherapeutic skills and deep personal understanding of different states of consciousness.
+This is more than a training. It is an invitation to become the practitioner your work has been asking for.
+
+Through an integrative approach to transpersonal psychology, embodiment, and transformational practice, you'll learn not only what creates lasting change, but who you must become to facilitate it: Being in your essence is about being beyond your story, beyond the narratives, patterns, and beliefs that live your life for you.
+
+As your own awareness deepens, your capacity to hold others expands naturally. Therapeutic techniques, diagnostic models, and theoretical knowledge are valuable instruments, but they constitute only the scaffolding. The true engine of healing resides in the quality of the therapist's presence — specifically their ability to embody authenticity, truth, and conscious love.
 
 EUROTAS-accredited, this transpersonal psychology degree is recognized across Europe and structured to meet international standards for transpersonal practice.
