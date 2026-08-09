@@ -116,6 +116,45 @@ module.exports = function(eleventyConfig) {
     }
   });
 
+  // Read a content MD file and split its body on '### ' headings.
+  // Returns { data, introHtml, blocks: [{ title, teachers, icon, image, html }] }.
+  // Per-block conventions: an italic '*(Name, Name)*' line right after the
+  // heading is lifted out as `teachers`; a standalone image line
+  // '![alt](/path "object-position")' is lifted out as `image` (the path is
+  // extensionless — the template builds the <picture> with .webp/.jpg);
+  // `data.icons[title]` in the frontmatter supplies `icon`.
+  eleventyConfig.addFilter('pageSections', function(filename) {
+    try {
+      const contentPath = path.join(__dirname, 'src/content', filename);
+      const raw = fs.readFileSync(contentPath, 'utf-8');
+      const parsed = matter(raw);
+      const parts = parsed.content.split(/^### +/m);
+      const introHtml = md.render((parts.shift() || '').trim());
+      const blocks = parts.map(part => {
+        const lines = part.split('\n');
+        const title = lines.shift().trim();
+        let body = lines.join('\n');
+        let teachers = null;
+        const teacherMatch = body.match(/^\*\(([^)]+)\)\*\s*$/m);
+        if (teacherMatch) {
+          teachers = teacherMatch[1];
+          body = body.replace(teacherMatch[0], '');
+        }
+        let image = null;
+        const imageMatch = body.match(/^!\[([^\]]*)\]\(([^)\s"]+)(?:\s+"([^"]+)")?\)\s*$/m);
+        if (imageMatch) {
+          image = { alt: imageMatch[1], src: imageMatch[2], position: imageMatch[3] || 'object-center' };
+          body = body.replace(imageMatch[0], '');
+        }
+        const icon = (parsed.data.icons || {})[title] || null;
+        return { title, teachers, icon, image, html: md.render(body.trim()) };
+      });
+      return { data: parsed.data, introHtml, blocks };
+    } catch (error) {
+      return { data: {}, introHtml: '', blocks: [] };
+    }
+  });
+
   // Promote standalone markdown-styled title/subtitle paragraphs to semantic headings.
   //
   // Pass the page title so the opening bold line can be reconciled with it: the

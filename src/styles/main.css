@@ -247,6 +247,12 @@ body.mobile-menu-open { overflow: hidden; }
     .p4-parallax { background-attachment: scroll; }
 }
 
+/* ── Techniques page typography ── */
+
+.tq-lead p + p { margin-top: 1.1rem; }
+.tq-prose p + p { margin-top: 1rem; }
+.tq-prose strong { font-weight: 600; }
+
 /* ── Blog article typography ── */
 
 .blog-article-content h1 {
