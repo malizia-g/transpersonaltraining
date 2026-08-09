@@ -8,7 +8,7 @@ subtitle: The contexts that give meaning to the experience.
 icons:
   Pillars: landmark
   Maps of the Psyche: map
-  "Family Constellations & Collective, Ancestral Trauma": network
+  Ancestral Trauma: network
   Shadow Work: moon
   "Psychedelic Studies, Harm Reduction & Integration": flask-conical
   "The Hero's Journey & the Evolution of Consciousness": compass
@@ -26,7 +26,7 @@ Within this frame, love itself is read as a spectrum of consciousness — from p
 
 The cartographies students learn to navigate: Jung's model of ego, persona, shadow, complexes, collective unconscious and Self, with individuation as the path of integration; the archetypes as forms without content that organize psychic life; Grof's Basic Perinatal Matrices, linking the stages of biological birth to recurring patterns of experience in non-ordinary states; and Stefan Dressler's map of the central drama — separation and unsafety as the two roots, the inner critic as storyteller and guardian, the five core beliefs, and the victim–perpetrator structure — which gives the one-to-one method "The Central" its theoretical backbone.
 
-### Family Constellations & Collective, Ancestral Trauma
+### Ancestral Trauma
 
 Trauma is not the event but the nervous system's frozen response to it, and it lives at three levels: personal, ancestral, collective. Family constellations — based on Bert Hellinger's Orders of Love and the *knowing field* — make the ancestral level visible: representatives embody parts of the client's system, revealing entanglements with excluded or forgotten ancestors, and healing sentences and movements restore the natural flow.
 
@@ -34,7 +34,7 @@ Because an ancestral or collective field carries more charge than a single nervo
 
 ### Shadow Work
 
-The Jungian frame of the shadow (seminar with Nicolas Cambas): to build a personality that earns love and belonging, we split off the traits our family and culture could not accept, and lock them in a vault. Since the shadow is designed to stay hidden, we approach it indirectly through its three mechanisms — patterns, triggers and projections. The premise: the shadow is not negative; the vault of the shadow holds our most powerful suppressed energies, and integration ("I don't want to be a good person, I want to be a complete person" — Jung) is the aim.
+The Jungian frame of the shadow: to build a personality that earns love and belonging, we split off the traits our family and culture could not accept, and lock them in a vault. Since the shadow is designed to stay hidden, we approach it indirectly through its three mechanisms — patterns, triggers and projections. The premise: the shadow is not negative; the vault of the shadow holds our most powerful suppressed energies, and integration ("I don't want to be a good person, I want to be a complete person" — Jung) is the aim.
 
 ### Psychedelic Studies, Harm Reduction & Integration
 
