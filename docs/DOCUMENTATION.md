@@ -475,6 +475,25 @@ Completed refactoring phases:
 
 ---
 
+## Curriculum JSON Endpoint
+
+Script: `docs/spreadsheet-automation/curriculum-json-apps-script.js`
+
+The Apps Script deployed as a **Web App** on the Curriculum spreadsheet. It exposes
+`doGet` and returns the whole curriculum as hierarchical JSON — this is what
+`src/_data/curriculumData.js` fetches at build time (falling back to
+`curriculumData.cache.json` if the request fails).
+
+It shares its parser with the PDF generator below: `COL`, `readShow`, `classifyRow`,
+`buildItem` and `parseLevelTopic` must stay identical in both files, or the PDFs and
+the website will disagree about the same spreadsheet.
+
+**After any edit: Deploy → Manage deployments → ✎ → Version: *New version*.** Without
+a new version the published URL keeps serving the old code and the site never sees
+the change. Verify the output first with **Preview JSON data** in the PDF script's menu.
+
+---
+
 ## Curriculum PDF Generator
 
 Script: `docs/spreadsheet-automation/curriculum-pdf-apps-script.js`
@@ -510,7 +529,7 @@ A Google Apps Script that adds a **📄 Curriculum Tools** menu to the Curriculu
 
 ### Spreadsheet Structure Requirements
 
-The script expects these columns in order (A–P):
+The script expects these columns in order (A–Q):
 
 | Column | Header |
 |--------|--------|
@@ -530,6 +549,19 @@ The script expects these columns in order (A–P):
 | N | Core Teacher |
 | O | Guest Teacher |
 | P | Compulsory |
+| Q | Show on website |
+
+**Column Q — Show on website.** Read by both the PDF script and the website build
+(`src/_data/curriculumData.js`), which drops any row set to `FALSE` — module,
+sub-module, experiential item, whole section or whole level. A **blank cell keeps the
+row visible**, so nothing disappears from the site by omission; type `FALSE` only in
+the rows you want hidden. If you use checkboxes instead, note that an unticked box
+exports as `false` and therefore hides the row, so every published row must be ticked.
+The PDFs ignore the flag by default — flip `PDF_RESPECTS_SHOW_ON_WEBSITE` to `true`
+to filter them too.
+
+New columns must be appended at the **end**: the scripts map columns by fixed index,
+so inserting one mid-table shifts everything after it.
 
 Row classification:
 - **Level headers** — Level = "L1", Topic = "L1: SELF DEVELOPMENT"

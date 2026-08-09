@@ -28,6 +28,11 @@ yarn-error.log*
 # Data cache files (generated during build)
 src/_data/*.cache.json
 
+# Scratch copies of the Apps Script files, kept at the root only to make them
+# easy to copy-paste into the Google editor. The versioned originals live in
+# docs/spreadsheet-automation/.
+APPS-SCRIPT-*.js
+
 # Claude Code local/runtime state (not shared config)
 .claude/settings.local.json
 .claude/scheduled_tasks.lock
