@@ -99,7 +99,7 @@ module.exports = function(eleventyConfig) {
   });
 
   // Read all MD files in a content directory and return sorted array of { filename, html, data }
-  // dir is relative to src/content/ (e.g. 'techniques/cards')
+  // dir is relative to src/content/ (e.g. 'home/cards')
   eleventyConfig.addFilter('pageContentDir', function(dir) {
     try {
       const contentDir = path.join(__dirname, 'src/content', dir);
