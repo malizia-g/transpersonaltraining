@@ -239,41 +239,6 @@ description: "How we train transpersonal therapists: Holotropic Breathwork and e
     </div>
 </section>
 
-<!-- Gallery Section -->
-<section class="py-24 bg-neutral-warm-50">
-    <div class="container mx-auto px-6">
-        <div class="max-w-4xl mx-auto text-center mb-12">
-            <p class="p4-kicker text-[#9A7734] mb-4 flex items-center justify-center gap-4">
-                <span class="p4-hairline"></span>
-                In practice
-                <span class="p4-hairline"></span>
-            </p>
-            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-4">
-                The Work in Practice
-            </h2>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
-            {% set galleryImages = [
-                ['technique-somatic-bodywork', 'Somatic bodywork in a group setting', 'object-center'],
-                ['technique-trust-walk-pair', 'A blindfolded trust walk in pairs', 'object-top'],
-                ['technique-sensory-spheres-face', 'Glass spheres exploring sensory awareness on the face', 'object-center'],
-                ['technique-group-bodywork-a', 'Group holding and bodywork', 'object-center'],
-                ['technique-constellation-line', 'A family constellation exercise', 'object-top'],
-                ['technique-blindfold-guided', 'A blindfolded guided sensing exercise', 'object-top'],
-                ['technique-psychodrama-stage-a', 'Psychodrama on the group stage', 'object-top'],
-                ['technique-shadow-work-fight', 'A shadow-work fight exercise, releasing tension through playful physical struggle', 'object-center']
-            ] %}
-            {% for img in galleryImages %}
-            <picture>
-                <source srcset="{{ ('/assets/images/Techniques/' ~ img[0] ~ '.webp') | url }}" type="image/webp">
-                <img src="{{ ('/assets/images/Techniques/' ~ img[0] ~ '.jpg') | url }}" alt="{{ img[1] }}" class="w-full h-48 object-cover {{ img[2] }} shadow-sm" loading="lazy">
-            </picture>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-
 <!-- CTA Section -->
 <section class="py-20 bg-gradient-to-br from-[#0F2540] to-[#12305A] text-white text-center">
     <div class="container mx-auto px-6">
