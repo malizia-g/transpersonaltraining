@@ -1,0 +1,59 @@
+---
+layout: base.njk
+title: "Homepage warmth test | Four variants to compare"
+description: "Internal comparison page: four homepage variants, from lightly warmed to strongly warm."
+ogType: website
+permalink: /home-variants/
+eleventyExcludeFromCollections: true
+noindex: true
+---
+
+<section class="bg-neutral-warm-50 pt-32 pb-20 md:pt-40 md:pb-28">
+    <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto">
+            <p class="p4-kicker text-[#9A7734] mb-6 flex items-center gap-4">
+                <span class="p4-hairline"></span> Internal — not linked from the site
+            </p>
+            <h1 class="p4-display text-4xl md:text-6xl font-medium text-indigo-deep-900 leading-[1.08] mb-8">
+                Four homepages, one question:<br>which one feels warm enough?
+            </h1>
+            <p class="text-lg text-neutral-warm-700 leading-relaxed mb-4">
+                All four keep the same structure, the same words and scientific blue as the leading colour.
+                They differ only in warmth &mdash; how much gold, cream and terracotta sits alongside the blue,
+                how warm the hero footage is graded, and how many human, lamplit photographs appear.
+            </p>
+            <p class="text-lg text-neutral-warm-700 leading-relaxed mb-14">
+                Every version also fixes the hero video: the old page laid an opaque white gradient over its lower
+                half, which is what read as a &ldquo;white filter&rdquo;. That is gone in all four.
+            </p>
+
+            <div class="grid sm:grid-cols-2 gap-px bg-[#C9A45C]/40 border border-[#C9A45C]/40">
+                <a href="{{ '/home-a/' | url }}" class="group bg-[#FFFEF9] hover:bg-white transition-colors p-8 md:p-10">
+                    <p class="p4-display text-5xl text-[#C9A45C] mb-4">A</p>
+                    <h2 class="p4-display text-2xl font-medium text-indigo-deep-900 mb-3 group-hover:underline underline-offset-4">Lightly warmed</h2>
+                    <p class="text-neutral-warm-700 leading-relaxed">Today&rsquo;s page with the washed-out video fixed and nothing else changed. The control.</p>
+                </a>
+                <a href="{{ '/home-b/' | url }}" class="group bg-[#FFFDF6] hover:bg-white transition-colors p-8 md:p-10">
+                    <p class="p4-display text-5xl text-[#C9A45C] mb-4">B</p>
+                    <h2 class="p4-display text-2xl font-medium text-indigo-deep-900 mb-3 group-hover:underline underline-offset-4">Gently warm</h2>
+                    <p class="text-neutral-warm-700 leading-relaxed">Warmer paper throughout, stronger gold rules, a touch of warmth graded into the video, two lamplit photographs in the film strip.</p>
+                </a>
+                <a href="{{ '/home-c/' | url }}" class="group bg-warm-yellow-50 hover:bg-white transition-colors p-8 md:p-10">
+                    <p class="p4-display text-5xl text-[#C97C4A] mb-4">C</p>
+                    <h2 class="p4-display text-2xl font-medium text-indigo-deep-900 mb-3 group-hover:underline underline-offset-4">Warm</h2>
+                    <p class="text-neutral-warm-700 leading-relaxed">Terracotta joins the gold, cards sit on cream, the contact band moves to the fire pit, and new photographs from the training hall appear.</p>
+                </a>
+                <a href="{{ '/home-d/' | url }}" class="group bg-[#FEF9EF] hover:bg-white transition-colors p-8 md:p-10">
+                    <p class="p4-display text-5xl text-[#B65E3F] mb-4">D</p>
+                    <h2 class="p4-display text-2xl font-medium text-indigo-deep-900 mb-3 group-hover:underline underline-offset-4">Strongly warm</h2>
+                    <p class="text-neutral-warm-700 leading-relaxed">A full cream palette, terracotta headings, brighter gold, the quote band drifting towards plum, and the serif voice carried into the hero.</p>
+                </a>
+            </div>
+
+            <p class="mt-10 text-sm text-neutral-warm-600 leading-relaxed">
+                The navigation on each variant still points at the live site, so use the browser back button to return here.
+                These pages carry <code class="text-neutral-warm-800">noindex</code> and stay out of the sitemap.
+            </p>
+        </div>
+    </div>
+</section>

@@ -9,6 +9,10 @@
 
     <meta name="description" content="{% pageDescription "" %}">
     <meta name="robots" content="{% metaRobots "" %}">
+    {# Pages set noindex: true in front matter to stay out of search results —
+       the SEO plugin's metaRobots only covers pagination, so this is separate.
+       Where both appear the crawler honours the more restrictive one. #}
+    {% if noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
     <meta name="author" content="{% metaAuthor "" %}">
 
     {# Syndicated blog posts set sourceUrl to the original article. Canonical then
