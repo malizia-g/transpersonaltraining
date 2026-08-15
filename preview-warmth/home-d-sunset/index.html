@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     
-    <title>Variant D &centerdot; Strongly warm, forest sunset | Homepage warmth test</title>
+    <title>Variant D &centerdot; Strongly warm, misty valley at dawn | Homepage warmth test</title>
 
     <meta name="description" content="EUROTAS-accredited four-year training in transpersonal psychotherapy, counselling and Holotropic Breathwork: online lectures plus intensives in Europe.">
     <meta name="robots" content="index,follow">
@@ -18,7 +18,7 @@
     <link rel="canonical" href="https://transpersonal-training.com/home-d-sunset/">
     
 
-    <meta property="og:title" content="Variant D &centerdot; Strongly warm, forest sunset | Homepage warmth test">
+    <meta property="og:title" content="Variant D &centerdot; Strongly warm, misty valley at dawn | Homepage warmth test">
 <meta property="og:type" content="website">
 
 <meta property="og:url" content="https://transpersonal-training.com/home-d-sunset/">
@@ -28,7 +28,7 @@
     <meta name="twitter:card" content="summary_large_image">
 
 <meta name="twitter:url" content="https://transpersonal-training.com/home-d-sunset/">
-<meta name="twitter:title" content="Variant D &centerdot; Strongly warm, forest sunset | Homepage warmth test">
+<meta name="twitter:title" content="Variant D &centerdot; Strongly warm, misty valley at dawn | Homepage warmth test">
 <meta name="twitter:description" content="EUROTAS-accredited four-year training in transpersonal psychotherapy, counselling and Holotropic Breathwork: online lectures plus intensives in Europe.">
 <meta name="twitter:image" content="https://transpersonal-training.com/assets/images/Graphics/og-default.jpg">
 
@@ -275,9 +275,9 @@
         <!-- Poster: first frame of the video, shown while it loads (and kept
              when the video is skipped on slow/data-saver connections) -->
         <picture>
-            <source srcset="/transpersonaltraining/preview-warmth/assets/images/Headers/hero-homepage-sunset.webp" type="image/webp">
-            <img src="/transpersonaltraining/preview-warmth/assets/images/Headers/hero-homepage-sunset.jpg"
-                 alt="The sun setting over woodland, seen from the air"
+            <source srcset="/transpersonaltraining/preview-warmth/assets/images/Headers/hero-homepage-dawn.webp" type="image/webp">
+            <img src="/transpersonaltraining/preview-warmth/assets/images/Headers/hero-homepage-dawn.jpg"
+                 alt="Sunrise over wooded hills with mist lying in the valleys"
                  class="absolute inset-0 w-full h-full object-cover z-0 sepia-[.25] saturate-[1.15] brightness-[1.03]"
                  id="hero-image">
         </picture>
@@ -292,16 +292,18 @@
         </video>
         <script>
         (function () {
-            // Adaptive hero video: 540p for small screens or 3g networks,
-            // 720p otherwise. No video at all — the poster image stays — for
-            // 2g, data-saver or reduced-motion users. navigator.connection
-            // only exists in Chromium browsers; elsewhere screen size decides.
+            // Adaptive hero video: 270p for small screens or 3g networks,
+            // 404p otherwise — this clip was shot vertically at 720x1280 and
+            // cropped to 16:9, so 720x404 is all the source gives. No video at
+            // all — the poster image stays — for 2g, data-saver or
+            // reduced-motion users. navigator.connection only exists in
+            // Chromium browsers; elsewhere screen size decides.
             var conn = navigator.connection || {};
             var type = conn.effectiveType || '';
             if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
             if (conn.saveData || type === '2g' || type === 'slow-2g') return;
             var small = matchMedia('(max-width: 767px)').matches;
-            var file = (small || type === '3g') ? 'hero-sunset-540.mp4' : 'hero-sunset-720.mp4';
+            var file = (small || type === '3g') ? 'hero-dawn-270.mp4' : 'hero-dawn-404.mp4';
             document.getElementById('hero-video').src =
                 '/transpersonaltraining/preview-warmth/assets/videos/' + file;
         })();
