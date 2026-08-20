@@ -1,8 +1,9 @@
 # Photo originals
 
-Unedited camera files for the school's own photographs. These are the sources
-of images published on the site — they are **not** published themselves, since
-Eleventy only copies `src/assets/` to the built site.
+Sources of the site's photography — camera files for the school's own
+photographs, unedited unless the table below says otherwise. They are the
+sources of images published on the site, and are **not** published themselves,
+since Eleventy only copies `src/assets/` to the built site.
 
 Keep them here rather than in `src/assets/`: full-resolution phone files run
 2–6 MB each, and dropping them in `src/assets/` would ship every one of them to
@@ -19,6 +20,7 @@ visitors.
 | `IMG_20260307_085849.jpg` | `Techniques/technique-somatic-tree-wound` | Healed wound in a mossy tree trunk |
 | `IMG_20251121_074227.jpg` | — not used yet | Snowy forest track in daylight |
 | `IMG_20260306_101334.jpg` | — not used yet | Moss and grasses arranged on the studio floor |
+| `Gemini_Generated_Image_srmvsasrmvsasrmv.jpg` | `Headers/hero-training-overview-breathwork-tent` | Group lying in a circle under an open-sided tent — school photograph, retouched with Gemini |
 
 Published paths are relative to `src/assets/images/`, and each exists as both
 `.jpg` and `.webp`.
