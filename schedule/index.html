@@ -109,21 +109,23 @@
     <div class="container mx-auto px-6 flex justify-between items-center relative z-10">
         <!-- Logo (Desktop Only) -->
         <a href="/transpersonaltraining/" class="hidden md:flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <div class="w-10 h-10 flex items-center justify-center bg-[#D9A756] rounded-full transition-transform duration-300 group hover:rotate-180">
+            <div class="w-10 h-10 flex items-center justify-center bg-[#D9A756] rounded-full transition-transform duration-300 group hover:rotate-180 shrink-0">
                 <img src="/transpersonaltraining/assets/images/Graphics/logo.svg" alt="Logo" class="w-8 h-8 transition-transform duration-500 group-hover:rotate-180" style="display:block;" />
             </div>
-            <span class="text-2xl font-serif font-bold tracking-wide text-slate-100">
-                Transpersonal Training
+            <span class="flex flex-col justify-center h-10 leading-none font-serif font-bold text-slate-100">
+                <span class="text-[0.7rem] tracking-widest leading-none">East West</span>
+                <span class="text-[1.35rem] tracking-wide leading-none mt-0.5">Transpersonal Training</span>
             </span>
         </a>
 
         <!-- Logo (Mobile Only) -->
         <a href="/transpersonaltraining/" class="flex md:hidden items-center gap-2 hover:opacity-80 transition-opacity">
-            <div class="w-8 h-8 flex items-center justify-center bg-[#D9A756] rounded-full transition-transform duration-300 group hover:rotate-180">
+            <div class="w-8 h-8 flex items-center justify-center bg-[#D9A756] rounded-full transition-transform duration-300 group hover:rotate-180 shrink-0">
                 <img src="/transpersonaltraining/assets/images/Graphics/logo.svg" alt="Logo" class="w-6 h-6 transition-transform duration-500 group-hover:rotate-180" style="display:block;" />
             </div>
-            <span class="text-xl font-serif font-bold tracking-wide text-slate-100">
-                Transpersonal Training
+            <span class="flex flex-col justify-center h-8 leading-none font-serif font-bold text-slate-100">
+                <span class="text-[0.6rem] tracking-widest leading-none">East West</span>
+                <span class="text-[1.05rem] tracking-wide leading-none mt-0.5">Transpersonal Training</span>
             </span>
         </a>
 
@@ -194,11 +196,6 @@
 
             <a href="/transpersonaltraining/blog/" class="nav-link text-sm font-medium hover:text-[#D9A756] transition-colors">Blog</a>
 
-            <div class="lang-switch flex items-center gap-1 text-sm font-medium" translate="no">
-                <a href="/ru/schedule/" class="lang-link-ru hover:text-[#D9A756] transition-colors" hreflang="ru" lang="ru">RU</a>
-                <a href="/schedule/" class="lang-link-en hidden hover:text-[#D9A756] transition-colors" hreflang="en" lang="en">EN</a>
-            </div>
-
             <a href="/transpersonaltraining/apply/" class="bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-6 py-2 font-medium tracking-wide transition-colors shadow-md">Apply</a>
         </div>
 
@@ -257,20 +254,9 @@
             <span>Collaborations</span>
         </a>
         <a href="/transpersonaltraining/blog/" class="text-slate-200 py-2 border-b block transition-colors">Blog</a>
-        <div class="lang-switch flex items-center gap-3 py-2 text-sm font-medium" translate="no">
-            <a href="/ru/schedule/" class="lang-link-ru text-slate-200 hover:text-[#D9A756] transition-colors" hreflang="ru" lang="ru">RU</a>
-            <a href="/schedule/" class="lang-link-en hidden text-slate-200 hover:text-[#D9A756] transition-colors" hreflang="en" lang="en">EN</a>
-        </div>
         <a href="/transpersonaltraining/apply/" class="bg-[#D9A756] text-[#0F2540] px-6 py-3 w-full mt-4 font-bold text-center block">Apply</a>
     </div>
 </nav>
-<script>
-    (function () {
-        var isRu = location.pathname === '/ru' || location.pathname.indexOf('/ru/') === 0;
-        document.querySelectorAll('.lang-link-ru').forEach(function (el) { el.classList.toggle('hidden', isRu); });
-        document.querySelectorAll('.lang-link-en').forEach(function (el) { el.classList.toggle('hidden', !isRu); });
-    })();
-</script>
 
 
     <!-- Main Content -->
@@ -3111,10 +3097,13 @@ Biechonski: “From Regression to Progression” </span>
             <!-- About Column -->
             <div>
                 <div class="flex items-center gap-2 mb-4">
-                    <div class="w-10 h-10 flex items-center justify-center bg-[#D9A756] rounded-full">
+                    <div class="w-10 h-10 flex items-center justify-center bg-[#D9A756] rounded-full shrink-0">
                         <img src="/transpersonaltraining/assets/images/Graphics/logo.svg" alt="Logo" class="w-8 h-8" style="display:block;" />
                     </div>
-                    <h3 class="p4-display text-white font-semibold text-xl tracking-wide">Transpersonal Training</h3>
+                    <h3 class="p4-display text-white font-semibold leading-tight">
+                        <span class="block text-sm tracking-widest font-normal mt-1">East West</span>
+                        <span class="block text-xl tracking-wide">Transpersonal Training</span>
+                    </h3>
                 </div>
                 <p class="text-sm leading-relaxed text-[#8FA0B3]">
                     Educating therapists for a revolution of consciousness through transpersonal psychotherapy and breathwork.

@@ -173,21 +173,23 @@
     <div class="container mx-auto px-6 flex justify-between items-center relative z-10">
         <!-- Logo (Desktop Only) -->
         <a href="/transpersonaltraining/" class="hidden md:flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <div class="w-10 h-10 flex items-center justify-center bg-[#D9A756] rounded-full transition-transform duration-300 group hover:rotate-180">
+            <div class="w-10 h-10 flex items-center justify-center bg-[#D9A756] rounded-full transition-transform duration-300 group hover:rotate-180 shrink-0">
                 <img src="/transpersonaltraining/assets/images/Graphics/logo.svg" alt="Logo" class="w-8 h-8 transition-transform duration-500 group-hover:rotate-180" style="display:block;" />
             </div>
-            <span class="text-2xl font-serif font-bold tracking-wide text-slate-100">
-                Transpersonal Training
+            <span class="flex flex-col justify-center h-10 leading-none font-serif font-bold text-slate-100">
+                <span class="text-[0.7rem] tracking-widest leading-none">East West</span>
+                <span class="text-[1.35rem] tracking-wide leading-none mt-0.5">Transpersonal Training</span>
             </span>
         </a>
 
         <!-- Logo (Mobile Only) -->
         <a href="/transpersonaltraining/" class="flex md:hidden items-center gap-2 hover:opacity-80 transition-opacity">
-            <div class="w-8 h-8 flex items-center justify-center bg-[#D9A756] rounded-full transition-transform duration-300 group hover:rotate-180">
+            <div class="w-8 h-8 flex items-center justify-center bg-[#D9A756] rounded-full transition-transform duration-300 group hover:rotate-180 shrink-0">
                 <img src="/transpersonaltraining/assets/images/Graphics/logo.svg" alt="Logo" class="w-6 h-6 transition-transform duration-500 group-hover:rotate-180" style="display:block;" />
             </div>
-            <span class="text-xl font-serif font-bold tracking-wide text-slate-100">
-                Transpersonal Training
+            <span class="flex flex-col justify-center h-8 leading-none font-serif font-bold text-slate-100">
+                <span class="text-[0.6rem] tracking-widest leading-none">East West</span>
+                <span class="text-[1.05rem] tracking-wide leading-none mt-0.5">Transpersonal Training</span>
             </span>
         </a>
 
@@ -258,11 +260,6 @@
 
             <a href="/transpersonaltraining/blog/" class="nav-link text-sm font-medium hover:text-[#D9A756] transition-colors">Blog</a>
 
-            <div class="lang-switch flex items-center gap-1 text-sm font-medium" translate="no">
-                <a href="/ru/" class="lang-link-ru hover:text-[#D9A756] transition-colors" hreflang="ru" lang="ru">RU</a>
-                <a href="/" class="lang-link-en hidden hover:text-[#D9A756] transition-colors" hreflang="en" lang="en">EN</a>
-            </div>
-
             <a href="/transpersonaltraining/apply/" class="bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-6 py-2 font-medium tracking-wide transition-colors shadow-md">Apply</a>
         </div>
 
@@ -321,20 +318,9 @@
             <span>Collaborations</span>
         </a>
         <a href="/transpersonaltraining/blog/" class="text-slate-200 py-2 border-b block transition-colors">Blog</a>
-        <div class="lang-switch flex items-center gap-3 py-2 text-sm font-medium" translate="no">
-            <a href="/ru/" class="lang-link-ru text-slate-200 hover:text-[#D9A756] transition-colors" hreflang="ru" lang="ru">RU</a>
-            <a href="/" class="lang-link-en hidden text-slate-200 hover:text-[#D9A756] transition-colors" hreflang="en" lang="en">EN</a>
-        </div>
         <a href="/transpersonaltraining/apply/" class="bg-[#D9A756] text-[#0F2540] px-6 py-3 w-full mt-4 font-bold text-center block">Apply</a>
     </div>
 </nav>
-<script>
-    (function () {
-        var isRu = location.pathname === '/ru' || location.pathname.indexOf('/ru/') === 0;
-        document.querySelectorAll('.lang-link-ru').forEach(function (el) { el.classList.toggle('hidden', isRu); });
-        document.querySelectorAll('.lang-link-en').forEach(function (el) { el.classList.toggle('hidden', !isRu); });
-    })();
-</script>
 
 
     <!-- Main Content -->
@@ -468,21 +454,10 @@
             <div class="lg:col-span-6 relative pb-16 pr-4 md:pr-10">
                 <picture>
                     <source srcset="/transpersonaltraining/assets/images/Community/community-hug-embrace.webp" type="image/webp">
-                    <img src="/transpersonaltraining/assets/images/Community/community-hug-embrace.jpg"
-                         alt="A warm group hug during a seminar"
-                         class="w-full aspect-[4/5] object-cover object-top shadow-xl">
+                    <img src="/transpersonaltraining/assets/images/Community/community-hug-embrace.png"
+                         alt="A collage of moments from a Level 1 seminar"
+                         class="w-full">
                 </picture>
-                <figure class="absolute -bottom-2 -left-2 md:left-auto md:-right-2 w-48 md:w-60 rotate-[-4deg]">
-                    <div class="bg-white p-2.5 pb-4 shadow-2xl border border-[#E7D6BE]">
-                        <picture>
-                            <source srcset="/transpersonaltraining/assets/images/Community/community-break-terrace-watermelon.webp" type="image/webp">
-                            <img src="/transpersonaltraining/assets/images/Community/community-break-terrace-watermelon.jpg"
-                                 alt="A shared break on the terrace in golden light"
-                                 class="w-full h-32 md:h-40 object-cover">
-                        </picture>
-                        <figcaption class="p4-display italic text-sm text-neutral-warm-700 mt-2 text-center">life between the lessons</figcaption>
-                    </div>
-                </figure>
             </div>
         </div>
     </div>
@@ -588,7 +563,11 @@
         </div>
     </div>
     <div class="p4-filmstrip overflow-x-auto snap-x snap-mandatory pb-4">
-        <div class="flex gap-3 px-6 w-max">
+        <div id="moments-filmstrip" class="flex gap-3 px-6 w-max">
+            <picture class="snap-start shrink-0">
+                <source srcset="/transpersonaltraining/assets/images/Community/community-break-terrace-watermelon.webp" type="image/webp">
+                <img src="/transpersonaltraining/assets/images/Community/community-break-terrace-watermelon.jpg" alt="A shared break on the terrace in golden light" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+            </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="/transpersonaltraining/assets/images/Techniques/technique-bodywork-holding.webp" type="image/webp">
                 <img src="/transpersonaltraining/assets/images/Techniques/technique-bodywork-holding.jpg" alt="Group bodywork and holding exercise" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
@@ -730,11 +709,13 @@
 
             <p class="mt-10 text-[#D5DEE9]">Or email us directly:</p>
             <div class="mt-3 flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-2 text-sm text-[#B9C6D8]">
-                <a href="mailto:west-office@transpersonal-training.com" class="inline-flex items-center gap-2 hover:text-[#D9A756] transition-colors text-center">
-                    <i data-lucide="mail" class="w-4 h-4 shrink-0"></i><span>West office<br>west-office@transpersonal-training.com</span>
+                <a href="mailto:west-office@transpersonal-training.com" class="flex flex-col items-center hover:text-[#D9A756] transition-colors">
+                    <span class="inline-flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4 shrink-0"></i>West office</span>
+                    west-office@transpersonal-training.com
                 </a>
-                <a href="mailto:east-office@transpersonal-training.com" class="inline-flex items-center gap-2 hover:text-[#D9A756] transition-colors text-center">
-                    <i data-lucide="mail" class="w-4 h-4 shrink-0"></i><span>East office<br>east-office@transpersonal-training.com</span>
+                <a href="mailto:east-office@transpersonal-training.com" class="flex flex-col items-center hover:text-[#D9A756] transition-colors">
+                    <span class="inline-flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4 shrink-0"></i>East office</span>
+                    east-office@transpersonal-training.com
                 </a>
             </div>
             <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-2 text-sm text-[#B9C6D8]">
@@ -769,6 +750,18 @@
         window.addEventListener('scroll', update, { passive: true });
         window.addEventListener('resize', update, { passive: true });
     })();
+
+    // Shuffle the "Moments from our seminars" filmstrip into a fresh order on every load
+    (function () {
+        const strip = document.getElementById('moments-filmstrip');
+        if (!strip) return;
+        const items = Array.from(strip.children);
+        for (let i = items.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [items[i], items[j]] = [items[j], items[i]];
+        }
+        items.forEach((item) => strip.appendChild(item));
+    })();
 </script>
 
 
@@ -786,10 +779,13 @@
             <!-- About Column -->
             <div>
                 <div class="flex items-center gap-2 mb-4">
-                    <div class="w-10 h-10 flex items-center justify-center bg-[#D9A756] rounded-full">
+                    <div class="w-10 h-10 flex items-center justify-center bg-[#D9A756] rounded-full shrink-0">
                         <img src="/transpersonaltraining/assets/images/Graphics/logo.svg" alt="Logo" class="w-8 h-8" style="display:block;" />
                     </div>
-                    <h3 class="p4-display text-white font-semibold text-xl tracking-wide">Transpersonal Training</h3>
+                    <h3 class="p4-display text-white font-semibold leading-tight">
+                        <span class="block text-sm tracking-widest font-normal mt-1">East West</span>
+                        <span class="block text-xl tracking-wide">Transpersonal Training</span>
+                    </h3>
                 </div>
                 <p class="text-sm leading-relaxed text-[#8FA0B3]">
                     Educating therapists for a revolution of consciousness through transpersonal psychotherapy and breathwork.
