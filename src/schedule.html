@@ -16,7 +16,7 @@ description: "Upcoming residential intensives and Holotropic Breathwork seminars
 
     <div class="container mx-auto px-6 relative z-10 text-center pt-20">
         <div class="max-w-4xl mx-auto">
-            <p class="p4-kicker text-[#C9A45C] mb-6 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[#D9A756] mb-6 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 Residential intensives
                 <span class="p4-hairline"></span>
@@ -32,7 +32,7 @@ description: "Upcoming residential intensives and Holotropic Breathwork seminars
 </section>
 
 <!-- Breadcrumb -->
-<div class="bg-white border-b border-neutral-warm-200">
+<div class="bg-white border-b border-[#E7D6BE]">
     <div class="container mx-auto px-6 py-4">
         <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
             <a href="{{ '/' | url }}" class="hover:text-science-blue-600 transition-colors">Home</a>
@@ -45,19 +45,19 @@ description: "Upcoming residential intensives and Holotropic Breathwork seminars
 </div>
 
 <!-- Schedule Content -->
-<section class="py-16 bg-gradient-to-b from-white to-neutral-warm-50">
+<section class="py-16 bg-gradient-to-b from-white to-[#FAF3E7]">
     <div class="container mx-auto px-6">
         <div class="max-w-5xl mx-auto">
             
             <!-- Filters Section -->
-            <div id="filters-section" class="mb-8 bg-white shadow-md p-6 border border-neutral-warm-200">
+            <div id="filters-section" class="mb-8 bg-white shadow-md p-6 border border-[#E7D6BE]">
                 <!-- Header Row with Title and Clear Button -->
                 <div class="flex items-center justify-between mb-4">
                     <div class="flex items-center gap-2 text-neutral-warm-700">
                         <i data-lucide="filter" class="w-5 h-5"></i>
                         <h3 class="font-semibold text-lg">Filter Events</h3>
                     </div>
-                    <button id="clear-filters-btn" class="px-4 py-2 bg-neutral-warm-200 text-neutral-warm-700 hover:bg-neutral-warm-300 transition-colors font-medium flex items-center gap-2">
+                    <button id="clear-filters-btn" class="px-4 py-2 bg-[#F3E7D4] text-neutral-warm-700 hover:bg-neutral-warm-300 transition-colors font-medium flex items-center gap-2">
                         <i data-lucide="x" class="w-4 h-4"></i>
                         Clear
                     </button>
@@ -110,7 +110,7 @@ description: "Upcoming residential intensives and Holotropic Breathwork seminars
                 </div>
                 
                 <!-- Active Filters Count -->
-                <div id="filter-count" class="hidden mt-4 pt-4 border-t border-neutral-warm-200">
+                <div id="filter-count" class="hidden mt-4 pt-4 border-t border-[#E7D6BE]">
                     <p class="text-sm text-neutral-warm-600">
                         Showing <span id="filtered-count" class="font-semibold text-science-blue-600">0</span> of <span id="total-count" class="font-semibold">0</span> events
                     </p>
@@ -121,7 +121,7 @@ description: "Upcoming residential intensives and Holotropic Breathwork seminars
             <div id="appointments-list" class="space-y-6">
                 {% if scheduleEvents.length > 0 %}
                     {% for event in scheduleEvents %}
-                    <div class="appointment-card group bg-white shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 overflow-hidden hover:border-[#C9A45C]"
+                    <div class="appointment-card group bg-white shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 overflow-hidden hover:border-[#D9A756]"
                          data-date="{{ event.date }}"
                         data-type1="{{ event.type1 | trim }}"
                         data-type2="{{ event.type2 | trim }}"
@@ -129,7 +129,7 @@ description: "Upcoming residential intensives and Holotropic Breathwork seminars
                          data-facilitator="{{ event.facilitator }}">
                         
                         <!-- Colored header bar -->
-                        <div class="h-1 bg-gradient-to-r from-[#0F2540] via-[#1E40AF] to-[#C9A45C]"></div>
+                        <div class="h-1 bg-gradient-to-r from-[#0F2540] via-[#1E40AF] to-[#D9A756]"></div>
                         
                         <div class="p-4">
                             <!-- Layout principale: contenuto a sinistra, badges a destra -->
@@ -152,7 +152,7 @@ description: "Upcoming residential intensives and Holotropic Breathwork seminars
                                         <!-- Facilitator -->
                                         {% if event.facilitator %}
                                         <div class="flex items-center gap-1.5">
-                                            <i data-lucide="user" class="w-3.5 h-3.5 text-[#9A7734] flex-shrink-0"></i>
+                                            <i data-lucide="user" class="w-3.5 h-3.5 text-[#B65E3F] flex-shrink-0"></i>
                                             <span class="text-xs text-slate-700">{{ event.facilitator }}</span>
                                         </div>
                                         {% endif %}
@@ -170,7 +170,7 @@ description: "Upcoming residential intensives and Holotropic Breathwork seminars
                                 <!-- Colonna destra: Badges (colonna su mobile, fila su desktop) -->
                                 <div class="flex flex-col lg:flex-row gap-1.5 flex-shrink-0">
                                     {% if event.type1 %}
-                                    <span class="px-3 py-1 bg-[#C9A45C]/15 text-[#9A7734] text-xs font-semibold uppercase tracking-wider border border-[#C9A45C]/40 whitespace-nowrap">
+                                    <span class="px-3 py-1 bg-[#D9A756]/15 text-[#B65E3F] text-xs font-semibold uppercase tracking-wider border border-[#D9A756]/40 whitespace-nowrap">
                                         {{ event.type1 }}
                                     </span>
                                     {% endif %}
@@ -217,7 +217,7 @@ description: "Upcoming residential intensives and Holotropic Breathwork seminars
                     {% endfor %}
                 {% else %}
                     <!-- Empty State -->
-                    <div class="bg-neutral-warm-100 border border-neutral-warm-200 p-12 text-center">
+                    <div class="bg-[#FAF3E7] border border-[#E7D6BE] p-12 text-center">
                         <i data-lucide="calendar-x" class="w-20 h-20 text-neutral-warm-400 mx-auto mb-4"></i>
                         <h3 class="text-2xl font-serif font-bold text-neutral-warm-700 mb-2">No Appointments Scheduled</h3>
                         <p class="text-neutral-warm-600">Check back soon for upcoming training sessions and workshops.</p>
@@ -227,7 +227,7 @@ description: "Upcoming residential intensives and Holotropic Breathwork seminars
 
             <!-- Filtered Empty State (hidden by default, shown by JS when filters return no results) -->
             <div id="empty-filtered-state" class="hidden">
-                <div class="bg-neutral-warm-100 border border-neutral-warm-200 p-12 text-center">
+                <div class="bg-[#FAF3E7] border border-[#E7D6BE] p-12 text-center">
                     <i data-lucide="filter-x" class="w-20 h-20 text-neutral-warm-400 mx-auto mb-4"></i>
                     <h3 class="text-2xl font-serif font-bold text-neutral-warm-700 mb-2">No Matching Events</h3>
                     <p class="text-neutral-warm-600">Try adjusting your filters to see more results.</p>
@@ -239,7 +239,7 @@ description: "Upcoming residential intensives and Holotropic Breathwork seminars
 </section>
 
 <!-- The Venues (teaser) -->
-<section class="py-16 bg-white border-t border-neutral-warm-200">
+<section class="py-16 bg-white border-t border-[#E7D6BE]">
     <div class="container mx-auto px-6">
         <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-6 items-center">
             <div class="grid grid-cols-2 gap-4">
@@ -253,7 +253,7 @@ description: "Upcoming residential intensives and Holotropic Breathwork seminars
                 </picture>
             </div>
             <div>
-                <p class="p4-kicker text-[#9A7734] mb-4 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
+                <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
                     <span class="p4-hairline"></span>
                     Where we gather
                     <span class="p4-hairline md:hidden"></span>
@@ -264,7 +264,7 @@ description: "Upcoming residential intensives and Holotropic Breathwork seminars
                 <p class="text-lg text-neutral-warm-700 leading-relaxed mb-6">
                     Our residential intensives are held in a house in the Black Forest (Todtmoos, Germany) and at the Tenuta di Monteverdi estate in Tuscany, Italy.
                 </p>
-                <a href="{{ '/venues/' | url }}" class="inline-flex items-center gap-2 text-[#9A7734] hover:text-[#7A5E29] font-medium underline underline-offset-4">
+                <a href="{{ '/venues/' | url }}" class="inline-flex items-center gap-2 text-[#B65E3F] hover:text-[#7A5E29] font-medium underline underline-offset-4">
                     Explore our venues
                     <i data-lucide="arrow-right" class="w-4 h-4"></i>
                 </a>

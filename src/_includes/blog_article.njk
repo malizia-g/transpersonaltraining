@@ -52,9 +52,9 @@ layout: base.njk
       {% endif %}
 
       {% if sourceUrl %}
-      <div class="mb-8 flex items-center gap-2 text-sm text-neutral-warm-600 bg-neutral-warm-50 border border-neutral-warm-200 px-4 py-3">
-        <i data-lucide="external-link" class="w-4 h-4 flex-shrink-0 text-[#9A7734]"></i>
-        <span>Originally published on <a href="{{ sourceUrl }}" target="_blank" rel="noopener noreferrer" class="text-[#9A7734] hover:text-[#7A5E29] font-medium underline underline-offset-2 transition-colors">{{ source if source else sourceUrl }}</a></span>
+      <div class="mb-8 flex items-center gap-2 text-sm text-neutral-warm-600 bg-[#FAF3E7] border border-[#E7D6BE] px-4 py-3">
+        <i data-lucide="external-link" class="w-4 h-4 flex-shrink-0 text-[#B65E3F]"></i>
+        <span>Originally published on <a href="{{ sourceUrl }}" target="_blank" rel="noopener noreferrer" class="text-[#B65E3F] hover:text-[#7A5E29] font-medium underline underline-offset-2 transition-colors">{{ source if source else sourceUrl }}</a></span>
       </div>
       {% endif %}
 
@@ -63,7 +63,7 @@ layout: base.njk
       </article>
 
       <div class="mt-12">
-        <a href="{{ '/blog/' | url }}" class="inline-flex items-center gap-2 text-[#9A7734] hover:text-[#7A5E29] font-medium">
+        <a href="{{ '/blog/' | url }}" class="inline-flex items-center gap-2 text-[#B65E3F] hover:text-[#7A5E29] font-medium">
           <i data-lucide="arrow-left" class="w-4 h-4"></i>
           Back to Blog
         </a>

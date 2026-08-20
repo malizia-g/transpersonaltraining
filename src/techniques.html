@@ -26,7 +26,7 @@ description: "How we train transpersonal therapists: Holotropic Breathwork and e
 
     <div class="relative z-10 container mx-auto px-6 text-center pt-20">
         <div class="animate-fade-in-up">
-            <p class="p4-kicker text-[#C9A45C] mb-6 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[#D9A756] mb-6 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 {{ intro.data.kicker }}
                 <span class="p4-hairline"></span>
@@ -42,7 +42,7 @@ description: "How we train transpersonal therapists: Holotropic Breathwork and e
 </header>
 
 <!-- Breadcrumb -->
-<div class="bg-white border-b border-neutral-warm-200">
+<div class="bg-white border-b border-[#E7D6BE]">
     <div class="container mx-auto px-6 py-4">
         <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
             <a href="{{ '/' | url }}" class="hover:text-science-blue-600 transition-colors">Home</a>
@@ -64,16 +64,16 @@ description: "How we train transpersonal therapists: Holotropic Breathwork and e
         <!-- Three-dimension navigator -->
         <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-14 md:mt-16">
             {% for section in sections %}
-            <a href="#{{ section.data.anchor }}" class="group relative block border-t-2 border-[#C9A45C] bg-neutral-warm-50 hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-8">
+            <a href="#{{ section.data.anchor }}" class="group relative block border-t-2 border-[#D9A756] bg-[#FAF3E7] hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-8">
                 <div class="flex items-start justify-between">
-                    <span class="p4-display text-6xl font-medium leading-none text-[#0F2540]/10 group-hover:text-[#C9A45C]/40 transition-colors">{{ section.data.number }}</span>
+                    <span class="p4-display text-6xl font-medium leading-none text-[#0F2540]/10 group-hover:text-[#D9A756]/40 transition-colors">{{ section.data.number }}</span>
                     <span class="w-11 h-11 bg-[#0F2540] flex items-center justify-center">
-                        <i data-lucide="{{ section.data.icon }}" class="w-5 h-5 text-[#C9A45C]"></i>
+                        <i data-lucide="{{ section.data.icon }}" class="w-5 h-5 text-[#D9A756]"></i>
                     </span>
                 </div>
                 <h3 class="mt-6 text-xl font-serif font-bold text-[#0F2540] leading-snug">{{ section.data.short_title }}</h3>
                 <p class="mt-2 text-sm text-neutral-warm-700 leading-relaxed">{{ section.data.subtitle }}</p>
-                <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-[#9A7734]">
+                <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-[#B65E3F]">
                     Explore
                     <i data-lucide="arrow-down" class="w-4 h-4 transition-transform group-hover:translate-y-0.5"></i>
                 </span>
@@ -89,7 +89,7 @@ description: "How we train transpersonal therapists: Holotropic Breathwork and e
         <!-- Section header -->
         <div class="max-w-6xl mx-auto mb-14 md:mb-20">
             <div class="flex items-start gap-5 md:gap-8">
-                <span class="p4-display text-[4.5rem] md:text-[7rem] font-medium leading-[0.85] text-[#C9A45C]/50 select-none">{{ experiential.data.number }}</span>
+                <span class="p4-display text-[4.5rem] md:text-[7rem] font-medium leading-[0.85] text-[#D9A756]/50 select-none">{{ experiential.data.number }}</span>
                 <div class="pt-1 md:pt-3">
                     <span class="p4-hairline !w-10 md:!w-16 mb-4 block"></span>
                     <h2 class="p4-display text-3xl md:text-5xl font-medium text-[#FDFBF5] leading-tight">{{ experiential.data.title }}</h2>
@@ -101,7 +101,7 @@ description: "How we train transpersonal therapists: Holotropic Breathwork and e
         <!-- Featured: Holotropic Breathwork -->
         {% set breathwork = experiential.blocks[0] %}
         <div class="max-w-6xl mx-auto">
-            <div class="grid lg:grid-cols-5 shadow-2xl border border-[#C9A45C]/30">
+            <div class="grid lg:grid-cols-5 shadow-2xl border border-[#D9A756]/30">
                 <div class="lg:col-span-3 relative min-h-[300px] lg:min-h-[520px]">
                     <picture>
                         <source srcset="{{ (breathwork.image.src ~ '.webp') | url }}" type="image/webp">
@@ -111,7 +111,7 @@ description: "How we train transpersonal therapists: Holotropic Breathwork and e
                     <div class="absolute inset-0 bg-gradient-to-t from-[#0F2540]/40 to-transparent lg:bg-gradient-to-r"></div>
                 </div>
                 <div class="lg:col-span-2 bg-[#12305A] p-8 md:p-12 flex flex-col justify-center">
-                    <p class="p4-kicker text-[#C9A45C] mb-5 flex items-center gap-3">
+                    <p class="p4-kicker text-[#D9A756] mb-5 flex items-center gap-3">
                         <i data-lucide="wind" class="w-5 h-5"></i>
                         The heart of the training
                     </p>
@@ -159,7 +159,7 @@ description: "How we train transpersonal therapists: Holotropic Breathwork and e
         <!-- Section header -->
         <div class="max-w-6xl mx-auto mb-14 md:mb-20">
             <div class="flex items-start gap-5 md:gap-8">
-                <span class="p4-display text-[4.5rem] md:text-[7rem] font-medium leading-[0.85] text-[#C9A45C] select-none">{{ oneToOne.data.number }}</span>
+                <span class="p4-display text-[4.5rem] md:text-[7rem] font-medium leading-[0.85] text-[#D9A756] select-none">{{ oneToOne.data.number }}</span>
                 <div class="pt-1 md:pt-3">
                     <span class="p4-hairline !w-10 md:!w-16 mb-4 block"></span>
                     <h2 class="p4-display text-3xl md:text-5xl font-medium text-[#0F2540] leading-tight">{{ oneToOne.data.title }}</h2>
@@ -173,7 +173,7 @@ description: "How we train transpersonal therapists: Holotropic Breathwork and e
             {% for block in oneToOne.blocks %}
             <div class="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
                 <div class="relative {% if loop.index % 2 == 0 %}md:order-2{% endif %}">
-                    <div class="absolute -top-3 {% if loop.index % 2 == 0 %}-right-3{% else %}-left-3{% endif %} w-full h-full border border-[#C9A45C]/60 pointer-events-none"></div>
+                    <div class="absolute -top-3 {% if loop.index % 2 == 0 %}-right-3{% else %}-left-3{% endif %} w-full h-full border border-[#D9A756]/60 pointer-events-none"></div>
                     <picture>
                         <source srcset="{{ (block.image.src ~ '.webp') | url }}" type="image/webp">
                         <img src="{{ (block.image.src ~ '.jpg') | url }}" alt="{{ block.image.alt }}" class="relative w-full aspect-[4/3] object-cover {{ block.image.position }} shadow-xl" loading="lazy">
@@ -181,7 +181,7 @@ description: "How we train transpersonal therapists: Holotropic Breathwork and e
                 </div>
                 <div class="{% if loop.index % 2 == 0 %}md:order-1{% endif %}">
                     {% if block.teachers %}
-                    <p class="p4-kicker text-[#9A7734] mb-3">{{ block.teachers }}</p>
+                    <p class="p4-kicker text-[#B65E3F] mb-3">{{ block.teachers }}</p>
                     {% endif %}
                     <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-5 leading-snug">{{ block.title }}</h3>
                     <div class="tq-prose text-neutral-warm-700 leading-relaxed">{{ block.html | safe }}</div>
@@ -208,7 +208,7 @@ description: "How we train transpersonal therapists: Holotropic Breathwork and e
         <!-- Section header -->
         <div class="max-w-6xl mx-auto mb-14 md:mb-20">
             <div class="flex items-start gap-5 md:gap-8">
-                <span class="p4-display text-[4.5rem] md:text-[7rem] font-medium leading-[0.85] text-[#C9A45C] select-none">{{ maps.data.number }}</span>
+                <span class="p4-display text-[4.5rem] md:text-[7rem] font-medium leading-[0.85] text-[#D9A756] select-none">{{ maps.data.number }}</span>
                 <div class="pt-1 md:pt-3">
                     <span class="p4-hairline !w-10 md:!w-16 mb-4 block"></span>
                     <h2 class="p4-display text-3xl md:text-5xl font-medium text-[#0F2540] leading-tight">{{ maps.data.title }}</h2>
@@ -220,15 +220,15 @@ description: "How we train transpersonal therapists: Holotropic Breathwork and e
         <!-- Framework cards: first one wide, the rest in two columns -->
         <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {% for block in maps.blocks %}
-            <div class="bg-neutral-warm-50 border border-neutral-warm-200 border-t-2 border-t-[#C9A45C] p-8 md:p-10 {% if loop.first %}md:col-span-2{% endif %}">
+            <div class="bg-[#FAF3E7] border border-[#E7D6BE] border-t-2 border-t-[#D9A756] p-8 md:p-10 {% if loop.first %}md:col-span-2{% endif %}">
                 <div class="flex items-center gap-4 mb-5">
                     <span class="w-12 h-12 shrink-0 bg-[#0F2540] flex items-center justify-center">
-                        <i data-lucide="{{ block.icon }}" class="w-6 h-6 text-[#C9A45C]"></i>
+                        <i data-lucide="{{ block.icon }}" class="w-6 h-6 text-[#D9A756]"></i>
                     </span>
                     <div>
                         <h3 class="text-xl md:text-2xl font-serif font-bold text-[#0F2540] leading-snug">{{ block.title }}</h3>
                         {% if block.teachers %}
-                        <p class="text-sm text-[#9A7734] tracking-wide mt-1">{{ block.teachers }}</p>
+                        <p class="text-sm text-[#B65E3F] tracking-wide mt-1">{{ block.teachers }}</p>
                         {% endif %}
                     </div>
                 </div>
@@ -242,7 +242,7 @@ description: "How we train transpersonal therapists: Holotropic Breathwork and e
 <!-- CTA Section -->
 <section class="py-20 bg-gradient-to-br from-[#0F2540] to-[#12305A] text-white text-center">
     <div class="container mx-auto px-6">
-        <p class="p4-kicker text-[#C9A45C] mb-4 flex items-center justify-center gap-4">
+        <p class="p4-kicker text-[#D9A756] mb-4 flex items-center justify-center gap-4">
             <span class="p4-hairline"></span>
             Join us
             <span class="p4-hairline"></span>
@@ -251,7 +251,7 @@ description: "How we train transpersonal therapists: Holotropic Breathwork and e
         <p class="text-[#E9EDF2]/80 max-w-2xl mx-auto mb-8 text-lg">
             Join our training programs to learn and practice these transformative therapeutic approaches.
         </p>
-        <a href="{{ '/training-overview.html' | url }}" class="inline-block bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
+        <a href="{{ '/training-overview.html' | url }}" class="inline-block bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
             Explore Training Programs
         </a>
     </div>

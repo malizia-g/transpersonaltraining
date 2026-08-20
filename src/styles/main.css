@@ -18,15 +18,15 @@ html {
     --color-primary-dark: #1E3A8A;
     --color-primary-light: #3B82F6;
     --color-indigo-deep: #312E81;
-    --color-cta: #C9A45C;
-    --color-cta-hover: #B8934B;
+    --color-cta: #D9A756;
+    --color-cta-hover: #C08F3F;
     --color-accent-teal: #2DD4BF;
-    --color-bg-light: #FFFEF9;
-    --color-bg-darker: #F3EBE0;
+    --color-bg-light: #FAF3E7;
+    --color-bg-darker: #F3E7D4;
     --color-text-dark: #1F2937;
     --color-text-light: #5D584E;
     --color-primary-rgb: 30, 64, 175;
-    --color-cta-rgb: 201, 164, 92;
+    --color-cta-rgb: 217, 167, 86;
 
     /* Theme switcher variables */
     --theme-primary: #1E3A8A;
@@ -90,9 +90,9 @@ body[class*="theme-"] #mobile-menu a:hover {
     padding: 1rem 1.25rem; color: #1e293b; font-weight: 500;
     transition: color 0.2s ease;
 }
-.dropdown-menu a:hover { color: #9A7734; }
+.dropdown-menu a:hover { color: #B65E3F; }
 .dropdown-menu .submenu-icon { color: #94a3b8; transition: color 0.2s ease; }
-.dropdown-menu a:hover .submenu-icon { color: #9A7734; }
+.dropdown-menu a:hover .submenu-icon { color: #B65E3F; }
 
 /* Mobile submenu icons */
 #mobile-menu .submenu-icon { color: rgba(226, 232, 240, 0.6); flex-shrink: 0; transition: color 0.2s ease; }
@@ -202,7 +202,7 @@ body.mobile-menu-open { overflow: hidden; }
     display: inline-block;
     width: 4rem;
     height: 1px;
-    background: #C9A45C;
+    background: #D9A756;
     vertical-align: middle;
 }
 @media (max-width: 767px) {
@@ -214,7 +214,7 @@ body.mobile-menu-open { overflow: hidden; }
     line-height: 0.8;
     float: left;
     padding-right: 0.14em;
-    color: #1E40AF;
+    color: #B65E3F;
     font-weight: 500;
 }
 .p4-welcome p + p { margin-top: 1.1rem; }
@@ -222,21 +222,21 @@ body.mobile-menu-open { overflow: hidden; }
 .p4-foryou ul li {
     position: relative;
     padding: 1.15rem 0 1.15rem 2.4rem;
-    border-bottom: 1px solid rgba(15, 37, 64, 0.15);
+    border-bottom: 1px solid rgba(90, 58, 40, 0.18);
     line-height: 1.65;
 }
-.p4-foryou ul li:first-child { border-top: 1px solid rgba(15, 37, 64, 0.15); }
+.p4-foryou ul li:first-child { border-top: 1px solid rgba(90, 58, 40, 0.18); }
 .p4-foryou ul li::before {
     content: '✦';
     position: absolute;
     left: 0.2rem;
     top: 1.15rem;
-    color: #9A7734;
+    color: #B65E3F;
     font-size: 0.9rem;
 }
 .p4-filmstrip::-webkit-scrollbar { height: 8px; }
-.p4-filmstrip::-webkit-scrollbar-track { background: rgba(15, 37, 64, 0.08); border-radius: 999px; }
-.p4-filmstrip::-webkit-scrollbar-thumb { background: rgba(154, 119, 52, 0.55); border-radius: 999px; }
+.p4-filmstrip::-webkit-scrollbar-track { background: rgba(90, 58, 40, 0.10); border-radius: 999px; }
+.p4-filmstrip::-webkit-scrollbar-thumb { background: rgba(182, 94, 63, 0.55); border-radius: 999px; }
 /* Fixed-background parallax; iOS ignores background-attachment: fixed, so fall back to scroll there */
 .p4-parallax {
     background-size: cover;
@@ -246,6 +246,18 @@ body.mobile-menu-open { overflow: hidden; }
 @media (hover: none), (max-width: 768px) {
     .p4-parallax { background-attachment: scroll; }
 }
+
+/* Expandable panel (native <details>). The default disclosure triangle is
+   dropped in favour of a lucide chevron that flips when the panel opens. */
+.p4-reveal > summary { list-style: none; }
+.p4-reveal > summary::-webkit-details-marker { display: none; }
+.p4-reveal[open] > summary .p4-reveal-chevron { transform: rotate(180deg); }
+.p4-reveal > summary:focus-visible {
+    outline: 2px solid #B65E3F;
+    outline-offset: 2px;
+}
+/* The last item's rule would otherwise double up with the panel border. */
+.p4-reveal .p4-foryou ul li:last-child { border-bottom: none; }
 
 /* ── Techniques page typography ── */
 

@@ -1,6 +1,6 @@
 ---
 icon: graduation-cap
-icon_color: text-[#9A7734]
+icon_color: text-[#B65E3F]
 title: An Accredited Qualification
 border_color: border-warm-yellow-400
 ---

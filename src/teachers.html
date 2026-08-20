@@ -55,7 +55,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
     }
     
     .badge-core {
-        background: #C9A45C;
+        background: #D9A756;
         color: #0F2540;
         padding: 0.25rem 0.75rem;
         font-size: 0.75rem;
@@ -167,7 +167,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
 
     <div class="relative z-10 container mx-auto px-6 text-center pt-20">
         <div class="animate-fade-in-up">
-            <p class="p4-kicker text-[#C9A45C] mb-6 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[#D9A756] mb-6 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 Our Faculty
                 <span class="p4-hairline"></span>
@@ -183,7 +183,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
 </header>
 
 <!-- Breadcrumb -->
-<div class="bg-white border-b border-neutral-warm-200">
+<div class="bg-white border-b border-[#E7D6BE]">
     <div class="container mx-auto px-6 py-4">
         <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
             <a href="{{ '/' | url }}" class="hover:text-science-blue-600 transition-colors">Home</a>
@@ -199,7 +199,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
 <section class="py-24 bg-white">
     <div class="container mx-auto px-6">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <p class="p4-kicker text-[#9A7734] mb-4 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 {{ coreIntro.data.kicker }}
                 <span class="p4-hairline"></span>
@@ -220,7 +220,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
                         <i data-lucide="chevron-down" class="w-5 h-5 text-science-blue-400 bio-icon"></i>
                     </div>
                     <h3 class="text-2xl font-serif font-bold text-indigo-deep-900 mb-1">{{ teacher.name }}</h3>
-                    <p class="text-[#9A7734] font-medium mb-3">{{ teacher.role }}</p>
+                    <p class="text-[#B65E3F] font-medium mb-3">{{ teacher.role }}</p>
                     <p class="text-neutral-warm-600 text-sm">{{ teacher.credentials }}</p>
                 </div>
                 <div class="teacher-bio">
@@ -251,7 +251,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
                         </div>
                         {% if teacher.website %}
                         <div class="mt-4">
-                            <a href="{{ teacher.website }}" target="_blank" class="inline-flex items-center gap-2 text-[#9A7734] hover:text-[#7A5E29] font-medium">
+                            <a href="{{ teacher.website }}" target="_blank" class="inline-flex items-center gap-2 text-[#B65E3F] hover:text-[#7A5E29] font-medium">
                                 <i data-lucide="globe" class="w-4 h-4"></i>
                                 {{ teacher.website | replace('https://', '') | replace('http://', '') | replace('www.', '') | truncate(30) }}
                             </a>
@@ -290,10 +290,10 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
 </section>
 
 <!-- Guest Teachers Section -->
-<section class="py-24 bg-neutral-warm-50">
+<section class="py-24 bg-[#FAF3E7]">
     <div class="container mx-auto px-6">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <p class="p4-kicker text-[#9A7734] mb-4 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 {{ guestIntro.data.kicker }}
                 <span class="p4-hairline"></span>
@@ -311,10 +311,10 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
                 <div class="p-4">
                     <div class="flex items-center justify-between mb-2">
                         <span class="badge-guest">Guest</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-[#9A7734] bio-icon"></i>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-[#B65E3F] bio-icon"></i>
                     </div>
                     <h3 class="text-lg font-serif font-bold text-indigo-deep-900 mb-1">{{ teacher.name }}</h3>
-                    <p class="text-[#9A7734] font-medium text-sm">{{ teacher.location }}</p>
+                    <p class="text-[#B65E3F] font-medium text-sm">{{ teacher.location }}</p>
                 </div>
                 <div class="teacher-bio">
                     <!-- Tab Navigation -->
@@ -344,7 +344,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
                         </div>
                         {% if teacher.website %}
                         <div class="mt-4">
-                            <a href="{{ teacher.website }}" target="_blank" class="inline-flex items-center gap-2 text-[#9A7734] hover:text-[#7A5E29] font-medium">
+                            <a href="{{ teacher.website }}" target="_blank" class="inline-flex items-center gap-2 text-[#B65E3F] hover:text-[#7A5E29] font-medium">
                                 <i data-lucide="globe" class="w-4 h-4"></i>
                                 {{ teacher.website | replace('https://', '') | replace('http://', '') | replace('www.', '') | truncate(30) }}
                             </a>
@@ -386,7 +386,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
 <section class="py-24 bg-white">
     <div class="container mx-auto px-6">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <p class="p4-kicker text-[#9A7734] mb-4 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 {{ alumniIntro.data.kicker }}
                 <span class="p4-hairline"></span>
@@ -405,7 +405,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
                     <div class="flex items-start justify-between gap-2">
                         <div>
                             <h3 class="text-sm font-serif font-bold text-indigo-deep-900 leading-tight line-clamp-2">{{ teacher.name }}</h3>
-                            <p class="text-[#9A7734] text-xs mt-0.5">{{ teacher.location }}</p>
+                            <p class="text-[#B65E3F] text-xs mt-0.5">{{ teacher.location }}</p>
                         </div>
                         <i data-lucide="chevron-down" class="w-4 h-4 text-neutral-warm-400 bio-icon mt-0.5 flex-shrink-0"></i>
                     </div>
@@ -421,7 +421,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
                         </div>
                         {% if teacher.website %}
                         <div class="mt-4">
-                            <a href="{{ teacher.website }}" target="_blank" class="inline-flex items-center gap-2 text-[#9A7734] hover:text-[#7A5E29] font-medium">
+                            <a href="{{ teacher.website }}" target="_blank" class="inline-flex items-center gap-2 text-[#B65E3F] hover:text-[#7A5E29] font-medium">
                                 <i data-lucide="globe" class="w-4 h-4"></i>
                                 {{ teacher.website | replace('https://', '') | replace('http://', '') | replace('www.', '') | truncate(30) }}
                             </a>
@@ -438,7 +438,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
 <!-- CTA Section -->
 <section class="py-24 bg-gradient-to-br from-[#0F2540] to-[#12305A] text-white relative overflow-hidden">
     <div class="container mx-auto px-6 text-center relative z-10">
-        <p class="p4-kicker text-[#C9A45C] mb-5 flex items-center justify-center gap-4">
+        <p class="p4-kicker text-[#D9A756] mb-5 flex items-center justify-center gap-4">
             <span class="p4-hairline"></span>
             Join us
             <span class="p4-hairline"></span>
@@ -447,7 +447,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
         <p class="text-xl text-[#E9EDF2]/80 max-w-2xl mx-auto mb-10">
             Join our internationally recognized training program and study with experienced teachers from around the world
         </p>
-        <a href="{{ '/apply/' | url }}" class="inline-flex items-center gap-2 bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
+        <a href="{{ '/apply/' | url }}" class="inline-flex items-center gap-2 bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
             <span>Apply to Our Program</span>
             <i data-lucide="arrow-right" class="w-5 h-5"></i>
         </a>
