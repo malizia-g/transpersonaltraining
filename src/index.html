@@ -342,7 +342,7 @@ ogType: website
                 Ready to enrol? <a href="{{ '/apply/' | url }}" class="text-[#D9A756] underline underline-offset-4 decoration-[#D9A756]/40 hover:text-[#EBC98A]">Start your application</a>.
             </p>
 
-            <form id="contactForm" action="mailto:office@transpersonal-training.com" method="post" enctype="text/plain" data-persist="contact" class="text-left border border-[#D9A756]/40 bg-[#0B1B30]/85 backdrop-blur-md p-6 md:p-10 space-y-6 shadow-2xl">
+            <form id="contactForm" action="mailto:west-office@transpersonal-training.com,east-office@transpersonal-training.com" method="post" enctype="text/plain" data-persist="contact" class="text-left border border-[#D9A756]/40 bg-[#0B1B30]/85 backdrop-blur-md p-6 md:p-10 space-y-6 shadow-2xl">
                 <!-- Honeypot: hidden from people, catnip for bots. Anything typed
                      here means the submission is discarded server-side. -->
                 <div class="hidden" aria-hidden="true">
@@ -367,6 +367,15 @@ ogType: website
                               class="w-full bg-transparent border-0 border-b border-[#D9A756]/40 text-[#EDF2F8] px-1 py-3 focus:outline-none focus:border-[#D9A756] transition-colors placeholder:text-[#7C8DA3]"
                               placeholder="How can we help?"></textarea>
                 </div>
+                <div>
+                    <label for="contact-track" class="block p4-kicker !text-xs text-[#D9A756] mb-3">Which office? <span class="normal-case tracking-normal text-[#7C8DA3]">(optional)</span></label>
+                    <select id="contact-track" name="track"
+                            class="w-full bg-transparent border-0 border-b border-[#D9A756]/40 text-[#EDF2F8] px-1 py-3 focus:outline-none focus:border-[#D9A756] transition-colors">
+                        <option value="" class="text-[#0F2540]">Not sure — send to both</option>
+                        <option value="Western" class="text-[#0F2540]">Western track</option>
+                        <option value="Eastern" class="text-[#0F2540]">Eastern track</option>
+                    </select>
+                </div>
                 <button type="submit" id="contactBtn"
                         class="w-full bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed">
                     <span id="contactBtnLabel">Send message</span>
@@ -380,10 +389,15 @@ ogType: website
                 </p>
             </form>
 
-            <p class="mt-10 text-[#D5DEE9]">
-                Or email us directly at
-                <a href="mailto:office@transpersonal-training.com" class="text-[#D9A756] underline underline-offset-8 decoration-[#D9A756]/40 hover:text-[#EBC98A]">office@transpersonal-training.com</a>
-            </p>
+            <p class="mt-10 text-[#D5DEE9]">Or email us directly:</p>
+            <div class="mt-3 flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-2 text-sm text-[#B9C6D8]">
+                <a href="mailto:west-office@transpersonal-training.com" class="inline-flex items-center gap-2 hover:text-[#D9A756] transition-colors text-center">
+                    <i data-lucide="mail" class="w-4 h-4 shrink-0"></i><span>West office<br>west-office@transpersonal-training.com</span>
+                </a>
+                <a href="mailto:east-office@transpersonal-training.com" class="inline-flex items-center gap-2 hover:text-[#D9A756] transition-colors text-center">
+                    <i data-lucide="mail" class="w-4 h-4 shrink-0"></i><span>East office<br>east-office@transpersonal-training.com</span>
+                </a>
+            </div>
             <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-2 text-sm text-[#B9C6D8]">
                 <a href="tel:+4917638034517" class="inline-flex items-center gap-2 hover:text-[#D9A756] transition-colors">
                     <i data-lucide="phone" class="w-4 h-4"></i>West office &middot; +49 176 38034517

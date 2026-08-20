@@ -159,6 +159,7 @@ description: "Apply for self-development, transpersonal psychotherapy, counselli
                         <option value="Self-development only (Level 1, no obligation to continue)">Self-development only (Level 1)</option>
                         <option value="Single lectures">Single lectures</option>
                         <option value="Single seminar(s)">Single seminar(s)</option>
+                        <option value="Single module enrolment">Single module enrolment</option>
                     </select>
                 </div>
 
@@ -234,6 +235,10 @@ description: "Apply for self-development, transpersonal psychotherapy, counselli
                     <input class="field-input" id="signedFile" name="signedFile" type="file" accept="application/pdf,image/jpeg,image/png" required>
                 </div>
                 <div>
+                    <label class="field-label" for="diplomaFile">Diploma or degree certificate <span class="text-neutral-warm-500 font-normal">(optional, PDF, JPG or PNG, max 15&nbsp;MB)</span></label>
+                    <input class="field-input" id="diplomaFile" name="diplomaFile" type="file" accept="application/pdf,image/jpeg,image/png">
+                </div>
+                <div>
                     <button type="submit" id="uploadBtn" class="inline-flex items-center gap-2 bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-6 py-3 font-medium tracking-wide transition-all shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed">
                         <i data-lucide="upload" class="w-4 h-4"></i>
                         <span id="uploadBtnLabel">Upload signed agreement</span>
@@ -242,7 +247,7 @@ description: "Apply for self-development, transpersonal psychotherapy, counselli
                 <div id="uploadStatus" class="text-sm hidden"></div>
             </form>
 
-            <p class="text-xs text-neutral-warm-500 mt-4">Prefer email? You can also send your signed agreement to <a href="mailto:office@transpersonal-training.com" class="underline hover:text-[#B65E3F]">office@transpersonal-training.com</a>.</p>
+            <p class="text-xs text-neutral-warm-500 mt-4">Prefer email? You can also send your signed agreement to <a href="mailto:west-office@transpersonal-training.com" class="underline hover:text-[#B65E3F]">west-office@transpersonal-training.com</a> (Western track) or <a href="mailto:east-office@transpersonal-training.com" class="underline hover:text-[#B65E3F]">east-office@transpersonal-training.com</a> (Eastern track).</p>
         </div>
     </div>
 </section>

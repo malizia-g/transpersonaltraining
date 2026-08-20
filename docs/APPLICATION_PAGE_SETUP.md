@@ -8,9 +8,14 @@ app writing into **one spreadsheet**, which ends up with just **two tabs**:
 | Contact message | homepage, `#contact` | a row in the **`Contact`** tab + an email to the office |
 | Application details | `/apply/`, step 1 | a row in the **`Applications`** tab |
 | Signed agreement | `/apply/`, step 3 | the PDF in a **Drive folder**, and its link written into the **`Agreement`** column of that person's existing `Applications` row |
+| Diploma / degree certificate (optional) | `/apply/`, step 3 | the file in the **same Drive folder** as the agreement (named with `Diploma` instead), and its link written into the **`Diploma`** column, right next to `Agreement` |
 
 Both tabs and all their columns are created automatically the first time they're
-used — you don't set up anything by hand.
+used — you don't set up anything by hand. That only applies to a **brand-new**
+`Applications` tab, though: if yours already exists, add a `Diploma` header by
+hand in the column right after `Agreement` — the script writes to that position
+regardless, but the header text itself is only auto-written when the tab is
+first created.
 
 **One applicant = one row.** The link between step 1 and step 3 is the **email
 address**: step 1 creates the row, step 3 finds it again and drops the agreement
@@ -40,7 +45,9 @@ The **Apply** page (`/apply/`, source [src/apply.html](../src/apply.html) +
    sharpest result, and "Save as PDF" is available there) or **Download PDF**
    (saves the file straight to their device). They **sign it by hand**.
 3. **They upload the signed copy**, which goes to your Drive and fills the
-   `Agreement` column on their row.
+   `Agreement` column on their row. They can optionally also attach a diploma
+   or degree certificate at the same step, which goes into the same Drive
+   folder and fills the `Diploma` column next to it.
 
 The document itself is generated in the browser and **works with no setup at
 all** — if the connection or the script fails, the applicant can still print,
@@ -119,7 +126,11 @@ internal notes never reach an applicant. If you rename that heading, update
 - Check `AGREEMENT_DOC_ID` near the top matches your master Google Doc (it's the
   long id in the Doc's URL). This is the Doc the website will publish.
 - (Optional) also at the top:
-  - `NOTIFY_EMAIL` — where to email you when a form comes in (`''` = no email).
+  - `NOTIFY_EMAIL_WEST` / `NOTIFY_EMAIL_EAST` — where to email each office when a
+    form comes in (`''` = no email for that office). A submission is routed to
+    the office matching the applicant's track; if the track isn't known yet
+    (a general enquiry with no office chosen, or a signed-agreement upload with
+    no matching application row), it goes to **both**.
   - `FOLDER_NAME` — the Drive folder signed agreements go into (auto-created).
     Or set `FOLDER_ID` to an existing folder's ID.
 
@@ -190,6 +201,9 @@ The `/exec` URL stays the same, so you never need to touch the site again.
 - **File size:** uploads are capped at 15 MB, both in the page and in the script.
   A scanned multi-page PDF is usually well under this; larger files should be emailed.
 - **Accepted types:** PDF, JPG, PNG.
+- **Diploma upload:** optional, sent alongside the signed agreement in the same
+  step-3 submission (not a separate step). Skipping it leaves the `Diploma`
+  column blank; nothing else is affected.
 - **Quotas:** Apps Script sends ~100 emails/day on a free Gmail account (1 500 on
   Workspace) — far more than these forms will ever need. Rows in Sheets are
   effectively unlimited here.
@@ -206,4 +220,4 @@ The `/exec` URL stays the same, so you never need to touch the site again.
 - **CORS:** requests are sent as "simple" requests (text/plain body) so the
   browser skips the preflight that Apps Script doesn't answer. If a browser still
   can't read the response, the page assumes success on a resolved request and the
-  `NOTIFY_EMAIL` is your backstop confirmation.
+  `NOTIFY_EMAIL_WEST` / `NOTIFY_EMAIL_EAST` notification is your backstop confirmation.

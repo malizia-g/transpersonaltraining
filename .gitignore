@@ -28,6 +28,9 @@ yarn-error.log*
 # Data cache files (generated during build)
 src/_data/*.cache.json
 
+# Translation cache (generated during build; restored via actions/cache in CI)
+.cache/
+
 # Scratch copies of the Apps Script files, kept at the root only to make them
 # easy to copy-paste into the Google editor. The versioned originals live in
 # docs/spreadsheet-automation/.

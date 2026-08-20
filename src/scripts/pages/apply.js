@@ -13,6 +13,8 @@
     // once in src/_data/forms.js (see docs/APPLICATION_PAGE_SETUP.md). Empty
     // keeps upload switched off and shows the "email your signed copy" note.
     var MAX_UPLOAD_MB = 15;
+    var EMAIL_LINK = '<a class="underline" href="mailto:west-office@transpersonal-training.com">west-office@transpersonal-training.com</a> or '
+        + '<a class="underline" href="mailto:east-office@transpersonal-training.com">east-office@transpersonal-training.com</a>';
 
     var form = document.getElementById('applicationForm');
     var step2 = document.getElementById('step2');
@@ -235,17 +237,23 @@
         uploadForm.addEventListener('submit', function (e) {
             e.preventDefault();
             var fileInput = document.getElementById('signedFile');
+            var diplomaInput = document.getElementById('diplomaFile');
             var email = document.getElementById('upEmail').value.trim();
             var file = fileInput.files && fileInput.files[0];
+            var diplomaFile = diplomaInput && diplomaInput.files && diplomaInput.files[0];
 
             if (!email || !file) { setStatus('err', 'Please add your email and the signed file.'); return; }
             if (file.size > MAX_UPLOAD_MB * 1024 * 1024) {
-                setStatus('err', 'That file is larger than ' + MAX_UPLOAD_MB + '&nbsp;MB. Please compress it, or email it to <a class="underline" href="mailto:office@transpersonal-training.com">office@transpersonal-training.com</a>.');
+                setStatus('err', 'That file is larger than ' + MAX_UPLOAD_MB + '&nbsp;MB. Please compress it, or email it to ' + EMAIL_LINK + '.');
+                return;
+            }
+            if (diplomaFile && diplomaFile.size > MAX_UPLOAD_MB * 1024 * 1024) {
+                setStatus('err', 'Your diploma file is larger than ' + MAX_UPLOAD_MB + '&nbsp;MB. Please compress it, or email it to ' + EMAIL_LINK + '.');
                 return;
             }
             var endpoint = window.FORMS_ENDPOINT || '';
             if (!endpoint) {
-                setStatus('info', 'Online upload isn’t switched on yet. Please email your signed agreement to <a class="underline" href="mailto:office@transpersonal-training.com">office@transpersonal-training.com</a>.');
+                setStatus('info', 'Online upload isn’t switched on yet. Please email your signed agreement to ' + EMAIL_LINK + '.');
                 return;
             }
 
@@ -253,18 +261,26 @@
             uploadBtnLabel.textContent = 'Uploading…';
             setStatus('info', 'Uploading your signed agreement…');
 
-            readFileBase64(file).then(function (b64) {
-                var payload = JSON.stringify({
+            Promise.all([
+                readFileBase64(file),
+                diplomaFile ? readFileBase64(diplomaFile) : Promise.resolve(null)
+            ]).then(function (results) {
+                var body = {
                     action: 'agreement', // the same endpoint also takes contact messages
                     email: email, // the only key linking this file to an application
                     filename: file.name,
                     mimeType: file.type || 'application/octet-stream',
-                    dataBase64: b64
-                });
+                    dataBase64: results[0]
+                };
+                if (diplomaFile && results[1]) {
+                    body.diplomaFilename = diplomaFile.name;
+                    body.diplomaMimeType = diplomaFile.type || 'application/octet-stream';
+                    body.diplomaBase64 = results[1];
+                }
                 // Sent as text/plain (default for a string body) so the browser
                 // makes a "simple" request and skips the CORS preflight that
                 // Apps Script web apps don't answer.
-                return fetch(endpoint, { method: 'POST', body: payload });
+                return fetch(endpoint, { method: 'POST', body: JSON.stringify(body) });
             }).then(function (res) {
                 return res.text().then(function (t) {
                     try { return JSON.parse(t); } catch (_) { return { status: 'ok' }; }
@@ -278,7 +294,7 @@
                 // is a module and loads after this script.)
                 if (window.FormCache) window.FormCache.clear('apply');
             }).catch(function () {
-                setStatus('err', 'Sorry, the upload didn’t go through. Please try again, or email your signed agreement to <a class="underline" href="mailto:office@transpersonal-training.com">office@transpersonal-training.com</a>.');
+                setStatus('err', 'Sorry, the upload didn’t go through. Please try again, or email your signed agreement to ' + EMAIL_LINK + '.');
             }).finally(function () {
                 uploadBtn.disabled = false;
                 uploadBtnLabel.textContent = 'Upload signed agreement';

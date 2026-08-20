@@ -25,8 +25,11 @@
  */
 
 // ---- Config ---------------------------------------------------------------
-// Where to email you when something comes in ('' = no email).
-var NOTIFY_EMAIL = 'office@transpersonal-training.com';
+// Where to email you when something comes in ('' = no email for that office).
+// The school runs two offices, one per track — see notifyEmails_() below for
+// how a message is routed to the right one (or both, when the track isn't known).
+var NOTIFY_EMAIL_WEST = 'west-office@transpersonal-training.com';
+var NOTIFY_EMAIL_EAST = 'east-office@transpersonal-training.com';
 
 // Leave empty when this script is bound to the spreadsheet (Extensions → Apps
 // Script). Only set it if you ever move the script to a standalone project.
@@ -58,7 +61,7 @@ var MAX_UPLOAD_MB = 15;
 var APPLICATION_HEADERS = [
   'Received', 'Name', 'Date of birth', 'Nationality', 'Country of residence',
   'Address', 'Email', 'Phone', 'Track', 'Subscription intent',
-  'Apply date', 'Agreement'
+  'Apply date', 'Agreement', 'Diploma'
 ];
 var EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 // ---------------------------------------------------------------------------
@@ -336,6 +339,7 @@ function handleContact_(data) {
   var name = clean_(data.name, 120);
   var email = clean_(data.email, 160);
   var message = clean_(data.message, 5000);
+  var track = clean_(data.track, 40); // which office to notify; blank = not sure, notify both
 
   if (!name || !email || !message) {
     return json_({ status: 'error', message: 'Please fill in your name, email and message.' });
@@ -347,9 +351,10 @@ function handleContact_(data) {
   sheet_(CONTACT_SHEET, ['Received', 'Name', 'Email', 'Message'])
     .appendRow([new Date(), name, email, message]);
 
-  if (NOTIFY_EMAIL) {
+  var notify = notifyEmails_(track);
+  if (notify) {
     MailApp.sendEmail({
-      to: NOTIFY_EMAIL,
+      to: notify,
       replyTo: email, // so you can just hit Reply
       name: 'Transpersonal Training website',
       subject: 'Website enquiry from ' + name,
@@ -383,7 +388,8 @@ function handleApplication_(data) {
     'Subscription intent': clean_(data.joining, 120),
     // Keep what step 3 already wrote — re-generating must not wipe it.
     'Apply date': row ? cell_(sh, row, 'Apply date') : '',
-    'Agreement': row ? cell_(sh, row, 'Agreement') : ''
+    'Agreement': row ? cell_(sh, row, 'Agreement') : '',
+    'Diploma': row ? cell_(sh, row, 'Diploma') : ''
   };
 
   if (row) sh.getRange(row, 1, 1, APPLICATION_HEADERS.length).setValues([rowFrom_(values)]);
@@ -407,15 +413,37 @@ function handleAgreement_(data) {
     return json_({ status: 'error', message: 'That file is larger than ' + MAX_UPLOAD_MB + ' MB.' });
   }
 
+  // The diploma is optional, so only decode/validate it if one was sent.
+  var diplomaBytes = null;
+  if (data.diplomaBase64) {
+    diplomaBytes = Utilities.base64Decode(data.diplomaBase64);
+    if (diplomaBytes.length > MAX_UPLOAD_MB * 1024 * 1024) {
+      return json_({ status: 'error', message: 'The diploma file is larger than ' + MAX_UPLOAD_MB + ' MB.' });
+    }
+  }
+
   var sh = sheet_(APPLICATION_SHEET, APPLICATION_HEADERS);
   var row = findRowByEmail_(sh, email);
   var name = row ? String(cell_(sh, row, 'Name') || '') : '';
+  var track = row ? String(cell_(sh, row, 'Track') || '') : ''; // routes the notification below
+
+  var folder = getFolder_();
+  var stamp = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd_HH-mm');
+  var label = sanitize_(name) || sanitize_(email.split('@')[0]) || 'applicant';
 
   var origName = sanitize_(data.filename) || 'signed-agreement';
   var blob = Utilities.newBlob(bytes, data.mimeType || 'application/octet-stream', origName);
-  var stamp = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd_HH-mm');
-  var label = sanitize_(name) || sanitize_(email.split('@')[0]) || 'applicant';
-  var file = getFolder_().createFile(blob).setName(label + '__' + stamp + '__' + origName);
+  var file = folder.createFile(blob).setName(label + '__' + stamp + '__' + origName);
+
+  // Same folder as the agreement, but tagged "Diploma" in the name instead so
+  // the two are easy to tell apart once they sit side by side in Drive.
+  var diplomaUrl = '';
+  if (diplomaBytes) {
+    var diplomaOrigName = sanitize_(data.diplomaFilename) || 'diploma';
+    var diplomaBlob = Utilities.newBlob(diplomaBytes, data.diplomaMimeType || 'application/octet-stream', diplomaOrigName);
+    var diplomaFile = folder.createFile(diplomaBlob).setName(label + '__' + stamp + '__Diploma__' + diplomaOrigName);
+    diplomaUrl = diplomaFile.getUrl();
+  }
 
   // The signed agreement arriving is what makes this a real application, so
   // that moment — not the form fill — is the date stamped here.
@@ -423,28 +451,35 @@ function handleAgreement_(data) {
   if (row) {
     sh.getRange(row, APPLICATION_HEADERS.indexOf('Apply date') + 1).setValue(applyDate);
     sh.getRange(row, APPLICATION_HEADERS.indexOf('Agreement') + 1).setValue(file.getUrl());
+    if (diplomaUrl) sh.getRange(row, APPLICATION_HEADERS.indexOf('Diploma') + 1).setValue(diplomaUrl);
   } else {
     // No application row for this address — they typed a different email, or
     // signed a copy from elsewhere. Never drop the file: give it its own row
     // so it's still visible, and flag it in the notification below.
     sh.appendRow(rowFrom_({
-      'Received': applyDate, 'Email': email, 'Apply date': applyDate, 'Agreement': file.getUrl()
+      'Received': applyDate, 'Email': email, 'Apply date': applyDate, 'Agreement': file.getUrl(),
+      'Diploma': diplomaUrl
     }));
   }
 
-  if (NOTIFY_EMAIL) {
+  var notify = notifyEmails_(track);
+  if (notify) {
     MailApp.sendEmail({
-      to: NOTIFY_EMAIL,
+      to: notify,
       replyTo: email,
       subject: 'New signed enrolment agreement: ' + (name || email),
       body: (row
         ? 'Matched to the application from ' + name + '.'
         : 'NO MATCHING APPLICATION for ' + email + ' — it was added as a new row. '
           + 'They may have used a different email at step 1.') +
-        '\n\nEmail: ' + email + '\nFile: ' + file.getUrl()
+        '\n\nEmail: ' + email + '\nFile: ' + file.getUrl() +
+        (diplomaUrl ? '\nDiploma: ' + diplomaUrl : '')
     });
   }
-  return json_({ status: 'ok', matched: !!row, fileId: file.getId(), fileUrl: file.getUrl() });
+  return json_({
+    status: 'ok', matched: !!row, fileId: file.getId(), fileUrl: file.getUrl(),
+    diplomaUrl: diplomaUrl || undefined
+  });
 }
 
 // ---- Helpers --------------------------------------------------------------
@@ -487,6 +522,16 @@ function sheet_(name, headers) {
     sh.setFrozenRows(1);
   }
   return sh;
+}
+
+// Routes a notification to the right office by track. An unrecognised or
+// missing track (message sent before choosing one, or no matching
+// application row) goes to both, so nothing is ever silently missed.
+function notifyEmails_(track) {
+  if (track === 'Western') return NOTIFY_EMAIL_WEST;
+  if (track === 'Eastern') return NOTIFY_EMAIL_EAST;
+  var both = [NOTIFY_EMAIL_WEST, NOTIFY_EMAIL_EAST].filter(function (e) { return !!e; });
+  return both.join(',');
 }
 
 function getFolder_() {
