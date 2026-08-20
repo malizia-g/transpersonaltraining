@@ -16,7 +16,8 @@
     var btnLabel = document.getElementById('contactBtnLabel');
     var statusEl = document.getElementById('contactStatus');
 
-    var EMAIL_LINK = '<a class="underline hover:text-[#EBC98A]" href="mailto:office@transpersonal-training.com">office@transpersonal-training.com</a>';
+    var EMAIL_LINK = '<a class="underline hover:text-[#EBC98A]" href="mailto:west-office@transpersonal-training.com">west-office@transpersonal-training.com</a> or '
+        + '<a class="underline hover:text-[#EBC98A]" href="mailto:east-office@transpersonal-training.com">east-office@transpersonal-training.com</a>';
 
     function setStatus(kind, html) {
         if (!statusEl) return;
@@ -43,6 +44,7 @@
             name: form.elements.name.value.trim(),
             email: form.elements.email.value.trim(),
             message: form.elements.message.value.trim(),
+            track: form.elements.track ? form.elements.track.value.trim() : '', // which office to notify; empty = both
             website: form.elements.website ? form.elements.website.value : '' // honeypot
         };
         if (!payload.name || !payload.email || !payload.message) {
