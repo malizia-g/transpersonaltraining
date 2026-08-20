@@ -82,269 +82,249 @@ description: "A four-year holistic therapy training in three levels: self-develo
     </div>
 </section>
 
-<!-- The rest of the page reads as a menu of folded panels: closed, each shows
-     only its label, and the display heading comes with the content. Native
-     <details>, so it works without JavaScript and stays keyboard- and
-     screen-reader-operable. Backgrounds alternate white / cream so the rows
-     stay visually separated. -->
-
-<!-- Our story -->
-<section class="bg-[#FAF3E7] border-t border-[#E7D6BE]">
+<!-- The rest of the page reads as a menu of folded panels, gathered into one
+     narrow bordered box so the closed labels stack up as the rows of a table
+     rather than six full-width bands. Native <details>, so it works without
+     JavaScript and stays keyboard- and screen-reader-operable. -->
+<section class="py-16 bg-[#FAF3E7] border-t border-[#E7D6BE]">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto">
-            <details class="p4-reveal">
-                <summary class="flex items-center justify-between gap-6 py-5 cursor-pointer">
-                    <h2 class="p4-kicker text-[#B65E3F] flex items-center gap-4">
-                        <span class="p4-hairline"></span>
-                        Our story
-                    </h2>
-                    <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[#B65E3F] transition-transform duration-300" aria-hidden="true"></i>
-                </summary>
-                <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-6">One school, East and West</h3>
-                <div class="pb-10 space-y-5 text-gray-700 text-lg leading-relaxed">
-                    <p>
-                        The school was founded in 2021. It began with its Eastern programme (2021&ndash;2025), rooted in Moldova and Eastern Europe, and was followed by the Western programme (2024&ndash;2027). We are not a new school &mdash; the 2027&ndash;2030 cohort is the next chapter of a training that has been running for several years.
-                    </p>
-                    <p>
-                        For 2027&ndash;2030 the two sides come together. The <strong>online lectures are shared</strong>: one international community, learning side by side, taught by the same faculty from East and West. Lectures are delivered in English, with automatic translation available for Russian-speaking students.
-                    </p>
-                    <p>
-                        The <strong>in-person intensives are held separately</strong> &mdash; in English for the Western track and in Russian for the Eastern track. Where a seminar is offered to both sides of the school, we provide translation. The two tracks are not sealed off from one another: with prior arrangement you are welcome to attend an intensive on the other side of the school.
-                    </p>
-                </div>
-            </details>
-        </div>
-    </div>
-</section>
+            <p class="text-center text-neutral-warm-700 text-lg leading-relaxed mb-8">
+                Open whichever topics interest you &mdash; or, if you would rather ask us directly, <a href="{{ '/' | url }}#contact" class="text-[#B65E3F] hover:text-[#7d5f28] font-medium underline underline-offset-4 decoration-[#D9A756] transition-colors">get in touch</a>.
+            </p>
 
-<!-- Program Overview -->
-<section class="bg-white border-t border-[#E7D6BE]">
-    <div class="container mx-auto px-6">
-        <div class="max-w-4xl mx-auto">
-            <details class="p4-reveal">
-                <summary class="flex items-center justify-between gap-6 py-5 cursor-pointer">
-                    <h2 class="p4-kicker text-[#B65E3F] flex items-center gap-4">
-                        <span class="p4-hairline"></span>
-                        The programme
-                    </h2>
-                    <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[#B65E3F] transition-transform duration-300" aria-hidden="true"></i>
-                </summary>
-                <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-6">{{ programOverview.data.heading }}</h3>
-                <div class="space-y-5 text-gray-700 text-lg leading-relaxed">
-                    {{ programOverview.html | safe }}
-                </div>
-                <div class="pt-6 pb-10">
-                    <a href="{{ '/curriculum/' | url }}" class="inline-flex items-center gap-2 text-[#B65E3F] hover:text-[#7d5f28] font-medium underline underline-offset-4 decoration-[#D9A756] transition-colors">
-                        <span>See the full curriculum, module by module</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </a>
-                </div>
-            </details>
-        </div>
-    </div>
-</section>
-
-<!-- Eligibility Section -->
-<section class="bg-[#FAF3E7] border-t border-[#E7D6BE]">
-    <div class="container mx-auto px-6">
-        <div class="max-w-4xl mx-auto">
-            <details class="p4-reveal">
-                <summary class="flex items-center justify-between gap-6 py-5 cursor-pointer">
-                    <h2 class="p4-kicker text-[#B65E3F] flex items-center gap-4">
-                        <span class="p4-hairline"></span>
-                        Eligibility
-                    </h2>
-                    <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[#B65E3F] transition-transform duration-300" aria-hidden="true"></i>
-                </summary>
-                <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-6">{{ eligibility.data.heading }}</h3>
-                <div class="pb-10">
-                    <div class="bg-white border border-[#E7D6BE] p-8 shadow-sm">
-                        <h4 class="font-serif font-bold text-slate-800 text-xl mb-4">{{ eligibility.data.subheading }}</h4>
-                        <p class="text-gray-700 text-base mb-5">{{ eligibility.data.intro }}</p>
-                        <div class="text-gray-600 text-sm space-y-3 mb-6 eligibility-content">
-                            {{ eligibility.html | safe }}
-                        </div>
-                        <div class="bg-[#D9A756]/10 border-l-4 border-[#D9A756] p-4">
-                            <p class="text-gray-700 text-sm leading-relaxed">
-                                <strong class="text-[#B65E3F]">Note:</strong> {{ eligibility.data.note }}
+            <div class="border border-[#E7D6BE] bg-white shadow-sm divide-y divide-[#E7D6BE]">
+                <details class="p4-reveal">
+                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[#F5EAD9] transition-colors">
+                        <h2 class="p4-kicker text-[#B65E3F] flex items-center gap-4">
+                            <span class="p4-hairline"></span>
+                            Our story
+                        </h2>
+                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[#B65E3F] transition-transform duration-300" aria-hidden="true"></i>
+                    </summary>
+                    <div class="border-t border-[#E7D6BE] px-6 pt-6">
+                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-6">One school, East and West</h3>
+                        <div class="pb-10 space-y-5 text-gray-700 text-lg leading-relaxed">
+                            <p>
+                                The school was founded in 2021. It began with its Eastern programme (2021&ndash;2025), rooted in Moldova and Eastern Europe, and was followed by the Western programme (2024&ndash;2027). We are not a new school &mdash; the 2027&ndash;2030 cohort is the next chapter of a training that has been running for several years.
+                            </p>
+                            <p>
+                                For 2027&ndash;2030 the two sides come together. The <strong>online lectures are shared</strong>: one international community, learning side by side, taught by the same faculty from East and West. Lectures are delivered in English, with automatic translation available for Russian-speaking students.
+                            </p>
+                            <p>
+                                The <strong>in-person intensives are held separately</strong> &mdash; in English for the Western track and in Russian for the Eastern track. Where a seminar is offered to both sides of the school, we provide translation. The two tracks are not sealed off from one another: with prior arrangement you are welcome to attend an intensive on the other side of the school.
                             </p>
                         </div>
                     </div>
-                </div>
-            </details>
-        </div>
-    </div>
-</section>
+                </details>
 
-<!-- Admissions Section -->
-<section class="bg-white border-t border-[#E7D6BE]">
-    <div class="container mx-auto px-6">
-        <div class="max-w-4xl mx-auto">
-            <details class="p4-reveal">
-                <summary class="flex items-center justify-between gap-6 py-5 cursor-pointer">
-                    <h2 class="p4-kicker text-[#B65E3F] flex items-center gap-4">
-                        <span class="p4-hairline"></span>
-                        Admissions
-                    </h2>
-                    <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[#B65E3F] transition-transform duration-300" aria-hidden="true"></i>
-                </summary>
-                <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-6">How to Apply</h3>
-                <div class="pb-10 grid gap-8">
-                    {% for adm in admissions %}
-                    <div class="bg-white border border-[#E7D6BE] p-8 shadow-sm">
-                        <div class="flex items-center gap-3 mb-4">
-                            <span class="text-xs font-bold uppercase tracking-wider text-[#B65E3F]">
-                                {{ adm.data.level }}
-                            </span>
-                            <span class="text-xs text-gray-400">—</span>
-                            <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ adm.data.label }}{% if adm.data.note_anchor %}<a href="{{ adm.data.note_anchor }}" class="text-[#B65E3F] font-bold no-underline normal-case" title="See note about the protected title &quot;psychotherapist&quot;">*</a>{% endif %}</span>
+                <details class="p4-reveal">
+                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[#F5EAD9] transition-colors">
+                        <h2 class="p4-kicker text-[#B65E3F] flex items-center gap-4">
+                            <span class="p4-hairline"></span>
+                            The programme
+                        </h2>
+                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[#B65E3F] transition-transform duration-300" aria-hidden="true"></i>
+                    </summary>
+                    <div class="border-t border-[#E7D6BE] px-6 pt-6">
+                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-6">{{ programOverview.data.heading }}</h3>
+                        <div class="space-y-5 text-gray-700 text-lg leading-relaxed">
+                            {{ programOverview.html | safe }}
                         </div>
-                        {% if adm.data.who_can_apply %}
-                        <p class="text-gray-700 text-sm mb-4">
-                            <strong>Who Can Apply:</strong> {{ adm.data.who_can_apply }}
-                        </p>
-                        {% endif %}
-                        <h4 class="font-semibold text-slate-700 text-sm mb-3">Requirements</h4>
-                        <div class="text-gray-600 text-sm space-y-2 admissions-content">
-                            {{ adm.html | safe }}
+                        <div class="pt-6 pb-10">
+                            <a href="{{ '/curriculum/' | url }}" class="inline-flex items-center gap-2 text-[#B65E3F] hover:text-[#7d5f28] font-medium underline underline-offset-4 decoration-[#D9A756] transition-colors">
+                                <span>See the full curriculum, module by module</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
                         </div>
                     </div>
-                    {% endfor %}
-                </div>
-            </details>
-        </div>
-    </div>
-</section>
+                </details>
 
-<!-- Commitment Structure -->
-<section class="bg-[#FAF3E7] border-t border-[#E7D6BE]">
-    <div class="container mx-auto px-6">
-        <div class="max-w-4xl mx-auto">
-            <details class="p4-reveal">
-                <summary class="flex items-center justify-between gap-6 py-5 cursor-pointer">
-                    <h2 class="p4-kicker text-[#B65E3F] flex items-center gap-4">
-                        <span class="p4-hairline"></span>
-                        Commitment
-                    </h2>
-                    <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[#B65E3F] transition-transform duration-300" aria-hidden="true"></i>
-                </summary>
-                <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-6">Your Commitment Structure</h3>
-                <div class="pb-10">
-                    <p class="text-gray-700 text-lg leading-relaxed mb-8">
-                        Our training asks for consistent engagement in learning, self-development, and supervised practice.
-                    </p>
-
-                    <div class="grid md:grid-cols-2 gap-6">
-                        {% for card in commitmentCards %}
-                        <div class="bg-white border border-[#E7D6BE] p-6 shadow-sm{% if loop.last or (loop.index == 3) %} md:col-span-2{% endif %}">
-                            <h3 class="font-serif font-bold text-slate-800 text-xl mb-4 flex items-center gap-2">
-                                <i data-lucide="{{ card.data.icon }}" class="w-5 h-5 {{ card.data.icon_color }}"></i>
-                                {{ card.data.heading }}
-                            </h3>
-                            <div class="text-gray-700 text-sm space-y-2 leading-relaxed commitment-content">
-                                {{ card.html | safe }}
+                <details class="p4-reveal">
+                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[#F5EAD9] transition-colors">
+                        <h2 class="p4-kicker text-[#B65E3F] flex items-center gap-4">
+                            <span class="p4-hairline"></span>
+                            Eligibility
+                        </h2>
+                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[#B65E3F] transition-transform duration-300" aria-hidden="true"></i>
+                    </summary>
+                    <div class="border-t border-[#E7D6BE] px-6 pt-6">
+                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-6">{{ eligibility.data.heading }}</h3>
+                        <div class="pb-10">
+                            <div class="bg-white border border-[#E7D6BE] p-8 shadow-sm">
+                                <h4 class="font-serif font-bold text-slate-800 text-xl mb-4">{{ eligibility.data.subheading }}</h4>
+                                <p class="text-gray-700 text-base mb-5">{{ eligibility.data.intro }}</p>
+                                <div class="text-gray-600 text-sm space-y-3 mb-6 eligibility-content">
+                                    {{ eligibility.html | safe }}
+                                </div>
+                                <div class="bg-[#D9A756]/10 border-l-4 border-[#D9A756] p-4">
+                                    <p class="text-gray-700 text-sm leading-relaxed">
+                                        <strong class="text-[#B65E3F]">Note:</strong> {{ eligibility.data.note }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                        {% endfor %}
                     </div>
-                </div>
-            </details>
-        </div>
-    </div>
-</section>
+                </details>
 
-<!-- Fees, Certificates & Enrolment -->
-<section class="bg-white border-t border-[#E7D6BE]">
-    <div class="container mx-auto px-6">
-        <div class="max-w-4xl mx-auto">
-            <details class="p4-reveal">
-                <summary class="flex items-center justify-between gap-6 py-5 cursor-pointer">
-                    <h2 class="p4-kicker text-[#B65E3F] flex items-center gap-4">
-                        <span class="p4-hairline"></span>
-                        Fees &amp; enrolment
-                    </h2>
-                    <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[#B65E3F] transition-transform duration-300" aria-hidden="true"></i>
-                </summary>
-                <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-6">What you earn, and what it costs</h3>
-                <div class="pb-10">
-                    <!-- Certificates per level -->
-                    <div class="bg-white border border-[#E7D6BE] shadow-sm overflow-hidden mb-8">
-                        <table class="block md:table w-full text-left text-sm md:text-base">
-                            <thead class="hidden md:table-header-group">
-                                <tr class="bg-[#0F2540] text-[#FDFBF5]">
-                                    <th class="px-4 py-3 font-semibold">Level</th>
-                                    <th class="px-4 py-3 font-semibold whitespace-nowrap">Duration</th>
-                                    <th class="px-4 py-3 font-semibold">Certificate</th>
-                                </tr>
-                            </thead>
-                            <tbody class="block md:table-row-group divide-y divide-[#E7D6BE]">
-                                <tr class="block md:table-row">
-                                    <td class="block md:table-cell px-4 pt-4 pb-1 md:py-3 font-medium text-[#0F2540] align-top">Level 1<br><span class="text-xs text-neutral-warm-500 font-normal">Self-Development</span></td>
-                                    <td class="block md:table-cell px-4 py-1 md:py-3 text-neutral-warm-700 align-top whitespace-nowrap"><span class="md:hidden text-xs uppercase tracking-wide text-neutral-warm-500 mr-2">Duration</span>1 year</td>
-                                    <td class="block md:table-cell px-4 pt-1 pb-4 md:py-3 text-neutral-warm-700 align-top">Certificate of Attendance. Can be taken on its own as a standalone year of self-development.</td>
-                                </tr>
-                                <tr class="block md:table-row">
-                                    <td class="block md:table-cell px-4 pt-4 pb-1 md:py-3 font-medium text-[#0F2540] align-top">Level 2<br><span class="text-xs text-neutral-warm-500 font-normal">Counselling Skills</span></td>
-                                    <td class="block md:table-cell px-4 py-1 md:py-3 text-neutral-warm-700 align-top whitespace-nowrap"><span class="md:hidden text-xs uppercase tracking-wide text-neutral-warm-500 mr-2">Duration</span>1.5 years</td>
-                                    <td class="block md:table-cell px-4 pt-1 pb-4 md:py-3 text-neutral-warm-700 align-top">Certificate in Transpersonal Counselling Skills, awarded through a EUROTAS-accredited institute, with credits toward EUROTAS certification.</td>
-                                </tr>
-                                <tr class="block md:table-row">
-                                    <td class="block md:table-cell px-4 pt-4 pb-1 md:py-3 font-medium text-[#0F2540] align-top">Level 3<br><span class="text-xs text-neutral-warm-500 font-normal">Psychotherapy<a href="#psychotherapy-note" class="text-[#B65E3F] font-bold no-underline" title="See note about the protected title &quot;psychotherapist&quot;">*</a> &amp; Breathwork</span></td>
-                                    <td class="block md:table-cell px-4 py-1 md:py-3 text-neutral-warm-700 align-top whitespace-nowrap"><span class="md:hidden text-xs uppercase tracking-wide text-neutral-warm-500 mr-2">Duration</span>1.5 years</td>
-                                    <td class="block md:table-cell px-4 pt-1 pb-4 md:py-3 text-neutral-warm-700 align-top">Certificate as Transpersonal Psychotherapy<a href="#psychotherapy-note" class="text-[#B65E3F] font-bold no-underline" title="See note about the protected title &quot;psychotherapist&quot;">*</a> &amp; Holotropic Breathwork Facilitator, with an optional EUROTAS certification track.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div id="psychotherapy-note" class="scroll-mt-24 bg-[#D9A756]/10 border-t border-[#D9A756]/30 px-4 py-3">
-                            <p class="text-xs md:text-sm text-neutral-warm-700 leading-relaxed">
-                                <strong class="text-[#B65E3F]">*Please note:</strong> &ldquo;psychotherapist&rdquo; is a legally protected title in many countries (for example Germany, France, Italy and Austria).Please check the psychotherapy regulations in the country where you intend to practise before using the title professionally. <a href="{{ '/legal-notice/' | url }}" class="text-[#B65E3F] hover:text-[#7d5f28] underline underline-offset-2 font-medium">Read the full legal notice</a>.
+                <details class="p4-reveal">
+                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[#F5EAD9] transition-colors">
+                        <h2 class="p4-kicker text-[#B65E3F] flex items-center gap-4">
+                            <span class="p4-hairline"></span>
+                            Admissions
+                        </h2>
+                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[#B65E3F] transition-transform duration-300" aria-hidden="true"></i>
+                    </summary>
+                    <div class="border-t border-[#E7D6BE] px-6 pt-6">
+                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-6">How to Apply</h3>
+                        <div class="pb-10 grid gap-8">
+                            {% for adm in admissions %}
+                            <div class="bg-white border border-[#E7D6BE] p-8 shadow-sm">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="text-xs font-bold uppercase tracking-wider text-[#B65E3F]">
+                                        {{ adm.data.level }}
+                                    </span>
+                                    <span class="text-xs text-gray-400">—</span>
+                                    <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ adm.data.label }}{% if adm.data.note_anchor %}<a href="{{ adm.data.note_anchor }}" class="text-[#B65E3F] font-bold no-underline normal-case" title="See note about the protected title &quot;psychotherapist&quot;">*</a>{% endif %}</span>
+                                </div>
+                                {% if adm.data.who_can_apply %}
+                                <p class="text-gray-700 text-sm mb-4">
+                                    <strong>Who Can Apply:</strong> {{ adm.data.who_can_apply }}
+                                </p>
+                                {% endif %}
+                                <h4 class="font-semibold text-slate-700 text-sm mb-3">Requirements</h4>
+                                <div class="text-gray-600 text-sm space-y-2 admissions-content">
+                                    {{ adm.html | safe }}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </details>
+
+                <details class="p4-reveal">
+                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[#F5EAD9] transition-colors">
+                        <h2 class="p4-kicker text-[#B65E3F] flex items-center gap-4">
+                            <span class="p4-hairline"></span>
+                            Commitment
+                        </h2>
+                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[#B65E3F] transition-transform duration-300" aria-hidden="true"></i>
+                    </summary>
+                    <div class="border-t border-[#E7D6BE] px-6 pt-6">
+                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-6">Your Commitment Structure</h3>
+                        <div class="pb-10">
+                            <p class="text-gray-700 text-lg leading-relaxed mb-8">
+                                Our training asks for consistent engagement in learning, self-development, and supervised practice.
                             </p>
-                        </div>
-                    </div>
 
-                    <!-- Enrolment options + Fees -->
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div class="bg-white border border-[#E7D6BE] p-6 shadow-sm">
-                            <h3 class="font-serif font-bold text-slate-800 text-xl mb-4 flex items-center gap-2">
-                                <i data-lucide="list-checks" class="w-5 h-5 text-science-blue-600"></i>
-                                How you can join
-                            </h3>
-                            <ul class="text-gray-700 text-sm space-y-2 leading-relaxed list-disc list-inside">
-                                <li>The <strong>full training</strong> — all three levels, toward professional certification.</li>
-                                <li><strong>Self-development only</strong> — join Level 1 on its own, with no obligation to continue.</li>
-                                <li><strong>Single lectures</strong> — follow individual recorded lectures à la carte.</li>
-                                <li><strong>Single seminars</strong> — attend an individual in-person intensive.</li>
-                            </ul>
-                            <p class="text-xs text-neutral-warm-500 mt-4">Enrolment options are identical for the Western and Eastern tracks.</p>
-                        </div>
-                        <div class="bg-white border border-[#E7D6BE] p-6 shadow-sm">
-                            <h3 class="font-serif font-bold text-slate-800 text-xl mb-4 flex items-center gap-2">
-                                <i data-lucide="wallet" class="w-5 h-5 text-science-blue-600"></i>
-                                Fees
-                            </h3>
-                            <ul class="text-gray-700 text-sm space-y-2 leading-relaxed">
-                                <li class="flex justify-between gap-4"><span>Per module &mdash; Eastern track</span><span class="font-semibold text-[#0F2540] whitespace-nowrap">&euro;489</span></li>
-                                <li class="flex justify-between gap-4"><span>Per module &mdash; Western track</span><span class="font-semibold text-[#0F2540] whitespace-nowrap">&euro;689</span></li>
-                                <li class="flex justify-between gap-4"><span>Single lecture</span><span class="font-semibold text-[#0F2540] whitespace-nowrap">&euro;45</span></li>
-                                <li class="flex justify-between gap-4"><span>Single seminar</span><span class="font-semibold text-[#0F2540] whitespace-nowrap">on request</span></li>
-                            </ul>
-                            <p class="text-xs text-neutral-warm-500 mt-4">Each module runs about three months. You pay module by module — there is no need to pay for a whole year at once.</p>
-                        </div>
-                    </div>
-
-                    <!-- Discounts + payment note -->
-                    <div class="mt-6 bg-[#0F2540]/5 border border-[#0F2540]/10 p-6">
-                        <div class="flex items-start gap-3">
-                            <i data-lucide="hand-heart" class="w-5 h-5 text-[#B65E3F] flex-shrink-0 mt-0.5"></i>
-                            <div class="text-sm text-neutral-warm-700 leading-relaxed space-y-2">
-                                <p><strong class="text-[#0F2540]">Cost should not be a barrier.</strong> If money is a genuine obstacle, please write to us — we can offer discounts on a case-by-case basis.</p>
-                                <p>We also give <strong class="text-[#0F2540]">one free module for every new student you bring</strong> to the school.</p>
-                                <p class="text-xs text-neutral-warm-500 pt-1">Online payment is not yet available on this website; enrolment and payment are arranged directly with the office.</p>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                {% for card in commitmentCards %}
+                                <div class="bg-white border border-[#E7D6BE] p-6 shadow-sm{% if loop.last or (loop.index == 3) %} md:col-span-2{% endif %}">
+                                    <h3 class="font-serif font-bold text-slate-800 text-xl mb-4 flex items-center gap-2">
+                                        <i data-lucide="{{ card.data.icon }}" class="w-5 h-5 {{ card.data.icon_color }}"></i>
+                                        {{ card.data.heading }}
+                                    </h3>
+                                    <div class="text-gray-700 text-sm space-y-2 leading-relaxed commitment-content">
+                                        {{ card.html | safe }}
+                                    </div>
+                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
-                </div>
-            </details>
+                </details>
+
+                <details class="p4-reveal">
+                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[#F5EAD9] transition-colors">
+                        <h2 class="p4-kicker text-[#B65E3F] flex items-center gap-4">
+                            <span class="p4-hairline"></span>
+                            Fees &amp; enrolment
+                        </h2>
+                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[#B65E3F] transition-transform duration-300" aria-hidden="true"></i>
+                    </summary>
+                    <div class="border-t border-[#E7D6BE] px-6 pt-6">
+                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-6">What you earn, and what it costs</h3>
+                        <div class="pb-10">
+                            <!-- Certificates per level -->
+                            <div class="bg-white border border-[#E7D6BE] shadow-sm overflow-hidden mb-8">
+                                <table class="block md:table w-full text-left text-sm md:text-base">
+                                    <thead class="hidden md:table-header-group">
+                                        <tr class="bg-[#0F2540] text-[#FDFBF5]">
+                                            <th class="px-4 py-3 font-semibold">Level</th>
+                                            <th class="px-4 py-3 font-semibold whitespace-nowrap">Duration</th>
+                                            <th class="px-4 py-3 font-semibold">Certificate</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="block md:table-row-group divide-y divide-[#E7D6BE]">
+                                        <tr class="block md:table-row">
+                                            <td class="block md:table-cell px-4 pt-4 pb-1 md:py-3 font-medium text-[#0F2540] align-top">Level 1<br><span class="text-xs text-neutral-warm-500 font-normal">Self-Development</span></td>
+                                            <td class="block md:table-cell px-4 py-1 md:py-3 text-neutral-warm-700 align-top whitespace-nowrap"><span class="md:hidden text-xs uppercase tracking-wide text-neutral-warm-500 mr-2">Duration</span>1 year</td>
+                                            <td class="block md:table-cell px-4 pt-1 pb-4 md:py-3 text-neutral-warm-700 align-top">Certificate of Attendance. Can be taken on its own as a standalone year of self-development.</td>
+                                        </tr>
+                                        <tr class="block md:table-row">
+                                            <td class="block md:table-cell px-4 pt-4 pb-1 md:py-3 font-medium text-[#0F2540] align-top">Level 2<br><span class="text-xs text-neutral-warm-500 font-normal">Counselling Skills</span></td>
+                                            <td class="block md:table-cell px-4 py-1 md:py-3 text-neutral-warm-700 align-top whitespace-nowrap"><span class="md:hidden text-xs uppercase tracking-wide text-neutral-warm-500 mr-2">Duration</span>1.5 years</td>
+                                            <td class="block md:table-cell px-4 pt-1 pb-4 md:py-3 text-neutral-warm-700 align-top">Certificate in Transpersonal Counselling Skills, awarded through a EUROTAS-accredited institute, with credits toward EUROTAS certification.</td>
+                                        </tr>
+                                        <tr class="block md:table-row">
+                                            <td class="block md:table-cell px-4 pt-4 pb-1 md:py-3 font-medium text-[#0F2540] align-top">Level 3<br><span class="text-xs text-neutral-warm-500 font-normal">Psychotherapy<a href="#psychotherapy-note" class="text-[#B65E3F] font-bold no-underline" title="See note about the protected title &quot;psychotherapist&quot;">*</a> &amp; Breathwork</span></td>
+                                            <td class="block md:table-cell px-4 py-1 md:py-3 text-neutral-warm-700 align-top whitespace-nowrap"><span class="md:hidden text-xs uppercase tracking-wide text-neutral-warm-500 mr-2">Duration</span>1.5 years</td>
+                                            <td class="block md:table-cell px-4 pt-1 pb-4 md:py-3 text-neutral-warm-700 align-top">Certificate as Transpersonal Psychotherapy<a href="#psychotherapy-note" class="text-[#B65E3F] font-bold no-underline" title="See note about the protected title &quot;psychotherapist&quot;">*</a> &amp; Holotropic Breathwork Facilitator, with an optional EUROTAS certification track.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div id="psychotherapy-note" class="scroll-mt-24 bg-[#D9A756]/10 border-t border-[#D9A756]/30 px-4 py-3">
+                                    <p class="text-xs md:text-sm text-neutral-warm-700 leading-relaxed">
+                                        <strong class="text-[#B65E3F]">*Please note:</strong> &ldquo;psychotherapist&rdquo; is a legally protected title in many countries (for example Germany, France, Italy and Austria).Please check the psychotherapy regulations in the country where you intend to practise before using the title professionally. <a href="{{ '/legal-notice/' | url }}" class="text-[#B65E3F] hover:text-[#7d5f28] underline underline-offset-2 font-medium">Read the full legal notice</a>.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Enrolment options + Fees -->
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-white border border-[#E7D6BE] p-6 shadow-sm">
+                                    <h3 class="font-serif font-bold text-slate-800 text-xl mb-4 flex items-center gap-2">
+                                        <i data-lucide="list-checks" class="w-5 h-5 text-science-blue-600"></i>
+                                        How you can join
+                                    </h3>
+                                    <ul class="text-gray-700 text-sm space-y-2 leading-relaxed list-disc list-inside">
+                                        <li>The <strong>full training</strong> — all three levels, toward professional certification.</li>
+                                        <li><strong>Self-development only</strong> — join Level 1 on its own, with no obligation to continue.</li>
+                                        <li><strong>Single lectures</strong> — follow individual recorded lectures à la carte.</li>
+                                        <li><strong>Single seminars</strong> — attend an individual in-person intensive.</li>
+                                    </ul>
+                                    <p class="text-xs text-neutral-warm-500 mt-4">Enrolment options are identical for the Western and Eastern tracks.</p>
+                                </div>
+                                <div class="bg-white border border-[#E7D6BE] p-6 shadow-sm">
+                                    <h3 class="font-serif font-bold text-slate-800 text-xl mb-4 flex items-center gap-2">
+                                        <i data-lucide="wallet" class="w-5 h-5 text-science-blue-600"></i>
+                                        Fees
+                                    </h3>
+                                    <ul class="text-gray-700 text-sm space-y-2 leading-relaxed">
+                                        <li class="flex justify-between gap-4"><span>Per module &mdash; Eastern track</span><span class="font-semibold text-[#0F2540] whitespace-nowrap">&euro;489</span></li>
+                                        <li class="flex justify-between gap-4"><span>Per module &mdash; Western track</span><span class="font-semibold text-[#0F2540] whitespace-nowrap">&euro;689</span></li>
+                                        <li class="flex justify-between gap-4"><span>Single lecture</span><span class="font-semibold text-[#0F2540] whitespace-nowrap">&euro;45</span></li>
+                                        <li class="flex justify-between gap-4"><span>Single seminar</span><span class="font-semibold text-[#0F2540] whitespace-nowrap">on request</span></li>
+                                    </ul>
+                                    <p class="text-xs text-neutral-warm-500 mt-4">Each module runs about three months. You pay module by module — there is no need to pay for a whole year at once.</p>
+                                </div>
+                            </div>
+
+                            <!-- Discounts + payment note -->
+                            <div class="mt-6 bg-[#0F2540]/5 border border-[#0F2540]/10 p-6">
+                                <div class="flex items-start gap-3">
+                                    <i data-lucide="hand-heart" class="w-5 h-5 text-[#B65E3F] flex-shrink-0 mt-0.5"></i>
+                                    <div class="text-sm text-neutral-warm-700 leading-relaxed space-y-2">
+                                        <p><strong class="text-[#0F2540]">Cost should not be a barrier.</strong> If money is a genuine obstacle, please write to us — we can offer discounts on a case-by-case basis.</p>
+                                        <p>We also give <strong class="text-[#0F2540]">one free module for every new student you bring</strong> to the school.</p>
+                                        <p class="text-xs text-neutral-warm-500 pt-1">Online payment is not yet available on this website; enrolment and payment are arranged directly with the office.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </div>
         </div>
     </div>
 </section>
