@@ -220,6 +220,67 @@
         statusEl.classList.remove('hidden');
     }
 
+    // A big scan can take a minute to encode and upload, and a status line that
+    // never changes reads as "stuck". So three things move: the dots cycle, the
+    // sentence changes every 5s, and a bar fills the message box behind the
+    // text. The list ends on a line that makes sense to sit on, since that's
+    // where it stays until we're done.
+    var UPLOAD_LINES = [
+        'Uploading your signed agreement',
+        'A scanned document can be a big file &mdash; still going',
+        'Thanks for your patience, this can take a minute',
+        'Filing your agreement safely with the school',
+        'The bigger the scan, the longer this takes',
+        'Please keep this page open while we finish',
+        'Still on it &mdash; a slow connection makes this crawl',
+        'Hang on. We&rsquo;ll confirm the moment it lands'
+    ];
+    var TICK_MS = 500; // how often the dots move
+    var TICKS_PER_LINE = 10; // 10 × 500ms = a new sentence every 5 seconds
+
+    // Nothing here knows how long the upload will actually take — it depends on
+    // the file and the connection — so the bar can't be a real percentage.
+    // Instead it eases towards the end without ever arriving: fast at first,
+    // then slower and slower, about 87% of the way after a minute. It can
+    // therefore never fill up and sit there looking broken while we still wait.
+    var FILL_TAU_MS = 25000;
+    var FILL_MAX = 96;
+
+    var uploadTicker = null;
+
+    function startUploadTicker() {
+        // Painted once; after this only the text and the bar's width change, so
+        // the bar keeps its CSS transition instead of being rebuilt each tick.
+        setStatus('info',
+            '<span class="absolute inset-y-0 left-0 pointer-events-none" data-fill '
+                + 'style="width:0%;background:rgba(217,167,86,.35);transition:width '
+                + TICK_MS + 'ms linear"></span>'
+            + '<span class="relative" data-line></span>');
+        statusEl.classList.add('relative', 'overflow-hidden');
+
+        var fillEl = statusEl.querySelector('[data-fill]');
+        var lineEl = statusEl.querySelector('[data-line]');
+        var tick = 0;
+
+        // The dots sit in a fixed-width box so the sentence doesn't jitter as
+        // they come and go.
+        function paint() {
+            var line = Math.min(Math.floor(tick / TICKS_PER_LINE), UPLOAD_LINES.length - 1);
+            // Phased off the line, not the total, so each new sentence starts
+            // with no dots rather than mid-cycle.
+            var dots = new Array((tick % TICKS_PER_LINE) % 4 + 1).join('.');
+            lineEl.innerHTML = UPLOAD_LINES[line]
+                + '<span class="inline-block w-6 text-left" aria-hidden="true">' + dots + '</span>';
+            fillEl.style.width = (FILL_MAX * (1 - Math.exp(-(tick * TICK_MS) / FILL_TAU_MS))) + '%';
+        }
+        paint();
+        uploadTicker = setInterval(function () { tick++; paint(); }, TICK_MS);
+    }
+
+    function stopUploadTicker() {
+        if (uploadTicker) { clearInterval(uploadTicker); uploadTicker = null; }
+    }
+
     function readFileBase64(file) {
         return new Promise(function (resolve, reject) {
             var r = new FileReader();
@@ -259,7 +320,7 @@
 
             uploadBtn.disabled = true;
             uploadBtnLabel.textContent = 'Uploading…';
-            setStatus('info', 'Uploading your signed agreement…');
+            startUploadTicker();
 
             Promise.all([
                 readFileBase64(file),
@@ -296,6 +357,9 @@
             }).catch(function () {
                 setStatus('err', 'Sorry, the upload didn’t go through. Please try again, or email your signed agreement to ' + EMAIL_LINK + '.');
             }).finally(function () {
+                // Safe here: no timer can fire between the handler above
+                // setting the final message and this running.
+                stopUploadTicker();
                 uploadBtn.disabled = false;
                 uploadBtnLabel.textContent = 'Upload signed agreement';
             });
