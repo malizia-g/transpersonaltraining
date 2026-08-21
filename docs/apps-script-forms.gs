@@ -7,6 +7,10 @@
  *   • signed enrolment agreement  → a file in your Drive, and its link written
  *     (/apply/ step 3)              onto that person's "Applications" row
  *
+ * Who gets told about a new message is read from the spreadsheet too, not
+ * hard-coded here — see NOTIFY_SHEET below. The contact form and the signed
+ * agreement also send a confirmation back to the person who submitted them.
+ *
  * The applicant is matched by EMAIL: step 1 creates their row, step 3 finds it
  * again and fills in the Agreement column. Re-submitting step 1 with the same
  * email updates that row instead of adding a second one.
@@ -25,11 +29,31 @@
  */
 
 // ---- Config ---------------------------------------------------------------
-// Where to email you when something comes in ('' = no email for that office).
-// The school runs two offices, one per track — see notifyEmails_() below for
-// how a message is routed to the right one (or both, when the track isn't known).
-var NOTIFY_EMAIL_WEST = 'west-office@transpersonal-training.com';
-var NOTIFY_EMAIL_EAST = 'east-office@transpersonal-training.com';
+// Who gets notified when something comes in. The addresses live in the forms
+// spreadsheet, in a tab with one column per office — so the school can add or
+// remove people without touching this code or redeploying. See notifyEmails_().
+//
+// Put the tab's name here. Capitalisation doesn't matter, and if the tab is
+// renamed outright it's still found by its two column headings — notifications
+// keep working either way.
+var NOTIFY_SHEET = 'Notifications';
+var NOTIFY_WEST_HEADER = 'WEST TRACK';
+var NOTIFY_EAST_HEADER = 'EAST TRACK';
+
+// The school's public addresses, the ones printed on the website. Two jobs:
+// the Reply-To on the confirmation we send back to the sender, and a fallback
+// set of recipients if the tab above can't be read, so a mistake in the
+// spreadsheet can never silence a notification altogether ('' = no email).
+//
+// Don't rely on them for notifications: mail sent here has to survive the
+// domain's forwarding, which is the hop that was swallowing them before. For a
+// human hitting Reply that hop works fine, which is why they're used for that.
+var OFFICE_EMAIL_WEST = 'west-office@transpersonal-training.com';
+var OFFICE_EMAIL_EAST = 'east-office@transpersonal-training.com';
+
+// The name and signature on mail the school sends out.
+var SCHOOL_NAME = 'Transpersonal Training';
+var SCHOOL_URL = 'https://transpersonal-training.com';
 
 // Leave empty when this script is bound to the spreadsheet (Extensions → Apps
 // Script). Only set it if you ever move the script to a standalone project.
@@ -361,6 +385,14 @@ function handleContact_(data) {
       body: name + ' <' + email + '> wrote:\n\n' + message
     });
   }
+
+  sendConfirmation_(email, track,
+    'We have your message — ' + SCHOOL_NAME,
+    'Hi ' + name + ',\n\n'
+      + 'Thank you for writing to us. Your message has reached the school and a real '
+      + 'person will read it — we normally reply within a few days.\n\n'
+      + 'This is what you sent, for your own records:\n\n' + message);
+
   return json_({ status: 'ok' });
 }
 
@@ -424,34 +456,45 @@ function handleAgreement_(data) {
 
   var sh = sheet_(APPLICATION_SHEET, APPLICATION_HEADERS);
   var row = findRowByEmail_(sh, email);
-  var name = row ? String(cell_(sh, row, 'Name') || '') : '';
-  var track = row ? String(cell_(sh, row, 'Track') || '') : ''; // routes the notification below
+  // The whole row in one read. Each cell_() is a separate round trip to Sheets,
+  // and this handler is already the slowest thing the website does.
+  var existing = row ? sh.getRange(row, 1, 1, APPLICATION_HEADERS.length).getValues()[0] : [];
+  var name = String(existing[APPLICATION_HEADERS.indexOf('Name')] || '');
+  var track = String(existing[APPLICATION_HEADERS.indexOf('Track')] || ''); // routes the notification below
 
   var folder = getFolder_();
   var stamp = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd_HH-mm');
   var label = sanitize_(name) || sanitize_(email.split('@')[0]) || 'applicant';
 
+  // Named on the blob rather than with a setName() afterwards: that would be a
+  // second call to Drive for something the first call can already carry.
   var origName = sanitize_(data.filename) || 'signed-agreement';
-  var blob = Utilities.newBlob(bytes, data.mimeType || 'application/octet-stream', origName);
-  var file = folder.createFile(blob).setName(label + '__' + stamp + '__' + origName);
+  var blob = Utilities.newBlob(bytes, data.mimeType || 'application/octet-stream',
+    label + '__' + stamp + '__' + origName);
+  var file = folder.createFile(blob);
 
   // Same folder as the agreement, but tagged "Diploma" in the name instead so
   // the two are easy to tell apart once they sit side by side in Drive.
   var diplomaUrl = '';
   if (diplomaBytes) {
     var diplomaOrigName = sanitize_(data.diplomaFilename) || 'diploma';
-    var diplomaBlob = Utilities.newBlob(diplomaBytes, data.diplomaMimeType || 'application/octet-stream', diplomaOrigName);
-    var diplomaFile = folder.createFile(diplomaBlob).setName(label + '__' + stamp + '__Diploma__' + diplomaOrigName);
-    diplomaUrl = diplomaFile.getUrl();
+    var diplomaBlob = Utilities.newBlob(diplomaBytes, data.diplomaMimeType || 'application/octet-stream',
+      label + '__' + stamp + '__Diploma__' + diplomaOrigName);
+    diplomaUrl = folder.createFile(diplomaBlob).getUrl();
   }
 
   // The signed agreement arriving is what makes this a real application, so
   // that moment — not the form fill — is the date stamped here.
   var applyDate = new Date();
   if (row) {
-    sh.getRange(row, APPLICATION_HEADERS.indexOf('Apply date') + 1).setValue(applyDate);
-    sh.getRange(row, APPLICATION_HEADERS.indexOf('Agreement') + 1).setValue(file.getUrl());
-    if (diplomaUrl) sh.getRange(row, APPLICATION_HEADERS.indexOf('Diploma') + 1).setValue(diplomaUrl);
+    // One write instead of three. Built from the row we already read, so the
+    // untouched columns keep their values and an earlier diploma survives an
+    // upload that doesn't carry a new one.
+    var updated = existing.slice();
+    updated[APPLICATION_HEADERS.indexOf('Apply date')] = applyDate;
+    updated[APPLICATION_HEADERS.indexOf('Agreement')] = file.getUrl();
+    if (diplomaUrl) updated[APPLICATION_HEADERS.indexOf('Diploma')] = diplomaUrl;
+    sh.getRange(row, 1, 1, APPLICATION_HEADERS.length).setValues([updated]);
   } else {
     // No application row for this address — they typed a different email, or
     // signed a copy from elsewhere. Never drop the file: give it its own row
@@ -476,6 +519,15 @@ function handleAgreement_(data) {
         (diplomaUrl ? '\nDiploma: ' + diplomaUrl : '')
     });
   }
+  sendConfirmation_(email, track,
+    'Your signed enrolment agreement has arrived — ' + SCHOOL_NAME,
+    'Hi ' + (name || 'there') + ',\n\n'
+      + 'Your signed enrolment agreement has reached us safely'
+      + (diplomaUrl ? ', along with your diploma' : '') + '. It is now with the '
+      + 'office, and someone will be in touch by email about the next steps.\n\n'
+      + 'There is nothing more for you to do for now. If anything looks wrong, '
+      + 'just reply to this email and we will sort it out.');
+
   return json_({
     status: 'ok', matched: !!row, fileId: file.getId(), fileUrl: file.getUrl(),
     diplomaUrl: diplomaUrl || undefined
@@ -524,14 +576,118 @@ function sheet_(name, headers) {
   return sh;
 }
 
-// Routes a notification to the right office by track. An unrecognised or
-// missing track (message sent before choosing one, or no matching
-// application row) goes to both, so nothing is ever silently missed.
+// Routes a notification to the right office by track, reading the addresses
+// from the notification tab. An unrecognised or missing track (message sent
+// before choosing an office, or no matching application row) goes to both, so
+// nothing is ever silently missed.
 function notifyEmails_(track) {
-  if (track === 'Western') return NOTIFY_EMAIL_WEST;
-  if (track === 'Eastern') return NOTIFY_EMAIL_EAST;
-  var both = [NOTIFY_EMAIL_WEST, NOTIFY_EMAIL_EAST].filter(function (e) { return !!e; });
-  return both.join(',');
+  var west = notifyColumn_(NOTIFY_WEST_HEADER, OFFICE_EMAIL_WEST);
+  var east = notifyColumn_(NOTIFY_EAST_HEADER, OFFICE_EMAIL_EAST);
+
+  var picked = track === 'Western' ? west
+             : track === 'Eastern' ? east
+             : west.concat(east);
+
+  // Someone in both columns should still get exactly one copy.
+  return picked.filter(function (addr, i) { return picked.indexOf(addr) === i; }).join(',');
+}
+
+// The public address a reply should go to, by track — both when we don't know
+// which office it is.
+function officeEmail_(track) {
+  if (track === 'Western') return OFFICE_EMAIL_WEST;
+  if (track === 'Eastern') return OFFICE_EMAIL_EAST;
+  return [OFFICE_EMAIL_WEST, OFFICE_EMAIL_EAST].filter(function (e) { return !!e; }).join(',');
+}
+
+// Confirms to the sender that what they sent actually arrived — the website
+// says so on screen, but a page can be closed and an email can be kept.
+//
+// Deliberately swallows its own errors: the submission is already saved by the
+// time this runs, so a confirmation that won't send (mail quota, a typo'd
+// address) must never turn a successful submission into an error on screen.
+function sendConfirmation_(to, track, subject, body) {
+  try {
+    MailApp.sendEmail({
+      to: to,
+      name: SCHOOL_NAME,
+      replyTo: officeEmail_(track), // a reply reaches a person, not this script
+      subject: subject,
+      body: body + '\n\nWarm regards,\n' + SCHOOL_NAME + '\n' + SCHOOL_URL
+    });
+  } catch (err) {
+    Logger.log('Confirmation to ' + to + ' failed: ' + err);
+  }
+}
+
+// The notification tab's grid, fetched once. notifyEmails_ wants two columns
+// out of it, and a Sheets read is a slow call to make twice — this global lives
+// exactly as long as one execution, which is the right scope for the cache.
+var notifyGrid_;
+
+function notifyGrid() {
+  if (notifyGrid_ !== undefined) return notifyGrid_;
+  var sh = notifySheet_();
+  notifyGrid_ = (sh && sh.getLastRow() > 1)
+    ? sh.getRange(1, 1, sh.getLastRow(), sh.getLastColumn()).getDisplayValues()
+    : null;
+  return notifyGrid_;
+}
+
+// The addresses in one column of the notification tab, top to bottom. Gaps are
+// normal — the two columns fill up at their own pace — so blanks are skipped,
+// and so is anything that isn't an email address (a note, a name, a heading
+// someone added). Falls back to the hard-coded office address when the tab or
+// the column has nothing usable in it.
+function notifyColumn_(header, fallback) {
+  var rows = notifyGrid();
+  if (rows) {
+    var headers = rows[0];
+    for (var col = 0; col < headers.length; col++) {
+      if (String(headers[col]).trim().toUpperCase() !== header) continue;
+      // slice, not shift: the grid is cached and the other column still needs it.
+      var found = rows.slice(1)
+        .map(function (row) { return String(row[col] || '').trim(); })
+        .filter(function (addr) { return EMAIL_RE.test(addr); });
+      if (found.length) return found;
+    }
+  }
+  return fallback ? [fallback] : [];
+}
+
+// The notification tab: by name, or — if it's been renamed — by the heading in
+// its first cell, so renaming the tab can't quietly cut the notifications off.
+var notifySheetFound_;
+
+function notifySheet_() {
+  if (notifySheetFound_ !== undefined) return notifySheetFound_;
+  notifySheetFound_ = findNotifySheet_();
+  return notifySheetFound_;
+}
+
+function findNotifySheet_() {
+  var ss = SHEET_ID ? SpreadsheetApp.openById(SHEET_ID) : SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss) return null;
+  var sh = ss.getSheetByName(NOTIFY_SHEET);
+  if (sh) return sh;
+
+  var all = ss.getSheets();
+
+  // getSheetByName is case-sensitive, and nobody should have to remember
+  // whether the tab was typed with a capital. Names are already in hand here,
+  // so this costs nothing.
+  var wanted = NOTIFY_SHEET.trim().toUpperCase();
+  for (var i = 0; i < all.length; i++) {
+    if (String(all[i].getName()).trim().toUpperCase() === wanted) return all[i];
+  }
+
+  // Renamed outright: fall back to the heading in the first cell. This one does
+  // cost a read per tab, which is why it comes last.
+  for (var j = 0; j < all.length; j++) {
+    var first = String(all[j].getRange(1, 1).getDisplayValue() || '').trim().toUpperCase();
+    if (first === NOTIFY_WEST_HEADER) return all[j];
+  }
+  return null;
 }
 
 function getFolder_() {

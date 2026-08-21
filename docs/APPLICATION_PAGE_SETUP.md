@@ -126,13 +126,41 @@ internal notes never reach an applicant. If you rename that heading, update
 - Check `AGREEMENT_DOC_ID` near the top matches your master Google Doc (it's the
   long id in the Doc's URL). This is the Doc the website will publish.
 - (Optional) also at the top:
-  - `NOTIFY_EMAIL_WEST` / `NOTIFY_EMAIL_EAST` — where to email each office when a
-    form comes in (`''` = no email for that office). A submission is routed to
-    the office matching the applicant's track; if the track isn't known yet
-    (a general enquiry with no office chosen, or a signed-agreement upload with
-    no matching application row), it goes to **both**.
+  - `NOTIFY_SHEET` — the name of the tab holding the notification addresses (see
+    below). `OFFICE_EMAIL_WEST` / `OFFICE_EMAIL_EAST` are the school's public
+    addresses: they become the Reply-To on the confirmation sent back to the
+    sender, and the fallback recipients if that tab can't be read (`''` = no
+    email for that office).
   - `FOLDER_NAME` — the Drive folder signed agreements go into (auto-created).
     Or set `FOLDER_ID` to an existing folder's ID.
+
+### Who gets notified
+
+Add a tab to the forms spreadsheet with two headings in row 1 — **WEST TRACK**
+and **EAST TRACK** — and list one email address per row under each. The script
+reads it on every submission, so adding or removing someone takes effect
+immediately, with no redeploy. Name the tab whatever `NOTIFY_SHEET` says —
+capitalisation doesn't matter — or rename it freely: the headings are enough to
+find it again.
+
+A submission is routed to the office matching the applicant's track; if the
+track isn't known yet (a general enquiry with no office chosen, or a
+signed-agreement upload with no matching application row), it goes to **both**
+columns. Gaps in a column are fine, and anything that isn't an email address is
+ignored, so you can keep notes alongside the addresses.
+
+Two emails go out for each contact message and each signed agreement: the
+notification to the office, and a confirmation back to the person who wrote in,
+so they have proof it arrived even after closing the page. A confirmation that
+can't be sent is logged and ignored — it must never make a saved submission
+look like it failed. (Applications, step 1, still send nothing: the applicant
+is mid-flow and hasn't finished yet.)
+
+> ⚠️ List the addresses people actually read — a personal or team mailbox — not
+> an address that only *forwards* somewhere else. `MailApp` sends as your Google
+> account, so a forwarded copy leaves the domain's mail server with a `From:`
+> that no longer passes SPF, and the receiving side tends to bin it silently.
+> That is exactly how notifications went missing before this tab existed.
 
 The script reads the Doc as **you**, so the Doc can stay private — it does not
 need to be shared or published to the web.
@@ -220,4 +248,4 @@ The `/exec` URL stays the same, so you never need to touch the site again.
 - **CORS:** requests are sent as "simple" requests (text/plain body) so the
   browser skips the preflight that Apps Script doesn't answer. If a browser still
   can't read the response, the page assumes success on a resolved request and the
-  `NOTIFY_EMAIL_WEST` / `NOTIFY_EMAIL_EAST` notification is your backstop confirmation.
+  office notification is your backstop confirmation.
