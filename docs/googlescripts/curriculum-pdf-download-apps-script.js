@@ -2,7 +2,7 @@
  * ═══════════════════════════════════════════════════════════════════
  *  Curriculum Spreadsheet → downloadable PDF for the website
  *  Google Apps Script — add as a NEW file in the SAME script project as the
- *  JSON web app (docs/spreadsheet-automation/curriculum-json-apps-script.js)
+ *  JSON web app (docs/googlescripts/curriculum-json-apps-script.js)
  * ═══════════════════════════════════════════════════════════════════
  *
  *  WHAT IT DOES
