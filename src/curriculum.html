@@ -49,6 +49,19 @@ description: "All modules across three levels: consciousness studies, counsellin
             <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
                 A structured progression from self-development through professional facilitation to advanced psychotherapy and Holotropic Breathwork practice.
             </p>
+            {% if curriculumData.pdfUrl %}
+            <div class="mt-8">
+                <a
+                    href="{{ curriculumData.pdfUrl }}"
+                    target="_blank"
+                    rel="noopener"
+                    class="inline-flex items-center gap-2 border border-[#FDFBF5]/60 hover:border-[#D9A756] text-[#FDFBF5] hover:text-[#D9A756] px-6 py-3 font-medium tracking-wide transition-all"
+                >
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    Download PDF
+                </a>
+            </div>
+            {% endif %}
         </div>
     </div>
 </header>

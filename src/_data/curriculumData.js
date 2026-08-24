@@ -9,6 +9,11 @@ const path = require('path');
 const CURRICULUM_JSON_URL = 'https://script.google.com/macros/s/AKfycbxCzM30igQdGt2vYsRaQToDtKnjvIE5ZIypoKSaxoBtrXlajcEBc1NArDxmbXzNqCzhOA/exec';
 const CACHE_FILE = path.join(__dirname, 'curriculumData.cache.json');
 
+// Same web app, second route: ?format=pdf builds the curriculum as a PDF and
+// bounces the browser to it (APPS-SCRIPT-3-curriculum-pdf-download.js). Kept
+// next to the JSON URL so the two can never drift apart.
+const CURRICULUM_PDF_URL = `${CURRICULUM_JSON_URL}?format=pdf`;
+
 function fetchUrl(url, redirectsLeft = 5) {
   return new Promise((resolve, reject) => {
     const req = https.get(
@@ -568,7 +573,7 @@ module.exports = async function () {
 
     saveCurriculumCache(normalized);
 
-    return normalized;
+    return { ...normalized, pdfUrl: CURRICULUM_PDF_URL };
   } catch (error) {
     console.error('Error loading curriculum data:', error.message);
 
@@ -580,7 +585,7 @@ module.exports = async function () {
           saveCurriculumCache(normalizedCache);
 
           console.log(`⚠️ Using cached curriculum data (${normalizedCache.levels.length} levels)`);
-          return normalizedCache;
+          return { ...normalizedCache, pdfUrl: CURRICULUM_PDF_URL };
         }
       } catch (cacheError) {
         console.error('❌ Cache read failed:', cacheError.message);
@@ -589,7 +594,8 @@ module.exports = async function () {
 
     return {
       levels: [],
-      totalModules: 0
+      totalModules: 0,
+      pdfUrl: CURRICULUM_PDF_URL
     };
   }
 };

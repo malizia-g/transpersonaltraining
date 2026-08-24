@@ -8,6 +8,11 @@
  *    Without a new version the published URL keeps serving the old code and
  *    the website build never sees the change.
  *
+ * Routes:
+ *   /exec              → the curriculum as JSON (below)
+ *   /exec?format=pdf   → the curriculum as a downloadable PDF, handled by
+ *                        curriculum-pdf-download-apps-script.js
+ *
  * Structure returned:
  *   { totalHours, levels[] }
  *   Each level  → { level, title, description, year, sections[], notes[] }
@@ -170,7 +175,34 @@ function parseLevelTopic(topic) {
 
 /* ── Main entry point ──────────────────────────────────────────────── */
 
+/**
+ * Web-app entry point. A script project can only have one doGet, so this is a
+ * router: ?format=pdf hands over to the curriculum PDF script
+ * (curriculum-pdf-download-apps-script.js), anything else returns the JSON the
+ * website build reads.
+ */
 function doGet(e) {
+  var format = String((e && e.parameter && e.parameter.format) || '').toLowerCase();
+
+  if (format === 'pdf') {
+    if (typeof curriculumPdfWebApp !== 'function') {
+      return ContentService
+        .createTextOutput('The curriculum PDF script is not installed in this project.')
+        .setMimeType(ContentService.MimeType.TEXT);
+    }
+    return curriculumPdfWebApp(e);
+  }
+
+  return ContentService.createTextOutput(JSON.stringify(buildCurriculumTree(), null, 2))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+/**
+ * Parse the spreadsheet into the hierarchical structure both the JSON endpoint
+ * and the PDF are built from. Kept separate from doGet so the PDF script can
+ * reuse it instead of carrying its own copy of the parser.
+ */
+function buildCurriculumTree() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   var data  = sheet.getDataRange().getValues();
 
@@ -354,6 +386,5 @@ function doGet(e) {
     }
   }
 
-  return ContentService.createTextOutput(JSON.stringify(result, null, 2))
-    .setMimeType(ContentService.MimeType.JSON);
+  return result;
 }
