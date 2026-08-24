@@ -11,7 +11,6 @@ icon_color: text-science-blue-600
 - **Monthly Group Coaching**
   - Transpersonal therapy group sessions, facilitated by a graduate of the school
   - Once a month, throughout each level
-  - How the school follows each student's personal development
 - **Residential Trainings**
   - 4 weekends per year (Thursday to Sunday)
   - 30 hours each = 120 hours/year = 480 hours in 4 years
