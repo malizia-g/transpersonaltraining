@@ -45,10 +45,13 @@
             email: form.elements.email.value.trim(),
             message: form.elements.message.value.trim(),
             track: form.elements.track ? form.elements.track.value.trim() : '', // which office to notify; empty = both
+            newsletter: form.elements.newsletter ? form.elements.newsletter.checked : false,
             website: form.elements.website ? form.elements.website.value : '' // honeypot
         };
-        if (!payload.name || !payload.email || !payload.message) {
-            setStatus('err', 'Please fill in your name, email and message.');
+        // The message is optional: plenty of people just want the lesson and
+        // the brochure, and the reply sends those either way.
+        if (!payload.name || !payload.email) {
+            setStatus('err', 'Please fill in your name and email.');
             return;
         }
 
@@ -67,7 +70,7 @@
             })
             .then(function (out) {
                 if (out && out.status === 'error') throw new Error(out.message || 'Server error');
-                setStatus('ok', 'Thank you — your message has reached us. We’ll be in touch by email.');
+                setStatus('ok', 'Thank you — we’ve got your details. Check your inbox: the sample lesson and the brochure are on their way.');
                 form.reset();
                 // It's safely with the school now; don't keep a copy in this browser.
                 if (window.FormCache) window.FormCache.clear('contact');
