@@ -86,7 +86,7 @@ sheet.
 | `/schedule/` | breathwork seminars | holotropic breathwork intensives, residential training Europe | `Breathwork Intensives & Seminars` |
 | `/venues/` | breathwork retreat Germany | training venues Italy, Black Forest, Tuscany | `Training Venues in Germany & Italy` |
 | `/collaborations/` | eurotas accredited psychotherapy schools | transpersonal psychology institutes Europe | `EUROTAS Partner Institutes` |
-| `/apply/` | transpersonal counselling certification | apply transpersonal training, enrolment | `Enrol — Transpersonal Training` |
+| `/apply/` | transpersonal counselling certification | apply transpersonal training, enrolment | `Apply — Transpersonal Training` |
 | `/sample-lesson/` | free transpersonal psychology lesson | transpersonal psychotherapy lecture, transpersonal psychology video | `Free Transpersonal Psychology Lesson` |
 | `/resources/` | transpersonal psychology books | Grof, Campbell, recommended reading | `Transpersonal Psychology Reading` |
 | `/blog/` | transpersonal psychology articles | topic hub | `Our Hero's Journey Blog` |
@@ -100,6 +100,31 @@ Pier Luigi Lattuada (4,850 impressions), Jure Biechonski (26 clicks), Manal Al-H
 Stephan Schillinger, Stefan Dressler, Kirsten Cameron.
 
 ### Funnel restructure — August 2026
+
+> **Superseded 2026-08-24.** The reasoning below changed again the same month, after the "Enrol"
+> nav button turned out to confuse a lot more than it converted:
+>
+> - **`/apply/` is reached from the Resources dropdown, not the top nav.** The nav's one CTA
+>   button is now "Request a Demo", linking to the homepage contact form from any page — not
+>   `/apply/`. "Enrol" does not appear anywhere on the site any more; where the front-matter title
+>   above still said `Enrol — Transpersonal Training`, it is now `Apply — Transpersonal Training`.
+> - **The homepage hero no longer offers the sample lesson directly.** Its two buttons are
+>   "Request a Demo" (→ the contact form) and "Explore the Training Overview". The "Two ways to
+>   see what this is" section became a four-card "Start here": Request a Demo, Training Overview,
+>   a monthly Zoom call (`/monthly-call/`, new — no keyword target yet, it is a placeholder with no
+>   scheduled dates and therefore nothing to rank on), and the curriculum.
+> - **`/sample-lesson/` is no longer linked from anywhere on the site** — not the nav, not the
+>   homepage, not `/apply/`. It is sent only as a direct link in the contact-form auto-reply. This
+>   reverses the "both lead magnets are public and indexable" reasoning below: the page is still
+>   live, still indexable and still in the sitemap, but with zero internal links pointing at it, it
+>   has lost the discovery and link-equity path that made "index it instead of gating it" worth
+>   doing in the first place. Whether that trade-off still makes sense for organic traffic is worth
+>   revisiting.
+> - **The "Is this programme for you?" content did not move to `/apply/`.** It was rewritten as
+>   "Why Is This Training for You?" inside `/training-overview/` (kept open, next to Philosophy)
+>   and dropped from the homepage entirely, rather than duplicated on `/apply/`. `/apply/` itself
+>   was trimmed of the sections that argued the same case, on the reasoning that they duplicated
+>   `/training-overview/` — see the pointer line in its hero.
 
 The homepage no longer leads with "Apply". Its hero now offers a sample lesson and the brochure,
 because the Search Console baseline shows visitors arriving on discovery intent, not transactional
