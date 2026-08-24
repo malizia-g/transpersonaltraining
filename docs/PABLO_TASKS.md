@@ -173,18 +173,15 @@ These items are not necessarily blockers for first publication, but they should 
 
 ### 11. Create the default OG image
 
-**Status:** Pending
+**Status:** Done (2026-08-24)
 
-File needed:
-- `src/assets/images/og-default.jpg`
+File:
+- `src/assets/images/Graphics/og-default.jpg`
 
 Actions:
-- [ ] Create a 1200 x 630 social sharing image
-- [ ] Use the final logo, title, and brand message
-- [ ] Save it to the expected path so link previews work correctly
-
-Reason:
-- Without this image, social previews will be broken or low quality
+- [x] Create a 1200 x 630 social sharing image
+- [x] Use the final logo, title, and brand message
+- [x] Save it to the expected path so link previews work correctly
 
 ---
 
@@ -294,7 +291,7 @@ Reason:
 **Status:** Pending
 
 Actions:
-- [ ] Install `docs/spreadsheet-automation/curriculum-pdf-apps-script.js` into the Curriculum Spreadsheet Apps Script editor
+- [ ] Install `docs/googlescripts/curriculum-pdf-apps-script.js` into the Curriculum Spreadsheet Apps Script editor
 - [ ] Test both PDF outputs
 - [ ] Adjust styling and exported content as needed
 
