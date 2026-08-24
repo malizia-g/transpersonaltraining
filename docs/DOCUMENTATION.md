@@ -419,6 +419,7 @@ A sitemap is generated and should be submitted to Google Search Console at:
 ### Personal Development
 
 - **Therapy:** 10h (L1) + 20h (L2) + 20h (L3) from a Transpersonal Therapist
+- **Group Coaching:** monthly transpersonal therapy group, facilitated by a school graduate
 - **Residential Weekends:** 4 per year (30h each = 120h/year = 480h total)
 - **Additional Development:** 150h (conferences, summer school, retreats)
 - **Holotropic Breathwork:** 40 sessions total
