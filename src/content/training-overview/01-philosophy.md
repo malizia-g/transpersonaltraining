@@ -1,5 +1,5 @@
 ---
-heading: Being in Your Essence
+heading: Cultivating an Inner Space
 ---
 
 This is more than just a professional training. It is for people whose purpose is to work with, support, and empower human beings.
