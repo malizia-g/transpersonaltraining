@@ -2,7 +2,7 @@
 id: dario-hampi-pacari
 name: Dario Hampi Pacari
 location: Italy
-credentials: "Staff Training & Human Resources Consultant"
+credentials: "Psychologist, Medicine Man & Vision Quester"
 image: /assets/images/People/teachers/dario-hampi-pacari.jpg
 section: alumni
 order: 15
@@ -10,7 +10,7 @@ order: 15
 
 ## Biography
 
-Dario Hampi Pacari specializes in the psychology of the workplace and organizations, staff training and human resources, with expertise in addiction consulting and trauma treatment. He leads ceremonial practices through indigenous-focused foundations and has held leadership roles supporting traditional healing knowledge across Europe and the Americas, including humanitarian work with marginalized youth in Ecuador and Guatemala (2004–2008).
+Dario Hampi Pacari is a psychologist, medicine man and vision quester who has spent two decades guiding sacred rituals and sharing the wisdom of indigenous traditions. He trained at the University of Rome La Sapienza and went on to work in Latin America alongside local communities, studying under medicine people in Ecuador and Guatemala — work that grew into humanitarian projects with marginalized youth there (2004–2008) and leadership roles supporting traditional healing knowledge across Europe and the Americas.
 
 ## Credentials
 

@@ -6,7 +6,7 @@ location: Germany
 credentials: "Trainer, Supervisor, Transpersonal Psychotherapist"
 image: /assets/images/People/teachers/ingo-benjamin-jahrsetz.jpg
 section: guest
-order: 9
+order: 1
 ---
 
 ## Biography

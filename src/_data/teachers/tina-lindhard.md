@@ -1,6 +1,6 @@
 ---
 id: tina-lindhard
-name: Tina Lindhard
+name: Dr. Tina Lindhard
 role: Guest Teacher
 location: Spain
 credentials: "PhD Consciousness Studies — Author & Researcher"

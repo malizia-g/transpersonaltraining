@@ -6,7 +6,7 @@ location: Ecuador / Austria
 credentials: "Scene & Experimental Artist, Collective Catalyst of Transformation"
 image: /assets/images/People/teachers/nicolas-cambas.jpg
 section: guest
-order: 2
+order: 5
 ---
 
 ## Biography

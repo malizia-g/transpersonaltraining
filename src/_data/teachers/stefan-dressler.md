@@ -1,6 +1,6 @@
 ---
 id: stefan-dressler
-name: Stefan Dressler
+name: Dr. Stefan Dressler
 role: Guest Teacher
 location: Germany
 credentials: "M.D., Specialist in Psychiatry and Psychotherapy"

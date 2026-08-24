@@ -6,7 +6,7 @@ location: Switzerland / France
 credentials: "Therapist, Writer & Transpersonal Training Founder"
 image: /assets/images/People/teachers/stephan-schillinger.jpg
 section: guest
-order: 1
+order: 9
 ---
 
 ## Biography

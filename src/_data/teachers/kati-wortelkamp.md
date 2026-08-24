@@ -13,13 +13,13 @@ order: 1
 
 ## Biography
 
-Kati Wortelkamp is Co-Founder and Head West of the Transpersonal Training program, based near Freiburg, Germany. She brings decades of experience in Holotropic Breathwork® and transpersonal psychotherapy, overseeing the Western curriculum and ensuring the program meets EUROTAS standards for professional transpersonal training. With over ten years at the Cancer-Hotline of the University Medical Center Freiburg, she brings deep compassion and practical expertise to therapeutic work, alongside an extensive background in bioenergetic, Kundalini and Iyengar yoga and other body-oriented methods.
+Kati Wortelkamp is Co-Founder and Head West of the Transpersonal Training program, based near Freiburg, Germany. She brings decades of experience in Holotropic Breathwork® and transpersonal psychotherapy, overseeing the Western curriculum and ensuring the program meets EUROTAS standards for professional transpersonal training, and conducts training programs in Germany and Latvia. With over ten years at the Cancer-Hotline of the University Medical Center Freiburg, she brings deep compassion and practical expertise to therapeutic work, alongside an extensive background in bioenergetic, Kundalini and Iyengar yoga and other body-oriented methods.
 
 ## Credentials
 
+- Certified Transpersonal Psychotherapist (EUROTAS)
 - Certified Holotropic Breathwork® Practitioner (Grof Transpersonal Training)
-- Certified in Grof® Legacy Training; training team member, Grof® Legacy Training Germany
-- Professional Member of EUROTAS
+- Trainer in the Grof® Legacy Training programme, Germany
 - Innovation Trainer/Coach (motiv network, Institute of the German Economy, Federal Railroad of Switzerland)
 - Didactic therapy in Transpersonal Psychotherapy
 - One Light Healing Touch practitioner

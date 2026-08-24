@@ -1,4 +1,4 @@
 ---
 ---
 
-Transpersonal psychology is a rigorous, evidence-based field that studies the whole person — mind, body, and spirit — including states of consciousness and experiences of meaning that conventional psychology often leaves out. It bridges clinical science and contemplative wisdom rather than opposing them, offering a foundation for therapeutic work that supports both psychological healing and deeper human growth.
+Transpersonal psychology is a well-established, evidence-based field of research that views the human being as a whole — mind, body and soul. Central to this is the study of states of consciousness and experiences of meaning, which are often overlooked in conventional psychology. Transpersonal psychology bridges the gap between clinical science and contemplative wisdom, rather than pitting them against one another. It thus provides a foundation for therapeutic work that promotes both psychological healing and deeper human growth.

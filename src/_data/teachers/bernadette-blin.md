@@ -6,7 +6,7 @@ location: France
 credentials: "Clinical & Social Psychologist, Transpersonal Psychotherapist, Gestalt Therapist"
 image: /assets/images/People/teachers/bernadette-blin.jpg
 section: guest
-order: 5
+order: 2
 ---
 
 ## Biography
