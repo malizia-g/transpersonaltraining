@@ -1,7 +1,10 @@
 /**
  * Website forms endpoint — ONE web app behind every form on the site:
  *
- *   • contact form (homepage)     → a row in the "Contact" sheet + an email to you
+ *   • contact form (homepage)     → a row in the "Contact" sheet, an auto-reply
+ *                                   carrying the sample lesson and brochure,
+ *                                   and an email to you when they asked a
+ *                                   question (the message field is optional)
  *   • application details         → a row in the "Applications" sheet
  *     (/apply/ step 1)
  *   • signed enrolment agreement  → a file in your Drive, and its link written
@@ -71,6 +74,19 @@ var AGREEMENT_DOC_ID = '1Gyu8MRYX9StBSReQPbCymDVo2hKrxfZNmUgDFs2b_eE';
 // Everything from a heading containing this phrase up to the next big heading is
 // left out of the website copy — that's the internal "notes for the school".
 var SKIP_SECTION_FROM = 'Notes for the school';
+
+// The things every enquiry gets sent, whether or not they asked a question.
+// Both are public pages on the site — nothing here is gated, and these links
+// are a convenience, not a reward for filling the form in. Keep them in step
+// with src/index.html and src/_data/brochure.js if either path ever moves.
+//
+// BROCHURE_URL: leave it EMPTY until the PDF is actually committed to
+// src/assets/documents/ (see docs/BROCHURE.md). The website hides its download
+// buttons on its own when the file is missing; this script cannot see the
+// filesystem, so emailing a link to a 404 is the one failure mode it has to be
+// told about by hand. Set it the same day the PDF goes live.
+var SAMPLE_LESSON_URL = SCHOOL_URL + '/sample-lesson/';
+var BROCHURE_URL = '';
 
 var CONTACT_SHEET = 'Contact';
 var APPLICATION_SHEET = 'Applications';
@@ -364,18 +380,29 @@ function handleContact_(data) {
   var email = clean_(data.email, 160);
   var message = clean_(data.message, 5000);
   var track = clean_(data.track, 40); // which office to notify; blank = not sure, notify both
+  var newsletter = !!data.newsletter; // opted into the mailing list checkbox; unticked by default
 
-  if (!name || !email || !message) {
-    return json_({ status: 'error', message: 'Please fill in your name, email and message.' });
+  // The message is OPTIONAL. Most people who write in are nowhere near
+  // applying — they want to see what the training actually is. Demanding a
+  // composed message before we will send them a lesson and a brochure puts a
+  // wall in front of the very thing that lowers the barrier.
+  if (!name || !email) {
+    return json_({ status: 'error', message: 'Please fill in your name and email.' });
   }
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
     return json_({ status: 'error', message: 'That email address does not look right.' });
   }
 
-  sheet_(CONTACT_SHEET, ['Received', 'Name', 'Email', 'Message'])
-    .appendRow([new Date(), name, email, message]);
+  // sheet_() only writes these headers when it creates the sheet; if
+  // CONTACT_SHEET already exists from before the newsletter checkbox existed,
+  // add a "Newsletter" column by hand once.
+  sheet_(CONTACT_SHEET, ['Received', 'Name', 'Email', 'Message', 'Newsletter'])
+    .appendRow([new Date(), name, email, message, newsletter ? 'Yes' : 'No']);
 
-  var notify = notifyEmails_(track);
+  // Only bother the office when there is something to answer. A bare request
+  // for the materials is handled entirely by the auto-reply below; it is still
+  // recorded in the sheet either way.
+  var notify = message ? notifyEmails_(track) : '';
   if (notify) {
     MailApp.sendEmail({
       to: notify,
@@ -387,13 +414,46 @@ function handleContact_(data) {
   }
 
   sendConfirmation_(email, track,
-    'We have your message — ' + SCHOOL_NAME,
-    'Hi ' + name + ',\n\n'
-      + 'Thank you for writing to us. Your message has reached the school and a real '
-      + 'person will read it — we normally reply within a few days.\n\n'
-      + 'This is what you sent, for your own records:\n\n' + message);
+    (BROCHURE_URL ? 'Your sample lesson and brochure — ' : 'Your sample lesson — ') + SCHOOL_NAME,
+    contactReplyBody_(name, message));
 
   return json_({ status: 'ok' });
+}
+
+// The reply everyone gets. It leads with what they came for rather than with an
+// acknowledgement, invites a conversation without pressing for one, and only
+// promises an answer when there is a question to answer.
+function contactReplyBody_(name, message) {
+  var body = 'Dear ' + name + ',\n\n'
+    + 'Thank you for getting in touch with ' + SCHOOL_NAME + '. It is a pleasure to hear '
+    + 'from you.\n\n';
+
+  body += BROCHURE_URL
+    ? 'Here are two ways to get a real feel for the programme, whenever you have the time '
+      + 'for them:\n\n'
+      + '  • Watch a full lesson from the training\n'
+      + '    ' + SAMPLE_LESSON_URL + '\n\n'
+      + '  • Download the programme brochure\n'
+      + '    ' + BROCHURE_URL + '\n\n'
+      + 'The lesson is a complete lecture, not a trailer — an hour of it will tell you more '
+      + 'than any prospectus can. The brochure covers the structure, the dates, the fees and '
+      + 'what each of the four years asks of you.\n\n'
+    : 'If you would like to get a real feel for the programme, you can watch a full lesson '
+      + 'from the training here:\n\n'
+      + '    ' + SAMPLE_LESSON_URL + '\n\n'
+      + 'It is a complete lecture, not a trailer — an hour of it will tell you more than any '
+      + 'prospectus can.\n\n';
+
+  body += 'If you would like to talk any of it through, simply reply to this email and we '
+    + 'will arrange a call at a time that suits you. There is no commitment either way, and '
+    + 'no question is too small.\n\n';
+
+  if (message) {
+    body += 'We have your message and one of us will come back to you as soon as possible. '
+      + 'This is what you sent, for your own records:\n\n' + message + '\n\n';
+  }
+
+  return body;
 }
 
 // ---- Application details (/apply/ step 1) ---------------------------------

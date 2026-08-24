@@ -1,7 +1,10 @@
 ---
 layout: base.njk
-title: "Apply — Transpersonal Training & Holotropic Breathwork"
-description: "Apply for self-development, transpersonal psychotherapy, counselling and Holotropic Breathwork certification. Download your enrolment agreement, sign, upload."
+# seo.js sets titleStyle: 'minimalistic', so this IS the whole <title> — nothing
+# is appended. Budget is therefore ~60 chars; the old title ran to 54 before the
+# brand and was truncated in results. See docs/SEO_KEYWORD_MAP.md.
+title: "Apply — Transpersonal Training"
+description: "Apply to our EUROTAS-accredited transpersonal psychotherapy, counselling and Holotropic Breathwork certification: why it may be for you, what you get, and how to apply."
 ---
 
 <style>
@@ -55,17 +58,34 @@ description: "Apply for self-development, transpersonal psychotherapy, counselli
 
 <!-- Hero -->
 <header class="relative min-h-[42vh] flex items-center justify-center text-white pt-28 pb-16 bg-[#0F2540] overflow-hidden no-print">
-    <div class="absolute inset-0 bg-gradient-to-b from-[#0B1B30] via-[#0F2540] to-[#0B1B30] z-0"></div>
+    <div class="absolute inset-0 z-0">
+        <picture>
+            <source srcset="{{ '/assets/images/Headers/hero-apply-night-fire-circle.webp' | url }}" type="image/webp">
+            <img
+                src="{{ '/assets/images/Headers/hero-apply-night-fire-circle.jpg' | url }}"
+                alt="Students gathered in a circle around a fire at night during a seminar"
+                class="w-full h-full object-cover object-[50%_55%]"
+            />
+        </picture>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0B1B30]/90 via-[#0F2540]/75 to-[#0B1B30]/90"></div>
+    </div>
     <div class="container mx-auto px-6 relative z-10 text-center">
         <div class="max-w-3xl mx-auto">
             <p class="p4-kicker text-[#D9A756] mb-6 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
-                Enrolment
+                Application
                 <span class="p4-hairline"></span>
             </p>
             <h1 class="p4-display text-3xl md:text-5xl font-medium mb-6 leading-tight text-[#FDFBF5]">Apply to the training</h1>
             <p class="text-lg text-white/80 font-light leading-relaxed max-w-2xl mx-auto">
-                Fill in your details, download your personalised enrolment agreement to print and sign, then upload the signed copy.
+                Four years, one international community, and a qualification recognised across Europe.
+                Here is who it is for, what you get, and what applying actually involves.
+            </p>
+            <p class="mt-6 text-sm text-white/60">
+                The full detail is in the
+                <a href="{{ '/curriculum/' | url }}" class="text-[#D9A756] underline underline-offset-4 hover:text-[#EBC98A]">curriculum</a>
+                and the
+                <a href="{{ '/training-overview/' | url }}" class="text-[#D9A756] underline underline-offset-4 hover:text-[#EBC98A]">training overview</a>.
             </p>
         </div>
     </div>
@@ -77,10 +97,72 @@ description: "Apply for self-development, transpersonal psychotherapy, counselli
         <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
             <a href="{{ '/' | url }}" class="hover:text-science-blue-600 transition-colors">Home</a>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <span class="text-neutral-warm-500">Resources</span>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
             <span class="text-science-blue-800 font-medium">Apply</span>
         </div>
     </div>
 </div>
+
+{# ═══════════ TESTIMONIALS ═══════════
+   Renders only once real quotes exist in src/_data/testimonials/. Nothing is
+   invented here: made-up testimonials are both a lie to prospective students
+   and, if ever marked up as review structured data, a Google policy violation.
+   Collection is step 11 / Phase F in docs/MARKETING_AND_SEO.md. #}
+{% if testimonials.length %}
+<section class="py-20 md:py-24 bg-[#FAF3E7] border-t border-[#E7D6BE] no-print">
+    <div class="container mx-auto px-6">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-14">
+                <p class="p4-kicker text-[#B65E3F] mb-6 flex items-center justify-center gap-4">
+                    <span class="p4-hairline"></span> In their words <span class="p4-hairline"></span>
+                </p>
+                <h2 class="p4-display text-3xl md:text-5xl font-medium text-indigo-deep-900 leading-tight">
+                    From people who have done it
+                </h2>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for t in testimonials %}
+                <figure class="bg-[#FEF9EF] border border-[#D9A756]/60 p-7 flex flex-col">
+                    <i data-lucide="quote" class="w-7 h-7 text-[#D9A756] mb-4"></i>
+                    <blockquote class="text-neutral-warm-800 leading-relaxed flex-grow">{{ t.quote }}</blockquote>
+                    <figcaption class="mt-6 flex items-center gap-3 border-t border-[#E7D6BE] pt-5">
+                        {% if t.photo %}
+                        <img src="{{ t.photo | url }}" alt="" loading="lazy" class="w-11 h-11 object-cover rounded-full shrink-0">
+                        {% endif %}
+                        <span class="text-sm leading-tight">
+                            <span class="block font-semibold text-indigo-deep-900">{{ t.name }}</span>
+                            {% if t.cohort %}<span class="text-neutral-warm-600">{{ t.cohort }}</span>{% endif %}
+                        </span>
+                    </figcaption>
+                </figure>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- ═══════════ READY TO APPLY ═══════════ -->
+<section class="py-16 md:py-20 bg-[#FAF3E7] no-print">
+    <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto text-center">
+            <p class="p4-kicker text-[#B65E3F] mb-6 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span> Ready when you are <span class="p4-hairline"></span>
+            </p>
+            <h2 class="p4-display text-3xl md:text-5xl font-medium text-indigo-deep-900 leading-tight mb-6">
+                Sign up for the 2027&ndash;2030 cohort
+            </h2>
+            <p class="text-lg text-neutral-warm-700 leading-relaxed mb-10">
+                Three steps: your details, a personalised agreement to print and sign, then upload it.
+                Nothing is binding until the signed agreement reaches us.
+            </p>
+            <p class="text-sm text-neutral-warm-600">
+                Still have doubts? <a href="{{ '/#contact' | url }}" class="text-[#B65E3F] underline underline-offset-4 decoration-[#B65E3F]/40 hover:text-[#7d5f28]">Ask a question first</a>.
+            </p>
+        </div>
+    </div>
+</section>
 
 <!-- How it works -->
 <section class="py-14 bg-white no-print">
@@ -108,7 +190,7 @@ description: "Apply for self-development, transpersonal psychotherapy, counselli
 </section>
 
 <!-- STEP 1 — Application form -->
-<section class="pb-8 bg-white no-print">
+<section id="step1" class="pb-8 bg-white no-print scroll-mt-24">
     <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto">
             <h2 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-2">1. Your details</h2>
