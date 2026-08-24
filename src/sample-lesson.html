@@ -1,0 +1,204 @@
+---
+layout: base.njk
+# seo.js sets titleStyle: 'minimalistic', so this IS the whole <title> — nothing
+# is appended. Budget ~60 chars. See docs/SEO_KEYWORD_MAP.md.
+title: "Free Transpersonal Psychology Lesson"
+description: "Watch a full lesson from our EUROTAS-accredited transpersonal psychotherapy training — free, no signup, full transcript included."
+ogType: website
+---
+
+{% set lesson = 'sample-lesson/01-lesson.md' | pageContent %}
+{% set transcript = 'sample-lesson/02-transcript.md' | pageContent %}
+{% set ytid = lesson.data.videoUrl | youtubeId %}
+{% set thumb = lesson.data.thumbnail or ('https://img.youtube.com/vi/' + ytid + '/maxresdefault.jpg' if ytid else '') %}
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="relative bg-[#0F2540] pt-36 pb-16 md:pt-44 md:pb-20">
+    <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto text-center">
+            <p class="p4-kicker text-[#D9A756] mb-6 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
+                {{ lesson.data.kicker }}
+                <span class="p4-hairline"></span>
+            </p>
+            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] leading-[1.1] mb-7">
+                {{ lesson.data.heading }}
+            </h1>
+            <div class="p4-lede text-lg md:text-xl text-[#D5DEE9] leading-relaxed">
+                {{ lesson.html | safe }}
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ═══════════ THE LESSON ═══════════ -->
+<section class="bg-[#0F2540] pb-20 md:pb-28">
+    <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+
+            {% if ytid %}
+            {# Click-to-load facade. Nothing is requested from YouTube until the
+               visitor asks for it — this is the page's LCP element, and an
+               eager iframe would pull in a megabyte of player before the poster
+               has painted. Same reasoning as the modal on /resources/. #}
+            <div id="lesson-player" class="relative aspect-video bg-black shadow-2xl overflow-hidden">
+                <button type="button"
+                        id="lesson-play"
+                        data-ytid="{{ ytid }}"
+                        aria-label="Play the sample lesson: {{ lesson.data.videoTitle }}"
+                        class="group absolute inset-0 w-full h-full border-none p-0 cursor-pointer bg-black">
+                    <img src="{{ thumb }}"
+                         alt=""
+                         class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-300">
+                    <span class="absolute inset-0 bg-[#0F2540]/25 group-hover:bg-[#0F2540]/10 transition-colors flex items-center justify-center">
+                        <i data-lucide="play-circle" class="w-20 h-20 text-white drop-shadow-lg"></i>
+                    </span>
+                </button>
+            </div>
+
+            <div class="mt-6 flex flex-wrap items-baseline justify-center gap-x-6 gap-y-2 text-sm text-[#9DAEC2]">
+                <span class="text-[#EDF2F8] font-medium">{{ lesson.data.videoTitle }}</span>
+                {% if lesson.data.teacher %}<span class="inline-flex items-center gap-2"><i data-lucide="user" class="w-4 h-4"></i>{{ lesson.data.teacher }}</span>{% endif %}
+                {% if lesson.data.module %}<span class="inline-flex items-center gap-2"><i data-lucide="book-open" class="w-4 h-4"></i>{{ lesson.data.module }}</span>{% endif %}
+            </div>
+
+            {% else %}
+            {# No recording selected yet — say so plainly rather than shipping a
+               dead player. Mirrors the pendingVideos state on /resources/. #}
+            <div class="aspect-video bg-[#0B1B30] border border-[#D9A756]/30 flex flex-col items-center justify-center text-center px-8">
+                <i data-lucide="video" class="w-12 h-12 text-[#D9A756] mb-5"></i>
+                <p class="p4-display text-2xl md:text-3xl text-[#FDFBF5] mb-3">The recording is on its way</p>
+                <p class="text-[#9DAEC2] max-w-md leading-relaxed">
+                    We are choosing the lesson to publish. In the meantime, the brochure below covers
+                    the whole programme &mdash; or write to us and we will tell you when it is up.
+                </p>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ TRANSCRIPT ═══════════ -->
+<!-- The video is opaque to search engines; this text is what carries the
+     lesson's vocabulary. It is also how anyone who would rather read than watch
+     gets the same content. -->
+<section class="bg-[#FAF3E7] py-20 md:py-28 border-t border-[#D9A756]/40">
+    <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto">
+            <p class="p4-kicker text-[#B65E3F] mb-6 flex items-center gap-4">
+                <span class="p4-hairline"></span> Read it instead
+            </p>
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-indigo-deep-900 mb-4">
+                {{ transcript.data.heading }}
+            </h2>
+            <p class="text-neutral-warm-600 text-lg mb-10">{{ transcript.data.intro }}</p>
+            <div class="p4-prose text-neutral-warm-800 leading-relaxed">
+                {{ transcript.html | safe }}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ NEXT STEPS ═══════════ -->
+<section class="bg-[#F3E7D4] py-20 md:py-28 border-t border-[#E7D6BE]">
+    <div class="container mx-auto px-6">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-14">
+                <p class="p4-kicker text-[#B65E3F] mb-6 flex items-center justify-center gap-4">
+                    <span class="p4-hairline"></span> Where to next <span class="p4-hairline"></span>
+                </p>
+                <h2 class="p4-display text-3xl md:text-5xl font-medium text-indigo-deep-900 leading-tight">
+                    Take your time with it
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                {% if brochure.available %}
+                <a href="{{ brochure.url | url }}"
+                   class="group bg-[#FEF9EF] border border-[#D9A756]/60 hover:border-[#B65E3F] p-8 transition-colors flex flex-col">
+                    <i data-lucide="file-down" class="w-9 h-9 text-[#B65E3F] mb-5"></i>
+                    <h3 class="font-serif text-xl font-semibold text-indigo-deep-900 mb-2">Download the brochure</h3>
+                    <p class="text-neutral-warm-700 text-sm leading-relaxed flex-grow">
+                        The whole programme in one document &mdash; structure, dates, fees and what each
+                        year asks of you.
+                    </p>
+                    <span class="mt-5 inline-flex items-center gap-2 text-science-blue-700 group-hover:text-science-blue-800 font-medium text-sm">
+                        PDF{% if brochure.sizeMb %} &middot; {{ brochure.sizeMb }} MB{% endif %} <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </span>
+                </a>
+                {% else %}
+                <a href="{{ '/training-overview/' | url }}"
+                   class="group bg-[#FEF9EF] border border-[#D9A756]/60 hover:border-[#B65E3F] p-8 transition-colors flex flex-col">
+                    <i data-lucide="compass" class="w-9 h-9 text-[#B65E3F] mb-5"></i>
+                    <h3 class="font-serif text-xl font-semibold text-indigo-deep-900 mb-2">The training overview</h3>
+                    <p class="text-neutral-warm-700 text-sm leading-relaxed flex-grow">
+                        The philosophy behind the programme, who it is for, and what each of the four
+                        years asks of you.
+                    </p>
+                    <span class="mt-5 inline-flex items-center gap-2 text-science-blue-700 group-hover:text-science-blue-800 font-medium text-sm">
+                        Read <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </span>
+                </a>
+                {% endif %}
+
+                <a href="{{ '/curriculum/' | url }}"
+                   class="group bg-[#FEF9EF] border border-[#D9A756]/60 hover:border-[#B65E3F] p-8 transition-colors flex flex-col">
+                    <i data-lucide="list-tree" class="w-9 h-9 text-[#B65E3F] mb-5"></i>
+                    <h3 class="font-serif text-xl font-semibold text-indigo-deep-900 mb-2">Read the curriculum</h3>
+                    <p class="text-neutral-warm-700 text-sm leading-relaxed flex-grow">
+                        Every module, lesson and experiential across the four years, level by level.
+                    </p>
+                    <span class="mt-5 inline-flex items-center gap-2 text-science-blue-700 group-hover:text-science-blue-800 font-medium text-sm">
+                        Explore <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </span>
+                </a>
+
+                <a href="{{ '/#contact' | url }}"
+                   class="group bg-[#FEF9EF] border border-[#D9A756]/60 hover:border-[#B65E3F] p-8 transition-colors flex flex-col">
+                    <i data-lucide="messages-square" class="w-9 h-9 text-[#B65E3F] mb-5"></i>
+                    <h3 class="font-serif text-xl font-semibold text-indigo-deep-900 mb-2">Talk it through</h3>
+                    <p class="text-neutral-warm-700 text-sm leading-relaxed flex-grow">
+                        Prefer it by email, or a conversation? Write to us and we will arrange a call
+                        &mdash; no commitment either way.
+                    </p>
+                    <span class="mt-5 inline-flex items-center gap-2 text-science-blue-700 group-hover:text-science-blue-800 font-medium text-sm">
+                        Get in touch <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </span>
+                </a>
+            </div>
+
+            <p class="text-center text-neutral-warm-600 mt-12">
+                When you are ready, <a href="{{ '/apply/' | url }}" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4">see how to apply</a>.
+            </p>
+        </div>
+    </div>
+</section>
+
+{% if ytid %}
+{# VideoObject lives on the page that carries the video, not in base.njk —
+   base.njk's JSON-LD block is homepage-only (EducationalOrganization + Course). #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": {{ lesson.data.videoTitle | dump | safe }},
+  "description": {{ description | dump | safe }},
+  "thumbnailUrl": {{ thumb | dump | safe }},
+  "embedUrl": "https://www.youtube-nocookie.com/embed/{{ ytid }}",
+  "url": "https://transpersonal-training.com{{ page.url }}",
+  {% if lesson.data.uploadDate %}"uploadDate": {{ lesson.data.uploadDate | dump | safe }},{% endif %}
+  {% if lesson.data.duration %}"duration": {{ lesson.data.duration | dump | safe }},{% endif %}
+  "isAccessibleForFree": true,
+  "publisher": {
+    "@type": "EducationalOrganization",
+    "name": "East West Transpersonal Training",
+    "url": "https://transpersonal-training.com"
+  }
+}
+</script>
+{% endif %}
+
+{% block scripts %}
+<script src="{{ '/scripts/pages/sample-lesson.js' | url }}"></script>
+{% endblock %}

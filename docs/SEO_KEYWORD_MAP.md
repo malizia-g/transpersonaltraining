@@ -26,9 +26,20 @@ Two facts from the Search Console baseline shape every choice below:
 
 ## Title length budget
 
-`eleventy-plugin-seo` appends ` | Transpersonal Training` — **25 characters** — to every front-matter
-title (`src/_data/seo.js`). To land under ~60 rendered characters, **the front-matter title must be
-≤ 38 characters**. The suffix is not wasted: "Transpersonal Training" is the homepage primary keyword.
+> **Corrected 2026-08-24.** This section used to say the plugin appends
+> ` | Transpersonal Training` (25 chars), leaving a 38-character budget. That is no longer true:
+> `src/_data/seo.js` now sets `titleStyle: 'minimalistic'`, which suppresses the suffix — verified
+> against the built output, where `/curriculum/` renders exactly `Transpersonal Psychotherapy
+> Curriculum` and nothing more. The front-matter title *is* the whole `<title>`.
+
+The front-matter title is rendered verbatim, so **the budget is the full ~60 characters** and each
+page must carry its own brand signal if it wants one. Two consequences worth remembering:
+
+- Titles written under the old 38-character rule are now shorter than they need to be — there is
+  room to add a qualifier or the brand.
+- The homepage still overruns at **81 characters**
+  (`Transpersonal Psychotherapy & Holotropic Breathwork Training | EUROTAS Accredited`) and is
+  truncated in results. Worth shortening.
 
 ---
 
@@ -75,7 +86,8 @@ sheet.
 | `/schedule/` | breathwork seminars | holotropic breathwork intensives, residential training Europe | `Breathwork Intensives & Seminars` |
 | `/venues/` | breathwork retreat Germany | training venues Italy, Black Forest, Tuscany | `Training Venues in Germany & Italy` |
 | `/collaborations/` | eurotas accredited psychotherapy schools | transpersonal psychology institutes Europe | `EUROTAS Partner Institutes` |
-| `/apply/` | transpersonal counselling certification | apply transpersonal training, enrolment | `Apply — Transpersonal Training` |
+| `/apply/` | transpersonal counselling certification | apply transpersonal training, enrolment | `Enrol — Transpersonal Training` |
+| `/sample-lesson/` | free transpersonal psychology lesson | transpersonal psychotherapy lecture, transpersonal psychology video | `Free Transpersonal Psychology Lesson` |
 | `/resources/` | transpersonal psychology books | Grof, Campbell, recommended reading | `Transpersonal Psychology Reading` |
 | `/blog/` | transpersonal psychology articles | topic hub | `Our Hero's Journey Blog` |
 | `/blog/the-heros-journey/` ⭐ | hero journey | Campbell, personal transformation, myth, individuation | `The Hero's Journey & Personal Transformation` |
@@ -86,6 +98,29 @@ sheet.
 name the highest-demand teachers** — that is what helps the page surface on name searches:
 Pier Luigi Lattuada (4,850 impressions), Jure Biechonski (26 clicks), Manal Al-Hammadi (25),
 Stephan Schillinger, Stefan Dressler, Kirsten Cameron.
+
+### Funnel restructure — August 2026
+
+The homepage no longer leads with "Apply". Its hero now offers a sample lesson and the brochure,
+because the Search Console baseline shows visitors arriving on discovery intent, not transactional
+intent — **zero clicks on every commercial query**, at positions 50–88. A homepage whose only
+above-fold action was "Apply for the 2027–2030 cohort" was answering a question almost nobody in
+the audience was asking yet.
+
+Three decisions worth recording, because each one had an obvious-looking alternative:
+
+- **`/apply/` absorbed the persuasion content instead of a new `/enrol/` page being created.**
+  "Why this is for you / what you get / testimonials" already existed on the homepage and inside
+  `/training-overview/`; a third page making the same argument would have set all three competing
+  on the same intent. The enrolment form now sits at the bottom of the page that argues for it.
+- **The "Is this programme for you?" list moved off the homepage** (where it was inside a collapsed
+  `<details>` nobody opened) onto `/apply/`, rather than being duplicated.
+- **Both lead magnets are public and indexable — neither is gated.** A brochure or a lesson behind
+  an email wall produces no crawlable content at all. `/sample-lesson/` carries the video *and its
+  full transcript*, which is the part that can actually rank; the PDF is self-hosted under
+  `/assets/documents/` rather than served from Drive, so links to it credit this domain instead of
+  `drive.google.com`. The trade-off, accepted deliberately: nobody is captured on download. The
+  contact form is the capture, and its auto-reply carries both assets. See `docs/BROCHURE.md`.
 
 ### High-value keywords still unassigned
 

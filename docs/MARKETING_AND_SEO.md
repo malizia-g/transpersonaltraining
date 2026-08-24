@@ -544,6 +544,36 @@ The single highest-ROI channel for a school with a long decision cycle (people c
 > ticked a separate marketing-consent box. Enquiry consent and marketing consent are different things
 > under GDPR and must stay separate checkboxes.
 
+> **Status (Aug 2026) — an interim auto-reply now ships; Brevo is still to do.**
+>
+> The funnel restructure delivered the *trigger* without the platform. `handleContact_()` in
+> `docs/apps-script-forms.gs` now sends every enquirer an immediate auto-reply carrying the sample
+> lesson and the brochure, and inviting a call. The message field became optional, so someone who
+> only wants the materials no longer has to compose a question first.
+>
+> What that interim step deliberately does **not** do, and what Brevo is still needed for:
+>
+> - **No sequences.** One email, once. There is no welcome series, no nurture for people who
+>   enquired and went quiet, no deadline reminders for the 2027 cohort.
+> - **No list.** Contacts land in the `Contact` sheet and nowhere else. Nobody is subscribed to
+>   anything, which is why the form's consent text can honestly say "we will not add you to a
+>   mailing list" — that sentence has to change the day Brevo goes live.
+> - **No measurement.** `MailApp` reports no opens, clicks or bounces, so the reply's effectiveness
+>   is invisible. Compounded by analytics still being missing (C2).
+> - **Deliverability is unauthenticated.** Mail goes out through Apps Script's quota under a Google
+>   address, not through an SPF/DKIM-signed school domain. Fine for a handful of replies a day;
+>   not fine for bulk.
+>
+> Everything in I0 below stands. Step 6 changes slightly: the Apps Script hook already has the
+> contact in hand at the right moment, so wiring Brevo in is an addition to `handleContact_()`
+> rather than new plumbing.
+>
+> **Lead-magnet gating was reversed.** I0's plan was to gate the programme PDF behind an email form.
+> Both assets are now public and indexable instead — a gated PDF and a gated video produce no
+> crawlable content, and `/sample-lesson/`'s transcript is the single best organic asset the site
+> can offer. The accepted cost is that nobody is captured on download; the contact form is the
+> capture. Reasoning in `docs/SEO_KEYWORD_MAP.md` § *Funnel restructure*.
+
 ### I0. Setup order (start here)
 
 1. [ ] **Create the Brevo account** on the free tier (300 emails/day) with `office@transpersonal-training.com`.
@@ -565,9 +595,15 @@ The single highest-ROI channel for a school with a long decision cycle (people c
 8. [ ] **Update the privacy modal** to name Brevo as a processor (see A1).
 
 - **Platform:** Brevo (free tier: 300 emails/day, forms, automation). EU-based, GDPR-friendly.
-- **Lead magnets:**
-  1. **Programme PDF** — the Curriculum PDF generator already produces a "Program PDF (summary)"; gate it behind an email form ("Get the full programme brochure").
-  2. **Free intro webinar recording** (after first webinar, Phase K).
+- **Lead magnets:** ~~gate the programme PDF behind an email form~~ → **superseded (Aug 2026):
+  both are public.** See the status note above.
+  1. **Programme brochure PDF** — hand-designed, self-hosted at `/assets/documents/`, indexable.
+     Not yet committed; `src/_data/brochure.js` hides every download CTA until it is. See
+     `docs/BROCHURE.md`.
+  2. **Sample lesson** — `/sample-lesson/`, an unlisted YouTube recording embedded with a full
+     transcript. Recording still to be chosen; the page renders a "recording on its way" state
+     until `src/content/sample-lesson/01-lesson.md` gets a `videoUrl`.
+  3. **Free intro webinar recording** (after first webinar, Phase K).
 - **Sequences:**
   - *Welcome* (3 emails): brochure delivery → school story/what makes transpersonal training different → invitation to intro evening / call booking.
   - *Application nurture:* for people who enquired but didn't apply — testimonials, teacher spotlights, deadline reminders for the 2027 cohort.
