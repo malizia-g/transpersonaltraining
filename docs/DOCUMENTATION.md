@@ -479,7 +479,7 @@ Completed refactoring phases:
 
 ## Curriculum JSON Endpoint
 
-Script: `docs/spreadsheet-automation/curriculum-json-apps-script.js`
+Script: `docs/googlescripts/curriculum-json-apps-script.js`
 
 The Apps Script deployed as a **Web App** on the Curriculum spreadsheet. Its `doGet`
 is a router over two routes:
@@ -504,7 +504,7 @@ the change. Verify the output first with **Preview JSON data** in the PDF script
 
 ## Curriculum PDF Generator
 
-Script: `docs/spreadsheet-automation/curriculum-pdf-apps-script.js`
+Script: `docs/googlescripts/curriculum-pdf-apps-script.js`
 
 A Google Apps Script that adds a **📄 Curriculum Tools** menu to the Curriculum Google Spreadsheet, allowing you to generate and download PDF documents directly from the spreadsheet data.
 
@@ -513,7 +513,7 @@ A Google Apps Script that adds a **📄 Curriculum Tools** menu to the Curriculu
 1. Open the **Curriculum Spreadsheet** in Google Sheets
 2. Go to **Extensions → Apps Script**
 3. Delete any existing code (or create a new `.gs` file)
-4. Copy and paste the entire contents of `docs/spreadsheet-automation/curriculum-pdf-apps-script.js`
+4. Copy and paste the entire contents of `docs/googlescripts/curriculum-pdf-apps-script.js`
 5. Save (Ctrl+S)
 6. Reload the spreadsheet — a **📄 Curriculum Tools** menu will appear in the menu bar
 7. First use will prompt for Google authorization (access to Drive & Docs)
@@ -626,7 +626,7 @@ Defined in `src/become-a-client-model.html` via `if/elif` blocks (full class str
 
 ## Curriculum PDF Download (website)
 
-Script: `docs/spreadsheet-automation/curriculum-pdf-download-apps-script.js`
+Script: `docs/googlescripts/curriculum-pdf-download-apps-script.js`
 
 The **Download PDF** button in the hero of `/curriculum/` links to the JSON web app
 with `?format=pdf`. The URL is built in `src/_data/curriculumData.js` and reaches the

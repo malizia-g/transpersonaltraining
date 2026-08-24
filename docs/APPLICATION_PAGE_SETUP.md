@@ -122,7 +122,7 @@ internal notes never reach an applicant. If you rename that heading, update
   *belongs to this spreadsheet*, which is what lets it write rows without you
   configuring any ID.
 - Delete the sample `myFunction` code, paste in everything from
-  [docs/apps-script-forms.gs](apps-script-forms.gs), and **save**.
+  [docs/googlescripts/apps-script-forms.gs](googlescripts/apps-script-forms.gs), and **save**.
 - Check `AGREEMENT_DOC_ID` near the top matches your master Google Doc (it's the
   long id in the Doc's URL). This is the Doc the website will publish.
 - (Optional) also at the top:

@@ -547,7 +547,7 @@ The single highest-ROI channel for a school with a long decision cycle (people c
 > **Status (Aug 2026) — an interim auto-reply now ships; Brevo is still to do.**
 >
 > The funnel restructure delivered the *trigger* without the platform. `handleContact_()` in
-> `docs/apps-script-forms.gs` now sends every enquirer an immediate auto-reply carrying the sample
+> `docs/googlescripts/apps-script-forms.gs` now sends every enquirer an immediate auto-reply carrying the sample
 > lesson and the brochure, and inviting a call. The message field became optional, so someone who
 > only wants the materials no longer has to compose a question first.
 >
