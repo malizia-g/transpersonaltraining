@@ -13,7 +13,7 @@
  *
  *  The PDF is built from the same spreadsheet rows, filtered and grouped the
  *  same way the website filters and groups them, and laid out to follow the
- *  page: title block, "Explore our Hero Journey", then for each level the certificate
+ *  page: title block, "Our Hero Journey", then for each level the certificate
  *  box, the lessons, the experiential work and the examinations.
  *
  *  WHY THE URL DOESN'T RETURN THE PDF ITSELF
@@ -70,7 +70,7 @@ var WEB_PDF = {
   /* Bump this after editing the layout: it is part of the fingerprint, so it
      forces the next request to rebuild a PDF that content alone would have
      considered up to date. */
-  RENDER_VERSION: 'v2',
+  RENDER_VERSION: 'v1',
 
   /* '' keeps the PDF next to the spreadsheet. Set a Drive folder id to put it
      somewhere else. */
@@ -577,7 +577,7 @@ function webPdfTitleBlock_(body, model) {
     spacingBefore: 14, spacingAfter: 4
   });
 
-  webPdfParagraph_(body, 'Explore our Hero Journey', {
+  webPdfParagraph_(body, 'Our Hero Journey', {
     font: WEB_PDF_FONT.DISPLAY, size: 18, color: WEB_PDF_COLOR.NAVY,
     spacingAfter: 12
   });
