@@ -9,10 +9,19 @@ const path = require('path');
 const CURRICULUM_JSON_URL = 'https://script.google.com/macros/s/AKfycbxCzM30igQdGt2vYsRaQToDtKnjvIE5ZIypoKSaxoBtrXlajcEBc1NArDxmbXzNqCzhOA/exec';
 const CACHE_FILE = path.join(__dirname, 'curriculumData.cache.json');
 
-// Same web app, second route: ?format=pdf builds the curriculum as a PDF and
-// bounces the browser to it (APPS-SCRIPT-3-curriculum-pdf-download.js). Kept
-// next to the JSON URL so the two can never drift apart.
+// Same web app, second route: ?format=pdf builds the curriculum as a PDF
+// (curriculum-pdf-download-apps-script.js). Kept next to the JSON URL so the two
+// can never drift apart.
+//
+// The build asks for the file's address rather than linking the route itself:
+// ?format=pdf answers with a page that bounces the browser on to Drive, and that
+// hop is done with JavaScript inside the Apps Script sandbox, which browsers may
+// refuse to let navigate. Resolving the Drive URL here makes the button an
+// ordinary link that downloads on the first click. It also means the PDF is
+// rebuilt with the site, so the file and the page always describe the same
+// curriculum.
 const CURRICULUM_PDF_URL = `${CURRICULUM_JSON_URL}?format=pdf`;
+const PDF_CACHE_FILE = path.join(__dirname, 'curriculumPdf.cache.json');
 
 function fetchUrl(url, redirectsLeft = 5) {
   return new Promise((resolve, reject) => {
@@ -557,6 +566,42 @@ function normalizeCurriculum(rawData) {
   };
 }
 
+/**
+ * The direct Drive address of the current curriculum PDF. Falls back to the
+ * ?format=pdf route (which still works, just with the redirect hop) and then to
+ * the last address we resolved, so the button never points at nothing.
+ */
+async function fetchCurriculumPdfUrl() {
+  try {
+    const response = await fetchUrl(`${CURRICULUM_PDF_URL}&mode=url`);
+    const url = typeof response?.url === 'string' ? response.url.trim() : '';
+
+    if (!url) {
+      throw new Error('PDF endpoint answered without a url');
+    }
+
+    fs.writeFileSync(PDF_CACHE_FILE, JSON.stringify(response, null, 2));
+    console.log(`📄 Curriculum PDF ready (${response.name || 'unnamed'})`);
+    return url;
+  } catch (error) {
+    console.warn('⚠️ Could not resolve the curriculum PDF URL:', error.message);
+
+    if (fs.existsSync(PDF_CACHE_FILE)) {
+      try {
+        const cached = JSON.parse(fs.readFileSync(PDF_CACHE_FILE, 'utf-8'));
+        if (typeof cached?.url === 'string' && cached.url) {
+          console.log('⚠️ Using the last known curriculum PDF URL');
+          return cached.url;
+        }
+      } catch (cacheError) {
+        console.error('❌ PDF cache read failed:', cacheError.message);
+      }
+    }
+
+    return CURRICULUM_PDF_URL;
+  }
+}
+
 module.exports = async function () {
   try {
     console.log('Fetching curriculum data from Google Apps Script...');
@@ -573,7 +618,7 @@ module.exports = async function () {
 
     saveCurriculumCache(normalized);
 
-    return { ...normalized, pdfUrl: CURRICULUM_PDF_URL };
+    return { ...normalized, pdfUrl: await fetchCurriculumPdfUrl() };
   } catch (error) {
     console.error('Error loading curriculum data:', error.message);
 
@@ -585,7 +630,7 @@ module.exports = async function () {
           saveCurriculumCache(normalizedCache);
 
           console.log(`⚠️ Using cached curriculum data (${normalizedCache.levels.length} levels)`);
-          return { ...normalizedCache, pdfUrl: CURRICULUM_PDF_URL };
+          return { ...normalizedCache, pdfUrl: await fetchCurriculumPdfUrl() };
         }
       } catch (cacheError) {
         console.error('❌ Cache read failed:', cacheError.message);

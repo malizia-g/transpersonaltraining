@@ -49,19 +49,6 @@ description: "All modules across three levels: consciousness studies, counsellin
             <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
                 A structured progression from self-development through professional facilitation to advanced psychotherapy and Holotropic Breathwork practice.
             </p>
-            {% if curriculumData.pdfUrl %}
-            <div class="mt-8">
-                <a
-                    href="{{ curriculumData.pdfUrl }}"
-                    target="_blank"
-                    rel="noopener"
-                    class="inline-flex items-center gap-2 border border-[#FDFBF5]/60 hover:border-[#D9A756] text-[#FDFBF5] hover:text-[#D9A756] px-6 py-3 font-medium tracking-wide transition-all"
-                >
-                    <i data-lucide="download" class="w-4 h-4"></i>
-                    Download PDF
-                </a>
-            </div>
-            {% endif %}
         </div>
     </div>
 </header>
@@ -79,7 +66,7 @@ description: "All modules across three levels: consciousness studies, counsellin
     </div>
 </div>
 
-<!-- Our Hero Journey Section -->
+<!-- Explore our Hero Journey Section -->
 <section class="py-16 bg-white relative overflow-x-clip">
     <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-5 pointer-events-none">
         <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#D9A756] blur-3xl"></div>
@@ -92,7 +79,7 @@ description: "All modules across three levels: consciousness studies, counsellin
                     The path
                     <span class="p4-hairline md:hidden"></span>
                 </p>
-                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540]">Our Hero Journey</h2>
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540]">Explore our Hero Journey</h2>
             </div>
 
             <div class="curriculum-vine-wrapper" id="curriculumWrapper">
@@ -116,7 +103,6 @@ description: "All modules across three levels: consciousness studies, counsellin
                         { title: 'Certificate as Transpersonal Psychotherapy & Holotropic Breathwork Facilitator', body: 'With an optional EUROTAS certification track. Please note: “psychotherapist” is a legally protected title in many countries (for example Germany, France, Italy and Austria). Please check the psychotherapy regulations in the country where you intend to practise before using the title professionally. <a href="/legal-notice/" class="text-[#B65E3F] hover:text-[#D9A756] underline underline-offset-2 font-medium">Read the full legal notice</a>.' }
                     ] %}
                     {% for level in curriculumData.levels %}
-                    {% set isFirst = loop.first %}
                     <div class="bg-white/25 backdrop-blur-sm border border-slate-200/40 shadow-sm overflow-hidden">
                         <div class="level-toggle flex items-center gap-4 p-6 cursor-pointer" onclick="toggleLevel('{{ level.id }}')">
                             <div class="w-12 h-12 min-w-[3rem] border border-[#D9A756] flex items-center justify-center flex-shrink-0">
@@ -131,10 +117,10 @@ description: "All modules across three levels: consciousness studies, counsellin
                             </div>
                             <div class="flex items-center gap-3 flex-shrink-0">
                                 <span class="module-count bg-[#0F2540]/5 text-[#0F2540] hidden sm:inline-block">{{ level.modules | length }} modules</span>
-                                <i data-lucide="chevron-down" class="w-5 h-5 text-[#B65E3F] toggle-icon{% if isFirst %} rotated{% endif %}" id="{{ level.id }}-icon"></i>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-[#B65E3F] toggle-icon" id="{{ level.id }}-icon"></i>
                             </div>
                         </div>
-                        <div class="level-content{% if isFirst %} expanded{% endif %}" id="{{ level.id }}">
+                        <div class="level-content" id="{{ level.id }}">
                             <div class="px-6 pb-6">
                                 <div class="space-y-6">
                                     {% set cert = levelCerts[loop.index0] %}
@@ -292,6 +278,19 @@ description: "All modules across three levels: consciousness studies, counsellin
                     {% endif %}
                 </div><!-- end space-y-6 -->
             </div><!-- end curriculum-vine-wrapper -->
+
+            {% if curriculumData.pdfUrl %}
+            <div class="mt-12 text-center">
+                <a
+                    href="{{ curriculumData.pdfUrl }}"
+                    class="inline-flex items-center gap-2 border border-[#0F2540]/30 hover:border-[#B65E3F] text-[#0F2540] hover:text-[#B65E3F] px-6 py-3 font-medium tracking-wide transition-all"
+                >
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    Download PDF
+                </a>
+                <p class="mt-3 text-sm text-neutral-warm-600">The whole curriculum, as a single document.</p>
+            </div>
+            {% endif %}
         </div>
     </div>
 </section>
