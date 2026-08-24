@@ -366,13 +366,22 @@ function extractLevelModules(level) {
     .sort(compareModuleNumbers);
 }
 
+/* The spreadsheet's Level column has to stay "L1"/"L2"/"L3" — the Apps Script
+   groups the rows by matching /^L\d+$/ on it — so the short form is expanded
+   here, for the page, rather than at the source. A label that already reads
+   "Level 1" passes through untouched. */
+function expandLevelLabel(label) {
+  const match = /^L\s*(\d+)$/i.exec(label.trim());
+  return match ? `Level ${match[1]}` : label;
+}
+
 function normalizeSectionedCurriculum(rawLevels) {
   const levels = rawLevels
     .filter(isVisibleOnWebsite)
     .map((level, index) => {
       const practicalItems = extractPracticalItems(level);
       const examinationItems = extractExaminationItems(level);
-      const label = pickFirstString(level, ['label', 'level', 'id']) || `Level ${index + 1}`;
+      const label = expandLevelLabel(pickFirstString(level, ['label', 'level', 'id']) || `Level ${index + 1}`);
       const title = pickFirstString(level, ['title', 'name', 'heading']) || 'Curriculum Level';
 
       return {
@@ -500,7 +509,7 @@ function normalizeCurriculum(rawData) {
       const modules = extractModules(level);
       const practicalItems = extractPracticalItems(level);
       const examinationItems = extractExaminationItems(level);
-      const label = pickFirstString(level, ['label', 'level', 'id']) || `Level ${index + 1}`;
+      const label = expandLevelLabel(pickFirstString(level, ['label', 'level', 'id']) || `Level ${index + 1}`);
       const title = pickFirstString(level, ['title', 'name', 'heading']) || 'Curriculum Level';
 
       return {
