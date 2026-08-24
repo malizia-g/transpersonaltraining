@@ -146,7 +146,7 @@ function curriculumPdfWebApp(e) {
 
     return webPdfRedirectPage_(downloadUrl, file.getName());
   } catch (error) {
-    return webPdfErrorPage_(error);
+    return webPdfErrorPage_(error, /^(1|true|yes)$/i.test(String(params.debug || '')));
   }
 }
 
@@ -622,9 +622,7 @@ function webPdfLevelHeading_(body, level) {
   cell.setBackgroundColor(WEB_PDF_COLOR.NAVY)
       .setPaddingTop(10).setPaddingBottom(10).setPaddingLeft(12).setPaddingRight(12);
 
-  webPdfStyle_(cell.getChild(0).asParagraph().setText(
-    level.roman + '.  ' + level.label + ' - ' + level.title
-  ), {
+  webPdfCellHeading_(cell, level.roman + '.  ' + level.label + ' - ' + level.title, {
     font: WEB_PDF_FONT.DISPLAY, size: 15, bold: true, color: WEB_PDF_COLOR.WHITE
   });
 
@@ -643,7 +641,7 @@ function webPdfCertificateBox_(body, certificate) {
   cell.setBackgroundColor(WEB_PDF_COLOR.CREAM)
       .setPaddingTop(8).setPaddingBottom(8).setPaddingLeft(12).setPaddingRight(12);
 
-  webPdfStyle_(cell.getChild(0).asParagraph().setText('WHAT YOU EARN'), {
+  webPdfCellHeading_(cell, 'WHAT YOU EARN', {
     font: WEB_PDF_FONT.BODY, size: 8, bold: true, color: WEB_PDF_COLOR.RUST, spacingAfter: 3
   });
 
@@ -771,6 +769,17 @@ function webPdfParagraph_(body, text, options) {
   return webPdfStyle_(body.appendParagraph(text), options);
 }
 
+/**
+ * Write the first line of a box. A new table cell already holds one empty
+ * paragraph, which is the one to fill — and Paragraph.setText() returns nothing,
+ * so it cannot be chained into the styling call.
+ */
+function webPdfCellHeading_(cell, text, options) {
+  var paragraph = cell.getChild(0).asParagraph();
+  paragraph.setText(text);
+  return webPdfStyle_(paragraph, options);
+}
+
 function webPdfStyle_(element, options) {
   var settings = options || {};
   var attributes = {};
@@ -836,7 +845,15 @@ function webPdfRedirectPage_(downloadUrl, fileName) {
   ).setTitle('Curriculum PDF');
 }
 
-function webPdfErrorPage_(error) {
+/**
+ * What the visitor sees when the file cannot be built: an apology and the way
+ * back to the page. &debug=1 adds the stack, for reading an error that only
+ * happens on the deployed script.
+ */
+function webPdfErrorPage_(error, debug) {
+  var detail = String((error && error.message) || error);
+  if (debug && error && error.stack) detail += '\n\n' + error.stack;
+
   return HtmlService.createHtmlOutput(
     '<!DOCTYPE html><html><head><meta charset="utf-8">' +
     '<title>The curriculum PDF is not available</title>' +
@@ -845,7 +862,8 @@ function webPdfErrorPage_(error) {
     'a{color:#B65E3F}</style></head><body>' +
     '<p>Sorry — the curriculum PDF could not be prepared just now.</p>' +
     '<p><a href="' + webPdfEscape_(WEB_PDF.PAGE_URL) + '">Read the curriculum on the website</a></p>' +
-    '<p style="color:#5D584E;font-size:12px">' + webPdfEscape_(String(error && error.message || error)) + '</p>' +
+    '<pre style="color:#5D584E;font-size:12px;white-space:pre-wrap;text-align:left">' +
+    webPdfEscape_(detail) + '</pre>' +
     '</body></html>'
   ).setTitle('Curriculum PDF');
 }
