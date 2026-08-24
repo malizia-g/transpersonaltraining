@@ -375,6 +375,24 @@ function expandLevelLabel(label) {
   return match ? `Level ${match[1]}` : label;
 }
 
+/* The level's real title lives in the Topic cell of its header row
+   ("L1: SELF DEVELOPMENT"). The Apps Script only recognises that row as a level
+   header when the cell starts "L1:" — spelled "Level 1:" it is parsed as an
+   ordinary section instead, and the level reaches us with an empty title. Read
+   the title back off that section rather than letting the page fall back to the
+   placeholder "Curriculum Level". */
+function deriveLevelTitleFromSections(level) {
+  for (const section of asArray(level?.sections)) {
+    const sectionTitle = pickFirstString(section, ['title', 'name', 'section', 'label']);
+    const match = /^(?:l|level)\s*\d+\s*[:\u2013\u2014-]\s*(.+)$/i.exec(sectionTitle);
+    if (match) {
+      return match[1].trim();
+    }
+  }
+
+  return '';
+}
+
 function normalizeSectionedCurriculum(rawLevels) {
   const levels = rawLevels
     .filter(isVisibleOnWebsite)
@@ -382,7 +400,10 @@ function normalizeSectionedCurriculum(rawLevels) {
       const practicalItems = extractPracticalItems(level);
       const examinationItems = extractExaminationItems(level);
       const label = expandLevelLabel(pickFirstString(level, ['label', 'level', 'id']) || `Level ${index + 1}`);
-      const title = pickFirstString(level, ['title', 'name', 'heading']) || 'Curriculum Level';
+      const title =
+        pickFirstString(level, ['title', 'name', 'heading']) ||
+        deriveLevelTitleFromSections(level) ||
+        'Curriculum Level';
 
       return {
         id: `level${index + 1}`,
