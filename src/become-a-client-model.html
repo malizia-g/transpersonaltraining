@@ -6,7 +6,6 @@ description: "Free breathwork and counselling for behaviour patterns, repeating 
 
 {% set introItems = 'become-a-client-model/intro' | pageContentDir %}
 {% set whatToLook = 'become-a-client-model/01-what-to-look-for.md' | pageContent %}
-{% set cta = 'become-a-client-model/02-cta.md' | pageContent %}
 
 <style>
     .student-details {
@@ -76,6 +75,35 @@ description: "Free breathwork and counselling for behaviour patterns, repeating 
                     <div>{{ item.html | safe }}</div>
                 </div>
                 {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How it works -->
+<section class="py-16 bg-white border-t border-[#E7D6BE]">
+    <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-6">How to Become a Client Model</h2>
+            <p class="text-neutral-warm-700 leading-relaxed mb-8">
+                Becoming a client model is also a way to get a first-hand sense of the school before deciding whether to enrol in the training itself &mdash; you do not need to be a student here to request a session.
+            </p>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-[#FAF3E7] border border-[#E7D6BE] p-6">
+                    <div class="w-9 h-9 border border-[#D9A756] flex items-center justify-center text-[#B65E3F] font-semibold mb-4">1</div>
+                    <h3 class="font-serif font-bold text-[#0F2540] text-lg mb-2">Contact a student directly</h3>
+                    <p class="text-xs text-neutral-warm-500 mb-3 leading-relaxed">Trainees offer these sessions under professional supervision as part of their training; they are not independently licensed practitioners. On the use of the professional title &ldquo;psychotherapist&rdquo;, see our <a href="{{ '/legal-notice/' | url }}" class="underline underline-offset-2 hover:text-[#B65E3F]">legal notice</a>.</p>
+                    <p class="text-sm text-neutral-warm-700 leading-relaxed">Browse the profiles below and reach out to whoever feels like the right fit, using the contact details on their card. They will let the school know once you are in touch.</p>
+                </div>
+                <div class="bg-[#FAF3E7] border border-[#E7D6BE] p-6">
+                    <div class="w-9 h-9 border border-[#D9A756] flex items-center justify-center text-[#B65E3F] font-semibold mb-4">2</div>
+                    <h3 class="font-serif font-bold text-[#0F2540] text-lg mb-2">Or write to the school</h3>
+                    <p class="text-sm text-neutral-warm-700 leading-relaxed mb-4">Prefer us to match you with a suitable student in training? Get in touch and we will take it from there.</p>
+                    <a href="{{ '/' | url }}#contact" class="inline-flex items-center gap-2 text-science-blue-700 hover:text-science-blue-800 font-medium text-sm">
+                        Write to us
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -275,22 +303,6 @@ description: "Free breathwork and counselling for behaviour patterns, repeating 
             <p class="text-neutral-warm-700 leading-relaxed mb-6">{{ whatToLook.data.intro }}</p>
             <div class="text-neutral-warm-700 leading-relaxed what-to-look-content">
                 {{ whatToLook.html | safe }}
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="py-16 bg-white">
-    <div class="container mx-auto px-6">
-        <div class="max-w-4xl mx-auto">
-            <div class="bg-[#FAF3E7] border border-[#E7D6BE] p-8 md:p-10">
-                <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-4">{{ cta.data.heading }}</h3>
-                <p class="text-neutral-warm-700 leading-relaxed mb-6">{{ cta.data.body }}</p>
-                <a href="mailto:{{ cta.data.email }}" class="inline-flex items-center gap-2 bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-6 py-3 font-medium tracking-wide transition-all shadow-lg hover:shadow-xl">
-                    <i data-lucide="mail" class="w-4 h-4"></i>
-                    {{ cta.data.cta_label }}
-                </a>
-                <p class="text-xs text-neutral-warm-500 mt-6 leading-relaxed">Trainees offer these sessions under professional supervision as part of their training; they are not independently licensed practitioners. On the use of the professional title &ldquo;psychotherapist&rdquo;, see our <a href="{{ '/legal-notice/' | url }}" class="underline underline-offset-2 hover:text-[#B65E3F]">legal notice</a>.</p>
             </div>
         </div>
     </div>
