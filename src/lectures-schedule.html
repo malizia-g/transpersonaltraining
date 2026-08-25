@@ -7,8 +7,12 @@ description: "Live online lectures in transpersonal psychology training. Learn h
 <!-- Hero Section -->
 <section id="hero-section" class="relative h-[50vh] min-h-[400px] flex items-center justify-center text-white bg-science-blue-900 overflow-hidden">
     <picture>
-        <source srcset="{{ '/assets/images/Headers/hero-lectures-group-listening.webp' | url }}" type="image/webp">
-        <img src="{{ '/assets/images/Headers/hero-lectures-group-listening.jpg' | url }}" alt="Group seated and listening during a lecture" class="absolute inset-0 w-full h-full object-cover z-0">
+        {# Wide screens get the band the hero actually shows; narrow ones keep
+           the full height, which object-cover would otherwise crop away. #}
+        <source media="(min-width: 1024px)" srcset="{{ '/assets/images/Headers/hero-lectures-group-listening-wide.webp' | url }}" type="image/webp">
+        <source media="(min-width: 1024px)" srcset="{{ '/assets/images/Headers/hero-lectures-group-listening-wide.jpg' | url }}">
+        <source srcset="{{ '/assets/images/Headers/hero-lectures-group-listening-narrow.webp' | url }}" type="image/webp">
+        <img src="{{ '/assets/images/Headers/hero-lectures-group-listening-narrow.jpg' | url }}" alt="Group seated and listening during a lecture" class="absolute inset-0 w-full h-full object-cover z-0">
     </picture>
     <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/80 via-[#0F2540]/60 to-[#0F2540]/80 z-0"></div>
 

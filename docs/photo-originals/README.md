@@ -26,6 +26,37 @@ visitors.
 Published paths are relative to `src/assets/images/`, and each exists as both
 `.jpg` and `.webp`.
 
+## Hero crops
+
+Heroes sit in a container whose shape changes with the viewport — `h-[50vh]
+min-h-[400px]` at full width — so `object-cover` shows a different part of the
+photo on a phone than on a desktop. A source at 1920x1080 shows all its width
+and half its height at 1920x1080, but all its height and half its width at
+390x844. One file cannot be cropped to suit both.
+
+Where it pays, the hero is therefore cut into two files, chosen with
+`<source media="(min-width: 1024px)">`:
+
+- `-wide` — full width, the middle 60% of the height, centred on whatever
+  `object-position` the page used before. This is what wide screens already
+  saw, minus the pixels they were never shown.
+- `-narrow` — full height, cropped to roughly 10:9, for phones and tablets.
+
+The `object-position` then comes off the `<img>`: the framing lives in the
+files, and below 1024 px `object-cover` crops nothing vertically anyway.
+
+Two rules learned the hard way, both worth re-checking per image rather than
+assuming:
+
+- **WebP is not always smaller.** On grainy or noisy photographs it loses to
+  JPEG outright. Generate both, compare, and keep the WebP only if it saves
+  more than 20%; otherwise ship the JPEG alone and drop the `<source>`.
+- **The crop is not always worth it.** Four heroes gained under 10% and were
+  left as single files. Measure before adding a second file.
+
+The uncropped masters of cropped heroes live here, since the two crops cannot
+be reassembled into the original if the layout changes again.
+
 ## Turning an original into a site image
 
 The published files follow the conventions already in

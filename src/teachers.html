@@ -155,11 +155,14 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
 <header class="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 z-0">
         <picture>
+            {# Wide screens get the band the hero actually shows; narrow ones keep
+               the full height, which object-cover would otherwise crop away. #}
+            <source media="(min-width: 1024px)" srcset="{{ '/assets/images/Headers/hero-teachers-faculty-wide.jpg' | url }}">
             <source srcset="{{ '/assets/images/Headers/hero-teachers-faculty.webp' | url }}" type="image/webp">
             <img
                 src="{{ '/assets/images/Headers/hero-teachers-faculty.jpg' | url }}"
                 alt="The seminar house at Todtmoos among the Black Forest trees, seen from the garden fire circle"
-                class="w-full h-full object-cover object-[50%_62%]"
+                class="w-full h-full object-cover"
             />
         </picture>
         <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/80 via-[#0F2540]/60 to-[#0F2540]/80"></div>
