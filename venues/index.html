@@ -274,8 +274,11 @@
 <header class="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 z-0">
         <picture>
-            <source srcset="/transpersonaltraining/assets/images/Headers/hero-venues-todtmoos.webp" type="image/webp">
-            <img src="/transpersonaltraining/assets/images/Headers/hero-venues-todtmoos.jpg" alt="Sunlit forest valley near Todtmoos in the Black Forest" class="w-full h-full object-cover">
+            
+            <source media="(min-width: 1024px)" srcset="/transpersonaltraining/assets/images/Headers/hero-venues-todtmoos-wide.webp" type="image/webp">
+            <source media="(min-width: 1024px)" srcset="/transpersonaltraining/assets/images/Headers/hero-venues-todtmoos-wide.jpg">
+            <source srcset="/transpersonaltraining/assets/images/Headers/hero-venues-todtmoos-narrow.webp" type="image/webp">
+            <img src="/transpersonaltraining/assets/images/Headers/hero-venues-todtmoos-narrow.jpg" alt="Sunlit forest valley near Todtmoos in the Black Forest" class="w-full h-full object-cover">
         </picture>
         <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/80 via-[#0F2540]/60 to-[#0F2540]/80"></div>
     </div>
