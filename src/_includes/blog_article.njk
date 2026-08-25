@@ -22,7 +22,10 @@ layout: base.njk
       <div class="mb-8 flex flex-wrap items-start gap-4 sm:flex-nowrap sm:gap-6">
         {% if image %}
         <figure class="w-20 h-20 sm:w-32 sm:h-32 flex-shrink-0 overflow-hidden shadow-md">
-          <img src="{{ image | blogImage | url }}" alt="{{ imageAlt or title }}" class="w-full h-full object-cover" loading="lazy" />
+          <picture>
+            {% if '.jpg' in image %}<source srcset="{{ image | blogImage | replace('.jpg', '.webp') | url }}" type="image/webp">{% endif %}
+            <img src="{{ image | blogImage | url }}" alt="{{ imageAlt or title }}" class="w-full h-full object-cover" loading="lazy" />
+          </picture>
         </figure>
         {% endif %}
 
