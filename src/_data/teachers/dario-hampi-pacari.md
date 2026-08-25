@@ -1,11 +1,12 @@
 ---
 id: dario-hampi-pacari
 name: Dario Hampi Pacari
+role: Guest Teacher
 location: Italy
 credentials: "Psychologist, Medicine Man & Vision Quester"
 image: /assets/images/People/teachers/dario-hampi-pacari.jpg
-section: alumni
-order: 15
+section: guest
+order: 12
 ---
 
 ## Biography

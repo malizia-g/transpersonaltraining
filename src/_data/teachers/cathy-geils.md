@@ -1,11 +1,12 @@
 ---
 id: cathy-geils
 name: Cathy Geils
+role: Guest Teacher
 location: South Africa
 credentials: PhD in Constellations Work; Clinical Psychologist
 image: /assets/images/People/teachers/cathy-geils.jpg
-section: alumni
-order: 10
+section: guest
+order: 15
 ---
 
 ## Biography

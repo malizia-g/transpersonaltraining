@@ -1,12 +1,13 @@
 ---
 id: lilian-gscheidel
 name: Lilian Gscheidel
+role: Guest Teacher
 location: Germany
 credentials: "Psychologist BSc, Transpersonal Breathwork Practitioner"
 image: /assets/images/People/teachers/lilian-gscheidel.jpg
 website: http://www.wandel-zart-und-wild.de
-section: alumni
-order: 4
+section: guest
+order: 13
 ---
 
 ## Biography

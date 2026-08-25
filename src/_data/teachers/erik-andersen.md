@@ -1,11 +1,12 @@
 ---
 id: erik-andersen
 name: Erik Andersen
+role: Guest Teacher
 location: South Africa
 credentials: "Certified Counselor — Family Constellations, Kabbalah, Kriya Yoga"
 image: /assets/images/People/teachers/erik-andersen.jpg
-section: alumni
-order: 9
+section: guest
+order: 14
 ---
 
 ## Biography
