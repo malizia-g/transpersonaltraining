@@ -261,6 +261,18 @@ Operational rules:
 - use lowercase ids with hyphens for consistency
 - if you manually provide a `picture_link`, it overrides the automatic image lookup
 
+Photos are resized during the build, so upload whatever you were sent — a phone
+photograph, a picture saved as PNG — without preparing it first. Each one is
+scaled to 800 px on its longest edge (the cards show them 224 px tall), rotated
+upright from its EXIF orientation, and written as JPEG or PNG, whichever comes
+out smaller for that particular image.
+
+Replacing a photo in Drive is enough: every photo is re-fetched on every build,
+so the new one appears at the next deploy. It did not always work this way — the
+build used to skip the download whenever a file was already on disk, and since
+the link in the sheet does not change when the picture behind it does, a replaced
+photo was never picked up again.
+
 Cache files are gitignored locally but committed by GitHub Actions.
 
 ### Google Sheets API URLs

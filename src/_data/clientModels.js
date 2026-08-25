@@ -2,6 +2,7 @@ const https = require('https');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const sharp = require('sharp');
 const { hasSheetChanged, commitSheetTimestamp } = require('./sheetTimestamps');
 
 // Fetch client models from Google Apps Script during build time
@@ -12,12 +13,10 @@ const LOCAL_IMAGE_PATH = '/assets/images/people/students';
 
 const STATUS_PRIORITY = ['active', 'approved', 'pending', 'on-hold', 'completed'];
 
-const MIME_TO_EXT = {
-  'image/jpeg': '.jpg',
-  'image/png': '.png',
-  'image/webp': '.webp',
-  'image/gif': '.gif',
-};
+// The cards show the photo 224 px tall, at most ~380 px wide; 800 px covers
+// that on a retina screen with room to spare.
+const MAX_EDGE = 800;
+const JPEG_QUALITY = 82;
 
 function normalizeUrl(value) {
   const url = String(value || '').trim();
@@ -112,9 +111,9 @@ function fetchJson(url) {
   });
 }
 
-// Download a single file from a URL (follows redirects) and save to disk.
-// Resolves with the final filename (e.g. "anna-keller.jpg").
-function downloadFile(url, destPathNoExt, maxRedirects) {
+// Fetch a single image from a URL (follows redirects) into memory.
+// Resolves with the raw bytes; the caller decides what to write to disk.
+function fetchImage(url, maxRedirects) {
   maxRedirects = typeof maxRedirects === 'number' ? maxRedirects : 10;
 
   return new Promise((resolve, reject) => {
@@ -128,11 +127,11 @@ function downloadFile(url, destPathNoExt, maxRedirects) {
     }, (res) => {
       // Follow redirects
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-        return downloadFile(res.headers.location, destPathNoExt, maxRedirects - 1)
-          .then(resolve).catch(reject);
+        return fetchImage(res.headers.location, maxRedirects - 1).then(resolve).catch(reject);
       }
 
       if (res.statusCode !== 200) {
+        res.resume();
         return reject(new Error('HTTP ' + res.statusCode));
       }
 
@@ -143,13 +142,10 @@ function downloadFile(url, destPathNoExt, maxRedirects) {
         return reject(new Error('Not an image (' + mime + ')'));
       }
 
-      const ext = MIME_TO_EXT[mime] || '.jpg';
-      const destPath = destPathNoExt + ext;
-      const ws = fs.createWriteStream(destPath);
-
-      res.pipe(ws);
-      ws.on('finish', function() { ws.close(); resolve(path.basename(destPath)); });
-      ws.on('error', function(err) { fs.unlink(destPath, function() {}); reject(err); });
+      const chunks = [];
+      res.on('data', (chunk) => { chunks.push(chunk); });
+      res.on('end', () => { resolve(Buffer.concat(chunks)); });
+      res.on('error', reject);
     });
 
     req.on('error', reject);
@@ -157,8 +153,46 @@ function downloadFile(url, destPathNoExt, maxRedirects) {
   });
 }
 
+// Write one student photo, scaled down to what the card actually needs.
+// Drive holds whatever the student sent us — 4000 px camera files, photographs
+// saved as PNG — while the card shows them 224 px tall, so everything is
+// resized to MAX_EDGE and re-encoded as JPEG. Resolves with the filename.
+async function saveStudentImage(buffer, destBase) {
+  const resized = sharp(buffer)
+    .rotate()                                   // honour the EXIF orientation
+    .resize({ width: MAX_EDGE, height: MAX_EDGE, fit: 'inside', withoutEnlargement: true });
+
+  // Photographs belong in JPEG, but a flat graphic — the placeholder some
+  // students still have — comes out several times larger that way, so encode
+  // both and keep whichever is smaller rather than assuming.
+  const jpeg = await resized.clone()
+    .flatten({ background: '#ffffff' })         // PNG transparency onto the card
+    .jpeg({ quality: JPEG_QUALITY, progressive: true, mozjpeg: true })
+    .toBuffer();
+  const png = await resized.clone()
+    .png({ compressionLevel: 9, palette: true })
+    .toBuffer();
+
+  const usePng = png.length < jpeg.length;
+  const destPath = destBase + (usePng ? '.png' : '.jpg');
+  fs.writeFileSync(destPath, usePng ? png : jpeg);
+
+  // An earlier build may have left this student behind under another extension.
+  ['.jpg', '.png', '.webp', '.gif', '.jpeg'].forEach(function(ext) {
+    const other = destBase + ext;
+    try { if (other !== destPath && fs.existsSync(other)) fs.unlinkSync(other); } catch (e) { /* ignore */ }
+  });
+
+  return path.basename(destPath);
+}
+
 // Download all student images in parallel into _site output directory.
-// Returns a map { studentId: "/assets/images/people/students/studentId.ext" }
+// Returns a map { studentId: "/assets/images/people/students/studentId.jpg" }
+//
+// Every photo is fetched on every build. Skipping the download when a file
+// already sat on disk meant a photo replaced in Drive was never picked up
+// again: the URL in the sheet does not change when the picture behind it does,
+// and CI restores the previous build's images before this runs.
 async function downloadStudentImages(students) {
   fs.mkdirSync(IMAGES_OUTPUT_DIR, { recursive: true });
 
@@ -166,19 +200,25 @@ async function downloadStudentImages(students) {
     students.map(async function(student) {
       if (!student.picture_link || !student.id) return null;
 
+      const destBase = path.join(IMAGES_OUTPUT_DIR, student.id);
+
       try {
-        const destBase = path.join(IMAGES_OUTPUT_DIR, student.id);
-        // Skip download if image already exists locally
-        const existingFiles = ['.jpg', '.png', '.webp', '.gif']
-          .map(ext => destBase + ext)
-          .filter(f => fs.existsSync(f));
-        if (existingFiles.length > 0) {
-          return { id: student.id, localPath: LOCAL_IMAGE_PATH + '/' + path.basename(existingFiles[0]) };
-        }
-        const fileName = await downloadFile(student.picture_link, destBase);
+        const buffer = await fetchImage(student.picture_link);
+        const fileName = await saveStudentImage(buffer, destBase);
         return { id: student.id, localPath: LOCAL_IMAGE_PATH + '/' + fileName };
       } catch (err) {
         console.warn('  ⚠️ Image download failed for ' + student.id + ': ' + err.message);
+
+        // Fall back to whatever an earlier build left here, so one unreachable
+        // photo does not blank out a card.
+        const stale = ['.jpg', '.png', '.webp', '.gif']
+          .map(function(ext) { return destBase + ext; })
+          .filter(function(f) { return fs.existsSync(f); })[0];
+
+        if (stale) {
+          console.warn('     ↩️ keeping the previously downloaded copy');
+          return { id: student.id, localPath: LOCAL_IMAGE_PATH + '/' + path.basename(stale) };
+        }
         return null;
       }
     })

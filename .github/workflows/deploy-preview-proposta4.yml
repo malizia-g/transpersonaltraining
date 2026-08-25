@@ -31,16 +31,18 @@ jobs:
         with:
           path: |
             src/_data/*.cache.json
-          key: sheet-data-${{ runner.os }}
+          key: sheet-data-${{ runner.os }}-${{ github.run_id }}
           restore-keys: |
+            sheet-data-${{ runner.os }}-
             sheet-data-
 
       - name: Restore student images cache
         uses: actions/cache@v4
         with:
           path: .cache/student-images
-          key: student-images-${{ runner.os }}
+          key: student-images-${{ runner.os }}-${{ github.run_id }}
           restore-keys: |
+            student-images-${{ runner.os }}-
             student-images-
 
       - name: Clean and build CSS
