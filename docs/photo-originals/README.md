@@ -20,6 +20,7 @@ visitors.
 | `IMG_20260307_085849.jpg` | `Techniques/technique-somatic-tree-wound` | Healed wound in a mossy tree trunk |
 | `IMG_20251121_074227.jpg` | — not used yet | Snowy forest track in daylight |
 | `IMG_20260306_101334.jpg` | — not used yet | Moss and grasses arranged on the studio floor |
+| `IMG_3096.JPG` | `People/teachers/lilian-gscheidel` | Lilian outdoors in front of greenery — rotated upright and cropped to a portrait |
 | `Gemini_Generated_Image_srmvsasrmvsasrmv.jpg` | `Headers/hero-training-overview-breathwork-tent` | Group lying in a circle under an open-sided tent — school photograph, retouched with Gemini |
 
 Published paths are relative to `src/assets/images/`, and each exists as both
