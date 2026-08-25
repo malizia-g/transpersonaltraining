@@ -5,7 +5,6 @@ role: Guest Teacher
 location: Spain
 credentials: "PhD Consciousness Studies — Author & Researcher"
 image: /assets/images/People/teachers/tina-lindhard.jpg
-website: http://tinalindhard.com/
 section: guest
 order: 6
 ---

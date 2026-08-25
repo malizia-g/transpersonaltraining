@@ -5,7 +5,6 @@ role: Head East
 location: Moldova
 credentials: MA Transpersonal Psychotherapist EUROTAS
 image: /assets/images/People/teachers/lyudmila-skartsesku.jpg
-website: https://arasco.org/
 section: core
 order: 2
 ---

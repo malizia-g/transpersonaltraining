@@ -5,6 +5,7 @@ role: Guest Teacher
 location: Italy
 credentials: "Psychologist, Medicine Man & Vision Quester"
 image: /assets/images/People/teachers/dario-hampi-pacari.jpg
+website: https://dariog.it/
 section: guest
 order: 12
 ---
