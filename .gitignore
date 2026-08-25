@@ -31,11 +31,6 @@ src/_data/*.cache.json
 # Translation cache (generated during build; restored via actions/cache in CI)
 .cache/
 
-# Scratch copies of the Apps Script files, kept at the root only to make them
-# easy to copy-paste into the Google editor. The versioned originals live in
-# docs/googlescripts/.
-APPS-SCRIPT-*.js
-
 # Claude Code local/runtime state (not shared config)
 .claude/settings.local.json
 .claude/scheduled_tasks.lock

@@ -252,7 +252,7 @@ function webPdfCurriculumTree_() {
   if (typeof parseCurriculumData === 'function') return parseCurriculumData();
 
   throw new Error(
-    'No curriculum parser in this script project. Add APPS-SCRIPT-1-json-web-app.js ' +
+    'No curriculum parser in this script project. Add curriculum-json-apps-script.js ' +
     '(which defines buildCurriculumTree) alongside this file.'
   );
 }
