@@ -42,4 +42,25 @@ ffmpeg -i technique-name.jpg -q:v 80 technique-name.webp
 Both files go in `src/assets/images/Techniques/`, and the page references them
 through a `<picture>` element with the `.webp` as the `<source>`.
 
+## Teacher portraits
+
+`src/assets/images/People/teachers/` follows the same two-file rule, at a
+smaller size: longest edge **1000 px** (the cards display them 280 px tall, so
+this covers retina), `.jpg` around 40-130 KB with a `.webp` beside it.
+
+The `.webp` is **required**, not an optimisation. `teachers.html` builds the
+`<source>` path by swapping `.jpg` for `.webp` on whatever `image:` says in the
+teacher's Markdown file, and a `<picture>` whose chosen `<source>` 404s does
+*not* fall back to the `<img>` — the portrait simply disappears. Adding a
+teacher means adding both files.
+
+```bash
+python3 -c "
+from PIL import Image, ImageOps
+im = ImageOps.exif_transpose(Image.open('original.jpg')).convert('RGB')
+im.thumbnail((1000, 1000), Image.LANCZOS)
+im.save('teacher-name.jpg', quality=86, optimize=True, progressive=True)
+im.save('teacher-name.webp', quality=82, method=6)"
+```
+
 See [`../MEDIA_ASSETS.md`](../MEDIA_ASSETS.md) for the video side.
