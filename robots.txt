@@ -1,4 +1,5 @@
+# Pre-launch build served from github.io. Every page returns
+# noindex; crawling is left open on purpose so that directive is
+# seen. Set by .github/workflows/deploy.yml — remove at cutover.
 User-agent: *
 Allow: /
-
-Sitemap: https://transpersonal-training.com/sitemap.xml
