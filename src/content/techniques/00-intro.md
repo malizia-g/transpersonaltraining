@@ -1,12 +1,12 @@
 ---
-heading: How We Work
-kicker: Techniques & Frameworks
+heading: School Pillars
+kicker: What We Teach
 trunk_title: The Transpersonal Therapist
-trunk_line: One root, three branches. Everything the training teaches grows from these.
-roots:
+trunk_line: Three branches, one training. Everything we teach grows from these pillars.
+pillars:
   - Body, emotion, spirit and collective, held together
   - The unconscious as a reserve of resources
   - Change through acceptance, not against the problem
 ---
 
-Our school trains therapists across three interconnected dimensions: **experiential practices** that open non-ordinary states of consciousness, **one-to-one counseling and psychotherapy methods** for accompanying a client session by session, and **maps of the psyche** — the theoretical and philosophical frameworks that make sense of what happens in the work. Experience without a map gets lost; a map without experience stays empty. The training constantly weaves the two together.
+Our school rests on a holistic charter: body, emotion, spirit and collective held together, the body as the temple of the soul, the unconscious as a reserve of resources, change through acceptance, and therapy as a political act. From these grow three branches — **Holotropic Breathwork and experiential work**, **counselling and psychotherapy skills**, and **consciousness maps and research** — woven together across the four years.

@@ -2,8 +2,8 @@
 number: "02"
 anchor: one-to-one
 icon: messages-square
-title: "Counselling Skills"
-short_title: Counselling Skills
+title: "Counselling & Psychotherapy Skills"
+short_title: Counselling & Psychotherapy Skills
 subtitle: The craft of the individual session, client by client.
 unit: methods
 icons:

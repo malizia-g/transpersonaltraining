@@ -1,7 +1,7 @@
 ---
 layout: base.njk
-title: "Techniques & Frameworks — Holotropic Breathwork Training"
-description: "How we train transpersonal therapists: three branches from one root — Holotropic Breathwork and experiential work, counselling skills, and the theoretical and philosophical framework that holds them."
+title: "School Pillars — Holotropic Breathwork & Transpersonal Training"
+description: "The pillars our school is built on, and the three branches that grow from them: Holotropic Breathwork and experiential work, counselling and psychotherapy skills, and consciousness maps and research."
 ---
 
 {% set intro = 'techniques/00-intro.md' | pageContent %}
@@ -119,7 +119,7 @@ description: "How we train transpersonal therapists: three branches from one roo
                 {{ intro.data.heading }}
             </h1>
             <p class="text-xl md:text-2xl text-[#D5DEE9] max-w-3xl mx-auto font-light leading-relaxed">
-                One root, three branches: the breath, the craft, and the maps that hold them
+                Three branches, one training: the breath, the craft, and the maps that hold them
             </p>
         </div>
     </div>
@@ -131,7 +131,7 @@ description: "How we train transpersonal therapists: three branches from one roo
         <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
             <a href="{{ '/' | url }}" class="hover:text-science-blue-800 transition-colors">Home</a>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-indigo-deep-900 font-medium">Techniques</span>
+            <span class="text-indigo-deep-900 font-medium">School Pillars</span>
         </div>
     </div>
 </div>
@@ -147,122 +147,25 @@ description: "How we train transpersonal therapists: three branches from one roo
     </div>
 </section>
 
-{# ══════════════════════════════════════════════════════════════════════════
-   TWO TREE TREATMENTS, SIDE BY SIDE FOR REVIEW.
-
-   Option A is the drawn tree, Option B the typographic one. They are both
-   here only so the choice can be made by looking at them on the page.
-   ONCE ONE IS CHOSEN, DELETE THE OTHER — along with its "Option A/B" caption
-   and this comment. Whichever survives, keep the id="branches" on it, since
-   the CTA and any future in-page link point there.
-   ══════════════════════════════════════════════════════════════════════════ #}
-
-<!-- ▽▽▽ OPTION A — the drawn tree ▽▽▽ -->
-<section id="branches" class="scroll-mt-24 pt-4 pb-16 md:pb-20 bg-[#FDFBF5]">
+<!-- The three branches -->
+<section id="branches" class="scroll-mt-24 pb-20 md:pb-24 bg-[#FDFBF5] border-b border-[#E7D6BE]">
     <div class="container mx-auto px-6">
-        <p class="text-center p4-kicker text-[#B65E3F] mb-10">Option A &mdash; the drawn tree</p>
-
-        {# Desktop: an actual tree. The three boughs are links, so the drawing
-           is the page's navigator rather than decoration on top of one. #}
-        <figure class="hidden md:block max-w-4xl mx-auto">
-            <svg viewBox="0 0 900 560" class="w-full h-auto" role="group" aria-label="The three branches of the training">
-                <!-- roots -->
-                <path class="tq-tree-root" d="M 450 468 C 430 490, 395 500, 358 516" />
-                <path class="tq-tree-root" d="M 450 468 C 450 492, 450 502, 450 524" />
-                <path class="tq-tree-root" d="M 450 468 C 470 490, 505 500, 542 516" />
-                <line class="tq-tree-ground" x1="290" y1="470" x2="610" y2="470" />
-
-                <!-- trunk -->
-                <path class="tq-tree-trunk" d="M 437 470 L 441 330 L 459 330 L 463 470 Z" />
-
-                <!-- boughs -->
-                <path class="tq-tree-bough" d="M 450 352 C 392 332, 250 318, 152 182" />
-                <path class="tq-tree-bough" d="M 450 330 L 450 178" />
-                <path class="tq-tree-bough" d="M 450 352 C 508 332, 650 318, 748 182" />
-
-                {% set cxs = [150, 450, 750] %}
-                {% for sec in sections %}
-                {% set cx = cxs[loop.index0] %}
-                {% set n = sec.blocks | length %}
-                {% set sp = 30 if n < 5 else 23 %}
-                <a class="tq-tree-branch" href="#{{ sec.data.anchor }}">
-                    <title>{{ sec.data.title }}</title>
-
-                    <!-- the twig the foliage sits on -->
-                    <path class="tq-tree-bough" d="M {{ cx }} 86 L {{ cx }} 62" stroke-width="3" />
-
-                    <!-- foliage: one leaf per sub-section -->
-                    {% for block in sec.blocks %}
-                    {% set lx = cx + (loop.index0 - (n - 1) / 2) * sp %}
-                    {% set tilt = loop.index0 % 2 %}
-                    {% set ly = 50 if tilt else 60 %}
-                    <ellipse class="tq-tree-leaf" cx="{{ lx }}" cy="{{ ly }}" rx="12" ry="7"
-                             transform="rotate({{ 28 if tilt else -28 }} {{ lx }} {{ ly }})" />
-                    {% endfor %}
-
-                    <!-- the branch label -->
-                    <rect class="tq-tree-box" x="{{ cx - 126 }}" y="86" width="252" height="92" rx="2" />
-                    <text class="tq-tree-num" x="{{ cx }}" y="112" text-anchor="middle"
-                          font-size="12" letter-spacing="2.5" font-weight="600">{{ sec.data.number }}</text>
-                    <text class="tq-tree-name" x="{{ cx }}" y="140" text-anchor="middle"
-                          font-size="19" font-weight="700" font-family="Georgia, serif">{{ sec.data.short_title }}</text>
-                    <text class="tq-tree-meta" x="{{ cx }}" y="162" text-anchor="middle" font-size="12">
-                        {{ n }} {{ sec.data.unit }} to open
-                    </text>
-                </a>
-                {% endfor %}
-
-                <!-- the trunk's name -->
-                <text class="tq-tree-trunk-label" x="450" y="552" text-anchor="middle"
-                      font-size="21" font-weight="700" font-family="Georgia, serif"
-                      letter-spacing="1">{{ intro.data.trunk_title }}</text>
-            </svg>
-            <figcaption class="text-center text-sm text-neutral-warm-600 mt-6 max-w-xl mx-auto">
-                {{ intro.data.trunk_line }}
-            </figcaption>
-        </figure>
-
-        {# Below md a wide tree is unreadable, so it becomes a stem with the
-           three branches hanging off it. #}
-        <div class="md:hidden max-w-sm mx-auto">
-            <p class="text-center font-serif text-xl font-bold text-indigo-deep-900">{{ intro.data.trunk_title }}</p>
-            <p class="text-center text-sm text-neutral-warm-600 mt-2 mb-6">{{ intro.data.trunk_line }}</p>
-            <div class="relative pl-8 space-y-4 border-l-2 border-[#D9A756] ml-4">
-                {% for sec in sections %}
-                <a href="#{{ sec.data.anchor }}" class="relative block bg-[#FEF9EF] border border-[#D9A756]/40 p-5">
-                    <span class="absolute top-8 -left-8 w-8 border-t-2 border-[#D9A756]" aria-hidden="true"></span>
-                    <span class="p4-kicker !text-xs text-[#D9A756]">{{ sec.data.number }}</span>
-                    <span class="block font-serif text-lg font-bold text-indigo-deep-900 mt-1">{{ sec.data.short_title }}</span>
-                    <span class="block text-xs text-neutral-warm-600 mt-1">{{ sec.blocks | length }} {{ sec.data.unit }} to open</span>
-                </a>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-</section>
-<!-- △△△ END OPTION A △△△ -->
-
-<!-- ▽▽▽ OPTION B — the typographic tree ▽▽▽ -->
-<section class="pb-20 md:pb-24 bg-[#FDFBF5] border-b border-[#E7D6BE]">
-    <div class="container mx-auto px-6">
-        <p class="text-center p4-kicker text-[#B65E3F] mb-10">Option B &mdash; the typographic tree</p>
-
         <div class="max-w-5xl mx-auto">
             <!-- trunk -->
             <div class="text-center">
                 <p class="p4-kicker text-[#D9A756] mb-4 flex items-center justify-center gap-4">
                     <span class="p4-hairline"></span>
-                    The root
+                    Our techniques
                     <span class="p4-hairline"></span>
                 </p>
                 <h2 class="p4-display text-3xl md:text-4xl font-medium text-indigo-deep-900">{{ intro.data.trunk_title }}</h2>
                 <p class="mt-3 text-neutral-warm-700 max-w-xl mx-auto">{{ intro.data.trunk_line }}</p>
-                {% if intro.data.roots %}
+                {% if intro.data.pillars %}
                 <ul class="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-neutral-warm-600">
-                    {% for root in intro.data.roots %}
+                    {% for pillar in intro.data.pillars %}
                     <li class="flex items-center gap-2">
                         <span class="w-1.5 h-1.5 shrink-0 rotate-45 bg-[#B65E3F]" aria-hidden="true"></span>
-                        {{ root }}
+                        {{ pillar }}
                     </li>
                     {% endfor %}
                 </ul>
@@ -316,7 +219,6 @@ description: "How we train transpersonal therapists: three branches from one roo
         </div>
     </div>
 </section>
-<!-- △△△ END OPTION B △△△ -->
 
 <!-- ═══ Branch 01 · Holotropic Breathwork & Experiential Work ═══ -->
 <section id="{{ experiential.data.anchor }}" class="scroll-mt-24 py-20 md:py-28 bg-[#0F2540] overflow-hidden">
@@ -341,7 +243,7 @@ description: "How we train transpersonal therapists: three branches from one roo
     </div>
 </section>
 
-<!-- ═══ Branch 02 · Counselling Skills ═══ -->
+<!-- ═══ Branch 02 · Counselling & Psychotherapy Skills ═══ -->
 <section id="{{ oneToOne.data.anchor }}" class="scroll-mt-24 py-20 md:py-28 bg-[#FAF3E7]">
     <div class="container mx-auto px-6">
         {{ branchHeader(oneToOne,
@@ -364,7 +266,7 @@ description: "How we train transpersonal therapists: three branches from one roo
     </div>
 </section>
 
-<!-- ═══ Branch 03 · Theoretical & Philosophical Framework ═══ -->
+<!-- ═══ Branch 03 · Consciousness Maps & Research ═══ -->
 <section id="{{ maps.data.anchor }}" class="scroll-mt-24 py-20 md:py-28 bg-[#FDFBF5]">
     <div class="container mx-auto px-6">
         {{ branchHeader(maps,

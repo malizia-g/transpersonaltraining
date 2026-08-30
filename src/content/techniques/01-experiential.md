@@ -3,7 +3,7 @@ number: "01"
 anchor: experiential
 icon: wind
 title: "Holotropic Breathwork & Experiential Work"
-short_title: Holotropic Breathwork
+short_title: Holotropic Breathwork & Experiential Work
 subtitle: Working with non-ordinary states of consciousness and the group field.
 unit: practices
 icons:

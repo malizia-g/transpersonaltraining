@@ -2,12 +2,12 @@
 number: "03"
 anchor: maps
 icon: landmark
-title: "Theoretical & Philosophical Framework"
-short_title: Theory & Philosophy
+title: "Consciousness Maps & Research"
+short_title: Consciousness Maps & Research
 subtitle: The contexts that give meaning to the experience.
 unit: frameworks
 icons:
-  Pillars: landmark
+  Love as a Spectrum of Consciousness: heart
   Maps of the Psyche: map
   Ancestral Trauma: network
   Shadow Work: moon
@@ -16,12 +16,10 @@ icons:
   The Body–Mind Foundations: brain
 ---
 
-### Pillars
-> The school’s foundational charter — from the body as the temple of the soul to therapy as a political act.
+### Love as a Spectrum of Consciousness
+> Love read developmentally — and the clinical question of how old the client is right now.
 
-The school's foundational charter: a holistic approach across body, emotion, spirit and collective; the body as the temple of the soul; change through acceptance ("I am already what I am seeking"); the unconscious as a reserve of resources; non-ordinary states as therapeutic allies; essence and existence held in the same dynamic; interconnectedness, unconditional love, the opening of the heart, the healing field, and therapy as a political act.
-
-Within this frame, love itself is read as a spectrum of consciousness — from possessive, infantile *ponya* through *eros* and *philia* to transpersonal *agape*, *anoya* and *charis* (grace). Clinically decisive: the therapist asks "how old is the client in front of me right now?" and attunes the intervention to that developmental level, moving the client from love lived as suffering to love lived as offering.
+Love itself is read as a spectrum of consciousness — from possessive, infantile *ponya* through *eros* and *philia* to transpersonal *agape*, *anoya* and *charis* (grace). Clinically decisive: the therapist asks "how old is the client in front of me right now?" and attunes the intervention to that developmental level, moving the client from love lived as suffering to love lived as offering.
 
 ### Maps of the Psyche
 *(Jung, Assagioli, Grof, Dressler)*
