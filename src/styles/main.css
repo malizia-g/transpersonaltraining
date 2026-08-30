@@ -29,74 +29,322 @@ html {
    lightness so they stay readable wherever the hue sliders end up — only their
    hue rides along with `deep`.
 
-   `palette-blue` reproduces the current design hex for hex; it is the default
-   so that every other page, which still carries literal colours, keeps
-   matching the nav and footer. */
+   `blue` reproduces the current design hex for hex; it is the default so that
+   every other page, which still carries literal colours, keeps matching the
+   nav and footer. It is also the one palette exempt from the contrast gate,
+   because it documents what is already shipped rather than proposing
+   something new.
 
+   The declarations below are GENERATED. The numbers, the family tags and the
+   accessibility checks all live in scripts/design/palettes.js; run
+
+       node scripts/design/build-palettes.js
+
+   to re-emit this block and the switcher's catalogue together. Every palette
+   must clear fourteen WCAG contrast pairs and keep some forty derived tones
+   inside 0-100% before the generator will write anything, so a scheme that
+   looks pleasant but puts unreadable text on paper cannot land. */
+
+/* ══ PALETTES:START — generated, see scripts/design/build-palettes.js ══ */
+
+/* ══ Classic ══ */
+
+/* Scientific Blue — the current scheme */
 :root,
 [data-palette="blue"] {
     --deep-h: 213; --deep-s: 62%; --deep-l: 15%;
     --dusk-h: 258; --dusk-s: 22%; --dusk-l: 18%;
-    --acc-h:   37; --acc-s:  63%; --acc-l:  59%;
-    --sec-h:   16; --sec-s:  49%; --sec-l:  48%;
-    --pap-h:   38; --pap-s:  65%; --pap-l:  94%;
+    --acc-h: 37; --acc-s: 63%; --acc-l: 59%;
+    --sec-h: 16; --sec-s: 49%; --sec-l: 48%;
+    --pap-h: 38; --pap-s: 65%; --pap-l: 94%;
 
     --head-shift: 29; --head-s: 47%; --head-l: 34%;
     --link-shift: 11; --link-s: 64%; --link-l: 33%;
     --glow-shift: -10; --glow-s: 69%; --glow-l: 51%;
 }
 
-/* Deep forest — meant for the outdoor photography */
+/* ══ Nature ══ */
+
+/* Deep Forest — dark conifer under honey gold */
 [data-palette="green"] {
     --deep-h: 155; --deep-s: 45%; --deep-l: 13%;
     --dusk-h: 108; --dusk-s: 26%; --dusk-l: 17%;
-    --acc-h:   42; --acc-s:  62%; --acc-l:  57%;
-    --sec-h:   22; --sec-s:  52%; --sec-l:  45%;
-    --pap-h:   44; --pap-s:  55%; --pap-l:  94%;
+    --acc-h: 42; --acc-s: 62%; --acc-l: 57%;
+    --sec-h: 22; --sec-s: 52%; --sec-l: 42%;
+    --pap-h: 44; --pap-s: 55%; --pap-l: 94%;
 
     --head-shift: 10; --head-s: 44%; --head-l: 22%;
-    --link-shift: 6;  --link-s: 58%; --link-l: 26%;
+    --link-shift: 6; --link-s: 58%; --link-l: 26%;
     --glow-shift: -8; --glow-s: 66%; --glow-l: 52%;
 }
 
-/* Amber — warm roasted browns under a bright orange CTA */
-[data-palette="orange"] {
-    --deep-h:  22; --deep-s: 46%; --deep-l: 14%;
-    --dusk-h: 340; --dusk-s: 26%; --dusk-l: 17%;
-    --acc-h:   30; --acc-s:  78%; --acc-l:  55%;
-    --sec-h:   10; --sec-s:  60%; --sec-l:  46%;
-    --pap-h:   34; --pap-s:  70%; --pap-l:  94%;
+/* Moss & Linen — soft green on a linen ground */
+[data-palette="moss"] {
+    --deep-h: 145; --deep-s: 32%; --deep-l: 16%;
+    --dusk-h: 95; --dusk-s: 22%; --dusk-l: 19%;
+    --acc-h: 45; --acc-s: 55%; --acc-l: 60%;
+    --sec-h: 28; --sec-s: 48%; --sec-l: 41%;
+    --pap-h: 60; --pap-s: 35%; --pap-l: 95%;
 
-    --head-shift: -4; --head-s: 48%; --head-l: 24%;
-    --link-shift: -6; --link-s: 62%; --link-l: 30%;
-    --glow-shift: 4;  --glow-s: 76%; --glow-l: 53%;
+    --head-shift: 8; --head-s: 40%; --head-l: 22%;
+    --link-shift: 5; --link-s: 50%; --link-l: 26%;
+    --glow-shift: -6; --glow-s: 60%; --glow-l: 54%;
 }
 
-/* Red earth — oxide and terracotta, meant for the interior photography */
-[data-palette="earth"] {
-    --deep-h:   8; --deep-s: 40%; --deep-l: 15%;
-    --dusk-h: 350; --dusk-s: 24%; --dusk-l: 18%;
-    --acc-h:   33; --acc-s:  58%; --acc-l:  58%;
-    --sec-h:    6; --sec-s:  55%; --sec-l:  45%;
-    --pap-h:   28; --pap-s:  60%; --pap-l:  94%;
+/* Pine & Ember — near-black pine, ember CTA */
+[data-palette="pine"] {
+    --deep-h: 172; --deep-s: 48%; --deep-l: 12%;
+    --dusk-h: 200; --dusk-s: 30%; --dusk-l: 16%;
+    --acc-h: 25; --acc-s: 72%; --acc-l: 62%;
+    --sec-h: 12; --sec-s: 58%; --sec-l: 44%;
+    --pap-h: 40; --pap-s: 45%; --pap-l: 94%;
 
-    --head-shift: 4;  --head-s: 42%; --head-l: 25%;
-    --link-shift: -2; --link-s: 55%; --link-l: 31%;
+    --head-shift: -6; --head-s: 44%; --head-l: 21%;
+    --link-shift: -10; --link-s: 56%; --link-l: 25%;
+    --glow-shift: 0; --glow-s: 74%; --glow-l: 52%;
+}
+
+/* Fern — fresher green, yellow-green accent */
+[data-palette="fern"] {
+    --deep-h: 138; --deep-s: 40%; --deep-l: 15%;
+    --dusk-h: 80; --dusk-s: 30%; --dusk-l: 17%;
+    --acc-h: 58; --acc-s: 58%; --acc-l: 54%;
+    --sec-h: 30; --sec-s: 52%; --sec-l: 39%;
+    --pap-h: 55; --pap-s: 45%; --pap-l: 95%;
+
+    --head-shift: 12; --head-s: 44%; --head-l: 22%;
+    --link-shift: 8; --link-s: 54%; --link-l: 26%;
+    --glow-shift: -14; --glow-s: 64%; --glow-l: 52%;
+}
+
+/* Sea Pine — green pulled towards teal */
+[data-palette="seapine"] {
+    --deep-h: 185; --deep-s: 44%; --deep-l: 13%;
+    --dusk-h: 210; --dusk-s: 28%; --dusk-l: 17%;
+    --acc-h: 40; --acc-s: 60%; --acc-l: 58%;
+    --sec-h: 18; --sec-s: 52%; --sec-l: 44%;
+    --pap-h: 45; --pap-s: 50%; --pap-l: 94%;
+
+    --head-shift: -8; --head-s: 46%; --head-l: 22%;
+    --link-shift: -12; --link-s: 58%; --link-l: 26%;
+    --glow-shift: -6; --glow-s: 68%; --glow-l: 52%;
+}
+
+/* ══ Earth ══ */
+
+/* Red Earth — oxide and terracotta */
+[data-palette="earth"] {
+    --deep-h: 8; --deep-s: 40%; --deep-l: 15%;
+    --dusk-h: 350; --dusk-s: 24%; --dusk-l: 18%;
+    --acc-h: 33; --acc-s: 58%; --acc-l: 58%;
+    --sec-h: 6; --sec-s: 55%; --sec-l: 43%;
+    --pap-h: 28; --pap-s: 60%; --pap-l: 94%;
+
+    --head-shift: 4; --head-s: 44%; --head-l: 23%;
+    --link-shift: -2; --link-s: 56%; --link-l: 28%;
     --glow-shift: 10; --glow-s: 70%; --glow-l: 52%;
 }
 
-/* Purple — the magenta-and-olive pairing from the reference swatch */
+/* Amber — roasted browns, bright orange CTA */
+[data-palette="orange"] {
+    --deep-h: 22; --deep-s: 46%; --deep-l: 14%;
+    --dusk-h: 340; --dusk-s: 26%; --dusk-l: 17%;
+    --acc-h: 30; --acc-s: 78%; --acc-l: 56%;
+    --sec-h: 10; --sec-s: 60%; --sec-l: 43%;
+    --pap-h: 34; --pap-s: 70%; --pap-l: 94%;
+
+    --head-shift: -4; --head-s: 48%; --head-l: 23%;
+    --link-shift: -6; --link-s: 62%; --link-l: 28%;
+    --glow-shift: 4; --glow-s: 76%; --glow-l: 53%;
+}
+
+/* Terracotta — fired brick and clay */
+[data-palette="terracotta"] {
+    --deep-h: 14; --deep-s: 38%; --deep-l: 16%;
+    --dusk-h: 355; --dusk-s: 22%; --dusk-l: 19%;
+    --acc-h: 28; --acc-s: 62%; --acc-l: 60%;
+    --sec-h: 12; --sec-s: 56%; --sec-l: 43%;
+    --pap-h: 30; --pap-s: 55%; --pap-l: 94%;
+
+    --head-shift: 2; --head-s: 42%; --head-l: 23%;
+    --link-shift: -4; --link-s: 54%; --link-l: 28%;
+    --glow-shift: 6; --glow-s: 68%; --glow-l: 53%;
+}
+
+/* Sienna & Sand — warm brown on a sand ground */
+[data-palette="sienna"] {
+    --deep-h: 26; --deep-s: 34%; --deep-l: 15%;
+    --dusk-h: 15; --dusk-s: 24%; --dusk-l: 18%;
+    --acc-h: 36; --acc-s: 60%; --acc-l: 58%;
+    --sec-h: 20; --sec-s: 54%; --sec-l: 42%;
+    --pap-h: 36; --pap-s: 50%; --pap-l: 95%;
+
+    --head-shift: 0; --head-s: 40%; --head-l: 23%;
+    --link-shift: -8; --link-s: 52%; --link-l: 27%;
+    --glow-shift: 2; --glow-s: 66%; --glow-l: 53%;
+}
+
+/* Rust & Bone — deep rust against bone white */
+[data-palette="rust"] {
+    --deep-h: 12; --deep-s: 45%; --deep-l: 13%;
+    --dusk-h: 330; --dusk-s: 22%; --dusk-l: 17%;
+    --acc-h: 24; --acc-s: 66%; --acc-l: 59%;
+    --sec-h: 8; --sec-s: 58%; --sec-l: 42%;
+    --pap-h: 40; --pap-s: 26%; --pap-l: 95%;
+
+    --head-shift: 6; --head-s: 46%; --head-l: 22%;
+    --link-shift: -2; --link-s: 58%; --link-l: 27%;
+    --glow-shift: 8; --glow-s: 72%; --glow-l: 52%;
+}
+
+/* ══ Spiritual ══ */
+
+/* Purple & Olive — from the reference swatch */
 [data-palette="purple"] {
     --deep-h: 300; --deep-s: 52%; --deep-l: 13%;
-    --dusk-h:  80; --dusk-s: 45%; --dusk-l: 12%;
-    --acc-h:   71; --acc-s:  60%; --acc-l:  55%;
-    --sec-h:  302; --sec-s:  55%; --sec-l:  40%;
-    --pap-h:   60; --pap-s:  40%; --pap-l:  95%;
+    --dusk-h: 80; --dusk-s: 45%; --dusk-l: 12%;
+    --acc-h: 71; --acc-s: 60%; --acc-l: 55%;
+    --sec-h: 302; --sec-s: 55%; --sec-l: 38%;
+    --pap-h: 60; --pap-s: 40%; --pap-l: 95%;
 
-    --head-shift: 4;   --head-s: 50%; --head-l: 26%;
-    --link-shift: 2;   --link-s: 55%; --link-l: 32%;
+    --head-shift: 4; --head-s: 52%; --head-l: 24%;
+    --link-shift: 2; --link-s: 56%; --link-l: 29%;
     --glow-shift: 130; --glow-s: 55%; --glow-l: 45%;
 }
+
+/* Amethyst — violet under a soft gold */
+[data-palette="amethyst"] {
+    --deep-h: 275; --deep-s: 40%; --deep-l: 14%;
+    --dusk-h: 250; --dusk-s: 28%; --dusk-l: 17%;
+    --acc-h: 42; --acc-s: 55%; --acc-l: 60%;
+    --sec-h: 290; --sec-s: 46%; --sec-l: 42%;
+    --pap-h: 45; --pap-s: 40%; --pap-l: 95%;
+
+    --head-shift: -6; --head-s: 46%; --head-l: 24%;
+    --link-shift: -10; --link-s: 54%; --link-l: 29%;
+    --glow-shift: -4; --glow-s: 64%; --glow-l: 53%;
+}
+
+/* Plum & Rose — deep plum, rose-gold CTA */
+[data-palette="plum"] {
+    --deep-h: 320; --deep-s: 38%; --deep-l: 14%;
+    --dusk-h: 285; --dusk-s: 26%; --dusk-l: 17%;
+    --acc-h: 20; --acc-s: 55%; --acc-l: 62%;
+    --sec-h: 335; --sec-s: 50%; --sec-l: 42%;
+    --pap-h: 30; --pap-s: 40%; --pap-l: 95%;
+
+    --head-shift: -14; --head-s: 46%; --head-l: 24%;
+    --link-shift: -20; --link-s: 52%; --link-l: 29%;
+    --glow-shift: 6; --glow-s: 62%; --glow-l: 54%;
+}
+
+/* Indigo Night — deep indigo, pale gold */
+[data-palette="indigonight"] {
+    --deep-h: 255; --deep-s: 45%; --deep-l: 13%;
+    --dusk-h: 285; --dusk-s: 30%; --dusk-l: 16%;
+    --acc-h: 45; --acc-s: 58%; --acc-l: 60%;
+    --sec-h: 265; --sec-s: 46%; --sec-l: 45%;
+    --pap-h: 42; --pap-s: 38%; --pap-l: 95%;
+
+    --head-shift: -12; --head-s: 50%; --head-l: 26%;
+    --link-shift: -18; --link-s: 58%; --link-l: 30%;
+    --glow-shift: -8; --glow-s: 66%; --glow-l: 53%;
+}
+
+/* Iris — a cooler mid purple */
+[data-palette="iris"] {
+    --deep-h: 288; --deep-s: 44%; --deep-l: 15%;
+    --dusk-h: 265; --dusk-s: 28%; --dusk-l: 18%;
+    --acc-h: 48; --acc-s: 52%; --acc-l: 60%;
+    --sec-h: 295; --sec-s: 48%; --sec-l: 43%;
+    --pap-h: 50; --pap-s: 32%; --pap-l: 95%;
+
+    --head-shift: -8; --head-s: 48%; --head-l: 25%;
+    --link-shift: -14; --link-s: 56%; --link-l: 30%;
+    --glow-shift: -6; --glow-s: 62%; --glow-l: 54%;
+}
+
+/* ══ Hybrids — two families at once ══ */
+
+/* Moss & Clay — green ground, clay gradients */
+[data-palette="mossclay"] {
+    --deep-h: 150; --deep-s: 38%; --deep-l: 14%;
+    --dusk-h: 30; --dusk-s: 28%; --dusk-l: 17%;
+    --acc-h: 36; --acc-s: 60%; --acc-l: 59%;
+    --sec-h: 18; --sec-s: 54%; --sec-l: 42%;
+    --pap-h: 38; --pap-s: 50%; --pap-l: 94%;
+
+    --head-shift: 4; --head-s: 44%; --head-l: 22%;
+    --link-shift: 0; --link-s: 54%; --link-l: 26%;
+    --glow-shift: 2; --glow-s: 68%; --glow-l: 52%;
+}
+
+/* Ochre Grove — leaf green under ochre */
+[data-palette="ochregrove"] {
+    --deep-h: 120; --deep-s: 34%; --deep-l: 15%;
+    --dusk-h: 40; --dusk-s: 30%; --dusk-l: 18%;
+    --acc-h: 40; --acc-s: 66%; --acc-l: 56%;
+    --sec-h: 25; --sec-s: 56%; --sec-l: 40%;
+    --pap-h: 42; --pap-s: 55%; --pap-l: 94%;
+
+    --head-shift: 10; --head-s: 42%; --head-l: 22%;
+    --link-shift: 6; --link-s: 52%; --link-l: 26%;
+    --glow-shift: 0; --glow-s: 70%; --glow-l: 53%;
+}
+
+/* Forest & Iris — conifer with a violet dusk */
+[data-palette="forestiris"] {
+    --deep-h: 160; --deep-s: 42%; --deep-l: 13%;
+    --dusk-h: 280; --dusk-s: 32%; --dusk-l: 16%;
+    --acc-h: 50; --acc-s: 56%; --acc-l: 57%;
+    --sec-h: 290; --sec-s: 46%; --sec-l: 42%;
+    --pap-h: 48; --pap-s: 40%; --pap-l: 95%;
+
+    --head-shift: 8; --head-s: 46%; --head-l: 22%;
+    --link-shift: 4; --link-s: 56%; --link-l: 26%;
+    --glow-shift: -10; --glow-s: 60%; --glow-l: 52%;
+}
+
+/* Twilight Heath — moor green drifting to heather */
+[data-palette="heather"] {
+    --deep-h: 170; --deep-s: 36%; --deep-l: 14%;
+    --dusk-h: 292; --dusk-s: 30%; --dusk-l: 17%;
+    --acc-h: 52; --acc-s: 52%; --acc-l: 57%;
+    --sec-h: 298; --sec-s: 44%; --sec-l: 43%;
+    --pap-h: 50; --pap-s: 35%; --pap-l: 95%;
+
+    --head-shift: -4; --head-s: 44%; --head-l: 22%;
+    --link-shift: -8; --link-s: 54%; --link-l: 26%;
+    --glow-shift: -8; --glow-s: 62%; --glow-l: 53%;
+}
+
+/* Clay & Amethyst — warm clay, amethyst shadows */
+[data-palette="clayamethyst"] {
+    --deep-h: 350; --deep-s: 36%; --deep-l: 14%;
+    --dusk-h: 285; --dusk-s: 30%; --dusk-l: 17%;
+    --acc-h: 32; --acc-s: 58%; --acc-l: 58%;
+    --sec-h: 300; --sec-s: 46%; --sec-l: 41%;
+    --pap-h: 32; --pap-s: 40%; --pap-l: 95%;
+
+    --head-shift: 8; --head-s: 44%; --head-l: 23%;
+    --link-shift: 0; --link-s: 54%; --link-l: 28%;
+    --glow-shift: 14; --glow-s: 66%; --glow-l: 53%;
+}
+
+/* Ember & Iris — violet ground, ember CTA */
+[data-palette="emberiris"] {
+    --deep-h: 305; --deep-s: 35%; --deep-l: 13%;
+    --dusk-h: 20; --dusk-s: 32%; --dusk-l: 17%;
+    --acc-h: 26; --acc-s: 68%; --acc-l: 58%;
+    --sec-h: 315; --sec-s: 50%; --sec-l: 42%;
+    --pap-h: 34; --pap-s: 38%; --pap-l: 95%;
+
+    --head-shift: 2; --head-s: 46%; --head-l: 23%;
+    --link-shift: -6; --link-s: 54%; --link-l: 28%;
+    --glow-shift: 8; --glow-s: 70%; --glow-l: 52%;
+}
+
+/* ══ PALETTES:END ══ */
 
 /* ── Derived tokens ──
    Named for the job they do, not the colour they happen to be, so the same
@@ -540,7 +788,48 @@ body.mobile-menu-open { overflow: hidden; }
     border-top: 1px solid #2A2D35;
 }
 
-.palette-choices { display: flex; flex-direction: column; gap: 0.3rem; }
+.palette-count { color: #6E7486; font-weight: 400; letter-spacing: 0; text-transform: none; }
+
+.palette-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-bottom: 0.55rem;
+}
+.palette-filter {
+    padding: 0.2rem 0.55rem;
+    background: #1E2128;
+    border: 1px solid #2E323B;
+    border-radius: 999px;
+    color: #9AA0B0;
+    font-size: 0.68rem;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.palette-filter:hover { background: #262A33; color: #C9CEDA; }
+.palette-filter.is-active { background: #3A4150; border-color: #596174; color: #F0F2F7; }
+
+.palette-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    max-height: 14.5rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-right: 0.2rem;
+}
+.palette-choice[hidden] { display: none; }
+
+.palette-tags { display: flex; gap: 0.25rem; margin-top: 0.2rem; }
+.palette-tag {
+    padding: 0.05rem 0.35rem;
+    background: #2A2E37;
+    border-radius: 999px;
+    color: #8891A3;
+    font-size: 0.58rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
 .palette-choice {
     display: flex;
     align-items: center;
@@ -575,23 +864,46 @@ body.mobile-menu-open { overflow: hidden; }
     border-top: 1px solid #23262D;
 }
 .palette-role-head { display: flex; align-items: center; gap: 0.5rem; }
-.palette-chip {
-    width: 0.95rem;
-    height: 0.95rem;
+/* The role's chip is the colour input, so clicking the swatch opens the
+   system picker and dragging it retints the page live. */
+.palette-pick {
+    width: 1.15rem;
+    height: 1.15rem;
+    flex-shrink: 0;
+    padding: 0;
+    border: none;
     border-radius: 0.2rem;
+    background: none;
+    cursor: pointer;
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
 }
+.palette-pick::-webkit-color-swatch-wrapper { padding: 0; }
+.palette-pick::-webkit-color-swatch { border: none; border-radius: 0.2rem; }
+.palette-pick::-moz-color-swatch { border: none; border-radius: 0.2rem; }
+.palette-pick:focus-visible { outline: 2px solid #7C8496; outline-offset: 2px; }
 .palette-role-name { font-size: 0.8rem; font-weight: 500; }
 .palette-hex {
+    width: 5.2rem;
     margin-left: auto;
+    padding: 0.15rem 0.35rem;
+    background: #1C1F26;
+    border: 1px solid #2E323B;
+    border-radius: 0.25rem;
+    color: #B9BFCC;
     font-size: 0.66rem;
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    color: #8D93A3;
+    text-align: right;
+    text-transform: uppercase;
+}
+.palette-hex:focus {
+    outline: none;
+    border-color: #596174;
+    color: #F0F2F7;
 }
 .palette-role-hint {
     font-size: 0.66rem;
     color: #7B8192;
-    margin: 0.15rem 0 0.35rem 1.45rem;
+    margin: 0.15rem 0 0.35rem 1.65rem;
 }
 
 .palette-channel {
