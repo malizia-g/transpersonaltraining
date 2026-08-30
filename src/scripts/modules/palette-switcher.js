@@ -45,7 +45,7 @@ const CHANNELS = [
 // shown as a percentage, which is what someone judging a photograph thinks in.
 // Past 100% the alphas simply saturate at fully opaque.
 const VEILS = [
-    { name: '--veil-hero',    label: 'Hero',         hint: 'the opening photograph' },
+    { name: '--veil-hero',    label: 'Hero',         hint: 'the opening video' },
     { name: '--veil-glow',    label: 'Sunset glow',  hint: 'warm light at the hero foot' },
     { name: '--veil-quote',   label: 'Quote band',   hint: 'the mandala collection' },
     { name: '--veil-contact', label: 'Contact band', hint: 'the fire pit at dusk' },
@@ -54,6 +54,7 @@ const VEIL_MAX = 150;
 
 const PALETTE_KEY = 'palette-preference';
 const FILTER_KEY = 'palette-filter';
+const HELP_KEY = 'palette-help-collapsed';
 // v2 stores ready-to-set CSS strings rather than bare numbers, so hues,
 // percentages and veil multipliers can all live in the same map.
 const TWEAK_KEY = 'palette-tweaks-v2';
@@ -187,6 +188,24 @@ export function initPaletteSwitcher() {
             <span class="palette-toggle-label">Colours</span>
         </button>
         <div id="palette-body" hidden>
+            <details id="palette-help">
+                <summary>How to use this</summary>
+                <ol>
+                    <li><b>Pick a category.</b> Nature, Earth or Spiritual. <i>Hybrids</i> are
+                        schemes that belong to two families at once; <i>All</i> shows everything.</li>
+                    <li><b>Choose a scheme.</b> The whole page retints as you click — header,
+                        buttons, headings, borders and footer together.</li>
+                    <li><b>Adjust the tones.</b> Each of the five roles has a hue, saturation and
+                        lightness slider. To set a colour exactly, click its swatch to open the
+                        colour picker, or type a hex code into the field beside it.</li>
+                    <li><b>Adjust the colour over the video.</b> The <i>Hero</i> slider sets how
+                        much colour is laid over the opening video; the other three do the same
+                        for the sunset glow and the two photo bands further down.</li>
+                </ol>
+                <p><b>Reset scheme</b> undoes your changes to the current scheme only — every other
+                   scheme keeps its own. <b>Copy CSS</b> puts the finished numbers on the clipboard.
+                   Your choices are remembered in this browser, so you can come back to them.</p>
+            </details>
             <p class="palette-title">Colour scheme <span class="palette-count"></span></p>
             <div class="palette-filters" role="group" aria-label="Filter schemes by family"></div>
             <div class="palette-choices" role="radiogroup" aria-label="Colour scheme"></div>
@@ -208,6 +227,11 @@ export function initPaletteSwitcher() {
     const countEl = panel.querySelector('.palette-count');
     const tune = panel.querySelector('.palette-tune');
     const veilBox = panel.querySelector('.palette-veils');
+
+    const help = panel.querySelector('#palette-help');
+    // Open the first time someone lands here, closed once they have folded it.
+    help.open = localStorage.getItem(HELP_KEY) !== '1';
+    help.addEventListener('toggle', () => remember(HELP_KEY, help.open ? '0' : '1'));
 
     toggle.addEventListener('click', () => {
         const open = body.hasAttribute('hidden');

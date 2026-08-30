@@ -788,6 +788,57 @@ body.mobile-menu-open { overflow: hidden; }
     border-top: 1px solid #2A2D35;
 }
 
+/* The in-panel how-to. This tool is shared as a link with people who have
+   never seen it, so the panel has to explain itself without a separate page. */
+#palette-help {
+    margin-bottom: 0.9rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid #2A2D35;
+}
+#palette-help > summary {
+    list-style: none;
+    cursor: pointer;
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #8D93A3;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+#palette-help > summary::-webkit-details-marker { display: none; }
+#palette-help > summary::before {
+    content: '';
+    width: 0.3rem; height: 0.3rem;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(-45deg);
+    transition: transform 0.2s ease;
+}
+#palette-help[open] > summary::before { transform: rotate(45deg); }
+#palette-help > summary:hover { color: #C9CEDA; }
+#palette-help ol {
+    margin: 0.65rem 0 0;
+    padding-left: 1.25rem;
+    list-style: decimal;
+}
+#palette-help li::marker { color: #6E7486; font-size: 0.66rem; }
+#palette-help li {
+    font-size: 0.7rem;
+    line-height: 1.5;
+    color: #9AA0B0;
+    margin-bottom: 0.45rem;
+}
+#palette-help li b { color: #D3D8E2; font-weight: 600; }
+#palette-help li i, #palette-help p i { color: #C9CEDA; font-style: normal; font-weight: 500; }
+#palette-help p {
+    margin: 0.55rem 0 0;
+    font-size: 0.68rem;
+    line-height: 1.5;
+    color: #7B8192;
+}
+#palette-help p b { color: #B9BFCC; font-weight: 600; }
+
 .palette-count { color: #6E7486; font-weight: 400; letter-spacing: 0; text-transform: none; }
 
 .palette-filters {

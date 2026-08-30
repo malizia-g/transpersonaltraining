@@ -1,0 +1,121 @@
+# Publishes the colour planner — the home page with the palette switcher on it —
+# to a subfolder of the Pages site, so the schemes can be tried and shared
+# without touching what is live at the root.
+#
+#   https://malizia-g.github.io/transpersonaltraining/color-planner/
+#
+# It deploys into the same `deploy` branch as the main site but under its own
+# destination_dir, and the main workflow publishes with keep_files: true, so the
+# two never overwrite each other.
+
+name: Build and Deploy Colour Planner (new_color_scheme)
+
+on:
+  push:
+    branches:
+      - new_color_scheme
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# A second push while one deploy is still running would race the other for the
+# same branch; queue them instead.
+concurrency:
+  group: deploy-color-planner
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy-color-planner:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Every palette has to clear its contrast and range checks before it can
+      # be published; the generator exits non-zero if one does not.
+      - name: Verify the palette catalogue
+        run: node scripts/design/build-palettes.js --check
+
+      - name: Restore data cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            src/_data/*.cache.json
+          key: sheet-data-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            sheet-data-${{ runner.os }}-
+            sheet-data-
+
+      - name: Restore student images cache
+        uses: actions/cache@v4
+        with:
+          path: .cache/student-images
+          key: student-images-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            student-images-${{ runner.os }}-
+            student-images-
+
+      - name: Clean and build CSS
+        run: |
+          npm run clean
+          npm run build:css
+        env:
+          PATH_PREFIX: /transpersonaltraining/color-planner/
+
+      - name: Restore cached student images into _site
+        run: |
+          if [ -d ".cache/student-images" ] && [ "$(ls -A .cache/student-images 2>/dev/null)" ]; then
+            mkdir -p _site/assets/images/people/students
+            cp -r .cache/student-images/* _site/assets/images/people/students/
+            echo "✅ Restored $(ls _site/assets/images/people/students/ | wc -l) cached student images"
+          fi
+
+      - name: Build Eleventy
+        run: npm run build:eleventy
+        env:
+          PATH_PREFIX: /transpersonaltraining/color-planner/
+
+      # A preview of unreleased colour work has no business in search results,
+      # and it would compete with the real pages it is a copy of.
+      - name: Keep the preview out of search results
+        run: |
+          printf 'User-agent: *\nDisallow: /\n' > _site/robots.txt
+          rm -f _site/sitemap.xml
+          # base.njk already emits a robots meta, so rewrite that one rather
+          # than adding a second: two conflicting tags is a rule to rely on,
+          # one correct tag is a fact.
+          find _site -name '*.html' -print0 | xargs -0 sed -i \
+            's|<meta name="robots" content="[^"]*">|<meta name="robots" content="noindex, nofollow">|g'
+          missing=$(grep -L 'name="robots"' $(find _site -name '*.html') || true)
+          if [ -n "$missing" ]; then echo "::error::pages without a robots meta:"; echo "$missing"; exit 1; fi
+          echo "✅ $(grep -l 'noindex, nofollow' $(find _site -name '*.html') | wc -l) pages marked noindex"
+
+      - name: Update student images cache
+        run: |
+          if [ -d "_site/assets/images/people/students" ] && [ "$(ls -A _site/assets/images/people/students 2>/dev/null)" ]; then
+            mkdir -p .cache/student-images
+            rsync -a _site/assets/images/people/students/ .cache/student-images/
+          fi
+
+      - name: Deploy to deploy branch (subfolder color-planner)
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: deploy
+          destination_dir: color-planner
+          keep_files: true
+          commit_message: 'Deploy colour planner: ${{ github.event.head_commit.message }}'
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
