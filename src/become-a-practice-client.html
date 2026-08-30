@@ -1,11 +1,11 @@
 ---
 layout: base.njk
 title: "Free Counselling & Breathwork Sessions"
-description: "Free breathwork and counselling for behaviour patterns, repeating cycles, and spiritual crisis. Join our practice groups as a client model."
+description: "Free breathwork and counselling for behaviour patterns, repeating cycles, and spiritual crisis. Join our practice groups as a practice client."
 ---
 
-{% set introItems = 'become-a-client-model/intro' | pageContentDir %}
-{% set whatToLook = 'become-a-client-model/01-what-to-look-for.md' | pageContent %}
+{% set introItems = 'become-a-practice-client/intro' | pageContentDir %}
+{% set whatToLook = 'become-a-practice-client/01-what-to-look-for.md' | pageContent %}
 
 <style>
     .student-details {
@@ -32,10 +32,10 @@ description: "Free breathwork and counselling for behaviour patterns, repeating 
         <picture>
             {# Wide screens get the band the hero actually shows; narrow ones keep
                the full height, which object-cover would otherwise crop away. #}
-            <source media="(min-width: 1024px)" srcset="{{ '/assets/images/Headers/hero-client-model-flowers-wide.webp' | url }}" type="image/webp">
-            <source media="(min-width: 1024px)" srcset="{{ '/assets/images/Headers/hero-client-model-flowers-wide.jpg' | url }}">
-            <source srcset="{{ '/assets/images/Headers/hero-client-model-flowers-narrow.webp' | url }}" type="image/webp">
-            <img src="{{ '/assets/images/Headers/hero-client-model-flowers-narrow.jpg' | url }}" alt="Wildflowers in the garden of the seminar house" class="w-full h-full object-cover">
+            <source media="(min-width: 1024px)" srcset="{{ '/assets/images/Headers/hero-practice-client-flowers-wide.webp' | url }}" type="image/webp">
+            <source media="(min-width: 1024px)" srcset="{{ '/assets/images/Headers/hero-practice-client-flowers-wide.jpg' | url }}">
+            <source srcset="{{ '/assets/images/Headers/hero-practice-client-flowers-narrow.webp' | url }}" type="image/webp">
+            <img src="{{ '/assets/images/Headers/hero-practice-client-flowers-narrow.jpg' | url }}" alt="Wildflowers in the garden of the seminar house" class="w-full h-full object-cover">
         </picture>
         <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/80 via-[#0F2540]/60 to-[#0F2540]/80"></div>
     </div>
@@ -47,7 +47,7 @@ description: "Free breathwork and counselling for behaviour patterns, repeating 
                 <span class="p4-hairline"></span>
             </p>
             <h1 class="p4-display text-4xl md:text-6xl font-medium mb-6 leading-tight text-[#FDFBF5]">
-                Become a Client Model
+                Become a Practice Client
             </h1>
             <p class="text-xl md:text-2xl text-white/80 font-light leading-relaxed max-w-3xl mx-auto">
                 Connect directly with our third-level students for supervised counselling and psychotherapy sessions.
@@ -63,7 +63,7 @@ description: "Free breathwork and counselling for behaviour patterns, repeating 
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
             <span class="text-neutral-warm-500">Resources</span>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-science-blue-800 font-medium">Become a Client Model</span>
+            <span class="text-science-blue-800 font-medium">Become a Practice Client</span>
         </div>
     </div>
 </div>
@@ -88,9 +88,9 @@ description: "Free breathwork and counselling for behaviour patterns, repeating 
 <section class="py-16 bg-white border-t border-[#E7D6BE]">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto">
-            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-6">How to Become a Client Model</h2>
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-6">How to Become a Practice Client</h2>
             <p class="text-neutral-warm-700 leading-relaxed mb-8">
-                Becoming a client model is also a way to get a first-hand sense of the school before deciding whether to enrol in the training itself &mdash; you do not need to be a student here to request a session.
+                Becoming a practice client is also a way to get a first-hand sense of the school before deciding whether to enrol in the training itself &mdash; you do not need to be a student here to request a session.
             </p>
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="bg-[#FAF3E7] border border-[#E7D6BE] p-6">
@@ -117,15 +117,15 @@ description: "Free breathwork and counselling for behaviour patterns, repeating 
     <div class="container mx-auto px-6">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-10">
-                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-4">Third-Level Students Available for Client Models</h2>
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-4">Third-Level Students Available for Practice Clients</h2>
                 <p class="text-neutral-warm-700 leading-relaxed max-w-3xl mx-auto">
                     This section is populated from a spreadsheet source and lists student therapists you can contact directly.
                 </p>
             </div>
 
-            {% if clientModels and clientModels.length %}
+            {% if practiceClients and practiceClients.length %}
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {% for student in clientModels %}
+                {% for student in practiceClients %}
                 <article class="student-card bg-white border border-[#E7D6BE] overflow-hidden shadow-sm">
                     {% if student.picture_link %}
                     <img

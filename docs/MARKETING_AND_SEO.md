@@ -112,7 +112,7 @@
 |----------|------|----------------|
 | 1 | Fill the 2027–2030 cohort | Qualified applications submitted |
 | 2 | Fill intensives/seminars open to externals | Event registrations |
-| 3 | Recruit client models for trainees | Client-model applications |
+| 3 | Recruit practice clients for trainees | Client-model applications |
 | 4 | Build a long-term audience | Email list growth |
 
 ### Audience personas (from the Longtail Keywords doc)
@@ -129,7 +129,7 @@
 1. **Aspiring transpersonal psychotherapists** — professionals seeking rigorous, EUROTAS-accredited training. Highest value; lowest volume. BOFU pages: Training Overview, Curriculum, Fees, Apply.
 2. **Aspiring counsellors** — career-changers wanting holistic counselling certification. BOFU/MOFU.
 3. **Breathwork facilitator candidates** — searching "breathwork training", "holotropic breathwork facilitator". MOFU: Techniques page, dedicated breathwork page.
-4. **Therapy seekers dissatisfied with classical psychotherapy** — potential client models and future students. TOFU blog + Become a Client Model.
+4. **Therapy seekers dissatisfied with classical psychotherapy** — potential practice clients and future students. TOFU blog + Become a Practice Client.
 5. **Personal-growth seekers** — seminars, self-development year (Level 1). TOFU blog + Schedule.
 
 **Language/geography:** courses are in English, delivered online + intensives in Germany/Italy. Primary SEO target: English-language searches from Europe. (Italian-language expansion is an open decision — see [Open Decisions](#open-decisions-for-fabio).)
@@ -320,7 +320,7 @@ This turns the Drive research into actual rankings.
 |----------|------|------------------------|--------------------------------|
 | 1 | Home | transpersonal psychology training / transpersonal counselling training | "Certified Transpersonal Psychology Training" |
 | 1 | **Courses (new page)** | hero journey, transpersonal training for therapists | "Our Hero Journey: an Advanced Shadow Work — Professional Training for Therapists" |
-| 1 | Become a Client Model | free counselling / breathwork seminars free | promotional angle |
+| 1 | Become a Practice Client | free counselling / breathwork seminars free | promotional angle |
 | 2 | **Transpersonal Therapist (new page)** | what is transpersonal psychology → career angle | "Why Holistic Training is the Future of Psychotherapy" |
 | 2 | Techniques | breathwork facilitator training, breathwork certification | "Breathwork Facilitator Certification: Integrate Somatics into Therapy" |
 | 3 | Blog pillar | what is transpersonal psychology | "Beyond the Ego: An Introduction to Transpersonal Psychology" |

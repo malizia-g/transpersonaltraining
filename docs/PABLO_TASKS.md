@@ -118,7 +118,7 @@ Reason:
 
 ---
 
-### 8. Finalize the Become a Client Model page
+### 8. Finalize the Become a Practice Client page
 
 **Status:** Pending
 
@@ -465,7 +465,7 @@ These items have already been handled and do not need further action unless requ
 
 ## Recommended Launch Order
 
-1. Finalize page content decisions: Home, Program naming, Teachers, Transpersonal Therapy, Become a Client Model, Techniques
+1. Finalize page content decisions: Home, Program naming, Teachers, Transpersonal Therapy, Become a Practice Client, Techniques
 2. Finalize spreadsheet data sources: Curriculum, Schedule, Lectures
 3. Approve and implement the lecture login and access approach
 4. Choose the production hosting path and test deployment
@@ -489,8 +489,8 @@ These items have already been handled and do not need further action unless requ
 - [ ] Test the Lectures page and access rules
 - [ ] Limit the Teachers page to Core Teachers only
 - [ ] Revise the Transpersonal Therapy text and links
-- [ ] Collect current student information for Become a Client Model
-- [ ] Finalize the Become a Client Model text
+- [ ] Collect current student information for Become a Practice Client
+- [ ] Finalize the Become a Practice Client text
 - [ ] Review the Techniques page (copy, images, technique descriptions)
 - [ ] Choose the production deployment path
 - [ ] Configure the production domain

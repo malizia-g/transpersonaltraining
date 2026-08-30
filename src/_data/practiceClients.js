@@ -5,9 +5,9 @@ const path = require('path');
 const sharp = require('sharp');
 const { hasSheetChanged, commitSheetTimestamp } = require('./sheetTimestamps');
 
-// Fetch client models from Google Apps Script during build time
+// Fetch practice clients from Google Apps Script during build time
 const SHEET_JSON_URL = 'https://script.google.com/macros/s/AKfycbzyBD_kWrr6irrQcMSwOFtHxip3rfYpc1_2q0oscmKCHLJVFFSiGd4zAzsikgbXTEXKow/exec';
-const CACHE_FILE = path.join(__dirname, 'clientModels.cache.json');
+const CACHE_FILE = path.join(__dirname, 'practiceClients.cache.json');
 const IMAGES_OUTPUT_DIR = path.join(__dirname, '../../_site/assets/images/people/students');
 const LOCAL_IMAGE_PATH = '/assets/images/people/students';
 
@@ -236,11 +236,14 @@ async function downloadStudentImages(students) {
 
 module.exports = async function() {
   // Check if sheet has changed before fetching
+  // 'clientModels' is the key the remote Apps Script publishes timestamps under.
+  // It stays as-is on purpose: renaming it here without renaming it there
+  // would silently defeat the cache and re-fetch the sheet every build.
   const changed = await hasSheetChanged('clientModels');
   if (!changed && fs.existsSync(CACHE_FILE)) {
     try {
       const cached = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf-8'));
-      console.log(`⚡ Client models: using cache (${cached.length} records, sheet unchanged)`);
+      console.log(`⚡ Practice clients: using cache (${cached.length} records, sheet unchanged)`);
       // Still need to download images for _site output (which is cleaned each build)
       console.log('Downloading student images from Drive (cached data)...');
       var localPaths = await downloadStudentImages(cached);
@@ -259,29 +262,29 @@ module.exports = async function() {
   var mapped;
 
   try {
-    console.log('Fetching client models from Google Apps Script...');
+    console.log('Fetching practice clients from Google Apps Script...');
     var rawData = await fetchJson(SHEET_JSON_URL);
     mapped = sortByStatusThenName((Array.isArray(rawData) ? rawData : []).map(mapItem));
 
     // Save cache with original Drive URLs
     try {
       fs.writeFileSync(CACHE_FILE, JSON.stringify(mapped, null, 2));
-      console.log('✅ Client models data updated (' + mapped.length + ' records)');
+      console.log('✅ Practice clients data updated (' + mapped.length + ' records)');
     } catch (cacheError) {
-      console.warn('⚠️ Could not save client models cache:', cacheError.message);
+      console.warn('⚠️ Could not save practice clients cache:', cacheError.message);
     }
 
     await commitSheetTimestamp('clientModels');
   } catch (error) {
-    console.error('Error fetching client models:', error.message);
+    console.error('Error fetching practice clients:', error.message);
 
     if (fs.existsSync(CACHE_FILE)) {
       try {
         var cached = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf-8'));
-        console.log('⚠️ Using cached client models (' + cached.length + ' records)');
+        console.log('⚠️ Using cached practice clients (' + cached.length + ' records)');
         mapped = sortByStatusThenName(cached.map(mapItem));
       } catch (cacheError) {
-        console.error('❌ Client models cache read failed:', cacheError.message);
+        console.error('❌ Practice clients cache read failed:', cacheError.message);
         return [];
       }
     } else {

@@ -57,7 +57,7 @@ page must carry its own brand signal if it wants one. Two consequences worth rem
 | Teachers *(TO DO in doc)* | `/teachers/` |
 | 🐉 Transpersonal Therapy *(group heading)* | "Resources" nav dropdown, not a page |
 | What is transpersonal psychology | `/what-is-transpersonal-psychology/` |
-| Became a client model | `/become-a-client-model/` |
+| Became a practice client | `/become-a-practice-client/` |
 | Techniques/Skills | `/techniques/` |
 | **Is transpersonal psychology for me?** | **no page yet** — real content (clinical indications and contraindications). Best home: a section of `/what-is-transpersonal-psychology/` |
 | 🤓 Blog *(group heading)* | `/blog/` |
@@ -82,7 +82,7 @@ sheet.
 | `/teachers/` ⭐ | transpersonal psychotherapy teachers | **the teachers' own names** — 64% of all clicks | `Transpersonal Psychotherapy Teachers` |
 | `/what-is-transpersonal-psychology/` | what is transpersonal psychology | transpersonal psychotherapy, hero journey, non-ordinary states of consciousness, integrative therapy education | `What is Transpersonal Psychology?` |
 | `/techniques/` | holotropic breathwork | breathwork certification, somatic healing, gestalt, breathwork for anxiety | `Holotropic Breathwork Training` |
-| `/become-a-client-model/` | free counselling | breathwork seminars free, free psychotherapy, behaviour pattern, repeating cycles, spiritual crisis, spiritual emergency | `Free Counselling & Breathwork` |
+| `/become-a-practice-client/` | free counselling | breathwork seminars free, free psychotherapy, behaviour pattern, repeating cycles, spiritual crisis, spiritual emergency | `Free Counselling & Breathwork` |
 | `/schedule/` | breathwork seminars | holotropic breathwork intensives, residential training Europe | `Breathwork Intensives & Seminars` |
 | `/venues/` | breathwork retreat Germany | training venues Italy, Black Forest, Tuscany | `Training Venues in Germany & Italy` |
 | `/collaborations/` | eurotas accredited psychotherapy schools | transpersonal psychology institutes Europe | `EUROTAS Partner Institutes` |
@@ -187,7 +187,7 @@ Worth a page when there is capacity to write one — all low difficulty:
 
 | Phrase | Status | Note |
 |---|---|---|
-| transpersonal therapists specializing in spiritual crisis | 🟡 | `/become-a-client-model/` mentions spiritual crisis, framed as free trainee sessions, not "find a specialist" |
+| transpersonal therapists specializing in spiritual crisis | 🟡 | `/become-a-practice-client/` mentions spiritual crisis, framed as free trainee sessions, not "find a specialist" |
 | holotropic breathwork sessions for trauma healing | 🟡 | "trauma" is common (13 files) but almost always training-context, not a "book a session" page |
 | find a therapist who uses shamanic and integral methods | ❌ | no therapist-finder / directory intent exists anywhere |
 | body-oriented psychotherapy for emotional release | ❌ | — |
@@ -195,7 +195,7 @@ Worth a page when there is capacity to write one — all low difficulty:
 | integration therapy for psychedelic or breathwork experiences | ❌ | "integration therapy" — zero hits (though "psychedelic" itself appears 5×) |
 
 **Structural note:** this whole category is a weaker fit for the site as it stands — the school sells
-*training*, not therapy sessions, and `/become-a-client-model/` is the only page positioned to capture
+*training*, not therapy sessions, and `/become-a-practice-client/` is the only page positioned to capture
 this intent at all. Closing these gaps may mean deciding how far to lean into "book a session with a
 trainee" as a page, rather than just adding copy.
 
@@ -267,7 +267,7 @@ Not 41 scattered problems — three root causes:
 2. **No Transpersonal Therapist / career page** (Phase D) — accounts for the career-change phrases in
    categories 4 and 5.
 3. **"Personal Therapy" (category 2) is a weak fit for a training-school site** — needs a strategy
-   decision (lean into it via Become a Client Model, or accept it's out of scope), not just copy.
+   decision (lean into it via Become a Practice Client, or accept it's out of scope), not just copy.
 
 Fully missing (❌) phrases, for reference: *expanded states of consciousness for beginners*, *inner
 peace*, *find a therapist who uses shamanic and integral methods*, *body-oriented psychotherapy for

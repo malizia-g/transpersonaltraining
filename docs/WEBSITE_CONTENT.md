@@ -590,7 +590,7 @@ Rodger Shute, writing from a philosophical standpoint, has argued that evidence 
 
 \-        *International Journal of Transpersonal Studies, Aims & Scope*
 
-# Became a client model
+# Became a practice client
 
 Breathwork seminars free  
 Psychology courses online free,  
@@ -613,7 +613,7 @@ In our free Psychology classes online our students will be followed by a supervi
 
 ## Subtitle 1 \- Breathwork seminars free access
 
-By accessing to our training as a client model you could be invited to an Holotropic Breathwork seminar for free, our student will conduct the seminar and will be assisted by 
+By accessing to our training as a practice client you could be invited to an Holotropic Breathwork seminar for free, our student will conduct the seminar and will be assisted by 
 
 ## Subtitle 1 \- **Join our students for private free counselling**
 

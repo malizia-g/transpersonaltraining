@@ -235,7 +235,7 @@ Schedule and lecture data is fetched from Google Sheets **at build time** (not c
 
 - `src/_data/scheduleEvents.js` — fetches schedule events
 - `src/_data/lectureEvents.js` — fetches lecture events
-- `src/_data/clientModels.js` — fetches client model/student therapist records
+- `src/_data/practiceClients.js` — fetches practice client/student therapist records
 
 Both use a **cache fallback** mechanism:
 1. On successful fetch → save to `*.cache.json`
@@ -244,7 +244,7 @@ Both use a **cache fallback** mechanism:
 
 ### Procedure For Adding New Student Profiles
 
-To add a new student to the “Become a Client Model” page:
+To add a new student to the “Become a Practice Client” page:
 
 1. Add a new row in the source spreadsheet.
 2. Fill in the student fields using the existing column headers.
@@ -281,7 +281,7 @@ The spreadsheet data is exported as JSON via Google Apps Script web apps. Each d
 
 | Data | File | Stable URL |
 |------|------|------------|
-| Client Models | `src/_data/clientModels.js` | `https://script.google.com/macros/s/AKfycbzyBD_kWrr6irrQcMSwOFtHxip3rfYpc1_2q0oscmKCHLJVFFSiGd4zAzsikgbXTEXKow/exec` |
+| Practice Clients | `src/_data/practiceClients.js` | `https://script.google.com/macros/s/AKfycbzyBD_kWrr6irrQcMSwOFtHxip3rfYpc1_2q0oscmKCHLJVFFSiGd4zAzsikgbXTEXKow/exec` |
 | Lecture Events | `src/_data/lectureEvents.js` | `https://script.google.com/macros/s/AKfycbwr2rE4dFTkQ5ZJzHewA9jBxYmAbxgqTOX-Kd20dNyDi7xbkGWjOFBjdrhHEF0yK-9Ucg/exec` |
 | Schedule Events | `src/_data/scheduleEvents.js` | `https://script.google.com/macros/s/AKfycbwF4y-K0oYh0Fd78xVezCcaGf7Ac5SglXAv0SUzcBJgqeg_kRXaLix3gSad8LAgg6oR/exec` |
 
@@ -618,9 +618,9 @@ Row classification:
 
 ---
 
-### Client Model Status Chip Colors
+### Practice Client Status Chip Colors
 
-Defined in `src/become-a-client-model.html` via `if/elif` blocks (full class strings required for Tailwind JIT scanning).
+Defined in `src/become-a-practice-client.html` via `if/elif` blocks (full class strings required for Tailwind JIT scanning).
 
 | Status | Color | Tailwind Classes | Reasoning |
 |--------|-------|-----------------|-----------|

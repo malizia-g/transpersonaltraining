@@ -66,7 +66,7 @@ function saveTimestamps(timestamps) {
  * Does not record the new timestamp: call commitSheetTimestamp() once the fetch
  * has succeeded, otherwise a failed fetch would mark stale cache as current and
  * the data would never be re-fetched again.
- * @param {string} sheetKey - 'schedule', 'lectures', or 'clientModels'
+ * @param {string} sheetKey - 'schedule', 'lectures', or 'clientModels' (the practice-client sheet)
  * @returns {Promise<boolean>} true if data should be re-fetched
  */
 async function hasSheetChanged(sheetKey) {
@@ -98,7 +98,7 @@ async function hasSheetChanged(sheetKey) {
 /**
  * Record a sheet's remote timestamp. Call only after the data has been fetched
  * and cached successfully.
- * @param {string} sheetKey - 'schedule', 'lectures', or 'clientModels'
+ * @param {string} sheetKey - 'schedule', 'lectures', or 'clientModels' (the practice-client sheet)
  */
 async function commitSheetTimestamp(sheetKey) {
   const remote = await getRemoteTimestamps();
