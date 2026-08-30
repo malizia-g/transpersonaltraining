@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
 const markdownIt = require('markdown-it');
+const { prefixMarkdownLinks } = require('../../lib/prefix-markdown-links');
 
 // Every collaboration lives in its own Markdown file under _data/collaborations/.
 // The front matter carries the structured fields (name, location, url, kind…),
@@ -9,7 +10,7 @@ const markdownIt = require('markdown-it');
 // field decides which part of the Collaborations page a partner appears in.
 // Adding a new collaboration only ever means dropping a new .md file in this
 // folder (or changing one `status` line) — never editing the template.
-const md = markdownIt({ html: true, linkify: true, typographer: true });
+const md = prefixMarkdownLinks(markdownIt({ html: true, linkify: true, typographer: true }));
 
 module.exports = function () {
   const dir = path.join(__dirname, 'collaborations');

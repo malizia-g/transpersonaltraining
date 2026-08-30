@@ -1,4 +1,5 @@
 const pluginSEO = require('eleventy-plugin-seo');
+const { prefixMarkdownLinks } = require('./lib/prefix-markdown-links');
 const markdownIt = require('markdown-it');
 const matter = require('gray-matter');
 const fs = require('fs');
@@ -62,12 +63,12 @@ module.exports = function(eleventyConfig) {
     return posts;
   });
   // Markdown instance
-  const md = markdownIt({
+  const md = prefixMarkdownLinks(markdownIt({
     html: true,
     linkify: true,
     typographer: true
-  });
-  
+  }));
+
   // Filter to read and render biography Markdown files
   eleventyConfig.addFilter('getBio', function(teacherId) {
     try {

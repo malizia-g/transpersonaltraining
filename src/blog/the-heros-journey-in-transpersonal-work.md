@@ -74,6 +74,6 @@ Teachers function as Mentors at each of these stages, not as authorities who hav
 
 ---
 
-**Ready to begin your own hero's journey?** Explore the [Transpersonal Psychotherapy Training](/training-overview/) and discover how four years of guided development can transform your life and your capacity to serve others.
+**Ready to begin your own hero's journey?** Explore the [Transpersonal Psychotherapy Training]({{ '/training-overview/' | url }}) and discover how four years of guided development can transform your life and your capacity to serve others.
 
-Or read more about the [deeper dimensions of transpersonal psychology](/what-is-transpersonal-psychology/) and how soul and consciousness shape the work.
+Or read more about the [deeper dimensions of transpersonal psychology]({{ '/what-is-transpersonal-psychology/' | url }}) and how soul and consciousness shape the work.
