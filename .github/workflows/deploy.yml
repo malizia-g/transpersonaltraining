@@ -69,7 +69,46 @@ jobs:
         run: npm run build:eleventy
         env:
           PATH_PREFIX: /transpersonaltraining/
-      
+
+      # ── Temporary, until the domain cutover ──
+      # This build is served from malizia-g.github.io/transpersonaltraining/, but
+      # every page canonicalises to https://transpersonal-training.com/… — which
+      # still serves the old WordPress site, where /techniques/, /curriculum/,
+      # /training-overview/ and /blog/ all 404. Left indexable, this offers Google a
+      # complete duplicate of the school whose canonical target does not exist, and
+      # the new site ends up competing with itself. Same defect the marketing plan
+      # already flags as urgent for test.transpersonal-training.com.
+      #
+      # DELETE THIS STEP ON CUTOVER DAY, when the domain points here and the
+      # canonicals become true.
+      - name: Keep the pre-launch build out of search results
+        run: |
+          # `noindex, follow`, and crawling deliberately left OPEN.
+          #
+          # Disallow would be the wrong tool here. It stops Googlebot fetching the
+          # page, so it never sees the noindex — and anything already indexed then
+          # lingers, because Google cannot recrawl to learn it should go. Allowing
+          # the crawl and returning noindex is the combination that actually
+          # removes pages. `follow` keeps the crawler moving through the internal
+          # links, so it reaches every page that needs dropping.
+          printf '%s\n' \
+            '# Pre-launch build served from github.io. Every page returns' \
+            '# noindex; crawling is left open on purpose so that directive is' \
+            '# seen. Set by .github/workflows/deploy.yml — remove at cutover.' \
+            'User-agent: *' \
+            'Allow: /' > _site/robots.txt
+          # base.njk already emits a robots meta, so rewrite that one rather than
+          # adding a second: two conflicting tags is a rule to rely on, one correct
+          # tag is a fact.
+          find _site -name '*.html' -print0 | xargs -0 sed -i \
+            's|<meta name="robots" content="[^"]*">|<meta name="robots" content="noindex, follow">|g'
+          missing=$(grep -L 'name="robots"' $(find _site -name '*.html') || true)
+          if [ -n "$missing" ]; then echo "::error::pages without a robots meta:"; echo "$missing"; exit 1; fi
+          echo "✅ $(grep -l 'noindex, follow' $(find _site -name '*.html') | wc -l) pages marked noindex"
+          # sitemap.xml is left in place on purpose: it lists transpersonal-training.com
+          # URLs, not github.io ones, and `keep_files: true` below means deleting it
+          # here would not remove the already-published copy anyway.
+
       - name: Update student images cache
         run: |
           if [ -d "_site/assets/images/people/students" ] && [ "$(ls -A _site/assets/images/people/students 2>/dev/null)" ]; then
