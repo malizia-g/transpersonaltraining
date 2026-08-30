@@ -10,6 +10,8 @@ from our own domain.
 
 ## `transpersonal-training-brochure.pdf` — not yet added
 
+*Tracked as [TODO task 44](TODO.md#task-44).*
+
 The programme brochure is **designed by hand** and committed here; it is not
 generated from the spreadsheet the way the curriculum PDF is.
 

@@ -5,7 +5,7 @@
 > live on the new site and why (SEO + conversion rationale).
 >
 > Companion documents: [MARKETING_AND_SEO.md](MARKETING_AND_SEO.md) (overall roadmap — phases
-> referenced below are its phases), [PABLO_TASKS.md](PABLO_TASKS.md) (launch blockers).
+> referenced below are its phases), [TODO.md](TODO.md) (everything still open).
 
 *Created: July 2026*
 
@@ -410,20 +410,24 @@ should not be listed as active faculty anywhere.
 | Newsletter (CleverReach!) | Phase I platform decision | decision | I |
 | Payment / portal | Portal decision | decision | B2 |
 
-## 5. Decisions this adds for Fabio
+## 5. What the 42 questions left open
 
-Superseded by **[Questions for Pablo](#questions-for-pablo)** above, which expands these into
-42 concrete, answerable questions grouped by the section they unblock. Answer there; this list
-stays only as a short index into that section:
+All 42 questions above have answers. Six of those answers were themselves *"to be decided"* or
+*"add to the tasks"*, and those are the only ones still owed anything. They live in
+**[TODO.md](TODO.md)** now:
 
-10. Certificates per level → Questions B (7–10)
-11. Enrollment options 2027–2030 → Questions C (11–14)
-12. New cohort pricing → Questions D (15–20)
-13. Legal identity on the new site → Questions G (28–30)
-14. Which partnerships are still active → Question H (31–32)
-15. CleverReach vs Brevo → Question K (40)
-16. Guest-faculty name list → Questions J (37–39)
-17. Eastern in-person venue(s) for 2027–2030 → Questions A (1–6)
+| Left open by | Task |
+|---|---|
+| Q1 — the Eastern in-person venue | [24](TODO.md#task-24), [36](TODO.md#task-36) |
+| Q10 — the exact certificate wording (*"is it important?"*) | [26](TODO.md#task-26) |
+| Q20 — the payment processor (*"we have to decide"*) | [21](TODO.md#task-21) |
+| Q28–29 — legal entity and GDPR data controller (*"TO_BE defined"*) | [20](TODO.md#task-20) |
+| Q31–32, Q38 — which partnerships are active, new partners, guest-faculty list for backlink checks | [29](TODO.md#task-29) |
+| Q34 — the "Our history" paragraph (*"draft it"*) | [45](TODO.md#task-45) |
+| Q35 — who owns the 301s for the old East URLs | [28](TODO.md#task-28), depends on [10](TODO.md#task-10) |
+| Q41 — build the Recommended Reading page, refresh the selection | [30](TODO.md#task-30) |
+
+Everything else the answers unblocked has already been applied to the site.
 
 ---
 

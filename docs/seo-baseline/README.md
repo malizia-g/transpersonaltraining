@@ -43,7 +43,7 @@ URL inventory captured 2026-07-20 from `https://transpersonal-training.com/wp-si
 - **Sitemap:** none submitted (Fabio, Jul 2026). Nothing to do now; the new sitemap gets submitted at
   cutover (plan step 19).
 - **Teacher bio URLs:** no per-teacher pages — all 32 redirect to `/teachers/#<id>`. See
-  [REDIRECT_MAP.md](REDIRECT_MAP.md) §2 and [PABLO_TASKS.md task 32](../PABLO_TASKS.md).
+  [REDIRECT_MAP.md](REDIRECT_MAP.md) §2 and [TODO task 32](../TODO.md#task-32).
 - **Ahrefs:** the free Webmaster Tools tier does not allow CSV export. Not worth paying for — GSC's
   7 referring domains are enough for a profile this small. Read the numbers on screen in AWT
   (Site Explorer → Referring domains) and note any domain missing from BASELINE.md Finding 4 by hand.
@@ -53,12 +53,13 @@ URL inventory captured 2026-07-20 from `https://transpersonal-training.com/wp-si
 
 ## Still open
 
-- **Hosting decision** (plan Open Decision 4, recommendation: Cloudflare Pages) — the last blocker on
-  finalizing the redirect map.
-- **Recover the West Program 2026 PDF** — both upload paths are dead ([PABLO task 34](../PABLO_TASKS.md)).
+Tracked in **[TODO.md](../TODO.md)** — listed here only so this file names its own loose ends:
+
+- **Hosting decision** — the last blocker on finalizing the redirect map → [task 10](../TODO.md#task-10)
 - **Portal SEO hygiene** on `student.` — 76 indexed pages of quizzes, dashboards and theme demo
-  content ([PABLO task 33](../PABLO_TASKS.md)).
-- **Confirm Manual Actions / Security Issues are clean** in GSC (expected: no issues).
+  content → [task 33](../TODO.md#task-33)
+- **Recover the West Program 2026 PDF** — both upload paths are dead → [task 34](../TODO.md#task-34)
+- **Confirm Manual Actions / Security Issues are clean** in GSC (expected: no issues) → [task 39](../TODO.md#task-39)
 
 ## Refreshing this baseline
 

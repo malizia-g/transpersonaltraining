@@ -207,4 +207,5 @@ The following pages still have their content embedded directly in their template
 | Schedule | `src/schedule.html` | Driven by Google Sheets at build time |
 | Lectures Schedule | `src/lectures-schedule.html` | Driven by Google Sheets at build time |
 
-For these pages, static intro text can be migrated to `src/content/` in a future iteration.
+For these pages, static intro text can be migrated to `src/content/` in a future iteration —
+tracked as [TODO task 58](TODO.md#task-58).

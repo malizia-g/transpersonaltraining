@@ -51,7 +51,7 @@ target genuinely contains the equivalent content — the condition that separate
 many-to-one redirect from a soft 404. Each card now has an `id`, and the page expands the matching
 teacher from the URL fragment, so old URLs 301 to `/teachers/#<id>` and land the visitor on the right
 bio. Expect to lose some long-tail name rankings anyway (one URL can't rank for 32 names as well as
-32 URLs did); that residual risk is tracked as [PABLO task 32](../PABLO_TASKS.md) with a data-ranked
+32 URLs did); that residual risk is tracked as [TODO task 32](../TODO.md#task-32) with a data-ranked
 shortlist, to be revisited 4–6 weeks after cutover. See [REDIRECT_MAP.md](REDIRECT_MAP.md) §2.
 
 ## Finding 2 — we rank for nothing commercial
@@ -188,7 +188,7 @@ It also compounds the Lattuada problem from Finding 2: his `student.` instructor
 **829 impressions with zero clicks**, on top of the 4,850 on his main-site bio. Searches for his name
 are hitting two of our pages and converting on neither.
 
-Tracked as [PABLO_TASKS.md task 33](../PABLO_TASKS.md).
+Tracked as [TODO task 33](../TODO.md#task-33).
 
 ## What this changes in the plan
 
@@ -206,17 +206,21 @@ Tracked as [PABLO_TASKS.md task 33](../PABLO_TASKS.md).
    meta descriptions on the new per-teacher pages should be written to earn the click, not just to
    exist.
 
-## Immediate actions arising
+## Actions arising — where they went
 
-- [ ] Block/noindex `test.transpersonal-training.com` + removal request in GSC — **do this week**
-- [x] ~~Export the 39 404 URLs from GSC~~ — done 2026-07-20, analysed in Finding 6
-- [ ] **Recover the West Program 2026 PDF** (both `/wp-content/uploads/2025/09|10/West_Program_26.pdf`
-      are dead) and 301 the old paths to wherever it is republished
-- [ ] 301 `/program-2024/` → `/training-overview/`
-- [ ] Portal SEO hygiene on `student.` — noindex the student-only areas, purge theme demo pages and
-      duplicate products ([PABLO task 33](../PABLO_TASKS.md))
-- [ ] Build per-teacher pages on the new site with the old slugs (see REDIRECT_MAP §2)
-- [ ] Confirm GSC property type is *Domain* (the presence of `student.`/`test.` URLs in this export
-      already indicates it is) and that Manual Actions is clean
-- [ ] Ahrefs Webmaster Tools: export backlinks to cross-check GSC's 7 domains
-- [ ] Ask EUROTAS for the accredited-school listing link (highest-value missing backlink)
+This snapshot produced eight actions. They are tracked in **[TODO.md](../TODO.md)**, not here, so
+there is one list to tick:
+
+| Action | Task |
+|---|---|
+| Block/noindex `test.` + removal request in GSC — **do this week** | [31](../TODO.md#task-31) |
+| Portal SEO hygiene on `student.` | [33](../TODO.md#task-33) |
+| Recover the West Program 2026 PDF and 301 the dead paths | [34](../TODO.md#task-34) |
+| Per-teacher pages — *decided against for now*, revisit 4–6 weeks after cutover | [32](../TODO.md#task-32) |
+| Confirm Manual Actions is clean; Ahrefs cross-check of the 7 referring domains | [39](../TODO.md#task-39) |
+| Ask EUROTAS for the accredited-school listing link | [40](../TODO.md#task-40) |
+| 301 `/program-2024/` → `/training-overview/` | folded into [REDIRECT_MAP.md](REDIRECT_MAP.md) §1 |
+
+Settled here: the 39 404 URLs were exported and analysed on 2026-07-20 (Finding 6), and the GSC
+property is confirmed a *Domain* property — the presence of `student.`/`test.` URLs in this export
+is itself the proof.

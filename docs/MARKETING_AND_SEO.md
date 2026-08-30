@@ -1,7 +1,7 @@
 # Marketing & SEO Plan — Transpersonal Training
 
 > Complete, prioritized roadmap for marketing the school and optimizing the website for search.
-> Companion documents: [PABLO_TASKS.md](PABLO_TASKS.md) (launch blockers), [FUTURE_IDEAS.md](FUTURE_IDEAS.md) (technical backlog),
+> Companion documents: **[TODO.md](TODO.md) — the single list of everything still open** (it absorbed the former `PABLO_TASKS.md`), [FUTURE_IDEAS.md](FUTURE_IDEAS.md) (technical backlog),
 > [OLD_SITE_CONTENT_MIGRATION.md](OLD_SITE_CONTENT_MIGRATION.md) (old-site content gap analysis: fees, enrollment options, certificates, partners, contacts — feeds Phases A/B/F and adds open decisions 10–16),
 > [SEO_KEYWORD_MAP.md](SEO_KEYWORD_MAP.md) (**current source of truth for page ↔ keyword assignments** — supersedes the D1 table below and the Drive Cluster Keywords Map, both written when the site had a different page structure; also holds the long-tail phrase coverage audit).
 >
@@ -36,11 +36,19 @@
 
 **Next up, in order**
 
-1. **Hosting decision** — the single remaining blocker on the redirect map (recommendation: Cloudflare Pages, [Open Decisions #4](#open-decisions-for-fabio))
-2. **Email marketing (Phase I)** — Brevo account, CleverReach list migration, newsletter signup on the site, programme-PDF lead magnet. *This, not the form backend, is what Brevo is for*
-3. **Urgent hygiene, independent of the cutover** — secure the `test.` subdomain ([PABLO 31](PABLO_TASKS.md)), portal SEO hygiene ([PABLO 33](PABLO_TASKS.md)), recover the missing West Program PDF ([PABLO 34](PABLO_TASKS.md))
-4. **Analytics (step 12)** — free if Cloudflare Pages is chosen
-5. **On-page SEO (Phase D)** — 🟡 **partly done (Jul 2026):** titles/descriptions for 13 of ~15 mapped pages now match [SEO_KEYWORD_MAP.md](SEO_KEYWORD_MAP.md) (D2's first checklist item). Still open: H1s and body copy haven't been audited against the map (D2's other checklist items), the FAQ and Transpersonal Therapist (career) pages don't exist yet, and the long-tail phrase audit found real gaps (see [SEO_KEYWORD_MAP.md § Long-tail phrase coverage](SEO_KEYWORD_MAP.md#long-tail-phrase-coverage)). The baseline still confirms nothing commercial ranks yet — titles alone don't move that; it needs indexing time plus the remaining D2 items
+→ **[TODO.md](TODO.md)** holds the open items and the order of work. It absorbed the open decisions
+that used to live at the bottom of this file, so there is one list to tick rather than four.
+
+The short version: the **hosting decision** ([TODO task 10](TODO.md#task-10)) is the single remaining
+blocker on the redirect map; the urgent hygiene items are independent of the cutover and should not
+wait for it ([31](TODO.md#task-31), [33](TODO.md#task-33), [34](TODO.md#task-34)).
+
+**Phase D status — 🟡 partly done (Jul 2026):** titles/descriptions for 13 of ~15 mapped pages now
+match [SEO_KEYWORD_MAP.md](SEO_KEYWORD_MAP.md) (D2's first checklist item). Still open: H1s and body
+copy haven't been audited against the map, the FAQ and Transpersonal Therapist (career) pages don't
+exist yet, and the long-tail audit found real gaps. Tracked as [TODO 53](TODO.md#task-53) and
+[TODO 46](TODO.md#task-46). The baseline still confirms nothing commercial ranks yet — titles alone
+don't move that; it needs indexing time plus the remaining D2 items.
 
 ---
 
@@ -62,7 +70,7 @@
 14. [Step details — Phase K: Events as Marketing](#phase-k--events-as-marketing)
 15. [Step details — Phase L: Paid Acquisition (Optional)](#phase-l--paid-acquisition-optional)
 16. [KPIs & Review Cadence](#kpis--review-cadence)
-17. [Open Decisions for Fabio](#open-decisions-for-fabio)
+17. [Decisions — the reasoning](#decisions--the-reasoning)
 
 ---
 
@@ -94,7 +102,7 @@
 1. **The production domain still serves the old WordPress site.** `transpersonal-training.com` currently runs WordPress (Enfold theme, MEC events, a full student portal with login/dashboard/payment pages, yearly archive pages, Russian-language event pages). The new Eleventy site is not live. Launching without a redirect plan will throw away every existing backlink and ranking, and will break the student portal. → Phase B.
 2. ~~**The conversion path is broken.** The only contact/application mechanism is a `<form action="mailto:...">`.~~ → **RESOLVED (Jul 2026).** Both the homepage contact form and the new `/apply/` page now POST to a Google Apps Script web app that writes to a spreadsheet, saves signed agreements to Drive and emails the office; `mailto:` remains only as a no-JS fallback. Every Phase A1 requirement is met — feedback on the page, honeypot, GDPR consent, durable storage. Remaining: name the processor in the privacy modal (see Phase A1).
 3. ~~**Zero measurement.** No analytics, no Search Console.~~ → **PARTLY RESOLVED (Jul 2026):** Search Console verified, and the old site's baseline is measured ([BASELINE.md](seo-baseline/BASELINE.md)). **Analytics is still missing** → Phase C2.
-4. 🟡 **Keyword map partly implemented (Jul 2026).** Titles/descriptions were rewritten for 13 of ~15 pages to match [SEO_KEYWORD_MAP.md](SEO_KEYWORD_MAP.md) (which itself supersedes the stale Drive Cluster Keywords Map — the sheet's 13 "pages" don't match the site's 18 real ones). Not done: H1s and body copy haven't been checked against target keywords page by page; `/venues/` title is deliberately still generic pending [PABLO task 36](PABLO_TASKS.md) (Eastern venue placeholder); of the three planned new pages, the Hero's Journey angle shipped as a **blog post** (`/blog/the-heros-journey-in-transpersonal-work/`, byline Fabio Malizia) rather than the dedicated pillar page the map originally specified, and **Transpersonal Therapist (career) and FAQ still don't exist**. A long-tail phrase audit against the Longtail Keywords doc also found real content gaps — see [SEO_KEYWORD_MAP.md § Long-tail phrase coverage](SEO_KEYWORD_MAP.md#long-tail-phrase-coverage). → Phase D.
+4. 🟡 **Keyword map partly implemented (Jul 2026).** Titles/descriptions were rewritten for 13 of ~15 pages to match [SEO_KEYWORD_MAP.md](SEO_KEYWORD_MAP.md) (which itself supersedes the stale Drive Cluster Keywords Map — the sheet's 13 "pages" don't match the site's 18 real ones). Not done: H1s and body copy haven't been checked against target keywords page by page; `/venues/` title is deliberately still generic pending [TODO task 36](TODO.md#task-36) (Eastern venue placeholder); of the three planned new pages, the Hero's Journey angle shipped as a **blog post** (`/blog/the-heros-journey-in-transpersonal-work/`, byline Fabio Malizia) rather than the dedicated pillar page the map originally specified, and **Transpersonal Therapist (career) and FAQ still don't exist**. A long-tail phrase audit against the Longtail Keywords doc also found real content gaps — see [SEO_KEYWORD_MAP.md § Long-tail phrase coverage](SEO_KEYWORD_MAP.md#long-tail-phrase-coverage). → Phase D.
 5. ~~**Duplicate-content risk on the blog.** 2 of 3 posts are republished from the authors' own sites (manalpsychotherapy.com, mariolorenzetti.org) with no `rel=canonical` pointing anywhere. Google may ignore or penalize them.~~ → **RESOLVED (Jul 2026).** The premise only held for one post: Mario Lorenzetti's medicine-wheel piece is genuinely republished from `mariolorenzetti.org`, and now emits `rel=canonical` to the original there. Manal Al-Hammadi's two posts were never syndicated — she wrote them directly for this blog — so the `source`/`sourceUrl` front matter that wrongly implied otherwise (and the "Originally published on…" badge it drove) has been removed from both; they now self-canonicalize like any original post, and her byline still links to her site as an author credit. Mechanism: `base.njk` emits `rel=canonical` to `sourceUrl` when a post sets it, else to the page's own URL — any future republished post is covered automatically just by setting `sourceUrl`. See Phase G3.
 6. **Structured data stops at the homepage.** No `Event` schema on the schedule (free rich-result opportunity for seminars), no `Person` for teachers, no `BlogPosting`, no `FAQPage`, no `BreadcrumbList`. → Phase D/E.
 7. **No social presence linked anywhere.** `sameAs: []` is empty in the JSON-LD; footer has no social icons; no profiles to point to. → Phase J.
@@ -132,7 +140,7 @@
 4. **Therapy seekers dissatisfied with classical psychotherapy** — potential practice clients and future students. TOFU blog + Become a Practice Client.
 5. **Personal-growth seekers** — seminars, self-development year (Level 1). TOFU blog + Schedule.
 
-**Language/geography:** courses are in English, delivered online + intensives in Germany/Italy. Primary SEO target: English-language searches from Europe. (Italian-language expansion is an open decision — see [Open Decisions](#open-decisions-for-fabio).)
+**Language/geography:** courses are in English, delivered online + intensives in Germany/Italy. Primary SEO target: English-language searches from Europe. (Italian-language expansion was decided against for launch — see [Decision 8](#decision-8--language).)
 
 ---
 
@@ -141,6 +149,8 @@
 **Strategy: the old WordPress site keeps serving the domain while the entire new site — pages, SEO, forms, email, measurement — is built and verified on the staging build. The cutover then becomes a short, low-risk switch instead of a construction site in production.**
 
 Work top to bottom within each stage. Details for every step are in the phase sections below.
+**This table is the *order*, not the checklist** — what is still open, and who owes it, lives in
+[TODO.md](TODO.md). Each open step below names the task that carries it.
 
 ### Stage 1 — Preparation (old WordPress site still live on the domain)
 
@@ -152,29 +162,29 @@ Everything in this stage can be completed and tested before touching DNS or host
 | 2 | ✅ **DONE (Jul 2026)** — baseline captured and analysed: **[seo-baseline/BASELINE.md](seo-baseline/BASELINE.md)**. 347 clicks / 17,448 impressions / 255 indexed pages / 7 referring domains. *(Ahrefs cross-check still pending)* | B/C | S | step 1 |
 | 3 | 🟡 WordPress URL inventory ✅ (574 URLs) + 301 redirect map ✅ drafted and data-prioritized ([seo-baseline/REDIRECT_MAP.md](seo-baseline/REDIRECT_MAP.md)); portal fate ✅ largely answered (already on `student.` subdomain); **still blocked on the hosting/CDN choice** | B | M | hosting decision |
 | 3b | 🔴 **NEW — urgent, independent of the cutover:** `test.transpersonal-training.com` is publicly indexed with a full duplicate of the site (402 impressions). Add HTTP auth or `noindex`+`Disallow`, then request removal in GSC | E | S | server access |
-| 3c | ✅ **DONE (Jul 2026)** — bio-page traffic protection. Bio pages are **64% of all organic clicks**. Decision (Fabio): no per-teacher pages; all 32 old URLs 301 to **`/teachers/#<id>`**, and the page now expands the right teacher from the URL fragment. Viable because all 32 bios are server-rendered into that page's HTML. Residual risk tracked as [PABLO task 32](PABLO_TASKS.md) | D/F | S | — |
+| 3c | ✅ **DONE (Jul 2026)** — bio-page traffic protection. Bio pages are **64% of all organic clicks**. Decision (Fabio): no per-teacher pages; all 32 old URLs 301 to **`/teachers/#<id>`**, and the page now expands the right teacher from the URL fragment. Viable because all 32 bios are server-rendered into that page's HTML. Residual risk tracked as [TODO task 32](TODO.md#task-32) | D/F | S | — |
 | 4 | ✅ **DONE (Jul 2026)** — real form backend live (Apps Script → Sheets + Drive + notification email). `mailto:` kept only as a no-JS fallback | A | S | — |
 | 5 | ✅ **DONE (Jul 2026)** — `/apply/` page built: details → generated enrolment agreement → signed-copy upload | A | M | — |
-| 6 | Create the missing money pages: Courses/Hero Journey, Transpersonal Therapist (career), FAQ, Fees & Dates | D | L | content |
-| 7 | Implement the Cluster Keywords Map on all existing pages (titles, H1, descriptions, copy) | D | M | — |
-| 8 | Expand structured data: `Event` (schedule), `Person` (teachers), `BlogPosting`, `FAQPage`, `BreadcrumbList`, enrich `Course` | D | M | — |
-| 9 | 🟡 Technical SEO hygiene: ✅ 404 page, ✅ canonical for syndicated posts, ✅ nav URL consistency — still open: self-hosted fonts/icons, Agreement page rebuilt into the new site, dynamic copyright year | E | M | — |
-| 10 | Image SEO & performance: `@11ty/eleventy-img` pipeline, alt-text audit, lazy loading; Lighthouse ≥ 90 on mobile | E | M | — |
-| 11 | Trust layer: Accreditation page, testimonials collected from current students, teacher bios enriched with credentials | F | M | testimonials collection |
-| 12 | Integrate cookieless analytics into the build + define conversion events (starts collecting automatically at cutover) | C | S | tool decision |
-| 13 | Email marketing ready: Brevo account, lists, programme-PDF lead magnet, welcome sequence drafted, forms wired into the site | I | L | step 4 |
-| 14 | Create social profiles (Instagram + LinkedIn), add them to footer + JSON-LD `sameAs` | J | S | ownership decision |
-| 15 | Draft 2–3 original blog posts so the site launches with fresh content | G | M | author availability |
-| 16 | Full pre-cutover QA: crawl the staging build (Screaming Frog), zero 404s, one canonical per page, Rich Results Test, mobile check, live form test | B/E | S | steps 4–10 |
+| 6 | Create the missing money pages: Transpersonal Therapist (career), FAQ — Hero's Journey shipped as a blog post instead → [TODO 46](TODO.md#task-46) | D | L | content |
+| 7 | Implement the keyword map on all existing pages — titles/descriptions done, H1s and body copy open → [TODO 53](TODO.md#task-53) | D | M | — |
+| 8 | Expand structured data: `Event`, `Person`, `BlogPosting`, `FAQPage`, `BreadcrumbList`, enrich `Course` → [TODO 47](TODO.md#task-47) | D | M | — |
+| 9 | 🟡 Technical SEO hygiene: ✅ 404 page, ✅ canonical for syndicated posts, ✅ nav URL consistency — still open → [TODO 48](TODO.md#task-48) | E | M | — |
+| 10 | Image SEO & performance; Lighthouse ≥ 90 on mobile → [TODO 49](TODO.md#task-49) | E | M | — |
+| 11 | Trust layer: Accreditation page → [TODO 27](TODO.md#task-27); testimonials → [TODO 50](TODO.md#task-50); teacher bios enriched with credentials | F | M | testimonials collection |
+| 12 | Analytics in the build + conversion events, collecting from cutover → [TODO 17](TODO.md#task-17) | C | S | tool decision |
+| 13 | Email marketing ready → [TODO 60](TODO.md#task-60); CleverReach list migration → [TODO 38](TODO.md#task-38) | I | L | step 4 |
+| 14 | Create social profiles, add to footer + JSON-LD `sameAs` → [TODO 23](TODO.md#task-23) | J | S | ownership decision |
+| 15 | Draft 2–3 original blog posts so the site launches with fresh content → [TODO 51](TODO.md#task-51) | G | M | author availability |
+| 16 | Full pre-cutover QA → [TODO 52](TODO.md#task-52), plus the checks on the old estate → [TODO 54](TODO.md#task-54) | B/E | S | steps 4–10 |
 
 ### Stage 2 — Cutover (launch week)
 
 | # | Step | Phase | Effort |
 |---|------|-------|--------|
-| 17 | Freeze WP content and take a full backup/export; move or preserve the student portal per the step-3 decision | B | S |
-| 18 | Switch DNS/hosting: new site live on the domain, 301 redirects active, HTTPS enforced | B | S |
-| 19 | Submit the sitemap in GSC (+ Bing), URL-inspect the top 10 pages; announce the launch (email + social) | B/C | S |
-| 20 | Monitor GSC coverage and redirects weekly for 4–6 weeks; fix crawl errors as they appear | B | ongoing |
+| 17 | Freeze WP content and take a full backup/export → [TODO 61](TODO.md#task-61) | B | S |
+| 18 | Switch DNS/hosting: new site live, 301s active, HTTPS enforced → [TODO 10](TODO.md#task-10) and [28](TODO.md#task-28) | B | S |
+| 19 | Submit the sitemap (+ Bing), URL-inspect the top 10; announce the launch → [TODO 13](TODO.md#task-13) | B/C | S |
+| 20 | Monitor GSC coverage and redirects weekly for 4–6 weeks → [TODO 13](TODO.md#task-13) | B | ongoing |
 
 ### Stage 3 — Post-launch growth (first 6–12 months)
 
@@ -182,7 +192,7 @@ Everything in this stage can be completed and tested before touching DNS or host
 |---|------|-------|--------|
 | 21 | Blog cadence: 1–2 posts/month following the keyword sheet, internal-linking rules | G | ongoing |
 | 22 | Off-page: EUROTAS/EAP directory listings, teacher & partner backlinks, niche directories (the domain doesn't change at cutover, so this can start during Stage 1 if capacity allows) | H | M |
-| 23 | Google Business Profile + student reviews, venue-level local SEO | H | S |
+| 23 | Google Business Profile + student reviews, venue-level local SEO → [TODO 62](TODO.md#task-62) | H | S |
 | 24 | Email sequences live: application nurture + monthly newsletter | I | ongoing |
 | 25 | Social cadence with the repurposing pipeline | J | ongoing |
 | 26 | Events as marketing: free intro webinars/open evenings, add-to-calendar, post-event follow-up | K | ongoing |
@@ -235,7 +245,7 @@ published on Training Overview (exact prices, Open Decision 5).
 - [ ] Add the low-commitment alternative — "book a 20-minute call" — for visitors not ready to apply
 - [ ] Add an FAQ excerpt and a testimonial to the page (Phase F trust signals)
 - [ ] Fill the remaining `[…]` placeholders in the agreement Doc and get the lawyer review
-      (blocks real use — see [PABLO task 22](PABLO_TASKS.md) and the legal-notice work)
+      (blocks real use — see [TODO task 22](TODO.md#task-22) and the legal-notice work)
 
 ### A3. Secondary conversions everywhere
 
@@ -263,8 +273,8 @@ Timing: **B1 and B2 are Stage 1 preparation work** — do them early, while Word
 ### B2. Redirect map & portal decision
 
 - Write a 301 map, e.g. `/faculty/ → /teachers/`, `/program-2026/ → /training-overview/`, `/schedule/ → /schedule/` (same path — verify content parity), `/apply/ → /apply/` (new page from A2), archive pages → homepage or blog.
-- **Student portal:** the WP login/dashboard/payment system is in active use. Options: (a) move WP to a subdomain like `portal.transpersonal-training.com` and 301 the portal paths there; (b) replace with the new restricted-lectures approach (see PABLO task 5) before cutover. Decide before DNS changes.
-- GitHub Pages cannot serve real 301s. Options: host behind **Cloudflare** (free) and use Bulk Redirects, or choose hosting that supports redirects (Netlify/Cloudflare Pages `_redirects` file). This may decide PABLO task 10 (deployment path).
+- **Student portal:** the WP login/dashboard/payment system is in active use. Options: (a) move WP to a subdomain like `portal.transpersonal-training.com` and 301 the portal paths there; (b) replace with the new restricted-lectures approach (see [TODO task 5](TODO.md#task-5)) before cutover. Decide before DNS changes.
+- GitHub Pages cannot serve real 301s. Options: host behind **Cloudflare** (free) and use Bulk Redirects, or choose hosting that supports redirects (Netlify/Cloudflare Pages `_redirects` file). This may decide [TODO task 10](TODO.md#task-10) (deployment path).
 - Rehome the `/agreement-appendix` page (footer links to it on the WP site today).
 
 ### B3. Cutover checklist
@@ -375,7 +385,32 @@ High-value keywords not yet mapped to any page (from Selecting Keywords, all low
 Google weighs expertise/authoritativeness heavily for health-adjacent topics (this is a psychotherapy school — YMYL territory). Trust signals also convert humans.
 
 - **Accreditation page (new):** what EUROTAS/EAP accreditation means, certification path hours (already documented in DOCUMENTATION.md), logos, links to the EUROTAS listing. Targets `eurotas accredited psychotherapy schools`, `transpersonal psychology degree europe`.
-- **Teacher bios — the highest-value SEO asset on the site.** The GSC baseline shows bio pages earn **64% of all organic clicks** at positions 3–8, and carry most of the backlink profile ([BASELINE.md](seo-baseline/BASELINE.md) Findings 1 & 4). They stay consolidated on the single `/teachers/` page (Fabio's decision — old URLs 301 to `/teachers/#<id>`), so that page has to carry the weight: (a) expand each bio with credentials, publications, years of practice; (b) link each teacher's personal site and get a link back (Phase H); (c) add `Person` schema per teacher (D3) — this matters more now that there's one URL, since the schema is what tells Google the page covers 32 distinct people; (d) **write the `/teachers/` title and meta description so they can rank for personal names**, not just for "our teachers"; (e) if dedicated pages become necessary, the ranked shortlist is in [PABLO task 32](PABLO_TASKS.md) — `/pier-luigi-lattuada/` alone draws 4,850 impressions at 0.02% CTR, the single biggest untapped opportunity in the data.
+- **Teacher bios — the highest-value SEO asset on the site.** The GSC baseline shows bio pages earn **64% of all organic clicks** at positions 3–8, and carry most of the backlink profile ([BASELINE.md](seo-baseline/BASELINE.md) Findings 1 & 4). They stay consolidated on the single `/teachers/` page (Fabio's decision — old URLs 301 to `/teachers/#<id>`), so that page has to carry the weight: (a) expand each bio with credentials, publications, years of practice; (b) link each teacher's personal site and get a link back (Phase H); (c) add `Person` schema per teacher (D3) — this matters more now that there's one URL, since the schema is what tells Google the page covers 32 distinct people; (d) **write the `/teachers/` title and meta description so they can rank for personal names**, not just for "our teachers"; (e) if dedicated pages become necessary, the ranked shortlist is [below](#teacher-page-shortlist) and the decision itself is [TODO task 32](TODO.md#task-32) — `/pier-luigi-lattuada/` alone draws 4,850 impressions at 0.02% CTR, the single biggest untapped opportunity in the data.
+
+<a id="teacher-page-shortlist"></a>
+
+**Teacher-page shortlist — ranked by measured search demand.** Only relevant if
+[TODO task 32](TODO.md#task-32) concludes the consolidation cost too much traffic. Clicks /
+impressions / average position over the 6 months to 2026-07-18, from
+[BASELINE.md](seo-baseline/BASELINE.md). Note that "most famous" here means *most searched*, which
+is not the same as most senior:
+
+| # | Teacher | Clicks | Impressions | Position | Section on new site | Why |
+|---|---------|--------|-------------|----------|---------------------|-----|
+| 1 | **Pier Luigi Lattuada** | 1 | **4,850** | 7.6 | alumni | **Biggest opportunity on the site.** Enormous search demand, ranking already good, but 0.02% CTR — people search him, see us, click elsewhere. A real page with a proper title/description could convert a large share of those impressions |
+| 2 | **Prof. Jure Biechonski** | **26** | 813 | 5.0 | guest | Highest actual click earner |
+| 3 | **Manal Al-Hammadi** | **25** | 578 | 8.0 | core | Second highest; core teacher; has her own site (reciprocal-link partner) |
+| 4 | Stephan Schillinger | 12 | 528 | 6.0 | guest | High impressions + 2 backlinks |
+| 5 | Stefan Dressler | 10 | 469 | 8.1 | guest | High impressions + 2 backlinks; own site (essence-sd.de) |
+| 6 | Dr. Kirsten E. Cameron | 9 | 413 | 9.1 | alumni | High impressions, weakest position of the top group |
+| 7 | Vladimir Maykov | 5 | 308 | 7.2 | alumni | Strong Russian-language demand (Eastern track) |
+| 8 | Tina Lindhard | 2 | 277 | 7.1 | guest | 277 impressions, 2 clicks — the same CTR problem as Lattuada |
+| 9 | Dr. Ingo Benjamin Jahrsetz | 13 | 181 | 5.5 | guest | Strong clicks; has a backlink |
+| 10 | Gabriel Fernandez-Borsot | 13 | 210 | 6.3 | guest | Strong clicks |
+
+If only three are built: **Lattuada, Biechonski, Al-Hammadi** — Lattuada for the untapped
+impressions, the other two because they are the actual traffic.
+
 - **Testimonials & alumni stories:** collect 5–10 short quotes (with photo + name + cohort, with consent) from current East/West students; place on Home, Training Overview, Apply. Later: 2–3 long-form alumni interviews as blog posts ("From nurse to transpersonal therapist").
 - **Photos of real seminars:** already shot and releases confirmed (see `photo_updating` branch work) — real people in real venues outperform stock everywhere.
 - **About/Contact completeness:** physical address (at least city/country), responsible persons, email — reassures both Google and applicants.
@@ -388,7 +423,7 @@ Google weighs expertise/authoritativeness heavily for health-adjacent topics (th
 ### G1. Editorial system
 
 - Cadence: **1–2 posts/month, sustained** beats 8 posts in January and silence after.
-- Workflow already documented in [BLOG_HOWTO.md](BLOG_HOWTO.md); decide the drafting flow (Google Docs → GitHub per FUTURE_IDEAS pipeline, or direct GitHub editing) — PABLO task 16.
+- Workflow already documented in [BLOG_HOWTO.md](BLOG_HOWTO.md); decide the drafting flow (Google Docs → GitHub per FUTURE_IDEAS pipeline, or direct GitHub editing) — [TODO task 16](TODO.md#task-16).
 - Every post: primary keyword from the sheet, D2 checklist, ≥2 internal links to a money page (Training Overview, Techniques, Apply), CTA block (programme PDF / newsletter).
 
 ### G2. First 8 posts (order from the keyword sheet priorities)
@@ -672,14 +707,24 @@ Baselines below are **measured**, from [seo-baseline/BASELINE.md](seo-baseline/B
 
 ---
 
-## Open Decisions for Fabio
+## Decisions — the reasoning
 
-These block specific steps; everything else can proceed.
+**The open ones are tracked in [TODO.md § Decisions waiting on Fabio or Pablo](TODO.md#1--decisions-waiting-on-fabio-or-pablo).**
+What stays here is *why* each was framed the way it was, and the record of how the settled ones were
+settled — worth keeping, and worth keeping out of a checklist.
 
-1. ~~**Form backend** (blocks step 4): Brevo forms vs Formspree/Tally vs embedded Google Form.~~ → **RESOLVED and BUILT (Jul 2026): Google Apps Script**, not Brevo forms. One script writes contact messages and applications into a spreadsheet and signed agreements into Drive, which keeps leads inside the Sheets workflow the office already uses and supports the file upload no generic form service offers. See Phase A1. **Brevo is still confirmed for email marketing** (Pablo) — a different job, see Phase I0. ⚠️ The existing **CleverReach** list (Jan 2024 – Jun 2026) needs an export/import plus a re-permission email before it can be mailed.
-2. **Analytics tool** (blocks step 12): cookieless (Plausible/Cloudflare) vs GA4+consent banner. *Recommendation: cookieless.*
-3. **Student portal fate at migration** (blocks steps 3 and 17–18): keep WordPress on a subdomain vs replace before cutover. This interacts with PABLO task 5 (lectures login) and task 10 (hosting). → **LARGELY RESOLVED (Jul 2026) by the GSC data:** the portal already runs on its own host, `student.transpersonal-training.com` (WordPress + Tutor LMS), so the cutover doesn't touch it. Remaining work is only 301-ing the ~12 legacy portal paths still on the root domain (`/login/`, `/payment/`, `/dashboard-page/`…) to their `student.` equivalents. Whether to *eventually* replace Tutor LMS with the new restricted-lectures approach is now a separate, non-blocking decision.
-4. **Hosting/CDN** (blocks steps 3 and 18): GitHub Pages alone cannot do 301 redirects — put Cloudflare in front, or switch to Netlify/Cloudflare Pages? → **RECOMMENDATION (Jul 2026): move to Cloudflare Pages**, keeping the existing GitHub Actions build.
+<a id="decision-1--form-backend"></a>
+
+1. ~~**Form backend** (blocks step 4): Brevo forms vs Formspree/Tally vs embedded Google Form.~~ → **RESOLVED and BUILT (Jul 2026): Google Apps Script**, not Brevo forms. One script writes contact messages and applications into a spreadsheet and signed agreements into Drive, which keeps leads inside the Sheets workflow the office already uses and supports the file upload no generic form service offers. See Phase A1. **Brevo is still confirmed for email marketing** (Pablo) — a different job, see Phase I0. ⚠️ The existing **CleverReach** list (Jan 2024 – Jun 2026) needs an export/import plus a re-permission email before it can be mailed → [TODO task 38](TODO.md#task-38).
+<a id="decision-2--analytics"></a>
+
+2. **Analytics tool** (blocks step 12): cookieless (Plausible/Cloudflare) vs GA4+consent banner. *Recommendation: cookieless.* → open, tracked as [TODO task 17](TODO.md#task-17)
+<a id="decision-3--student-portal"></a>
+
+3. **Student portal fate at migration** (blocks steps 3 and 17–18): keep WordPress on a subdomain vs replace before cutover. This interacts with [TODO task 5](TODO.md#task-5) (lectures login) and [task 10](TODO.md#task-10) (hosting). → **LARGELY RESOLVED (Jul 2026) by the GSC data:** the portal already runs on its own host, `student.transpersonal-training.com` (WordPress + Tutor LMS), so the cutover doesn't touch it. Remaining work is only 301-ing the ~12 legacy portal paths still on the root domain (`/login/`, `/payment/`, `/dashboard-page/`…) to their `student.` equivalents. Whether to *eventually* replace Tutor LMS with the new restricted-lectures approach is now a separate, non-blocking decision.
+<a id="decision-4--hostingcdn"></a>
+
+4. **Hosting/CDN** (blocks steps 3 and 18): GitHub Pages alone cannot do 301 redirects — put Cloudflare in front, or switch to Netlify/Cloudflare Pages? → **RECOMMENDATION (Jul 2026): move to Cloudflare Pages**, keeping the existing GitHub Actions build. **The blocker.** → [TODO task 10](TODO.md#task-10)
 
    The redirect map needs roughly **60 rules** (15 page rules + 32 bio anchors + 12 portal paths + pattern rules). That number is what decides this:
 
@@ -695,11 +740,21 @@ These block specific steps; everything else can proceed.
    **Migration effort is small.** Keep [.github/workflows/deploy.yml](../.github/workflows/deploy.yml) exactly as it is — the Sheets fetching, the data and student-image caches, and the `repository_dispatch` rebuild trigger all keep working. Only the last step changes: instead of `peaceiris/actions-gh-pages` publishing to the `deploy` branch, run a `wrangler pages deploy _site` step. Also set `PATH_PREFIX` to `/` (it is currently `/transpersonaltraining/` for the GitHub project-site path) and add the `_redirects` file generated from [seo-baseline/REDIRECT_MAP.md](seo-baseline/REDIRECT_MAP.md). If GitHub Pages is kept for staging, nothing else needs to change.
 
    **Caveat to check before committing:** confirm Cloudflare Pages' free-plan build/deploy limits suit a site that rebuilds on every Sheets change, and that `student.transpersonal-training.com` (the portal, on its own host) keeps resolving correctly once DNS moves to Cloudflare — it must be left untouched.
-5. **Fees transparency** (affects steps 5–6): publish fees, a range, or "on request"? *Recommendation: at least a range — it qualifies leads and is heavily searched.* → **RESOLVED (Jul 2026): publish exact prices.** €489/module (East) · €689/module (West) · €45/single lecture · single seminar on request. Now shown on Training Overview → Fees. Discounts (financial hardship, on request) and referral (one free module per new student introduced) are published too. Online payment is **not** available yet — enrolment is arranged with the office (see PABLO task 21).
-6. **Who writes content** (blocks steps 15 and 21): Fabio, teachers on rotation, syndication from Manal/Mario, or a hired writer?
-7. **Social ownership** (blocks steps 14 and 25): who runs Instagram/LinkedIn week to week? If nobody, defer Phase J rather than doing it badly.
+<a id="decision-5--fees"></a>
+
+5. **Fees transparency** (affects steps 5–6): publish fees, a range, or "on request"? *Recommendation: at least a range — it qualifies leads and is heavily searched.* → **RESOLVED (Jul 2026): publish exact prices.** €489/module (East) · €689/module (West) · €45/single lecture · single seminar on request. Now shown on Training Overview → Fees. Discounts (financial hardship, on request) and referral (one free module per new student introduced) are published too. Online payment is **not** available yet — enrolment is arranged with the office (see [TODO task 21](TODO.md#task-21)).
+<a id="decision-6--who-writes-content"></a>
+
+6. **Who writes content** (blocks steps 15 and 21): Fabio, teachers on rotation, syndication from Manal/Mario, or a hired writer? → open, tracked as [TODO task 55](TODO.md#task-55)
+<a id="decision-7--social-ownership"></a>
+
+7. **Social ownership** (blocks steps 14 and 25): who runs Instagram/LinkedIn week to week? If nobody, defer Phase J rather than doing it badly. → open, tracked as [TODO task 56](TODO.md#task-56)
+<a id="decision-8--language"></a>
+
 8. **Language / international markets:** Add other-language sections (`/it/`, `/ru/` + hreflang) or stay English-only? *Recommendation: English-only until the cohort fills, then reassess.* → **RESOLVED (Jul 2026): English-only for now.** Confirmed by Pablo, even though the 2027–2030 cohort now has a live Russian-language Eastern track (Russian speakers will rely on browser/Google translation for the moment). A Russian landing page *may* come later but is explicitly out of scope for launch. Keep an eye on the widened audience: the Eastern track opens up Russian-language / Eastern-Europe demand that the current English-only SEO plan does not capture.
-9. **Ads budget** (blocks step 27): is there any budget for a Google Ads pilot in 2026–27?
+<a id="decision-9--ads-budget"></a>
+
+9. **Ads budget** (blocks step 27): is there any budget for a Google Ads pilot in 2026–27? → open, tracked as [TODO task 57](TODO.md#task-57)
 
 ---
 

@@ -149,7 +149,9 @@ Three decisions worth recording, because each one had an obvious-looking alterna
 
 ### High-value keywords still unassigned
 
-Worth a page when there is capacity to write one — all low difficulty:
+Worth a page when there is capacity to write one — all low difficulty. The work these imply is
+[TODO 53](TODO.md#task-53) (focus), [TODO 27](TODO.md#task-27) (Accreditation page) and
+[TODO 42](TODO.md#task-42) (the Hero's Journey title):
 
 - `transpersonal psychotherapy` — 320/mo, **difficulty 2**. Currently spread thin; consider making it
   the explicit focus of `/what-is-transpersonal-psychology/`
@@ -245,7 +247,7 @@ trainee" as a page, rather than just adding copy.
 
 EUROTAS itself is mentioned on Training Overview, Curriculum and `/collaborations/`, so this category
 isn't invisible — but every phrase in it wants a single authoritative landing page, and that page (the
-**Accreditation page**, [PABLO task 27](PABLO_TASKS.md), Marketing plan Phase F) still doesn't exist.
+**Accreditation page**, [TODO task 27](TODO.md#task-27), Marketing plan Phase F) still doesn't exist.
 Building it would move most of this row from 🟡 to ✅ in one page.
 
 ### 8. Breathwork Techniques — persona 3, MOFU
@@ -286,9 +288,11 @@ The instinct is right — `/training-overview/` contains no keyword — but the 
 underscores and capitals, against URL conventions. The site is not live yet, so a change is cheap; it
 would need the matching row in [seo-baseline/REDIRECT_MAP.md](seo-baseline/REDIRECT_MAP.md) updated.
 **Not changed** pending a decision between keeping `/training-overview/` and moving to
-`/transpersonal-psychotherapy-training/`.
+`/transpersonal-psychotherapy-training/` → [TODO task 41](TODO.md#task-41).
 
 ---
+
+<a id="factual-conflicts"></a>
 
 ## ⚠️ Factual conflicts between WEBSITE_CONTENT.md and the site
 
@@ -304,18 +308,9 @@ i.e. inside the enrolment agreement the applicant signs.
 | Cohort | "2024 – 2027" | **2027–2030** |
 | Module count | "13 modules" in the body, but the Curriculum lists **14** | internal contradiction in the doc |
 
-Also to resolve in the doc:
+Six further problems in the doc — dead WordPress links, a duplicate contact address, an "EURTOS"
+typo, and three unresolved authoring notes — are listed with the fee rows in
+**[TODO task 43](TODO.md#task-43)**.
 
-- [ ] Links to WordPress URLs that die at migration: `/schedule/#tab-id-2`, `/program/`,
-      `/wp-content/uploads/2024/01/…pdf`, and **`/participate/`, which does not exist on the new site**
-- [ ] Second email `ewtts@posteo.de` alongside `office@transpersonal-training.com` — keep or drop?
-- [ ] Typo "EURTOS" → EUROTAS
-- [ ] Doc note: *"Entry Requirements: Degree (there should be a hyperlink…)"* → link to
-      `/training-overview/` eligibility section
-- [ ] Doc note: *"I DONT KNOW WHERE THIS GOES"* on the **"Is the programme for me?"** block →
-      suggested home: `/training-overview/`, above the eligibility list
-- [ ] Doc note: *"STUDENTS PAGE — this needs to be called something else"* → ambiguous: the
-      `student.` portal, or `/lectures-schedule/`?
-
-**Decisions for Fabio/Pablo.** Nothing in the doc should be published as copy until the fee rows agree
-with `training-overview.html`.
+Nothing in `WEBSITE_CONTENT.md` should be published as copy until the fee rows agree with
+`training-overview.html`.

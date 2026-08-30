@@ -27,7 +27,7 @@
 | `/closed_meeteing_iurii_becioski-7-9-04-23/` | 410 | 1 | low | one-off closed meeting page |
 | `/wp-content/uploads/2024/10/newsletter-9.pdf` | 410 | 0 | low | check the Links export for hotlinked PDFs before killing uploads |
 | `/program-2024/` | `/training-overview/` | 0 | low | **already 404 today** — confirmed 2026-07-20 |
-| `/wp-content/uploads/2025/09/West_Program_26.pdf` | new PDF location | 0 | **HIGH** | **already 404 today.** The West Program 2026 brochure is missing — recover the file first ([PABLO task 34](../PABLO_TASKS.md)), then redirect here |
+| `/wp-content/uploads/2025/09/West_Program_26.pdf` | new PDF location | 0 | **HIGH** | **already 404 today.** The West Program 2026 brochure is missing — recover the file first ([TODO task 34](../TODO.md#task-34)), then redirect here |
 | `/wp-content/uploads/2025/10/West_Program_26.pdf` | new PDF location | 0 | **HIGH** | same file, second path |
 | `/?page_id=3` | 410 | 0 | low | ancient WP internal URL, already 404 |
 
@@ -57,7 +57,7 @@ condition that separates an acceptable many-to-one redirect from a soft-404.
 fragments (`#id`) are ignored by Google when consolidating signals, so all 32 old URLs consolidate
 into one. Link equity does still flow through the 301s, so the backlink profile is preserved.
 This is a deliberate trade of some organic traffic for a much simpler site — it is tracked as
-**[PABLO_TASKS.md task 32](../PABLO_TASKS.md)**, to be revisited 4–6 weeks after cutover with GSC
+**[TODO task 32](../TODO.md#task-32)**, to be revisited 4–6 weeks after cutover with GSC
 data, at which point *a few* high-demand teachers may get their own page after all.
 
 ### The rules
@@ -135,17 +135,20 @@ All zero-traffic. Pattern rules:
 
 ## 6. Pre-cutover cleanup (do before, so it isn't blamed on the migration)
 
-- [ ] **`test.transpersonal-training.com` is public and indexed** — 8 pages, 402 impressions, a full
-      duplicate of the site. Add HTTP auth or `noindex` + `Disallow`, then request removal in GSC.
-      Unrelated to the cutover; fix now. ([BASELINE.md](BASELINE.md) Finding 3)
+Status for each of these lives in [TODO.md](../TODO.md); what follows is what needs doing and why.
+
+- **`test.transpersonal-training.com` is public and indexed** — 8 pages, 402 impressions, a full
+  duplicate of the site. Unrelated to the cutover; fix now → [TODO task 31](../TODO.md#task-31)
+  ([BASELINE.md](BASELINE.md) Finding 3)
 - [x] ~~**39 URLs already return 404** per GSC — export and triage.~~ Done 2026-07-20
       ([BASELINE.md](BASELINE.md) Finding 6). Result: only **4 are on the main domain** and all four are
       now rows in §1 above. The other 35 sit on `student.`/`test.` and are deleted theme-demo content —
       correctly 404, nothing to do. The count is self-healing (66 in April → 39 in July).
-- [ ] **Portal SEO hygiene** — `student.` has 76 indexed pages including quizzes, dashboards, trashed
-      content and theme demo junk ([PABLO task 33](../PABLO_TASKS.md)). Independent of the cutover.
-- [ ] Check the Links export for hotlinked `/wp-content/uploads/*` images before letting uploads die.
-- [ ] Confirm whether any `?lang=` / Russian-language event variants are indexed outside the sitemap.
+- **Portal SEO hygiene** — `student.` has 76 indexed pages including quizzes, dashboards, trashed
+  content and theme demo junk. Independent of the cutover → [TODO task 33](../TODO.md#task-33)
+- Check the Links export for hotlinked `/wp-content/uploads/*` images before letting uploads die,
+  and confirm whether any `?lang=` / Russian-language event variants are indexed outside the sitemap
+  → [TODO task 54](../TODO.md#task-54)
 
 ## Cutover format
 

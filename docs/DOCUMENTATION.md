@@ -615,6 +615,7 @@ Row classification:
 ### Known Issues
 
 - **Browserslist outdated warning** — fix with `npx update-browserslist-db@latest`
+  ([TODO task 59](TODO.md#task-59))
 
 ---
 
