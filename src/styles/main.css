@@ -10,29 +10,193 @@ html {
     scroll-behavior: smooth; 
 }
 
-/* ── Theme color variables ── */
+/* ── Colour palettes ──
+
+   Every colour on the home page (plus the nav and footer, which the home page
+   shares with the rest of the site) resolves through the tokens below instead
+   of a literal hex. A palette is nothing but five HSL triples:
+
+     deep   the dark ground — hero, quote band, contact section, footer
+     dusk   the second dark, where the gradients drift away from `deep`
+     accent the CTA colour — buttons, kickers, hairlines
+     second the supporting warm accent — card borders, drop caps, section kickers
+     paper  the light background the cream sections sit on
+
+   Everything else (the twelve gradient stops, the five steps of text-on-dark,
+   the borders, the hover states) is derived from those five by nudging
+   lightness or alpha, which is what lets the switcher retint the whole page by
+   moving fifteen numbers. Headings and links keep their own saturation and
+   lightness so they stay readable wherever the hue sliders end up — only their
+   hue rides along with `deep`.
+
+   `palette-blue` reproduces the current design hex for hex; it is the default
+   so that every other page, which still carries literal colours, keeps
+   matching the nav and footer. */
+
+:root,
+[data-palette="blue"] {
+    --deep-h: 213; --deep-s: 62%; --deep-l: 15%;
+    --dusk-h: 258; --dusk-s: 22%; --dusk-l: 18%;
+    --acc-h:   37; --acc-s:  63%; --acc-l:  59%;
+    --sec-h:   16; --sec-s:  49%; --sec-l:  48%;
+    --pap-h:   38; --pap-s:  65%; --pap-l:  94%;
+
+    --head-shift: 29; --head-s: 47%; --head-l: 34%;
+    --link-shift: 11; --link-s: 64%; --link-l: 33%;
+    --glow-shift: -10; --glow-s: 69%; --glow-l: 51%;
+}
+
+/* Deep forest — meant for the outdoor photography */
+[data-palette="green"] {
+    --deep-h: 155; --deep-s: 45%; --deep-l: 13%;
+    --dusk-h: 108; --dusk-s: 26%; --dusk-l: 17%;
+    --acc-h:   42; --acc-s:  62%; --acc-l:  57%;
+    --sec-h:   22; --sec-s:  52%; --sec-l:  45%;
+    --pap-h:   44; --pap-s:  55%; --pap-l:  94%;
+
+    --head-shift: 10; --head-s: 44%; --head-l: 22%;
+    --link-shift: 6;  --link-s: 58%; --link-l: 26%;
+    --glow-shift: -8; --glow-s: 66%; --glow-l: 52%;
+}
+
+/* Amber — warm roasted browns under a bright orange CTA */
+[data-palette="orange"] {
+    --deep-h:  22; --deep-s: 46%; --deep-l: 14%;
+    --dusk-h: 340; --dusk-s: 26%; --dusk-l: 17%;
+    --acc-h:   30; --acc-s:  78%; --acc-l:  55%;
+    --sec-h:   10; --sec-s:  60%; --sec-l:  46%;
+    --pap-h:   34; --pap-s:  70%; --pap-l:  94%;
+
+    --head-shift: -4; --head-s: 48%; --head-l: 24%;
+    --link-shift: -6; --link-s: 62%; --link-l: 30%;
+    --glow-shift: 4;  --glow-s: 76%; --glow-l: 53%;
+}
+
+/* Red earth — oxide and terracotta, meant for the interior photography */
+[data-palette="earth"] {
+    --deep-h:   8; --deep-s: 40%; --deep-l: 15%;
+    --dusk-h: 350; --dusk-s: 24%; --dusk-l: 18%;
+    --acc-h:   33; --acc-s:  58%; --acc-l:  58%;
+    --sec-h:    6; --sec-s:  55%; --sec-l:  45%;
+    --pap-h:   28; --pap-s:  60%; --pap-l:  94%;
+
+    --head-shift: 4;  --head-s: 42%; --head-l: 25%;
+    --link-shift: -2; --link-s: 55%; --link-l: 31%;
+    --glow-shift: 10; --glow-s: 70%; --glow-l: 52%;
+}
+
+/* Purple — the magenta-and-olive pairing from the reference swatch */
+[data-palette="purple"] {
+    --deep-h: 300; --deep-s: 52%; --deep-l: 13%;
+    --dusk-h:  80; --dusk-s: 45%; --dusk-l: 12%;
+    --acc-h:   71; --acc-s:  60%; --acc-l:  55%;
+    --sec-h:  302; --sec-s:  55%; --sec-l:  40%;
+    --pap-h:   60; --pap-s:  40%; --pap-l:  95%;
+
+    --head-shift: 4;   --head-s: 50%; --head-l: 26%;
+    --link-shift: 2;   --link-s: 55%; --link-l: 32%;
+    --glow-shift: 130; --glow-s: 55%; --glow-l: 45%;
+}
+
+/* ── Derived tokens ──
+   Named for the job they do, not the colour they happen to be, so the same
+   markup reads correctly under every palette. */
 
 :root {
-    /* Primary Colors - Professional Palette */
-    --color-primary: #1E40AF;
-    --color-primary-dark: #1E3A8A;
-    --color-primary-light: #3B82F6;
-    --color-indigo-deep: #312E81;
-    --color-cta: #D9A756;
-    --color-cta-hover: #C08F3F;
-    --color-accent-teal: #2DD4BF;
-    --color-bg-light: #FAF3E7;
-    --color-bg-darker: #F3E7D4;
-    --color-text-dark: #1F2937;
-    --color-text-light: #5D584E;
-    --color-primary-rgb: 30, 64, 175;
-    --color-cta-rgb: 217, 167, 86;
+    /* The dark ground, and the two steps either side of it */
+    --c-deep:        hsl(var(--deep-h) var(--deep-s) var(--deep-l));
+    --c-deep-2:      hsl(var(--deep-h) calc(var(--deep-s) - 8%) calc(var(--deep-l) + 3.4%));
+    --c-deepest:     hsl(var(--deep-h) var(--deep-s) calc(var(--deep-l) - 4%));
+    --c-deep-95:     hsl(var(--deep-h) var(--deep-s) var(--deep-l) / .95);
+    --c-deep-30:     hsl(var(--deep-h) var(--deep-s) var(--deep-l) / .30);
+    /* Plain alpha tints of the dark ground — hover fills, muted numerals and
+       the flat overlays on the techniques page. Distinct from the --v-* veils
+       below, which exist to be scaled as a group. */
+    --c-deep-20:     hsl(var(--deep-h) var(--deep-s) var(--deep-l) / .20);
+    --c-deep-50:     hsl(var(--deep-h) var(--deep-s) var(--deep-l) / .50);
+    --c-deep-80:     hsl(var(--deep-h) var(--deep-s) var(--deep-l) / .80);
+    --c-deep-85:     hsl(var(--deep-h) var(--deep-s) var(--deep-l) / .85);
+    --c-deepest-85:  hsl(var(--deep-h) var(--deep-s) calc(var(--deep-l) - 4%) / .85);
+    --c-deepest-70:  hsl(var(--deep-h) var(--deep-s) calc(var(--deep-l) - 4%) / .70);
 
-    /* Theme switcher variables */
-    --theme-primary: #1E3A8A;
-    --theme-darker: #0f2540;
-    --theme-light: #3b82f6;
-    --theme-primary-rgb: 30, 58, 138;
+    /* The second dark, used where a gradient needs somewhere to go */
+    --c-dusk:        hsl(var(--dusk-h) var(--dusk-s) var(--dusk-l));
+
+    /* The CTA accent */
+    --c-acc:         hsl(var(--acc-h) var(--acc-s) var(--acc-l));
+    --c-acc-dark:    hsl(var(--acc-h) calc(var(--acc-s) - 12%) calc(var(--acc-l) - 9%));
+    --c-acc-light:   hsl(var(--acc-h) calc(var(--acc-s) + 8%) calc(var(--acc-l) + 14%));
+    --c-acc-65:      hsl(var(--acc-h) var(--acc-s) var(--acc-l) / .65);
+    --c-acc-60:      hsl(var(--acc-h) var(--acc-s) var(--acc-l) / .60);
+    --c-acc-40:      hsl(var(--acc-h) var(--acc-s) var(--acc-l) / .40);
+    --c-acc-25:      hsl(var(--acc-h) var(--acc-s) var(--acc-l) / .25);
+
+    /* The supporting accent */
+    --c-sec:         hsl(var(--sec-h) var(--sec-s) var(--sec-l));
+    --c-sec-60:      hsl(var(--sec-h) var(--sec-s) var(--sec-l) / .60);
+    --c-sec-18:      hsl(var(--sec-h) var(--sec-s) var(--sec-l) / .18);
+
+    /* The light sections */
+    --c-paper:       hsl(var(--pap-h) var(--pap-s) var(--pap-l));
+    --c-paper-2:     hsl(var(--pap-h) calc(var(--pap-s) - 9%) calc(var(--pap-l) - 5%));
+    --c-paper-card:  hsl(var(--pap-h) calc(var(--pap-s) + 23%) calc(var(--pap-l) + 2.5%));
+    --c-paper-hi:    hsl(var(--pap-h) calc(var(--pap-s) + 2%) calc(var(--pap-l) + 3.5%));
+    --c-paper-hi-60: hsl(var(--pap-h) calc(var(--pap-s) + 2%) calc(var(--pap-l) + 3.5%) / .60);
+    --c-line:        hsl(var(--pap-h) calc(var(--pap-s) - 19%) calc(var(--pap-l) - 12%));
+
+    /* Text sitting on the dark ground: five steps from near-white to muted */
+    --c-on-dark-1:   hsl(var(--deep-h) 44% 95%);
+    --c-on-dark-2:   hsl(var(--deep-h) 31% 87%);
+    --c-on-dark-3:   hsl(var(--deep-h) 28% 79%);
+    --c-on-dark-4:   hsl(var(--deep-h) 23% 69%);
+    --c-on-dark-5:   hsl(var(--deep-h) 18% 56%);
+
+    /* Headings, links and icons on the light sections */
+    --c-heading:     hsl(calc(var(--deep-h) + var(--head-shift)) var(--head-s) var(--head-l));
+    --c-link:        hsl(calc(var(--deep-h) + var(--link-shift)) var(--link-s) var(--link-l));
+    --c-link-hover:  hsl(calc(var(--deep-h) + var(--link-shift)) calc(var(--link-s) - 20%) calc(var(--link-l) - 15%));
+    --c-icon:        hsl(calc(var(--deep-h) + var(--link-shift) + 2) calc(var(--link-s) + 7%) calc(var(--link-l) + 7%));
+
+    /* Body copy, warmed by the paper hue rather than left a flat grey */
+    --c-body:        hsl(var(--pap-h) 9% 33%);
+    --c-body-dim:    hsl(var(--pap-h) 4% 52%);
+
+    /* ── Veils over the photographs ──
+       The hero, the quote band and the contact band are photographs with a
+       wash of palette colour laid over them. Each band's wash is scaled by its
+       own multiplier, so how much of the picture survives is a separate
+       decision from what colour the page is. 1 is the design's own weight;
+       above 1 the alphas simply saturate at fully opaque. */
+    --veil-hero: 1;
+    --veil-glow: 1;
+    --veil-quote: 1;
+    --veil-contact: 1;
+
+    /* Hero: a vertical wash, a wash from the left, and a warm glow off the
+       bottom edge that carries the sunset up into the type. */
+    --v-hero-top:      hsl(var(--deep-h) var(--deep-s) var(--deep-l) / calc(.90 * var(--veil-hero)));
+    --v-hero-mid:      hsl(var(--deep-h) var(--deep-s) var(--deep-l) / calc(.20 * var(--veil-hero)));
+    --v-hero-foot:     hsl(var(--dusk-h) var(--dusk-s) var(--dusk-l) / calc(.90 * var(--veil-hero)));
+    --v-hero-side:     hsl(var(--deep-h) calc(var(--deep-s) - 8%) calc(var(--deep-l) + 3.4%) / calc(.70 * var(--veil-hero)));
+    --v-hero-side-mid: hsl(var(--deep-h) calc(var(--deep-s) - 8%) calc(var(--deep-l) + 3.4%) / calc(.20 * var(--veil-hero)));
+    --v-glow:          hsl(calc(var(--acc-h) + var(--glow-shift)) var(--glow-s) var(--glow-l) / calc(.40 * var(--veil-glow)));
+
+    /* Quote band, over the mandala collection */
+    --v-quote-top:     hsl(var(--deep-h) calc(var(--deep-s) - 8%) calc(var(--deep-l) + 3.4%) / calc(.90 * var(--veil-quote)));
+    --v-quote-mid:     hsl(var(--dusk-h) var(--dusk-s) calc(var(--dusk-l) + 7%) / calc(.80 * var(--veil-quote)));
+    --v-quote-foot:    hsl(var(--dusk-h) var(--dusk-s) var(--dusk-l) / calc(.90 * var(--veil-quote)));
+
+    /* Contact band, over the fire pit at dusk */
+    --v-contact-top:   hsl(var(--deep-h) var(--deep-s) var(--deep-l) / calc(.80 * var(--veil-contact)));
+    --v-contact-mid:   hsl(var(--deep-h) var(--deep-s) var(--deep-l) / calc(.50 * var(--veil-contact)));
+    --v-contact-foot:  hsl(var(--deep-h) var(--deep-s) var(--deep-l) / calc(.85 * var(--veil-contact)));
+}
+
+/* Palette changes are instant by default; this makes them read as a fade so
+   you can see what actually moved between two schemes. */
+body.palette-animating,
+body.palette-animating * {
+    transition: background-color .35s ease, border-color .35s ease, color .35s ease;
 }
 
 /* ── Navigation & Dropdown styles ── */
@@ -41,28 +205,16 @@ html {
     transition: all 0.3s ease;
 }
 
-/* Mobile menu - default */
+/* Mobile menu. The panel is the dark ground, so it retints with the palette. */
 #mobile-menu {
-    background-color: var(--theme-darker) !important;
-    border-color: var(--theme-primary) !important;
+    background-color: var(--c-deep) !important;
+    border-color: var(--c-deep-2) !important;
 }
 #mobile-menu a.border-b {
-    border-color: rgba(var(--theme-primary-rgb, 107, 91, 127), 0.5) !important;
+    border-color: var(--c-acc-25) !important;
 }
 #mobile-menu a:hover {
-    color: var(--theme-light) !important;
-}
-
-/* Mobile menu - themed */
-body[class*="theme-"] #mobile-menu {
-    background-color: var(--theme-darker) !important;
-    border-color: var(--theme-primary) !important;
-}
-body[class*="theme-"] #mobile-menu a.border-b {
-    border-color: rgba(var(--theme-primary-rgb, 107, 91, 127), 0.5) !important;
-}
-body[class*="theme-"] #mobile-menu a:hover { 
-    color: var(--theme-light) !important; 
+    color: var(--c-acc) !important;
 }
 
 /* Dropdown */
@@ -90,9 +242,9 @@ body[class*="theme-"] #mobile-menu a:hover {
     padding: 1rem 1.25rem; color: #1e293b; font-weight: 500;
     transition: color 0.2s ease;
 }
-.dropdown-menu a:hover { color: #B65E3F; }
+.dropdown-menu a:hover { color: var(--c-sec); }
 .dropdown-menu .submenu-icon { color: #94a3b8; transition: color 0.2s ease; }
-.dropdown-menu a:hover .submenu-icon { color: #B65E3F; }
+.dropdown-menu a:hover .submenu-icon { color: var(--c-sec); }
 
 /* Mobile submenu icons */
 #mobile-menu .submenu-icon { color: rgba(226, 232, 240, 0.6); flex-shrink: 0; transition: color 0.2s ease; }
@@ -202,7 +354,7 @@ body.mobile-menu-open { overflow: hidden; }
     display: inline-block;
     width: 4rem;
     height: 1px;
-    background: #D9A756;
+    background: var(--c-acc);
     vertical-align: middle;
 }
 @media (max-width: 767px) {
@@ -214,7 +366,7 @@ body.mobile-menu-open { overflow: hidden; }
     line-height: 0.8;
     float: left;
     padding-right: 0.14em;
-    color: #B65E3F;
+    color: var(--c-sec);
     font-weight: 500;
 }
 .p4-welcome p + p { margin-top: 1.1rem; }
@@ -222,21 +374,21 @@ body.mobile-menu-open { overflow: hidden; }
 .p4-foryou ul li {
     position: relative;
     padding: 1.15rem 0 1.15rem 2.4rem;
-    border-bottom: 1px solid rgba(90, 58, 40, 0.18);
+    border-bottom: 1px solid var(--c-sec-18);
     line-height: 1.65;
 }
-.p4-foryou ul li:first-child { border-top: 1px solid rgba(90, 58, 40, 0.18); }
+.p4-foryou ul li:first-child { border-top: 1px solid var(--c-sec-18); }
 .p4-foryou ul li::before {
     content: '✦';
     position: absolute;
     left: 0.2rem;
     top: 1.15rem;
-    color: #B65E3F;
+    color: var(--c-sec);
     font-size: 0.9rem;
 }
 .p4-filmstrip::-webkit-scrollbar { height: 8px; }
-.p4-filmstrip::-webkit-scrollbar-track { background: rgba(90, 58, 40, 0.10); border-radius: 999px; }
-.p4-filmstrip::-webkit-scrollbar-thumb { background: rgba(182, 94, 63, 0.55); border-radius: 999px; }
+.p4-filmstrip::-webkit-scrollbar-track { background: var(--c-sec-18); border-radius: 999px; }
+.p4-filmstrip::-webkit-scrollbar-thumb { background: var(--c-sec-60); border-radius: 999px; }
 /* Fixed-background parallax; iOS ignores background-attachment: fixed, so fall back to scroll there */
 .p4-parallax {
     background-size: cover;
@@ -253,7 +405,7 @@ body.mobile-menu-open { overflow: hidden; }
 .p4-reveal > summary::-webkit-details-marker { display: none; }
 .p4-reveal[open] > summary .p4-reveal-chevron { transform: rotate(180deg); }
 .p4-reveal > summary:focus-visible {
-    outline: 2px solid #B65E3F;
+    outline: 2px solid var(--c-sec);
     outline-offset: 2px;
 }
 /* The last item's rule would otherwise double up with the panel border. */
@@ -264,6 +416,32 @@ body.mobile-menu-open { overflow: hidden; }
 .tq-lead p + p { margin-top: 1.1rem; }
 .tq-prose p + p { margin-top: 1rem; }
 .tq-prose strong { font-weight: 600; }
+
+/* ── Techniques page: the tree navigator ──
+   Colours live here rather than on the SVG attributes so the tree follows the
+   palette like everything else. Hover and focus are put on the <a> wrapper, so
+   the whole branch — bough, foliage and label — lights up as one thing. */
+
+.tq-tree-ground { stroke: var(--c-line); stroke-width: 1.5; }
+.tq-tree-root   { stroke: var(--c-deep); fill: none; stroke-width: 2.5; stroke-linecap: round; opacity: .35; }
+.tq-tree-trunk  { fill: var(--c-deep); }
+.tq-tree-bough  { stroke: var(--c-acc); fill: none; stroke-width: 5; stroke-linecap: round; }
+.tq-tree-leaf   { fill: var(--c-sec); opacity: .5; transition: opacity .35s ease, fill .35s ease; }
+.tq-tree-box    { fill: var(--c-paper-card); stroke: var(--c-acc); stroke-width: 1.5; transition: fill .3s ease, stroke .3s ease; }
+.tq-tree-num    { fill: var(--c-acc); }
+.tq-tree-name   { fill: var(--c-heading); }
+.tq-tree-meta   { fill: var(--c-body-dim); }
+.tq-tree-trunk-label { fill: var(--c-heading); }
+
+.tq-tree-branch { cursor: pointer; }
+.tq-tree-branch:hover .tq-tree-box  { fill: var(--c-paper-hi); stroke: var(--c-sec); }
+.tq-tree-branch:hover .tq-tree-leaf { opacity: 1; fill: var(--c-acc); }
+.tq-tree-branch:focus-visible { outline: 2px solid var(--c-sec); outline-offset: 4px; }
+
+/* A leaf's preview line is a <span> inside <summary>; keep it from inheriting
+   the summary's cursor-pointer weirdness on selection. */
+.tq-leaf > summary { user-select: none; }
+.tq-leaf[open] > summary { background: transparent; }
 
 /* ── Blog article typography ── */
 
@@ -287,4 +465,194 @@ body.mobile-menu-open { overflow: hidden; }
     border: none;
     margin: auto;
     border-radius: 2px;
+}
+
+/* ── Palette switcher panel ──
+   Deliberately outside the palette system: the panel is a tool for judging the
+   colours, so it stays the same neutral dark whichever scheme is on. */
+
+#palette-panel {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 9998;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    /* column-reverse so the button stays pinned to the bottom corner and the
+       panel grows upward, rather than opening off the bottom of the screen. */
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: 0.5rem;
+    color: #E8EAF0;
+}
+
+#palette-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.6rem 0.95rem;
+    background: #16181D;
+    border: 1px solid #33363F;
+    border-radius: 999px;
+    color: inherit;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+#palette-toggle:hover { background: #1D2027; border-color: #4A4E59; }
+
+/* Three dots in the live palette, so the button itself previews the scheme */
+.palette-toggle-dots {
+    width: 2.1rem;
+    height: 0.55rem;
+    border-radius: 999px;
+    background: linear-gradient(90deg,
+        var(--c-deep) 0 33%, var(--c-sec) 33% 66%, var(--c-acc) 66% 100%);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+
+#palette-body {
+    width: min(21rem, calc(100vw - 2rem));
+    max-height: min(40rem, calc(100vh - 5rem));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 1rem 1.1rem 1.1rem;
+    background: #16181D;
+    border: 1px solid #33363F;
+    border-radius: 0.75rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+#palette-body[hidden] { display: none; }
+
+.palette-title {
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #8D93A3;
+    margin-bottom: 0.6rem;
+}
+.palette-title-rule {
+    margin-top: 1.1rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid #2A2D35;
+}
+
+.palette-choices { display: flex; flex-direction: column; gap: 0.3rem; }
+.palette-choice {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    width: 100%;
+    padding: 0.45rem 0.55rem;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 0.45rem;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+.palette-choice:hover { background: #1E2128; }
+.palette-choice.is-active { background: #23272F; border-color: #4B5160; }
+
+.palette-swatch {
+    width: 1.65rem;
+    height: 1.65rem;
+    flex-shrink: 0;
+    border-radius: 0.3rem;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+.palette-choice-text { display: flex; flex-direction: column; line-height: 1.25; }
+.palette-choice-name { font-size: 0.82rem; font-weight: 500; }
+.palette-choice-note { font-size: 0.68rem; color: #8D93A3; }
+
+.palette-role + .palette-role {
+    margin-top: 0.7rem;
+    padding-top: 0.7rem;
+    border-top: 1px solid #23262D;
+}
+.palette-role-head { display: flex; align-items: center; gap: 0.5rem; }
+.palette-chip {
+    width: 0.95rem;
+    height: 0.95rem;
+    border-radius: 0.2rem;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+}
+.palette-role-name { font-size: 0.8rem; font-weight: 500; }
+.palette-hex {
+    margin-left: auto;
+    font-size: 0.66rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: #8D93A3;
+}
+.palette-role-hint {
+    font-size: 0.66rem;
+    color: #7B8192;
+    margin: 0.15rem 0 0.35rem 1.45rem;
+}
+
+.palette-channel {
+    display: grid;
+    grid-template-columns: 0.9rem 1fr 2.4rem;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.68rem;
+}
+.palette-channel-label { color: #8D93A3; }
+.palette-channel output {
+    text-align: right;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: #B9BFCC;
+}
+.palette-channel input[type="range"] {
+    width: 100%;
+    height: 0.9rem;
+    accent-color: #7C8496;
+    cursor: pointer;
+}
+
+.palette-veil {
+    display: grid;
+    grid-template-columns: 1fr 5.6rem 2.6rem;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0;
+}
+.palette-veil + .palette-veil { border-top: 1px solid #23262D; }
+.palette-veil-text { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+.palette-veil-name { font-size: 0.78rem; font-weight: 500; }
+.palette-veil-hint { font-size: 0.64rem; color: #7B8192; }
+.palette-veil input[type="range"] { width: 100%; height: 0.9rem; accent-color: #7C8496; cursor: pointer; }
+.palette-veil output {
+    text-align: right;
+    font-size: 0.68rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: #B9BFCC;
+}
+
+.palette-actions {
+    display: flex;
+    gap: 0.4rem;
+    margin-top: 0.9rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid #2A2D35;
+}
+.palette-actions button {
+    flex: 1;
+    padding: 0.45rem 0.5rem;
+    background: #23272F;
+    border: 1px solid #3A3F49;
+    border-radius: 0.35rem;
+    color: #D3D8E2;
+    font-size: 0.72rem;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+.palette-actions button:hover { background: #2C313A; }
+
+@media print {
+    #palette-panel { display: none; }
 }

@@ -117,8 +117,8 @@
         .loader-spinner {
             width: 50px;
             height: 50px;
-            border: 4px solid rgba(201, 164, 92, 0.25);
-            border-top-color: #D9A756;
+            border: 4px solid var(--c-acc-25, rgba(201, 164, 92, 0.25));
+            border-top-color: var(--c-acc, #D9A756);
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
@@ -136,6 +136,22 @@
         }
     </style>
     
+    <!-- Restore the saved colour palette before the first paint. Without this
+         the page would render in the default blue for a frame and then jump. -->
+    <script>
+    (function () {
+        try {
+            var id = localStorage.getItem('palette-preference');
+            if (!id) return;
+            document.documentElement.setAttribute('data-palette', id);
+            var tweaks = (JSON.parse(localStorage.getItem('palette-tweaks-v2')) || {})[id] || {};
+            for (var name in tweaks) {
+                document.documentElement.style.setProperty(name, tweaks[name]);
+            }
+        } catch (e) { /* private browsing, or nothing saved yet */ }
+    })();
+    </script>
+
     <!-- Stylesheets (load first for faster rendering) -->
     <link rel="stylesheet" href="{{ '/css/main.css' | url }}">
         <link rel="icon" type="image/x-icon" href="{{ '/assets/images/Graphics/favicon.ico' | url }}">
@@ -152,7 +168,7 @@
     <!-- Lucide Icons (defer loading) -->
     <script src="https://unpkg.com/lucide@0.344.0" defer></script>
 </head>
-<body class="font-sans text-slate-800 bg-slate-50 antialiased">
+<body class="font-sans text-slate-800 bg-slate-50 antialiased"{% if page.url == "/" %} data-palette-switcher{% endif %}>
 
     <!-- Page Loader -->
     <div id="page-loader">

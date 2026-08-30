@@ -3,6 +3,7 @@
 import { initIcons } from './modules/icons.js';
 import { initMobileMenu, initNavbarScroll } from './modules/navigation.js';
 import { initFormCache } from './modules/form-cache.js';
+import { initPaletteSwitcher } from './modules/palette-switcher.js';
 
 /**
  * Initialize core application functionality
@@ -17,6 +18,9 @@ function init() {
 
     // Restore anything typed into a form before the page was closed
     initFormCache();
+
+    // Colour-scheme switcher (home page only)
+    initPaletteSwitcher();
 }
 
 // Run initialization when DOM is ready

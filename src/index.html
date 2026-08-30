@@ -18,7 +18,7 @@ ogType: website
 
 
 <!-- ═══════════ HERO — video threshold ═══════════ -->
-<header class="relative min-h-[92vh] flex items-end overflow-hidden bg-[#0F2540]">
+<header class="relative min-h-[92vh] flex items-end overflow-hidden bg-[color:var(--c-deep)]">
     <div class="absolute inset-0 z-0">
         <!-- Poster: first frame of the video, shown while it loads (and kept
              when the video is skipped on slow/data-saver connections) -->
@@ -54,23 +54,23 @@ ogType: website
                 '{{ "/assets/videos/" | url }}' + file;
         })();
         </script>
-        <div class="absolute inset-0 z-20 bg-gradient-to-b from-[#14273F]/90 via-[#14273F]/20 via-45% to-[#2A2438]/90"></div>
-        <div class="absolute inset-0 z-20 bg-gradient-to-r from-[#1A2B44]/70 via-[#1A2B44]/20 to-transparent"></div>
-        <div class="absolute inset-0 z-20 bg-gradient-to-t from-[#D9822F]/40 via-transparent to-transparent"></div>
+        <div class="absolute inset-0 z-20 bg-gradient-to-b from-[var(--v-hero-top)] via-[var(--v-hero-mid)] via-45% to-[var(--v-hero-foot)]"></div>
+        <div class="absolute inset-0 z-20 bg-gradient-to-r from-[var(--v-hero-side)] via-[var(--v-hero-side-mid)] to-transparent"></div>
+        <div class="absolute inset-0 z-20 bg-gradient-to-t from-[var(--v-glow)] via-transparent to-transparent"></div>
     </div>
 
     <div class="relative z-10 container mx-auto px-6 pb-10 pt-24 md:pb-16 md:pt-40">
         <div class="max-w-3xl animate-fade-in-up">
-            <p class="p4-kicker text-[#D9A756] mb-7 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
+            <p class="p4-kicker text-[color:var(--c-acc)] mb-7 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
                 <span class="p4-hairline"></span>
                 A four-year path<br class="md:hidden"> 2027&ndash;2030
                 <span class="p4-hairline md:hidden"></span>
             </p>
-            <h1 class="p4-display text-5xl md:text-7xl font-medium text-[#FDFBF5] leading-[1.05] mb-7 drop-shadow-md">
+            <h1 class="p4-display text-5xl md:text-7xl font-medium text-[color:var(--c-paper-hi)] leading-[1.05] mb-7 drop-shadow-md">
                 Educating therapists for a<br class="hidden md:block">
-                <em class="text-[#D9A756]">revolution of consciousness</em>
+                <em class="text-[color:var(--c-acc)]">revolution of consciousness</em>
             </h1>
-            <p class="p4-display italic text-xl md:text-3xl text-[#F0E6D6] max-w-2xl leading-relaxed mb-10 drop-shadow">
+            <p class="p4-display italic text-xl md:text-3xl text-[color:var(--c-paper-2)] max-w-2xl leading-relaxed mb-10 drop-shadow">
                 A training in Transpersonal Psychotherapy, Counselling &amp; Holotropic Breathwork&reg; &mdash; shared online lectures for one international East&ndash;West community, with in-person intensives held in Europe.
             </p>
             {# The sample lesson is no longer a page anyone can click through to
@@ -79,10 +79,10 @@ ogType: website
                itself, not at /apply/, which lives in the Resources menu and
                the contact section below. #}
             <div class="flex flex-col sm:flex-row gap-4">
-                <a href="#contact" class="bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-10 py-4 font-medium text-lg tracking-wide text-center transition-all shadow-lg hover:shadow-xl">
+                <a href="#contact" class="bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-deep)] px-10 py-4 font-medium text-lg tracking-wide text-center transition-all shadow-lg hover:shadow-xl">
                     Request a Demo
                 </a>
-                <a href="{{ '/training-overview/' | url }}" class="border border-[#FDFBF5]/60 hover:border-[#D9A756] bg-[#0F2540]/30 text-[#FDFBF5] hover:text-[#D9A756] px-10 py-4 font-medium text-lg tracking-wide text-center transition-all">
+                <a href="{{ '/training-overview/' | url }}" class="border border-[color:var(--c-paper-hi-60)] hover:border-[color:var(--c-acc)] bg-[color:var(--c-deep-30)] text-[color:var(--c-paper-hi)] hover:text-[color:var(--c-acc)] px-10 py-4 font-medium text-lg tracking-wide text-center transition-all">
                     Explore the Training Overview
                 </a>
             </div>
@@ -91,24 +91,24 @@ ogType: website
 </header>
 
 <!-- Fact strip -->
-<div class="bg-[#FAF3E7]">
+<div class="bg-[color:var(--c-paper)]">
     <div class="container mx-auto px-6">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 py-10 border-b border-[#E7D6BE]">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 py-10 border-b border-[color:var(--c-line)]">
             <div class="flex items-center gap-3">
-                <i data-lucide="award" class="w-8 h-8 text-science-blue-600 shrink-0"></i>
-                <p class="text-sm text-neutral-warm-700 leading-snug"><span class="block font-semibold text-indigo-deep-900">EUROTAS accredited</span>recognised qualification</p>
+                <i data-lucide="award" class="w-8 h-8 text-[color:var(--c-icon)] shrink-0"></i>
+                <p class="text-sm text-[color:var(--c-body)] leading-snug"><span class="block font-semibold text-[color:var(--c-heading)]">EUROTAS accredited</span>recognised qualification</p>
             </div>
             <div class="flex items-center gap-3">
-                <i data-lucide="calendar-range" class="w-8 h-8 text-science-blue-600 shrink-0"></i>
-                <p class="text-sm text-neutral-warm-700 leading-snug"><span class="block font-semibold text-indigo-deep-900">Four years</span>1st year: self development</p>
+                <i data-lucide="calendar-range" class="w-8 h-8 text-[color:var(--c-icon)] shrink-0"></i>
+                <p class="text-sm text-[color:var(--c-body)] leading-snug"><span class="block font-semibold text-[color:var(--c-heading)]">Four years</span>1st year: self development</p>
             </div>
             <div class="flex items-center gap-3">
-                <i data-lucide="laptop" class="w-8 h-8 text-science-blue-600 shrink-0"></i>
-                <p class="text-sm text-neutral-warm-700 leading-snug"><span class="block font-semibold text-indigo-deep-900">Online lectures</span>study from anywhere</p>
+                <i data-lucide="laptop" class="w-8 h-8 text-[color:var(--c-icon)] shrink-0"></i>
+                <p class="text-sm text-[color:var(--c-body)] leading-snug"><span class="block font-semibold text-[color:var(--c-heading)]">Online lectures</span>study from anywhere</p>
             </div>
             <div class="flex items-center gap-3">
-                <i data-lucide="tent-tree" class="w-8 h-8 text-science-blue-600 shrink-0"></i>
-                <p class="text-sm text-neutral-warm-700 leading-snug"><span class="block font-semibold text-indigo-deep-900">In-person intensives</span>Western &amp; Eastern tracks</p>
+                <i data-lucide="tent-tree" class="w-8 h-8 text-[color:var(--c-icon)] shrink-0"></i>
+                <p class="text-sm text-[color:var(--c-body)] leading-snug"><span class="block font-semibold text-[color:var(--c-heading)]">In-person intensives</span>Western &amp; Eastern tracks</p>
             </div>
         </div>
     </div>
@@ -119,14 +119,14 @@ ogType: website
      lowest to highest commitment: request a demo lesson by email, read about
      the programme, join a live call, or try a free supervised session as a
      client model. -->
-<section class="bg-[#FAF3E7] pt-16 md:pt-20">
+<section class="bg-[color:var(--c-paper)] pt-16 md:pt-20">
     <div class="container mx-auto px-6">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-12">
-                <p class="p4-kicker text-[#B65E3F] mb-6 flex items-center justify-center gap-4">
+                <p class="p4-kicker text-[color:var(--c-sec)] mb-6 flex items-center justify-center gap-4">
                     <span class="p4-hairline"></span> Start here <span class="p4-hairline"></span>
                 </p>
-                <p class="text-lg text-neutral-warm-700 leading-relaxed max-w-2xl mx-auto">
+                <p class="text-lg text-[color:var(--c-body)] leading-relaxed max-w-2xl mx-auto">
                     Before any of the practical questions, it helps to know what the teaching actually
                     feels like &mdash; pick whichever entry point suits you.
                 </p>
@@ -134,53 +134,53 @@ ogType: website
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <a href="#contact"
-                   class="group bg-[#FEF9EF] border border-[#D9A756]/60 hover:border-[#B65E3F] p-8 transition-colors flex flex-col">
-                    <i data-lucide="play-circle" class="w-9 h-9 text-[#B65E3F] mb-5"></i>
-                    <h3 class="font-serif text-xl font-semibold text-indigo-deep-900 mb-2">Request a Demo</h3>
-                    <p class="text-neutral-warm-700 text-sm leading-relaxed flex-grow">
+                   class="group bg-[color:var(--c-paper-card)] border border-[color:var(--c-acc-60)] hover:border-[color:var(--c-sec)] p-8 transition-colors flex flex-col">
+                    <i data-lucide="play-circle" class="w-9 h-9 text-[color:var(--c-sec)] mb-5"></i>
+                    <h3 class="font-serif text-xl font-semibold text-[color:var(--c-heading)] mb-2">Request a Demo</h3>
+                    <p class="text-[color:var(--c-body)] text-sm leading-relaxed flex-grow">
                         A complete lecture from the training &mdash; not a trailer &mdash; sent straight to
                         your inbox, along with the brochure. The same form takes your questions.
                     </p>
-                    <span class="mt-5 inline-flex items-center gap-2 text-science-blue-700 group-hover:text-science-blue-800 font-medium text-sm">
+                    <span class="mt-5 inline-flex items-center gap-2 text-[color:var(--c-link)] group-hover:text-[color:var(--c-link-hover)] font-medium text-sm">
                         Get in touch <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </span>
                 </a>
 
                 <a href="{{ '/training-overview/' | url }}"
-                   class="group bg-[#FEF9EF] border border-[#D9A756]/60 hover:border-[#B65E3F] p-8 transition-colors flex flex-col">
-                    <i data-lucide="compass" class="w-9 h-9 text-[#B65E3F] mb-5"></i>
-                    <h3 class="font-serif text-xl font-semibold text-indigo-deep-900 mb-2">Explore the Training Overview</h3>
-                    <p class="text-neutral-warm-700 text-sm leading-relaxed flex-grow">
+                   class="group bg-[color:var(--c-paper-card)] border border-[color:var(--c-acc-60)] hover:border-[color:var(--c-sec)] p-8 transition-colors flex flex-col">
+                    <i data-lucide="compass" class="w-9 h-9 text-[color:var(--c-sec)] mb-5"></i>
+                    <h3 class="font-serif text-xl font-semibold text-[color:var(--c-heading)] mb-2">Explore the Training Overview</h3>
+                    <p class="text-[color:var(--c-body)] text-sm leading-relaxed flex-grow">
                         Philosophy, structure, eligibility and fees &mdash; the whole shape of the programme
                         in one page.
                     </p>
-                    <span class="mt-5 inline-flex items-center gap-2 text-science-blue-700 group-hover:text-science-blue-800 font-medium text-sm">
+                    <span class="mt-5 inline-flex items-center gap-2 text-[color:var(--c-link)] group-hover:text-[color:var(--c-link-hover)] font-medium text-sm">
                         Explore <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </span>
                 </a>
 
                 <a href="{{ '/monthly-call/' | url }}"
-                   class="group bg-[#FEF9EF] border border-[#D9A756]/60 hover:border-[#B65E3F] p-8 transition-colors flex flex-col">
-                    <i data-lucide="video" class="w-9 h-9 text-[#B65E3F] mb-5"></i>
-                    <h3 class="font-serif text-xl font-semibold text-indigo-deep-900 mb-2">Join Our Monthly Zoom Call</h3>
-                    <p class="text-neutral-warm-700 text-sm leading-relaxed flex-grow">
+                   class="group bg-[color:var(--c-paper-card)] border border-[color:var(--c-acc-60)] hover:border-[color:var(--c-sec)] p-8 transition-colors flex flex-col">
+                    <i data-lucide="video" class="w-9 h-9 text-[color:var(--c-sec)] mb-5"></i>
+                    <h3 class="font-serif text-xl font-semibold text-[color:var(--c-heading)] mb-2">Join Our Monthly Zoom Call</h3>
+                    <p class="text-[color:var(--c-body)] text-sm leading-relaxed flex-grow">
                         Meet a member of the school live, ask questions, and hear from us directly &mdash; no
                         obligation.
                     </p>
-                    <span class="mt-5 inline-flex items-center gap-2 text-science-blue-700 group-hover:text-science-blue-800 font-medium text-sm">
+                    <span class="mt-5 inline-flex items-center gap-2 text-[color:var(--c-link)] group-hover:text-[color:var(--c-link-hover)] font-medium text-sm">
                         See the next date <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </span>
                 </a>
 
                 <a href="{{ '/become-a-client-model/' | url }}"
-                   class="group bg-[#FEF9EF] border border-[#D9A756]/60 hover:border-[#B65E3F] p-8 transition-colors flex flex-col">
-                    <i data-lucide="user-check" class="w-9 h-9 text-[#B65E3F] mb-5"></i>
-                    <h3 class="font-serif text-xl font-semibold text-indigo-deep-900 mb-2">Become a Client Model</h3>
-                    <p class="text-neutral-warm-700 text-sm leading-relaxed flex-grow">
+                   class="group bg-[color:var(--c-paper-card)] border border-[color:var(--c-acc-60)] hover:border-[color:var(--c-sec)] p-8 transition-colors flex flex-col">
+                    <i data-lucide="user-check" class="w-9 h-9 text-[color:var(--c-sec)] mb-5"></i>
+                    <h3 class="font-serif text-xl font-semibold text-[color:var(--c-heading)] mb-2">Become a Client Model</h3>
+                    <p class="text-[color:var(--c-body)] text-sm leading-relaxed flex-grow">
                         Free, supervised counselling and psychotherapy sessions with our third-level students
                         &mdash; no obligation to enrol.
                     </p>
-                    <span class="mt-5 inline-flex items-center gap-2 text-science-blue-700 group-hover:text-science-blue-800 font-medium text-sm">
+                    <span class="mt-5 inline-flex items-center gap-2 text-[color:var(--c-link)] group-hover:text-[color:var(--c-link-hover)] font-medium text-sm">
                         Explore <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </span>
                 </a>
@@ -190,27 +190,27 @@ ogType: website
 </section>
 
 <!-- ═══════════ WELCOME — editorial split ═══════════ -->
-<section id="welcome" class="bg-[#FAF3E7] py-20 md:py-28">
+<section id="welcome" class="bg-[color:var(--c-paper)] py-20 md:py-28">
     <div class="container mx-auto px-6">
         <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
             <div class="lg:col-span-6">
-                <p class="p4-kicker text-[#B65E3F] mb-6 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
+                <p class="p4-kicker text-[color:var(--c-sec)] mb-6 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
                     <span class="p4-hairline"></span> Welcome to our school <span class="p4-hairline md:hidden"></span>
                 </p>
-                <h2 class="p4-display text-4xl md:text-6xl font-medium text-indigo-deep-900 leading-[1.08] mb-8">
+                <h2 class="p4-display text-4xl md:text-6xl font-medium text-[color:var(--c-heading)] leading-[1.08] mb-8">
                     A profession of the mind, learned with the whole&nbsp;heart
                 </h2>
-                <div class="p4-welcome p4-dropcap text-lg text-neutral-warm-700 leading-relaxed">
+                <div class="p4-welcome p4-dropcap text-lg text-[color:var(--c-body)] leading-relaxed">
                     {{ welcomeIntro | safe }}
                 </div>
-                <p class="mt-8 text-indigo-deep-900 font-medium">
-                    <a href="{{ '/lectures-schedule/' | url }}" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4 decoration-2">Online lectures</a>
+                <p class="mt-8 text-[color:var(--c-heading)] font-medium">
+                    <a href="{{ '/lectures-schedule/' | url }}" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-4 decoration-2">Online lectures</a>
                     and
-                    <a href="{{ '/schedule/' | url }}" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4 decoration-2">intensive seminars</a>
+                    <a href="{{ '/schedule/' | url }}" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-4 decoration-2">intensive seminars</a>
                     in Europe &middot; 2027&ndash;2030
                 </p>
-                <p class="mt-4 text-neutral-warm-600 text-sm leading-relaxed">
-                    Not ready for the full path? You can also join <strong class="text-indigo-deep-900">Level 1 on its own</strong>, as a stand alone year of self-development, with no obligation to continue.
+                <p class="mt-4 text-[color:var(--c-body-dim)] text-sm leading-relaxed">
+                    Not ready for the full path? You can also join <strong class="text-[color:var(--c-heading)]">Level 1 on its own</strong>, as a stand alone year of self-development, with no obligation to continue.
                 </p>
             </div>
             <div class="lg:col-span-6 relative pb-16 pr-4 md:pr-10">
@@ -227,11 +227,11 @@ ogType: website
 
 <!-- ═══════════ QUOTE — mandala band with parallax ═══════════ -->
 <section class="relative py-28 md:py-40 overflow-hidden p4-parallax" style="background-image: url('{{ '/assets/images/Symbolic/symbolic-mandala-collection.jpg' | url }}'); background-image: image-set(url('{{ '/assets/images/Symbolic/symbolic-mandala-collection.webp' | url }}') type('image/webp'), url('{{ '/assets/images/Symbolic/symbolic-mandala-collection.jpg' | url }}') type('image/jpeg'));">
-    <div class="absolute inset-0 bg-gradient-to-b from-[#12294A]/90 via-[#43304E]/80 to-[#241E3C]/90"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-[var(--v-quote-top)] via-[var(--v-quote-mid)] to-[var(--v-quote-foot)]"></div>
     <div class="relative container mx-auto px-6">
         <div class="max-w-3xl mx-auto text-center">
-            <p class="p4-kicker text-[#D9A756] mb-10">{{ quote.data.label }}</p>
-            <p class="p4-display text-3xl md:text-5xl italic font-medium text-[#FDFBF5] leading-[1.25]">
+            <p class="p4-kicker text-[color:var(--c-acc)] mb-10">{{ quote.data.label }}</p>
+            <p class="p4-display text-3xl md:text-5xl italic font-medium text-[color:var(--c-paper-hi)] leading-[1.25]">
                 {{ quote.data.quote }}
             </p>
         </div>
@@ -241,21 +241,21 @@ ogType: website
 <!-- ═══════════ WHAT YOU WILL FIND HERE — signpost to Techniques ═══════════ -->
 <!-- A single link rather than three cards: the Techniques page covers this
      ground at length. -->
-<section class="bg-[#F3E7D4] py-20 md:py-28">
+<section class="bg-[color:var(--c-paper-2)] py-20 md:py-28">
     <div class="container mx-auto px-6">
         <div class="max-w-2xl mx-auto text-center">
-            <p class="p4-kicker text-[#B65E3F] mb-6 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-sec)] mb-6 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span> What you will find here <span class="p4-hairline"></span>
             </p>
-            <h2 class="p4-display text-4xl md:text-6xl font-medium text-indigo-deep-900 leading-tight mb-6">
+            <h2 class="p4-display text-4xl md:text-6xl font-medium text-[color:var(--c-heading)] leading-tight mb-6">
                 Techniques &amp; frameworks
             </h2>
-            <p class="text-lg text-neutral-warm-700 leading-relaxed mb-10">
+            <p class="text-lg text-[color:var(--c-body)] leading-relaxed mb-10">
                 Holotropic Breathwork and experiential group practice, one-to-one counselling methods,
                 and the maps of the psyche that give them meaning.
             </p>
             <a href="{{ '/techniques/' | url }}"
-               class="inline-block border border-[#B65E3F]/60 hover:border-[#B65E3F] hover:bg-[#B65E3F] text-[#B65E3F] hover:text-[#FEF9EF] px-10 py-4 font-medium text-lg tracking-wide transition-colors">
+               class="inline-block border border-[color:var(--c-sec-60)] hover:border-[color:var(--c-sec)] hover:bg-[color:var(--c-sec)] text-[color:var(--c-sec)] hover:text-[color:var(--c-paper-card)] px-10 py-4 font-medium text-lg tracking-wide transition-colors">
                 See how we teach
             </a>
         </div>
@@ -263,11 +263,11 @@ ogType: website
 </section>
 
 <!-- ═══════════ MOMENTS — film strip ═══════════ -->
-<section class="bg-[#FAF3E7] pb-20 md:pb-28">
+<section class="bg-[color:var(--c-paper)] pb-20 md:pb-28">
     <div class="container mx-auto px-6 mb-10">
-        <div class="max-w-6xl mx-auto flex items-center gap-6 border-t border-[#E7D6BE] pt-10">
-            <h2 class="p4-display text-3xl md:text-4xl font-medium text-indigo-deep-900 whitespace-nowrap">Moments from our seminars</h2>
-            <span class="hidden md:block h-px flex-1 bg-[#D9A756]/65" aria-hidden="true"></span>
+        <div class="max-w-6xl mx-auto flex items-center gap-6 border-t border-[color:var(--c-line)] pt-10">
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] whitespace-nowrap">Moments from our seminars</h2>
+            <span class="hidden md:block h-px flex-1 bg-[color:var(--c-acc-65)]" aria-hidden="true"></span>
         </div>
     </div>
     <div class="p4-filmstrip overflow-x-auto snap-x snap-mandatory pb-4">
@@ -352,23 +352,23 @@ ogType: website
 </section>
 
 <!-- ═══════════ CONTACT ═══════════ -->
-<section id="contact" class="relative py-24 md:py-32 overflow-hidden p4-parallax border-t border-[#D9A756]/40" style="background-image: url('{{ '/assets/images/Venue/venue-todtmoos-firepit.jpg' | url }}'); background-image: image-set(url('{{ '/assets/images/Venue/venue-todtmoos-firepit.webp' | url }}') type('image/webp'), url('{{ '/assets/images/Venue/venue-todtmoos-firepit.jpg' | url }}') type('image/jpeg'));">
-    <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/80 via-[#0F2540]/50 to-[#0F2540]/85"></div>
+<section id="contact" class="relative py-24 md:py-32 overflow-hidden p4-parallax border-t border-[color:var(--c-acc-40)]" style="background-image: url('{{ '/assets/images/Venue/venue-todtmoos-firepit.jpg' | url }}'); background-image: image-set(url('{{ '/assets/images/Venue/venue-todtmoos-firepit.webp' | url }}') type('image/webp'), url('{{ '/assets/images/Venue/venue-todtmoos-firepit.jpg' | url }}') type('image/jpeg'));">
+    <div class="absolute inset-0 bg-gradient-to-b from-[var(--v-contact-top)] via-[var(--v-contact-mid)] to-[var(--v-contact-foot)]"></div>
     <div class="relative container mx-auto px-6">
         <div class="max-w-2xl mx-auto text-center">
-            <p class="p4-kicker text-[#D9A756] mb-8 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-acc)] mb-8 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 Get in touch
                 <span class="p4-hairline"></span>
             </p>
-            <h2 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] mb-6 drop-shadow-md">Request your demo lesson<br>&mdash; or just ask us.</h2>
-            <p class="text-lg text-[#D5DEE9] mb-14 drop-shadow">
+            <h2 class="p4-display text-4xl md:text-6xl font-medium text-[color:var(--c-paper-hi)] mb-6 drop-shadow-md">Request your demo lesson<br>&mdash; or just ask us.</h2>
+            <p class="text-lg text-[color:var(--c-on-dark-2)] mb-14 drop-shadow">
                 One form, two ways to use it. Leave your name and email and we will send you the demo lesson &mdash; a complete lecture from the training &mdash; and the brochure straight away.
                 Add a question or a request and a real person will read it and write back: about the training, the intensives, the right entry point for you, or a call at a time that suits you.
-                Ready to apply? <a href="{{ '/apply/' | url }}" class="text-[#D9A756] underline underline-offset-4 decoration-[#D9A756]/40 hover:text-[#EBC98A]">See how to apply</a>.
+                Ready to apply? <a href="{{ '/apply/' | url }}" class="text-[color:var(--c-acc)] underline underline-offset-4 decoration-[color:var(--c-acc-40)] hover:text-[color:var(--c-acc-light)]">See how to apply</a>.
             </p>
 
-            <form id="contactForm" action="mailto:west-office@transpersonal-training.com,east-office@transpersonal-training.com" method="post" enctype="text/plain" data-persist="contact" class="text-left border border-[#D9A756]/40 bg-[#0B1B30]/85 backdrop-blur-md p-6 md:p-10 space-y-6 shadow-2xl">
+            <form id="contactForm" action="mailto:west-office@transpersonal-training.com,east-office@transpersonal-training.com" method="post" enctype="text/plain" data-persist="contact" class="text-left border border-[color:var(--c-acc-40)] bg-[color:var(--c-deepest-85)] backdrop-blur-md p-6 md:p-10 space-y-6 shadow-2xl">
                 <!-- Honeypot: hidden from people, catnip for bots. Anything typed
                      here means the submission is discarded server-side. -->
                 <div class="hidden" aria-hidden="true">
@@ -376,15 +376,15 @@ ogType: website
                     <input type="text" id="contact-website" name="website" tabindex="-1" autocomplete="off">
                 </div>
                 <div>
-                    <label for="contact-name" class="block p4-kicker !text-xs text-[#D9A756] mb-3">Name</label>
+                    <label for="contact-name" class="block p4-kicker !text-xs text-[color:var(--c-acc)] mb-3">Name</label>
                     <input type="text" id="contact-name" name="name" required
-                           class="w-full bg-transparent border-0 border-b border-[#D9A756]/40 text-[#EDF2F8] px-1 py-3 focus:outline-none focus:border-[#D9A756] transition-colors placeholder:text-[#7C8DA3]"
+                           class="w-full bg-transparent border-0 border-b border-[color:var(--c-acc-40)] text-[color:var(--c-on-dark-1)] px-1 py-3 focus:outline-none focus:border-[color:var(--c-acc)] transition-colors placeholder:text-[color:var(--c-on-dark-5)]"
                            placeholder="Your full name">
                 </div>
                 <div>
-                    <label for="contact-email" class="block p4-kicker !text-xs text-[#D9A756] mb-3">Email</label>
+                    <label for="contact-email" class="block p4-kicker !text-xs text-[color:var(--c-acc)] mb-3">Email</label>
                     <input type="email" id="contact-email" name="email" required
-                           class="w-full bg-transparent border-0 border-b border-[#D9A756]/40 text-[#EDF2F8] px-1 py-3 focus:outline-none focus:border-[#D9A756] transition-colors placeholder:text-[#7C8DA3]"
+                           class="w-full bg-transparent border-0 border-b border-[color:var(--c-acc-40)] text-[color:var(--c-on-dark-1)] px-1 py-3 focus:outline-none focus:border-[color:var(--c-acc)] transition-colors placeholder:text-[color:var(--c-on-dark-5)]"
                            placeholder="you@example.com">
                 </div>
                 {# Optional on purpose. Someone who only wants the brochure and
@@ -392,62 +392,62 @@ ogType: website
                    reply sends both either way, and adds "we'll get back to you"
                    only when there is something to reply to. #}
                 <div>
-                    <label for="contact-message" class="block p4-kicker !text-xs text-[#D9A756] mb-3">Your question or request <span class="normal-case tracking-normal text-[#7C8DA3]">(optional)</span></label>
+                    <label for="contact-message" class="block p4-kicker !text-xs text-[color:var(--c-acc)] mb-3">Your question or request <span class="normal-case tracking-normal text-[color:var(--c-on-dark-5)]">(optional)</span></label>
                     <textarea id="contact-message" name="message" rows="4"
-                              class="w-full bg-transparent border-0 border-b border-[#D9A756]/40 text-[#EDF2F8] px-1 py-3 focus:outline-none focus:border-[#D9A756] transition-colors placeholder:text-[#7C8DA3]"
+                              class="w-full bg-transparent border-0 border-b border-[color:var(--c-acc-40)] text-[color:var(--c-on-dark-1)] px-1 py-3 focus:outline-none focus:border-[color:var(--c-acc)] transition-colors placeholder:text-[color:var(--c-on-dark-5)]"
                               placeholder="Ask us anything, or tell us what you are looking for &mdash; or leave this blank and we will simply send the demo lesson and the brochure."></textarea>
                 </div>
                 <div>
-                    <label for="contact-track" class="block p4-kicker !text-xs text-[#D9A756] mb-3">Which office? <span class="normal-case tracking-normal text-[#7C8DA3]">(optional)</span></label>
+                    <label for="contact-track" class="block p4-kicker !text-xs text-[color:var(--c-acc)] mb-3">Which office? <span class="normal-case tracking-normal text-[color:var(--c-on-dark-5)]">(optional)</span></label>
                     <select id="contact-track" name="track"
-                            class="w-full bg-transparent border-0 border-b border-[#D9A756]/40 text-[#EDF2F8] px-1 py-3 focus:outline-none focus:border-[#D9A756] transition-colors">
-                        <option value="" class="text-[#0F2540]">Not sure — send to both</option>
-                        <option value="Western" class="text-[#0F2540]">Western track</option>
-                        <option value="Eastern" class="text-[#0F2540]">Eastern track</option>
+                            class="w-full bg-transparent border-0 border-b border-[color:var(--c-acc-40)] text-[color:var(--c-on-dark-1)] px-1 py-3 focus:outline-none focus:border-[color:var(--c-acc)] transition-colors">
+                        <option value="" class="text-[color:var(--c-deep)]">Not sure — send to both</option>
+                        <option value="Western" class="text-[color:var(--c-deep)]">Western track</option>
+                        <option value="Eastern" class="text-[color:var(--c-deep)]">Eastern track</option>
                     </select>
                 </div>
                 <div class="flex items-start gap-3">
                     <input type="checkbox" id="contact-newsletter" name="newsletter" value="yes"
-                           class="mt-1 w-4 h-4 shrink-0 accent-[#D9A756] bg-transparent border border-[#D9A756]/40 focus:outline-none focus:ring-2 focus:ring-[#D9A756]">
-                    <label for="contact-newsletter" class="text-sm text-[#D5DEE9] leading-relaxed">
+                           class="mt-1 w-4 h-4 shrink-0 accent-[var(--c-acc)] bg-transparent border border-[color:var(--c-acc-40)] focus:outline-none focus:ring-2 focus:ring-[color:var(--c-acc)]">
+                    <label for="contact-newsletter" class="text-sm text-[color:var(--c-on-dark-2)] leading-relaxed">
                         Also sign me up to the newsletter, for occasional updates about the training and the school.
-                        <span class="block text-xs text-[#9DAEC2] mt-1">Optional &mdash; left unticked by default, and you can unsubscribe at any time.</span>
+                        <span class="block text-xs text-[color:var(--c-on-dark-4)] mt-1">Optional &mdash; left unticked by default, and you can unsubscribe at any time.</span>
                     </label>
                 </div>
                 <button type="submit" id="contactBtn"
-                        class="w-full bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed">
+                        class="w-full bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-deep)] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed">
                     <span id="contactBtnLabel">Send my request</span>
                 </button>
                 <div id="contactStatus" class="text-sm hidden"></div>
-                <p class="text-xs text-[#9DAEC2] leading-relaxed">
+                <p class="text-xs text-[color:var(--c-on-dark-4)] leading-relaxed">
                     By submitting this form you consent to Transpersonal Training processing the personal data you provide
                     in order to send you the demo lesson and brochure and to respond to your enquiry, in accordance with
                     the GDPR (Regulation (EU) 2016/679). We will only add you to our mailing list if you tick the box
                     above, and you can unsubscribe at any time. See our
-                    <button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="underline underline-offset-4 hover:text-[#D9A756] bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy Policy</button>
+                    <button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="underline underline-offset-4 hover:text-[color:var(--c-acc)] bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy Policy</button>
                     for details on your rights.
                 </p>
             </form>
 
-            <p class="mt-10 text-[#D5DEE9]">Or email us directly:</p>
-            <div class="mt-3 flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-2 text-sm text-[#B9C6D8]">
-                <a href="mailto:west-office@transpersonal-training.com" class="flex flex-col items-center hover:text-[#D9A756] transition-colors">
+            <p class="mt-10 text-[color:var(--c-on-dark-2)]">Or email us directly:</p>
+            <div class="mt-3 flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-2 text-sm text-[color:var(--c-on-dark-3)]">
+                <a href="mailto:west-office@transpersonal-training.com" class="flex flex-col items-center hover:text-[color:var(--c-acc)] transition-colors">
                     <span class="inline-flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4 shrink-0"></i>West office</span>
                     west-office@transpersonal-training.com
                 </a>
-                <a href="mailto:east-office@transpersonal-training.com" class="flex flex-col items-center hover:text-[#D9A756] transition-colors">
+                <a href="mailto:east-office@transpersonal-training.com" class="flex flex-col items-center hover:text-[color:var(--c-acc)] transition-colors">
                     <span class="inline-flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4 shrink-0"></i>East office</span>
                     east-office@transpersonal-training.com
                 </a>
             </div>
-            <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-2 text-sm text-[#B9C6D8]">
-                <a href="tel:+4917638034517" class="inline-flex items-center gap-2 hover:text-[#D9A756] transition-colors">
+            <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-2 text-sm text-[color:var(--c-on-dark-3)]">
+                <a href="tel:+4917638034517" class="inline-flex items-center gap-2 hover:text-[color:var(--c-acc)] transition-colors">
                     <i data-lucide="phone" class="w-4 h-4"></i>West office &middot; +49 176 38034517
                 </a>
-                <a href="tel:+37379024199" class="inline-flex items-center gap-2 hover:text-[#D9A756] transition-colors">
+                <a href="tel:+37379024199" class="inline-flex items-center gap-2 hover:text-[color:var(--c-acc)] transition-colors">
                     <i data-lucide="phone" class="w-4 h-4"></i>East office &middot; +373 79024199
                 </a>
-                <a href="https://www.facebook.com/EastwestTranspersonalTrainingSchool/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 hover:text-[#D9A756] transition-colors">
+                <a href="https://www.facebook.com/EastwestTranspersonalTrainingSchool/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 hover:text-[color:var(--c-acc)] transition-colors">
                     <i data-lucide="facebook" class="w-4 h-4"></i>Facebook
                 </a>
             </div>

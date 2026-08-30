@@ -46,7 +46,8 @@ export function initMobileMenu() {
 
 /**
  * Initialize navbar scroll effect
- * Transparent and roomy at the top; solid blue and compressed on scroll
+ * Transparent and roomy at the top; solid and compressed on scroll, in
+ * whichever dark the active palette has set
  */
 export function initNavbarScroll() {
     const navbar = document.getElementById('navbar');
@@ -59,7 +60,7 @@ export function initNavbarScroll() {
         if (window.scrollY > 50) {
             // On scroll - solid background, backdrop blur, compressed padding
             navbar.classList.remove('bg-transparent', 'py-6');
-            navbar.style.backgroundColor = 'rgba(15, 37, 64, 0.95)';
+            navbar.style.backgroundColor = 'var(--c-deep-95)';
             navbar.classList.add('backdrop-blur-sm', 'py-1.5', ...scrollClasses);
         } else {
             // At top - transparent and roomy

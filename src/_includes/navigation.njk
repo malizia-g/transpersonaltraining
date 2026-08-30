@@ -3,7 +3,7 @@
     <div class="container mx-auto px-6 flex justify-between items-center relative z-10">
         <!-- Logo (Desktop Only) -->
         <a href="{{ '/' | url }}" class="hidden md:flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <div class="w-10 h-10 flex items-center justify-center bg-[#D9A756] rounded-full transition-transform duration-300 group hover:rotate-180 shrink-0">
+            <div class="w-10 h-10 flex items-center justify-center bg-[color:var(--c-acc)] rounded-full transition-transform duration-300 group hover:rotate-180 shrink-0">
                 <img src="{{ '/assets/images/Graphics/logo.svg' | url }}" alt="Logo" class="w-8 h-8 transition-transform duration-500 group-hover:rotate-180" style="display:block;" />
             </div>
             <span class="flex flex-col justify-center h-10 leading-none font-serif font-bold text-slate-100">
@@ -14,7 +14,7 @@
 
         <!-- Logo (Mobile Only) -->
         <a href="{{ '/' | url }}" class="flex md:hidden items-center gap-2 hover:opacity-80 transition-opacity">
-            <div class="w-8 h-8 flex items-center justify-center bg-[#D9A756] rounded-full transition-transform duration-300 group hover:rotate-180 shrink-0">
+            <div class="w-8 h-8 flex items-center justify-center bg-[color:var(--c-acc)] rounded-full transition-transform duration-300 group hover:rotate-180 shrink-0">
                 <img src="{{ '/assets/images/Graphics/logo.svg' | url }}" alt="Logo" class="w-6 h-6 transition-transform duration-500 group-hover:rotate-180" style="display:block;" />
             </div>
             <span class="flex flex-col justify-center h-8 leading-none font-serif font-bold text-slate-100">
@@ -27,7 +27,7 @@
         <div class="hidden md:flex items-center gap-8">
             <!-- Training Dropdown -->
             <div class="dropdown">
-                <button type="button" class="nav-link text-sm font-medium hover:text-[#D9A756] transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
+                <button type="button" class="nav-link text-sm font-medium hover:text-[color:var(--c-acc)] transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
                     Training <i data-lucide="chevron-down" class="w-4 h-4"></i>
                 </button>
                 <div class="dropdown-menu">
@@ -61,7 +61,7 @@
 
             <!-- Resources Dropdown (con Techniques) -->
             <div class="dropdown">
-                <button type="button" class="nav-link text-sm font-medium hover:text-[#D9A756] transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
+                <button type="button" class="nav-link text-sm font-medium hover:text-[color:var(--c-acc)] transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
                     Resources <i data-lucide="chevron-down" class="w-4 h-4"></i>
                 </button>
                 <div class="dropdown-menu">
@@ -92,9 +92,9 @@
                 </div>
             </div>
 
-            <a href="{{ '/blog/' | url }}" class="nav-link text-sm font-medium hover:text-[#D9A756] transition-colors">Blog</a>
+            <a href="{{ '/blog/' | url }}" class="nav-link text-sm font-medium hover:text-[color:var(--c-acc)] transition-colors">Blog</a>
 
-            <a href="{{ contactHref }}" class="bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-4 py-1.5 text-xs lg:px-6 lg:py-2 lg:text-sm font-medium tracking-wide transition-colors shadow-md whitespace-nowrap">Request a Demo</a>
+            <a href="{{ contactHref }}" class="bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-deep)] px-4 py-1.5 text-xs lg:px-6 lg:py-2 lg:text-sm font-medium tracking-wide transition-colors shadow-md whitespace-nowrap">Request a Demo</a>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -156,6 +156,6 @@
             <span>Collaborations</span>
         </a>
         <a href="{{ '/blog/' | url }}" class="text-slate-200 py-2 border-b block transition-colors">Blog</a>
-        <a href="{{ contactHref }}" class="bg-[#D9A756] text-[#0F2540] px-6 py-3 w-full mt-4 font-bold text-center block">Request a Demo</a>
+        <a href="{{ contactHref }}" class="bg-[color:var(--c-acc)] text-[color:var(--c-deep)] px-6 py-3 w-full mt-4 font-bold text-center block">Request a Demo</a>
     </div>
 </nav>
