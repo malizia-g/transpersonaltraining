@@ -1,7 +1,7 @@
 ---
 layout: base.njk
 title: "Techniques & Frameworks — Holotropic Breathwork Training"
-description: "How we train transpersonal therapists: Holotropic Breathwork and experiential group practices, one-to-one counseling and psychotherapy methods, and the maps of the psyche that give them meaning."
+description: "How we train transpersonal therapists: three branches from one root — Holotropic Breathwork and experiential work, counselling skills, and the theoretical and philosophical framework that holds them."
 ---
 
 {% set intro = 'techniques/00-intro.md' | pageContent %}
@@ -9,6 +9,90 @@ description: "How we train transpersonal therapists: Holotropic Breathwork and e
 {% set oneToOne = 'techniques/02-one-to-one.md' | pageSections %}
 {% set maps = 'techniques/03-maps.md' | pageSections %}
 {% set sections = [experiential, oneToOne, maps] %}
+
+{# ── The leaves ──────────────────────────────────────────────────────────────
+   One shape for all three branches: a bordered box of native <details>, the
+   same pattern as training-overview.html. Closed, a leaf shows its title, who
+   teaches it and a one-line preview; everything else — the prose and the
+   photograph — waits until the reader asks for it.
+
+   `tone` classes are passed in whole rather than built up, so Tailwind's
+   scanner can still see them as literal strings in this file. #}
+{% macro leaves(sec, boxCls, dividerCls, hoverCls, chipCls, titleCls, teachersCls, leadCls, proseCls, chevronCls, ruleCls) %}
+<div class="{{ boxCls }} divide-y {{ dividerCls }} shadow-lg">
+    {% for block in sec.blocks %}
+    <details class="p4-reveal tq-leaf">
+        <summary class="flex items-start gap-4 md:gap-5 px-5 py-5 md:px-7 md:py-6 cursor-pointer {{ hoverCls }} transition-colors">
+            <span class="w-10 h-10 md:w-11 md:h-11 shrink-0 flex items-center justify-center {{ chipCls }}">
+                <i data-lucide="{{ block.icon | default('leaf') }}" class="w-5 h-5" aria-hidden="true"></i>
+            </span>
+            <span class="min-w-0 flex-1">
+                <span class="block font-serif text-lg md:text-xl font-bold leading-snug {{ titleCls }}">{{ block.title }}</span>
+                {% if block.teachers %}
+                <span class="block mt-1 text-xs tracking-wide {{ teachersCls }}">{{ block.teachers }}</span>
+                {% endif %}
+                {% if block.lead %}
+                <span class="block mt-2 text-sm leading-relaxed {{ leadCls }}">{{ block.lead }}</span>
+                {% endif %}
+            </span>
+            <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 mt-1 {{ chevronCls }} transition-transform duration-300" aria-hidden="true"></i>
+        </summary>
+        <div class="border-t {{ ruleCls }} px-5 md:px-7 py-7">
+            {% if block.image %}
+            <picture>
+                <source srcset="{{ (block.image.src ~ '.webp') | url }}" type="image/webp">
+                <img src="{{ (block.image.src ~ '.jpg') | url }}" alt="{{ block.image.alt }}"
+                     class="w-full h-56 md:h-72 object-cover {{ block.image.position }} mb-7 shadow-md" loading="lazy">
+            </picture>
+            {% endif %}
+            <div class="tq-prose leading-relaxed {{ proseCls }}">{{ block.html | safe }}</div>
+        </div>
+    </details>
+    {% endfor %}
+</div>
+{% endmacro %}
+
+{% macro darkLeaves(sec) %}
+{{ leaves(sec,
+    'border border-[#D9A756]/40 bg-[#1A2B44]',
+    'divide-[#D9A756]/25',
+    'hover:bg-[#0F2540]/20',
+    'bg-[#D9A756] text-[#0F2540]',
+    'text-[#FDFBF5]',
+    'text-[#D9A756]',
+    'text-[#B9C6D8]',
+    'text-[#D5DEE9]',
+    'text-[#D9A756]',
+    'border-[#D9A756]/25') }}
+{% endmacro %}
+
+{% macro lightLeaves(sec) %}
+{{ leaves(sec,
+    'border border-[#E7D6BE] bg-[#FDFBF5]',
+    'divide-[#E7D6BE]',
+    'hover:bg-[#FEF9EF]',
+    'bg-[#0F2540] text-[#D9A756]',
+    'text-indigo-deep-900',
+    'text-[#B65E3F]',
+    'text-neutral-warm-600',
+    'text-neutral-warm-700',
+    'text-[#B65E3F]',
+    'border-[#E7D6BE]') }}
+{% endmacro %}
+
+{# ── A branch header ─────────────────────────────────────────────────────── #}
+{% macro branchHeader(sec, numCls, titleCls, subCls) %}
+<div class="max-w-5xl mx-auto mb-10 md:mb-14">
+    <div class="flex items-start gap-5 md:gap-8">
+        <span class="p4-display text-[4.5rem] md:text-[7rem] font-medium leading-[0.85] {{ numCls }} select-none">{{ sec.data.number }}</span>
+        <div class="pt-1 md:pt-3">
+            <span class="p4-hairline !w-10 md:!w-16 mb-4 block"></span>
+            <h2 class="p4-display text-3xl md:text-5xl font-medium {{ titleCls }} leading-tight">{{ sec.data.title }}</h2>
+            <p class="mt-3 p4-display italic text-lg md:text-xl {{ subCls }}">{{ sec.data.subtitle }}</p>
+        </div>
+    </div>
+</div>
+{% endmacro %}
 
 <!-- Hero Section -->
 <header class="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
@@ -21,7 +105,7 @@ description: "How we train transpersonal therapists: Holotropic Breathwork and e
                 class="w-full h-full object-cover object-bottom"
             />
         </picture>
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/80 via-[#0F2540]/60 to-[#0F2540]/85"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/80 via-[#0F2540]/50 to-[#0F2540]/85"></div>
     </div>
 
     <div class="relative z-10 container mx-auto px-6 text-center pt-20">
@@ -34,120 +118,222 @@ description: "How we train transpersonal therapists: Holotropic Breathwork and e
             <h1 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] mb-6 leading-tight drop-shadow-md">
                 {{ intro.data.heading }}
             </h1>
-            <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
-                Three dimensions of one training: experience, craft, and the maps that hold them
+            <p class="text-xl md:text-2xl text-[#D5DEE9] max-w-3xl mx-auto font-light leading-relaxed">
+                One root, three branches: the breath, the craft, and the maps that hold them
             </p>
         </div>
     </div>
 </header>
 
 <!-- Breadcrumb -->
-<div class="bg-white border-b border-[#E7D6BE]">
+<div class="bg-[#FDFBF5] border-b border-[#E7D6BE]">
     <div class="container mx-auto px-6 py-4">
         <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
-            <a href="{{ '/' | url }}" class="hover:text-science-blue-600 transition-colors">Home</a>
+            <a href="{{ '/' | url }}" class="hover:text-science-blue-800 transition-colors">Home</a>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-neutral-warm-500">Resources</span>
-            <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-science-blue-800 font-medium">Techniques</span>
+            <span class="text-indigo-deep-900 font-medium">Techniques</span>
         </div>
     </div>
 </div>
 
-<!-- Intro: page lead + the three dimensions -->
-<section class="py-20 md:py-24 bg-white">
+<!-- Intro: the page lead -->
+<section class="py-20 md:py-24 bg-[#FDFBF5]">
     <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto text-center">
             <div class="tq-lead text-lg md:text-xl text-neutral-warm-700 leading-relaxed font-light">
                 {{ intro.html | safe }}
             </div>
         </div>
-
-        <!-- Three-dimension navigator -->
-        <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-14 md:mt-16">
-            {% for section in sections %}
-            <a href="#{{ section.data.anchor }}" class="group relative block border-t-2 border-[#D9A756] bg-[#FAF3E7] hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-8">
-                <div class="flex items-start justify-between">
-                    <span class="p4-display text-6xl font-medium leading-none text-[#0F2540]/10 group-hover:text-[#D9A756]/40 transition-colors">{{ section.data.number }}</span>
-                    <span class="w-11 h-11 bg-[#0F2540] flex items-center justify-center">
-                        <i data-lucide="{{ section.data.icon }}" class="w-5 h-5 text-[#D9A756]"></i>
-                    </span>
-                </div>
-                <h3 class="mt-6 text-xl font-serif font-bold text-[#0F2540] leading-snug">{{ section.data.short_title }}</h3>
-                <p class="mt-2 text-sm text-neutral-warm-700 leading-relaxed">{{ section.data.subtitle }}</p>
-                <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-[#B65E3F]">
-                    Explore
-                    <i data-lucide="arrow-down" class="w-4 h-4 transition-transform group-hover:translate-y-0.5"></i>
-                </span>
-            </a>
-            {% endfor %}
-        </div>
     </div>
 </section>
 
-<!-- ═══ Section 01 · Experiential & Group Practices ═══ -->
-<section id="{{ experiential.data.anchor }}" class="scroll-mt-24 py-20 md:py-28 bg-[#0F2540] text-white overflow-hidden">
+{# ══════════════════════════════════════════════════════════════════════════
+   TWO TREE TREATMENTS, SIDE BY SIDE FOR REVIEW.
+
+   Option A is the drawn tree, Option B the typographic one. They are both
+   here only so the choice can be made by looking at them on the page.
+   ONCE ONE IS CHOSEN, DELETE THE OTHER — along with its "Option A/B" caption
+   and this comment. Whichever survives, keep the id="branches" on it, since
+   the CTA and any future in-page link point there.
+   ══════════════════════════════════════════════════════════════════════════ #}
+
+<!-- ▽▽▽ OPTION A — the drawn tree ▽▽▽ -->
+<section id="branches" class="scroll-mt-24 pt-4 pb-16 md:pb-20 bg-[#FDFBF5]">
     <div class="container mx-auto px-6">
-        <!-- Section header -->
-        <div class="max-w-6xl mx-auto mb-14 md:mb-20">
-            <div class="flex items-start gap-5 md:gap-8">
-                <span class="p4-display text-[4.5rem] md:text-[7rem] font-medium leading-[0.85] text-[#D9A756]/50 select-none">{{ experiential.data.number }}</span>
-                <div class="pt-1 md:pt-3">
-                    <span class="p4-hairline !w-10 md:!w-16 mb-4 block"></span>
-                    <h2 class="p4-display text-3xl md:text-5xl font-medium text-[#FDFBF5] leading-tight">{{ experiential.data.title }}</h2>
-                    <p class="mt-3 p4-display italic text-lg md:text-xl text-[#E9EDF2]/70">{{ experiential.data.subtitle }}</p>
-                </div>
+        <p class="text-center p4-kicker text-[#B65E3F] mb-10">Option A &mdash; the drawn tree</p>
+
+        {# Desktop: an actual tree. The three boughs are links, so the drawing
+           is the page's navigator rather than decoration on top of one. #}
+        <figure class="hidden md:block max-w-4xl mx-auto">
+            <svg viewBox="0 0 900 560" class="w-full h-auto" role="group" aria-label="The three branches of the training">
+                <!-- roots -->
+                <path class="tq-tree-root" d="M 450 468 C 430 490, 395 500, 358 516" />
+                <path class="tq-tree-root" d="M 450 468 C 450 492, 450 502, 450 524" />
+                <path class="tq-tree-root" d="M 450 468 C 470 490, 505 500, 542 516" />
+                <line class="tq-tree-ground" x1="290" y1="470" x2="610" y2="470" />
+
+                <!-- trunk -->
+                <path class="tq-tree-trunk" d="M 437 470 L 441 330 L 459 330 L 463 470 Z" />
+
+                <!-- boughs -->
+                <path class="tq-tree-bough" d="M 450 352 C 392 332, 250 318, 152 182" />
+                <path class="tq-tree-bough" d="M 450 330 L 450 178" />
+                <path class="tq-tree-bough" d="M 450 352 C 508 332, 650 318, 748 182" />
+
+                {% set cxs = [150, 450, 750] %}
+                {% for sec in sections %}
+                {% set cx = cxs[loop.index0] %}
+                {% set n = sec.blocks | length %}
+                {% set sp = 30 if n < 5 else 23 %}
+                <a class="tq-tree-branch" href="#{{ sec.data.anchor }}">
+                    <title>{{ sec.data.title }}</title>
+
+                    <!-- the twig the foliage sits on -->
+                    <path class="tq-tree-bough" d="M {{ cx }} 86 L {{ cx }} 62" stroke-width="3" />
+
+                    <!-- foliage: one leaf per sub-section -->
+                    {% for block in sec.blocks %}
+                    {% set lx = cx + (loop.index0 - (n - 1) / 2) * sp %}
+                    {% set tilt = loop.index0 % 2 %}
+                    {% set ly = 50 if tilt else 60 %}
+                    <ellipse class="tq-tree-leaf" cx="{{ lx }}" cy="{{ ly }}" rx="12" ry="7"
+                             transform="rotate({{ 28 if tilt else -28 }} {{ lx }} {{ ly }})" />
+                    {% endfor %}
+
+                    <!-- the branch label -->
+                    <rect class="tq-tree-box" x="{{ cx - 126 }}" y="86" width="252" height="92" rx="2" />
+                    <text class="tq-tree-num" x="{{ cx }}" y="112" text-anchor="middle"
+                          font-size="12" letter-spacing="2.5" font-weight="600">{{ sec.data.number }}</text>
+                    <text class="tq-tree-name" x="{{ cx }}" y="140" text-anchor="middle"
+                          font-size="19" font-weight="700" font-family="Georgia, serif">{{ sec.data.short_title }}</text>
+                    <text class="tq-tree-meta" x="{{ cx }}" y="162" text-anchor="middle" font-size="12">
+                        {{ n }} {{ sec.data.unit }} to open
+                    </text>
+                </a>
+                {% endfor %}
+
+                <!-- the trunk's name -->
+                <text class="tq-tree-trunk-label" x="450" y="552" text-anchor="middle"
+                      font-size="21" font-weight="700" font-family="Georgia, serif"
+                      letter-spacing="1">{{ intro.data.trunk_title }}</text>
+            </svg>
+            <figcaption class="text-center text-sm text-neutral-warm-600 mt-6 max-w-xl mx-auto">
+                {{ intro.data.trunk_line }}
+            </figcaption>
+        </figure>
+
+        {# Below md a wide tree is unreadable, so it becomes a stem with the
+           three branches hanging off it. #}
+        <div class="md:hidden max-w-sm mx-auto">
+            <p class="text-center font-serif text-xl font-bold text-indigo-deep-900">{{ intro.data.trunk_title }}</p>
+            <p class="text-center text-sm text-neutral-warm-600 mt-2 mb-6">{{ intro.data.trunk_line }}</p>
+            <div class="relative pl-8 space-y-4 border-l-2 border-[#D9A756] ml-4">
+                {% for sec in sections %}
+                <a href="#{{ sec.data.anchor }}" class="relative block bg-[#FEF9EF] border border-[#D9A756]/40 p-5">
+                    <span class="absolute top-8 -left-8 w-8 border-t-2 border-[#D9A756]" aria-hidden="true"></span>
+                    <span class="p4-kicker !text-xs text-[#D9A756]">{{ sec.data.number }}</span>
+                    <span class="block font-serif text-lg font-bold text-indigo-deep-900 mt-1">{{ sec.data.short_title }}</span>
+                    <span class="block text-xs text-neutral-warm-600 mt-1">{{ sec.blocks | length }} {{ sec.data.unit }} to open</span>
+                </a>
+                {% endfor %}
             </div>
         </div>
+    </div>
+</section>
+<!-- △△△ END OPTION A △△△ -->
 
-        <!-- Featured: Holotropic Breathwork -->
-        {% set breathwork = experiential.blocks[0] %}
-        <div class="max-w-6xl mx-auto">
-            <div class="grid lg:grid-cols-5 shadow-2xl border border-[#D9A756]/30">
-                <div class="lg:col-span-3 relative min-h-[300px] lg:min-h-[520px]">
-                    <picture>
-                        <source srcset="{{ (breathwork.image.src ~ '.webp') | url }}" type="image/webp">
-                        <img src="{{ (breathwork.image.src ~ '.jpg') | url }}" alt="{{ breathwork.image.alt }}"
-                             class="absolute inset-0 w-full h-full object-cover {{ breathwork.image.position }}">
-                    </picture>
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#0F2540]/40 to-transparent lg:bg-gradient-to-r"></div>
-                </div>
-                <div class="lg:col-span-2 bg-[#12305A] p-8 md:p-12 flex flex-col justify-center">
-                    <p class="p4-kicker text-[#D9A756] mb-5 flex items-center gap-3">
-                        <i data-lucide="wind" class="w-5 h-5"></i>
-                        The heart of the training
-                    </p>
-                    <h3 class="p4-display text-3xl md:text-4xl font-medium text-[#FDFBF5] mb-6 leading-tight">{{ breathwork.title }}</h3>
-                    <div class="tq-prose text-[#E9EDF2]/85 leading-relaxed">{{ breathwork.html | safe }}</div>
-                </div>
-            </div>
-        </div>
+<!-- ▽▽▽ OPTION B — the typographic tree ▽▽▽ -->
+<section class="pb-20 md:pb-24 bg-[#FDFBF5] border-b border-[#E7D6BE]">
+    <div class="container mx-auto px-6">
+        <p class="text-center p4-kicker text-[#B65E3F] mb-10">Option B &mdash; the typographic tree</p>
 
-        <!-- The other experiential practices -->
-        <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto mt-10 md:mt-12">
-            {% for block in experiential.blocks %}
-            {% if not loop.first %}
-            <div class="bg-[#FDFBF5] text-[#0F2540] overflow-hidden shadow-lg">
-                {% if block.image %}
-                <picture>
-                    <source srcset="{{ (block.image.src ~ '.webp') | url }}" type="image/webp">
-                    <img src="{{ (block.image.src ~ '.jpg') | url }}" alt="{{ block.image.alt }}" class="w-full h-52 object-cover {{ block.image.position }}" loading="lazy">
-                </picture>
+        <div class="max-w-5xl mx-auto">
+            <!-- trunk -->
+            <div class="text-center">
+                <p class="p4-kicker text-[#D9A756] mb-4 flex items-center justify-center gap-4">
+                    <span class="p4-hairline"></span>
+                    The root
+                    <span class="p4-hairline"></span>
+                </p>
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-indigo-deep-900">{{ intro.data.trunk_title }}</h2>
+                <p class="mt-3 text-neutral-warm-700 max-w-xl mx-auto">{{ intro.data.trunk_line }}</p>
+                {% if intro.data.roots %}
+                <ul class="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-neutral-warm-600">
+                    {% for root in intro.data.roots %}
+                    <li class="flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 shrink-0 rotate-45 bg-[#B65E3F]" aria-hidden="true"></span>
+                        {{ root }}
+                    </li>
+                    {% endfor %}
+                </ul>
                 {% endif %}
-                <div class="p-8">
-                    <h3 class="text-2xl font-serif font-bold text-[#0F2540] mb-4">{{ block.title }}</h3>
-                    <div class="tq-prose text-neutral-warm-700 leading-relaxed">{{ block.html | safe }}</div>
-                </div>
             </div>
-            {% endif %}
-            {% endfor %}
+
+            <!-- the trunk rising into the fork -->
+            <div class="mt-10 flex justify-center" aria-hidden="true">
+                <span class="w-px h-12 bg-[#D9A756]"></span>
+            </div>
+            <div class="hidden md:grid grid-cols-3 gap-8 h-10" aria-hidden="true">
+                {% for sec in sections %}
+                <div class="relative">
+                    <span class="absolute top-0 h-px bg-[#D9A756] {% if loop.first %}left-1/2 -right-4{% elif loop.last %}-left-4 right-1/2{% else %}-left-4 -right-4{% endif %}"></span>
+                    <span class="absolute top-0 left-1/2 w-px h-full bg-[#D9A756]"></span>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- the three branches -->
+            <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+                {% for sec in sections %}
+                <div class="flex flex-col">
+                    <a href="#{{ sec.data.anchor }}" class="group w-full flex-1 flex flex-col border-t-2 border-[#D9A756] bg-[#FEF9EF] hover:bg-[#FDFBF5] hover:shadow-xl transition-all duration-300 p-7">
+                        <div class="flex items-start justify-between">
+                            <span class="p4-display text-5xl font-medium leading-none text-[#0F2540]/20 group-hover:text-[#D9A756]/60 transition-colors">{{ sec.data.number }}</span>
+                            <span class="w-11 h-11 bg-[#0F2540] flex items-center justify-center">
+                                <i data-lucide="{{ sec.data.icon }}" class="w-5 h-5 text-[#D9A756]"></i>
+                            </span>
+                        </div>
+                        <h3 class="mt-5 text-xl font-serif font-bold text-indigo-deep-900 leading-snug">{{ sec.data.short_title }}</h3>
+                        <p class="mt-2 text-sm text-neutral-warm-700 leading-relaxed">{{ sec.data.subtitle }}</p>
+
+                        <!-- the leaves this branch carries -->
+                        <ul class="mt-5 pt-4 border-t border-[#E7D6BE] space-y-2 flex-grow">
+                            {% for block in sec.blocks %}
+                            <li class="flex items-start gap-2 text-xs text-neutral-warm-600 leading-snug">
+                                <span class="mt-1.5 w-1.5 h-1.5 shrink-0 rotate-45 bg-[#B65E3F]" aria-hidden="true"></span>
+                                {{ block.title }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-science-blue-700 group-hover:text-science-blue-800">
+                            Open this branch
+                            <i data-lucide="arrow-down" class="w-4 h-4 transition-transform group-hover:translate-y-0.5"></i>
+                        </span>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- △△△ END OPTION B △△△ -->
+
+<!-- ═══ Branch 01 · Holotropic Breathwork & Experiential Work ═══ -->
+<section id="{{ experiential.data.anchor }}" class="scroll-mt-24 py-20 md:py-28 bg-[#0F2540] overflow-hidden">
+    <div class="container mx-auto px-6">
+        {{ branchHeader(experiential,
+            'text-[#D9A756]/60',
+            'text-[#FDFBF5]',
+            'text-[#B9C6D8]') }}
+        <div class="max-w-5xl mx-auto">
+            {{ darkLeaves(experiential) }}
         </div>
     </div>
 </section>
 
 <!-- Quote interlude -->
 <section class="relative py-24 md:py-32 overflow-hidden p4-parallax" style="background-image: url('{{ '/assets/images/Headers/hero-what-is-tp-window-forest.jpg' | url }}'); background-image: image-set(url('{{ '/assets/images/Headers/hero-what-is-tp-window-forest.webp' | url }}') type('image/webp'), url('{{ '/assets/images/Headers/hero-what-is-tp-window-forest.jpg' | url }}') type('image/jpeg'));">
-    <div class="absolute inset-0 bg-[#0F2540]/70"></div>
+    <div class="absolute inset-0 bg-[#0F2540]/80"></div>
     <div class="relative z-10 container mx-auto px-6 text-center">
         <blockquote class="p4-display italic text-2xl md:text-4xl text-[#FDFBF5] max-w-4xl mx-auto leading-snug drop-shadow-md">
             &ldquo;The continuous breath puts you in contact with your boundaries &mdash; and boundaries are doors.&rdquo;
@@ -155,48 +341,22 @@ description: "How we train transpersonal therapists: Holotropic Breathwork and e
     </div>
 </section>
 
-<!-- ═══ Section 02 · One-to-One Work ═══ -->
-<section id="{{ oneToOne.data.anchor }}" class="scroll-mt-24 py-20 md:py-28 bg-[#FDFBF5]">
+<!-- ═══ Branch 02 · Counselling Skills ═══ -->
+<section id="{{ oneToOne.data.anchor }}" class="scroll-mt-24 py-20 md:py-28 bg-[#FAF3E7]">
     <div class="container mx-auto px-6">
-        <!-- Section header -->
-        <div class="max-w-6xl mx-auto mb-14 md:mb-20">
-            <div class="flex items-start gap-5 md:gap-8">
-                <span class="p4-display text-[4.5rem] md:text-[7rem] font-medium leading-[0.85] text-[#D9A756] select-none">{{ oneToOne.data.number }}</span>
-                <div class="pt-1 md:pt-3">
-                    <span class="p4-hairline !w-10 md:!w-16 mb-4 block"></span>
-                    <h2 class="p4-display text-3xl md:text-5xl font-medium text-[#0F2540] leading-tight">{{ oneToOne.data.title }}</h2>
-                    <p class="mt-3 p4-display italic text-lg md:text-xl text-neutral-warm-600">{{ oneToOne.data.subtitle }}</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Alternating method rows -->
-        <div class="max-w-6xl mx-auto space-y-20 md:space-y-24">
-            {% for block in oneToOne.blocks %}
-            <div class="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
-                <div class="relative {% if loop.index % 2 == 0 %}md:order-2{% endif %}">
-                    <div class="absolute -top-3 {% if loop.index % 2 == 0 %}-right-3{% else %}-left-3{% endif %} w-full h-full border border-[#D9A756]/60 pointer-events-none"></div>
-                    <picture>
-                        <source srcset="{{ (block.image.src ~ '.webp') | url }}" type="image/webp">
-                        <img src="{{ (block.image.src ~ '.jpg') | url }}" alt="{{ block.image.alt }}" class="relative w-full aspect-[4/3] object-cover {{ block.image.position }} shadow-xl" loading="lazy">
-                    </picture>
-                </div>
-                <div class="{% if loop.index % 2 == 0 %}md:order-1{% endif %}">
-                    {% if block.teachers %}
-                    <p class="p4-kicker text-[#B65E3F] mb-3">{{ block.teachers }}</p>
-                    {% endif %}
-                    <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-5 leading-snug">{{ block.title }}</h3>
-                    <div class="tq-prose text-neutral-warm-700 leading-relaxed">{{ block.html | safe }}</div>
-                </div>
-            </div>
-            {% endfor %}
+        {{ branchHeader(oneToOne,
+            'text-[#D9A756]',
+            'text-indigo-deep-900',
+            'text-neutral-warm-600') }}
+        <div class="max-w-5xl mx-auto">
+            {{ lightLeaves(oneToOne) }}
         </div>
     </div>
 </section>
 
 <!-- Quote interlude -->
 <section class="relative py-24 md:py-32 overflow-hidden p4-parallax" style="background-image: url('{{ '/assets/images/Symbolic/symbolic-plant-roots.jpg' | url }}'); background-image: image-set(url('{{ '/assets/images/Symbolic/symbolic-plant-roots.webp' | url }}') type('image/webp'), url('{{ '/assets/images/Symbolic/symbolic-plant-roots.jpg' | url }}') type('image/jpeg'));">
-    <div class="absolute inset-0 bg-[#0F2540]/70"></div>
+    <div class="absolute inset-0 bg-[#0F2540]/80"></div>
     <div class="relative z-10 container mx-auto px-6 text-center">
         <blockquote class="p4-display italic text-2xl md:text-4xl text-[#FDFBF5] max-w-4xl mx-auto leading-snug drop-shadow-md">
             &ldquo;Experience without a map gets lost; a map without experience stays empty.&rdquo;
@@ -204,45 +364,21 @@ description: "How we train transpersonal therapists: Holotropic Breathwork and e
     </div>
 </section>
 
-<!-- ═══ Section 03 · Maps of the Psyche ═══ -->
-<section id="{{ maps.data.anchor }}" class="scroll-mt-24 py-20 md:py-28 bg-white">
+<!-- ═══ Branch 03 · Theoretical & Philosophical Framework ═══ -->
+<section id="{{ maps.data.anchor }}" class="scroll-mt-24 py-20 md:py-28 bg-[#FDFBF5]">
     <div class="container mx-auto px-6">
-        <!-- Section header -->
-        <div class="max-w-6xl mx-auto mb-14 md:mb-20">
-            <div class="flex items-start gap-5 md:gap-8">
-                <span class="p4-display text-[4.5rem] md:text-[7rem] font-medium leading-[0.85] text-[#D9A756] select-none">{{ maps.data.number }}</span>
-                <div class="pt-1 md:pt-3">
-                    <span class="p4-hairline !w-10 md:!w-16 mb-4 block"></span>
-                    <h2 class="p4-display text-3xl md:text-5xl font-medium text-[#0F2540] leading-tight">{{ maps.data.title }}</h2>
-                    <p class="mt-3 p4-display italic text-lg md:text-xl text-neutral-warm-600">{{ maps.data.subtitle }}</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Framework cards: first one wide, the rest in two columns -->
-        <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {% for block in maps.blocks %}
-            <div class="bg-[#FAF3E7] border border-[#E7D6BE] border-t-2 border-t-[#D9A756] p-8 md:p-10 {% if loop.first %}md:col-span-2{% endif %}">
-                <div class="flex items-center gap-4 mb-5">
-                    <span class="w-12 h-12 shrink-0 bg-[#0F2540] flex items-center justify-center">
-                        <i data-lucide="{{ block.icon }}" class="w-6 h-6 text-[#D9A756]"></i>
-                    </span>
-                    <div>
-                        <h3 class="text-xl md:text-2xl font-serif font-bold text-[#0F2540] leading-snug">{{ block.title }}</h3>
-                        {% if block.teachers %}
-                        <p class="text-sm text-[#B65E3F] tracking-wide mt-1">{{ block.teachers }}</p>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="tq-prose text-neutral-warm-700 leading-relaxed {% if loop.first %}lg:columns-2 lg:gap-10{% endif %}">{{ block.html | safe }}</div>
-            </div>
-            {% endfor %}
+        {{ branchHeader(maps,
+            'text-[#D9A756]',
+            'text-indigo-deep-900',
+            'text-neutral-warm-600') }}
+        <div class="max-w-5xl mx-auto">
+            {{ lightLeaves(maps) }}
         </div>
     </div>
 </section>
 
 <!-- CTA Section -->
-<section class="py-20 bg-gradient-to-br from-[#0F2540] to-[#12305A] text-white text-center">
+<section class="py-20 bg-gradient-to-br from-[#0F2540] to-[#2A2438] text-center">
     <div class="container mx-auto px-6">
         <p class="p4-kicker text-[#D9A756] mb-4 flex items-center justify-center gap-4">
             <span class="p4-hairline"></span>
@@ -250,10 +386,10 @@ description: "How we train transpersonal therapists: Holotropic Breathwork and e
             <span class="p4-hairline"></span>
         </p>
         <h2 class="p4-display text-3xl md:text-4xl font-medium mb-4 text-[#FDFBF5]">Experience These Techniques</h2>
-        <p class="text-[#E9EDF2]/80 max-w-2xl mx-auto mb-8 text-lg">
+        <p class="text-[#D5DEE9] max-w-2xl mx-auto mb-8 text-lg">
             Join our training programs to learn and practice these transformative therapeutic approaches.
         </p>
-        <a href="{{ '/training-overview.html' | url }}" class="inline-block bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
+        <a href="{{ '/training-overview/' | url }}" class="inline-block bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
             Explore Training Programs
         </a>
     </div>

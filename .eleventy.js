@@ -117,12 +117,15 @@ module.exports = function(eleventyConfig) {
   });
 
   // Read a content MD file and split its body on '### ' headings.
-  // Returns { data, introHtml, blocks: [{ title, teachers, icon, image, html }] }.
+  // Returns { data, introHtml, blocks: [{ title, teachers, lead, icon, image, html }] }.
   // Per-block conventions: an italic '*(Name, Name)*' line right after the
-  // heading is lifted out as `teachers`; a standalone image line
+  // heading is lifted out as `teachers`; a blockquote line '> One sentence.'
+  // is lifted out as `lead`, the preview a template can show while the rest of
+  // the block stays folded away; a standalone image line
   // '![alt](/path "object-position")' is lifted out as `image` (the path is
   // extensionless — the template builds the <picture> with .webp/.jpg);
   // `data.icons[title]` in the frontmatter supplies `icon`.
+  // All three are removed from the body, so nothing renders twice.
   eleventyConfig.addFilter('pageSections', function(filename) {
     try {
       const contentPath = path.join(__dirname, 'src/content', filename);
@@ -140,6 +143,12 @@ module.exports = function(eleventyConfig) {
           teachers = teacherMatch[1];
           body = body.replace(teacherMatch[0], '');
         }
+        let lead = null;
+        const leadMatch = body.match(/^> +(.+)$/m);
+        if (leadMatch) {
+          lead = leadMatch[1].trim();
+          body = body.replace(leadMatch[0], '');
+        }
         let image = null;
         const imageMatch = body.match(/^!\[([^\]]*)\]\(([^)\s"]+)(?:\s+"([^"]+)")?\)\s*$/m);
         if (imageMatch) {
@@ -147,7 +156,7 @@ module.exports = function(eleventyConfig) {
           body = body.replace(imageMatch[0], '');
         }
         const icon = (parsed.data.icons || {})[title] || null;
-        return { title, teachers, icon, image, html: md.render(body.trim()) };
+        return { title, teachers, lead, icon, image, html: md.render(body.trim()) };
       });
       return { data: parsed.data, introHtml, blocks };
     } catch (error) {

@@ -70,7 +70,7 @@
             })
             .then(function (out) {
                 if (out && out.status === 'error') throw new Error(out.message || 'Server error');
-                setStatus('ok', 'Thank you — we’ve got your details. Check your inbox: the sample lesson and the brochure are on their way.');
+                setStatus('ok', 'Thank you — we’ve got your details. Check your inbox: the demo lesson and the brochure are on their way. If you asked us something, one of us will write back personally.');
                 form.reset();
                 // It's safely with the school now; don't keep a copy in this browser.
                 if (window.FormCache) window.FormCache.clear('contact');
@@ -80,7 +80,7 @@
             })
             .finally(function () {
                 btn.disabled = false;
-                btnLabel.textContent = 'Send message';
+                btnLabel.textContent = 'Send my request';
             });
     });
 })();
