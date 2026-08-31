@@ -99,51 +99,54 @@ feature/xxx  ──▶  staging  ──▶  deploy (auto)
 ```
 transpersonaltraining/
 ├── src/                          # Source (Eleventy input)
-│   ├── _includes/               # Nunjucks templates
-│   │   ├── base.njk            # Main layout
-│   │   ├── navigation.njk      # Global navbar
-│   │   └── footer.njk          # Global footer
+│   ├── _includes/                # Nunjucks templates
+│   │   ├── base.njk              # Main layout
+│   │   ├── navigation.njk        # Global navbar
+│   │   ├── footer.njk            # Global footer
+│   │   └── blog_article.njk      # Blog post layout
 │   │
-│   ├── _data/                  # Structured data
-│   │   ├── coreTeachers.json   # Core teacher list
-│   │   ├── guestTeachers.json  # Guest teacher list
-│   │   ├── scheduleEvents.js   # Fetch schedule from Google Sheets (with cache fallback)
-│   │   ├── lectureEvents.js    # Fetch lectures from Google Sheets (with cache fallback)
-│   │   ├── scheduleFilters.js  # Schedule filter options
-│   │   ├── lectureFilters.js   # Lecture filter options
-│   │   ├── teachers.js         # Teachers data
-│   │   └── bios/*.md           # Teacher biographies in Markdown
+│   ├── _data/                    # Structured data
+│   │   ├── teachers/*.md         # One file per teacher — bio + front matter
+│   │   ├── teachers.js           # Assembles the roster from that folder
+│   │   ├── collaborations/       # Partner institutes, one file each
+│   │   ├── curriculumData.js     # Curriculum from Google Sheets
+│   │   ├── scheduleEvents.js     # Schedule from Google Sheets (cache fallback)
+│   │   ├── lectureEvents.js      # Lectures from Google Sheets (cache fallback)
+│   │   ├── practiceClients.js    # Practice clients from Google Sheets
+│   │   ├── scheduleFilters.js    # Schedule filter options
+│   │   ├── lectureFilters.js     # Lecture filter options
+│   │   ├── sheetTimestamps.js    # Asks the Apps Script which sheets changed
+│   │   ├── agreement.js          # Enrolment agreement from the master Google Doc
+│   │   ├── brochure.js           # Reports whether the brochure PDF exists
+│   │   ├── forms.js  seo.js  readingResources.js  testimonials.js
+│   │   └── *.cache.json          # Build caches (gitignored)
 │   │
+│   ├── content/                  # Editorial Markdown, one folder per page
+│   │                             #   → see CONTENT_EDITING.md
 │   ├── styles/
-│   │   └── main.css            # All styles consolidated (Tailwind directives + component styles)
+│   │   └── main.css              # All styles (Tailwind directives + components)
 │   │
-│   ├── scripts/                # Modular JavaScript
-│   │   ├── main.js            # Entry point
-│   │   ├── modules/           # Reusable core modules
-│   │   │   ├── icons.js       # Lucide icon management
-│   │   │   ├── navigation.js  # Mobile menu, scroll navbar
-│   │   │   └── theme-switcher.js # Theme system
-│   │   └── pages/             # Page-specific scripts
-│   │       ├── schedule-ssr.js # Schedule filters (SSR)
-│   │       ├── lectures-schedule.js # Lecture filters
-│   │       └── training.js    # Vine animation
+│   ├── scripts/                  # Modular JavaScript
+│   │   ├── main.js               # Entry point
+│   │   ├── modules/              # icons, navigation, theme-switcher, form-cache
+│   │   └── pages/                # apply, contact, lectures-schedule, resources,
+│   │                             #   sample-lesson, schedule-ssr, training
 │   │
-│   ├── assets/                # Media files
-│   │   ├── images/
-│   │   └── videos/
-│   │
-│   ├── blog/                  # Blog posts (Markdown)
-│   │   └── *.md
-│   │
-│   └── *.html                 # Pages with Eleventy front matter
+│   ├── assets/                   # images/  videos/  documents/
+│   ├── blog/*.md                 # Blog posts
+│   └── *.html                    # Pages with Eleventy front matter
 │
-├── _site/                     # Build output (gitignored)
-├── docs/                      # Project documentation
-├── TESTS/                     # Experimental HTML pages
-├── .eleventy.js               # Eleventy config
-├── tailwind.config.js         # Tailwind config
-├── postcss.config.js          # PostCSS config
-└── package.json               # Dependencies and scripts
+├── lib/
+│   └── prefix-markdown-links.js  # Applies PATH_PREFIX inside rendered Markdown
+├── scripts/
+│   └── i18n/translate.js
+├── _site/                        # Build output (gitignored)
+├── docs/                         # Project documentation
+├── TESTS/                        # Experimental HTML pages
+├── .eleventy.js                  # Eleventy config
+├── tailwind.config.js            # Tailwind config
+├── postcss.config.js             # PostCSS config
+└── package.json                  # Dependencies and scripts
 ```
 
 ---
@@ -306,7 +309,9 @@ The Apps Script in the spreadsheet exports data as JSON. Key points:
 - Handles missing data gracefully (empty string for missing cells)
 - Changes are available instantly after spreadsheet edits — no need to redeploy the script
 
-**Full setup guide:** See `TESTS/Instructions/GOOGLE_APPS_SCRIPT_SETUP.md` (archived reference)
+**Full setup guide:** the scripts themselves are in [`docs/googlescripts/`](googlescripts/), each
+with its setup steps in a header comment. (An older `TESTS/Instructions/` guide is referenced in
+older commits but is no longer in the repo.)
 
 ---
 

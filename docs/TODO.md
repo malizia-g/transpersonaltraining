@@ -124,10 +124,12 @@ and capitals, against URL conventions. The site is not live, so a change is chea
 ### 42. The Hero's Journey post — title and URL
 
 `hero journey` is 3,600/mo at difficulty 19, the biggest volume in the whole keyword research.
-The post shipped as `/blog/the-heros-journey-in-transpersonal-work/` rather than the
-`/blog/the-heros-journey/` the map specified, so the exact phrase no longer leads the title.
+The **title** is already right — "The Hero's Journey & Personal Transformation", leading with the
+exact phrase. Only the **URL** differs: the post is at `/blog/the-heros-journey-in-transpersonal-work/`
+rather than `/blog/the-heros-journey/`. The permalink comes from the filename, so renaming the file
+is the entire change, and the site is not live yet, which makes it free today.
 
-- [ ] Decide: retitle/rename for the exact-match benefit, or accept the softer match as final
+- [ ] Decide: rename the file for the exact-match URL, or accept the current slug as final
 
 <a id="task-26"></a>
 ### 26. Official certificate wording — optional but useful

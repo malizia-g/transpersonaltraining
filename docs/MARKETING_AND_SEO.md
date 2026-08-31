@@ -120,7 +120,7 @@ don't move that; it needs indexing time plus the remaining D2 items.
 |----------|------|----------------|
 | 1 | Fill the 2027–2030 cohort | Qualified applications submitted |
 | 2 | Fill intensives/seminars open to externals | Event registrations |
-| 3 | Recruit practice clients for trainees | Client-model applications |
+| 3 | Recruit practice clients for trainees | Practice Client applications |
 | 4 | Build a long-term audience | Email list growth |
 
 ### Audience personas (from the Longtail Keywords doc)

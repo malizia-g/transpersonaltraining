@@ -151,7 +151,7 @@ signal.
 
 ### J. Faculty (unblocks §2.9)
 
-36. `coreTeachers.json` already lists Lyudmila Skartsesku as "Head East" and Kati Wortelkamp as "Head West," and the Teachers page hero already reads "bringing East and West together in transpersonal knowledge" — was this intentional foresight? Should the East/West leadership split be made more visible on the page now that the Eastern track for 2027–2030 is confirmed?
+36. The teacher data (now one Markdown file per person in `src/_data/teachers/`) already lists Lyudmila Skartsesku as "Head East" and Kati Wortelkamp as "Head West," and the Teachers page hero already reads "bringing East and West together in transpersonal knowledge" — was this intentional foresight? Should the East/West leadership split be made more visible on the page now that the Eastern track for 2027–2030 is confirmed?
     **Answer: yes kati is the Head West and Lyudmila is the East**
 37. What is the final core-teacher roster for the public Teachers page — does it change at all now that the East track is confirmed live (e.g. any additional Eastern faculty to add as core)?
     **Answer: Don't worry about this**

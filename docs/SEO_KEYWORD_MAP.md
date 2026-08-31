@@ -74,25 +74,31 @@ page must carry its own brand signal if it wants one. Two consequences worth rem
 Primary keyword goes first in the title. Volumes and difficulty from the Drive *Selecting Keywords*
 sheet.
 
-| Page | Primary keyword | Secondary | Front-matter title (≤38) |
+| Page | Primary keyword | Secondary | Front-matter title — **as live, verified 2026-08-31** |
 |---|---|---|---|
-| `/` | transpersonal psychotherapy training | transpersonal psychology training, counselling courses online, hero journey | `Transpersonal Psychotherapy Training` |
+| `/` | transpersonal psychotherapy training | transpersonal psychology training, counselling courses online, hero journey | `Transpersonal Psychotherapy & Holotropic Breathwork Training \| EUROTAS Accredited` ⚠️ 81 chars, truncated in results |
 | `/training-overview/` | transpersonal training for therapists | self development, shadow work, spiritual crisis, **transpersonal psychology degree europe, eurotas accreditation** | `Transpersonal Training for Therapists and Self-Development` |
 | `/curriculum/` | transpersonal psychotherapy curriculum | counselling skills, psychotherapy skills, holotropic breathwork | `Transpersonal Psychotherapy Curriculum` |
 | `/teachers/` ⭐ | transpersonal psychotherapy teachers | **the teachers' own names** — 64% of all clicks | `Transpersonal Psychotherapy Teachers` |
 | `/what-is-transpersonal-psychology/` | what is transpersonal psychology | transpersonal psychotherapy, hero journey, non-ordinary states of consciousness, integrative therapy education | `What is Transpersonal Psychology?` |
-| `/techniques/` | holotropic breathwork | breathwork certification, somatic healing, gestalt, breathwork for anxiety | `Holotropic Breathwork Training` |
-| `/become-a-practice-client/` | free counselling | breathwork seminars free, free psychotherapy, behaviour pattern, repeating cycles, spiritual crisis, spiritual emergency | `Free Counselling & Breathwork` |
-| `/schedule/` | breathwork seminars | holotropic breathwork intensives, residential training Europe | `Breathwork Intensives & Seminars` |
-| `/venues/` | breathwork retreat Germany | training venues Italy, Black Forest, Tuscany | `Training Venues in Germany & Italy` |
-| `/collaborations/` | eurotas accredited psychotherapy schools | transpersonal psychology institutes Europe | `EUROTAS Partner Institutes` |
+| `/techniques/` | holotropic breathwork | breathwork certification, somatic healing, gestalt, breathwork for anxiety | `School Pillars — Holotropic Breathwork & Transpersonal Training` |
+| `/become-a-practice-client/` | free counselling | breathwork seminars free, free psychotherapy, behaviour pattern, repeating cycles, spiritual crisis, spiritual emergency | `Free Counselling & Breathwork Sessions` |
+| `/schedule/` | breathwork seminars | holotropic breathwork intensives, residential training Europe | `Holotropic Breathwork Intensives & Seminars` |
+| `/venues/` | breathwork retreat Germany | training venues Italy, Black Forest, Tuscany | `Training Venues` — shortened on purpose while the venue list is incomplete ([TODO 36](TODO.md#task-36)) |
+| `/collaborations/` | eurotas accredited psychotherapy schools | transpersonal psychology institutes Europe | `EUROTAS Partners & Other Institutes` |
 | `/apply/` | transpersonal counselling certification | apply transpersonal training, enrolment | `Apply — Transpersonal Training` |
 | `/sample-lesson/` | free transpersonal psychology lesson | transpersonal psychotherapy lecture, transpersonal psychology video | `Free Transpersonal Psychology Lesson` |
-| `/resources/` | transpersonal psychology books | Grof, Campbell, recommended reading | `Transpersonal Psychology Reading` |
+| `/resources/` | transpersonal psychology books | Grof, Campbell, recommended reading | `Transpersonal Psychology Reading & Watching` |
 | `/blog/` | transpersonal psychology articles | topic hub | `Our Hero's Journey Blog` |
-| `/blog/the-heros-journey/` ⭐ | hero journey | Campbell, personal transformation, myth, individuation | `The Hero's Journey & Personal Transformation` |
+| `/blog/the-heros-journey-in-transpersonal-work/` ⭐ | hero journey | Campbell, personal transformation, myth, individuation | `The Hero's Journey & Personal Transformation` |
 | `/lectures-schedule/` | transpersonal psychology training online | holotropic breathwork intensives, online psychotherapy training | `Transpersonal Psychology Online Lectures` |
+| `/monthly-call/` | — no target yet | placeholder: no dates scheduled, so nothing to rank on ([TODO 3](TODO.md#task-3)) | `Monthly Zoom Call — Transpersonal Training` |
 | `/legal-notice/` | — no target | — | `Legal Notice — Professional Title` |
+
+The title column was a specification when this map was written and had drifted from the live pages
+by six rows; it is now a **record of what is live**, re-read from the page front matter on
+2026-08-31. The budget is ~60 characters, not the 38 this column once assumed — see
+[Title length budget](#title-length-budget).
 
 ⭐ `/teachers/` is the priority. Because all 32 bio URLs redirect here, the **meta description should
 name the highest-demand teachers** — that is what helps the page surface on name searches:
@@ -158,13 +164,14 @@ Worth a page when there is capacity to write one — all low difficulty. The wor
 - `transpersonal psychology degree europe` (difficulty 5) and `eurotas accredited psychotherapy
   schools` — an **Accreditation page** would own both (Marketing plan Phase F)
 - `hero journey` — 3,600/mo, difficulty 19, the biggest volume in the research. Partly addressed
-  (Jul 2026): a blog post now exists — `/blog/the-heros-journey-in-transpersonal-work/`, "The Hero's
-  Journey in Transpersonal Work", byline Fabio Malizia — but it shipped under a different URL and
-  title than this map originally specified (`/blog/the-heros-journey/`, "The Hero's Journey &
-  Personal Transformation"), and the exact phrase "hero journey"/"hero's journey" carries the
-  keyword rather than being the title's leading phrase. Worth deciding whether to retitle/rename for
-  the exact-match SEO benefit, or treat the current title as final and accept the softer match.
-  `src/curriculum.html` and `02-program-overview.md` still carry supporting content.
+  (Jul 2026): a blog post now exists, byline Fabio Malizia. **Corrected 2026-08-31:** this entry used
+  to say the post shipped under a different title as well as a different URL. Only the URL differs.
+  The title is exactly what this map specified — "The Hero's Journey & Personal Transformation" — and
+  it does lead with the exact phrase. What differs is the slug: the post lives at
+  `/blog/the-heros-journey-in-transpersonal-work/`, not `/blog/the-heros-journey/`, because the
+  permalink is derived from the filename (`blog.11tydata.js`). Renaming the file is the whole change.
+  Worth deciding whether the exact-match URL is worth it, or the current slug is final.
+  `src/curriculum.html` and `training-overview/03-program-overview.md` still carry supporting content.
 
 ## Long-tail phrase coverage
 
