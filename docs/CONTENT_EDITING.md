@@ -12,9 +12,6 @@ it — see [How a page loads its content](#how-a-page-loads-its-content) below.
 - [**home/**](../src/content/home/) → [`src/index.html`](../src/index.html)
   - [welcome.md](../src/content/home/welcome.md) — the welcome paragraphs (no front matter, prose only)
   - [quote.md](../src/content/home/quote.md) — the pull-quote box (`label`, `quote`, `attribution`)
-  - [**cards/**](../src/content/home/cards/) — ⚠️ **orphaned.** The homepage stopped rendering these
-    three cards and now links to the School Pillars page instead. Editing them changes nothing on the
-    site. Keep or delete, but do not expect them to appear
 
 - [**what-is-transpersonal-psychology/**](../src/content/what-is-transpersonal-psychology/) → [`src/what-is-transpersonal-psychology.html`](../src/what-is-transpersonal-psychology.html)
   - [00-abstract.md](../src/content/what-is-transpersonal-psychology/00-abstract.md) — the opening abstract (empty front matter, prose only)
