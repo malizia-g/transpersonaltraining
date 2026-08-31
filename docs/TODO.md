@@ -655,7 +655,7 @@ Curriculum, Schedule and Lectures Schedule still hold their static intro text in
 because the pages themselves are driven by Google Sheets at build time.
 
 - [ ] Move the static intro prose into `src/content/` so it is editable like every other page
-      (→ [CONTENT_EDITING.md § Pages Not Yet Migrated](CONTENT_EDITING.md#pages-not-yet-migrated))
+      (→ [CONTENT_EDITING.md § Pages With Content in the Template](CONTENT_EDITING.md#pages-with-content-in-the-template))
 
 <a id="task-59"></a>
 ### 59. Browserslist warning
