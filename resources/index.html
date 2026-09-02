@@ -60,14 +60,14 @@
         .loader-spinner {
             width: 50px;
             height: 50px;
-            border: 4px solid rgba(201, 164, 92, 0.25);
-            border-top-color: #D9A756;
+            border: 4px solid var(--c-acc-25, rgba(201, 164, 92, 0.25));
+            border-top-color: var(--c-acc, #D9A756);
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
         
         .loader-text {
-            color: #334155;
+            color: var(--c-body, #334155);
             font-size: 1.125rem;
             font-weight: 500;
             margin-top: 1.5rem;
@@ -95,7 +95,7 @@
     <!-- Lucide Icons (defer loading) -->
     <script src="https://unpkg.com/lucide@0.344.0" defer></script>
 </head>
-<body class="font-sans text-slate-800 bg-slate-50 antialiased">
+<body class="font-sans text-[color:var(--c-heading)] bg-[color:var(--c-paper-hi)] antialiased">
 
     <!-- Page Loader -->
     <div id="page-loader">
@@ -105,14 +105,14 @@
 
     <!-- Navigation -->
     
-<nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 bg-transparent text-slate-100/90">
+<nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 bg-transparent text-[color:var(--c-on-dark-2)]">
     <div class="container mx-auto px-6 flex justify-between items-center relative z-10">
         <!-- Logo (Desktop Only) -->
         <a href="/transpersonaltraining/" class="hidden md:flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <div class="w-10 h-10 flex items-center justify-center bg-[#D9A756] rounded-full transition-transform duration-300 group hover:rotate-180 shrink-0">
+            <div class="w-10 h-10 flex items-center justify-center bg-[color:var(--c-acc)] rounded-full transition-transform duration-300 group hover:rotate-180 shrink-0">
                 <img src="/transpersonaltraining/assets/images/Graphics/logo.svg" alt="Logo" class="w-8 h-8 transition-transform duration-500 group-hover:rotate-180" style="display:block;" />
             </div>
-            <span class="flex flex-col justify-center h-10 leading-none font-serif font-bold text-slate-100">
+            <span class="flex flex-col justify-center h-10 leading-none font-serif font-bold text-[color:var(--c-on-dark-1)]">
                 <span class="text-[0.7rem] tracking-widest leading-none">East West</span>
                 <span class="text-[1.35rem] tracking-wide leading-none mt-0.5">Transpersonal Training</span>
             </span>
@@ -120,10 +120,10 @@
 
         <!-- Logo (Mobile Only) -->
         <a href="/transpersonaltraining/" class="flex md:hidden items-center gap-2 hover:opacity-80 transition-opacity">
-            <div class="w-8 h-8 flex items-center justify-center bg-[#D9A756] rounded-full transition-transform duration-300 group hover:rotate-180 shrink-0">
+            <div class="w-8 h-8 flex items-center justify-center bg-[color:var(--c-acc)] rounded-full transition-transform duration-300 group hover:rotate-180 shrink-0">
                 <img src="/transpersonaltraining/assets/images/Graphics/logo.svg" alt="Logo" class="w-6 h-6 transition-transform duration-500 group-hover:rotate-180" style="display:block;" />
             </div>
-            <span class="flex flex-col justify-center h-8 leading-none font-serif font-bold text-slate-100">
+            <span class="flex flex-col justify-center h-8 leading-none font-serif font-bold text-[color:var(--c-on-dark-1)]">
                 <span class="text-[0.6rem] tracking-widest leading-none">East West</span>
                 <span class="text-[1.05rem] tracking-wide leading-none mt-0.5">Transpersonal Training</span>
             </span>
@@ -133,7 +133,7 @@
         <div class="hidden md:flex items-center gap-8">
             <!-- Training Dropdown -->
             <div class="dropdown">
-                <button type="button" class="nav-link text-sm font-medium hover:text-[#D9A756] transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
+                <button type="button" class="nav-link text-sm font-medium hover:text-[color:var(--c-acc)] transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
                     Training <i data-lucide="chevron-down" class="w-4 h-4"></i>
                 </button>
                 <div class="dropdown-menu">
@@ -167,14 +167,11 @@
 
             <!-- Resources Dropdown (con Techniques) -->
             <div class="dropdown">
-                <button type="button" class="nav-link text-sm font-medium hover:text-[#D9A756] transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
+                <button type="button" class="nav-link text-sm font-medium hover:text-[color:var(--c-acc)] transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
                     Resources <i data-lucide="chevron-down" class="w-4 h-4"></i>
                 </button>
                 <div class="dropdown-menu">
-                    <a href="/transpersonaltraining/apply/" class="text-sm">
-                        <i data-lucide="clipboard-check" class="w-4 h-4 submenu-icon"></i>
-                        <span>Apply</span>
-                    </a>
+                    
                     <a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="text-sm">
                         <i data-lucide="stethoscope" class="w-4 h-4 submenu-icon"></i>
                         <span>What is Transpersonal Psychology</span>
@@ -195,74 +192,87 @@
                         <i data-lucide="handshake" class="w-4 h-4 submenu-icon"></i>
                         <span>Collaborations</span>
                     </a>
+                    <a href="https://student.transpersonal-training.com/" target="_blank" rel="noopener" class="text-sm">
+                        <i data-lucide="graduation-cap" class="w-4 h-4 submenu-icon"></i>
+                        <span>Learning platform</span>
+                    </a>
+                    <a href="https://old.transpersonal-training.com/" target="_blank" rel="noopener" class="text-sm">
+                        <i data-lucide="archive" class="w-4 h-4 submenu-icon"></i>
+                        <span>Old website</span>
+                    </a>
                 </div>
             </div>
 
-            <a href="/transpersonaltraining/blog/" class="nav-link text-sm font-medium hover:text-[#D9A756] transition-colors">Blog</a>
+            <a href="/transpersonaltraining/blog/" class="nav-link text-sm font-medium hover:text-[color:var(--c-acc)] transition-colors">Blog</a>
 
-            <a href="/transpersonaltraining/#contact" class="bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-4 py-1.5 text-xs lg:px-6 lg:py-2 lg:text-sm font-medium tracking-wide transition-colors shadow-md whitespace-nowrap">Request a Demo</a>
+            <a href="/transpersonaltraining/#contact" class="bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-deep)] px-4 py-1.5 text-xs lg:px-6 lg:py-2 lg:text-sm font-medium tracking-wide transition-colors shadow-md whitespace-nowrap">Request a Demo</a>
         </div>
 
         <!-- Mobile Menu Button -->
-        <button id="mobile-menu-btn" class="md:hidden text-slate-100 focus:outline-none">
+        <button id="mobile-menu-btn" class="md:hidden text-[color:var(--c-on-dark-1)] focus:outline-none">
             <i data-lucide="menu" class="w-7 h-7"></i>
         </button>
     </div>
 
     <!-- Mobile Menu Dropdown -->
     <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full shadow-xl py-6 px-6 flex-col gap-4 z-20 border-t">
-        <span class="text-slate-200 py-2 border-b block font-semibold">Training</span>
-        <a href="/transpersonaltraining/training-overview/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <span class="text-[color:var(--c-on-dark-2)] py-2 border-b block font-semibold">Training</span>
+        <a href="/transpersonaltraining/training-overview/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="compass" class="w-4 h-4 submenu-icon"></i>
             <span>Training Overview</span>
         </a>
-        <a href="/transpersonaltraining/curriculum/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/curriculum/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="book-open" class="w-4 h-4 submenu-icon"></i>
             <span>Curriculum</span>
         </a>
-        <a href="/transpersonaltraining/teachers/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/teachers/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="users" class="w-4 h-4 submenu-icon"></i>
             <span>Our Teachers</span>
         </a>
-        <a href="/transpersonaltraining/schedule/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/schedule/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="calendar" class="w-4 h-4 submenu-icon"></i>
             <span>Intensive Schedule</span>
         </a>
-        <a href="/transpersonaltraining/venues/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/venues/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="map-pin" class="w-4 h-4 submenu-icon"></i>
             <span>Venues</span>
         </a>
-        <a href="/transpersonaltraining/lectures-schedule/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/lectures-schedule/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="presentation" class="w-4 h-4 submenu-icon"></i>
             <span>Lectures Schedule</span>
         </a>
-        <span class="text-slate-200 py-2 border-b block font-semibold">Resources</span>
-        <a href="/transpersonaltraining/apply/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
-            <i data-lucide="clipboard-check" class="w-4 h-4 submenu-icon"></i>
-            <span>Apply</span>
-        </a>
-        <a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <span class="text-[color:var(--c-on-dark-2)] py-2 border-b block font-semibold">Resources</span>
+        
+        <a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="stethoscope" class="w-4 h-4 submenu-icon"></i>
             <span>What is Transpersonal Psychology</span>
         </a>
-        <a href="/transpersonaltraining/become-a-practice-client/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/become-a-practice-client/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="user-check" class="w-4 h-4 submenu-icon"></i>
             <span>Become a Practice Client</span>
         </a>
-        <a href="/transpersonaltraining/techniques/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/techniques/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="activity" class="w-4 h-4 submenu-icon"></i>
             <span>School Pillars</span>
         </a>
-        <a href="/transpersonaltraining/resources/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/resources/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="book-marked" class="w-4 h-4 submenu-icon"></i>
             <span>Recommended Reading</span>
         </a>
-        <a href="/transpersonaltraining/collaborations/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/collaborations/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="handshake" class="w-4 h-4 submenu-icon"></i>
             <span>Collaborations</span>
         </a>
-        <a href="/transpersonaltraining/blog/" class="text-slate-200 py-2 border-b block transition-colors">Blog</a>
-        <a href="/transpersonaltraining/#contact" class="bg-[#D9A756] text-[#0F2540] px-6 py-3 w-full mt-4 font-bold text-center block">Request a Demo</a>
+        <a href="https://student.transpersonal-training.com/" target="_blank" rel="noopener" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+            <i data-lucide="graduation-cap" class="w-4 h-4 submenu-icon"></i>
+            <span>Learning platform</span>
+        </a>
+        <a href="https://old.transpersonal-training.com/" target="_blank" rel="noopener" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+            <i data-lucide="archive" class="w-4 h-4 submenu-icon"></i>
+            <span>Old website</span>
+        </a>
+        <a href="/transpersonaltraining/blog/" class="text-[color:var(--c-on-dark-2)] py-2 border-b block transition-colors">Blog</a>
+        <a href="/transpersonaltraining/#contact" class="bg-[color:var(--c-acc)] text-[color:var(--c-deep)] px-6 py-3 w-full mt-4 font-bold text-center block">Request a Demo</a>
     </div>
 </nav>
 
@@ -277,20 +287,20 @@
             <source srcset="/transpersonaltraining/assets/images/Headers/hero-resources-terrace-winter.webp" type="image/webp">
             <img src="/transpersonaltraining/assets/images/Headers/hero-resources-terrace-winter.jpg" alt="Wicker chairs on the snow-dusted terrace looking out to the winter Black Forest" class="w-full h-full object-cover" style="object-position: center 70%;">
         </picture>
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/80 via-[#0F2540]/60 to-[#0F2540]/80"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[var(--c-deep-80)] via-[var(--c-deep-60)] to-[var(--c-deep-80)]"></div>
     </div>
 
     <div class="relative z-10 container mx-auto px-6 text-center pt-20">
         <div class="animate-fade-in-up">
-            <p class="p4-kicker text-[#D9A756] mb-6 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-acc)] mb-6 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 Resources
                 <span class="p4-hairline"></span>
             </p>
-            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] mb-6 leading-tight drop-shadow-md">
+            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[color:var(--c-paper-hi)] mb-6 leading-tight drop-shadow-md">
                 Recommended Reading &amp; Watching
             </h1>
-            <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
+            <p class="text-xl md:text-2xl text-[color:var(--c-on-dark-2)] max-w-3xl mx-auto font-light leading-relaxed">
                 Books, voices and talks that have shaped our path &mdash; an invitation to explore further
             </p>
         </div>
@@ -298,23 +308,23 @@
 </header>
 
 <!-- Breadcrumb -->
-<div class="bg-white border-b border-[#E7D6BE]">
+<div class="bg-[color:var(--c-paper-card)] border-b border-[color:var(--c-line)]">
     <div class="container mx-auto px-6 py-4">
-        <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
-            <a href="/transpersonaltraining/" class="hover:text-science-blue-600 transition-colors">Home</a>
+        <div class="flex items-center gap-2 text-sm text-[color:var(--c-body-dim)]">
+            <a href="/transpersonaltraining/" class="hover:text-[color:var(--c-link)] transition-colors">Home</a>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-neutral-warm-500">Resources</span>
+            <span class="text-[color:var(--c-body-dim)]">Resources</span>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-science-blue-800 font-medium">Recommended Reading</span>
+            <span class="text-[color:var(--c-heading)] font-medium">Recommended Reading</span>
         </div>
     </div>
 </div>
 
 <!-- Intro -->
-<section class="py-16 bg-white">
+<section class="py-16 bg-[color:var(--c-paper-hi)]">
     <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto text-center">
-            <p class="text-lg md:text-xl text-neutral-warm-700 leading-relaxed">
+            <p class="text-lg md:text-xl text-[color:var(--c-body)] leading-relaxed">
                 Transpersonal psychology is a wide landscape &mdash; part psychology, part philosophy,
                 part contemplative practice. Below is a starting library of the books and thinkers we
                 return to again and again, grouped by theme, together with a few talks worth your time.
@@ -326,44 +336,44 @@
 
 <!-- Recommended Reading -->
 
-<section id="reading" class="scroll-mt-24 py-16 md:py-20 bg-[#FAF3E7] border-t border-[#E7D6BE]">
+<section id="reading" class="scroll-mt-24 py-16 md:py-20 bg-[color:var(--c-paper)] border-t border-[color:var(--c-line)]">
     <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto text-center mb-14">
-            <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-sec)] mb-4 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 Read
                 <span class="p4-hairline"></span>
             </p>
-            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-4">Recommended reading</h2>
-            <p class="text-neutral-warm-600 text-lg">A themed library for the transpersonal path.</p>
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-4">Recommended reading</h2>
+            <p class="text-[color:var(--c-body-dim)] text-lg">A themed library for the transpersonal path.</p>
         </div>
 
         <div class="max-w-6xl mx-auto space-y-14">
             
             <div>
-                <h3 class="p4-display text-2xl font-medium text-[#0F2540] mb-6 pb-3 border-b border-neutral-warm-300 flex items-center gap-3">
-                    <i data-lucide="book-marked" class="w-6 h-6 text-[#B65E3F]"></i>
+                <h3 class="p4-display text-2xl font-medium text-[color:var(--c-heading)] mb-6 pb-3 border-b border-[color:var(--c-line)] flex items-center gap-3">
+                    <i data-lucide="book-marked" class="w-6 h-6 text-[color:var(--c-sec)]"></i>
                     Foundations of Transpersonal Psychology
                 </h3>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                     
-                    <article class="bg-white border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
-                        <h4 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">Paths Beyond Ego: The Transpersonal Vision</h4>
-                        <p class="text-[#B65E3F] text-sm font-medium mt-1">Roger Walsh &amp; Frances Vaughan (eds.)</p>
-                        <p class="text-neutral-warm-600 text-sm mt-3 leading-relaxed flex-grow">A broad, accessible map of the whole field — a good first book.</p>
+                    <article class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
+                        <h4 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">Paths Beyond Ego: The Transpersonal Vision</h4>
+                        <p class="text-[color:var(--c-sec)] text-sm font-medium mt-1">Roger Walsh &amp; Frances Vaughan (eds.)</p>
+                        <p class="text-[color:var(--c-body-dim)] text-sm mt-3 leading-relaxed flex-grow">A broad, accessible map of the whole field — a good first book.</p>
                         
                     </article>
                     
-                    <article class="bg-white border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
-                        <h4 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">The Farther Reaches of Human Nature</h4>
-                        <p class="text-[#B65E3F] text-sm font-medium mt-1">Abraham Maslow</p>
-                        <p class="text-neutral-warm-600 text-sm mt-3 leading-relaxed flex-grow">Where humanistic psychology opens into the transpersonal.</p>
+                    <article class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
+                        <h4 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">The Farther Reaches of Human Nature</h4>
+                        <p class="text-[color:var(--c-sec)] text-sm font-medium mt-1">Abraham Maslow</p>
+                        <p class="text-[color:var(--c-body-dim)] text-sm mt-3 leading-relaxed flex-grow">Where humanistic psychology opens into the transpersonal.</p>
                         
                     </article>
                     
-                    <article class="bg-white border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
-                        <h4 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">Psychosynthesis</h4>
-                        <p class="text-[#B65E3F] text-sm font-medium mt-1">Roberto Assagioli</p>
+                    <article class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
+                        <h4 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">Psychosynthesis</h4>
+                        <p class="text-[color:var(--c-sec)] text-sm font-medium mt-1">Roberto Assagioli</p>
                         
                         
                     </article>
@@ -372,29 +382,29 @@
             </div>
             
             <div>
-                <h3 class="p4-display text-2xl font-medium text-[#0F2540] mb-6 pb-3 border-b border-neutral-warm-300 flex items-center gap-3">
-                    <i data-lucide="book-marked" class="w-6 h-6 text-[#B65E3F]"></i>
+                <h3 class="p4-display text-2xl font-medium text-[color:var(--c-heading)] mb-6 pb-3 border-b border-[color:var(--c-line)] flex items-center gap-3">
+                    <i data-lucide="book-marked" class="w-6 h-6 text-[color:var(--c-sec)]"></i>
                     Holotropic States &amp; Breathwork
                 </h3>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                     
-                    <article class="bg-white border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
-                        <h4 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">The Holotropic Mind</h4>
-                        <p class="text-[#B65E3F] text-sm font-medium mt-1">Stanislav Grof</p>
+                    <article class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
+                        <h4 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">The Holotropic Mind</h4>
+                        <p class="text-[color:var(--c-sec)] text-sm font-medium mt-1">Stanislav Grof</p>
                         
                         
                     </article>
                     
-                    <article class="bg-white border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
-                        <h4 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">Psychology of the Future</h4>
-                        <p class="text-[#B65E3F] text-sm font-medium mt-1">Stanislav Grof</p>
-                        <p class="text-neutral-warm-600 text-sm mt-3 leading-relaxed flex-grow">Grof’s overview of his life’s work and the cartography of the psyche.</p>
+                    <article class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
+                        <h4 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">Psychology of the Future</h4>
+                        <p class="text-[color:var(--c-sec)] text-sm font-medium mt-1">Stanislav Grof</p>
+                        <p class="text-[color:var(--c-body-dim)] text-sm mt-3 leading-relaxed flex-grow">Grof’s overview of his life’s work and the cartography of the psyche.</p>
                         
                     </article>
                     
-                    <article class="bg-white border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
-                        <h4 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">Holotropic Breathwork: A New Approach to Self-Exploration and Therapy</h4>
-                        <p class="text-[#B65E3F] text-sm font-medium mt-1">Stanislav &amp; Christina Grof</p>
+                    <article class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
+                        <h4 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">Holotropic Breathwork: A New Approach to Self-Exploration and Therapy</h4>
+                        <p class="text-[color:var(--c-sec)] text-sm font-medium mt-1">Stanislav &amp; Christina Grof</p>
                         
                         
                     </article>
@@ -403,22 +413,22 @@
             </div>
             
             <div>
-                <h3 class="p4-display text-2xl font-medium text-[#0F2540] mb-6 pb-3 border-b border-neutral-warm-300 flex items-center gap-3">
-                    <i data-lucide="book-marked" class="w-6 h-6 text-[#B65E3F]"></i>
+                <h3 class="p4-display text-2xl font-medium text-[color:var(--c-heading)] mb-6 pb-3 border-b border-[color:var(--c-line)] flex items-center gap-3">
+                    <i data-lucide="book-marked" class="w-6 h-6 text-[color:var(--c-sec)]"></i>
                     Depth &amp; Archetypal Psychology
                 </h3>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                     
-                    <article class="bg-white border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
-                        <h4 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">Memories, Dreams, Reflections</h4>
-                        <p class="text-[#B65E3F] text-sm font-medium mt-1">C. G. Jung</p>
+                    <article class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
+                        <h4 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">Memories, Dreams, Reflections</h4>
+                        <p class="text-[color:var(--c-sec)] text-sm font-medium mt-1">C. G. Jung</p>
                         
                         
                     </article>
                     
-                    <article class="bg-white border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
-                        <h4 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">Re-Visioning Psychology</h4>
-                        <p class="text-[#B65E3F] text-sm font-medium mt-1">James Hillman</p>
+                    <article class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
+                        <h4 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">Re-Visioning Psychology</h4>
+                        <p class="text-[color:var(--c-sec)] text-sm font-medium mt-1">James Hillman</p>
                         
                         
                     </article>
@@ -427,22 +437,22 @@
             </div>
             
             <div>
-                <h3 class="p4-display text-2xl font-medium text-[#0F2540] mb-6 pb-3 border-b border-neutral-warm-300 flex items-center gap-3">
-                    <i data-lucide="book-marked" class="w-6 h-6 text-[#B65E3F]"></i>
+                <h3 class="p4-display text-2xl font-medium text-[color:var(--c-heading)] mb-6 pb-3 border-b border-[color:var(--c-line)] flex items-center gap-3">
+                    <i data-lucide="book-marked" class="w-6 h-6 text-[color:var(--c-sec)]"></i>
                     Myth &amp; the Hero’s Journey
                 </h3>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                     
-                    <article class="bg-white border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
-                        <h4 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">The Hero with a Thousand Faces</h4>
-                        <p class="text-[#B65E3F] text-sm font-medium mt-1">Joseph Campbell</p>
-                        <p class="text-neutral-warm-600 text-sm mt-3 leading-relaxed flex-grow">The classic account of the monomyth behind our own “Hero’s Journey” work.</p>
+                    <article class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
+                        <h4 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">The Hero with a Thousand Faces</h4>
+                        <p class="text-[color:var(--c-sec)] text-sm font-medium mt-1">Joseph Campbell</p>
+                        <p class="text-[color:var(--c-body-dim)] text-sm mt-3 leading-relaxed flex-grow">The classic account of the monomyth behind our own “Hero’s Journey” work.</p>
                         
                     </article>
                     
-                    <article class="bg-white border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
-                        <h4 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">The Power of Myth</h4>
-                        <p class="text-[#B65E3F] text-sm font-medium mt-1">Joseph Campbell &amp; Bill Moyers</p>
+                    <article class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
+                        <h4 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">The Power of Myth</h4>
+                        <p class="text-[color:var(--c-sec)] text-sm font-medium mt-1">Joseph Campbell &amp; Bill Moyers</p>
                         
                         
                     </article>
@@ -451,22 +461,22 @@
             </div>
             
             <div>
-                <h3 class="p4-display text-2xl font-medium text-[#0F2540] mb-6 pb-3 border-b border-neutral-warm-300 flex items-center gap-3">
-                    <i data-lucide="book-marked" class="w-6 h-6 text-[#B65E3F]"></i>
+                <h3 class="p4-display text-2xl font-medium text-[color:var(--c-heading)] mb-6 pb-3 border-b border-[color:var(--c-line)] flex items-center gap-3">
+                    <i data-lucide="book-marked" class="w-6 h-6 text-[color:var(--c-sec)]"></i>
                     Consciousness &amp; Integral Theory
                 </h3>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                     
-                    <article class="bg-white border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
-                        <h4 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">The Spectrum of Consciousness</h4>
-                        <p class="text-[#B65E3F] text-sm font-medium mt-1">Ken Wilber</p>
+                    <article class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
+                        <h4 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">The Spectrum of Consciousness</h4>
+                        <p class="text-[color:var(--c-sec)] text-sm font-medium mt-1">Ken Wilber</p>
                         
                         
                     </article>
                     
-                    <article class="bg-white border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
-                        <h4 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">Integral Psychology</h4>
-                        <p class="text-[#B65E3F] text-sm font-medium mt-1">Ken Wilber</p>
+                    <article class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
+                        <h4 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">Integral Psychology</h4>
+                        <p class="text-[color:var(--c-sec)] text-sm font-medium mt-1">Ken Wilber</p>
                         
                         
                     </article>
@@ -475,22 +485,22 @@
             </div>
             
             <div>
-                <h3 class="p4-display text-2xl font-medium text-[#0F2540] mb-6 pb-3 border-b border-neutral-warm-300 flex items-center gap-3">
-                    <i data-lucide="book-marked" class="w-6 h-6 text-[#B65E3F]"></i>
+                <h3 class="p4-display text-2xl font-medium text-[color:var(--c-heading)] mb-6 pb-3 border-b border-[color:var(--c-line)] flex items-center gap-3">
+                    <i data-lucide="book-marked" class="w-6 h-6 text-[color:var(--c-sec)]"></i>
                     Shamanism &amp; Non-Ordinary States
                 </h3>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                     
-                    <article class="bg-white border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
-                        <h4 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">The Way of the Shaman</h4>
-                        <p class="text-[#B65E3F] text-sm font-medium mt-1">Michael Harner</p>
+                    <article class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
+                        <h4 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">The Way of the Shaman</h4>
+                        <p class="text-[color:var(--c-sec)] text-sm font-medium mt-1">Michael Harner</p>
                         
                         
                     </article>
                     
-                    <article class="bg-white border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
-                        <h4 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">LSD Psychotherapy</h4>
-                        <p class="text-[#B65E3F] text-sm font-medium mt-1">Stanislav Grof</p>
+                    <article class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
+                        <h4 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">LSD Psychotherapy</h4>
+                        <p class="text-[color:var(--c-sec)] text-sm font-medium mt-1">Stanislav Grof</p>
                         
                         
                     </article>
@@ -499,22 +509,22 @@
             </div>
             
             <div>
-                <h3 class="p4-display text-2xl font-medium text-[#0F2540] mb-6 pb-3 border-b border-neutral-warm-300 flex items-center gap-3">
-                    <i data-lucide="book-marked" class="w-6 h-6 text-[#B65E3F]"></i>
+                <h3 class="p4-display text-2xl font-medium text-[color:var(--c-heading)] mb-6 pb-3 border-b border-[color:var(--c-line)] flex items-center gap-3">
+                    <i data-lucide="book-marked" class="w-6 h-6 text-[color:var(--c-sec)]"></i>
                     Spiritual Emergency &amp; Emergence
                 </h3>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                     
-                    <article class="bg-white border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
-                        <h4 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">Spiritual Emergency: When Personal Transformation Becomes a Crisis</h4>
-                        <p class="text-[#B65E3F] text-sm font-medium mt-1">Stanislav &amp; Christina Grof (eds.)</p>
-                        <p class="text-neutral-warm-600 text-sm mt-3 leading-relaxed flex-grow">Essential on distinguishing awakening from crisis.</p>
+                    <article class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
+                        <h4 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">Spiritual Emergency: When Personal Transformation Becomes a Crisis</h4>
+                        <p class="text-[color:var(--c-sec)] text-sm font-medium mt-1">Stanislav &amp; Christina Grof (eds.)</p>
+                        <p class="text-[color:var(--c-body-dim)] text-sm mt-3 leading-relaxed flex-grow">Essential on distinguishing awakening from crisis.</p>
                         
                     </article>
                     
-                    <article class="bg-white border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
-                        <h4 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">The Stormy Search for the Self</h4>
-                        <p class="text-[#B65E3F] text-sm font-medium mt-1">Christina &amp; Stanislav Grof</p>
+                    <article class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
+                        <h4 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">The Stormy Search for the Self</h4>
+                        <p class="text-[color:var(--c-sec)] text-sm font-medium mt-1">Christina &amp; Stanislav Grof</p>
                         
                         
                     </article>
@@ -523,22 +533,22 @@
             </div>
             
             <div>
-                <h3 class="p4-display text-2xl font-medium text-[#0F2540] mb-6 pb-3 border-b border-neutral-warm-300 flex items-center gap-3">
-                    <i data-lucide="book-marked" class="w-6 h-6 text-[#B65E3F]"></i>
+                <h3 class="p4-display text-2xl font-medium text-[color:var(--c-heading)] mb-6 pb-3 border-b border-[color:var(--c-line)] flex items-center gap-3">
+                    <i data-lucide="book-marked" class="w-6 h-6 text-[color:var(--c-sec)]"></i>
                     Body, Process &amp; Somatics
                 </h3>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                     
-                    <article class="bg-white border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
-                        <h4 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">Dreambody: The Body’s Role in Revealing the Self</h4>
-                        <p class="text-[#B65E3F] text-sm font-medium mt-1">Arnold Mindell</p>
+                    <article class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
+                        <h4 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">Dreambody: The Body’s Role in Revealing the Self</h4>
+                        <p class="text-[color:var(--c-sec)] text-sm font-medium mt-1">Arnold Mindell</p>
                         
                         
                     </article>
                     
-                    <article class="bg-white border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
-                        <h4 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">Waking the Tiger: Healing Trauma</h4>
-                        <p class="text-[#B65E3F] text-sm font-medium mt-1">Peter A. Levine</p>
+                    <article class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
+                        <h4 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">Waking the Tiger: Healing Trauma</h4>
+                        <p class="text-[color:var(--c-sec)] text-sm font-medium mt-1">Peter A. Levine</p>
                         
                         
                     </article>
@@ -547,22 +557,22 @@
             </div>
             
             <div>
-                <h3 class="p4-display text-2xl font-medium text-[#0F2540] mb-6 pb-3 border-b border-neutral-warm-300 flex items-center gap-3">
-                    <i data-lucide="book-marked" class="w-6 h-6 text-[#B65E3F]"></i>
+                <h3 class="p4-display text-2xl font-medium text-[color:var(--c-heading)] mb-6 pb-3 border-b border-[color:var(--c-line)] flex items-center gap-3">
+                    <i data-lucide="book-marked" class="w-6 h-6 text-[color:var(--c-sec)]"></i>
                     Meditation &amp; the Contemplative Path
                 </h3>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                     
-                    <article class="bg-white border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
-                        <h4 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">A Path with Heart</h4>
-                        <p class="text-[#B65E3F] text-sm font-medium mt-1">Jack Kornfield</p>
+                    <article class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
+                        <h4 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">A Path with Heart</h4>
+                        <p class="text-[color:var(--c-sec)] text-sm font-medium mt-1">Jack Kornfield</p>
                         
                         
                     </article>
                     
-                    <article class="bg-white border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
-                        <h4 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">Be Here Now</h4>
-                        <p class="text-[#B65E3F] text-sm font-medium mt-1">Ram Dass</p>
+                    <article class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col h-full">
+                        <h4 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">Be Here Now</h4>
+                        <p class="text-[color:var(--c-sec)] text-sm font-medium mt-1">Ram Dass</p>
                         
                         
                     </article>
@@ -577,37 +587,37 @@
 
 <!-- Watch -->
 
-<section id="watch" class="scroll-mt-24 py-16 md:py-20 bg-white border-t border-[#E7D6BE]">
+<section id="watch" class="scroll-mt-24 py-16 md:py-20 bg-[color:var(--c-paper-card)] border-t border-[color:var(--c-line)]">
     <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto text-center mb-12">
-            <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-sec)] mb-4 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 Watch
                 <span class="p4-hairline"></span>
             </p>
-            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-4">Talks &amp; documentaries</h2>
-            <p class="text-neutral-warm-600 text-lg">Voices from the field, in their own words.</p>
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-4">Talks &amp; documentaries</h2>
+            <p class="text-[color:var(--c-body-dim)] text-lg">Voices from the field, in their own words.</p>
             
         </div>
 
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             
             
-            <article class="bg-[#FAF3E7] border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col h-full">
+            <article class="bg-[color:var(--c-paper)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col h-full">
                 
-                <button type="button" onclick="openResourceVideo('mA1hDI5IiJQ')" aria-label="Watch: Stanislav Grof — Holotropic States of Consciousness" class="group relative block w-full aspect-video bg-[#0F2540] overflow-hidden">
+                <button type="button" onclick="openResourceVideo('mA1hDI5IiJQ')" aria-label="Watch: Stanislav Grof — Holotropic States of Consciousness" class="group relative block w-full aspect-video bg-[color:var(--c-deep)] overflow-hidden">
                     <img src="https://img.youtube.com/vi/mA1hDI5IiJQ/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                    <span class="absolute inset-0 bg-[#0F2540]/20 group-hover:bg-[#0F2540]/10 transition-colors flex items-center justify-center">
-                        <i data-lucide="play-circle" class="w-14 h-14 text-white drop-shadow-lg"></i>
+                    <span class="absolute inset-0 bg-[color:var(--c-deep-20)] group-hover:bg-[color:var(--c-deep-10)] transition-colors flex items-center justify-center">
+                        <i data-lucide="play-circle" class="w-14 h-14 text-[color:var(--c-on-dark-1)] drop-shadow-lg"></i>
                     </span>
                 </button>
                 
                 <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">Stanislav Grof — Holotropic States of Consciousness</h3>
-                    <p class="text-neutral-warm-500 text-sm mt-1">Omega Institute</p>
-                    <p class="text-neutral-warm-600 text-sm mt-3 leading-relaxed flex-grow">Grof on non-ordinary (holotropic) states and their healing, transformative potential.</p>
+                    <h3 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">Stanislav Grof — Holotropic States of Consciousness</h3>
+                    <p class="text-[color:var(--c-body-dim)] text-sm mt-1">Omega Institute</p>
+                    <p class="text-[color:var(--c-body-dim)] text-sm mt-3 leading-relaxed flex-grow">Grof on non-ordinary (holotropic) states and their healing, transformative potential.</p>
                     
-                    <button type="button" onclick="openResourceVideo('mA1hDI5IiJQ')" class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] text-sm font-semibold transition-all shadow-sm hover:shadow-md self-start">
+                    <button type="button" onclick="openResourceVideo('mA1hDI5IiJQ')" class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-heading)] text-sm font-semibold transition-all shadow-sm hover:shadow-md self-start">
                         <i data-lucide="play-circle" class="w-4 h-4"></i>
                         Watch
                     </button>
@@ -616,21 +626,21 @@
             </article>
             
             
-            <article class="bg-[#FAF3E7] border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col h-full">
+            <article class="bg-[color:var(--c-paper)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col h-full">
                 
-                <button type="button" onclick="openResourceVideo('-AmIpprjMjU')" aria-label="Watch: Joseph Campbell &amp; Bill Moyers — The Power of Myth (Ep. 1: The Hero’s Adventure)" class="group relative block w-full aspect-video bg-[#0F2540] overflow-hidden">
+                <button type="button" onclick="openResourceVideo('-AmIpprjMjU')" aria-label="Watch: Joseph Campbell &amp; Bill Moyers — The Power of Myth (Ep. 1: The Hero’s Adventure)" class="group relative block w-full aspect-video bg-[color:var(--c-deep)] overflow-hidden">
                     <img src="https://img.youtube.com/vi/-AmIpprjMjU/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                    <span class="absolute inset-0 bg-[#0F2540]/20 group-hover:bg-[#0F2540]/10 transition-colors flex items-center justify-center">
-                        <i data-lucide="play-circle" class="w-14 h-14 text-white drop-shadow-lg"></i>
+                    <span class="absolute inset-0 bg-[color:var(--c-deep-20)] group-hover:bg-[color:var(--c-deep-10)] transition-colors flex items-center justify-center">
+                        <i data-lucide="play-circle" class="w-14 h-14 text-[color:var(--c-on-dark-1)] drop-shadow-lg"></i>
                     </span>
                 </button>
                 
                 <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">Joseph Campbell &amp; Bill Moyers — The Power of Myth (Ep. 1: The Hero’s Adventure)</h3>
-                    <p class="text-neutral-warm-500 text-sm mt-1">Documentary series · PBS, 1988</p>
-                    <p class="text-neutral-warm-600 text-sm mt-3 leading-relaxed flex-grow">The Hero’s Journey and the mythic dimension of ordinary life — the source behind our own Hero’s Journey work.</p>
+                    <h3 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">Joseph Campbell &amp; Bill Moyers — The Power of Myth (Ep. 1: The Hero’s Adventure)</h3>
+                    <p class="text-[color:var(--c-body-dim)] text-sm mt-1">Documentary series · PBS, 1988</p>
+                    <p class="text-[color:var(--c-body-dim)] text-sm mt-3 leading-relaxed flex-grow">The Hero’s Journey and the mythic dimension of ordinary life — the source behind our own Hero’s Journey work.</p>
                     
-                    <button type="button" onclick="openResourceVideo('-AmIpprjMjU')" class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] text-sm font-semibold transition-all shadow-sm hover:shadow-md self-start">
+                    <button type="button" onclick="openResourceVideo('-AmIpprjMjU')" class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-heading)] text-sm font-semibold transition-all shadow-sm hover:shadow-md self-start">
                         <i data-lucide="play-circle" class="w-4 h-4"></i>
                         Watch
                     </button>
@@ -639,21 +649,21 @@
             </article>
             
             
-            <article class="bg-[#FAF3E7] border border-[#E7D6BE] shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col h-full">
+            <article class="bg-[color:var(--c-paper)] border border-[color:var(--c-line)] shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col h-full">
                 
-                <button type="button" onclick="openResourceVideo('IM2HQ0scAbA')" aria-label="Watch: Arnold Mindell — Process Psychology &amp; the Dream Body" class="group relative block w-full aspect-video bg-[#0F2540] overflow-hidden">
+                <button type="button" onclick="openResourceVideo('IM2HQ0scAbA')" aria-label="Watch: Arnold Mindell — Process Psychology &amp; the Dream Body" class="group relative block w-full aspect-video bg-[color:var(--c-deep)] overflow-hidden">
                     <img src="https://img.youtube.com/vi/IM2HQ0scAbA/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                    <span class="absolute inset-0 bg-[#0F2540]/20 group-hover:bg-[#0F2540]/10 transition-colors flex items-center justify-center">
-                        <i data-lucide="play-circle" class="w-14 h-14 text-white drop-shadow-lg"></i>
+                    <span class="absolute inset-0 bg-[color:var(--c-deep-20)] group-hover:bg-[color:var(--c-deep-10)] transition-colors flex items-center justify-center">
+                        <i data-lucide="play-circle" class="w-14 h-14 text-[color:var(--c-on-dark-1)] drop-shadow-lg"></i>
                     </span>
                 </button>
                 
                 <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-serif text-lg font-semibold text-indigo-deep-900 leading-snug">Arnold Mindell — Process Psychology &amp; the Dream Body</h3>
-                    <p class="text-neutral-warm-500 text-sm mt-1">New Thinking Allowed (Jeffrey Mishlove)</p>
-                    <p class="text-neutral-warm-600 text-sm mt-3 leading-relaxed flex-grow">The founder of Process Work on following the “dreaming” that moves through body, relationship and the world.</p>
+                    <h3 class="font-serif text-lg font-semibold text-[color:var(--c-heading)] leading-snug">Arnold Mindell — Process Psychology &amp; the Dream Body</h3>
+                    <p class="text-[color:var(--c-body-dim)] text-sm mt-1">New Thinking Allowed (Jeffrey Mishlove)</p>
+                    <p class="text-[color:var(--c-body-dim)] text-sm mt-3 leading-relaxed flex-grow">The founder of Process Work on following the “dreaming” that moves through body, relationship and the world.</p>
                     
-                    <button type="button" onclick="openResourceVideo('IM2HQ0scAbA')" class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] text-sm font-semibold transition-all shadow-sm hover:shadow-md self-start">
+                    <button type="button" onclick="openResourceVideo('IM2HQ0scAbA')" class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-heading)] text-sm font-semibold transition-all shadow-sm hover:shadow-md self-start">
                         <i data-lucide="play-circle" class="w-4 h-4"></i>
                         Watch
                     </button>
@@ -667,25 +677,25 @@
 
 
 <!-- CTA -->
-<section class="py-16 md:py-20 bg-[#FAF3E7] border-t border-[#E7D6BE] text-center">
+<section class="py-16 md:py-20 bg-[color:var(--c-paper)] border-t border-[color:var(--c-line)] text-center">
     <div class="container mx-auto px-6 max-w-2xl">
-        <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center gap-4">
+        <p class="p4-kicker text-[color:var(--c-sec)] mb-4 flex items-center justify-center gap-4">
             <span class="p4-hairline"></span>
             Keep exploring
             <span class="p4-hairline"></span>
         </p>
-        <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-4">Have a recommendation?</h2>
-        <p class="text-neutral-warm-700 text-lg leading-relaxed mb-8">
+        <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-4">Have a recommendation?</h2>
+        <p class="text-[color:var(--c-body)] text-lg leading-relaxed mb-8">
             This list grows with our community. If there is a book or talk that changed the way you see
             the psyche, we would love to hear about it &mdash; and you might also enjoy our
-            <a href="/transpersonaltraining/blog/" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4">blog</a>.
+            <a href="/transpersonaltraining/blog/" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-4">blog</a>.
         </p>
         <div class="flex flex-wrap items-center justify-center gap-4">
-            <a href="mailto:west-office@transpersonal-training.com?subject=A%20reading%20recommendation" class="inline-flex items-center gap-2 bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
+            <a href="mailto:west-office@transpersonal-training.com?subject=A%20reading%20recommendation" class="inline-flex items-center gap-2 bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-heading)] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
                 <i data-lucide="mail" class="w-5 h-5"></i>
                 West office
             </a>
-            <a href="mailto:east-office@transpersonal-training.com?subject=A%20reading%20recommendation" class="inline-flex items-center gap-2 bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
+            <a href="mailto:east-office@transpersonal-training.com?subject=A%20reading%20recommendation" class="inline-flex items-center gap-2 bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-heading)] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
                 <i data-lucide="mail" class="w-5 h-5"></i>
                 East office
             </a>
@@ -694,9 +704,9 @@
 </section>
 
 <!-- Video popup modal (opened by the "Watch" buttons above) -->
-<dialog id="resource-video-modal" class="w-[92vw] max-w-3xl p-0 bg-transparent backdrop:bg-[#0B1B30]/80">
+<dialog id="resource-video-modal" class="w-[92vw] max-w-3xl p-0 bg-transparent backdrop:bg-[color:var(--c-deepest-80)]">
     <div class="relative bg-black shadow-2xl">
-        <button type="button" onclick="closeResourceVideo()" aria-label="Close video" class="absolute top-2 right-2 z-10 bg-black/60 hover:bg-black/80 text-white rounded-full p-1.5 transition-colors border-none cursor-pointer">
+        <button type="button" onclick="closeResourceVideo()" aria-label="Close video" class="absolute top-2 right-2 z-10 bg-black/60 hover:bg-black/80 text-[color:var(--c-on-dark-1)] rounded-full p-1.5 transition-colors border-none cursor-pointer">
             <i data-lucide="x" class="w-5 h-5"></i>
         </button>
         <div class="aspect-video w-full">
@@ -713,122 +723,124 @@
 
     <!-- Footer -->
     
-<footer class="bg-[#0B1B30] text-[#B9C4D2] py-16">
+<footer class="bg-[color:var(--c-deepest)] text-[color:var(--c-on-dark-3)] py-16">
     <div class="container mx-auto px-6">
         <div class="grid md:grid-cols-4 gap-12 border-b border-white/10 pb-12 mb-12">
             <!-- About Column -->
             <div>
                 <div class="flex items-center gap-2 mb-4">
-                    <div class="w-10 h-10 flex items-center justify-center bg-[#D9A756] rounded-full shrink-0">
+                    <div class="w-10 h-10 flex items-center justify-center bg-[color:var(--c-acc)] rounded-full shrink-0">
                         <img src="/transpersonaltraining/assets/images/Graphics/logo.svg" alt="Logo" class="w-8 h-8" style="display:block;" />
                     </div>
-                    <h3 class="p4-display text-white font-semibold leading-tight">
+                    <h3 class="p4-display text-[color:var(--c-on-dark-1)] font-semibold leading-tight">
                         <span class="block text-sm tracking-widest font-normal mt-1">East West</span>
                         <span class="block text-xl tracking-wide">Transpersonal Training</span>
                     </h3>
                 </div>
-                <p class="text-sm leading-relaxed text-[#8FA0B3]">
+                <p class="text-sm leading-relaxed text-[color:var(--c-on-dark-4)]">
                     Educating therapists for a revolution of consciousness through transpersonal psychotherapy and breathwork.
                 </p>
-                <p class="text-xs leading-relaxed text-[#7185A0] mt-4">
+                <p class="text-xs leading-relaxed text-[color:var(--c-on-dark-5)] mt-4">
                     Eastwest Transpersonal Training School
                 </p>
             </div>
 
             <!-- Quick Links -->
             <div>
-                <h4 class="p4-kicker text-[#D9A756] mb-5">Training</h4>
+                <h4 class="p4-kicker text-[color:var(--c-acc)] mb-5">Training</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="/transpersonaltraining/training-overview/" class="hover:text-[#D9A756] transition-colors">Training Overview</a></li>
-                    <li><a href="/transpersonaltraining/curriculum/" class="hover:text-[#D9A756] transition-colors">Curriculum</a></li>
-                    <li><a href="/transpersonaltraining/schedule/" class="hover:text-[#D9A756] transition-colors">Intensive Schedule</a></li>
-                    <li><a href="/transpersonaltraining/lectures-schedule/" class="hover:text-[#D9A756] transition-colors">Lectures Schedule</a></li>
-                    <li><a href="/transpersonaltraining/teachers/" class="hover:text-[#D9A756] transition-colors">Our Teachers</a></li>
-                    <li><a href="/transpersonaltraining/blog/" class="hover:text-[#D9A756] transition-colors">Blog</a></li>
+                    <li><a href="/transpersonaltraining/training-overview/" class="hover:text-[color:var(--c-acc)] transition-colors">Training Overview</a></li>
+                    <li><a href="/transpersonaltraining/curriculum/" class="hover:text-[color:var(--c-acc)] transition-colors">Curriculum</a></li>
+                    <li><a href="/transpersonaltraining/schedule/" class="hover:text-[color:var(--c-acc)] transition-colors">Intensive Schedule</a></li>
+                    <li><a href="/transpersonaltraining/lectures-schedule/" class="hover:text-[color:var(--c-acc)] transition-colors">Lectures Schedule</a></li>
+                    <li><a href="/transpersonaltraining/teachers/" class="hover:text-[color:var(--c-acc)] transition-colors">Our Teachers</a></li>
+                    <li><a href="/transpersonaltraining/blog/" class="hover:text-[color:var(--c-acc)] transition-colors">Blog</a></li>
                 </ul>
             </div>
 
             <!-- Resources -->
             <div>
-                <h4 class="p4-kicker text-[#D9A756] mb-5">Resources</h4>
+                <h4 class="p4-kicker text-[color:var(--c-acc)] mb-5">Resources</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="/transpersonaltraining/techniques/" class="hover:text-[#D9A756] transition-colors">School Pillars</a></li>
-                    <li><a href="/transpersonaltraining/venues/" class="hover:text-[#D9A756] transition-colors">Venues</a></li>
-                    <li><a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="hover:text-[#D9A756] transition-colors">What is Transpersonal Psychology</a></li>
-                    <li><a href="/transpersonaltraining/become-a-practice-client/" class="hover:text-[#D9A756] transition-colors">Become a Practice Client</a></li>
-                    <li><a href="/transpersonaltraining/resources/" class="hover:text-[#D9A756] transition-colors">Recommended Reading</a></li>
-                    <li><a href="/transpersonaltraining/collaborations/" class="hover:text-[#D9A756] transition-colors">Collaborations</a></li>
+                    <li><a href="/transpersonaltraining/techniques/" class="hover:text-[color:var(--c-acc)] transition-colors">School Pillars</a></li>
+                    <li><a href="/transpersonaltraining/venues/" class="hover:text-[color:var(--c-acc)] transition-colors">Venues</a></li>
+                    <li><a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="hover:text-[color:var(--c-acc)] transition-colors">What is Transpersonal Psychology</a></li>
+                    <li><a href="/transpersonaltraining/become-a-practice-client/" class="hover:text-[color:var(--c-acc)] transition-colors">Become a Practice Client</a></li>
+                    <li><a href="/transpersonaltraining/resources/" class="hover:text-[color:var(--c-acc)] transition-colors">Recommended Reading</a></li>
+                    <li><a href="/transpersonaltraining/collaborations/" class="hover:text-[color:var(--c-acc)] transition-colors">Collaborations</a></li>
+                    <li><a href="https://student.transpersonal-training.com/" target="_blank" rel="noopener" class="hover:text-[color:var(--c-acc)] transition-colors">Learning platform</a></li>
+                    <li><a href="https://old.transpersonal-training.com/" target="_blank" rel="noopener" class="hover:text-[color:var(--c-acc)] transition-colors">Old website</a></li>
                 </ul>
             </div>
 
             <!-- Contact -->
             <div>
-                <h4 class="p4-kicker text-[#D9A756] mb-5">Connect</h4>
+                <h4 class="p4-kicker text-[color:var(--c-acc)] mb-5">Connect</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="/transpersonaltraining/#contact" class="hover:text-[#D9A756] transition-colors">Contact Us</a></li>
-                    <li><a href="mailto:west-office@transpersonal-training.com" class="hover:text-[#D9A756] transition-colors">West office &middot; west-office@transpersonal-training.com</a></li>
-                    <li><a href="mailto:east-office@transpersonal-training.com" class="hover:text-[#D9A756] transition-colors">East office &middot; east-office@transpersonal-training.com</a></li>
-                    <li><a href="tel:+4917638034517" class="hover:text-[#D9A756] transition-colors">West office &middot; +49 176 38034517</a></li>
-                    <li><a href="tel:+37379024199" class="hover:text-[#D9A756] transition-colors">East office &middot; +373 79024199</a></li>
-                    <li><a href="https://www.facebook.com/EastwestTranspersonalTrainingSchool/" target="_blank" rel="noopener" class="hover:text-[#D9A756] transition-colors inline-flex items-center gap-1.5"><i data-lucide="facebook" class="w-4 h-4"></i>Facebook</a></li>
-                    <li><button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="hover:text-[#D9A756] transition-colors text-left bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy Policy</button></li>
+                    <li><a href="/transpersonaltraining/#contact" class="hover:text-[color:var(--c-acc)] transition-colors">Contact Us</a></li>
+                    <li><a href="mailto:west-office@transpersonal-training.com" class="hover:text-[color:var(--c-acc)] transition-colors">West office &middot; west-office@transpersonal-training.com</a></li>
+                    <li><a href="mailto:east-office@transpersonal-training.com" class="hover:text-[color:var(--c-acc)] transition-colors">East office &middot; east-office@transpersonal-training.com</a></li>
+                    <li><a href="tel:+4917638034517" class="hover:text-[color:var(--c-acc)] transition-colors">West office &middot; +49 176 38034517</a></li>
+                    <li><a href="tel:+37379024199" class="hover:text-[color:var(--c-acc)] transition-colors">East office &middot; +373 79024199</a></li>
+                    <li><a href="https://www.facebook.com/EastwestTranspersonalTrainingSchool/" target="_blank" rel="noopener" class="hover:text-[color:var(--c-acc)] transition-colors inline-flex items-center gap-1.5"><i data-lucide="facebook" class="w-4 h-4"></i>Facebook</a></li>
+                    <li><button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="hover:text-[color:var(--c-acc)] transition-colors text-left bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy Policy</button></li>
                 </ul>
             </div>
         </div>
 
         <!-- Bottom Bar -->
-        <div class="flex flex-col md:flex-row justify-between items-center text-xs text-[#7185A0]">
+        <div class="flex flex-col md:flex-row justify-between items-center text-xs text-[color:var(--c-on-dark-5)]">
             <p>&copy; 2026 transpersonal-training.com — Educating therapists for a revolution of consciousness.</p>
             <div class="flex gap-6 mt-4 md:mt-0">
-                <button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="hover:text-[#D9A756] bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy</button>
-                <a href="/transpersonaltraining/legal-notice/" class="hover:text-[#D9A756]">Legal Notice</a>
+                <button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="hover:text-[color:var(--c-acc)] bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy</button>
+                <a href="/transpersonaltraining/legal-notice/" class="hover:text-[color:var(--c-acc)]">Legal Notice</a>
             </div>
         </div>
     </div>
 </footer>
 
 <!-- Privacy Policy Modal -->
-<dialog id="privacy-modal" class="max-w-2xl w-[92vw] p-0 backdrop:bg-[#0B1B30]/70 shadow-2xl">
-    <div class="bg-[#FEF9EF] max-h-[85vh] overflow-y-auto">
-        <div class="sticky top-0 bg-[#0F2540] text-[#FDFBF5] px-6 py-5 flex items-center justify-between">
+<dialog id="privacy-modal" class="max-w-2xl w-[92vw] p-0 backdrop:bg-[color:var(--c-deepest-70)] shadow-2xl">
+    <div class="bg-[color:var(--c-paper-card)] max-h-[85vh] overflow-y-auto">
+        <div class="sticky top-0 bg-[color:var(--c-deep)] text-[color:var(--c-paper-hi)] px-6 py-5 flex items-center justify-between">
             <h2 class="p4-display text-2xl font-medium">Privacy Policy</h2>
-            <button type="button" onclick="document.getElementById('privacy-modal').close()" aria-label="Close" class="text-[#FDFBF5] hover:text-[#D9A756] bg-transparent border-none cursor-pointer p-1">
+            <button type="button" onclick="document.getElementById('privacy-modal').close()" aria-label="Close" class="text-[color:var(--c-paper-hi)] hover:text-[color:var(--c-acc)] bg-transparent border-none cursor-pointer p-1">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
         </div>
-        <div class="px-6 md:px-8 py-8 space-y-5 text-neutral-warm-700 leading-relaxed text-sm md:text-base">
+        <div class="px-6 md:px-8 py-8 space-y-5 text-[color:var(--c-body)] leading-relaxed text-sm md:text-base">
             <p>
                 This website does not use cookies, analytics, tracking pixels or any similar technology, and it does not
                 collect, store or process any personal data through your simple use of these pages. There is nothing to
                 consent to and nothing to opt out of — no data is gathered by browsing this site.
             </p>
-            <h3 class="text-lg font-semibold text-indigo-deep-900">If you contact us or apply</h3>
+            <h3 class="text-lg font-semibold text-[color:var(--c-heading)]">If you contact us or apply</h3>
             <p>
                 The only personal data we ever receive is what you choose to send us directly — for example through the
                 application form or by writing to
-                <a href="mailto:west-office@transpersonal-training.com" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4">west-office@transpersonal-training.com</a>
+                <a href="mailto:west-office@transpersonal-training.com" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-4">west-office@transpersonal-training.com</a>
                 (Western track) or
-                <a href="mailto:east-office@transpersonal-training.com" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4">east-office@transpersonal-training.com</a>
+                <a href="mailto:east-office@transpersonal-training.com" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-4">east-office@transpersonal-training.com</a>
                 (Eastern track).
                 In that case, the following applies in accordance with the EU General Data Protection Regulation
                 (Regulation (EU) 2016/679, "GDPR"):
             </p>
             <ul class="list-disc list-inside space-y-2">
-                <li><span class="font-medium text-neutral-warm-800">Data controller:</span> Eastwest Transpersonal Training School, reachable at the email addresses above.</li>
-                <li><span class="font-medium text-neutral-warm-800">Categories of data processed:</span> the name, email address and any other information you voluntarily include in your message or application.</li>
-                <li><span class="font-medium text-neutral-warm-800">Purpose and legal basis:</span> responding to your enquiry and assessing applications, on the basis of your consent (Art. 6(1)(a) GDPR) and, where applicable, to take pre-contractual steps at your request (Art. 6(1)(b) GDPR).</li>
-                <li><span class="font-medium text-neutral-warm-800">Retention:</span> your data is kept only for as long as necessary to handle your enquiry or application, and is then deleted.</li>
-                <li><span class="font-medium text-neutral-warm-800">Recipients:</span> your data is not sold or shared with third parties, save where strictly necessary to respond to you (e.g. our email provider) or where required by law.</li>
-                <li><span class="font-medium text-neutral-warm-800">Your rights:</span> under Articles 15–22 GDPR you may request access to, rectification or erasure of your data, restriction of or objection to its processing, and data portability, and you may lodge a complaint with your national data protection authority at any time. To exercise these rights, simply email us at the address above.</li>
+                <li><span class="font-medium text-[color:var(--c-heading)]">Data controller:</span> Eastwest Transpersonal Training School, reachable at the email addresses above.</li>
+                <li><span class="font-medium text-[color:var(--c-heading)]">Categories of data processed:</span> the name, email address and any other information you voluntarily include in your message or application.</li>
+                <li><span class="font-medium text-[color:var(--c-heading)]">Purpose and legal basis:</span> responding to your enquiry and assessing applications, on the basis of your consent (Art. 6(1)(a) GDPR) and, where applicable, to take pre-contractual steps at your request (Art. 6(1)(b) GDPR).</li>
+                <li><span class="font-medium text-[color:var(--c-heading)]">Retention:</span> your data is kept only for as long as necessary to handle your enquiry or application, and is then deleted.</li>
+                <li><span class="font-medium text-[color:var(--c-heading)]">Recipients:</span> your data is not sold or shared with third parties, save where strictly necessary to respond to you (e.g. our email provider) or where required by law.</li>
+                <li><span class="font-medium text-[color:var(--c-heading)]">Your rights:</span> under Articles 15–22 GDPR you may request access to, rectification or erasure of your data, restriction of or objection to its processing, and data portability, and you may lodge a complaint with your national data protection authority at any time. To exercise these rights, simply email us at the address above.</li>
             </ul>
-            <h3 class="text-lg font-semibold text-indigo-deep-900">Newsletter</h3>
+            <h3 class="text-lg font-semibold text-[color:var(--c-heading)]">Newsletter</h3>
             <p>
                 If you tick the newsletter box on the contact form, we also keep your name and email to send you
                 occasional updates about the training and the school, on the basis of your consent (Art. 6(1)(a) GDPR).
                 You can withdraw this consent and unsubscribe at any time by emailing us at the address above; this does
                 not affect any other request you have made.
             </p>
-            <p class="text-xs text-neutral-warm-500 pt-2 border-t border-[#E7D6BE]">
+            <p class="text-xs text-[color:var(--c-body-dim)] pt-2 border-t border-[color:var(--c-line)]">
                 Last updated 2026.
             </p>
         </div>

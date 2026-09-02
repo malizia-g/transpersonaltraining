@@ -166,7 +166,7 @@
         if (!html) { downloadNote.classList.add('hidden'); return; }
         downloadNote.className = 'text-sm mt-3 p-3 border ' + (kind === 'err'
             ? 'bg-red-50 border-red-300 text-red-800'
-            : 'bg-[#FAF3E7] border-neutral-warm-300 text-neutral-warm-700');
+            : 'bg-[color:var(--c-paper)] border-[color:var(--c-line)] text-[color:var(--c-body)]');
         downloadNote.innerHTML = html;
         downloadNote.classList.remove('hidden');
     }
@@ -214,7 +214,7 @@
         var base = 'text-sm p-3 border ';
         var tone = kind === 'ok' ? 'bg-green-50 border-green-300 text-green-800'
                  : kind === 'err' ? 'bg-red-50 border-red-300 text-red-800'
-                 : 'bg-[#FAF3E7] border-neutral-warm-300 text-neutral-warm-700';
+                 : 'bg-[color:var(--c-paper)] border-[color:var(--c-line)] text-[color:var(--c-body)]';
         statusEl.className = base + tone;
         statusEl.innerHTML = html;
         statusEl.classList.remove('hidden');

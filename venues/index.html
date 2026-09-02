@@ -60,14 +60,14 @@
         .loader-spinner {
             width: 50px;
             height: 50px;
-            border: 4px solid rgba(201, 164, 92, 0.25);
-            border-top-color: #D9A756;
+            border: 4px solid var(--c-acc-25, rgba(201, 164, 92, 0.25));
+            border-top-color: var(--c-acc, #D9A756);
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
         
         .loader-text {
-            color: #334155;
+            color: var(--c-body, #334155);
             font-size: 1.125rem;
             font-weight: 500;
             margin-top: 1.5rem;
@@ -95,7 +95,7 @@
     <!-- Lucide Icons (defer loading) -->
     <script src="https://unpkg.com/lucide@0.344.0" defer></script>
 </head>
-<body class="font-sans text-slate-800 bg-slate-50 antialiased">
+<body class="font-sans text-[color:var(--c-heading)] bg-[color:var(--c-paper-hi)] antialiased">
 
     <!-- Page Loader -->
     <div id="page-loader">
@@ -105,14 +105,14 @@
 
     <!-- Navigation -->
     
-<nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 bg-transparent text-slate-100/90">
+<nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 bg-transparent text-[color:var(--c-on-dark-2)]">
     <div class="container mx-auto px-6 flex justify-between items-center relative z-10">
         <!-- Logo (Desktop Only) -->
         <a href="/transpersonaltraining/" class="hidden md:flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <div class="w-10 h-10 flex items-center justify-center bg-[#D9A756] rounded-full transition-transform duration-300 group hover:rotate-180 shrink-0">
+            <div class="w-10 h-10 flex items-center justify-center bg-[color:var(--c-acc)] rounded-full transition-transform duration-300 group hover:rotate-180 shrink-0">
                 <img src="/transpersonaltraining/assets/images/Graphics/logo.svg" alt="Logo" class="w-8 h-8 transition-transform duration-500 group-hover:rotate-180" style="display:block;" />
             </div>
-            <span class="flex flex-col justify-center h-10 leading-none font-serif font-bold text-slate-100">
+            <span class="flex flex-col justify-center h-10 leading-none font-serif font-bold text-[color:var(--c-on-dark-1)]">
                 <span class="text-[0.7rem] tracking-widest leading-none">East West</span>
                 <span class="text-[1.35rem] tracking-wide leading-none mt-0.5">Transpersonal Training</span>
             </span>
@@ -120,10 +120,10 @@
 
         <!-- Logo (Mobile Only) -->
         <a href="/transpersonaltraining/" class="flex md:hidden items-center gap-2 hover:opacity-80 transition-opacity">
-            <div class="w-8 h-8 flex items-center justify-center bg-[#D9A756] rounded-full transition-transform duration-300 group hover:rotate-180 shrink-0">
+            <div class="w-8 h-8 flex items-center justify-center bg-[color:var(--c-acc)] rounded-full transition-transform duration-300 group hover:rotate-180 shrink-0">
                 <img src="/transpersonaltraining/assets/images/Graphics/logo.svg" alt="Logo" class="w-6 h-6 transition-transform duration-500 group-hover:rotate-180" style="display:block;" />
             </div>
-            <span class="flex flex-col justify-center h-8 leading-none font-serif font-bold text-slate-100">
+            <span class="flex flex-col justify-center h-8 leading-none font-serif font-bold text-[color:var(--c-on-dark-1)]">
                 <span class="text-[0.6rem] tracking-widest leading-none">East West</span>
                 <span class="text-[1.05rem] tracking-wide leading-none mt-0.5">Transpersonal Training</span>
             </span>
@@ -133,7 +133,7 @@
         <div class="hidden md:flex items-center gap-8">
             <!-- Training Dropdown -->
             <div class="dropdown">
-                <button type="button" class="nav-link text-sm font-medium hover:text-[#D9A756] transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
+                <button type="button" class="nav-link text-sm font-medium hover:text-[color:var(--c-acc)] transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
                     Training <i data-lucide="chevron-down" class="w-4 h-4"></i>
                 </button>
                 <div class="dropdown-menu">
@@ -167,14 +167,11 @@
 
             <!-- Resources Dropdown (con Techniques) -->
             <div class="dropdown">
-                <button type="button" class="nav-link text-sm font-medium hover:text-[#D9A756] transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
+                <button type="button" class="nav-link text-sm font-medium hover:text-[color:var(--c-acc)] transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
                     Resources <i data-lucide="chevron-down" class="w-4 h-4"></i>
                 </button>
                 <div class="dropdown-menu">
-                    <a href="/transpersonaltraining/apply/" class="text-sm">
-                        <i data-lucide="clipboard-check" class="w-4 h-4 submenu-icon"></i>
-                        <span>Apply</span>
-                    </a>
+                    
                     <a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="text-sm">
                         <i data-lucide="stethoscope" class="w-4 h-4 submenu-icon"></i>
                         <span>What is Transpersonal Psychology</span>
@@ -195,74 +192,87 @@
                         <i data-lucide="handshake" class="w-4 h-4 submenu-icon"></i>
                         <span>Collaborations</span>
                     </a>
+                    <a href="https://student.transpersonal-training.com/" target="_blank" rel="noopener" class="text-sm">
+                        <i data-lucide="graduation-cap" class="w-4 h-4 submenu-icon"></i>
+                        <span>Learning platform</span>
+                    </a>
+                    <a href="https://old.transpersonal-training.com/" target="_blank" rel="noopener" class="text-sm">
+                        <i data-lucide="archive" class="w-4 h-4 submenu-icon"></i>
+                        <span>Old website</span>
+                    </a>
                 </div>
             </div>
 
-            <a href="/transpersonaltraining/blog/" class="nav-link text-sm font-medium hover:text-[#D9A756] transition-colors">Blog</a>
+            <a href="/transpersonaltraining/blog/" class="nav-link text-sm font-medium hover:text-[color:var(--c-acc)] transition-colors">Blog</a>
 
-            <a href="/transpersonaltraining/#contact" class="bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-4 py-1.5 text-xs lg:px-6 lg:py-2 lg:text-sm font-medium tracking-wide transition-colors shadow-md whitespace-nowrap">Request a Demo</a>
+            <a href="/transpersonaltraining/#contact" class="bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-deep)] px-4 py-1.5 text-xs lg:px-6 lg:py-2 lg:text-sm font-medium tracking-wide transition-colors shadow-md whitespace-nowrap">Request a Demo</a>
         </div>
 
         <!-- Mobile Menu Button -->
-        <button id="mobile-menu-btn" class="md:hidden text-slate-100 focus:outline-none">
+        <button id="mobile-menu-btn" class="md:hidden text-[color:var(--c-on-dark-1)] focus:outline-none">
             <i data-lucide="menu" class="w-7 h-7"></i>
         </button>
     </div>
 
     <!-- Mobile Menu Dropdown -->
     <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full shadow-xl py-6 px-6 flex-col gap-4 z-20 border-t">
-        <span class="text-slate-200 py-2 border-b block font-semibold">Training</span>
-        <a href="/transpersonaltraining/training-overview/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <span class="text-[color:var(--c-on-dark-2)] py-2 border-b block font-semibold">Training</span>
+        <a href="/transpersonaltraining/training-overview/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="compass" class="w-4 h-4 submenu-icon"></i>
             <span>Training Overview</span>
         </a>
-        <a href="/transpersonaltraining/curriculum/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/curriculum/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="book-open" class="w-4 h-4 submenu-icon"></i>
             <span>Curriculum</span>
         </a>
-        <a href="/transpersonaltraining/teachers/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/teachers/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="users" class="w-4 h-4 submenu-icon"></i>
             <span>Our Teachers</span>
         </a>
-        <a href="/transpersonaltraining/schedule/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/schedule/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="calendar" class="w-4 h-4 submenu-icon"></i>
             <span>Intensive Schedule</span>
         </a>
-        <a href="/transpersonaltraining/venues/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/venues/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="map-pin" class="w-4 h-4 submenu-icon"></i>
             <span>Venues</span>
         </a>
-        <a href="/transpersonaltraining/lectures-schedule/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/lectures-schedule/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="presentation" class="w-4 h-4 submenu-icon"></i>
             <span>Lectures Schedule</span>
         </a>
-        <span class="text-slate-200 py-2 border-b block font-semibold">Resources</span>
-        <a href="/transpersonaltraining/apply/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
-            <i data-lucide="clipboard-check" class="w-4 h-4 submenu-icon"></i>
-            <span>Apply</span>
-        </a>
-        <a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <span class="text-[color:var(--c-on-dark-2)] py-2 border-b block font-semibold">Resources</span>
+        
+        <a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="stethoscope" class="w-4 h-4 submenu-icon"></i>
             <span>What is Transpersonal Psychology</span>
         </a>
-        <a href="/transpersonaltraining/become-a-practice-client/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/become-a-practice-client/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="user-check" class="w-4 h-4 submenu-icon"></i>
             <span>Become a Practice Client</span>
         </a>
-        <a href="/transpersonaltraining/techniques/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/techniques/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="activity" class="w-4 h-4 submenu-icon"></i>
             <span>School Pillars</span>
         </a>
-        <a href="/transpersonaltraining/resources/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/resources/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="book-marked" class="w-4 h-4 submenu-icon"></i>
             <span>Recommended Reading</span>
         </a>
-        <a href="/transpersonaltraining/collaborations/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/collaborations/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="handshake" class="w-4 h-4 submenu-icon"></i>
             <span>Collaborations</span>
         </a>
-        <a href="/transpersonaltraining/blog/" class="text-slate-200 py-2 border-b block transition-colors">Blog</a>
-        <a href="/transpersonaltraining/#contact" class="bg-[#D9A756] text-[#0F2540] px-6 py-3 w-full mt-4 font-bold text-center block">Request a Demo</a>
+        <a href="https://student.transpersonal-training.com/" target="_blank" rel="noopener" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+            <i data-lucide="graduation-cap" class="w-4 h-4 submenu-icon"></i>
+            <span>Learning platform</span>
+        </a>
+        <a href="https://old.transpersonal-training.com/" target="_blank" rel="noopener" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+            <i data-lucide="archive" class="w-4 h-4 submenu-icon"></i>
+            <span>Old website</span>
+        </a>
+        <a href="/transpersonaltraining/blog/" class="text-[color:var(--c-on-dark-2)] py-2 border-b block transition-colors">Blog</a>
+        <a href="/transpersonaltraining/#contact" class="bg-[color:var(--c-acc)] text-[color:var(--c-deep)] px-6 py-3 w-full mt-4 font-bold text-center block">Request a Demo</a>
     </div>
 </nav>
 
@@ -280,20 +290,20 @@
             <source srcset="/transpersonaltraining/assets/images/Headers/hero-venues-todtmoos-narrow.webp" type="image/webp">
             <img src="/transpersonaltraining/assets/images/Headers/hero-venues-todtmoos-narrow.jpg" alt="Sunlit forest valley near Todtmoos in the Black Forest" class="w-full h-full object-cover">
         </picture>
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/80 via-[#0F2540]/60 to-[#0F2540]/80"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[var(--c-deep-80)] via-[var(--c-deep-60)] to-[var(--c-deep-80)]"></div>
     </div>
 
     <div class="relative z-10 container mx-auto px-6 text-center pt-20">
         <div class="animate-fade-in-up">
-            <p class="p4-kicker text-[#D9A756] mb-6 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-acc)] mb-6 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 Where we gather
                 <span class="p4-hairline"></span>
             </p>
-            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] mb-6 leading-tight drop-shadow-md">
+            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[color:var(--c-paper-hi)] mb-6 leading-tight drop-shadow-md">
                 Our Venues
             </h1>
-            <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
+            <p class="text-xl md:text-2xl text-[color:var(--c-on-dark-2)] max-w-3xl mx-auto font-light leading-relaxed">
                 Inspiring settings for our residential intensives &mdash; the Black Forest, the hills of Tuscany, and a new home for our Eastern track
             </p>
         </div>
@@ -301,23 +311,23 @@
 </header>
 
 <!-- Breadcrumb -->
-<div class="bg-white border-b border-[#E7D6BE]">
+<div class="bg-[color:var(--c-paper-card)] border-b border-[color:var(--c-line)]">
     <div class="container mx-auto px-6 py-4">
-        <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
-            <a href="/transpersonaltraining/" class="hover:text-science-blue-600 transition-colors">Home</a>
+        <div class="flex items-center gap-2 text-sm text-[color:var(--c-body-dim)]">
+            <a href="/transpersonaltraining/" class="hover:text-[color:var(--c-link)] transition-colors">Home</a>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-neutral-warm-500">Training</span>
+            <span class="text-[color:var(--c-body-dim)]">Training</span>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-science-blue-800 font-medium">Venues</span>
+            <span class="text-[color:var(--c-heading)] font-medium">Venues</span>
         </div>
     </div>
 </div>
 
 <!-- Intro -->
-<section class="py-16 bg-white">
+<section class="py-16 bg-[color:var(--c-paper-hi)]">
     <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto text-center">
-            <p class="text-lg md:text-xl text-neutral-warm-700 leading-relaxed">
+            <p class="text-lg md:text-xl text-[color:var(--c-body)] leading-relaxed">
                 The online lectures bring our whole international community together, but the residential intensives are held separately for each track. Our Western-track intensives take place at two very different but equally inspiring locations in Western Europe, while a dedicated venue for the Eastern (Russian-language) track is being finalised. Each offers quiet, natural surroundings, shared living spaces and room for deep experiential work, rest and community.
             </p>
         </div>
@@ -325,19 +335,19 @@
 </section>
 
 <!-- Venue 1: Todtmoos -->
-<section id="todtmoos" class="scroll-mt-24 py-16 md:py-20 bg-[#FAF3E7] border-t border-[#E7D6BE]">
+<section id="todtmoos" class="scroll-mt-24 py-16 md:py-20 bg-[color:var(--c-paper)] border-t border-[color:var(--c-line)]">
     <div class="container mx-auto px-6">
         <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             <div>
-                <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
+                <p class="p4-kicker text-[color:var(--c-sec)] mb-4 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
                     <span class="p4-hairline"></span>
                     Todtmoos &middot; Black Forest, Germany
                     <span class="p4-hairline md:hidden"></span>
                 </p>
-                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-5">
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-5">
                     A house in the Black Forest
                 </h2>
-                <div class="space-y-4 text-neutral-warm-700 leading-relaxed text-lg">
+                <div class="space-y-4 text-[color:var(--c-body)] leading-relaxed text-lg">
                     <p>
                         Our German intensives are held in a welcoming house nestled in the forested hills of Todtmoos, in the southern Black Forest. Surrounded by woodland and birdsong, it is a place designed to support deep work, rest and connection.
                     </p>
@@ -377,19 +387,19 @@
 </section>
 
 <!-- Venue 2: Tenuta di Monteverdi -->
-<section id="monteverdi" class="scroll-mt-24 py-16 md:py-20 bg-white border-t border-[#E7D6BE]">
+<section id="monteverdi" class="scroll-mt-24 py-16 md:py-20 bg-[color:var(--c-paper-card)] border-t border-[color:var(--c-line)]">
     <div class="container mx-auto px-6">
         <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             <div class="lg:order-2">
-                <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
+                <p class="p4-kicker text-[color:var(--c-sec)] mb-4 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
                     <span class="p4-hairline"></span>
                     Tenuta di Monteverdi &middot; Tuscany, Italy
                     <span class="p4-hairline md:hidden"></span>
                 </p>
-                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-5">
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-5">
                     A Tuscan estate in the Maremma
                 </h2>
-                <div class="space-y-4 text-neutral-warm-700 leading-relaxed text-lg">
+                <div class="space-y-4 text-[color:var(--c-body)] leading-relaxed text-lg">
                     <p>
                         Our Italian intensives take place at the Tenuta di Monteverdi, a historic estate of over 1,000 hectares in the Maremma, in southern Tuscany. It is centred on a restored 15th-century hamlet with an 18th-century church, wrapped in olive groves, vineyards, woodland and rolling hills.
                     </p>
@@ -397,9 +407,9 @@
                         Renovated farmhouses, elegant common rooms, gardens and a pool provide a serene and beautiful setting for residential intensives &mdash; with Siena, Montalcino and Florence within easy reach for those who wish to explore.
                     </p>
                 </div>
-                <p class="mt-5 text-sm text-neutral-warm-500">
+                <p class="mt-5 text-sm text-[color:var(--c-body-dim)]">
                     Estate photos courtesy of
-                    <a href="https://www.grimaldisavelli.com/tenuta-di-monteverdi-estate/" target="_blank" rel="noopener" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4">grimaldisavelli.com</a>.
+                    <a href="https://www.grimaldisavelli.com/tenuta-di-monteverdi-estate/" target="_blank" rel="noopener" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-4">grimaldisavelli.com</a>.
                 </p>
             </div>
 
@@ -428,33 +438,33 @@
 </section>
 
 <!-- Venue 3: Eastern track (coming soon) -->
-<section id="eastern-venue" class="scroll-mt-24 py-16 md:py-20 bg-[#FAF3E7] border-t border-[#E7D6BE]">
+<section id="eastern-venue" class="scroll-mt-24 py-16 md:py-20 bg-[color:var(--c-paper)] border-t border-[color:var(--c-line)]">
     <div class="container mx-auto px-6">
         <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             <div>
-                <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
+                <p class="p4-kicker text-[color:var(--c-sec)] mb-4 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
                     <span class="p4-hairline"></span>
                     Eastern track &middot; Eastern Europe
                     <span class="p4-hairline md:hidden"></span>
                 </p>
-                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-5">
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-5">
                     A home for our Eastern intensives
                 </h2>
-                <div class="space-y-4 text-neutral-warm-700 leading-relaxed text-lg">
+                <div class="space-y-4 text-[color:var(--c-body)] leading-relaxed text-lg">
                     <p>
                         Students on our Russian-language Eastern track share the same online lectures as the rest of the community, but gather for their residential intensives at their own dedicated venue.
                     </p>
                     <p>
-                        We are currently finalising this location for the 2027&ndash;2030 cohort, near Chisinau in the Republic of Moldova. Details, photographs and directions will appear here soon &mdash; in the meantime, please <a href="/transpersonaltraining/#contact" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4">get in touch</a> if you would like to know more about the Eastern track.
+                        We are currently finalising this location for the 2027&ndash;2030 cohort, near Chisinau in the Republic of Moldova. Details, photographs and directions will appear here soon &mdash; in the meantime, please <a href="/transpersonaltraining/#contact" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-4">get in touch</a> if you would like to know more about the Eastern track.
                     </p>
                 </div>
             </div>
 
             <div class="flex items-center justify-center">
-                <div class="w-full aspect-[4/3] border-2 border-dashed border-[#D9A756]/50 bg-white/60 flex flex-col items-center justify-center text-center p-8 gap-3">
-                    <i data-lucide="map-pin" class="w-10 h-10 text-[#D9A756]"></i>
-                    <p class="p4-display text-2xl text-[#0F2540]">Coming soon</p>
-                    <p class="text-sm text-neutral-warm-600">Eastern-track venue to be announced</p>
+                <div class="w-full aspect-[4/3] border-2 border-dashed border-[color:var(--c-acc-50)] bg-[color:var(--c-paper-hi-60)] flex flex-col items-center justify-center text-center p-8 gap-3">
+                    <i data-lucide="map-pin" class="w-10 h-10 text-[color:var(--c-acc)]"></i>
+                    <p class="p4-display text-2xl text-[color:var(--c-heading)]">Coming soon</p>
+                    <p class="text-sm text-[color:var(--c-body-dim)]">Eastern-track venue to be announced</p>
                 </div>
             </div>
         </div>
@@ -462,18 +472,18 @@
 </section>
 
 <!-- Secondary / collaborative venues -->
-<section id="secondary-venues" class="scroll-mt-24 py-16 md:py-20 bg-white border-t border-[#E7D6BE]">
+<section id="secondary-venues" class="scroll-mt-24 py-16 md:py-20 bg-[color:var(--c-paper-card)] border-t border-[color:var(--c-line)]">
     <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto text-center mb-14 md:mb-16">
-            <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-sec)] mb-4 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 Closer to home
                 <span class="p4-hairline"></span>
             </p>
-            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-5">
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-5">
                 Secondary &amp; collaborative venues
             </h2>
-            <p class="text-lg text-neutral-warm-700 leading-relaxed">
+            <p class="text-lg text-[color:var(--c-body)] leading-relaxed">
                 As well as our large, intensive courses with overnight accommodation, we also offer smaller seminars run by our collaborative partners. These events take place at their own venues, which may be closer to where members of our community live. This makes it possible &mdash; particularly in the case of the personal experiences required for the training in expanded states of consciousness, such as Holotropic Breathing &mdash; to complete the practice sessions without having to travel far, e.g. in Milano, Chisinau or at several places in Germany or elsewhere, depending on where our students live.
             </p>
         </div>
@@ -481,15 +491,15 @@
         <!-- Moldova -->
         <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             <div>
-                <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
+                <p class="p4-kicker text-[color:var(--c-sec)] mb-4 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
                     <span class="p4-hairline"></span>
                     Moldova &middot; by the Dniester river
                     <span class="p4-hairline md:hidden"></span>
                 </p>
-                <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-5">
+                <h3 class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mb-5">
                     By the banks of the Dniester
                 </h3>
-                <div class="space-y-4 text-neutral-warm-700 leading-relaxed text-lg">
+                <div class="space-y-4 text-[color:var(--c-body)] leading-relaxed text-lg">
                     <p>
                         In Moldova, seminars are held out in the countryside near the Dniester river, where wide meadows and willow-lined banks open onto sweeping views across the valley.
                     </p>
@@ -522,18 +532,18 @@
 </section>
 
 <!-- CTA -->
-<section class="py-16 bg-[#FAF3E7] border-t border-[#E7D6BE] text-center">
+<section class="py-16 bg-[color:var(--c-paper)] border-t border-[color:var(--c-line)] text-center">
     <div class="container mx-auto px-6">
-        <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center gap-4">
+        <p class="p4-kicker text-[color:var(--c-sec)] mb-4 flex items-center justify-center gap-4">
             <span class="p4-hairline"></span>
             Join us
             <span class="p4-hairline"></span>
         </p>
-        <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-4">Join us at an intensive</h2>
-        <p class="text-neutral-warm-700 max-w-2xl mx-auto mb-8 text-lg">
+        <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-4">Join us at an intensive</h2>
+        <p class="text-[color:var(--c-body)] max-w-2xl mx-auto mb-8 text-lg">
             See upcoming residential weekends and intensive seminars across our locations.
         </p>
-        <a href="/transpersonaltraining/schedule/" class="inline-block bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
+        <a href="/transpersonaltraining/schedule/" class="inline-block bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-heading)] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
             View the Intensive Schedule
         </a>
     </div>
@@ -543,122 +553,124 @@
 
     <!-- Footer -->
     
-<footer class="bg-[#0B1B30] text-[#B9C4D2] py-16">
+<footer class="bg-[color:var(--c-deepest)] text-[color:var(--c-on-dark-3)] py-16">
     <div class="container mx-auto px-6">
         <div class="grid md:grid-cols-4 gap-12 border-b border-white/10 pb-12 mb-12">
             <!-- About Column -->
             <div>
                 <div class="flex items-center gap-2 mb-4">
-                    <div class="w-10 h-10 flex items-center justify-center bg-[#D9A756] rounded-full shrink-0">
+                    <div class="w-10 h-10 flex items-center justify-center bg-[color:var(--c-acc)] rounded-full shrink-0">
                         <img src="/transpersonaltraining/assets/images/Graphics/logo.svg" alt="Logo" class="w-8 h-8" style="display:block;" />
                     </div>
-                    <h3 class="p4-display text-white font-semibold leading-tight">
+                    <h3 class="p4-display text-[color:var(--c-on-dark-1)] font-semibold leading-tight">
                         <span class="block text-sm tracking-widest font-normal mt-1">East West</span>
                         <span class="block text-xl tracking-wide">Transpersonal Training</span>
                     </h3>
                 </div>
-                <p class="text-sm leading-relaxed text-[#8FA0B3]">
+                <p class="text-sm leading-relaxed text-[color:var(--c-on-dark-4)]">
                     Educating therapists for a revolution of consciousness through transpersonal psychotherapy and breathwork.
                 </p>
-                <p class="text-xs leading-relaxed text-[#7185A0] mt-4">
+                <p class="text-xs leading-relaxed text-[color:var(--c-on-dark-5)] mt-4">
                     Eastwest Transpersonal Training School
                 </p>
             </div>
 
             <!-- Quick Links -->
             <div>
-                <h4 class="p4-kicker text-[#D9A756] mb-5">Training</h4>
+                <h4 class="p4-kicker text-[color:var(--c-acc)] mb-5">Training</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="/transpersonaltraining/training-overview/" class="hover:text-[#D9A756] transition-colors">Training Overview</a></li>
-                    <li><a href="/transpersonaltraining/curriculum/" class="hover:text-[#D9A756] transition-colors">Curriculum</a></li>
-                    <li><a href="/transpersonaltraining/schedule/" class="hover:text-[#D9A756] transition-colors">Intensive Schedule</a></li>
-                    <li><a href="/transpersonaltraining/lectures-schedule/" class="hover:text-[#D9A756] transition-colors">Lectures Schedule</a></li>
-                    <li><a href="/transpersonaltraining/teachers/" class="hover:text-[#D9A756] transition-colors">Our Teachers</a></li>
-                    <li><a href="/transpersonaltraining/blog/" class="hover:text-[#D9A756] transition-colors">Blog</a></li>
+                    <li><a href="/transpersonaltraining/training-overview/" class="hover:text-[color:var(--c-acc)] transition-colors">Training Overview</a></li>
+                    <li><a href="/transpersonaltraining/curriculum/" class="hover:text-[color:var(--c-acc)] transition-colors">Curriculum</a></li>
+                    <li><a href="/transpersonaltraining/schedule/" class="hover:text-[color:var(--c-acc)] transition-colors">Intensive Schedule</a></li>
+                    <li><a href="/transpersonaltraining/lectures-schedule/" class="hover:text-[color:var(--c-acc)] transition-colors">Lectures Schedule</a></li>
+                    <li><a href="/transpersonaltraining/teachers/" class="hover:text-[color:var(--c-acc)] transition-colors">Our Teachers</a></li>
+                    <li><a href="/transpersonaltraining/blog/" class="hover:text-[color:var(--c-acc)] transition-colors">Blog</a></li>
                 </ul>
             </div>
 
             <!-- Resources -->
             <div>
-                <h4 class="p4-kicker text-[#D9A756] mb-5">Resources</h4>
+                <h4 class="p4-kicker text-[color:var(--c-acc)] mb-5">Resources</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="/transpersonaltraining/techniques/" class="hover:text-[#D9A756] transition-colors">School Pillars</a></li>
-                    <li><a href="/transpersonaltraining/venues/" class="hover:text-[#D9A756] transition-colors">Venues</a></li>
-                    <li><a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="hover:text-[#D9A756] transition-colors">What is Transpersonal Psychology</a></li>
-                    <li><a href="/transpersonaltraining/become-a-practice-client/" class="hover:text-[#D9A756] transition-colors">Become a Practice Client</a></li>
-                    <li><a href="/transpersonaltraining/resources/" class="hover:text-[#D9A756] transition-colors">Recommended Reading</a></li>
-                    <li><a href="/transpersonaltraining/collaborations/" class="hover:text-[#D9A756] transition-colors">Collaborations</a></li>
+                    <li><a href="/transpersonaltraining/techniques/" class="hover:text-[color:var(--c-acc)] transition-colors">School Pillars</a></li>
+                    <li><a href="/transpersonaltraining/venues/" class="hover:text-[color:var(--c-acc)] transition-colors">Venues</a></li>
+                    <li><a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="hover:text-[color:var(--c-acc)] transition-colors">What is Transpersonal Psychology</a></li>
+                    <li><a href="/transpersonaltraining/become-a-practice-client/" class="hover:text-[color:var(--c-acc)] transition-colors">Become a Practice Client</a></li>
+                    <li><a href="/transpersonaltraining/resources/" class="hover:text-[color:var(--c-acc)] transition-colors">Recommended Reading</a></li>
+                    <li><a href="/transpersonaltraining/collaborations/" class="hover:text-[color:var(--c-acc)] transition-colors">Collaborations</a></li>
+                    <li><a href="https://student.transpersonal-training.com/" target="_blank" rel="noopener" class="hover:text-[color:var(--c-acc)] transition-colors">Learning platform</a></li>
+                    <li><a href="https://old.transpersonal-training.com/" target="_blank" rel="noopener" class="hover:text-[color:var(--c-acc)] transition-colors">Old website</a></li>
                 </ul>
             </div>
 
             <!-- Contact -->
             <div>
-                <h4 class="p4-kicker text-[#D9A756] mb-5">Connect</h4>
+                <h4 class="p4-kicker text-[color:var(--c-acc)] mb-5">Connect</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="/transpersonaltraining/#contact" class="hover:text-[#D9A756] transition-colors">Contact Us</a></li>
-                    <li><a href="mailto:west-office@transpersonal-training.com" class="hover:text-[#D9A756] transition-colors">West office &middot; west-office@transpersonal-training.com</a></li>
-                    <li><a href="mailto:east-office@transpersonal-training.com" class="hover:text-[#D9A756] transition-colors">East office &middot; east-office@transpersonal-training.com</a></li>
-                    <li><a href="tel:+4917638034517" class="hover:text-[#D9A756] transition-colors">West office &middot; +49 176 38034517</a></li>
-                    <li><a href="tel:+37379024199" class="hover:text-[#D9A756] transition-colors">East office &middot; +373 79024199</a></li>
-                    <li><a href="https://www.facebook.com/EastwestTranspersonalTrainingSchool/" target="_blank" rel="noopener" class="hover:text-[#D9A756] transition-colors inline-flex items-center gap-1.5"><i data-lucide="facebook" class="w-4 h-4"></i>Facebook</a></li>
-                    <li><button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="hover:text-[#D9A756] transition-colors text-left bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy Policy</button></li>
+                    <li><a href="/transpersonaltraining/#contact" class="hover:text-[color:var(--c-acc)] transition-colors">Contact Us</a></li>
+                    <li><a href="mailto:west-office@transpersonal-training.com" class="hover:text-[color:var(--c-acc)] transition-colors">West office &middot; west-office@transpersonal-training.com</a></li>
+                    <li><a href="mailto:east-office@transpersonal-training.com" class="hover:text-[color:var(--c-acc)] transition-colors">East office &middot; east-office@transpersonal-training.com</a></li>
+                    <li><a href="tel:+4917638034517" class="hover:text-[color:var(--c-acc)] transition-colors">West office &middot; +49 176 38034517</a></li>
+                    <li><a href="tel:+37379024199" class="hover:text-[color:var(--c-acc)] transition-colors">East office &middot; +373 79024199</a></li>
+                    <li><a href="https://www.facebook.com/EastwestTranspersonalTrainingSchool/" target="_blank" rel="noopener" class="hover:text-[color:var(--c-acc)] transition-colors inline-flex items-center gap-1.5"><i data-lucide="facebook" class="w-4 h-4"></i>Facebook</a></li>
+                    <li><button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="hover:text-[color:var(--c-acc)] transition-colors text-left bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy Policy</button></li>
                 </ul>
             </div>
         </div>
 
         <!-- Bottom Bar -->
-        <div class="flex flex-col md:flex-row justify-between items-center text-xs text-[#7185A0]">
+        <div class="flex flex-col md:flex-row justify-between items-center text-xs text-[color:var(--c-on-dark-5)]">
             <p>&copy; 2026 transpersonal-training.com — Educating therapists for a revolution of consciousness.</p>
             <div class="flex gap-6 mt-4 md:mt-0">
-                <button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="hover:text-[#D9A756] bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy</button>
-                <a href="/transpersonaltraining/legal-notice/" class="hover:text-[#D9A756]">Legal Notice</a>
+                <button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="hover:text-[color:var(--c-acc)] bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy</button>
+                <a href="/transpersonaltraining/legal-notice/" class="hover:text-[color:var(--c-acc)]">Legal Notice</a>
             </div>
         </div>
     </div>
 </footer>
 
 <!-- Privacy Policy Modal -->
-<dialog id="privacy-modal" class="max-w-2xl w-[92vw] p-0 backdrop:bg-[#0B1B30]/70 shadow-2xl">
-    <div class="bg-[#FEF9EF] max-h-[85vh] overflow-y-auto">
-        <div class="sticky top-0 bg-[#0F2540] text-[#FDFBF5] px-6 py-5 flex items-center justify-between">
+<dialog id="privacy-modal" class="max-w-2xl w-[92vw] p-0 backdrop:bg-[color:var(--c-deepest-70)] shadow-2xl">
+    <div class="bg-[color:var(--c-paper-card)] max-h-[85vh] overflow-y-auto">
+        <div class="sticky top-0 bg-[color:var(--c-deep)] text-[color:var(--c-paper-hi)] px-6 py-5 flex items-center justify-between">
             <h2 class="p4-display text-2xl font-medium">Privacy Policy</h2>
-            <button type="button" onclick="document.getElementById('privacy-modal').close()" aria-label="Close" class="text-[#FDFBF5] hover:text-[#D9A756] bg-transparent border-none cursor-pointer p-1">
+            <button type="button" onclick="document.getElementById('privacy-modal').close()" aria-label="Close" class="text-[color:var(--c-paper-hi)] hover:text-[color:var(--c-acc)] bg-transparent border-none cursor-pointer p-1">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
         </div>
-        <div class="px-6 md:px-8 py-8 space-y-5 text-neutral-warm-700 leading-relaxed text-sm md:text-base">
+        <div class="px-6 md:px-8 py-8 space-y-5 text-[color:var(--c-body)] leading-relaxed text-sm md:text-base">
             <p>
                 This website does not use cookies, analytics, tracking pixels or any similar technology, and it does not
                 collect, store or process any personal data through your simple use of these pages. There is nothing to
                 consent to and nothing to opt out of — no data is gathered by browsing this site.
             </p>
-            <h3 class="text-lg font-semibold text-indigo-deep-900">If you contact us or apply</h3>
+            <h3 class="text-lg font-semibold text-[color:var(--c-heading)]">If you contact us or apply</h3>
             <p>
                 The only personal data we ever receive is what you choose to send us directly — for example through the
                 application form or by writing to
-                <a href="mailto:west-office@transpersonal-training.com" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4">west-office@transpersonal-training.com</a>
+                <a href="mailto:west-office@transpersonal-training.com" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-4">west-office@transpersonal-training.com</a>
                 (Western track) or
-                <a href="mailto:east-office@transpersonal-training.com" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4">east-office@transpersonal-training.com</a>
+                <a href="mailto:east-office@transpersonal-training.com" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-4">east-office@transpersonal-training.com</a>
                 (Eastern track).
                 In that case, the following applies in accordance with the EU General Data Protection Regulation
                 (Regulation (EU) 2016/679, "GDPR"):
             </p>
             <ul class="list-disc list-inside space-y-2">
-                <li><span class="font-medium text-neutral-warm-800">Data controller:</span> Eastwest Transpersonal Training School, reachable at the email addresses above.</li>
-                <li><span class="font-medium text-neutral-warm-800">Categories of data processed:</span> the name, email address and any other information you voluntarily include in your message or application.</li>
-                <li><span class="font-medium text-neutral-warm-800">Purpose and legal basis:</span> responding to your enquiry and assessing applications, on the basis of your consent (Art. 6(1)(a) GDPR) and, where applicable, to take pre-contractual steps at your request (Art. 6(1)(b) GDPR).</li>
-                <li><span class="font-medium text-neutral-warm-800">Retention:</span> your data is kept only for as long as necessary to handle your enquiry or application, and is then deleted.</li>
-                <li><span class="font-medium text-neutral-warm-800">Recipients:</span> your data is not sold or shared with third parties, save where strictly necessary to respond to you (e.g. our email provider) or where required by law.</li>
-                <li><span class="font-medium text-neutral-warm-800">Your rights:</span> under Articles 15–22 GDPR you may request access to, rectification or erasure of your data, restriction of or objection to its processing, and data portability, and you may lodge a complaint with your national data protection authority at any time. To exercise these rights, simply email us at the address above.</li>
+                <li><span class="font-medium text-[color:var(--c-heading)]">Data controller:</span> Eastwest Transpersonal Training School, reachable at the email addresses above.</li>
+                <li><span class="font-medium text-[color:var(--c-heading)]">Categories of data processed:</span> the name, email address and any other information you voluntarily include in your message or application.</li>
+                <li><span class="font-medium text-[color:var(--c-heading)]">Purpose and legal basis:</span> responding to your enquiry and assessing applications, on the basis of your consent (Art. 6(1)(a) GDPR) and, where applicable, to take pre-contractual steps at your request (Art. 6(1)(b) GDPR).</li>
+                <li><span class="font-medium text-[color:var(--c-heading)]">Retention:</span> your data is kept only for as long as necessary to handle your enquiry or application, and is then deleted.</li>
+                <li><span class="font-medium text-[color:var(--c-heading)]">Recipients:</span> your data is not sold or shared with third parties, save where strictly necessary to respond to you (e.g. our email provider) or where required by law.</li>
+                <li><span class="font-medium text-[color:var(--c-heading)]">Your rights:</span> under Articles 15–22 GDPR you may request access to, rectification or erasure of your data, restriction of or objection to its processing, and data portability, and you may lodge a complaint with your national data protection authority at any time. To exercise these rights, simply email us at the address above.</li>
             </ul>
-            <h3 class="text-lg font-semibold text-indigo-deep-900">Newsletter</h3>
+            <h3 class="text-lg font-semibold text-[color:var(--c-heading)]">Newsletter</h3>
             <p>
                 If you tick the newsletter box on the contact form, we also keep your name and email to send you
                 occasional updates about the training and the school, on the basis of your consent (Art. 6(1)(a) GDPR).
                 You can withdraw this consent and unsubscribe at any time by emailing us at the address above; this does
                 not affect any other request you have made.
             </p>
-            <p class="text-xs text-neutral-warm-500 pt-2 border-t border-[#E7D6BE]">
+            <p class="text-xs text-[color:var(--c-body-dim)] pt-2 border-t border-[color:var(--c-line)]">
                 Last updated 2026.
             </p>
         </div>

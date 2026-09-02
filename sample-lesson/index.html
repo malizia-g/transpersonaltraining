@@ -60,14 +60,14 @@
         .loader-spinner {
             width: 50px;
             height: 50px;
-            border: 4px solid rgba(201, 164, 92, 0.25);
-            border-top-color: #D9A756;
+            border: 4px solid var(--c-acc-25, rgba(201, 164, 92, 0.25));
+            border-top-color: var(--c-acc, #D9A756);
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
         
         .loader-text {
-            color: #334155;
+            color: var(--c-body, #334155);
             font-size: 1.125rem;
             font-weight: 500;
             margin-top: 1.5rem;
@@ -95,7 +95,7 @@
     <!-- Lucide Icons (defer loading) -->
     <script src="https://unpkg.com/lucide@0.344.0" defer></script>
 </head>
-<body class="font-sans text-slate-800 bg-slate-50 antialiased">
+<body class="font-sans text-[color:var(--c-heading)] bg-[color:var(--c-paper-hi)] antialiased">
 
     <!-- Page Loader -->
     <div id="page-loader">
@@ -105,14 +105,14 @@
 
     <!-- Navigation -->
     
-<nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 bg-transparent text-slate-100/90">
+<nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 bg-transparent text-[color:var(--c-on-dark-2)]">
     <div class="container mx-auto px-6 flex justify-between items-center relative z-10">
         <!-- Logo (Desktop Only) -->
         <a href="/transpersonaltraining/" class="hidden md:flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <div class="w-10 h-10 flex items-center justify-center bg-[#D9A756] rounded-full transition-transform duration-300 group hover:rotate-180 shrink-0">
+            <div class="w-10 h-10 flex items-center justify-center bg-[color:var(--c-acc)] rounded-full transition-transform duration-300 group hover:rotate-180 shrink-0">
                 <img src="/transpersonaltraining/assets/images/Graphics/logo.svg" alt="Logo" class="w-8 h-8 transition-transform duration-500 group-hover:rotate-180" style="display:block;" />
             </div>
-            <span class="flex flex-col justify-center h-10 leading-none font-serif font-bold text-slate-100">
+            <span class="flex flex-col justify-center h-10 leading-none font-serif font-bold text-[color:var(--c-on-dark-1)]">
                 <span class="text-[0.7rem] tracking-widest leading-none">East West</span>
                 <span class="text-[1.35rem] tracking-wide leading-none mt-0.5">Transpersonal Training</span>
             </span>
@@ -120,10 +120,10 @@
 
         <!-- Logo (Mobile Only) -->
         <a href="/transpersonaltraining/" class="flex md:hidden items-center gap-2 hover:opacity-80 transition-opacity">
-            <div class="w-8 h-8 flex items-center justify-center bg-[#D9A756] rounded-full transition-transform duration-300 group hover:rotate-180 shrink-0">
+            <div class="w-8 h-8 flex items-center justify-center bg-[color:var(--c-acc)] rounded-full transition-transform duration-300 group hover:rotate-180 shrink-0">
                 <img src="/transpersonaltraining/assets/images/Graphics/logo.svg" alt="Logo" class="w-6 h-6 transition-transform duration-500 group-hover:rotate-180" style="display:block;" />
             </div>
-            <span class="flex flex-col justify-center h-8 leading-none font-serif font-bold text-slate-100">
+            <span class="flex flex-col justify-center h-8 leading-none font-serif font-bold text-[color:var(--c-on-dark-1)]">
                 <span class="text-[0.6rem] tracking-widest leading-none">East West</span>
                 <span class="text-[1.05rem] tracking-wide leading-none mt-0.5">Transpersonal Training</span>
             </span>
@@ -133,7 +133,7 @@
         <div class="hidden md:flex items-center gap-8">
             <!-- Training Dropdown -->
             <div class="dropdown">
-                <button type="button" class="nav-link text-sm font-medium hover:text-[#D9A756] transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
+                <button type="button" class="nav-link text-sm font-medium hover:text-[color:var(--c-acc)] transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
                     Training <i data-lucide="chevron-down" class="w-4 h-4"></i>
                 </button>
                 <div class="dropdown-menu">
@@ -167,14 +167,11 @@
 
             <!-- Resources Dropdown (con Techniques) -->
             <div class="dropdown">
-                <button type="button" class="nav-link text-sm font-medium hover:text-[#D9A756] transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
+                <button type="button" class="nav-link text-sm font-medium hover:text-[color:var(--c-acc)] transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
                     Resources <i data-lucide="chevron-down" class="w-4 h-4"></i>
                 </button>
                 <div class="dropdown-menu">
-                    <a href="/transpersonaltraining/apply/" class="text-sm">
-                        <i data-lucide="clipboard-check" class="w-4 h-4 submenu-icon"></i>
-                        <span>Apply</span>
-                    </a>
+                    
                     <a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="text-sm">
                         <i data-lucide="stethoscope" class="w-4 h-4 submenu-icon"></i>
                         <span>What is Transpersonal Psychology</span>
@@ -195,74 +192,87 @@
                         <i data-lucide="handshake" class="w-4 h-4 submenu-icon"></i>
                         <span>Collaborations</span>
                     </a>
+                    <a href="https://student.transpersonal-training.com/" target="_blank" rel="noopener" class="text-sm">
+                        <i data-lucide="graduation-cap" class="w-4 h-4 submenu-icon"></i>
+                        <span>Learning platform</span>
+                    </a>
+                    <a href="https://old.transpersonal-training.com/" target="_blank" rel="noopener" class="text-sm">
+                        <i data-lucide="archive" class="w-4 h-4 submenu-icon"></i>
+                        <span>Old website</span>
+                    </a>
                 </div>
             </div>
 
-            <a href="/transpersonaltraining/blog/" class="nav-link text-sm font-medium hover:text-[#D9A756] transition-colors">Blog</a>
+            <a href="/transpersonaltraining/blog/" class="nav-link text-sm font-medium hover:text-[color:var(--c-acc)] transition-colors">Blog</a>
 
-            <a href="/transpersonaltraining/#contact" class="bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-4 py-1.5 text-xs lg:px-6 lg:py-2 lg:text-sm font-medium tracking-wide transition-colors shadow-md whitespace-nowrap">Request a Demo</a>
+            <a href="/transpersonaltraining/#contact" class="bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-deep)] px-4 py-1.5 text-xs lg:px-6 lg:py-2 lg:text-sm font-medium tracking-wide transition-colors shadow-md whitespace-nowrap">Request a Demo</a>
         </div>
 
         <!-- Mobile Menu Button -->
-        <button id="mobile-menu-btn" class="md:hidden text-slate-100 focus:outline-none">
+        <button id="mobile-menu-btn" class="md:hidden text-[color:var(--c-on-dark-1)] focus:outline-none">
             <i data-lucide="menu" class="w-7 h-7"></i>
         </button>
     </div>
 
     <!-- Mobile Menu Dropdown -->
     <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full shadow-xl py-6 px-6 flex-col gap-4 z-20 border-t">
-        <span class="text-slate-200 py-2 border-b block font-semibold">Training</span>
-        <a href="/transpersonaltraining/training-overview/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <span class="text-[color:var(--c-on-dark-2)] py-2 border-b block font-semibold">Training</span>
+        <a href="/transpersonaltraining/training-overview/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="compass" class="w-4 h-4 submenu-icon"></i>
             <span>Training Overview</span>
         </a>
-        <a href="/transpersonaltraining/curriculum/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/curriculum/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="book-open" class="w-4 h-4 submenu-icon"></i>
             <span>Curriculum</span>
         </a>
-        <a href="/transpersonaltraining/teachers/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/teachers/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="users" class="w-4 h-4 submenu-icon"></i>
             <span>Our Teachers</span>
         </a>
-        <a href="/transpersonaltraining/schedule/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/schedule/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="calendar" class="w-4 h-4 submenu-icon"></i>
             <span>Intensive Schedule</span>
         </a>
-        <a href="/transpersonaltraining/venues/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/venues/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="map-pin" class="w-4 h-4 submenu-icon"></i>
             <span>Venues</span>
         </a>
-        <a href="/transpersonaltraining/lectures-schedule/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/lectures-schedule/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="presentation" class="w-4 h-4 submenu-icon"></i>
             <span>Lectures Schedule</span>
         </a>
-        <span class="text-slate-200 py-2 border-b block font-semibold">Resources</span>
-        <a href="/transpersonaltraining/apply/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
-            <i data-lucide="clipboard-check" class="w-4 h-4 submenu-icon"></i>
-            <span>Apply</span>
-        </a>
-        <a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <span class="text-[color:var(--c-on-dark-2)] py-2 border-b block font-semibold">Resources</span>
+        
+        <a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="stethoscope" class="w-4 h-4 submenu-icon"></i>
             <span>What is Transpersonal Psychology</span>
         </a>
-        <a href="/transpersonaltraining/become-a-practice-client/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/become-a-practice-client/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="user-check" class="w-4 h-4 submenu-icon"></i>
             <span>Become a Practice Client</span>
         </a>
-        <a href="/transpersonaltraining/techniques/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/techniques/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="activity" class="w-4 h-4 submenu-icon"></i>
             <span>School Pillars</span>
         </a>
-        <a href="/transpersonaltraining/resources/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/resources/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="book-marked" class="w-4 h-4 submenu-icon"></i>
             <span>Recommended Reading</span>
         </a>
-        <a href="/transpersonaltraining/collaborations/" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+        <a href="/transpersonaltraining/collaborations/" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="handshake" class="w-4 h-4 submenu-icon"></i>
             <span>Collaborations</span>
         </a>
-        <a href="/transpersonaltraining/blog/" class="text-slate-200 py-2 border-b block transition-colors">Blog</a>
-        <a href="/transpersonaltraining/#contact" class="bg-[#D9A756] text-[#0F2540] px-6 py-3 w-full mt-4 font-bold text-center block">Request a Demo</a>
+        <a href="https://student.transpersonal-training.com/" target="_blank" rel="noopener" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+            <i data-lucide="graduation-cap" class="w-4 h-4 submenu-icon"></i>
+            <span>Learning platform</span>
+        </a>
+        <a href="https://old.transpersonal-training.com/" target="_blank" rel="noopener" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+            <i data-lucide="archive" class="w-4 h-4 submenu-icon"></i>
+            <span>Old website</span>
+        </a>
+        <a href="/transpersonaltraining/blog/" class="text-[color:var(--c-on-dark-2)] py-2 border-b block transition-colors">Blog</a>
+        <a href="/transpersonaltraining/#contact" class="bg-[color:var(--c-acc)] text-[color:var(--c-deep)] px-6 py-3 w-full mt-4 font-bold text-center block">Request a Demo</a>
     </div>
 </nav>
 
@@ -276,18 +286,18 @@
 
 
 <!-- ═══════════ HERO ═══════════ -->
-<header class="relative bg-[#0F2540] pt-36 pb-16 md:pt-44 md:pb-20">
+<header class="relative bg-[color:var(--c-deep)] pt-36 pb-16 md:pt-44 md:pb-20">
     <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto text-center">
-            <p class="p4-kicker text-[#D9A756] mb-6 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-acc)] mb-6 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 Watch a full lesson
                 <span class="p4-hairline"></span>
             </p>
-            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] leading-[1.1] mb-7">
+            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[color:var(--c-paper-hi)] leading-[1.1] mb-7">
                 See how we teach, before you decide anything
             </h1>
-            <div class="p4-lede text-lg md:text-xl text-[#D5DEE9] leading-relaxed">
+            <div class="p4-lede text-lg md:text-xl text-[color:var(--c-on-dark-2)] leading-relaxed">
                 <p>This is a complete lesson from the training, not a trailer. It is one of the
 shared online lectures that students on both the Western and Eastern tracks
 attend together — the same recording, the same teacher, the same hour.</p>
@@ -301,20 +311,33 @@ hour of it first.</p>
 </header>
 
 <!-- ═══════════ THE LESSON ═══════════ -->
-<section class="bg-[#0F2540] pb-20 md:pb-28">
+<section class="bg-[color:var(--c-deep)] pb-20 md:pb-28">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto">
 
             
             
-            <div class="aspect-video bg-[#0B1B30] border border-[#D9A756]/30 flex flex-col items-center justify-center text-center px-8">
-                <i data-lucide="video" class="w-12 h-12 text-[#D9A756] mb-5"></i>
-                <p class="p4-display text-2xl md:text-3xl text-[#FDFBF5] mb-3">The recording is on its way</p>
-                <p class="text-[#9DAEC2] max-w-md leading-relaxed">
-                    We are choosing the lesson to publish. In the meantime, the brochure below covers
-                    the whole programme &mdash; or write to us and we will tell you when it is up.
-                </p>
+            <div id="lesson-player" class="relative aspect-video bg-black shadow-2xl overflow-hidden">
+                <button type="button"
+                        id="lesson-play"
+                        data-ytid="JMpEaiyV0AI"
+                        aria-label="Play the sample lesson: Maps of the Psyche: an introduction to the transpersonal model"
+                        class="group absolute inset-0 w-full h-full border-none p-0 cursor-pointer bg-black">
+                    <img src="https://img.youtube.com/vi/JMpEaiyV0AI/maxresdefault.jpg"
+                         alt=""
+                         class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-300">
+                    <span class="absolute inset-0 bg-[color:var(--c-deep-25)] group-hover:bg-[color:var(--c-deep-10)] transition-colors flex items-center justify-center">
+                        <i data-lucide="play-circle" class="w-20 h-20 text-[color:var(--c-on-dark-1)] drop-shadow-lg"></i>
+                    </span>
+                </button>
             </div>
+
+            <div class="mt-6 flex flex-wrap items-baseline justify-center gap-x-6 gap-y-2 text-sm text-[color:var(--c-on-dark-4)]">
+                <span class="text-[color:var(--c-on-dark-1)] font-medium">Maps of the Psyche: an introduction to the transpersonal model</span>
+                
+                
+            </div>
+
             
 
         </div>
@@ -325,52 +348,334 @@ hour of it first.</p>
 <!-- The video is opaque to search engines; this text is what carries the
      lesson's vocabulary. It is also how anyone who would rather read than watch
      gets the same content. -->
-<section class="bg-[#FAF3E7] py-20 md:py-28 border-t border-[#D9A756]/40">
+<section class="bg-[color:var(--c-paper)] py-20 md:py-28 border-t border-[color:var(--c-acc-40)]">
     <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto">
-            <p class="p4-kicker text-[#B65E3F] mb-6 flex items-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-sec)] mb-6 flex items-center gap-4">
                 <span class="p4-hairline"></span> Read it instead
             </p>
-            <h2 class="p4-display text-3xl md:text-4xl font-medium text-indigo-deep-900 mb-4">
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-4">
                 Full transcript
             </h2>
-            <p class="text-neutral-warm-600 text-lg mb-10">The complete text of the lesson, for reading, searching and accessibility.</p>
-            <div class="p4-prose text-neutral-warm-800 leading-relaxed">
-                <!--
-  ─────────────────────────────────────────────────────────────────────────────
-  PLACEHOLDER — replace with the real transcript when the recording is chosen.
+            <p class="text-[color:var(--c-body-dim)] text-lg mb-10">The complete text of the lesson, for reading, searching and accessibility.</p>
 
-  This is not filler. The transcript is the reason this page can rank at all:
-  the video itself is opaque to search engines, and this text is what carries
-  the vocabulary of the lesson — the terms people actually search for. It also
-  makes the lesson usable by anyone who cannot or would rather not watch an
-  hour of video.
+            
+            <details class="p4-reveal border border-[color:var(--c-line)] bg-[color:var(--c-paper-card)] shadow-sm">
+                <summary class="flex items-center justify-between gap-6 px-6 py-5 cursor-pointer hover:bg-[color:var(--c-paper-2)] transition-colors">
+                    <span class="font-serif text-xl font-semibold text-[color:var(--c-heading)]">Read the full transcript</span>
+                    <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[color:var(--c-sec)] transition-transform duration-300" aria-hidden="true"></i>
+                </summary>
+                <div class="border-t border-[color:var(--c-line)] px-6 md:px-10 pt-8 pb-10">
+                    <div class="p4-prose text-[color:var(--c-heading)] leading-relaxed">
+                        <h2>Victim and perpetrator: an introduction</h2>
+<p>Welcome, everybody. I want to talk about some aspects concerning victim and
+perpetrator. I think this is a big subject to cover, because for me — and I
+think for many people — it’s maybe the most challenging psychodynamic
+structure we have created in us: this victim–perpetrator dynamic.</p>
+<p>I’ll present some aspects of it, and maybe some new perspectives too. I’ll
+talk for around an hour, and then we’ll have enough time to cover all the
+questions you have, and see where it goes.</p>
+<h2>Everyone feels like a victim</h2>
+<p>In my work, I realised after a while that when I’m listening to people —
+especially when they’re in conflict — they are all, in some way, in a
+victim position. Everyone feels like a victim. And the question for today
+is: how does this happen?</p>
+<p>So I’ll take you on a little journey.</p>
+<h2>Separation: the first deep experience of childhood</h2>
+<p>Let’s look back at childhood. When a baby is born, there’s an ongoing
+process of the baby becoming more and more separate from the mother. In
+the beginning, every cell of the baby is made of the mother; then,
+continuously after birth, there is more and more splitting, more and more
+separation. The child gets more and more the feeling: here’s me, and
+here’s my mother, and here’s my father.</p>
+<p>This starts on a physical level, and that ends around when the child is
+two years old. Then on an emotional level, that ends normally when the
+child is six. And in puberty — around 13, 14, 15, a bit later for boys —
+we separate on a mental level too. We get more and more the feeling: here
+is me, and here are other people.</p>
+<p>So very deep inside, there is a feeling of being separated, of being
+alone. When you ask people around 16, 17, 18, 20 years old, they normally
+feel quite alone, and separate. For me, this is because we all have to go
+this way: I’m separated, I’m alone.</p>
+<h2>Fear: the second deep experience of childhood</h2>
+<p>The second thing that happens in childhood: when we are very little, we
+need shelter, we need love, we need to be cared for. But this isn’t always
+available.</p>
+<p>As a child, we sometimes experience an angry adult. We experience a
+mother who is ill, or not available to us — maybe she’s in hospital.
+Maybe the father has left the family. Maybe father and mother are arguing
+a lot with each other. A lot of things happen in childhood, and the child
+— especially when it’s a baby, or very young — is in a very weak
+position. It can’t do much about it. So trauma happens.</p>
+<p>There are normally two main kinds of trauma for a child: acute, single
+traumas, or an ongoing trauma in the relationship — maybe the father is
+very critical, or the mother is often depressed. Either way, the child
+can’t really stop the trauma from happening in the outer world.</p>
+<p>There’s little or nothing a child can do. It can’t run away, it can’t
+really prevent others from doing harm to it. So when the father is
+abusive, for example, the child is really in a weak position.</p>
+<p>Fear is the feeling that arises because the child doesn’t feel safe.
+That’s the second deep experience of childhood. The first is: I’m
+separated. The second is: I’m not safe, life is not safe.</p>
+<h2>How the child copes: body, heart and mind</h2>
+<p>These are very deep experiences: I’m separated, life is not safe. In the
+outer world, the child can’t do much — but in the inner world, three
+things normally happen.</p>
+<p>On the physical, the body level, the child tightens somewhere in the
+body. The breathing isn’t as deep as it could be — it becomes superficial
+— and tension builds, often around the heart. The heart closes more and
+more, because the child doesn’t want to feel the painful things that are
+happening; the child learns to close its heart.</p>
+<p>The third thing that happens is on the mental level: we retreat into the
+mind, because in the mind we can create a fantasy world. We can get more
+control, think things through, find a new perspective. So the whole
+energy moves upward — retreating from the body and the heart, and more
+and more into the mind.</p>
+<h2>The central drama</h2>
+<p>And the child, in order to control the whole situation, builds up what I
+call the central drama. In psychology it’s sometimes called the “false
+self” — there are many names for it, but I don’t like “false self”; I
+prefer “central drama.” Central, because it’s an individual drama:
+everyone has their own. My drama is different from someone else’s.</p>
+<p>When we’re a child, being in the drama feels very dramatic. But as we
+grow up, and work with it, and gain some perspective on it, we see it’s
+just an old habit — something we built up to deal with a difficult life
+situation when we were a child.</p>
+<p>For me, the central drama is an atmosphere we create. It’s an inner
+habit, an inner energy field we build up — and everyone does this in
+childhood, to cope with the conditions of their life as a child. For
+example, we might build a drama like: “I have to be strong, in order to
+survive.” Or: “I have to be cleverer than other children.” Or: “I have to
+care for other people — for my mother, and for others.”</p>
+<h2>The little me and the inner critic</h2>
+<p>When you take a closer look at the drama, there are two main parts. One
+is what I call the little me. And there’s also a critical voice that
+comes up more and more — a voice we’re not really aware of. I call this
+the inner critic.</p>
+<p>The rule of thumb is: the more trauma that happens, the harsher it is, or
+the less love comes to the child from father or mother, the stronger this
+inner critical voice becomes. This inner voice is always pushing me
+somewhere — telling me I have to learn more, I have to be more — in order
+to get more love, or to be rejected less by mother or father, and to
+avoid pain. You could say this critical voice is the perpetrator part in
+us.</p>
+<p>And when you look closely at the drama, there’s always a lack at its
+root — the lack the trauma left behind. As a child I missed love, or I
+missed being seen, or I missed shelter or protection. That’s one leg. The
+other leg is that, because the central drama is based on fear, there’s
+always a lack of trust in life. We no longer trust life.</p>
+<h2>Why we build the central drama</h2>
+<p>We create the central drama for three reasons.</p>
+<p>First, the child desperately wants to feel safe again, to control the
+life situation better — to get out of this weak position.</p>
+<p>Second, the drama always wants to compensate for the deep lack of love;
+we’re all searching for love, or to be happy again.</p>
+<p>And third, we build this drama because we want to confirm an identity —
+through the drama, we come to know who we are.</p>
+<h2>The point of avoidance and the ideal point</h2>
+<p>In the drama, there are also two other aspects. One is what I call the
+point of avoidance: all the feelings we don’t want to feel — fear, panic,
+helplessness, hopelessness, dependency on others, shame, guilt,
+abandonment, and so on. On the other side, there’s the ideal point.</p>
+<p>The inner critic always wants to protect us from the difficult feelings
+in the point of avoidance, and always wants to push us toward the ideal
+point, where we feel safe again, where we think we’ll get love. So when
+my central drama, for example, is “I have to be strong,” my inner critic
+always says: you have to be strong.</p>
+<p>People with this drama desperately want to avoid feeling weak, or
+helpless, or dependent on others. The inner critic is always pushing
+toward “I’m strong.” Donald Trump is maybe a candidate for this
+particular drama — he always has to be strong, and really avoids showing
+any weakness or helplessness; he knows everything, and so on.</p>
+<h2>A short exercise</h2>
+<p>Let’s do a short exercise — take two or three minutes. Think about your
+inner critic, your inner voice. Take a little time to notice: in which
+direction is your inner critic always trying to push you? And what are
+you trying to avoid falling into? Take a minute for that.</p>
+<h2>The inner critic as storyteller</h2>
+<p>When we take a closer look at this inner controller, or inner critic: as
+I see it, the inner critic always keeps the central drama alive in us.
+It’s the main part of it. But the thing is, we’re not usually aware of
+how harsh or how rude this voice is.</p>
+<p>When I look at my clients — even myself — 99.9% of the time, we’re not
+aware of how harsh or rude this voice is. Think about when you fail: for
+most people, the inner critic shows up with “how stupid I was,” “I’m the
+worst person in the world.” It’s always a big thing for the inner critic
+— very harsh, and very rude.</p>
+<p>In normal life, when we’re not triggered, when we’re fairly relaxed, the
+inner critic appears more like a storyteller — narrating us from morning
+until evening. From the moment we wake up, there are always stories
+running, lots of thoughts coming up. When you take a close look at them,
+98 or 99% of our everyday thoughts really aren’t very precious. And
+they’re always the same stories, coming up again and again.</p>
+<p>So the storyteller is always creating a kind of fog of thoughts, and we
+end up quite disconnected — from life, from our feelings, from our body.
+That’s because of this inner structure of the inner controller: it wants
+to prevent us from feeling, especially the deep, painful feelings. It’s
+always creating separation — from our body, from the heart, from the
+world. We end up disconnected from others.</p>
+<h2>Five signs you are inside your central drama</h2>
+<p>So how can we recognise when we’re in our central drama? I’ve found five
+important signs.</p>
+<p>The first is: I am right. The second is: it’s your fault. The third is:
+I’m the victim. The fourth is: you have to — or I have to — do something
+about it. And the fifth is: complaining, or ranting.</p>
+<p>For example, say you have a conflict with a partner, and you tell them:
+“You’re so mean to me,” or “You never see me.” When you’re really in it,
+you feel: I’m right about what I’m saying, totally right. It’s your fault
+— it’s not my fault that I’m suffering, it’s your fault, because you’re
+mean to me. And I feel like a victim in this.</p>
+<p>Then, normally, we tend towards: I have to quit this relationship, or I
+have to find another partner, or you have to go to therapy so you learn
+to see me, to be kinder to me. And afterwards, after the conflict, we
+complain — about the whole situation, about the other person, and so on.
+Does that sound familiar?</p>
+<p>Normally, we are really trapped in this drama. And the crucial point is
+that we’re maybe a little bit aware that we always feel like a victim,
+but we’re mostly completely unaware of how rude, or harsh, or hurtful we
+ourselves are being in conflict — because we’re acting from our inner
+critic side, and that’s the aspect of ourselves we don’t want to see.</p>
+<p>So I say “you’re so mean to me,” without noticing that my own voice is
+harsh too. I feel like a victim, but I’m not aware of how rude or harsh I
+am — while I’m very aware of how harsh the other person is being towards
+me. That’s always the main focus inside the central drama: we feel,
+always, like a victim.</p>
+<h2>Why the victim position is so easy to fall into</h2>
+<p>Why is it so easy to fall into this victim position? The first reason,
+for me, is that it’s really rooted in childhood — very deeply rooted in
+us, and it starts very early. Sometimes it really starts at the
+beginning of pregnancy, when trauma happens and continues through into
+having a baby. We build this drama within the first five or six years of
+life, when we were very little — that’s when the main aspects are formed
+— but it’s hidden in our unconscious. That’s why it’s so important to do
+inner work, to really deal with this.</p>
+<p>The second reason is that a victim always feels a little better than a
+perpetrator. We feel a bit better when we’re in conflict and think: I’m
+the victim, the other person is wrong, I’m right. And the third reason,
+for me, is that a perpetrator always justifies his actions by seeing
+himself as a victim.</p>
+<p>When I was a young doctor, I worked in a psychiatric hospital, and at
+that time we sometimes had to give assessments for a court — for
+example, examining people who had committed murder. And when I examined
+and talked with them, they all felt like victims.</p>
+<p>A murderer normally can’t really see his own perpetrator side. That’s an
+extreme example, but it points to something we all do: we don’t want to
+see our perpetrator side, and in the beginning, we’re all somehow
+identified with the victim side.</p>
+<p>There’s another reason, too: the child finds a very creative way to get
+out of the weak position. Inside the drama, we can easily switch —
+within seconds — between the little me, the weak position, and the
+perpetrator, the harsh, rude voice. It’s a way of getting into a more
+powerful position. We create the whole drama in order to escape that
+weak little-me position.</p>
+<h2>Switching between victim and perpetrator</h2>
+<p>When you look at the world, you see this pattern everywhere. Look at the
+war between Russia and Ukraine: Putin, and Russia, also act from the
+victim position, always accusing NATO and the Western world, but unable
+to really see their own perpetrator actions — always seeing the
+perpetrator side of the other.</p>
+<p>And when you look at the Ukrainian side, or the Western side, or NATO,
+it’s the same: they blame Russia for being the perpetrator, and feel
+like the victim. When you look closely, both sides have many reasons to
+feel like victims. It’s a pattern you see nearly everywhere — when you
+look at leaders like Xi Jinping, or Trump, they’re all acting out of
+their own drama, all wanting to get into this powerful position, without
+being aware of it.</p>
+<p>And they all need someone to push into the weaker, little-me position
+instead. The best way is always to find an outer enemy, and then build
+an army. Because when you’re causing fear — when you’re a dictator —
+you’re always trying to bring people into fear, because then, since our
+drama is based on fear, it’s easier to control people. They always try
+to bring other people into that weaker position.</p>
+<h2>Question: the inner critic turned outward</h2>
+<p><strong>A participant asks:</strong> This perpetrator role, in a way, seems to be both
+your inner critic, which is harsh towards yourself, and a perpetrator
+role towards others — your aggression can be directed towards yourself
+and towards the other person. Earlier you talked about the perpetrator
+against ourselves, and then, talking about the victim position, more
+about the perpetrator directed outward, externally. Do you see them as
+the same thing, just expressed in different directions? Could you say
+something about this double aspect, to help us understand better?</p>
+<p><strong>Answer:</strong> Yes — it’s the same drama, the same drama pattern. Sometimes
+the drama plays out inside us, and the inner critic is blaming me. Or we
+can project these two parts onto other people.</p>
+<p>For example, when the central drama is something like “I have to protect
+myself, because the world is so aggressive” — because my mother or
+father was aggressive — then there’s an aggressive world out there, and
+a little me that always wants to protect itself. We can project these
+parts onto other people.</p>
+<p>Sometimes we get very angry — and especially when you have children, you
+can see this very clearly. Normally, when we have children, we do the
+same thing our parents did to us. We use, sometimes, exactly the same
+words, when we shout at the child. So these two positions — the little
+me and the inner critic — are sometimes inside us, and sometimes we
+project them into the outer world.</p>
+<p>For example, with borderline personality, people always tend to project
+one or the other aspect onto the other person: they might get very angry
+at others, or feel devastated, thinking the other person is trying to
+destroy them. And this can switch within seconds — we can switch between
+these two roles. You can see this everywhere. And the problem is that we
+always feel like a victim, and in the beginning we’re completely blind
+to the fact that we are, ourselves, really perpetrators in relationships
+too.</p>
+<h2>The body as the little me</h2>
+<p>This inner drama sometimes plays out inside us, and very often our body
+is given the role of the little me. The inner critic tells the body
+things like: “You’re so ugly,” “No one likes you, look at your stomach,”
+“You have too many kilos,” “You’re too small,” or “too big.” The body is
+very often placed in this little-me position — and we’re not aware of
+it.</p>
+<h2>Getting out of the drama: the inner warrior</h2>
+<p>Only when we were children were we truly victims — up to the age of,
+let’s say, ten or twelve. There, we really were victims, because we
+couldn’t handle all those traumas. But as we grow older, as adults,
+we’re not victims anymore.</p>
+<p>Of course, on an adult level, there are genuinely life-threatening
+situations — earthquakes, wars — where we really can be victims. But in
+normal, everyday life, in ordinary conflicts, we are not victims; we are
+much more the perpetrators. And the way out of this drama, the way out
+of conflict, is really to dare to look at my own perpetrator side.</p>
+<p>This is one step, and it’s a tough one, because for this you need what I
+call the inner warrior. The warrior is really connected to the heart,
+and dares to feel, and to take responsibility for his or her actions in
+the world.</p>
+<p>This is really tough — in a conversation with your partner, when you’ve
+been shouting at each other, maybe for years, in an ongoing conflict,
+and you always think: I am right, the other is wrong, it’s their fault,
+not mine, I’m the victim, I have to find someone else — and then you
+complain, and argue. What I described before — when we’re really trapped
+in this drama — it takes real courage to notice: I feel like a victim.
+Why? How? There’s a little me inside too.</p>
+<p>We always feel like a victim as an adult, because the little me is
+knocking at the door, wanting to be seen, wanting to be in touch —
+wanting to get out of the prison we were in during childhood. So the
+warrior, connected with the heart, needs to get in touch with the inner
+child, and really feel — this is the crucial point. Don’t just talk
+about that little child inside you: really feel it.</p>
+<p>Dare to feel your way into what I call the point of avoidance, where the
+difficult feelings are, where — very deep down — there’s a deep pain.
+The deepest pain in our heart is always a deep fear, and it’s always the
+separation — from life, and from God. That’s the deepest fear we can
+face, and it has a lot to do with childhood, with when we were very
+little.</p>
+<p>That’s more or less what I wanted to share with you today.</p>
 
-  When writing it up:
-  · Keep the teacher's own words. Light editing for readability is fine;
-    rewriting it into marketing copy defeats the point.
-  · Break it into `## ` sections with descriptive headings that follow the
-    shape of the lesson. Those headings are what a reader skims.
-  · Optionally prefix sections with a timestamp, e.g. "## 12:40 — The three
-    dimensions", so a reader can jump to that point in the video.
-  ─────────────────────────────────────────────────────────────────────────────
--->
-<p><em>The transcript is being prepared and will appear here alongside the recording.</em></p>
-
-            </div>
+                    </div>
+                </div>
+            </details>
         </div>
     </div>
 </section>
 
 <!-- ═══════════ NEXT STEPS ═══════════ -->
-<section class="bg-[#F3E7D4] py-20 md:py-28 border-t border-[#E7D6BE]">
+<section class="bg-[color:var(--c-paper-2)] py-20 md:py-28 border-t border-[color:var(--c-line)]">
     <div class="container mx-auto px-6">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-14">
-                <p class="p4-kicker text-[#B65E3F] mb-6 flex items-center justify-center gap-4">
+                <p class="p4-kicker text-[color:var(--c-sec)] mb-6 flex items-center justify-center gap-4">
                     <span class="p4-hairline"></span> Where to next <span class="p4-hairline"></span>
                 </p>
-                <h2 class="p4-display text-3xl md:text-5xl font-medium text-indigo-deep-900 leading-tight">
+                <h2 class="p4-display text-3xl md:text-5xl font-medium text-[color:var(--c-heading)] leading-tight">
                     Take your time with it
                 </h2>
             </div>
@@ -378,52 +683,73 @@ hour of it first.</p>
             <div class="grid md:grid-cols-3 gap-6">
                 
                 <a href="/transpersonaltraining/training-overview/"
-                   class="group bg-[#FEF9EF] border border-[#D9A756]/60 hover:border-[#B65E3F] p-8 transition-colors flex flex-col">
-                    <i data-lucide="compass" class="w-9 h-9 text-[#B65E3F] mb-5"></i>
-                    <h3 class="font-serif text-xl font-semibold text-indigo-deep-900 mb-2">The training overview</h3>
-                    <p class="text-neutral-warm-700 text-sm leading-relaxed flex-grow">
+                   class="group bg-[color:var(--c-paper-card)] border border-[color:var(--c-acc-60)] hover:border-[color:var(--c-sec)] p-8 transition-colors flex flex-col">
+                    <i data-lucide="compass" class="w-9 h-9 text-[color:var(--c-sec)] mb-5"></i>
+                    <h3 class="font-serif text-xl font-semibold text-[color:var(--c-heading)] mb-2">The training overview</h3>
+                    <p class="text-[color:var(--c-body)] text-sm leading-relaxed flex-grow">
                         The philosophy behind the programme, who it is for, and what each of the four
                         years asks of you.
                     </p>
-                    <span class="mt-5 inline-flex items-center gap-2 text-science-blue-700 group-hover:text-science-blue-800 font-medium text-sm">
+                    <span class="mt-5 inline-flex items-center gap-2 text-[color:var(--c-link)] group-hover:text-[color:var(--c-link-hover)] font-medium text-sm">
                         Read <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </span>
                 </a>
                 
 
                 <a href="/transpersonaltraining/curriculum/"
-                   class="group bg-[#FEF9EF] border border-[#D9A756]/60 hover:border-[#B65E3F] p-8 transition-colors flex flex-col">
-                    <i data-lucide="list-tree" class="w-9 h-9 text-[#B65E3F] mb-5"></i>
-                    <h3 class="font-serif text-xl font-semibold text-indigo-deep-900 mb-2">Read the curriculum</h3>
-                    <p class="text-neutral-warm-700 text-sm leading-relaxed flex-grow">
+                   class="group bg-[color:var(--c-paper-card)] border border-[color:var(--c-acc-60)] hover:border-[color:var(--c-sec)] p-8 transition-colors flex flex-col">
+                    <i data-lucide="list-tree" class="w-9 h-9 text-[color:var(--c-sec)] mb-5"></i>
+                    <h3 class="font-serif text-xl font-semibold text-[color:var(--c-heading)] mb-2">Read the curriculum</h3>
+                    <p class="text-[color:var(--c-body)] text-sm leading-relaxed flex-grow">
                         Every module, lesson and experiential across the four years, level by level.
                     </p>
-                    <span class="mt-5 inline-flex items-center gap-2 text-science-blue-700 group-hover:text-science-blue-800 font-medium text-sm">
+                    <span class="mt-5 inline-flex items-center gap-2 text-[color:var(--c-link)] group-hover:text-[color:var(--c-link-hover)] font-medium text-sm">
                         Explore <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </span>
                 </a>
 
                 <a href="/transpersonaltraining/#contact"
-                   class="group bg-[#FEF9EF] border border-[#D9A756]/60 hover:border-[#B65E3F] p-8 transition-colors flex flex-col">
-                    <i data-lucide="messages-square" class="w-9 h-9 text-[#B65E3F] mb-5"></i>
-                    <h3 class="font-serif text-xl font-semibold text-indigo-deep-900 mb-2">Talk it through</h3>
-                    <p class="text-neutral-warm-700 text-sm leading-relaxed flex-grow">
+                   class="group bg-[color:var(--c-paper-card)] border border-[color:var(--c-acc-60)] hover:border-[color:var(--c-sec)] p-8 transition-colors flex flex-col">
+                    <i data-lucide="messages-square" class="w-9 h-9 text-[color:var(--c-sec)] mb-5"></i>
+                    <h3 class="font-serif text-xl font-semibold text-[color:var(--c-heading)] mb-2">Talk it through</h3>
+                    <p class="text-[color:var(--c-body)] text-sm leading-relaxed flex-grow">
                         Prefer it by email, or a conversation? Write to us and we will arrange a call
                         &mdash; no commitment either way.
                     </p>
-                    <span class="mt-5 inline-flex items-center gap-2 text-science-blue-700 group-hover:text-science-blue-800 font-medium text-sm">
+                    <span class="mt-5 inline-flex items-center gap-2 text-[color:var(--c-link)] group-hover:text-[color:var(--c-link-hover)] font-medium text-sm">
                         Get in touch <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </span>
                 </a>
             </div>
 
-            <p class="text-center text-neutral-warm-600 mt-12">
-                When you are ready, <a href="/transpersonaltraining/apply/" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4">see how to apply</a>.
+            <p class="text-center text-[color:var(--c-body-dim)] mt-12">
+                When you are ready, <a href="/transpersonaltraining/apply/" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-4">see how to apply</a>.
             </p>
         </div>
     </div>
 </section>
 
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "Maps of the Psyche: an introduction to the transpersonal model",
+  "description": "Watch a full lesson from our EUROTAS-accredited transpersonal psychotherapy training — free, no signup, full transcript included.",
+  "thumbnailUrl": "https://img.youtube.com/vi/JMpEaiyV0AI/maxresdefault.jpg",
+  "embedUrl": "https://www.youtube-nocookie.com/embed/JMpEaiyV0AI",
+  "url": "https://transpersonal-training.com/sample-lesson/",
+  
+  
+  "isAccessibleForFree": true,
+  "publisher": {
+    "@type": "EducationalOrganization",
+    "name": "East West Transpersonal Training",
+    "url": "https://transpersonal-training.com"
+  }
+}
+</script>
 
 
 
@@ -434,122 +760,124 @@ hour of it first.</p>
 
     <!-- Footer -->
     
-<footer class="bg-[#0B1B30] text-[#B9C4D2] py-16">
+<footer class="bg-[color:var(--c-deepest)] text-[color:var(--c-on-dark-3)] py-16">
     <div class="container mx-auto px-6">
         <div class="grid md:grid-cols-4 gap-12 border-b border-white/10 pb-12 mb-12">
             <!-- About Column -->
             <div>
                 <div class="flex items-center gap-2 mb-4">
-                    <div class="w-10 h-10 flex items-center justify-center bg-[#D9A756] rounded-full shrink-0">
+                    <div class="w-10 h-10 flex items-center justify-center bg-[color:var(--c-acc)] rounded-full shrink-0">
                         <img src="/transpersonaltraining/assets/images/Graphics/logo.svg" alt="Logo" class="w-8 h-8" style="display:block;" />
                     </div>
-                    <h3 class="p4-display text-white font-semibold leading-tight">
+                    <h3 class="p4-display text-[color:var(--c-on-dark-1)] font-semibold leading-tight">
                         <span class="block text-sm tracking-widest font-normal mt-1">East West</span>
                         <span class="block text-xl tracking-wide">Transpersonal Training</span>
                     </h3>
                 </div>
-                <p class="text-sm leading-relaxed text-[#8FA0B3]">
+                <p class="text-sm leading-relaxed text-[color:var(--c-on-dark-4)]">
                     Educating therapists for a revolution of consciousness through transpersonal psychotherapy and breathwork.
                 </p>
-                <p class="text-xs leading-relaxed text-[#7185A0] mt-4">
+                <p class="text-xs leading-relaxed text-[color:var(--c-on-dark-5)] mt-4">
                     Eastwest Transpersonal Training School
                 </p>
             </div>
 
             <!-- Quick Links -->
             <div>
-                <h4 class="p4-kicker text-[#D9A756] mb-5">Training</h4>
+                <h4 class="p4-kicker text-[color:var(--c-acc)] mb-5">Training</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="/transpersonaltraining/training-overview/" class="hover:text-[#D9A756] transition-colors">Training Overview</a></li>
-                    <li><a href="/transpersonaltraining/curriculum/" class="hover:text-[#D9A756] transition-colors">Curriculum</a></li>
-                    <li><a href="/transpersonaltraining/schedule/" class="hover:text-[#D9A756] transition-colors">Intensive Schedule</a></li>
-                    <li><a href="/transpersonaltraining/lectures-schedule/" class="hover:text-[#D9A756] transition-colors">Lectures Schedule</a></li>
-                    <li><a href="/transpersonaltraining/teachers/" class="hover:text-[#D9A756] transition-colors">Our Teachers</a></li>
-                    <li><a href="/transpersonaltraining/blog/" class="hover:text-[#D9A756] transition-colors">Blog</a></li>
+                    <li><a href="/transpersonaltraining/training-overview/" class="hover:text-[color:var(--c-acc)] transition-colors">Training Overview</a></li>
+                    <li><a href="/transpersonaltraining/curriculum/" class="hover:text-[color:var(--c-acc)] transition-colors">Curriculum</a></li>
+                    <li><a href="/transpersonaltraining/schedule/" class="hover:text-[color:var(--c-acc)] transition-colors">Intensive Schedule</a></li>
+                    <li><a href="/transpersonaltraining/lectures-schedule/" class="hover:text-[color:var(--c-acc)] transition-colors">Lectures Schedule</a></li>
+                    <li><a href="/transpersonaltraining/teachers/" class="hover:text-[color:var(--c-acc)] transition-colors">Our Teachers</a></li>
+                    <li><a href="/transpersonaltraining/blog/" class="hover:text-[color:var(--c-acc)] transition-colors">Blog</a></li>
                 </ul>
             </div>
 
             <!-- Resources -->
             <div>
-                <h4 class="p4-kicker text-[#D9A756] mb-5">Resources</h4>
+                <h4 class="p4-kicker text-[color:var(--c-acc)] mb-5">Resources</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="/transpersonaltraining/techniques/" class="hover:text-[#D9A756] transition-colors">School Pillars</a></li>
-                    <li><a href="/transpersonaltraining/venues/" class="hover:text-[#D9A756] transition-colors">Venues</a></li>
-                    <li><a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="hover:text-[#D9A756] transition-colors">What is Transpersonal Psychology</a></li>
-                    <li><a href="/transpersonaltraining/become-a-practice-client/" class="hover:text-[#D9A756] transition-colors">Become a Practice Client</a></li>
-                    <li><a href="/transpersonaltraining/resources/" class="hover:text-[#D9A756] transition-colors">Recommended Reading</a></li>
-                    <li><a href="/transpersonaltraining/collaborations/" class="hover:text-[#D9A756] transition-colors">Collaborations</a></li>
+                    <li><a href="/transpersonaltraining/techniques/" class="hover:text-[color:var(--c-acc)] transition-colors">School Pillars</a></li>
+                    <li><a href="/transpersonaltraining/venues/" class="hover:text-[color:var(--c-acc)] transition-colors">Venues</a></li>
+                    <li><a href="/transpersonaltraining/what-is-transpersonal-psychology/" class="hover:text-[color:var(--c-acc)] transition-colors">What is Transpersonal Psychology</a></li>
+                    <li><a href="/transpersonaltraining/become-a-practice-client/" class="hover:text-[color:var(--c-acc)] transition-colors">Become a Practice Client</a></li>
+                    <li><a href="/transpersonaltraining/resources/" class="hover:text-[color:var(--c-acc)] transition-colors">Recommended Reading</a></li>
+                    <li><a href="/transpersonaltraining/collaborations/" class="hover:text-[color:var(--c-acc)] transition-colors">Collaborations</a></li>
+                    <li><a href="https://student.transpersonal-training.com/" target="_blank" rel="noopener" class="hover:text-[color:var(--c-acc)] transition-colors">Learning platform</a></li>
+                    <li><a href="https://old.transpersonal-training.com/" target="_blank" rel="noopener" class="hover:text-[color:var(--c-acc)] transition-colors">Old website</a></li>
                 </ul>
             </div>
 
             <!-- Contact -->
             <div>
-                <h4 class="p4-kicker text-[#D9A756] mb-5">Connect</h4>
+                <h4 class="p4-kicker text-[color:var(--c-acc)] mb-5">Connect</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="/transpersonaltraining/#contact" class="hover:text-[#D9A756] transition-colors">Contact Us</a></li>
-                    <li><a href="mailto:west-office@transpersonal-training.com" class="hover:text-[#D9A756] transition-colors">West office &middot; west-office@transpersonal-training.com</a></li>
-                    <li><a href="mailto:east-office@transpersonal-training.com" class="hover:text-[#D9A756] transition-colors">East office &middot; east-office@transpersonal-training.com</a></li>
-                    <li><a href="tel:+4917638034517" class="hover:text-[#D9A756] transition-colors">West office &middot; +49 176 38034517</a></li>
-                    <li><a href="tel:+37379024199" class="hover:text-[#D9A756] transition-colors">East office &middot; +373 79024199</a></li>
-                    <li><a href="https://www.facebook.com/EastwestTranspersonalTrainingSchool/" target="_blank" rel="noopener" class="hover:text-[#D9A756] transition-colors inline-flex items-center gap-1.5"><i data-lucide="facebook" class="w-4 h-4"></i>Facebook</a></li>
-                    <li><button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="hover:text-[#D9A756] transition-colors text-left bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy Policy</button></li>
+                    <li><a href="/transpersonaltraining/#contact" class="hover:text-[color:var(--c-acc)] transition-colors">Contact Us</a></li>
+                    <li><a href="mailto:west-office@transpersonal-training.com" class="hover:text-[color:var(--c-acc)] transition-colors">West office &middot; west-office@transpersonal-training.com</a></li>
+                    <li><a href="mailto:east-office@transpersonal-training.com" class="hover:text-[color:var(--c-acc)] transition-colors">East office &middot; east-office@transpersonal-training.com</a></li>
+                    <li><a href="tel:+4917638034517" class="hover:text-[color:var(--c-acc)] transition-colors">West office &middot; +49 176 38034517</a></li>
+                    <li><a href="tel:+37379024199" class="hover:text-[color:var(--c-acc)] transition-colors">East office &middot; +373 79024199</a></li>
+                    <li><a href="https://www.facebook.com/EastwestTranspersonalTrainingSchool/" target="_blank" rel="noopener" class="hover:text-[color:var(--c-acc)] transition-colors inline-flex items-center gap-1.5"><i data-lucide="facebook" class="w-4 h-4"></i>Facebook</a></li>
+                    <li><button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="hover:text-[color:var(--c-acc)] transition-colors text-left bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy Policy</button></li>
                 </ul>
             </div>
         </div>
 
         <!-- Bottom Bar -->
-        <div class="flex flex-col md:flex-row justify-between items-center text-xs text-[#7185A0]">
+        <div class="flex flex-col md:flex-row justify-between items-center text-xs text-[color:var(--c-on-dark-5)]">
             <p>&copy; 2026 transpersonal-training.com — Educating therapists for a revolution of consciousness.</p>
             <div class="flex gap-6 mt-4 md:mt-0">
-                <button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="hover:text-[#D9A756] bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy</button>
-                <a href="/transpersonaltraining/legal-notice/" class="hover:text-[#D9A756]">Legal Notice</a>
+                <button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="hover:text-[color:var(--c-acc)] bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy</button>
+                <a href="/transpersonaltraining/legal-notice/" class="hover:text-[color:var(--c-acc)]">Legal Notice</a>
             </div>
         </div>
     </div>
 </footer>
 
 <!-- Privacy Policy Modal -->
-<dialog id="privacy-modal" class="max-w-2xl w-[92vw] p-0 backdrop:bg-[#0B1B30]/70 shadow-2xl">
-    <div class="bg-[#FEF9EF] max-h-[85vh] overflow-y-auto">
-        <div class="sticky top-0 bg-[#0F2540] text-[#FDFBF5] px-6 py-5 flex items-center justify-between">
+<dialog id="privacy-modal" class="max-w-2xl w-[92vw] p-0 backdrop:bg-[color:var(--c-deepest-70)] shadow-2xl">
+    <div class="bg-[color:var(--c-paper-card)] max-h-[85vh] overflow-y-auto">
+        <div class="sticky top-0 bg-[color:var(--c-deep)] text-[color:var(--c-paper-hi)] px-6 py-5 flex items-center justify-between">
             <h2 class="p4-display text-2xl font-medium">Privacy Policy</h2>
-            <button type="button" onclick="document.getElementById('privacy-modal').close()" aria-label="Close" class="text-[#FDFBF5] hover:text-[#D9A756] bg-transparent border-none cursor-pointer p-1">
+            <button type="button" onclick="document.getElementById('privacy-modal').close()" aria-label="Close" class="text-[color:var(--c-paper-hi)] hover:text-[color:var(--c-acc)] bg-transparent border-none cursor-pointer p-1">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
         </div>
-        <div class="px-6 md:px-8 py-8 space-y-5 text-neutral-warm-700 leading-relaxed text-sm md:text-base">
+        <div class="px-6 md:px-8 py-8 space-y-5 text-[color:var(--c-body)] leading-relaxed text-sm md:text-base">
             <p>
                 This website does not use cookies, analytics, tracking pixels or any similar technology, and it does not
                 collect, store or process any personal data through your simple use of these pages. There is nothing to
                 consent to and nothing to opt out of — no data is gathered by browsing this site.
             </p>
-            <h3 class="text-lg font-semibold text-indigo-deep-900">If you contact us or apply</h3>
+            <h3 class="text-lg font-semibold text-[color:var(--c-heading)]">If you contact us or apply</h3>
             <p>
                 The only personal data we ever receive is what you choose to send us directly — for example through the
                 application form or by writing to
-                <a href="mailto:west-office@transpersonal-training.com" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4">west-office@transpersonal-training.com</a>
+                <a href="mailto:west-office@transpersonal-training.com" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-4">west-office@transpersonal-training.com</a>
                 (Western track) or
-                <a href="mailto:east-office@transpersonal-training.com" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4">east-office@transpersonal-training.com</a>
+                <a href="mailto:east-office@transpersonal-training.com" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-4">east-office@transpersonal-training.com</a>
                 (Eastern track).
                 In that case, the following applies in accordance with the EU General Data Protection Regulation
                 (Regulation (EU) 2016/679, "GDPR"):
             </p>
             <ul class="list-disc list-inside space-y-2">
-                <li><span class="font-medium text-neutral-warm-800">Data controller:</span> Eastwest Transpersonal Training School, reachable at the email addresses above.</li>
-                <li><span class="font-medium text-neutral-warm-800">Categories of data processed:</span> the name, email address and any other information you voluntarily include in your message or application.</li>
-                <li><span class="font-medium text-neutral-warm-800">Purpose and legal basis:</span> responding to your enquiry and assessing applications, on the basis of your consent (Art. 6(1)(a) GDPR) and, where applicable, to take pre-contractual steps at your request (Art. 6(1)(b) GDPR).</li>
-                <li><span class="font-medium text-neutral-warm-800">Retention:</span> your data is kept only for as long as necessary to handle your enquiry or application, and is then deleted.</li>
-                <li><span class="font-medium text-neutral-warm-800">Recipients:</span> your data is not sold or shared with third parties, save where strictly necessary to respond to you (e.g. our email provider) or where required by law.</li>
-                <li><span class="font-medium text-neutral-warm-800">Your rights:</span> under Articles 15–22 GDPR you may request access to, rectification or erasure of your data, restriction of or objection to its processing, and data portability, and you may lodge a complaint with your national data protection authority at any time. To exercise these rights, simply email us at the address above.</li>
+                <li><span class="font-medium text-[color:var(--c-heading)]">Data controller:</span> Eastwest Transpersonal Training School, reachable at the email addresses above.</li>
+                <li><span class="font-medium text-[color:var(--c-heading)]">Categories of data processed:</span> the name, email address and any other information you voluntarily include in your message or application.</li>
+                <li><span class="font-medium text-[color:var(--c-heading)]">Purpose and legal basis:</span> responding to your enquiry and assessing applications, on the basis of your consent (Art. 6(1)(a) GDPR) and, where applicable, to take pre-contractual steps at your request (Art. 6(1)(b) GDPR).</li>
+                <li><span class="font-medium text-[color:var(--c-heading)]">Retention:</span> your data is kept only for as long as necessary to handle your enquiry or application, and is then deleted.</li>
+                <li><span class="font-medium text-[color:var(--c-heading)]">Recipients:</span> your data is not sold or shared with third parties, save where strictly necessary to respond to you (e.g. our email provider) or where required by law.</li>
+                <li><span class="font-medium text-[color:var(--c-heading)]">Your rights:</span> under Articles 15–22 GDPR you may request access to, rectification or erasure of your data, restriction of or objection to its processing, and data portability, and you may lodge a complaint with your national data protection authority at any time. To exercise these rights, simply email us at the address above.</li>
             </ul>
-            <h3 class="text-lg font-semibold text-indigo-deep-900">Newsletter</h3>
+            <h3 class="text-lg font-semibold text-[color:var(--c-heading)]">Newsletter</h3>
             <p>
                 If you tick the newsletter box on the contact form, we also keep your name and email to send you
                 occasional updates about the training and the school, on the basis of your consent (Art. 6(1)(a) GDPR).
                 You can withdraw this consent and unsubscribe at any time by emailing us at the address above; this does
                 not affect any other request you have made.
             </p>
-            <p class="text-xs text-neutral-warm-500 pt-2 border-t border-[#E7D6BE]">
+            <p class="text-xs text-[color:var(--c-body-dim)] pt-2 border-t border-[color:var(--c-line)]">
                 Last updated 2026.
             </p>
         </div>
