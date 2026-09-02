@@ -93,9 +93,22 @@ ogType: website
                 {{ transcript.data.heading }}
             </h2>
             <p class="text-[color:var(--c-body-dim)] text-lg mb-10">{{ transcript.data.intro }}</p>
-            <div class="p4-prose text-[color:var(--c-heading)] leading-relaxed">
-                {{ transcript.html | safe }}
-            </div>
+
+            {# Collapsed by default: this is several thousand words, and most
+               visitors came to watch, not read. Native <details>, so it works
+               without JavaScript and stays keyboard- and screen-reader-operable
+               — same pattern as the accordions on /training-overview/. #}
+            <details class="p4-reveal border border-[color:var(--c-line)] bg-[color:var(--c-paper-card)] shadow-sm">
+                <summary class="flex items-center justify-between gap-6 px-6 py-5 cursor-pointer hover:bg-[color:var(--c-paper-2)] transition-colors">
+                    <span class="font-serif text-xl font-semibold text-[color:var(--c-heading)]">Read the full transcript</span>
+                    <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[color:var(--c-sec)] transition-transform duration-300" aria-hidden="true"></i>
+                </summary>
+                <div class="border-t border-[color:var(--c-line)] px-6 md:px-10 pt-8 pb-10">
+                    <div class="p4-prose text-[color:var(--c-heading)] leading-relaxed">
+                        {{ transcript.html | safe }}
+                    </div>
+                </div>
+            </details>
         </div>
     </div>
 </section>
