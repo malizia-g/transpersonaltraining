@@ -487,6 +487,80 @@ ogType: website
 </script>
 
 
+<!-- ═══════════ Announcement — the 2027 cycle ═══════════ -->
+{# Homepage only, and shown on every visit for as long as 2027 is still ahead
+   — see the script below. Opened from `load` rather than DOMContentLoaded:
+   #page-loader covers the viewport until then, and a dialog lives in the top
+   layer, so an earlier open would put the announcement over the spinner. #}
+<dialog id="cycle-2027-modal" aria-labelledby="cycle-2027-title" class="max-w-lg w-[92vw] p-0 backdrop:bg-[#0B1B30]/70 shadow-2xl">
+    <div class="bg-[#FEF9EF]">
+        <div class="bg-[#0F2540] text-[#FDFBF5] px-6 md:px-8 py-6 flex items-start justify-between gap-4">
+            <div>
+                <p class="p4-kicker text-[#D9A756] flex items-center gap-3 mb-3">
+                    <span class="p4-hairline"></span>
+                    2027&ndash;2030
+                </p>
+                <h2 id="cycle-2027-title" class="p4-display text-2xl md:text-3xl font-medium leading-tight">
+                    A new cycle opens in <em class="text-[#D9A756]">2027</em>
+                </h2>
+            </div>
+            <button type="button" onclick="document.getElementById('cycle-2027-modal').close()" aria-label="Close" class="text-[#FDFBF5] hover:text-[#D9A756] bg-transparent border-none cursor-pointer p-1 shrink-0">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <div class="px-6 md:px-8 py-7 space-y-6 text-neutral-warm-700 leading-relaxed">
+            <p>
+                The school opens its doors again for a new four-year cycle of the training in Transpersonal
+                Psychotherapy, Counselling &amp; Holotropic Breathwork&reg;, running from 2027 to 2030 &mdash;
+                shared online lectures for one international East&ndash;West community, with in-person
+                intensives held in Europe.
+            </p>
+            <div class="flex">
+                <button type="button" onclick="document.getElementById('cycle-2027-modal').close()" class="bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-8 py-3 font-medium tracking-wide text-center transition-all shadow hover:shadow-lg border-none cursor-pointer w-full sm:w-auto">
+                    Continue
+                </button>
+            </div>
+        </div>
+
+        <div class="px-6 md:px-8 py-5 bg-[#FAF3E7] border-t border-[#E7D6BE] text-sm text-neutral-warm-700 leading-relaxed">
+            <span class="font-medium text-neutral-warm-800">Studied with us before?</span>
+            The site you remember is still online at
+            <a href="https://old.transpersonal-training.com" target="_blank" rel="noopener" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4">old.transpersonal-training.com</a>.
+        </div>
+    </div>
+</dialog>
+<script>
+    (function () {
+        var dialog = document.getElementById('cycle-2027-modal');
+        if (!dialog || typeof dialog.showModal !== 'function') return;
+
+        // Shown on every visit, on purpose: this announces a cycle that has not
+        // started yet, so it is the standing message of the moment rather than a
+        // notice to acknowledge once. Nothing is remembered between visits.
+        //
+        // It stops opening once 2027 arrives, because from that day the wording
+        // is wrong. Treat that as a safety net, not the plan: a visitor's clock
+        // is theirs to set, so the block itself comes out in January.
+        // → docs/TODO.md task 65
+        var STOPS_AT = new Date('2027-01-01T00:00:00Z');
+
+        dialog.addEventListener('click', function (e) {
+            if (e.target === dialog) dialog.close();
+        });
+
+        window.addEventListener('load', function () {
+            if (new Date() >= STOPS_AT) return;
+            // A beat after the loader clears, so the hero is what greets you
+            // first and the announcement arrives over a page already there.
+            setTimeout(function () {
+                if (!dialog.open) dialog.showModal();
+            }, 800);
+        });
+    })();
+</script>
+
+
 {% block scripts %}
 <script src="{{ '/scripts/pages/contact.js' | url }}"></script>
 {% endblock %}
