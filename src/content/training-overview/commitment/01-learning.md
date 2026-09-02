@@ -1,7 +1,7 @@
 ---
 heading: Learning
 icon: graduation-cap
-icon_color: text-science-blue-600
+icon_color: text-[color:var(--c-link)]
 ---
 
 - **Weekly Online Lessons**

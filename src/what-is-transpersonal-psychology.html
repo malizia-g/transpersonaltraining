@@ -9,88 +9,88 @@ description: "Non-ordinary states of consciousness and soul as embodied psycholo
 {% set s2 = 'what-is-transpersonal-psychology/02-science-and-spirit.md' | pageContent %}
 {% set s3 = 'what-is-transpersonal-psychology/03-why-it-matters.md' | pageContent %}
 
-<header class="relative h-[50vh] min-h-[400px] flex items-center justify-center text-white bg-science-blue-900 overflow-hidden">
+<header class="relative h-[50vh] min-h-[400px] flex items-center justify-center text-[color:var(--c-on-dark-1)] bg-[color:var(--c-deep)] overflow-hidden">
 	<picture>
 		<source srcset="{{ '/assets/images/Headers/hero-what-is-tp-window-forest.webp' | url }}" type="image/webp">
 		<img src="{{ '/assets/images/Headers/hero-what-is-tp-window-forest.jpg' | url }}" alt="Open window looking onto the forest" class="absolute inset-0 w-full h-full object-cover z-0">
 	</picture>
-	<div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/80 via-[#0F2540]/60 to-[#0F2540]/80 z-0"></div>
+	<div class="absolute inset-0 bg-gradient-to-b from-[var(--c-deep-80)] via-[var(--c-deep-60)] to-[var(--c-deep-80)] z-0"></div>
 	<div class="container mx-auto px-6 relative z-10 text-center pt-20">
 		<div class="max-w-4xl mx-auto">
-			<p class="p4-kicker text-[#D9A756] mb-6 flex items-center justify-center gap-4">
+			<p class="p4-kicker text-[color:var(--c-acc)] mb-6 flex items-center justify-center gap-4">
 				<span class="p4-hairline"></span>
 				Foundations of the field
 				<span class="p4-hairline"></span>
 			</p>
-			<h1 class="p4-display text-4xl md:text-6xl font-medium mb-6 leading-tight text-[#FDFBF5]">
+			<h1 class="p4-display text-4xl md:text-6xl font-medium mb-6 leading-tight text-[color:var(--c-paper-hi)]">
 				What is Transpersonal Psychology?
 			</h1>
-			<p class="text-xl md:text-2xl text-white/80 font-light leading-relaxed max-w-3xl mx-auto">
+			<p class="text-xl md:text-2xl text-[color:var(--c-on-dark-3)] font-light leading-relaxed max-w-3xl mx-auto">
 				Exploring the crossroad of human psychology and spiritual experience.
 			</p>
 		</div>
 	</div>
 </header>
 
-<div class="bg-white border-b border-[#E7D6BE]">
+<div class="bg-[color:var(--c-paper-card)] border-b border-[color:var(--c-line)]">
 	<div class="container mx-auto px-6 py-4">
-		<div class="flex items-center gap-2 text-sm text-neutral-warm-600">
-			<a href="{{ '/' | url }}" class="hover:text-science-blue-600 transition-colors">Home</a>
+		<div class="flex items-center gap-2 text-sm text-[color:var(--c-body-dim)]">
+			<a href="{{ '/' | url }}" class="hover:text-[color:var(--c-link)] transition-colors">Home</a>
 			<i data-lucide="chevron-right" class="w-4 h-4"></i>
-			<span class="text-neutral-warm-500">Resources</span>
+			<span class="text-[color:var(--c-body-dim)]">Resources</span>
 			<i data-lucide="chevron-right" class="w-4 h-4"></i>
-			<span class="text-science-blue-800 font-medium">What is Transpersonal Psychology</span>
+			<span class="text-[color:var(--c-heading)] font-medium">What is Transpersonal Psychology</span>
 		</div>
 	</div>
 </div>
 
-<section class="py-12 bg-white border-b border-[#E7D6BE]">
+<section class="py-12 bg-[color:var(--c-paper-card)] border-b border-[color:var(--c-line)]">
 	<div class="container mx-auto px-6">
-		<div class="max-w-3xl mx-auto text-center text-lg text-neutral-warm-600 leading-relaxed">
+		<div class="max-w-3xl mx-auto text-center text-lg text-[color:var(--c-body-dim)] leading-relaxed">
 			{{ abstract.html | safe }}
 		</div>
 	</div>
 </section>
 
-<section class="py-16 bg-white">
+<section class="py-16 bg-[color:var(--c-paper-hi)]">
 	<div class="container mx-auto px-6">
 		<div class="max-w-4xl mx-auto">
-			<h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-8">{{ s1.data.heading }}</h2>
-			<div class="space-y-6 text-neutral-warm-700 leading-relaxed">
+			<h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-8">{{ s1.data.heading }}</h2>
+			<div class="space-y-6 text-[color:var(--c-body)] leading-relaxed">
 				{{ s1.html | safe }}
 			</div>
 		</div>
 	</div>
 </section>
 
-<section class="py-16 bg-[#FAF3E7]">
+<section class="py-16 bg-[color:var(--c-paper)]">
 	<div class="container mx-auto px-6">
 		<div class="max-w-4xl mx-auto">
-			<h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-8">{{ s2.data.heading }}</h2>
-			<div class="space-y-6 text-neutral-warm-700 leading-relaxed">
+			<h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-8">{{ s2.data.heading }}</h2>
+			<div class="space-y-6 text-[color:var(--c-body)] leading-relaxed">
 				{{ s2.html | safe }}
-				<blockquote class="border-l-4 border-[#D9A756] pl-6 italic text-neutral-warm-800 p4-display text-xl">
+				<blockquote class="border-l-4 border-[color:var(--c-acc)] pl-6 italic text-[color:var(--c-heading)] p4-display text-xl">
 					{{ s2.data.blockquote }}
 				</blockquote>
-				<p class="text-sm text-neutral-warm-600">{{ s2.data.blockquote_source }}</p>
+				<p class="text-sm text-[color:var(--c-body-dim)]">{{ s2.data.blockquote_source }}</p>
 			</div>
 		</div>
 	</div>
 </section>
 
-<section class="py-16 bg-white">
+<section class="py-16 bg-[color:var(--c-paper-hi)]">
 	<div class="container mx-auto px-6">
 		<div class="max-w-4xl mx-auto">
-			<h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-8">{{ s3.data.heading }}</h2>
-			<div class="space-y-6 text-neutral-warm-700 leading-relaxed">
+			<h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-8">{{ s3.data.heading }}</h2>
+			<div class="space-y-6 text-[color:var(--c-body)] leading-relaxed">
 				{{ s3.html | safe }}
 			</div>
 
 			<div class="mt-10 flex flex-col sm:flex-row gap-4">
-				<a href="{{ '/training-overview/' | url }}" class="bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-6 py-3 font-medium tracking-wide transition-all text-center shadow-lg hover:shadow-xl">
+				<a href="{{ '/training-overview/' | url }}" class="bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-heading)] px-6 py-3 font-medium tracking-wide transition-all text-center shadow-lg hover:shadow-xl">
 					Explore the Training Overview
 				</a>
-				<a href="{{ '/' | url }}" class="border border-[#0F2540]/40 hover:border-[#B65E3F] text-[#0F2540] hover:text-[#B65E3F] px-6 py-3 font-medium tracking-wide transition-all text-center">
+				<a href="{{ '/' | url }}" class="border border-[color:var(--c-deep-40)] hover:border-[color:var(--c-sec)] text-[color:var(--c-heading)] hover:text-[color:var(--c-sec)] px-6 py-3 font-medium tracking-wide transition-all text-center">
 					Back to Home
 				</a>
 			</div>

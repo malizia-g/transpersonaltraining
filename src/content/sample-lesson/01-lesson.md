@@ -14,7 +14,7 @@
 # ─────────────────────────────────────────────────────────────────────────────
 kicker: "Watch a full lesson"
 heading: "See how we teach, before you decide anything"
-videoUrl: ""
+videoUrl: "https://www.youtube.com/watch?v=JMpEaiyV0AI"
 videoTitle: "Maps of the Psyche: an introduction to the transpersonal model"
 teacher: ""
 module: ""

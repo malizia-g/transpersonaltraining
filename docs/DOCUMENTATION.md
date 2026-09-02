@@ -196,19 +196,31 @@ palette colour over them. Each band's wash is scaled by its own multiplier
 the picture survives is a separate decision from what colour the page is. Indigo
 Night ships at `0.95 / 0.35 / 1 / 0.8`.
 
-### Pages not yet converted
+### What is not a token
 
-Pages other than the home and techniques pages still carry literal hexes and
-the older Tailwind colour classes (`science-blue-*`, `indigo-deep-*`,
-`warm-yellow-*`, `neutral-warm-*`, defined in `tailwind.config.js`). The nav and
-footer they share are token-driven, so they stay in step at the top and bottom
-of every page.
+Four things keep their own colour on purpose, and should stay that way:
+
+- **Status tones.** The green/red notices on the contact and application forms,
+  the required-field asterisk, and the Active / On Hold badges on the practice
+  client page say something the palette cannot.
+- **The botanical drawings.** The curriculum vine and its leaves are an
+  illustration, not chrome.
+- **Video surfaces.** The player letterboxes on /resources/, /sample-lesson/
+  and the lectures page stay black, as video wants.
+- **The printable agreement.** `/apply/` prints near-black ink on white paper;
+  its headings follow the palette, its body does not.
 
 ### Accessibility
 
-- White buttons on blue backgrounds: 9.6:1+ contrast ratio
-- All text meets WCAG AA standards
-- Not relying solely on color (color-blind friendly)
+The palette generator on `new_color_scheme` gates every scheme on fourteen
+contrast pairs before it will emit anything: body, headings, links and the two
+accents on paper at 4.5:1, the CTA text on the accent at 4.5:1, and the muted
+tier (`--c-body-dim`) and icons at 3:1. Indigo Night clears all of them.
+
+The 3:1 tier is deliberate and is where the muted text sits — breadcrumbs,
+meta lines, captions. It is the same weight the old design used there
+(`neutral-warm-600`), so it reads as before, but it is below AA for body copy:
+do not use `--c-body-dim` for anything a visitor has to read.
 
 ---
 
@@ -602,13 +614,13 @@ Row classification:
 
 Defined in `src/become-a-practice-client.html` via `if/elif` blocks (full class strings required for Tailwind JIT scanning).
 
-| Status | Color | Tailwind Classes | Reasoning |
-|--------|-------|-----------------|-----------|
-| **Active** | Emerald green | `bg-emerald-100 text-emerald-700` | Currently in training — vibrant positive |
-| **Approved** | Science-blue | `bg-science-blue-100 text-science-blue-700` | Accepted — matches page primary |
-| **Pending** | Amber | `bg-amber-100 text-amber-700` | Waiting — caution/neutral warmth |
-| **On Hold** | Orange | `bg-orange-100 text-orange-700` | Paused — gentle warning tone |
-| **Completed** | Teal | `bg-teal-100 text-teal-700` | Finished — positive but distinct from active |
+| Status | Colour | Classes | Reasoning |
+|--------|--------|---------|-----------|
+| **Active** | Emerald green | `bg-emerald-100 text-emerald-700` | Currently in training — a status tone, deliberately outside the palette |
+| **Approved** | Paper | `bg-[color:var(--c-paper-2)] text-[color:var(--c-heading)]` | Accepted — quiet, in the page's own colours |
+| **Pending** | Accent | `bg-[color:var(--c-acc-20)] text-[color:var(--c-sec)]` | Waiting — the CTA gold, held back |
+| **On Hold** | Orange | `bg-orange-100 text-orange-700` | Paused — a gentle warning, again a status tone |
+| **Completed** | Deep | `bg-[color:var(--c-deep-10)] text-[color:var(--c-heading)]` | Finished — settled, distinct from active |
 
 ---
 

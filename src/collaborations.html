@@ -5,30 +5,30 @@ description: "The transpersonal institutes, schools and teachers we work with ac
 ---
 
 {% macro collabCard(c) %}
-<article class="bg-white border border-[#E7D6BE] shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-6 flex flex-col h-full">
+<article class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-6 flex flex-col h-full">
     <div class="flex items-start gap-4 mb-4">
-        <div class="w-12 h-12 flex-shrink-0 rounded-full bg-[#D9A756]/15 flex items-center justify-center">
-            <i data-lucide="{{ c.icon or 'building-2' }}" class="w-6 h-6 text-[#B65E3F]"></i>
+        <div class="w-12 h-12 flex-shrink-0 rounded-full bg-[color:var(--c-acc-15)] flex items-center justify-center">
+            <i data-lucide="{{ c.icon or 'building-2' }}" class="w-6 h-6 text-[color:var(--c-sec)]"></i>
         </div>
         <div class="min-w-0">
-            <h3 class="p4-display text-xl font-medium text-[#0F2540] leading-snug">{{ c.name }}</h3>
+            <h3 class="p4-display text-xl font-medium text-[color:var(--c-heading)] leading-snug">{{ c.name }}</h3>
             {% if c.kind or c.location %}
-            <p class="text-sm text-neutral-warm-500 mt-1">
+            <p class="text-sm text-[color:var(--c-body-dim)] mt-1">
                 {%- if c.kind %}{{ c.kind }}{% endif -%}
                 {%- if c.kind and c.location %} &middot; {% endif -%}
                 {%- if c.location %}{{ c.location }}{% endif -%}
             </p>
             {% endif %}
             {% if c.comingSoon %}
-            <span class="inline-block mt-2 text-xs font-semibold uppercase tracking-wide text-[#B65E3F] bg-[#D9A756]/15 px-2 py-0.5">Coming soon</span>
+            <span class="inline-block mt-2 text-xs font-semibold uppercase tracking-wide text-[color:var(--c-sec)] bg-[color:var(--c-acc-15)] px-2 py-0.5">Coming soon</span>
             {% endif %}
         </div>
     </div>
     {% if c.description %}
-    <div class="prose prose-sm max-w-none text-neutral-warm-700 leading-relaxed flex-grow">{{ c.description | safe }}</div>
+    <div class="prose prose-sm max-w-none text-[color:var(--c-body)] leading-relaxed flex-grow">{{ c.description | safe }}</div>
     {% endif %}
     {% if c.url %}
-    <a href="{{ c.url }}" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-2 text-[#B65E3F] hover:text-[#7A5E29] font-medium text-sm">
+    <a href="{{ c.url }}" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-2 text-[color:var(--c-sec)] hover:text-[color:var(--c-sec-dark)] font-medium text-sm">
         <i data-lucide="globe" class="w-4 h-4"></i>
         Visit website
     </a>
@@ -43,20 +43,20 @@ description: "The transpersonal institutes, schools and teachers we work with ac
             <source srcset="{{ '/assets/images/Headers/hero-collaborations-terrace-autumn.webp' | url }}" type="image/webp">
             <img src="{{ '/assets/images/Headers/hero-collaborations-terrace-autumn.jpg' | url }}" alt="Autumn light through the trees above the terrace at the Black Forest seminar house" class="w-full h-full object-cover object-center">
         </picture>
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/80 via-[#0F2540]/60 to-[#0F2540]/80"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[var(--c-deep-80)] via-[var(--c-deep-60)] to-[var(--c-deep-80)]"></div>
     </div>
 
     <div class="relative z-10 container mx-auto px-6 text-center pt-20">
         <div class="animate-fade-in-up">
-            <p class="p4-kicker text-[#D9A756] mb-6 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-acc)] mb-6 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 Our network
                 <span class="p4-hairline"></span>
             </p>
-            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] mb-6 leading-tight drop-shadow-md">
+            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[color:var(--c-paper-hi)] mb-6 leading-tight drop-shadow-md">
                 Collaborations
             </h1>
-            <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
+            <p class="text-xl md:text-2xl text-[color:var(--c-on-dark-2)] max-w-3xl mx-auto font-light leading-relaxed">
                 The institutes, schools and friends we walk with &mdash; past, present and future
             </p>
         </div>
@@ -64,23 +64,23 @@ description: "The transpersonal institutes, schools and teachers we work with ac
 </header>
 
 <!-- Breadcrumb -->
-<div class="bg-white border-b border-[#E7D6BE]">
+<div class="bg-[color:var(--c-paper-card)] border-b border-[color:var(--c-line)]">
     <div class="container mx-auto px-6 py-4">
-        <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
-            <a href="{{ '/' | url }}" class="hover:text-science-blue-600 transition-colors">Home</a>
+        <div class="flex items-center gap-2 text-sm text-[color:var(--c-body-dim)]">
+            <a href="{{ '/' | url }}" class="hover:text-[color:var(--c-link)] transition-colors">Home</a>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-neutral-warm-500">Resources</span>
+            <span class="text-[color:var(--c-body-dim)]">Resources</span>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-science-blue-800 font-medium">Collaborations</span>
+            <span class="text-[color:var(--c-heading)] font-medium">Collaborations</span>
         </div>
     </div>
 </div>
 
 <!-- Intro -->
-<section class="py-16 bg-white">
+<section class="py-16 bg-[color:var(--c-paper-hi)]">
     <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto text-center">
-            <p class="text-lg md:text-xl text-neutral-warm-700 leading-relaxed">
+            <p class="text-lg md:text-xl text-[color:var(--c-body)] leading-relaxed">
                 Transpersonal work has always grown through relationship. Our school is part of a
                 living web of institutes, training schools and teachers across Europe and beyond &mdash;
                 colleagues who share standards, students and a common vision of psychotherapy as a path
@@ -93,16 +93,16 @@ description: "The transpersonal institutes, schools and teachers we work with ac
 
 <!-- Present -->
 {% if collaborations.present.length %}
-<section id="present" class="scroll-mt-24 py-16 md:py-20 bg-[#FAF3E7] border-t border-[#E7D6BE]">
+<section id="present" class="scroll-mt-24 py-16 md:py-20 bg-[color:var(--c-paper)] border-t border-[color:var(--c-line)]">
     <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto text-center mb-14">
-            <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-sec)] mb-4 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 Present
                 <span class="p4-hairline"></span>
             </p>
-            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-4">Current partners &amp; network</h2>
-            <p class="text-neutral-warm-600 text-lg">The institutes and networks we actively collaborate with today.</p>
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-4">Current partners &amp; network</h2>
+            <p class="text-[color:var(--c-body-dim)] text-lg">The institutes and networks we actively collaborate with today.</p>
         </div>
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {% for c in collaborations.present %}{{ collabCard(c) }}{% endfor %}
@@ -113,16 +113,16 @@ description: "The transpersonal institutes, schools and teachers we work with ac
 
 <!-- Past -->
 {% if collaborations.past.length %}
-<section id="past" class="scroll-mt-24 py-16 md:py-20 bg-white border-t border-[#E7D6BE]">
+<section id="past" class="scroll-mt-24 py-16 md:py-20 bg-[color:var(--c-paper-card)] border-t border-[color:var(--c-line)]">
     <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto text-center mb-14">
-            <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-sec)] mb-4 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 Past
                 <span class="p4-hairline"></span>
             </p>
-            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-4">Those we have walked with</h2>
-            <p class="text-neutral-warm-600 text-lg">Schools and teachers who have contributed to our community over the years.</p>
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-4">Those we have walked with</h2>
+            <p class="text-[color:var(--c-body-dim)] text-lg">Schools and teachers who have contributed to our community over the years.</p>
         </div>
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {% for c in collaborations.past %}{{ collabCard(c) }}{% endfor %}
@@ -133,16 +133,16 @@ description: "The transpersonal institutes, schools and teachers we work with ac
 
 <!-- Future -->
 {% if collaborations.future.length %}
-<section id="future" class="scroll-mt-24 py-16 md:py-20 bg-[#FAF3E7] border-t border-[#E7D6BE]">
+<section id="future" class="scroll-mt-24 py-16 md:py-20 bg-[color:var(--c-paper)] border-t border-[color:var(--c-line)]">
     <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto text-center mb-14">
-            <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-sec)] mb-4 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 Future
                 <span class="p4-hairline"></span>
             </p>
-            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-4">Emerging collaborations</h2>
-            <p class="text-neutral-warm-600 text-lg">New partnerships taking shape as the school grows.</p>
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-4">Emerging collaborations</h2>
+            <p class="text-[color:var(--c-body-dim)] text-lg">New partnerships taking shape as the school grows.</p>
         </div>
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {% for c in collaborations.future %}{{ collabCard(c) }}{% endfor %}
@@ -152,24 +152,24 @@ description: "The transpersonal institutes, schools and teachers we work with ac
 {% endif %}
 
 <!-- CTA: reciprocal link / partner with us -->
-<section class="py-16 md:py-20 bg-[#0F2540] text-center">
+<section class="py-16 md:py-20 bg-[color:var(--c-deep)] text-center">
     <div class="container mx-auto px-6 max-w-2xl">
-        <div class="w-14 h-14 mx-auto mb-6 rounded-full bg-[#D9A756]/20 flex items-center justify-center">
-            <i data-lucide="handshake" class="w-7 h-7 text-[#D9A756]"></i>
+        <div class="w-14 h-14 mx-auto mb-6 rounded-full bg-[color:var(--c-acc-20)] flex items-center justify-center">
+            <i data-lucide="handshake" class="w-7 h-7 text-[color:var(--c-acc)]"></i>
         </div>
-        <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#FDFBF5] mb-4">Let&rsquo;s link up</h2>
-        <p class="text-slate-300 text-lg leading-relaxed mb-8">
+        <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-paper-hi)] mb-4">Let&rsquo;s link up</h2>
+        <p class="text-[color:var(--c-on-dark-3)] text-lg leading-relaxed mb-8">
             Are you a partner school, a teacher or a friend of the school? We would love to celebrate
             our connection here &mdash; and to link between our websites, so students and colleagues can
             find their way from one to the other. Send us your website and the wording you&rsquo;d like,
             and we&rsquo;ll add you to this page.
         </p>
         <div class="flex flex-wrap items-center justify-center gap-4">
-            <a href="mailto:west-office@transpersonal-training.com?subject=Collaboration%20%26%20link%20exchange" class="inline-flex items-center gap-2 bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
+            <a href="mailto:west-office@transpersonal-training.com?subject=Collaboration%20%26%20link%20exchange" class="inline-flex items-center gap-2 bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-heading)] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
                 <i data-lucide="mail" class="w-5 h-5"></i>
                 West office
             </a>
-            <a href="mailto:east-office@transpersonal-training.com?subject=Collaboration%20%26%20link%20exchange" class="inline-flex items-center gap-2 bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
+            <a href="mailto:east-office@transpersonal-training.com?subject=Collaboration%20%26%20link%20exchange" class="inline-flex items-center gap-2 bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-heading)] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
                 <i data-lucide="mail" class="w-5 h-5"></i>
                 East office
             </a>

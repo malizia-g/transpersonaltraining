@@ -15,20 +15,20 @@ description: "Where our intensives happen: a house in the Black Forest at Todtmo
             <source srcset="{{ '/assets/images/Headers/hero-venues-todtmoos-narrow.webp' | url }}" type="image/webp">
             <img src="{{ '/assets/images/Headers/hero-venues-todtmoos-narrow.jpg' | url }}" alt="Sunlit forest valley near Todtmoos in the Black Forest" class="w-full h-full object-cover">
         </picture>
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/80 via-[#0F2540]/60 to-[#0F2540]/80"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[var(--c-deep-80)] via-[var(--c-deep-60)] to-[var(--c-deep-80)]"></div>
     </div>
 
     <div class="relative z-10 container mx-auto px-6 text-center pt-20">
         <div class="animate-fade-in-up">
-            <p class="p4-kicker text-[#D9A756] mb-6 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-acc)] mb-6 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 Where we gather
                 <span class="p4-hairline"></span>
             </p>
-            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] mb-6 leading-tight drop-shadow-md">
+            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[color:var(--c-paper-hi)] mb-6 leading-tight drop-shadow-md">
                 Our Venues
             </h1>
-            <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
+            <p class="text-xl md:text-2xl text-[color:var(--c-on-dark-2)] max-w-3xl mx-auto font-light leading-relaxed">
                 Inspiring settings for our residential intensives &mdash; the Black Forest, the hills of Tuscany, and a new home for our Eastern track
             </p>
         </div>
@@ -36,23 +36,23 @@ description: "Where our intensives happen: a house in the Black Forest at Todtmo
 </header>
 
 <!-- Breadcrumb -->
-<div class="bg-white border-b border-[#E7D6BE]">
+<div class="bg-[color:var(--c-paper-card)] border-b border-[color:var(--c-line)]">
     <div class="container mx-auto px-6 py-4">
-        <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
-            <a href="{{ '/' | url }}" class="hover:text-science-blue-600 transition-colors">Home</a>
+        <div class="flex items-center gap-2 text-sm text-[color:var(--c-body-dim)]">
+            <a href="{{ '/' | url }}" class="hover:text-[color:var(--c-link)] transition-colors">Home</a>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-neutral-warm-500">Training</span>
+            <span class="text-[color:var(--c-body-dim)]">Training</span>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-science-blue-800 font-medium">Venues</span>
+            <span class="text-[color:var(--c-heading)] font-medium">Venues</span>
         </div>
     </div>
 </div>
 
 <!-- Intro -->
-<section class="py-16 bg-white">
+<section class="py-16 bg-[color:var(--c-paper-hi)]">
     <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto text-center">
-            <p class="text-lg md:text-xl text-neutral-warm-700 leading-relaxed">
+            <p class="text-lg md:text-xl text-[color:var(--c-body)] leading-relaxed">
                 The online lectures bring our whole international community together, but the residential intensives are held separately for each track. Our Western-track intensives take place at two very different but equally inspiring locations in Western Europe, while a dedicated venue for the Eastern (Russian-language) track is being finalised. Each offers quiet, natural surroundings, shared living spaces and room for deep experiential work, rest and community.
             </p>
         </div>
@@ -60,19 +60,19 @@ description: "Where our intensives happen: a house in the Black Forest at Todtmo
 </section>
 
 <!-- Venue 1: Todtmoos -->
-<section id="todtmoos" class="scroll-mt-24 py-16 md:py-20 bg-[#FAF3E7] border-t border-[#E7D6BE]">
+<section id="todtmoos" class="scroll-mt-24 py-16 md:py-20 bg-[color:var(--c-paper)] border-t border-[color:var(--c-line)]">
     <div class="container mx-auto px-6">
         <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             <div>
-                <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
+                <p class="p4-kicker text-[color:var(--c-sec)] mb-4 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
                     <span class="p4-hairline"></span>
                     Todtmoos &middot; Black Forest, Germany
                     <span class="p4-hairline md:hidden"></span>
                 </p>
-                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-5">
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-5">
                     A house in the Black Forest
                 </h2>
-                <div class="space-y-4 text-neutral-warm-700 leading-relaxed text-lg">
+                <div class="space-y-4 text-[color:var(--c-body)] leading-relaxed text-lg">
                     <p>
                         Our German intensives are held in a welcoming house nestled in the forested hills of Todtmoos, in the southern Black Forest. Surrounded by woodland and birdsong, it is a place designed to support deep work, rest and connection.
                     </p>
@@ -112,19 +112,19 @@ description: "Where our intensives happen: a house in the Black Forest at Todtmo
 </section>
 
 <!-- Venue 2: Tenuta di Monteverdi -->
-<section id="monteverdi" class="scroll-mt-24 py-16 md:py-20 bg-white border-t border-[#E7D6BE]">
+<section id="monteverdi" class="scroll-mt-24 py-16 md:py-20 bg-[color:var(--c-paper-card)] border-t border-[color:var(--c-line)]">
     <div class="container mx-auto px-6">
         <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             <div class="lg:order-2">
-                <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
+                <p class="p4-kicker text-[color:var(--c-sec)] mb-4 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
                     <span class="p4-hairline"></span>
                     Tenuta di Monteverdi &middot; Tuscany, Italy
                     <span class="p4-hairline md:hidden"></span>
                 </p>
-                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-5">
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-5">
                     A Tuscan estate in the Maremma
                 </h2>
-                <div class="space-y-4 text-neutral-warm-700 leading-relaxed text-lg">
+                <div class="space-y-4 text-[color:var(--c-body)] leading-relaxed text-lg">
                     <p>
                         Our Italian intensives take place at the Tenuta di Monteverdi, a historic estate of over 1,000 hectares in the Maremma, in southern Tuscany. It is centred on a restored 15th-century hamlet with an 18th-century church, wrapped in olive groves, vineyards, woodland and rolling hills.
                     </p>
@@ -132,9 +132,9 @@ description: "Where our intensives happen: a house in the Black Forest at Todtmo
                         Renovated farmhouses, elegant common rooms, gardens and a pool provide a serene and beautiful setting for residential intensives &mdash; with Siena, Montalcino and Florence within easy reach for those who wish to explore.
                     </p>
                 </div>
-                <p class="mt-5 text-sm text-neutral-warm-500">
+                <p class="mt-5 text-sm text-[color:var(--c-body-dim)]">
                     Estate photos courtesy of
-                    <a href="https://www.grimaldisavelli.com/tenuta-di-monteverdi-estate/" target="_blank" rel="noopener" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4">grimaldisavelli.com</a>.
+                    <a href="https://www.grimaldisavelli.com/tenuta-di-monteverdi-estate/" target="_blank" rel="noopener" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-4">grimaldisavelli.com</a>.
                 </p>
             </div>
 
@@ -163,33 +163,33 @@ description: "Where our intensives happen: a house in the Black Forest at Todtmo
 </section>
 
 <!-- Venue 3: Eastern track (coming soon) -->
-<section id="eastern-venue" class="scroll-mt-24 py-16 md:py-20 bg-[#FAF3E7] border-t border-[#E7D6BE]">
+<section id="eastern-venue" class="scroll-mt-24 py-16 md:py-20 bg-[color:var(--c-paper)] border-t border-[color:var(--c-line)]">
     <div class="container mx-auto px-6">
         <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             <div>
-                <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
+                <p class="p4-kicker text-[color:var(--c-sec)] mb-4 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
                     <span class="p4-hairline"></span>
                     Eastern track &middot; Eastern Europe
                     <span class="p4-hairline md:hidden"></span>
                 </p>
-                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-5">
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-5">
                     A home for our Eastern intensives
                 </h2>
-                <div class="space-y-4 text-neutral-warm-700 leading-relaxed text-lg">
+                <div class="space-y-4 text-[color:var(--c-body)] leading-relaxed text-lg">
                     <p>
                         Students on our Russian-language Eastern track share the same online lectures as the rest of the community, but gather for their residential intensives at their own dedicated venue.
                     </p>
                     <p>
-                        We are currently finalising this location for the 2027&ndash;2030 cohort, near Chisinau in the Republic of Moldova. Details, photographs and directions will appear here soon &mdash; in the meantime, please <a href="{{ '/' | url }}#contact" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4">get in touch</a> if you would like to know more about the Eastern track.
+                        We are currently finalising this location for the 2027&ndash;2030 cohort, near Chisinau in the Republic of Moldova. Details, photographs and directions will appear here soon &mdash; in the meantime, please <a href="{{ '/' | url }}#contact" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-4">get in touch</a> if you would like to know more about the Eastern track.
                     </p>
                 </div>
             </div>
 
             <div class="flex items-center justify-center">
-                <div class="w-full aspect-[4/3] border-2 border-dashed border-[#D9A756]/50 bg-white/60 flex flex-col items-center justify-center text-center p-8 gap-3">
-                    <i data-lucide="map-pin" class="w-10 h-10 text-[#D9A756]"></i>
-                    <p class="p4-display text-2xl text-[#0F2540]">Coming soon</p>
-                    <p class="text-sm text-neutral-warm-600">Eastern-track venue to be announced</p>
+                <div class="w-full aspect-[4/3] border-2 border-dashed border-[color:var(--c-acc-50)] bg-[color:var(--c-paper-hi-60)] flex flex-col items-center justify-center text-center p-8 gap-3">
+                    <i data-lucide="map-pin" class="w-10 h-10 text-[color:var(--c-acc)]"></i>
+                    <p class="p4-display text-2xl text-[color:var(--c-heading)]">Coming soon</p>
+                    <p class="text-sm text-[color:var(--c-body-dim)]">Eastern-track venue to be announced</p>
                 </div>
             </div>
         </div>
@@ -197,18 +197,18 @@ description: "Where our intensives happen: a house in the Black Forest at Todtmo
 </section>
 
 <!-- Secondary / collaborative venues -->
-<section id="secondary-venues" class="scroll-mt-24 py-16 md:py-20 bg-white border-t border-[#E7D6BE]">
+<section id="secondary-venues" class="scroll-mt-24 py-16 md:py-20 bg-[color:var(--c-paper-card)] border-t border-[color:var(--c-line)]">
     <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto text-center mb-14 md:mb-16">
-            <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-sec)] mb-4 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 Closer to home
                 <span class="p4-hairline"></span>
             </p>
-            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-5">
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-5">
                 Secondary &amp; collaborative venues
             </h2>
-            <p class="text-lg text-neutral-warm-700 leading-relaxed">
+            <p class="text-lg text-[color:var(--c-body)] leading-relaxed">
                 As well as our large, intensive courses with overnight accommodation, we also offer smaller seminars run by our collaborative partners. These events take place at their own venues, which may be closer to where members of our community live. This makes it possible &mdash; particularly in the case of the personal experiences required for the training in expanded states of consciousness, such as Holotropic Breathing &mdash; to complete the practice sessions without having to travel far, e.g. in Milano, Chisinau or at several places in Germany or elsewhere, depending on where our students live.
             </p>
         </div>
@@ -216,15 +216,15 @@ description: "Where our intensives happen: a house in the Black Forest at Todtmo
         <!-- Moldova -->
         <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             <div>
-                <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
+                <p class="p4-kicker text-[color:var(--c-sec)] mb-4 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
                     <span class="p4-hairline"></span>
                     Moldova &middot; by the Dniester river
                     <span class="p4-hairline md:hidden"></span>
                 </p>
-                <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-5">
+                <h3 class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mb-5">
                     By the banks of the Dniester
                 </h3>
-                <div class="space-y-4 text-neutral-warm-700 leading-relaxed text-lg">
+                <div class="space-y-4 text-[color:var(--c-body)] leading-relaxed text-lg">
                     <p>
                         In Moldova, seminars are held out in the countryside near the Dniester river, where wide meadows and willow-lined banks open onto sweeping views across the valley.
                     </p>
@@ -257,18 +257,18 @@ description: "Where our intensives happen: a house in the Black Forest at Todtmo
 </section>
 
 <!-- CTA -->
-<section class="py-16 bg-[#FAF3E7] border-t border-[#E7D6BE] text-center">
+<section class="py-16 bg-[color:var(--c-paper)] border-t border-[color:var(--c-line)] text-center">
     <div class="container mx-auto px-6">
-        <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center gap-4">
+        <p class="p4-kicker text-[color:var(--c-sec)] mb-4 flex items-center justify-center gap-4">
             <span class="p4-hairline"></span>
             Join us
             <span class="p4-hairline"></span>
         </p>
-        <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-4">Join us at an intensive</h2>
-        <p class="text-neutral-warm-700 max-w-2xl mx-auto mb-8 text-lg">
+        <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-4">Join us at an intensive</h2>
+        <p class="text-[color:var(--c-body)] max-w-2xl mx-auto mb-8 text-lg">
             See upcoming residential weekends and intensive seminars across our locations.
         </p>
-        <a href="{{ '/schedule/' | url }}" class="inline-block bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
+        <a href="{{ '/schedule/' | url }}" class="inline-block bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-heading)] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
             View the Intensive Schedule
         </a>
     </div>

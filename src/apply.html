@@ -9,23 +9,23 @@ description: "Apply to our EUROTAS-accredited transpersonal psychotherapy, couns
 
 <style>
     /* --- Application form + printable agreement --- */
-    .field-label { font-size: 0.875rem; font-weight: 500; color: #3F3A35; margin-bottom: 0.35rem; display: block; }
+    .field-label { font-size: 0.875rem; font-weight: 500; color: var(--c-heading); margin-bottom: 0.35rem; display: block; }
     .field-input,
     .field-select {
-        width: 100%; border: 1px solid #E5D4C1; background: #fff; padding: 0.6rem 0.75rem;
-        font-size: 0.95rem; color: #2B2825; transition: border-color .15s, box-shadow .15s;
+        width: 100%; border: 1px solid var(--c-line); background: var(--c-paper-card); padding: 0.6rem 0.75rem;
+        font-size: 0.95rem; color: var(--c-body); transition: border-color .15s, box-shadow .15s;
     }
     .field-input:focus, .field-select:focus {
-        outline: none; border-color: #D9A756; box-shadow: 0 0 0 3px rgba(201,164,92,.18);
+        outline: none; border-color: var(--c-acc); box-shadow: 0 0 0 3px var(--c-acc-20);
     }
     .field-error { border-color: #b91c1c !important; }
     .req::after { content: " *"; color: #b91c1c; }
 
     /* The printable agreement */
     .agreement-doc { color: #1a1a1a; font-size: 0.9rem; line-height: 1.55; }
-    .agreement-doc h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.7rem; font-weight: 700; color: #0F2540; margin: 0 0 .6rem; }
-    .agreement-doc h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; font-weight: 700; color: #0F2540; margin: 1.6rem 0 .6rem; }
-    .agreement-doc h3 { font-weight: 700; font-size: 1rem; margin: 1.2rem 0 .5rem; color: #0F2540; }
+    .agreement-doc h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.7rem; font-weight: 700; color: var(--c-heading); margin: 0 0 .6rem; }
+    .agreement-doc h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; font-weight: 700; color: var(--c-heading); margin: 1.6rem 0 .6rem; }
+    .agreement-doc h3 { font-weight: 700; font-size: 1rem; margin: 1.2rem 0 .5rem; color: var(--c-heading); }
     .agreement-doc p { margin: 0 0 .7rem; }
     .agreement-doc ul { margin: 0 0 .7rem 1.25rem; list-style: disc; }
     .agreement-doc li { margin-bottom: .3rem; }
@@ -34,7 +34,7 @@ description: "Apply to our EUROTAS-accredited transpersonal psychotherapy, couns
     .agreement-doc hr { border: none; border-top: 1px solid #ddd; margin: 1.3rem 0; }
     .agreement-doc .fld { font-weight: 600; }
     .agreement-doc .box { display: inline-block; width: 1em; }
-    .agreement-doc blockquote { border-left: 4px solid #D9A756; padding-left: 1rem; margin: 0 0 .7rem; color: #333; }
+    .agreement-doc blockquote { border-left: 4px solid var(--c-acc); padding-left: 1rem; margin: 0 0 .7rem; color: #333; }
     .agreement-doc .sigline { display:block; margin-top:1.2rem; }
     .agreement-doc .fill { color:#9A5B00; }
 
@@ -57,7 +57,7 @@ description: "Apply to our EUROTAS-accredited transpersonal psychotherapy, couns
 </style>
 
 <!-- Hero -->
-<header class="relative min-h-[42vh] flex items-center justify-center text-white pt-28 pb-16 bg-[#0F2540] overflow-hidden no-print">
+<header class="relative min-h-[42vh] flex items-center justify-center text-[color:var(--c-on-dark-1)] pt-28 pb-16 bg-[color:var(--c-deep)] overflow-hidden no-print">
     <div class="absolute inset-0 z-0">
         <picture>
             <source srcset="{{ '/assets/images/Headers/hero-apply-night-fire-circle.webp' | url }}" type="image/webp">
@@ -67,44 +67,44 @@ description: "Apply to our EUROTAS-accredited transpersonal psychotherapy, couns
                 class="w-full h-full object-cover object-[50%_55%]"
             />
         </picture>
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0B1B30]/90 via-[#0F2540]/75 to-[#0B1B30]/90"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[var(--c-deepest-90)] via-[var(--c-deep-80)] to-[var(--c-deepest-90)]"></div>
     </div>
     <div class="container mx-auto px-6 relative z-10 text-center">
         <div class="max-w-3xl mx-auto">
-            <p class="p4-kicker text-[#D9A756] mb-6 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-acc)] mb-6 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 Application
                 <span class="p4-hairline"></span>
             </p>
-            <h1 class="p4-display text-3xl md:text-5xl font-medium mb-6 leading-tight text-[#FDFBF5]">Apply to the training</h1>
+            <h1 class="p4-display text-3xl md:text-5xl font-medium mb-6 leading-tight text-[color:var(--c-paper-hi)]">Apply to the training</h1>
             {# The asterisk carries the same job it does on the home page: the
                recognition claim is the line a regulator reads first, so the
                qualification on it travels with it rather than waiting below the
                fold. Gold rather than terracotta here, to stay legible on the dark
                hero. #}
-            <p class="text-lg text-white/80 font-light leading-relaxed max-w-2xl mx-auto">
-                Four years, one international community, and a qualification recognised across Europe<sup><a href="{{ '/legal-notice/' | url }}" title="Legal notice on the use of the professional title &lsquo;psychotherapist&rsquo;" class="text-[#D9A756] hover:text-[#EBC98A] font-semibold no-underline">*</a></sup>.
+            <p class="text-lg text-[color:var(--c-on-dark-3)] font-light leading-relaxed max-w-2xl mx-auto">
+                Four years, one international community, and a qualification recognised across Europe<sup><a href="{{ '/legal-notice/' | url }}" title="Legal notice on the use of the professional title &lsquo;psychotherapist&rsquo;" class="text-[color:var(--c-acc)] hover:text-[color:var(--c-acc-light)] font-semibold no-underline">*</a></sup>.
                 Here is who it is for, what you get, and what applying actually involves.
             </p>
-            <p class="mt-6 text-sm text-white/60">
+            <p class="mt-6 text-sm text-[color:var(--c-on-dark-4)]">
                 The full detail is in the
-                <a href="{{ '/curriculum/' | url }}" class="text-[#D9A756] underline underline-offset-4 hover:text-[#EBC98A]">curriculum</a>
+                <a href="{{ '/curriculum/' | url }}" class="text-[color:var(--c-acc)] underline underline-offset-4 hover:text-[color:var(--c-acc-light)]">curriculum</a>
                 and the
-                <a href="{{ '/training-overview/' | url }}" class="text-[#D9A756] underline underline-offset-4 hover:text-[#EBC98A]">training overview</a>.
+                <a href="{{ '/training-overview/' | url }}" class="text-[color:var(--c-acc)] underline underline-offset-4 hover:text-[color:var(--c-acc-light)]">training overview</a>.
             </p>
         </div>
     </div>
 </header>
 
 <!-- Breadcrumb -->
-<div class="bg-white border-b border-[#E7D6BE] no-print">
+<div class="bg-[color:var(--c-paper-card)] border-b border-[color:var(--c-line)] no-print">
     <div class="container mx-auto px-6 py-4">
-        <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
-            <a href="{{ '/' | url }}" class="hover:text-science-blue-600 transition-colors">Home</a>
+        <div class="flex items-center gap-2 text-sm text-[color:var(--c-body-dim)]">
+            <a href="{{ '/' | url }}" class="hover:text-[color:var(--c-link)] transition-colors">Home</a>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-neutral-warm-500">Resources</span>
+            <span class="text-[color:var(--c-body-dim)]">Resources</span>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-science-blue-800 font-medium">Apply</span>
+            <span class="text-[color:var(--c-heading)] font-medium">Apply</span>
         </div>
     </div>
 </div>
@@ -115,29 +115,29 @@ description: "Apply to our EUROTAS-accredited transpersonal psychotherapy, couns
    and, if ever marked up as review structured data, a Google policy violation.
    Collection is step 11 / Phase F in docs/MARKETING_AND_SEO.md. #}
 {% if testimonials.length %}
-<section class="py-20 md:py-24 bg-[#FAF3E7] border-t border-[#E7D6BE] no-print">
+<section class="py-20 md:py-24 bg-[color:var(--c-paper)] border-t border-[color:var(--c-line)] no-print">
     <div class="container mx-auto px-6">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-14">
-                <p class="p4-kicker text-[#B65E3F] mb-6 flex items-center justify-center gap-4">
+                <p class="p4-kicker text-[color:var(--c-sec)] mb-6 flex items-center justify-center gap-4">
                     <span class="p4-hairline"></span> In their words <span class="p4-hairline"></span>
                 </p>
-                <h2 class="p4-display text-3xl md:text-5xl font-medium text-indigo-deep-900 leading-tight">
+                <h2 class="p4-display text-3xl md:text-5xl font-medium text-[color:var(--c-heading)] leading-tight">
                     From people who have done it
                 </h2>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {% for t in testimonials %}
-                <figure class="bg-[#FEF9EF] border border-[#D9A756]/60 p-7 flex flex-col">
-                    <i data-lucide="quote" class="w-7 h-7 text-[#D9A756] mb-4"></i>
-                    <blockquote class="text-neutral-warm-800 leading-relaxed flex-grow">{{ t.quote }}</blockquote>
-                    <figcaption class="mt-6 flex items-center gap-3 border-t border-[#E7D6BE] pt-5">
+                <figure class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-acc-60)] p-7 flex flex-col">
+                    <i data-lucide="quote" class="w-7 h-7 text-[color:var(--c-acc)] mb-4"></i>
+                    <blockquote class="text-[color:var(--c-heading)] leading-relaxed flex-grow">{{ t.quote }}</blockquote>
+                    <figcaption class="mt-6 flex items-center gap-3 border-t border-[color:var(--c-line)] pt-5">
                         {% if t.photo %}
                         <img src="{{ t.photo | url }}" alt="" loading="lazy" class="w-11 h-11 object-cover rounded-full shrink-0">
                         {% endif %}
                         <span class="text-sm leading-tight">
-                            <span class="block font-semibold text-indigo-deep-900">{{ t.name }}</span>
-                            {% if t.cohort %}<span class="text-neutral-warm-600">{{ t.cohort }}</span>{% endif %}
+                            <span class="block font-semibold text-[color:var(--c-heading)]">{{ t.name }}</span>
+                            {% if t.cohort %}<span class="text-[color:var(--c-body-dim)]">{{ t.cohort }}</span>{% endif %}
                         </span>
                     </figcaption>
                 </figure>
@@ -149,45 +149,45 @@ description: "Apply to our EUROTAS-accredited transpersonal psychotherapy, couns
 {% endif %}
 
 <!-- ═══════════ READY TO APPLY ═══════════ -->
-<section class="py-16 md:py-20 bg-[#FAF3E7] no-print">
+<section class="py-16 md:py-20 bg-[color:var(--c-paper)] no-print">
     <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto text-center">
-            <p class="p4-kicker text-[#B65E3F] mb-6 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-sec)] mb-6 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span> Ready when you are <span class="p4-hairline"></span>
             </p>
-            <h2 class="p4-display text-3xl md:text-5xl font-medium text-indigo-deep-900 leading-tight mb-6">
+            <h2 class="p4-display text-3xl md:text-5xl font-medium text-[color:var(--c-heading)] leading-tight mb-6">
                 Sign up for the 2027&ndash;2030 cohort
             </h2>
-            <p class="text-lg text-neutral-warm-700 leading-relaxed mb-10">
+            <p class="text-lg text-[color:var(--c-body)] leading-relaxed mb-10">
                 Three steps: your details, a personalised agreement to print and sign, then upload it.
                 Nothing is binding until the signed agreement reaches us.
             </p>
-            <p class="text-sm text-neutral-warm-600">
-                Still have doubts? <a href="{{ '/#contact' | url }}" class="text-[#B65E3F] underline underline-offset-4 decoration-[#B65E3F]/40 hover:text-[#7d5f28]">Ask a question first</a>.
+            <p class="text-sm text-[color:var(--c-body-dim)]">
+                Still have doubts? <a href="{{ '/#contact' | url }}" class="text-[color:var(--c-sec)] underline underline-offset-4 decoration-[color:var(--c-sec-40)] hover:text-[color:var(--c-sec-dark)]">Ask a question first</a>.
             </p>
         </div>
     </div>
 </section>
 
 <!-- How it works -->
-<section class="py-14 bg-white no-print">
+<section class="py-14 bg-[color:var(--c-paper-hi)] no-print">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto">
             <div class="grid md:grid-cols-3 gap-6">
-                <div class="border border-[#E7D6BE] p-6">
-                    <div class="w-9 h-9 border border-[#D9A756] flex items-center justify-center text-[#B65E3F] font-semibold mb-4">1</div>
-                    <h3 class="font-serif font-bold text-[#0F2540] text-lg mb-2">Fill in your details</h3>
-                    <p class="text-sm text-neutral-warm-700 leading-relaxed">Complete the short application form below.</p>
+                <div class="border border-[color:var(--c-line)] p-6">
+                    <div class="w-9 h-9 border border-[color:var(--c-acc)] flex items-center justify-center text-[color:var(--c-sec)] font-semibold mb-4">1</div>
+                    <h3 class="font-serif font-bold text-[color:var(--c-heading)] text-lg mb-2">Fill in your details</h3>
+                    <p class="text-sm text-[color:var(--c-body)] leading-relaxed">Complete the short application form below.</p>
                 </div>
-                <div class="border border-[#E7D6BE] p-6">
-                    <div class="w-9 h-9 border border-[#D9A756] flex items-center justify-center text-[#B65E3F] font-semibold mb-4">2</div>
-                    <h3 class="font-serif font-bold text-[#0F2540] text-lg mb-2">Download &amp; sign</h3>
-                    <p class="text-sm text-neutral-warm-700 leading-relaxed">Generate your personalised enrolment agreement (PDF), print it, read it and sign it by hand.</p>
+                <div class="border border-[color:var(--c-line)] p-6">
+                    <div class="w-9 h-9 border border-[color:var(--c-acc)] flex items-center justify-center text-[color:var(--c-sec)] font-semibold mb-4">2</div>
+                    <h3 class="font-serif font-bold text-[color:var(--c-heading)] text-lg mb-2">Download &amp; sign</h3>
+                    <p class="text-sm text-[color:var(--c-body)] leading-relaxed">Generate your personalised enrolment agreement (PDF), print it, read it and sign it by hand.</p>
                 </div>
-                <div class="border border-[#E7D6BE] p-6">
-                    <div class="w-9 h-9 border border-[#D9A756] flex items-center justify-center text-[#B65E3F] font-semibold mb-4">3</div>
-                    <h3 class="font-serif font-bold text-[#0F2540] text-lg mb-2">Upload the signed copy</h3>
-                    <p class="text-sm text-neutral-warm-700 leading-relaxed">Scan or photograph the signed agreement and upload it — it goes straight to the school.</p>
+                <div class="border border-[color:var(--c-line)] p-6">
+                    <div class="w-9 h-9 border border-[color:var(--c-acc)] flex items-center justify-center text-[color:var(--c-sec)] font-semibold mb-4">3</div>
+                    <h3 class="font-serif font-bold text-[color:var(--c-heading)] text-lg mb-2">Upload the signed copy</h3>
+                    <p class="text-sm text-[color:var(--c-body)] leading-relaxed">Scan or photograph the signed agreement and upload it — it goes straight to the school.</p>
                 </div>
             </div>
         </div>
@@ -195,12 +195,12 @@ description: "Apply to our EUROTAS-accredited transpersonal psychotherapy, couns
 </section>
 
 <!-- STEP 1 — Application form -->
-<section id="step1" class="pb-8 bg-white no-print scroll-mt-24">
+<section id="step1" class="pb-8 bg-[color:var(--c-paper-hi)] no-print scroll-mt-24">
     <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto">
-            <h2 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-2">1. Your details</h2>
-            <p class="text-sm text-neutral-warm-600 mb-2">Fields marked <span class="text-red-700">*</span> are required. Your details are used to prepare your agreement and are sent to the school office when you generate it, so we know your application is on its way.</p>
-            <p class="text-sm text-neutral-warm-600 mb-6">Please read our <a href="{{ '/legal-notice/' | url }}" class="text-[#B65E3F] hover:text-[#7d5f28] underline underline-offset-2 font-medium">legal notice</a> before you apply — it covers the agreement you will sign in step 2 and the protected title &ldquo;psychotherapist&rdquo;.</p>
+            <h2 class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mb-2">1. Your details</h2>
+            <p class="text-sm text-[color:var(--c-body-dim)] mb-2">Fields marked <span class="text-red-700">*</span> are required. Your details are used to prepare your agreement and are sent to the school office when you generate it, so we know your application is on its way.</p>
+            <p class="text-sm text-[color:var(--c-body-dim)] mb-6">Please read our <a href="{{ '/legal-notice/' | url }}" class="text-[color:var(--c-sec)] hover:text-[color:var(--c-sec-dark)] underline underline-offset-2 font-medium">legal notice</a> before you apply — it covers the agreement you will sign in step 2 and the protected title &ldquo;psychotherapist&rdquo;.</p>
 
             <form id="applicationForm" data-persist="apply" novalidate class="grid md:grid-cols-2 gap-5">
                 <div class="md:col-span-2">
@@ -240,7 +240,7 @@ description: "Apply to our EUROTAS-accredited transpersonal psychotherapy, couns
                     </select>
                 </div>
                 <div>
-                    <label class="field-label" for="joining">Subscription intent <span class="text-neutral-warm-500 font-normal">(optional)</span></label>
+                    <label class="field-label" for="joining">Subscription intent <span class="text-[color:var(--c-body-dim)] font-normal">(optional)</span></label>
                     <select class="field-select" id="joining" name="joining">
                         <option value="">Not sure yet</option>
                         <option value="Full training (all levels, toward professional certification)">Full training (all levels)</option>
@@ -252,14 +252,14 @@ description: "Apply to our EUROTAS-accredited transpersonal psychotherapy, couns
                 </div>
 
                 <div class="md:col-span-2 mt-2">
-                    <button type="submit" class="inline-flex items-center gap-2 bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-6 py-3 font-medium tracking-wide transition-all shadow-lg hover:shadow-xl">
+                    <button type="submit" class="inline-flex items-center gap-2 bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-heading)] px-6 py-3 font-medium tracking-wide transition-all shadow-lg hover:shadow-xl">
                         <i data-lucide="file-text" class="w-4 h-4"></i>
                         Generate my agreement
                     </button>
                     <p id="formHint" class="text-xs text-red-700 mt-3 hidden">Please complete the required fields above.</p>
-                    <p class="text-xs text-neutral-warm-500 mt-3">
+                    <p class="text-xs text-[color:var(--c-body-dim)] mt-3">
                         Your answers are also kept in this browser as you type, so you won&rsquo;t lose them if the page closes or reloads.
-                        <button type="button" data-clear-persist="apply" class="underline underline-offset-2 hover:text-[#B65E3F]">Clear saved answers</button>
+                        <button type="button" data-clear-persist="apply" class="underline underline-offset-2 hover:text-[color:var(--c-sec)]">Clear saved answers</button>
                     </p>
                 </div>
             </form>
@@ -268,34 +268,34 @@ description: "Apply to our EUROTAS-accredited transpersonal psychotherapy, couns
 </section>
 
 <!-- STEP 2 — Generated agreement (hidden until generated) -->
-<section id="step2" class="py-8 bg-[#FAF3E7] hidden">
+<section id="step2" class="py-8 bg-[color:var(--c-paper)] hidden">
     <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto">
             <div class="no-print mb-6">
-                <h2 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-2">2. Your enrolment agreement</h2>
-                <p class="text-sm text-neutral-warm-700 mb-4">Your details have been filled in below. <strong>Print</strong> opens your browser&rsquo;s print dialog &mdash; the sharpest result, and you can also choose &ldquo;Save as PDF&rdquo; there. <strong>Download PDF</strong> saves a copy straight to your device. Then read it, sign it by hand, and continue to step 3.</p>
+                <h2 class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mb-2">2. Your enrolment agreement</h2>
+                <p class="text-sm text-[color:var(--c-body)] mb-4">Your details have been filled in below. <strong>Print</strong> opens your browser&rsquo;s print dialog &mdash; the sharpest result, and you can also choose &ldquo;Save as PDF&rdquo; there. <strong>Download PDF</strong> saves a copy straight to your device. Then read it, sign it by hand, and continue to step 3.</p>
                 <div class="flex flex-wrap gap-3">
-                    <button type="button" id="printBtn" class="inline-flex items-center gap-2 bg-[#0F2540] hover:bg-[#0B1B30] text-white px-6 py-3 font-medium tracking-wide transition-all shadow-lg">
+                    <button type="button" id="printBtn" class="inline-flex items-center gap-2 bg-[color:var(--c-deep)] hover:bg-[color:var(--c-deepest)] text-[color:var(--c-on-dark-1)] px-6 py-3 font-medium tracking-wide transition-all shadow-lg">
                         <i data-lucide="printer" class="w-4 h-4"></i>
                         Print agreement
                     </button>
-                    <button type="button" id="downloadBtn" class="inline-flex items-center gap-2 border border-[#0F2540]/40 hover:border-[#B65E3F] text-[#0F2540] hover:text-[#B65E3F] px-6 py-3 font-medium tracking-wide transition-all disabled:opacity-60 disabled:cursor-not-allowed">
+                    <button type="button" id="downloadBtn" class="inline-flex items-center gap-2 border border-[color:var(--c-deep-40)] hover:border-[color:var(--c-sec)] text-[color:var(--c-heading)] hover:text-[color:var(--c-sec)] px-6 py-3 font-medium tracking-wide transition-all disabled:opacity-60 disabled:cursor-not-allowed">
                         <i data-lucide="download" class="w-4 h-4"></i>
                         <span id="downloadBtnLabel">Download PDF</span>
                     </button>
-                    <a href="#step3" class="inline-flex items-center gap-2 border border-[#0F2540]/40 hover:border-[#B65E3F] text-[#0F2540] hover:text-[#B65E3F] px-6 py-3 font-medium tracking-wide transition-all">
+                    <a href="#step3" class="inline-flex items-center gap-2 border border-[color:var(--c-deep-40)] hover:border-[color:var(--c-sec)] text-[color:var(--c-heading)] hover:text-[color:var(--c-sec)] px-6 py-3 font-medium tracking-wide transition-all">
                         I&rsquo;ve signed it — go to upload
                         <i data-lucide="arrow-down" class="w-4 h-4"></i>
                     </a>
                 </div>
                 <p id="downloadNote" class="text-sm mt-3 hidden"></p>
-                <p class="text-xs text-neutral-warm-500 mt-3">Note: the school still needs to complete the items shown in [brackets] (legal seat, governing law, refund terms). This draft is for review and signature; the final version will be confirmed by the office.</p>
+                <p class="text-xs text-[color:var(--c-body-dim)] mt-3">Note: the school still needs to complete the items shown in [brackets] (legal seat, governing law, refund terms). This draft is for review and signature; the final version will be confirmed by the office.</p>
             </div>
 
             <!-- Printable document — text comes from the master Google Doc
                  (src/_data/agreement.js). The {{placeholders}} inside are filled
                  in per applicant by src/scripts/pages/apply.js. -->
-            <div id="agreementPrintable" class="bg-white border border-[#E7D6BE] shadow-sm p-8 md:p-12">
+            <div id="agreementPrintable" class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm p-8 md:p-12">
                 <div class="agreement-doc"></div>
             </div>
             <template id="agreementTemplate">{{ agreement.html | safe }}</template>
@@ -304,17 +304,17 @@ description: "Apply to our EUROTAS-accredited transpersonal psychotherapy, couns
 </section>
 
 <!-- STEP 3 — Upload signed copy -->
-<section id="step3" class="py-12 bg-white no-print">
+<section id="step3" class="py-12 bg-[color:var(--c-paper-hi)] no-print">
     <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto">
-            <h2 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-2">3. Upload your signed agreement</h2>
-            <p class="text-sm text-neutral-warm-700 mb-6">Scan or photograph every signed page as a single PDF (preferred) or image, then upload it. It is sent securely to the school office.</p>
+            <h2 class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mb-2">3. Upload your signed agreement</h2>
+            <p class="text-sm text-[color:var(--c-body)] mb-6">Scan or photograph every signed page as a single PDF (preferred) or image, then upload it. It is sent securely to the school office.</p>
 
-            <form id="uploadForm" class="bg-[#FAF3E7] border border-[#E7D6BE] p-6 md:p-8 space-y-5">
+            <form id="uploadForm" class="bg-[color:var(--c-paper)] border border-[color:var(--c-line)] p-6 md:p-8 space-y-5">
                 <div>
                     <label class="field-label req" for="upEmail">Your email</label>
                     <input class="field-input" id="upEmail" name="upEmail" type="email" required>
-                    <p class="text-xs text-neutral-warm-600 mt-2">
+                    <p class="text-xs text-[color:var(--c-body-dim)] mt-2">
                         Please use <strong>the same email address you entered in step 1</strong> &mdash; it is what links your signed agreement to your application.
                     </p>
                 </div>
@@ -323,11 +323,11 @@ description: "Apply to our EUROTAS-accredited transpersonal psychotherapy, couns
                     <input class="field-input" id="signedFile" name="signedFile" type="file" accept="application/pdf,image/jpeg,image/png" required>
                 </div>
                 <div>
-                    <label class="field-label" for="diplomaFile">Diploma or degree certificate <span class="text-neutral-warm-500 font-normal">(optional, PDF, JPG or PNG, max 15&nbsp;MB)</span></label>
+                    <label class="field-label" for="diplomaFile">Diploma or degree certificate <span class="text-[color:var(--c-body-dim)] font-normal">(optional, PDF, JPG or PNG, max 15&nbsp;MB)</span></label>
                     <input class="field-input" id="diplomaFile" name="diplomaFile" type="file" accept="application/pdf,image/jpeg,image/png">
                 </div>
                 <div>
-                    <button type="submit" id="uploadBtn" class="inline-flex items-center gap-2 bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-6 py-3 font-medium tracking-wide transition-all shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed">
+                    <button type="submit" id="uploadBtn" class="inline-flex items-center gap-2 bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-heading)] px-6 py-3 font-medium tracking-wide transition-all shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed">
                         <i data-lucide="upload" class="w-4 h-4"></i>
                         <span id="uploadBtnLabel">Upload signed agreement</span>
                     </button>
@@ -335,7 +335,7 @@ description: "Apply to our EUROTAS-accredited transpersonal psychotherapy, couns
                 <div id="uploadStatus" class="text-sm hidden"></div>
             </form>
 
-            <p class="text-xs text-neutral-warm-500 mt-4">Prefer email? You can also send your signed agreement to <a href="mailto:west-office@transpersonal-training.com" class="underline hover:text-[#B65E3F]">west-office@transpersonal-training.com</a> (Western track) or <a href="mailto:east-office@transpersonal-training.com" class="underline hover:text-[#B65E3F]">east-office@transpersonal-training.com</a> (Eastern track).</p>
+            <p class="text-xs text-[color:var(--c-body-dim)] mt-4">Prefer email? You can also send your signed agreement to <a href="mailto:west-office@transpersonal-training.com" class="underline hover:text-[color:var(--c-sec)]">west-office@transpersonal-training.com</a> (Western track) or <a href="mailto:east-office@transpersonal-training.com" class="underline hover:text-[color:var(--c-sec)]">east-office@transpersonal-training.com</a> (Eastern track).</p>
         </div>
     </div>
 </section>

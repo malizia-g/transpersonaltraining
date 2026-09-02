@@ -33,20 +33,20 @@ description: "All modules across three levels: consciousness studies, counsellin
             <source srcset="{{ '/assets/images/Headers/hero-curriculum-buddha-garden.webp' | url }}" type="image/webp">
             <img src="{{ '/assets/images/Headers/hero-curriculum-buddha-garden.jpg' | url }}" alt="A weathered stone Buddha resting among the garden greenery" class="w-full h-full object-cover">
         </picture>
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/80 via-[#0F2540]/60 to-[#0F2540]/80"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[var(--c-deep-80)] via-[var(--c-deep-60)] to-[var(--c-deep-80)]"></div>
     </div>
 
     <div class="relative z-10 container mx-auto px-6 text-center pt-20">
         <div class="animate-fade-in-up">
-            <p class="p4-kicker text-[#D9A756] mb-6 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-acc)] mb-6 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 {{ (curriculumData.levels | length) or 0 }} Levels &middot; {{ curriculumData.totalModules or 0 }} Modules
                 <span class="p4-hairline"></span>
             </p>
-            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] mb-6 leading-tight drop-shadow-md">
+            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[color:var(--c-paper-hi)] mb-6 leading-tight drop-shadow-md">
                 Curriculum
             </h1>
-            <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
+            <p class="text-xl md:text-2xl text-[color:var(--c-on-dark-2)] max-w-3xl mx-auto font-light leading-relaxed">
                 A structured progression from self-development through professional facilitation to advanced psychotherapy and Holotropic Breathwork practice.
             </p>
         </div>
@@ -54,32 +54,32 @@ description: "All modules across three levels: consciousness studies, counsellin
 </header>
 
 <!-- Breadcrumb -->
-<div class="bg-white border-b border-[#E7D6BE]">
+<div class="bg-[color:var(--c-paper-card)] border-b border-[color:var(--c-line)]">
     <div class="container mx-auto px-6 py-4">
-        <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
-            <a href="{{ '/' | url }}" class="hover:text-science-blue-600 transition-colors">Home</a>
+        <div class="flex items-center gap-2 text-sm text-[color:var(--c-body-dim)]">
+            <a href="{{ '/' | url }}" class="hover:text-[color:var(--c-link)] transition-colors">Home</a>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-neutral-warm-500">Training</span>
+            <span class="text-[color:var(--c-body-dim)]">Training</span>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-science-blue-800 font-medium">Curriculum</span>
+            <span class="text-[color:var(--c-heading)] font-medium">Curriculum</span>
         </div>
     </div>
 </div>
 
 <!-- Explore our Hero Journey Section -->
-<section class="py-16 bg-white relative overflow-x-clip">
+<section class="py-16 bg-[color:var(--c-paper-hi)] relative overflow-x-clip">
     <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-5 pointer-events-none">
-        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#D9A756] blur-3xl"></div>
+        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[color:var(--c-acc)] blur-3xl"></div>
     </div>
     <div class="container mx-auto px-6 relative z-10">
         <div class="max-w-4xl mx-auto">
             <div class="mb-8">
-                <p class="p4-kicker text-[#B65E3F] mb-3 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
+                <p class="p4-kicker text-[color:var(--c-sec)] mb-3 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
                     <span class="p4-hairline"></span>
                     The path
                     <span class="p4-hairline md:hidden"></span>
                 </p>
-                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540]">Explore our Hero Journey</h2>
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)]">Explore our Hero Journey</h2>
             </div>
 
             <div class="curriculum-vine-wrapper" id="curriculumWrapper">
@@ -100,24 +100,24 @@ description: "All modules across three levels: consciousness studies, counsellin
                     {% set levelCerts = [
                         { title: 'Certificate of Attendance', body: 'Level 1 can be taken on its own as a stand alone year of self-development — no obligation to continue.' },
                         { title: 'Certificate in Transpersonal Counselling Skills', body: 'Awarded through a EUROTAS-accredited institute, with credits toward EUROTAS certification.' },
-                        { title: 'Certificate as Transpersonal Psychotherapy & Holotropic Breathwork Facilitator', body: 'With an optional EUROTAS certification track. Please note: “psychotherapist” is a legally protected title in many countries (for example Germany, France, Italy and Austria). Please check the psychotherapy regulations in the country where you intend to practise before using the title professionally. <a href="' ~ ('/legal-notice/' | url) ~ '" class="text-[#B65E3F] hover:text-[#D9A756] underline underline-offset-2 font-medium">Read the full legal notice</a>.' }
+                        { title: 'Certificate as Transpersonal Psychotherapy & Holotropic Breathwork Facilitator', body: 'With an optional EUROTAS certification track. Please note: “psychotherapist” is a legally protected title in many countries (for example Germany, France, Italy and Austria). Please check the psychotherapy regulations in the country where you intend to practise before using the title professionally. <a href="' ~ ('/legal-notice/' | url) ~ '" class="text-[color:var(--c-sec)] hover:text-[color:var(--c-acc)] underline underline-offset-2 font-medium">Read the full legal notice</a>.' }
                     ] %}
                     {% for level in curriculumData.levels %}
-                    <div class="bg-white/25 backdrop-blur-sm border border-slate-200/40 shadow-sm overflow-hidden">
+                    <div class="bg-[color:var(--c-paper-hi-60)] backdrop-blur-sm border border-[color:var(--c-line)] shadow-sm overflow-hidden">
                         <div class="level-toggle flex items-center gap-4 p-6 cursor-pointer" onclick="toggleLevel('{{ level.id }}')">
-                            <div class="w-12 h-12 min-w-[3rem] border border-[#D9A756] flex items-center justify-center flex-shrink-0">
-                                <span class="p4-display text-2xl font-medium text-[#B65E3F] leading-none">{{ romans[loop.index0] }}</span>
+                            <div class="w-12 h-12 min-w-[3rem] border border-[color:var(--c-acc)] flex items-center justify-center flex-shrink-0">
+                                <span class="p4-display text-2xl font-medium text-[color:var(--c-sec)] leading-none">{{ romans[loop.index0] }}</span>
                             </div>
                             <div class="flex-1">
-                                <h3 class="font-serif font-bold text-black text-lg md:text-xl leading-tight flex items-baseline gap-2">
-                                    <span class="text-black text-lg md:text-xl font-bold whitespace-nowrap flex-shrink-0">{{ level.label }}</span>
-                                    <span class="text-black font-bold flex-shrink-0">-</span>
-                                    <span class="text-black font-bold">{{ level.title }}</span>
+                                <h3 class="font-serif font-bold text-[color:var(--c-heading)] text-lg md:text-xl leading-tight flex items-baseline gap-2">
+                                    <span class="text-[color:var(--c-heading)] text-lg md:text-xl font-bold whitespace-nowrap flex-shrink-0">{{ level.label }}</span>
+                                    <span class="text-[color:var(--c-heading)] font-bold flex-shrink-0">-</span>
+                                    <span class="text-[color:var(--c-heading)] font-bold">{{ level.title }}</span>
                                 </h3>
                             </div>
                             <div class="flex items-center gap-3 flex-shrink-0">
-                                <span class="module-count bg-[#0F2540]/5 text-[#0F2540] hidden sm:inline-block">{{ level.modules | length }} modules</span>
-                                <i data-lucide="chevron-down" class="w-5 h-5 text-[#B65E3F] toggle-icon" id="{{ level.id }}-icon"></i>
+                                <span class="module-count bg-[color:var(--c-deep-5)] text-[color:var(--c-heading)] hidden sm:inline-block">{{ level.modules | length }} modules</span>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-[color:var(--c-sec)] toggle-icon" id="{{ level.id }}-icon"></i>
                             </div>
                         </div>
                         <div class="level-content" id="{{ level.id }}">
@@ -125,19 +125,19 @@ description: "All modules across three levels: consciousness studies, counsellin
                                 <div class="space-y-6">
                                     {% set cert = levelCerts[loop.index0] %}
                                     {% if cert %}
-                                    <div class="flex items-start gap-3 bg-[#D9A756]/10 border-l-4 border-[#D9A756] p-4">
-                                        <i data-lucide="award" class="w-5 h-5 text-[#B65E3F] flex-shrink-0 mt-0.5"></i>
+                                    <div class="flex items-start gap-3 bg-[color:var(--c-acc-10)] border-l-4 border-[color:var(--c-acc)] p-4">
+                                        <i data-lucide="award" class="w-5 h-5 text-[color:var(--c-sec)] flex-shrink-0 mt-0.5"></i>
                                         <div>
-                                            <p class="text-xs font-semibold uppercase tracking-wider text-[#B65E3F] mb-1">What you earn</p>
-                                            <p class="font-serif font-bold text-black text-sm md:text-base leading-snug">{{ cert.title }}</p>
-                                            <p class="text-xs md:text-sm text-black/80 leading-relaxed mt-1">{{ cert.body | safe }}</p>
+                                            <p class="text-xs font-semibold uppercase tracking-wider text-[color:var(--c-sec)] mb-1">What you earn</p>
+                                            <p class="font-serif font-bold text-[color:var(--c-heading)] text-sm md:text-base leading-snug">{{ cert.title }}</p>
+                                            <p class="text-xs md:text-sm text-[color:var(--c-body-dim)] leading-relaxed mt-1">{{ cert.body | safe }}</p>
                                         </div>
                                     </div>
                                     {% endif %}
                                     {% if level.modules.length > 0 %}
-                                    <div class="level-card bg-[#FAF3E7] p-4 border border-dashed border-slate-300">
-                                        <h4 class="font-serif font-bold text-slate-800 text-sm mb-3 flex items-center gap-2">
-                                            <i data-lucide="book-open" class="w-4 h-4 text-slate-600"></i>
+                                    <div class="level-card bg-[color:var(--c-paper)] p-4 border border-dashed border-[color:var(--c-line)]">
+                                        <h4 class="font-serif font-bold text-[color:var(--c-heading)] text-sm mb-3 flex items-center gap-2">
+                                            <i data-lucide="book-open" class="w-4 h-4 text-[color:var(--c-body)]"></i>
                                             <span>Lessons</span>
                                         </h4>
                                         <div class="space-y-3">
@@ -146,25 +146,25 @@ description: "All modules across three levels: consciousness studies, counsellin
                                     <div class="py-1">
                                         <div class="flex items-start gap-3">
                                             <div class="w-full">
-                                                <h4 class="font-serif font-bold text-black text-base md:text-lg mb-2 leading-tight flex items-baseline gap-2 flex-wrap">
+                                                <h4 class="font-serif font-bold text-[color:var(--c-heading)] text-base md:text-lg mb-2 leading-tight flex items-baseline gap-2 flex-wrap">
                                                     <span>Module {{ module.number }}</span>
                                                     <span class="font-bold">-</span>
                                                     <span>{{ module.topic }}</span>
                                                 </h4>
                                                 {% if module.description %}
-                                                <p class="text-black text-sm leading-relaxed">{{ module.description }}</p>
+                                                <p class="text-[color:var(--c-body)] text-sm leading-relaxed">{{ module.description }}</p>
                                                 {% endif %}
 
                                                 {% if module.hours or module.deliveryFormat %}
                                                 <div class="mt-3 flex flex-wrap gap-2 text-xs">
                                                     {% if module.hours %}
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[color:var(--c-deep-5)] text-[color:var(--c-heading)] font-medium">
                                                         <i data-lucide="clock-3" class="w-3.5 h-3.5"></i>
                                                         {{ module.hours }}
                                                     </span>
                                                     {% endif %}
                                                     {% if module.deliveryFormat %}
-                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[#0F2540]/5 text-[#0F2540] font-medium">
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-[color:var(--c-deep-5)] text-[color:var(--c-heading)] font-medium">
                                                         <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
                                                         {{ module.deliveryFormat }}
                                                     </span>
@@ -173,28 +173,28 @@ description: "All modules across three levels: consciousness studies, counsellin
                                                 {% endif %}
 
                                                 {% if module.subModules.length > 0 %}
-                                                <div class="mt-2 pt-2 mb-4 pb-4 border-b border-slate-200">
+                                                <div class="mt-2 pt-2 mb-4 pb-4 border-b border-[color:var(--c-line)]">
                                                     <div class="space-y-3">
                                                         {% for subModule in module.subModules %}
                                                         {% set subModuleToggleId = moduleToggleId ~ '-submodule-' ~ loop.index %}
-                                                        <div class="border border-slate-200 bg-white/70 overflow-hidden">
+                                                        <div class="border border-[color:var(--c-line)] bg-[color:var(--c-paper-hi-60)] overflow-hidden">
                                                             <button
                                                                 type="button"
                                                                 class="submodule-toggle w-full flex items-center justify-between gap-3 px-4 py-3 text-left"
                                                                 onclick="toggleSubModule('{{ subModuleToggleId }}')"
                                                             >
-                                                                <span class="text-sm font-semibold text-slate-700">{{ subModule.topic }}</span>
-                                                                <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500 toggle-icon" id="{{ subModuleToggleId }}-icon"></i>
+                                                                <span class="text-sm font-semibold text-[color:var(--c-body)]">{{ subModule.topic }}</span>
+                                                                <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-body-dim)] toggle-icon" id="{{ subModuleToggleId }}-icon"></i>
                                                             </button>
                                                             <div class="submodule-content" id="{{ subModuleToggleId }}">
-                                                                <div class="px-4 pb-4 pt-1 space-y-2 border-t border-slate-200 bg-white/80">
+                                                                <div class="px-4 pb-4 pt-1 space-y-2 border-t border-[color:var(--c-line)] bg-[color:var(--c-paper-hi-60)]">
                                                                     {% if subModule.description and subModule.topics.length == 0 %}
-                                                                                    <p class="text-xs text-black leading-relaxed">{{ subModule.description }}</p>
+                                                                                    <p class="text-xs text-[color:var(--c-body)] leading-relaxed">{{ subModule.description }}</p>
                                                                     {% endif %}
                                                                     {% if subModule.topics.length > 0 %}
                                                                     <div class="space-y-2">
                                                                         {% for topic in subModule.topics %}
-                                                                                        <p class="text-xs text-black leading-relaxed">{{ topic }}</p>
+                                                                                        <p class="text-xs text-[color:var(--c-body)] leading-relaxed">{{ topic }}</p>
                                                                         {% endfor %}
                                                                     </div>
                                                                     {% endif %}
@@ -205,9 +205,9 @@ description: "All modules across three levels: consciousness studies, counsellin
                                                     </div>
                                                 </div>
                                                 {% elif module.hasHiddenSubModules %}
-                                                <div class="mt-2 pt-2 mb-4 pb-4 border-b border-slate-200">
-                                                    <div class="border border-dashed border-slate-200 bg-white/50 px-4 py-3">
-                                                        <p class="text-xs text-slate-500 italic leading-relaxed">The detailed topics for this module are being finalised and will be published shortly.</p>
+                                                <div class="mt-2 pt-2 mb-4 pb-4 border-b border-[color:var(--c-line)]">
+                                                    <div class="border border-dashed border-[color:var(--c-line)] bg-[color:var(--c-paper-hi-60)] px-4 py-3">
+                                                        <p class="text-xs text-[color:var(--c-body-dim)] italic leading-relaxed">The detailed topics for this module are being finalised and will be published shortly.</p>
                                                     </div>
                                                 </div>
                                                 {% endif %}
@@ -220,19 +220,19 @@ description: "All modules across three levels: consciousness studies, counsellin
                                     {% endif %}
 
                                     {% if level.practicalItems.length > 0 %}
-                                    <div class="level-card bg-[#FAF3E7] p-4 border border-dashed border-slate-300">
+                                    <div class="level-card bg-[color:var(--c-paper)] p-4 border border-dashed border-[color:var(--c-line)]">
                                         <div class="mb-4">
-                                            <h4 class="font-serif font-bold text-black text-base md:text-lg leading-tight flex items-baseline gap-2 flex-wrap">
-                                                <i data-lucide="person-standing" class="w-5 h-5 text-black"></i>
+                                            <h4 class="font-serif font-bold text-[color:var(--c-heading)] text-base md:text-lg leading-tight flex items-baseline gap-2 flex-wrap">
+                                                <i data-lucide="person-standing" class="w-5 h-5 text-[color:var(--c-body)]"></i>
                                                 <span>Experiential / Personal / Group Work</span>
                                             </h4>
                                         </div>
                                         <div class="grid gap-2 sm:grid-cols-2">
                                             {% for practicalItem in level.practicalItems %}
-                                            <div class="bg-white/70 p-2.5">
-                                                <p class="text-xs font-semibold text-slate-700 leading-snug">{{ practicalItem.topic }}</p>
+                                            <div class="bg-[color:var(--c-paper-hi-60)] p-2.5">
+                                                <p class="text-xs font-semibold text-[color:var(--c-body)] leading-snug">{{ practicalItem.topic }}</p>
                                                 {% if practicalItem.deliveryFormat %}
-                                                <p class="text-xs text-gray-600 mt-1 leading-snug">{{ practicalItem.deliveryFormat }}</p>
+                                                <p class="text-xs text-[color:var(--c-body-dim)] mt-1 leading-snug">{{ practicalItem.deliveryFormat }}</p>
                                                 {% endif %}
                                             </div>
                                             {% endfor %}
@@ -241,23 +241,23 @@ description: "All modules across three levels: consciousness studies, counsellin
                                     {% endif %}
 
                                     {% if level.examinationItems.length > 0 %}
-                                    <div class="level-card bg-[#FAF3E7] p-4 border border-dashed border-slate-300">
+                                    <div class="level-card bg-[color:var(--c-paper)] p-4 border border-dashed border-[color:var(--c-line)]">
                                         <div class="mb-4">
-                                            <h4 class="font-serif font-bold text-black text-base md:text-lg leading-tight flex items-baseline gap-2 flex-wrap">
-                                                <i data-lucide="clipboard-check" class="w-5 h-5 text-black"></i>
+                                            <h4 class="font-serif font-bold text-[color:var(--c-heading)] text-base md:text-lg leading-tight flex items-baseline gap-2 flex-wrap">
+                                                <i data-lucide="clipboard-check" class="w-5 h-5 text-[color:var(--c-body)]"></i>
                                                 <span>Examination</span>
                                             </h4>
                                         </div>
                                         <div class="space-y-2">
                                             {% for examinationItem in level.examinationItems %}
-                                            <div class="rounded-md bg-white/70 p-2.5 flex items-start gap-2.5">
-                                                <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#D9A756]/20 text-[#B65E3F] flex-shrink-0">
+                                            <div class="rounded-md bg-[color:var(--c-paper-hi-60)] p-2.5 flex items-start gap-2.5">
+                                                <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[color:var(--c-acc-20)] text-[color:var(--c-sec)] flex-shrink-0">
                                                     <i data-lucide="check" class="w-3.5 h-3.5"></i>
                                                 </span>
                                                 <div>
-                                                    <p class="text-xs font-semibold text-slate-700 leading-snug">{{ examinationItem.topic }}</p>
+                                                    <p class="text-xs font-semibold text-[color:var(--c-body)] leading-snug">{{ examinationItem.topic }}</p>
                                                     {% if examinationItem.deliveryFormat %}
-                                                    <p class="text-xs text-gray-600 mt-1 leading-snug">{{ examinationItem.deliveryFormat }}</p>
+                                                    <p class="text-xs text-[color:var(--c-body-dim)] mt-1 leading-snug">{{ examinationItem.deliveryFormat }}</p>
                                                     {% endif %}
                                                 </div>
                                             </div>
@@ -272,7 +272,7 @@ description: "All modules across three levels: consciousness studies, counsellin
                     {% endfor %}
 
                     {% if (curriculumData.levels | length) == 0 %}
-                    <div class="bg-white/60 border border-slate-200 p-6 text-center text-slate-600">
+                    <div class="bg-[color:var(--c-paper-hi-60)] border border-[color:var(--c-line)] p-6 text-center text-[color:var(--c-body)]">
                         Curriculum data is temporarily unavailable. Please try again later.
                     </div>
                     {% endif %}
@@ -283,12 +283,12 @@ description: "All modules across three levels: consciousness studies, counsellin
             <div class="mt-12 text-center">
                 <a
                     href="{{ curriculumData.pdfUrl }}"
-                    class="inline-flex items-center gap-2 border border-[#0F2540]/30 hover:border-[#B65E3F] text-[#0F2540] hover:text-[#B65E3F] px-6 py-3 font-medium tracking-wide transition-all"
+                    class="inline-flex items-center gap-2 border border-[color:var(--c-deep-30)] hover:border-[color:var(--c-sec)] text-[color:var(--c-heading)] hover:text-[color:var(--c-sec)] px-6 py-3 font-medium tracking-wide transition-all"
                 >
                     <i data-lucide="download" class="w-4 h-4"></i>
                     Download PDF
                 </a>
-                <p class="mt-3 text-sm text-neutral-warm-600">The whole curriculum, as a single document.</p>
+                <p class="mt-3 text-sm text-[color:var(--c-body-dim)]">The whole curriculum, as a single document.</p>
             </div>
             {% endif %}
         </div>
@@ -296,23 +296,23 @@ description: "All modules across three levels: consciousness studies, counsellin
 </section>
 
 <!-- CTA Section -->
-<section class="bg-gradient-to-br from-[#0F2540] to-[#12305A] text-white py-16">
+<section class="bg-gradient-to-br from-[var(--c-deep)] to-[var(--c-deep-2)] text-[color:var(--c-on-dark-1)] py-16">
     <div class="container mx-auto px-6 text-center">
-        <p class="p4-kicker text-[#D9A756] mb-4 flex items-center justify-center gap-4">
+        <p class="p4-kicker text-[color:var(--c-acc)] mb-4 flex items-center justify-center gap-4">
             <span class="p4-hairline"></span>
             Next step
             <span class="p4-hairline"></span>
         </p>
-        <h3 class="p4-display text-3xl md:text-4xl font-medium mb-4 text-[#FDFBF5]">Ready to begin?</h3>
-        <p class="text-[#E9EDF2]/80 max-w-2xl mx-auto mb-8">See how to apply, or get in touch to find the right entry point for you.</p>
+        <h3 class="p4-display text-3xl md:text-4xl font-medium mb-4 text-[color:var(--c-paper-hi)]">Ready to begin?</h3>
+        <p class="text-[color:var(--c-on-dark-3)] max-w-2xl mx-auto mb-8">See how to apply, or get in touch to find the right entry point for you.</p>
         {# Someone who has read the whole curriculum is further along than most
            visitors — this page used to end without ever offering the application
            page, which left /apply/ reachable only from the nav. #}
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="{{ '/apply/' | url }}" class="inline-block bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-8 py-3 font-medium tracking-wide transition-all shadow-lg hover:shadow-xl">
+            <a href="{{ '/apply/' | url }}" class="inline-block bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-heading)] px-8 py-3 font-medium tracking-wide transition-all shadow-lg hover:shadow-xl">
                 Apply
             </a>
-            <a href="{{ '/' | url }}#contact" class="inline-block border border-[#FDFBF5]/60 hover:border-[#D9A756] text-[#FDFBF5] hover:text-[#D9A756] px-8 py-3 font-medium tracking-wide transition-all">
+            <a href="{{ '/' | url }}#contact" class="inline-block border border-[color:var(--c-paper-hi-60)] hover:border-[color:var(--c-acc)] text-[color:var(--c-paper-hi)] hover:text-[color:var(--c-acc)] px-8 py-3 font-medium tracking-wide transition-all">
                 Get in touch
             </a>
         </div>

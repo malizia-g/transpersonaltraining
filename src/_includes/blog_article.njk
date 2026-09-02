@@ -2,7 +2,7 @@
 layout: base.njk
 ---
 
-<section class="py-0 bg-white" lang="en">
+<section class="py-0 bg-[color:var(--c-paper-hi)]" lang="en">
   <div class="w-full h-56 md:h-72 overflow-hidden relative mb-8">
     <picture>
       <source srcset="{{ '/assets/images/Headers/blog-hero.webp' | url }}" type="image/webp">
@@ -13,10 +13,10 @@ layout: base.njk
 
   <div class="container mx-auto px-6 pb-16">
     <div class="max-w-4xl mx-auto">
-      <nav class="text-sm text-neutral-warm-600 mb-6 flex items-center gap-2">
-        <a href="{{ '/blog/' | url }}" class="hover:text-science-blue-700 transition-colors">Blog</a>
+      <nav class="text-sm text-[color:var(--c-body-dim)] mb-6 flex items-center gap-2">
+        <a href="{{ '/blog/' | url }}" class="hover:text-[color:var(--c-link-hover)] transition-colors">Blog</a>
         <i data-lucide="chevron-right" class="w-4 h-4"></i>
-        <span class="text-neutral-warm-800 font-medium">{{ title }}</span>
+        <span class="text-[color:var(--c-heading)] font-medium">{{ title }}</span>
       </nav>
 
       <div class="mb-8 flex flex-wrap items-start gap-4 sm:flex-nowrap sm:gap-6">
@@ -30,34 +30,34 @@ layout: base.njk
         {% endif %}
 
         <div class="min-w-0 flex-1">
-          <h1 class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-indigo-deep-900 mb-3 leading-tight">{{ title }}</h1>
-          <div class="hidden sm:block text-xs sm:text-sm text-neutral-warm-600 leading-relaxed">
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-[color:var(--c-heading)] mb-3 leading-tight">{{ title }}</h1>
+          <div class="hidden sm:block text-xs sm:text-sm text-[color:var(--c-body-dim)] leading-relaxed">
             {% if author %}
-              <span>By {% if authorUrl %}<a href="{{ authorUrl }}" target="_blank" rel="noopener noreferrer" class="hover:text-science-blue-700 underline underline-offset-2 transition-colors">{{ author }}</a>{% else %}{{ author }}{% endif %}</span>
+              <span>By {% if authorUrl %}<a href="{{ authorUrl }}" target="_blank" rel="noopener noreferrer" class="hover:text-[color:var(--c-link-hover)] underline underline-offset-2 transition-colors">{{ author }}</a>{% else %}{{ author }}{% endif %}</span>
             {% endif %}
             {% if author and page.date %}<span> &middot; </span>{% endif %}
             {% if page.date %}<time datetime="{{ page.date | date('yyyy-MM-dd') }}">{{ page.date | date('dd MMM yyyy') }}</time>{% endif %}
-            {% if tags %}<div class="mt-2 text-xs text-neutral-warm-500">{{ tags | join(', ') }}</div>{% endif %}
+            {% if tags %}<div class="mt-2 text-xs text-[color:var(--c-body-dim)]">{{ tags | join(', ') }}</div>{% endif %}
           </div>
         </div>
-        <div class="basis-full sm:hidden text-xs text-neutral-warm-600 leading-relaxed">
+        <div class="basis-full sm:hidden text-xs text-[color:var(--c-body-dim)] leading-relaxed">
           {% if author %}
-            <span>By {% if authorUrl %}<a href="{{ authorUrl }}" target="_blank" rel="noopener noreferrer" class="hover:text-science-blue-700 underline underline-offset-2 transition-colors">{{ author }}</a>{% else %}{{ author }}{% endif %}</span>
+            <span>By {% if authorUrl %}<a href="{{ authorUrl }}" target="_blank" rel="noopener noreferrer" class="hover:text-[color:var(--c-link-hover)] underline underline-offset-2 transition-colors">{{ author }}</a>{% else %}{{ author }}{% endif %}</span>
           {% endif %}
           {% if author and page.date %}<span> &middot; </span>{% endif %}
           {% if page.date %}<time datetime="{{ page.date | date('yyyy-MM-dd') }}">{{ page.date | date('dd MMM yyyy') }}</time>{% endif %}
-          {% if tags %}<div class="mt-2 text-xs text-neutral-warm-500">{{ tags | join(', ') }}</div>{% endif %}
+          {% if tags %}<div class="mt-2 text-xs text-[color:var(--c-body-dim)]">{{ tags | join(', ') }}</div>{% endif %}
         </div>
       </div>
 
       {% if description %}
-      <p class="mb-8 text-lg leading-relaxed text-neutral-warm-700">{{ description }}</p>
+      <p class="mb-8 text-lg leading-relaxed text-[color:var(--c-body)]">{{ description }}</p>
       {% endif %}
 
       {% if sourceUrl %}
-      <div class="mb-8 flex items-center gap-2 text-sm text-neutral-warm-600 bg-[#FAF3E7] border border-[#E7D6BE] px-4 py-3">
-        <i data-lucide="external-link" class="w-4 h-4 flex-shrink-0 text-[#B65E3F]"></i>
-        <span>Originally published on <a href="{{ sourceUrl }}" target="_blank" rel="noopener noreferrer" class="text-[#B65E3F] hover:text-[#7A5E29] font-medium underline underline-offset-2 transition-colors">{{ source if source else sourceUrl }}</a></span>
+      <div class="mb-8 flex items-center gap-2 text-sm text-[color:var(--c-body-dim)] bg-[color:var(--c-paper)] border border-[color:var(--c-line)] px-4 py-3">
+        <i data-lucide="external-link" class="w-4 h-4 flex-shrink-0 text-[color:var(--c-sec)]"></i>
+        <span>Originally published on <a href="{{ sourceUrl }}" target="_blank" rel="noopener noreferrer" class="text-[color:var(--c-sec)] hover:text-[color:var(--c-sec-dark)] font-medium underline underline-offset-2 transition-colors">{{ source if source else sourceUrl }}</a></span>
       </div>
       {% endif %}
 
@@ -66,7 +66,7 @@ layout: base.njk
       </article>
 
       <div class="mt-12">
-        <a href="{{ '/blog/' | url }}" class="inline-flex items-center gap-2 text-[#B65E3F] hover:text-[#7A5E29] font-medium">
+        <a href="{{ '/blog/' | url }}" class="inline-flex items-center gap-2 text-[color:var(--c-sec)] hover:text-[color:var(--c-sec-dark)] font-medium">
           <i data-lucide="arrow-left" class="w-4 h-4"></i>
           Back to Blog
         </a>

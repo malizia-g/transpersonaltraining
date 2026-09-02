@@ -28,55 +28,55 @@ description: "A four-year holistic therapy training in three levels: self-develo
                 class="w-full h-full object-cover object-[50%_60%]"
             />
         </picture>
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/80 via-[#0F2540]/60 to-[#0F2540]/80"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[var(--c-deep-80)] via-[var(--c-deep-60)] to-[var(--c-deep-80)]"></div>
     </div>
 
     <div class="relative z-10 container mx-auto px-6 text-center pt-20">
         <div class="animate-fade-in-up">
-            <p class="p4-kicker text-[#D9A756] mb-6 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-acc)] mb-6 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 EUROTAS-Accredited &middot; 3 Levels &middot; 500+ Hours
                 <span class="p4-hairline"></span>
             </p>
-            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] mb-6 leading-tight drop-shadow-md">
+            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[color:var(--c-paper-hi)] mb-6 leading-tight drop-shadow-md">
                 Training Overview
             </h1>
-            <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
-                A progressive journey from self-development through to professional facilitation, advanced psychotherapy<a href="#psychotherapy-note" class="text-[#D9A756] font-bold no-underline" title="See note about the protected title &quot;psychotherapist&quot;">*</a> and Holotropic Breathwork practice.
+            <p class="text-xl md:text-2xl text-[color:var(--c-on-dark-2)] max-w-3xl mx-auto font-light leading-relaxed">
+                A progressive journey from self-development through to professional facilitation, advanced psychotherapy<a href="#psychotherapy-note" class="text-[color:var(--c-acc)] font-bold no-underline" title="See note about the protected title &quot;psychotherapist&quot;">*</a> and Holotropic Breathwork practice.
             </p>
         </div>
     </div>
 </header>
 
 <!-- Breadcrumb -->
-<div class="bg-white border-b border-[#E7D6BE]">
+<div class="bg-[color:var(--c-paper-card)] border-b border-[color:var(--c-line)]">
     <div class="container mx-auto px-6 py-4">
-        <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
-            <a href="{{ '/' | url }}" class="hover:text-science-blue-600 transition-colors">Home</a>
+        <div class="flex items-center gap-2 text-sm text-[color:var(--c-body-dim)]">
+            <a href="{{ '/' | url }}" class="hover:text-[color:var(--c-link)] transition-colors">Home</a>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-neutral-warm-500">Training</span>
+            <span class="text-[color:var(--c-body-dim)]">Training</span>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-science-blue-800 font-medium">Training Overview</span>
+            <span class="text-[color:var(--c-heading)] font-medium">Training Overview</span>
         </div>
     </div>
 </div>
 
 <!-- Training Philosophy — the one section that stays open, as the way in -->
-<section class="py-16 bg-white relative overflow-hidden">
+<section class="py-16 bg-[color:var(--c-paper-hi)] relative overflow-hidden">
     <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-5 pointer-events-none">
-        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-science-blue-400 blur-3xl"></div>
+        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[color:var(--c-link)] blur-3xl"></div>
     </div>
     <div class="container mx-auto px-6 relative z-10">
         <div class="max-w-4xl mx-auto">
             <div class="mb-6">
-                <p class="p4-kicker text-[#B65E3F] mb-3 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
+                <p class="p4-kicker text-[color:var(--c-sec)] mb-3 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
                     <span class="p4-hairline"></span>
                     Training Philosophy
                     <span class="p4-hairline md:hidden"></span>
                 </p>
-                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540]">{{ philosophy.data.heading }}</h2>
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)]">{{ philosophy.data.heading }}</h2>
             </div>
-            <div class="text-gray-700 text-lg leading-relaxed space-y-6">
+            <div class="text-[color:var(--c-body)] text-lg leading-relaxed space-y-6">
                 {{ philosophy.html | safe }}
             </div>
         </div>
@@ -86,17 +86,17 @@ description: "A four-year holistic therapy training in three levels: self-develo
 <!-- Why is this training for you? — self-selection questions, kept open like
      Philosophy since it continues the same persuasive "way in" rather than
      the reference material folded away below. -->
-<section class="py-16 bg-white border-t border-[#E7D6BE]">
+<section class="py-16 bg-[color:var(--c-paper-card)] border-t border-[color:var(--c-line)]">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto">
             <div class="mb-8">
-                <p class="p4-kicker text-[#B65E3F] mb-3 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
+                <p class="p4-kicker text-[color:var(--c-sec)] mb-3 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
                     <span class="p4-hairline"></span>
                     Who This Is For
                     <span class="p4-hairline md:hidden"></span>
                 </p>
-                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-4">{{ whyThisTraining.data.heading }}</h2>
-                <p class="text-gray-700 text-lg leading-relaxed">{{ whyThisTraining.data.intro }}</p>
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-4">{{ whyThisTraining.data.heading }}</h2>
+                <p class="text-[color:var(--c-body)] text-lg leading-relaxed">{{ whyThisTraining.data.intro }}</p>
             </div>
 
             <div class="p4-foryou">
@@ -104,14 +104,14 @@ description: "A four-year holistic therapy training in three levels: self-develo
             </div>
 
             {% for block in whyThisTraining.blocks %}
-            <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mt-10 mb-2">{{ block.title }}</h3>
+            <h3 class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mt-10 mb-2">{{ block.title }}</h3>
             <div class="p4-foryou">
                 {{ block.html | safe }}
             </div>
             {% endfor %}
 
-            <div class="mt-8 bg-[#D9A756]/10 border-l-4 border-[#D9A756] p-6">
-                <p class="text-gray-700 text-lg leading-relaxed font-medium">{{ whyThisTraining.data.closing }}</p>
+            <div class="mt-8 bg-[color:var(--c-acc-10)] border-l-4 border-[color:var(--c-acc)] p-6">
+                <p class="text-[color:var(--c-body)] text-lg leading-relaxed font-medium">{{ whyThisTraining.data.closing }}</p>
             </div>
         </div>
     </div>
@@ -121,25 +121,25 @@ description: "A four-year holistic therapy training in three levels: self-develo
      narrow bordered box so the closed labels stack up as the rows of a table
      rather than six full-width bands. Native <details>, so it works without
      JavaScript and stays keyboard- and screen-reader-operable. -->
-<section class="py-16 bg-[#FAF3E7] border-t border-[#E7D6BE]">
+<section class="py-16 bg-[color:var(--c-paper)] border-t border-[color:var(--c-line)]">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto">
-            <p class="text-center text-neutral-warm-700 text-lg leading-relaxed mb-8">
-                Open whichever topics interest you &mdash; or, if you would rather ask us directly, <a href="{{ '/' | url }}#contact" class="text-[#B65E3F] hover:text-[#7d5f28] font-medium underline underline-offset-4 decoration-[#D9A756] transition-colors">get in touch</a>.
+            <p class="text-center text-[color:var(--c-body)] text-lg leading-relaxed mb-8">
+                Open whichever topics interest you &mdash; or, if you would rather ask us directly, <a href="{{ '/' | url }}#contact" class="text-[color:var(--c-sec)] hover:text-[color:var(--c-sec-dark)] font-medium underline underline-offset-4 decoration-[color:var(--c-acc)] transition-colors">get in touch</a>.
             </p>
 
-            <div class="border border-[#E7D6BE] bg-white shadow-sm divide-y divide-[#E7D6BE]">
+            <div class="border border-[color:var(--c-line)] bg-[color:var(--c-paper-card)] shadow-sm divide-y divide-[color:var(--c-line)]">
                 <details class="p4-reveal">
-                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[#F5EAD9] transition-colors">
-                        <h2 class="p4-kicker text-[#B65E3F] flex items-center gap-4">
+                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[color:var(--c-paper-2)] transition-colors">
+                        <h2 class="p4-kicker text-[color:var(--c-sec)] flex items-center gap-4">
                             <span class="p4-hairline"></span>
                             Our story
                         </h2>
-                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[#B65E3F] transition-transform duration-300" aria-hidden="true"></i>
+                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[color:var(--c-sec)] transition-transform duration-300" aria-hidden="true"></i>
                     </summary>
-                    <div class="border-t border-[#E7D6BE] px-6 pt-6">
-                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-6">One school, East and West</h3>
-                        <div class="pb-10 space-y-5 text-gray-700 text-lg leading-relaxed">
+                    <div class="border-t border-[color:var(--c-line)] px-6 pt-6">
+                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mb-6">One school, East and West</h3>
+                        <div class="pb-10 space-y-5 text-[color:var(--c-body)] text-lg leading-relaxed">
                             <p>
                                 The school was founded in 2021. It began with its Eastern programme (2021&ndash;2025), rooted in Moldova and Eastern Europe, and was followed by the Western programme (2024&ndash;2027).
                             </p>
@@ -154,20 +154,20 @@ description: "A four-year holistic therapy training in three levels: self-develo
                 </details>
 
                 <details class="p4-reveal">
-                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[#F5EAD9] transition-colors">
-                        <h2 class="p4-kicker text-[#B65E3F] flex items-center gap-4">
+                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[color:var(--c-paper-2)] transition-colors">
+                        <h2 class="p4-kicker text-[color:var(--c-sec)] flex items-center gap-4">
                             <span class="p4-hairline"></span>
                             The programme
                         </h2>
-                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[#B65E3F] transition-transform duration-300" aria-hidden="true"></i>
+                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[color:var(--c-sec)] transition-transform duration-300" aria-hidden="true"></i>
                     </summary>
-                    <div class="border-t border-[#E7D6BE] px-6 pt-6">
-                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-6">{{ programOverview.data.heading }}</h3>
-                        <div class="space-y-5 text-gray-700 text-lg leading-relaxed">
+                    <div class="border-t border-[color:var(--c-line)] px-6 pt-6">
+                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mb-6">{{ programOverview.data.heading }}</h3>
+                        <div class="space-y-5 text-[color:var(--c-body)] text-lg leading-relaxed">
                             {{ programOverview.html | safe }}
                         </div>
                         <div class="pt-6 pb-10">
-                            <a href="{{ '/curriculum/' | url }}" class="inline-flex items-center gap-2 text-[#B65E3F] hover:text-[#7d5f28] font-medium underline underline-offset-4 decoration-[#D9A756] transition-colors">
+                            <a href="{{ '/curriculum/' | url }}" class="inline-flex items-center gap-2 text-[color:var(--c-sec)] hover:text-[color:var(--c-sec-dark)] font-medium underline underline-offset-4 decoration-[color:var(--c-acc)] transition-colors">
                                 <span>See the full curriculum, module by module</span>
                                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
                             </a>
@@ -176,25 +176,25 @@ description: "A four-year holistic therapy training in three levels: self-develo
                 </details>
 
                 <details class="p4-reveal">
-                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[#F5EAD9] transition-colors">
-                        <h2 class="p4-kicker text-[#B65E3F] flex items-center gap-4">
+                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[color:var(--c-paper-2)] transition-colors">
+                        <h2 class="p4-kicker text-[color:var(--c-sec)] flex items-center gap-4">
                             <span class="p4-hairline"></span>
                             Eligibility
                         </h2>
-                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[#B65E3F] transition-transform duration-300" aria-hidden="true"></i>
+                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[color:var(--c-sec)] transition-transform duration-300" aria-hidden="true"></i>
                     </summary>
-                    <div class="border-t border-[#E7D6BE] px-6 pt-6">
-                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-6">{{ eligibility.data.heading }}</h3>
+                    <div class="border-t border-[color:var(--c-line)] px-6 pt-6">
+                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mb-6">{{ eligibility.data.heading }}</h3>
                         <div class="pb-10">
-                            <div class="bg-white border border-[#E7D6BE] p-8 shadow-sm">
-                                <h4 class="font-serif font-bold text-slate-800 text-xl mb-4">{{ eligibility.data.subheading }}</h4>
-                                <p class="text-gray-700 text-base mb-5">{{ eligibility.data.intro }}</p>
-                                <div class="text-gray-600 text-sm space-y-3 mb-6 eligibility-content">
+                            <div class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] p-8 shadow-sm">
+                                <h4 class="font-serif font-bold text-[color:var(--c-heading)] text-xl mb-4">{{ eligibility.data.subheading }}</h4>
+                                <p class="text-[color:var(--c-body)] text-base mb-5">{{ eligibility.data.intro }}</p>
+                                <div class="text-[color:var(--c-body-dim)] text-sm space-y-3 mb-6 eligibility-content">
                                     {{ eligibility.html | safe }}
                                 </div>
-                                <div class="bg-[#D9A756]/10 border-l-4 border-[#D9A756] p-4">
-                                    <p class="text-gray-700 text-sm leading-relaxed">
-                                        <strong class="text-[#B65E3F]">Note:</strong> {{ eligibility.data.note }}
+                                <div class="bg-[color:var(--c-acc-10)] border-l-4 border-[color:var(--c-acc)] p-4">
+                                    <p class="text-[color:var(--c-body)] text-sm leading-relaxed">
+                                        <strong class="text-[color:var(--c-sec)]">Note:</strong> {{ eligibility.data.note }}
                                     </p>
                                 </div>
                             </div>
@@ -203,32 +203,32 @@ description: "A four-year holistic therapy training in three levels: self-develo
                 </details>
 
                 <details class="p4-reveal">
-                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[#F5EAD9] transition-colors">
-                        <h2 class="p4-kicker text-[#B65E3F] flex items-center gap-4">
+                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[color:var(--c-paper-2)] transition-colors">
+                        <h2 class="p4-kicker text-[color:var(--c-sec)] flex items-center gap-4">
                             <span class="p4-hairline"></span>
                             Admissions
                         </h2>
-                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[#B65E3F] transition-transform duration-300" aria-hidden="true"></i>
+                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[color:var(--c-sec)] transition-transform duration-300" aria-hidden="true"></i>
                     </summary>
-                    <div class="border-t border-[#E7D6BE] px-6 pt-6">
-                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-6">How to Apply</h3>
+                    <div class="border-t border-[color:var(--c-line)] px-6 pt-6">
+                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mb-6">How to Apply</h3>
                         <div class="pb-10 grid gap-8">
                             {% for adm in admissions %}
-                            <div class="bg-white border border-[#E7D6BE] p-8 shadow-sm">
+                            <div class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] p-8 shadow-sm">
                                 <div class="flex items-center gap-3 mb-4">
-                                    <span class="text-xs font-bold uppercase tracking-wider text-[#B65E3F]">
+                                    <span class="text-xs font-bold uppercase tracking-wider text-[color:var(--c-sec)]">
                                         {{ adm.data.level }}
                                     </span>
-                                    <span class="text-xs text-gray-400">—</span>
-                                    <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ adm.data.label }}{% if adm.data.note_anchor %}<a href="{{ adm.data.note_anchor }}" class="text-[#B65E3F] font-bold no-underline normal-case" title="See note about the protected title &quot;psychotherapist&quot;">*</a>{% endif %}</span>
+                                    <span class="text-xs text-[color:var(--c-body-dim)]">—</span>
+                                    <span class="text-xs font-semibold text-[color:var(--c-body-dim)] uppercase tracking-wider">{{ adm.data.label }}{% if adm.data.note_anchor %}<a href="{{ adm.data.note_anchor }}" class="text-[color:var(--c-sec)] font-bold no-underline normal-case" title="See note about the protected title &quot;psychotherapist&quot;">*</a>{% endif %}</span>
                                 </div>
                                 {% if adm.data.who_can_apply %}
-                                <p class="text-gray-700 text-sm mb-4">
+                                <p class="text-[color:var(--c-body)] text-sm mb-4">
                                     <strong>Who Can Apply:</strong> {{ adm.data.who_can_apply }}
                                 </p>
                                 {% endif %}
-                                <h4 class="font-semibold text-slate-700 text-sm mb-3">Requirements</h4>
-                                <div class="text-gray-600 text-sm space-y-2 admissions-content">
+                                <h4 class="font-semibold text-[color:var(--c-body)] text-sm mb-3">Requirements</h4>
+                                <div class="text-[color:var(--c-body-dim)] text-sm space-y-2 admissions-content">
                                     {{ adm.html | safe }}
                                 </div>
                             </div>
@@ -238,28 +238,28 @@ description: "A four-year holistic therapy training in three levels: self-develo
                 </details>
 
                 <details class="p4-reveal">
-                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[#F5EAD9] transition-colors">
-                        <h2 class="p4-kicker text-[#B65E3F] flex items-center gap-4">
+                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[color:var(--c-paper-2)] transition-colors">
+                        <h2 class="p4-kicker text-[color:var(--c-sec)] flex items-center gap-4">
                             <span class="p4-hairline"></span>
                             Commitment
                         </h2>
-                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[#B65E3F] transition-transform duration-300" aria-hidden="true"></i>
+                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[color:var(--c-sec)] transition-transform duration-300" aria-hidden="true"></i>
                     </summary>
-                    <div class="border-t border-[#E7D6BE] px-6 pt-6">
-                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-6">Your Commitment Structure</h3>
+                    <div class="border-t border-[color:var(--c-line)] px-6 pt-6">
+                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mb-6">Your Commitment Structure</h3>
                         <div class="pb-10">
-                            <p class="text-gray-700 text-lg leading-relaxed mb-8">
+                            <p class="text-[color:var(--c-body)] text-lg leading-relaxed mb-8">
                                 Our training asks for consistent engagement in learning, self-development, and supervised practice.
                             </p>
 
                             <div class="grid md:grid-cols-2 gap-6">
                                 {% for card in commitmentCards %}
-                                <div class="bg-white border border-[#E7D6BE] p-6 shadow-sm{% if loop.last or (loop.index == 3) %} md:col-span-2{% endif %}">
-                                    <h3 class="font-serif font-bold text-slate-800 text-xl mb-4 flex items-center gap-2">
+                                <div class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] p-6 shadow-sm{% if loop.last or (loop.index == 3) %} md:col-span-2{% endif %}">
+                                    <h3 class="font-serif font-bold text-[color:var(--c-heading)] text-xl mb-4 flex items-center gap-2">
                                         <i data-lucide="{{ card.data.icon }}" class="w-5 h-5 {{ card.data.icon_color }}"></i>
                                         {{ card.data.heading }}
                                     </h3>
-                                    <div class="text-gray-700 text-sm space-y-2 leading-relaxed commitment-content">
+                                    <div class="text-[color:var(--c-body)] text-sm space-y-2 leading-relaxed commitment-content">
                                         {{ card.html | safe }}
                                     </div>
                                 </div>
@@ -270,89 +270,89 @@ description: "A four-year holistic therapy training in three levels: self-develo
                 </details>
 
                 <details class="p4-reveal">
-                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[#F5EAD9] transition-colors">
-                        <h2 class="p4-kicker text-[#B65E3F] flex items-center gap-4">
+                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[color:var(--c-paper-2)] transition-colors">
+                        <h2 class="p4-kicker text-[color:var(--c-sec)] flex items-center gap-4">
                             <span class="p4-hairline"></span>
                             Fees &amp; enrolment
                         </h2>
-                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[#B65E3F] transition-transform duration-300" aria-hidden="true"></i>
+                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[color:var(--c-sec)] transition-transform duration-300" aria-hidden="true"></i>
                     </summary>
-                    <div class="border-t border-[#E7D6BE] px-6 pt-6">
-                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[#0F2540] mb-6">What you earn, and what it costs</h3>
+                    <div class="border-t border-[color:var(--c-line)] px-6 pt-6">
+                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mb-6">What you earn, and what it costs</h3>
                         <div class="pb-10">
                             <!-- Certificates per level -->
-                            <div class="bg-white border border-[#E7D6BE] shadow-sm overflow-hidden mb-8">
+                            <div class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm overflow-hidden mb-8">
                                 <table class="block md:table w-full text-left text-sm md:text-base">
                                     <thead class="hidden md:table-header-group">
-                                        <tr class="bg-[#0F2540] text-[#FDFBF5]">
+                                        <tr class="bg-[color:var(--c-deep)] text-[color:var(--c-paper-hi)]">
                                             <th class="px-4 py-3 font-semibold">Level</th>
                                             <th class="px-4 py-3 font-semibold whitespace-nowrap">Duration</th>
                                             <th class="px-4 py-3 font-semibold">Certificate</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="block md:table-row-group divide-y divide-[#E7D6BE]">
+                                    <tbody class="block md:table-row-group divide-y divide-[color:var(--c-line)]">
                                         <tr class="block md:table-row">
-                                            <td class="block md:table-cell px-4 pt-4 pb-1 md:py-3 font-medium text-[#0F2540] align-top">Level 1<br><span class="text-xs text-neutral-warm-500 font-normal">Self-Development</span></td>
-                                            <td class="block md:table-cell px-4 py-1 md:py-3 text-neutral-warm-700 align-top whitespace-nowrap"><span class="md:hidden text-xs uppercase tracking-wide text-neutral-warm-500 mr-2">Duration</span>1 year</td>
-                                            <td class="block md:table-cell px-4 pt-1 pb-4 md:py-3 text-neutral-warm-700 align-top">Certificate of Attendance. Can be taken on its own as a stand alone year of self-development.</td>
+                                            <td class="block md:table-cell px-4 pt-4 pb-1 md:py-3 font-medium text-[color:var(--c-heading)] align-top">Level 1<br><span class="text-xs text-[color:var(--c-body-dim)] font-normal">Self-Development</span></td>
+                                            <td class="block md:table-cell px-4 py-1 md:py-3 text-[color:var(--c-body)] align-top whitespace-nowrap"><span class="md:hidden text-xs uppercase tracking-wide text-[color:var(--c-body-dim)] mr-2">Duration</span>1 year</td>
+                                            <td class="block md:table-cell px-4 pt-1 pb-4 md:py-3 text-[color:var(--c-body)] align-top">Certificate of Attendance. Can be taken on its own as a stand alone year of self-development.</td>
                                         </tr>
                                         <tr class="block md:table-row">
-                                            <td class="block md:table-cell px-4 pt-4 pb-1 md:py-3 font-medium text-[#0F2540] align-top">Level 2<br><span class="text-xs text-neutral-warm-500 font-normal">Counselling Skills</span></td>
-                                            <td class="block md:table-cell px-4 py-1 md:py-3 text-neutral-warm-700 align-top whitespace-nowrap"><span class="md:hidden text-xs uppercase tracking-wide text-neutral-warm-500 mr-2">Duration</span>1.5 years</td>
-                                            <td class="block md:table-cell px-4 pt-1 pb-4 md:py-3 text-neutral-warm-700 align-top">Certificate in Transpersonal Counselling Skills, awarded through a EUROTAS-accredited institute, with credits toward EUROTAS certification.</td>
+                                            <td class="block md:table-cell px-4 pt-4 pb-1 md:py-3 font-medium text-[color:var(--c-heading)] align-top">Level 2<br><span class="text-xs text-[color:var(--c-body-dim)] font-normal">Counselling Skills</span></td>
+                                            <td class="block md:table-cell px-4 py-1 md:py-3 text-[color:var(--c-body)] align-top whitespace-nowrap"><span class="md:hidden text-xs uppercase tracking-wide text-[color:var(--c-body-dim)] mr-2">Duration</span>1.5 years</td>
+                                            <td class="block md:table-cell px-4 pt-1 pb-4 md:py-3 text-[color:var(--c-body)] align-top">Certificate in Transpersonal Counselling Skills, awarded through a EUROTAS-accredited institute, with credits toward EUROTAS certification.</td>
                                         </tr>
                                         <tr class="block md:table-row">
-                                            <td class="block md:table-cell px-4 pt-4 pb-1 md:py-3 font-medium text-[#0F2540] align-top">Level 3<br><span class="text-xs text-neutral-warm-500 font-normal">Psychotherapy<a href="#psychotherapy-note" class="text-[#B65E3F] font-bold no-underline" title="See note about the protected title &quot;psychotherapist&quot;">*</a> &amp; Breathwork</span></td>
-                                            <td class="block md:table-cell px-4 py-1 md:py-3 text-neutral-warm-700 align-top whitespace-nowrap"><span class="md:hidden text-xs uppercase tracking-wide text-neutral-warm-500 mr-2">Duration</span>1.5 years</td>
-                                            <td class="block md:table-cell px-4 pt-1 pb-4 md:py-3 text-neutral-warm-700 align-top">Certificate as Transpersonal Psychotherapy<a href="#psychotherapy-note" class="text-[#B65E3F] font-bold no-underline" title="See note about the protected title &quot;psychotherapist&quot;">*</a> &amp; Holotropic Breathwork Facilitator, with an optional EUROTAS certification track.</td>
+                                            <td class="block md:table-cell px-4 pt-4 pb-1 md:py-3 font-medium text-[color:var(--c-heading)] align-top">Level 3<br><span class="text-xs text-[color:var(--c-body-dim)] font-normal">Psychotherapy<a href="#psychotherapy-note" class="text-[color:var(--c-sec)] font-bold no-underline" title="See note about the protected title &quot;psychotherapist&quot;">*</a> &amp; Breathwork</span></td>
+                                            <td class="block md:table-cell px-4 py-1 md:py-3 text-[color:var(--c-body)] align-top whitespace-nowrap"><span class="md:hidden text-xs uppercase tracking-wide text-[color:var(--c-body-dim)] mr-2">Duration</span>1.5 years</td>
+                                            <td class="block md:table-cell px-4 pt-1 pb-4 md:py-3 text-[color:var(--c-body)] align-top">Certificate as Transpersonal Psychotherapy<a href="#psychotherapy-note" class="text-[color:var(--c-sec)] font-bold no-underline" title="See note about the protected title &quot;psychotherapist&quot;">*</a> &amp; Holotropic Breathwork Facilitator, with an optional EUROTAS certification track.</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div id="psychotherapy-note" class="scroll-mt-24 bg-[#D9A756]/10 border-t border-[#D9A756]/30 px-4 py-3">
-                                    <p class="text-xs md:text-sm text-neutral-warm-700 leading-relaxed">
-                                        <strong class="text-[#B65E3F]">*Please note:</strong> &ldquo;psychotherapist&rdquo; is a legally protected title in many countries (for example Germany, France, Italy and Austria).Please check the psychotherapy regulations in the country where you intend to practise before using the title professionally. <a href="{{ '/legal-notice/' | url }}" class="text-[#B65E3F] hover:text-[#7d5f28] underline underline-offset-2 font-medium">Read the full legal notice</a>.
+                                <div id="psychotherapy-note" class="scroll-mt-24 bg-[color:var(--c-acc-10)] border-t border-[color:var(--c-acc-30)] px-4 py-3">
+                                    <p class="text-xs md:text-sm text-[color:var(--c-body)] leading-relaxed">
+                                        <strong class="text-[color:var(--c-sec)]">*Please note:</strong> &ldquo;psychotherapist&rdquo; is a legally protected title in many countries (for example Germany, France, Italy and Austria).Please check the psychotherapy regulations in the country where you intend to practise before using the title professionally. <a href="{{ '/legal-notice/' | url }}" class="text-[color:var(--c-sec)] hover:text-[color:var(--c-sec-dark)] underline underline-offset-2 font-medium">Read the full legal notice</a>.
                                     </p>
                                 </div>
                             </div>
 
                             <!-- Enrolment options + Fees -->
                             <div class="grid md:grid-cols-2 gap-6">
-                                <div class="bg-white border border-[#E7D6BE] p-6 shadow-sm">
-                                    <h3 class="font-serif font-bold text-slate-800 text-xl mb-4 flex items-center gap-2">
-                                        <i data-lucide="list-checks" class="w-5 h-5 text-science-blue-600"></i>
+                                <div class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] p-6 shadow-sm">
+                                    <h3 class="font-serif font-bold text-[color:var(--c-heading)] text-xl mb-4 flex items-center gap-2">
+                                        <i data-lucide="list-checks" class="w-5 h-5 text-[color:var(--c-link)]"></i>
                                         How you can join
                                     </h3>
-                                    <ul class="text-gray-700 text-sm space-y-2 leading-relaxed list-disc list-inside">
+                                    <ul class="text-[color:var(--c-body)] text-sm space-y-2 leading-relaxed list-disc list-inside">
                                         <li>The <strong>full training</strong> — all three levels, toward professional certification.</li>
                                         <li><strong>Self-development only</strong> — join Level 1 on its own, with no obligation to continue.</li>
                                         <li><strong>Single lectures</strong> — follow individual recorded lectures à la carte.</li>
                                         <li><strong>Single seminars</strong> — attend an individual in-person intensive.</li>
                                     </ul>
-                                    <p class="text-xs text-neutral-warm-500 mt-4">Enrolment options are identical for the Western and Eastern tracks.</p>
+                                    <p class="text-xs text-[color:var(--c-body-dim)] mt-4">Enrolment options are identical for the Western and Eastern tracks.</p>
                                 </div>
-                                <div class="bg-white border border-[#E7D6BE] p-6 shadow-sm">
-                                    <h3 class="font-serif font-bold text-slate-800 text-xl mb-4 flex items-center gap-2">
-                                        <i data-lucide="wallet" class="w-5 h-5 text-science-blue-600"></i>
+                                <div class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] p-6 shadow-sm">
+                                    <h3 class="font-serif font-bold text-[color:var(--c-heading)] text-xl mb-4 flex items-center gap-2">
+                                        <i data-lucide="wallet" class="w-5 h-5 text-[color:var(--c-link)]"></i>
                                         Fees
                                     </h3>
-                                    <ul class="text-gray-700 text-sm space-y-2 leading-relaxed">
-                                        <li class="flex justify-between gap-4"><span>Per module &mdash; Eastern track</span><span class="font-semibold text-[#0F2540] whitespace-nowrap">&euro;489</span></li>
-                                        <li class="flex justify-between gap-4"><span>Per module &mdash; Western track</span><span class="font-semibold text-[#0F2540] whitespace-nowrap">&euro;689</span></li>
-                                        <li class="flex justify-between gap-4"><span>Single lecture</span><span class="font-semibold text-[#0F2540] whitespace-nowrap">&euro;45</span></li>
-                                        <li class="flex justify-between gap-4"><span>Single seminar</span><span class="font-semibold text-[#0F2540] whitespace-nowrap">on request</span></li>
+                                    <ul class="text-[color:var(--c-body)] text-sm space-y-2 leading-relaxed">
+                                        <li class="flex justify-between gap-4"><span>Per module &mdash; Eastern track</span><span class="font-semibold text-[color:var(--c-heading)] whitespace-nowrap">&euro;489</span></li>
+                                        <li class="flex justify-between gap-4"><span>Per module &mdash; Western track</span><span class="font-semibold text-[color:var(--c-heading)] whitespace-nowrap">&euro;689</span></li>
+                                        <li class="flex justify-between gap-4"><span>Single lecture</span><span class="font-semibold text-[color:var(--c-heading)] whitespace-nowrap">&euro;45</span></li>
+                                        <li class="flex justify-between gap-4"><span>Single seminar</span><span class="font-semibold text-[color:var(--c-heading)] whitespace-nowrap">on request</span></li>
                                     </ul>
-                                    <p class="text-xs text-neutral-warm-500 mt-4">Each module runs about three months. You pay module by module — there is no need to pay for a whole year at once.</p>
+                                    <p class="text-xs text-[color:var(--c-body-dim)] mt-4">Each module runs about three months. You pay module by module — there is no need to pay for a whole year at once.</p>
                                 </div>
                             </div>
 
                             <!-- Discounts + payment note -->
-                            <div class="mt-6 bg-[#0F2540]/5 border border-[#0F2540]/10 p-6">
+                            <div class="mt-6 bg-[color:var(--c-deep-5)] border border-[color:var(--c-deep-10)] p-6">
                                 <div class="flex items-start gap-3">
-                                    <i data-lucide="hand-heart" class="w-5 h-5 text-[#B65E3F] flex-shrink-0 mt-0.5"></i>
-                                    <div class="text-sm text-neutral-warm-700 leading-relaxed space-y-2">
-                                        <p><strong class="text-[#0F2540]">Cost should not be a barrier.</strong> If money is a genuine obstacle, please write to us — we can offer discounts on a case-by-case basis.</p>
-                                        <p>We also give <strong class="text-[#0F2540]">one free module for every new student you bring</strong> to the school.</p>
-                                        <p class="text-xs text-neutral-warm-500 pt-1">Online payment is not yet available on this website; enrolment and payment are arranged directly with the office.</p>
+                                    <i data-lucide="hand-heart" class="w-5 h-5 text-[color:var(--c-sec)] flex-shrink-0 mt-0.5"></i>
+                                    <div class="text-sm text-[color:var(--c-body)] leading-relaxed space-y-2">
+                                        <p><strong class="text-[color:var(--c-heading)]">Cost should not be a barrier.</strong> If money is a genuine obstacle, please write to us — we can offer discounts on a case-by-case basis.</p>
+                                        <p>We also give <strong class="text-[color:var(--c-heading)]">one free module for every new student you bring</strong> to the school.</p>
+                                        <p class="text-xs text-[color:var(--c-body-dim)] pt-1">Online payment is not yet available on this website; enrolment and payment are arranged directly with the office.</p>
                                     </div>
                                 </div>
                             </div>
@@ -365,25 +365,25 @@ description: "A four-year holistic therapy training in three levels: self-develo
 </section>
 
 <!-- CTA Section -->
-<section class="bg-gradient-to-br from-[#0F2540] to-[#12305A] text-white py-16">
+<section class="bg-gradient-to-br from-[var(--c-deep)] to-[var(--c-deep-2)] text-[color:var(--c-on-dark-1)] py-16">
     <div class="container mx-auto px-6 text-center">
-        <p class="p4-kicker text-[#D9A756] mb-4 flex items-center justify-center gap-4">
+        <p class="p4-kicker text-[color:var(--c-acc)] mb-4 flex items-center justify-center gap-4">
             <span class="p4-hairline"></span>
             Next step
             <span class="p4-hairline"></span>
         </p>
-        <h2 class="p4-display text-3xl md:text-4xl font-medium mb-4 text-[#FDFBF5]">Ready to begin?</h2>
-        <p class="text-[#E9EDF2]/80 max-w-2xl mx-auto mb-8">See how to apply, explore the curriculum in detail, or get in touch to find the right entry point for you.</p>
+        <h2 class="p4-display text-3xl md:text-4xl font-medium mb-4 text-[color:var(--c-paper-hi)]">Ready to begin?</h2>
+        <p class="text-[color:var(--c-on-dark-3)] max-w-2xl mx-auto mb-8">See how to apply, explore the curriculum in detail, or get in touch to find the right entry point for you.</p>
         {# Same gap as on /curriculum/: this page argued the case at length and
            then never offered the application page. #}
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="{{ '/apply/' | url }}" class="inline-block bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-8 py-3 font-medium tracking-wide transition-all shadow-lg hover:shadow-xl">
+            <a href="{{ '/apply/' | url }}" class="inline-block bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-heading)] px-8 py-3 font-medium tracking-wide transition-all shadow-lg hover:shadow-xl">
                 Apply
             </a>
-            <a href="{{ '/curriculum/' | url }}" class="inline-block border border-[#FDFBF5]/60 hover:border-[#D9A756] text-[#FDFBF5] hover:text-[#D9A756] px-8 py-3 font-medium tracking-wide transition-all">
+            <a href="{{ '/curriculum/' | url }}" class="inline-block border border-[color:var(--c-paper-hi-60)] hover:border-[color:var(--c-acc)] text-[color:var(--c-paper-hi)] hover:text-[color:var(--c-acc)] px-8 py-3 font-medium tracking-wide transition-all">
                 View Curriculum
             </a>
-            <a href="{{ '/' | url }}#contact" class="inline-block border border-[#FDFBF5]/60 hover:border-[#D9A756] text-[#FDFBF5] hover:text-[#D9A756] px-8 py-3 font-medium tracking-wide transition-all">
+            <a href="{{ '/' | url }}#contact" class="inline-block border border-[color:var(--c-paper-hi-60)] hover:border-[color:var(--c-acc)] text-[color:var(--c-paper-hi)] hover:text-[color:var(--c-acc)] px-8 py-3 font-medium tracking-wide transition-all">
                 Get in touch
             </a>
         </div>

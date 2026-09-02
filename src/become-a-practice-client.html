@@ -27,7 +27,7 @@ description: "Free breathwork and counselling for behaviour patterns, repeating 
     }
 </style>
 
-<header class="relative h-[50vh] min-h-[400px] flex items-center justify-center text-white bg-science-blue-900 overflow-hidden">
+<header class="relative h-[50vh] min-h-[400px] flex items-center justify-center text-[color:var(--c-on-dark-1)] bg-[color:var(--c-deep)] overflow-hidden">
     <div class="absolute inset-0 z-0">
         <picture>
             {# Wide screens get the band the hero actually shows; narrow ones keep
@@ -37,42 +37,42 @@ description: "Free breathwork and counselling for behaviour patterns, repeating 
             <source srcset="{{ '/assets/images/Headers/hero-practice-client-flowers-narrow.webp' | url }}" type="image/webp">
             <img src="{{ '/assets/images/Headers/hero-practice-client-flowers-narrow.jpg' | url }}" alt="Wildflowers in the garden of the seminar house" class="w-full h-full object-cover">
         </picture>
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/80 via-[#0F2540]/60 to-[#0F2540]/80"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[var(--c-deep-80)] via-[var(--c-deep-60)] to-[var(--c-deep-80)]"></div>
     </div>
     <div class="container mx-auto px-6 relative z-10 text-center pt-20">
         <div class="max-w-4xl mx-auto">
-            <p class="p4-kicker text-[#D9A756] mb-6 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-acc)] mb-6 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 Supervised practice
                 <span class="p4-hairline"></span>
             </p>
-            <h1 class="p4-display text-4xl md:text-6xl font-medium mb-6 leading-tight text-[#FDFBF5]">
+            <h1 class="p4-display text-4xl md:text-6xl font-medium mb-6 leading-tight text-[color:var(--c-paper-hi)]">
                 Become a Practice Client
             </h1>
-            <p class="text-xl md:text-2xl text-white/80 font-light leading-relaxed max-w-3xl mx-auto">
+            <p class="text-xl md:text-2xl text-[color:var(--c-on-dark-3)] font-light leading-relaxed max-w-3xl mx-auto">
                 Connect directly with our third-level students for supervised counselling and psychotherapy sessions.
             </p>
         </div>
     </div>
 </header>
 
-<div class="bg-white border-b border-[#E7D6BE]">
+<div class="bg-[color:var(--c-paper-card)] border-b border-[color:var(--c-line)]">
     <div class="container mx-auto px-6 py-4">
-        <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
-            <a href="{{ '/' | url }}" class="hover:text-science-blue-600 transition-colors">Home</a>
+        <div class="flex items-center gap-2 text-sm text-[color:var(--c-body-dim)]">
+            <a href="{{ '/' | url }}" class="hover:text-[color:var(--c-link)] transition-colors">Home</a>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-neutral-warm-500">Resources</span>
+            <span class="text-[color:var(--c-body-dim)]">Resources</span>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-science-blue-800 font-medium">Become a Practice Client</span>
+            <span class="text-[color:var(--c-heading)] font-medium">Become a Practice Client</span>
         </div>
     </div>
 </div>
 
-<section class="py-16 bg-white">
+<section class="py-16 bg-[color:var(--c-paper-hi)]">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto">
-            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-8">Free Counselling and Supervised Practice</h2>
-            <div class="space-y-6 text-neutral-warm-700 leading-relaxed">
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-8">Free Counselling and Supervised Practice</h2>
+            <div class="space-y-6 text-[color:var(--c-body)] leading-relaxed">
                 {% for item in introItems %}
                 <div class="flex items-start gap-3">
                     <i data-lucide="{{ item.data.icon }}" class="w-5 h-5 {{ item.data.icon_color }} mt-1 flex-shrink-0"></i>
@@ -85,25 +85,25 @@ description: "Free breathwork and counselling for behaviour patterns, repeating 
 </section>
 
 <!-- How it works -->
-<section class="py-16 bg-white border-t border-[#E7D6BE]">
+<section class="py-16 bg-[color:var(--c-paper-card)] border-t border-[color:var(--c-line)]">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto">
-            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-6">How to Become a Practice Client</h2>
-            <p class="text-neutral-warm-700 leading-relaxed mb-8">
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-6">How to Become a Practice Client</h2>
+            <p class="text-[color:var(--c-body)] leading-relaxed mb-8">
                 Becoming a practice client is also a way to get a first-hand sense of the school before deciding whether to enrol in the training itself &mdash; you do not need to be a student here to request a session.
             </p>
             <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-[#FAF3E7] border border-[#E7D6BE] p-6">
-                    <div class="w-9 h-9 border border-[#D9A756] flex items-center justify-center text-[#B65E3F] font-semibold mb-4">1</div>
-                    <h3 class="font-serif font-bold text-[#0F2540] text-lg mb-2">Contact a student directly</h3>
-                    <p class="text-xs text-neutral-warm-500 mb-3 leading-relaxed">Trainees offer these sessions under professional supervision as part of their training; they are not independently licensed practitioners. On the use of the professional title &ldquo;psychotherapist&rdquo;, see our <a href="{{ '/legal-notice/' | url }}" class="underline underline-offset-2 hover:text-[#B65E3F]">legal notice</a>.</p>
-                    <p class="text-sm text-neutral-warm-700 leading-relaxed">Browse the profiles below and reach out to whoever feels like the right fit, using the contact details on their card. They will let the school know once you are in touch.</p>
+                <div class="bg-[color:var(--c-paper)] border border-[color:var(--c-line)] p-6">
+                    <div class="w-9 h-9 border border-[color:var(--c-acc)] flex items-center justify-center text-[color:var(--c-sec)] font-semibold mb-4">1</div>
+                    <h3 class="font-serif font-bold text-[color:var(--c-heading)] text-lg mb-2">Contact a student directly</h3>
+                    <p class="text-xs text-[color:var(--c-body-dim)] mb-3 leading-relaxed">Trainees offer these sessions under professional supervision as part of their training; they are not independently licensed practitioners. On the use of the professional title &ldquo;psychotherapist&rdquo;, see our <a href="{{ '/legal-notice/' | url }}" class="underline underline-offset-2 hover:text-[color:var(--c-sec)]">legal notice</a>.</p>
+                    <p class="text-sm text-[color:var(--c-body)] leading-relaxed">Browse the profiles below and reach out to whoever feels like the right fit, using the contact details on their card. They will let the school know once you are in touch.</p>
                 </div>
-                <div class="bg-[#FAF3E7] border border-[#E7D6BE] p-6">
-                    <div class="w-9 h-9 border border-[#D9A756] flex items-center justify-center text-[#B65E3F] font-semibold mb-4">2</div>
-                    <h3 class="font-serif font-bold text-[#0F2540] text-lg mb-2">Or write to the school</h3>
-                    <p class="text-sm text-neutral-warm-700 leading-relaxed mb-4">Prefer us to match you with a suitable student in training? Get in touch and we will take it from there.</p>
-                    <a href="{{ '/' | url }}#contact" class="inline-flex items-center gap-2 text-science-blue-700 hover:text-science-blue-800 font-medium text-sm">
+                <div class="bg-[color:var(--c-paper)] border border-[color:var(--c-line)] p-6">
+                    <div class="w-9 h-9 border border-[color:var(--c-acc)] flex items-center justify-center text-[color:var(--c-sec)] font-semibold mb-4">2</div>
+                    <h3 class="font-serif font-bold text-[color:var(--c-heading)] text-lg mb-2">Or write to the school</h3>
+                    <p class="text-sm text-[color:var(--c-body)] leading-relaxed mb-4">Prefer us to match you with a suitable student in training? Get in touch and we will take it from there.</p>
+                    <a href="{{ '/' | url }}#contact" class="inline-flex items-center gap-2 text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] font-medium text-sm">
                         Write to us
                         <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </a>
@@ -113,12 +113,12 @@ description: "Free breathwork and counselling for behaviour patterns, repeating 
     </div>
 </section>
 
-<section class="py-16 bg-[#FAF3E7]">
+<section class="py-16 bg-[color:var(--c-paper)]">
     <div class="container mx-auto px-6">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-10">
-                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-4">Third-Level Students Available for Practice Clients</h2>
-                <p class="text-neutral-warm-700 leading-relaxed max-w-3xl mx-auto">
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-4">Third-Level Students Available for Practice Clients</h2>
+                <p class="text-[color:var(--c-body)] leading-relaxed max-w-3xl mx-auto">
                     This section is populated from a spreadsheet source and lists student therapists you can contact directly.
                 </p>
             </div>
@@ -126,7 +126,7 @@ description: "Free breathwork and counselling for behaviour patterns, repeating 
             {% if practiceClients and practiceClients.length %}
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {% for student in practiceClients %}
-                <article class="student-card bg-white border border-[#E7D6BE] overflow-hidden shadow-sm">
+                <article class="student-card bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] overflow-hidden shadow-sm">
                     {% if student.picture_link %}
                     <img
                         src="{{ student.picture_link | url }}"
@@ -135,39 +135,39 @@ description: "Free breathwork and counselling for behaviour patterns, repeating 
                         loading="lazy"
                     >
                     {% else %}
-                    <div class="h-56 bg-[#FAF3E7] flex items-center justify-center text-neutral-warm-500">
+                    <div class="h-56 bg-[color:var(--c-paper)] flex items-center justify-center text-[color:var(--c-body-dim)]">
                         <i data-lucide="user" class="w-10 h-10"></i>
                     </div>
                     {% endif %}
 
                     <div class="p-6">
                         <div class="flex items-center justify-between gap-3 mb-4">
-                            <h3 class="text-xl font-serif font-bold text-indigo-deep-900">{{ student.name }}</h3>
+                            <h3 class="text-xl font-serif font-bold text-[color:var(--c-heading)]">{{ student.name }}</h3>
                             {% if student.status == 'active' %}
                             <span class="text-xs font-medium px-2.5 py-1 uppercase tracking-wider bg-emerald-100 text-emerald-700">Active</span>
                             {% elif student.status == 'approved' %}
-                            <span class="text-xs font-medium px-2.5 py-1 uppercase tracking-wider bg-science-blue-100 text-science-blue-700">Approved</span>
+                            <span class="text-xs font-medium px-2.5 py-1 uppercase tracking-wider bg-[color:var(--c-paper-2)] text-[color:var(--c-heading)]">Approved</span>
                             {% elif student.status == 'pending' %}
-                            <span class="text-xs font-medium px-2.5 py-1 uppercase tracking-wider bg-[#D9A756]/20 text-[#B65E3F]">Pending</span>
+                            <span class="text-xs font-medium px-2.5 py-1 uppercase tracking-wider bg-[color:var(--c-acc-20)] text-[color:var(--c-sec)]">Pending</span>
                             {% elif student.status == 'on-hold' %}
                             <span class="text-xs font-medium px-2.5 py-1 uppercase tracking-wider bg-orange-100 text-orange-700">On Hold</span>
                             {% elif student.status == 'completed' %}
-                            <span class="text-xs font-medium px-2.5 py-1 uppercase tracking-wider bg-[#0F2540]/10 text-[#0F2540]">Completed</span>
+                            <span class="text-xs font-medium px-2.5 py-1 uppercase tracking-wider bg-[color:var(--c-deep-10)] text-[color:var(--c-heading)]">Completed</span>
                             {% else %}
-                            <span class="text-xs font-medium px-2.5 py-1 uppercase tracking-wider bg-neutral-100 text-neutral-600">{{ student.status }}</span>
+                            <span class="text-xs font-medium px-2.5 py-1 uppercase tracking-wider bg-[color:var(--c-paper-2)] text-[color:var(--c-body-dim)]">{{ student.status }}</span>
                             {% endif %}
                         </div>
 
-                        <ul class="space-y-2 text-sm text-neutral-warm-700 mb-4">
+                        <ul class="space-y-2 text-sm text-[color:var(--c-body)] mb-4">
                             {% if student.location %}
                             <li class="flex items-center gap-2">
-                                <i data-lucide="map-pin" class="w-4 h-4 text-science-blue-600"></i>
+                                <i data-lucide="map-pin" class="w-4 h-4 text-[color:var(--c-link)]"></i>
                                 <span>{{ student.location }}{% if student.city %} – {{ student.city }}{% endif %}</span>
                             </li>
                             {% endif %}
                             {% if student.spoken_languages %}
                             <li class="flex items-center gap-2">
-                                <i data-lucide="languages" class="w-4 h-4 text-[#B65E3F]"></i>
+                                <i data-lucide="languages" class="w-4 h-4 text-[color:var(--c-sec)]"></i>
                                 <span>{{ student.spoken_languages }}</span>
                             </li>
                             {% endif %}
@@ -175,7 +175,7 @@ description: "Free breathwork and counselling for behaviour patterns, repeating 
 
                         <button
                             type="button"
-                            class="w-full mb-4 inline-flex items-center justify-between px-4 py-2 border border-[#E7D6BE] text-sm font-medium text-indigo-deep-900 hover:bg-[#FAF3E7] transition-colors"
+                            class="w-full mb-4 inline-flex items-center justify-between px-4 py-2 border border-[color:var(--c-line)] text-sm font-medium text-[color:var(--c-heading)] hover:bg-[color:var(--c-paper)] transition-colors"
                             onclick="toggleStudentDetails(this)"
                             aria-expanded="false"
                         >
@@ -184,25 +184,25 @@ description: "Free breathwork and counselling for behaviour patterns, repeating 
                         </button>
 
                         <div class="student-details">
-                            <ul class="space-y-2 text-sm text-neutral-warm-700 mb-4">
+                            <ul class="space-y-2 text-sm text-[color:var(--c-body)] mb-4">
                                 {% if student.country %}
                                 <li class="flex items-center gap-2">
-                                    <i data-lucide="flag" class="w-4 h-4 text-science-blue-600"></i>
+                                    <i data-lucide="flag" class="w-4 h-4 text-[color:var(--c-link)]"></i>
                                     <span>Country: {{ student.country }}</span>
                                 </li>
                                 {% endif %}
                                 {% if student.intake_date %}
                                 <li class="flex items-center gap-2">
-                                    <i data-lucide="calendar" class="w-4 h-4 text-science-blue-600"></i>
+                                    <i data-lucide="calendar" class="w-4 h-4 text-[color:var(--c-link)]"></i>
                                     <span>Intake: {{ student.intake_date }}</span>
                                 </li>
                                 {% endif %}
                                 {% if student.skill_1 or student.skill_2 or student.skill_3 %}
                                 <li class="flex items-start gap-2">
-                                    <i data-lucide="sparkles" class="w-4 h-4 text-science-blue-600 mt-0.5 flex-shrink-0"></i>
+                                    <i data-lucide="sparkles" class="w-4 h-4 text-[color:var(--c-link)] mt-0.5 flex-shrink-0"></i>
                                     <div>
-                                        <span class="font-medium text-neutral-warm-800">Skills</span>
-                                        <ul class="mt-1 space-y-1 list-disc list-inside text-neutral-warm-700">
+                                        <span class="font-medium text-[color:var(--c-heading)]">Skills</span>
+                                        <ul class="mt-1 space-y-1 list-disc list-inside text-[color:var(--c-body)]">
                                             {% if student.skill_1 %}<li>{{ student.skill_1 }}</li>{% endif %}
                                             {% if student.skill_2 %}<li>{{ student.skill_2 }}</li>{% endif %}
                                             {% if student.skill_3 %}<li>{{ student.skill_3 }}</li>{% endif %}
@@ -211,16 +211,16 @@ description: "Free breathwork and counselling for behaviour patterns, repeating 
                                 </li>
                                 {% elif student.skills %}
                                 <li class="flex items-center gap-2">
-                                    <i data-lucide="sparkles" class="w-4 h-4 text-science-blue-600"></i>
+                                    <i data-lucide="sparkles" class="w-4 h-4 text-[color:var(--c-link)]"></i>
                                     <span>{{ student.skills }}</span>
                                 </li>
                                 {% endif %}
                                 {% if student.bth %}
                                 <li class="flex items-start gap-2">
-                                    <i data-lucide="wind" class="w-4 h-4 text-[#B65E3F] mt-0.5 flex-shrink-0"></i>
+                                    <i data-lucide="wind" class="w-4 h-4 text-[color:var(--c-sec)] mt-0.5 flex-shrink-0"></i>
                                     <div>
-                                        <span class="font-medium text-neutral-warm-800">Breathwork</span>
-                                        <p class="mt-1 text-neutral-warm-700 whitespace-pre-line">{{ student.bth }}</p>
+                                        <span class="font-medium text-[color:var(--c-heading)]">Breathwork</span>
+                                        <p class="mt-1 text-[color:var(--c-body)] whitespace-pre-line">{{ student.bth }}</p>
                                     </div>
                                 </li>
                                 {% endif %}
@@ -228,41 +228,41 @@ description: "Free breathwork and counselling for behaviour patterns, repeating 
 
                             {% if student.bio %}
                             <div class="mb-3">
-                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Bio</h4>
-                                <p class="text-neutral-warm-700 leading-relaxed text-sm">{{ student.bio }}</p>
+                                <h4 class="text-sm font-semibold text-[color:var(--c-heading)] mb-1">Bio</h4>
+                                <p class="text-[color:var(--c-body)] leading-relaxed text-sm">{{ student.bio }}</p>
                             </div>
                             {% endif %}
 
                             {% if student.training %}
                             <div class="mb-3">
-                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Training</h4>
-                                <p class="text-neutral-warm-700 leading-relaxed text-sm">{{ student.training }}</p>
+                                <h4 class="text-sm font-semibold text-[color:var(--c-heading)] mb-1">Training</h4>
+                                <p class="text-[color:var(--c-body)] leading-relaxed text-sm">{{ student.training }}</p>
                             </div>
                             {% endif %}
 
                             {% if student.practice %}
                             <div class="mb-4">
-                                <h4 class="text-sm font-semibold text-indigo-deep-900 mb-1">Practice</h4>
-                                <p class="text-neutral-warm-700 leading-relaxed text-sm">{{ student.practice }}</p>
+                                <h4 class="text-sm font-semibold text-[color:var(--c-heading)] mb-1">Practice</h4>
+                                <p class="text-[color:var(--c-body)] leading-relaxed text-sm">{{ student.practice }}</p>
                             </div>
                             {% endif %}
                         </div>
 
                         <div class="flex flex-col gap-2 text-sm">
                             {% if student.email %}
-                            <a href="mailto:{{ student.email }}" class="flex items-center gap-2 text-science-blue-700 hover:text-science-blue-800 transition-colors">
+                            <a href="mailto:{{ student.email }}" class="flex items-center gap-2 text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] transition-colors">
                                 <i data-lucide="mail" class="w-4 h-4 shrink-0"></i>
                                 <span>{{ student.email }}</span>
                             </a>
                             {% endif %}
                             {% if student.phone %}
-                            <p class="flex items-center gap-2 text-neutral-warm-700">
+                            <p class="flex items-center gap-2 text-[color:var(--c-body)]">
                                 <i data-lucide="phone" class="w-4 h-4 shrink-0"></i>
                                 <span>{{ student.phone }}</span>
                             </p>
                             {% endif %}
                             {% if student.website %}
-                            <a href="{{ student.website }}" target="_blank" rel="noopener" class="flex items-center gap-2 text-science-blue-700 hover:text-science-blue-800 transition-colors">
+                            <a href="{{ student.website }}" target="_blank" rel="noopener" class="flex items-center gap-2 text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] transition-colors">
                                 <i data-lucide="globe" class="w-4 h-4 shrink-0"></i>
                                 <span>{{ student.website | replace("https://", "") | replace("http://", "") | replace("www.", "") }}</span>
                             </a>
@@ -273,8 +273,8 @@ description: "Free breathwork and counselling for behaviour patterns, repeating 
                 {% endfor %}
             </div>
             {% else %}
-            <div class="max-w-3xl mx-auto bg-white border border-[#E7D6BE] p-8 text-center">
-                <p class="text-neutral-warm-700 leading-relaxed">
+            <div class="max-w-3xl mx-auto bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] p-8 text-center">
+                <p class="text-[color:var(--c-body)] leading-relaxed">
                     No student records are available yet. Add rows to your spreadsheet (or cache file) to populate this section.
                 </p>
             </div>
@@ -300,12 +300,12 @@ description: "Free breathwork and counselling for behaviour patterns, repeating 
 </script>
 {% endblock %}
 
-<section class="py-16 bg-[#FAF3E7]">
+<section class="py-16 bg-[color:var(--c-paper)]">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto">
-            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[#0F2540] mb-8">{{ whatToLook.data.heading }}</h2>
-            <p class="text-neutral-warm-700 leading-relaxed mb-6">{{ whatToLook.data.intro }}</p>
-            <div class="text-neutral-warm-700 leading-relaxed what-to-look-content">
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-8">{{ whatToLook.data.heading }}</h2>
+            <p class="text-[color:var(--c-body)] leading-relaxed mb-6">{{ whatToLook.data.intro }}</p>
+            <div class="text-[color:var(--c-body)] leading-relaxed what-to-look-content">
                 {{ whatToLook.html | safe }}
             </div>
         </div>

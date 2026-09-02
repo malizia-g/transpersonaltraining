@@ -11,7 +11,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
 <style>
     /* Teacher Card Styles */
     .teacher-card {
-        background: white;
+        background: var(--c-paper-card);
         overflow: hidden;
         transition: all 0.3s ease;
         cursor: pointer;
@@ -21,7 +21,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
     .teacher-card:hover {
         transform: translateY(-8px);
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        border-color: var(--color-primary, #1E40AF);
+        border-color: var(--c-link);
     }
     
     .teacher-img {
@@ -55,8 +55,8 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
     }
     
     .badge-core {
-        background: #D9A756;
-        color: #0F2540;
+        background: var(--c-acc);
+        color: var(--c-deep);
         padding: 0.25rem 0.75rem;
         font-size: 0.75rem;
         font-weight: 600;
@@ -65,8 +65,8 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
     }
 
     .badge-guest {
-        background: #0F2540;
-        color: #FDFBF5;
+        background: var(--c-deep);
+        color: var(--c-paper-hi);
         padding: 0.25rem 0.75rem;
         font-size: 0.75rem;
         font-weight: 600;
@@ -78,7 +78,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
     .tab-navigation {
         display: flex;
         justify-content: center;
-        border-bottom: 2px solid #E5D4C1;
+        border-bottom: 2px solid var(--c-line);
         margin-bottom: 1.5rem;
         gap: 0.5rem;
     }
@@ -88,7 +88,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
         background: transparent;
         border: none;
         border-bottom: 3px solid transparent;
-        color: #8B8680;
+        color: var(--c-body-dim);
         font-weight: 500;
         font-size: 0.95rem;
         cursor: pointer;
@@ -101,12 +101,12 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
     }
     
     .tab-button:hover {
-        color: var(--color-primary, #1E40AF);
+        color: var(--c-link);
     }
     
     .tab-button.active {
-        color: var(--color-primary, #1E40AF);
-        border-bottom-color: var(--color-primary, #1E40AF);
+        color: var(--c-link);
+        border-bottom-color: var(--c-link);
     }
     
     .tab-content {
@@ -147,7 +147,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
     }
     
     .tab-content ul li::marker {
-        color: var(--color-primary, #1E40AF);
+        color: var(--c-link);
     }
 </style>
 
@@ -165,20 +165,20 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
                 class="w-full h-full object-cover"
             />
         </picture>
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/80 via-[#0F2540]/60 to-[#0F2540]/80"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[var(--c-deep-80)] via-[var(--c-deep-60)] to-[var(--c-deep-80)]"></div>
     </div>
 
     <div class="relative z-10 container mx-auto px-6 text-center pt-20">
         <div class="animate-fade-in-up">
-            <p class="p4-kicker text-[#D9A756] mb-6 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-acc)] mb-6 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 Our Faculty
                 <span class="p4-hairline"></span>
             </p>
-            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] mb-6 leading-tight drop-shadow-md">
+            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[color:var(--c-paper-hi)] mb-6 leading-tight drop-shadow-md">
                 Meet Our Teachers
             </h1>
-            <p class="text-xl md:text-2xl text-neutral-warm-200 max-w-3xl mx-auto font-light leading-relaxed">
+            <p class="text-xl md:text-2xl text-[color:var(--c-paper-2)] max-w-3xl mx-auto font-light leading-relaxed">
                 Experienced professionals bringing East and West together in transpersonal knowledge
             </p>
         </div>
@@ -186,29 +186,29 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
 </header>
 
 <!-- Breadcrumb -->
-<div class="bg-white border-b border-[#E7D6BE]">
+<div class="bg-[color:var(--c-paper-card)] border-b border-[color:var(--c-line)]">
     <div class="container mx-auto px-6 py-4">
-        <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
-            <a href="{{ '/' | url }}" class="hover:text-science-blue-600 transition-colors">Home</a>
+        <div class="flex items-center gap-2 text-sm text-[color:var(--c-body-dim)]">
+            <a href="{{ '/' | url }}" class="hover:text-[color:var(--c-link)] transition-colors">Home</a>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-neutral-warm-500">Training</span>
+            <span class="text-[color:var(--c-body-dim)]">Training</span>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-science-blue-800 font-medium">Our Teachers</span>
+            <span class="text-[color:var(--c-heading)] font-medium">Our Teachers</span>
         </div>
     </div>
 </div>
 
 <!-- Core Teachers Section -->
-<section class="py-24 bg-white">
+<section class="py-24 bg-[color:var(--c-paper-hi)]">
     <div class="container mx-auto px-6">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-sec)] mb-4 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 {{ coreIntro.data.kicker }}
                 <span class="p4-hairline"></span>
             </p>
-            <h2 class="p4-display text-4xl md:text-5xl font-medium text-[#0F2540] mb-4">{{ coreIntro.data.heading }}</h2>
-            <p class="text-indigo-deep-900/70 text-lg">{{ coreIntro.data.description }}</p>
+            <h2 class="p4-display text-4xl md:text-5xl font-medium text-[color:var(--c-heading)] mb-4">{{ coreIntro.data.heading }}</h2>
+            <p class="text-[color:var(--c-body-dim)] text-lg">{{ coreIntro.data.description }}</p>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -223,11 +223,11 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-2">
                         <span class="badge-core">Core Teacher</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-science-blue-400 bio-icon"></i>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-[color:var(--c-link)] bio-icon"></i>
                     </div>
-                    <h3 class="text-2xl font-serif font-bold text-indigo-deep-900 mb-1">{{ teacher.name }}</h3>
-                    <p class="text-[#B65E3F] font-medium mb-3">{{ teacher.role }}</p>
-                    <p class="text-neutral-warm-600 text-sm">{{ teacher.credentials }}</p>
+                    <h3 class="text-2xl font-serif font-bold text-[color:var(--c-heading)] mb-1">{{ teacher.name }}</h3>
+                    <p class="text-[color:var(--c-sec)] font-medium mb-3">{{ teacher.role }}</p>
+                    <p class="text-[color:var(--c-body-dim)] text-sm">{{ teacher.credentials }}</p>
                 </div>
                 <div class="teacher-bio">
                     <!-- Tab Navigation -->
@@ -248,7 +248,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
                     
                     <!-- Biography Tab -->
                     <div id="bio-{{ teacher.id }}" class="tab-content active">
-                        <div class="prose prose-sm max-w-none text-neutral-warm-700">
+                        <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             {% if teacher.bio %}
                                 {{ teacher.bio | markdown | safe }}
                             {% else %}
@@ -257,7 +257,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
                         </div>
                         {% if teacher.website %}
                         <div class="mt-4">
-                            <a href="{{ teacher.website }}" target="_blank" class="inline-flex items-center gap-2 text-[#B65E3F] hover:text-[#7A5E29] font-medium">
+                            <a href="{{ teacher.website }}" target="_blank" class="inline-flex items-center gap-2 text-[color:var(--c-sec)] hover:text-[color:var(--c-sec-dark)] font-medium">
                                 <i data-lucide="globe" class="w-4 h-4"></i>
                                 {{ teacher.website | replace('https://', '') | replace('http://', '') | replace('www.', '') | truncate(30) }}
                             </a>
@@ -267,24 +267,24 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
                     
                     <!-- Training Tab -->
                     <div id="training-{{ teacher.id }}" class="tab-content">
-                        <div class="prose prose-sm max-w-none text-neutral-warm-700">
+                        <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             {% if teacher.credentials_detail %}
                                 {{ teacher.credentials_detail | markdown | safe }}
                             {% else %}
-                                <p class="text-slate-600">Training information coming soon</p>
+                                <p class="text-[color:var(--c-body)]">Training information coming soon</p>
                             {% endif %}
                         </div>
                     </div>
                     
                     <!-- Practice Tab -->
                     <div id="practice-{{ teacher.id }}" class="tab-content">
-                        <div class="prose prose-sm max-w-none text-neutral-warm-700">
+                        <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             {% if teacher.experience %}
                                 {{ teacher.experience | markdown | safe }}
                             {% elif teacher.publications %}
                                 {{ teacher.publications | markdown | safe }}
                             {% else %}
-                                <p class="text-slate-600">Practice information coming soon</p>
+                                <p class="text-[color:var(--c-body)]">Practice information coming soon</p>
                             {% endif %}
                         </div>
                     </div>
@@ -296,16 +296,16 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
 </section>
 
 <!-- Guest Teachers Section -->
-<section class="py-24 bg-[#FAF3E7]">
+<section class="py-24 bg-[color:var(--c-paper)]">
     <div class="container mx-auto px-6">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-sec)] mb-4 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 {{ guestIntro.data.kicker }}
                 <span class="p4-hairline"></span>
             </p>
-            <h2 class="p4-display text-4xl md:text-5xl font-medium text-[#0F2540] mb-4">{{ guestIntro.data.heading }}</h2>
-            <p class="text-indigo-deep-900/70 text-lg">{{ guestIntro.data.description }}</p>
+            <h2 class="p4-display text-4xl md:text-5xl font-medium text-[color:var(--c-heading)] mb-4">{{ guestIntro.data.heading }}</h2>
+            <p class="text-[color:var(--c-body-dim)] text-lg">{{ guestIntro.data.description }}</p>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -320,10 +320,10 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
                 <div class="p-4">
                     <div class="flex items-center justify-between mb-2">
                         <span class="badge-guest">Guest</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-[#B65E3F] bio-icon"></i>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-sec)] bio-icon"></i>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-indigo-deep-900 mb-1">{{ teacher.name }}</h3>
-                    <p class="text-[#B65E3F] font-medium text-sm">{{ teacher.location }}</p>
+                    <h3 class="text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1">{{ teacher.name }}</h3>
+                    <p class="text-[color:var(--c-sec)] font-medium text-sm">{{ teacher.location }}</p>
                 </div>
                 <div class="teacher-bio">
                     <!-- Tab Navigation -->
@@ -344,7 +344,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
                     
                     <!-- Biography Tab -->
                     <div id="bio-{{ teacher.id }}" class="tab-content active">
-                        <div class="prose prose-sm max-w-none text-neutral-warm-700">
+                        <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             {% if teacher.bio %}
                                 {{ teacher.bio | markdown | safe }}
                             {% else %}
@@ -353,7 +353,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
                         </div>
                         {% if teacher.website %}
                         <div class="mt-4">
-                            <a href="{{ teacher.website }}" target="_blank" class="inline-flex items-center gap-2 text-[#B65E3F] hover:text-[#7A5E29] font-medium">
+                            <a href="{{ teacher.website }}" target="_blank" class="inline-flex items-center gap-2 text-[color:var(--c-sec)] hover:text-[color:var(--c-sec-dark)] font-medium">
                                 <i data-lucide="globe" class="w-4 h-4"></i>
                                 {{ teacher.website | replace('https://', '') | replace('http://', '') | replace('www.', '') | truncate(30) }}
                             </a>
@@ -363,24 +363,24 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
 
                     <!-- Training Tab -->
                     <div id="training-{{ teacher.id }}" class="tab-content">
-                        <div class="prose prose-sm max-w-none text-neutral-warm-700">
+                        <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             {% if teacher.credentials_detail %}
                                 {{ teacher.credentials_detail | markdown | safe }}
                             {% else %}
-                                <p class="text-slate-600">Training information coming soon</p>
+                                <p class="text-[color:var(--c-body)]">Training information coming soon</p>
                             {% endif %}
                         </div>
                     </div>
 
                     <!-- Practice Tab -->
                     <div id="practice-{{ teacher.id }}" class="tab-content">
-                        <div class="prose prose-sm max-w-none text-neutral-warm-700">
+                        <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             {% if teacher.experience %}
                                 {{ teacher.experience | markdown | safe }}
                             {% elif teacher.publications %}
                                 {{ teacher.publications | markdown | safe }}
                             {% else %}
-                                <p class="text-slate-600">Practice information coming soon</p>
+                                <p class="text-[color:var(--c-body)]">Practice information coming soon</p>
                             {% endif %}
                         </div>
                     </div>
@@ -392,16 +392,16 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
 </section>
 
 <!-- "Who Has Taught With Us" Section -->
-<section class="py-24 bg-white">
+<section class="py-24 bg-[color:var(--c-paper-hi)]">
     <div class="container mx-auto px-6">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <p class="p4-kicker text-[#B65E3F] mb-4 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-sec)] mb-4 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 {{ alumniIntro.data.kicker }}
                 <span class="p4-hairline"></span>
             </p>
-            <h2 class="p4-display text-4xl md:text-5xl font-medium text-[#0F2540] mb-4">{{ alumniIntro.data.heading }}</h2>
-            <p class="text-indigo-deep-900/70 text-lg">{{ alumniIntro.data.description }}</p>
+            <h2 class="p4-display text-4xl md:text-5xl font-medium text-[color:var(--c-heading)] mb-4">{{ alumniIntro.data.heading }}</h2>
+            <p class="text-[color:var(--c-body-dim)] text-lg">{{ alumniIntro.data.description }}</p>
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
@@ -416,15 +416,15 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
                 <div class="p-3">
                     <div class="flex items-start justify-between gap-2">
                         <div>
-                            <h3 class="text-sm font-serif font-bold text-indigo-deep-900 leading-tight line-clamp-2">{{ teacher.name }}</h3>
-                            <p class="text-[#B65E3F] text-xs mt-0.5">{{ teacher.location }}</p>
+                            <h3 class="text-sm font-serif font-bold text-[color:var(--c-heading)] leading-tight line-clamp-2">{{ teacher.name }}</h3>
+                            <p class="text-[color:var(--c-sec)] text-xs mt-0.5">{{ teacher.location }}</p>
                         </div>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-neutral-warm-400 bio-icon mt-0.5 flex-shrink-0"></i>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-body-dim)] bio-icon mt-0.5 flex-shrink-0"></i>
                     </div>
                 </div>
                 <div class="teacher-bio">
                     <div class="p-4 pt-2">
-                        <div class="prose prose-sm max-w-none text-neutral-warm-700">
+                        <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             {% if teacher.bio %}
                                 {{ teacher.bio | markdown | safe }}
                             {% else %}
@@ -433,7 +433,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
                         </div>
                         {% if teacher.website %}
                         <div class="mt-4">
-                            <a href="{{ teacher.website }}" target="_blank" class="inline-flex items-center gap-2 text-[#B65E3F] hover:text-[#7A5E29] font-medium">
+                            <a href="{{ teacher.website }}" target="_blank" class="inline-flex items-center gap-2 text-[color:var(--c-sec)] hover:text-[color:var(--c-sec-dark)] font-medium">
                                 <i data-lucide="globe" class="w-4 h-4"></i>
                                 {{ teacher.website | replace('https://', '') | replace('http://', '') | replace('www.', '') | truncate(30) }}
                             </a>
@@ -448,18 +448,18 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
 </section>
 
 <!-- CTA Section -->
-<section class="py-24 bg-gradient-to-br from-[#0F2540] to-[#12305A] text-white relative overflow-hidden">
+<section class="py-24 bg-gradient-to-br from-[var(--c-deep)] to-[var(--c-deep-2)] text-[color:var(--c-on-dark-1)] relative overflow-hidden">
     <div class="container mx-auto px-6 text-center relative z-10">
-        <p class="p4-kicker text-[#D9A756] mb-5 flex items-center justify-center gap-4">
+        <p class="p4-kicker text-[color:var(--c-acc)] mb-5 flex items-center justify-center gap-4">
             <span class="p4-hairline"></span>
             Join us
             <span class="p4-hairline"></span>
         </p>
-        <h2 class="p4-display text-4xl md:text-5xl font-medium mb-6 text-[#FDFBF5]">Learn from the Best</h2>
-        <p class="text-xl text-[#E9EDF2]/80 max-w-2xl mx-auto mb-10">
+        <h2 class="p4-display text-4xl md:text-5xl font-medium mb-6 text-[color:var(--c-paper-hi)]">Learn from the Best</h2>
+        <p class="text-xl text-[color:var(--c-on-dark-3)] max-w-2xl mx-auto mb-10">
             Join our internationally recognized training program and study with experienced teachers from around the world
         </p>
-        <a href="{{ '/apply/' | url }}" class="inline-flex items-center gap-2 bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
+        <a href="{{ '/apply/' | url }}" class="inline-flex items-center gap-2 bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-heading)] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
             <span>Apply to Our Program</span>
             <i data-lucide="arrow-right" class="w-5 h-5"></i>
         </a>

@@ -121,7 +121,7 @@ structured bits, the body carries the description. From
 ```markdown
 ---
 icon: message-circle-heart
-icon_color: text-science-blue-600
+icon_color: text-[color:var(--c-link)]
 ---
 
 As a practice client, you can choose from available third-level students and contact
@@ -129,7 +129,9 @@ them directly for supervised sessions.
 ```
 
 - `icon` — the [Lucide icon name](https://lucide.dev/icons/) (e.g. `wind`, `heart`, `compass`)
-- `icon_color` — Tailwind text colour class for the icon
+- `icon_color` — the icon's colour, as a palette token class: `text-[color:var(--c-link)]`,
+  `text-[color:var(--c-sec)]` or `text-[color:var(--c-heading)]` (see the palette
+  section of [DOCUMENTATION.md](DOCUMENTATION.md#color-palette--design-system))
 - Body text — the card description
 
 **The three card folders do not share a schema.** Each template reads its own fields, so copy a

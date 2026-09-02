@@ -16,15 +16,15 @@
     var btnLabel = document.getElementById('contactBtnLabel');
     var statusEl = document.getElementById('contactStatus');
 
-    var EMAIL_LINK = '<a class="underline hover:text-[#EBC98A]" href="mailto:west-office@transpersonal-training.com">west-office@transpersonal-training.com</a> or '
-        + '<a class="underline hover:text-[#EBC98A]" href="mailto:east-office@transpersonal-training.com">east-office@transpersonal-training.com</a>';
+    var EMAIL_LINK = '<a class="underline hover:text-[color:var(--c-acc-light)]" href="mailto:west-office@transpersonal-training.com">west-office@transpersonal-training.com</a> or '
+        + '<a class="underline hover:text-[color:var(--c-acc-light)]" href="mailto:east-office@transpersonal-training.com">east-office@transpersonal-training.com</a>';
 
     function setStatus(kind, html) {
         if (!statusEl) return;
         if (!html) { statusEl.classList.add('hidden'); return; }
         var tone = kind === 'ok' ? 'bg-green-900/40 border-green-500/50 text-green-100'
                  : kind === 'err' ? 'bg-red-900/40 border-red-500/50 text-red-100'
-                 : 'bg-[#0F2540]/60 border-[#D9A756]/40 text-[#D5DEE9]';
+                 : 'bg-[color:var(--c-deep-60)] border-[color:var(--c-acc-40)] text-[color:var(--c-on-dark-2)]';
         statusEl.className = 'text-sm p-3 border ' + tone;
         statusEl.innerHTML = html;
         statusEl.classList.remove('hidden');
