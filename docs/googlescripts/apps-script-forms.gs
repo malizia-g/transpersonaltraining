@@ -88,6 +88,34 @@ var SKIP_SECTION_FROM = 'Notes for the school';
 var SAMPLE_LESSON_URL = SCHOOL_URL + '/sample-lesson/';
 var BROCHURE_URL = '';
 
+// The hand-designed school brochure, sent as a real email ATTACHMENT on the
+// contact confirmation (separate from BROCHURE_URL above, which is the
+// self-hosted, indexable download link on the website itself — see
+// docs/BROCHURE.md). This one just needs to exist in Drive, so it can go out
+// before the website copy is ever committed.
+//
+// SETUP: upload the brochure PDF to Drive, open it, copy the file ID out of
+// its URL (drive.google.com/file/d/THIS_PART/view) and paste it below. Leave
+// empty and the confirmation email simply skips the attachment.
+var BROCHURE_DRIVE_FILE_ID = '';
+
+// The site's own palette (src/styles/main.css, "Indigo Night"), spelled out as
+// flat hex. Email clients can't read the site's HSL custom properties or
+// Tailwind classes, so these five are the one place on the whole site where a
+// colour is a literal instead of a token — re-derive them by hand from
+// main.css if the palette ever changes. Fonts follow the same logic: the
+// site's Cormorant Garamond / Inter pairing isn't loadable in an email client,
+// so headings fall back to Georgia (closest safe serif) and body text to the
+// system sans stack, rather than the two families the site actually uses.
+var EMAIL_C_DEEP = '#1a1230';    // --c-deep
+var EMAIL_C_ACC = '#d4b75e';     // --c-acc
+var EMAIL_C_PAPER = '#f7f4ed';   // --c-paper
+var EMAIL_C_HEADING = '#252163'; // --c-heading
+var EMAIL_C_BODY = '#5c574d';    // --c-body
+var EMAIL_C_LINE = '#dcd7cb';    // --c-line
+var EMAIL_FONT_SERIF = "Georgia, 'Times New Roman', serif";
+var EMAIL_FONT_SANS = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
+
 var CONTACT_SHEET = 'Contact';
 var APPLICATION_SHEET = 'Applications';
 var MAX_UPLOAD_MB = 15;
@@ -373,6 +401,55 @@ function escapeHtml_(s) {
     .replace(/>/g, '&gt;');
 }
 
+// ---- Branded HTML email shell ----------------------------------------------
+// A styled skin over the plain-text confirmations. MailApp always sends both:
+// the plain body remains the source of truth (and what any client without
+// HTML rendering falls back to), the HTML is purely cosmetic on top of it.
+
+// contentHtml is the message itself; the dark header band, the sign-off and
+// the footer link are the chrome every confirmation shares.
+function emailShell_(contentHtml) {
+  return ''
+    + '<div style="background:' + EMAIL_C_PAPER + ';padding:32px 16px;">'
+    +   '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" '
+    +     'style="max-width:560px;margin:0 auto;background:#ffffff;border:1px solid ' + EMAIL_C_LINE + ';">'
+    +     '<tr><td style="background:' + EMAIL_C_DEEP + ';padding:28px 32px;text-align:center;">'
+    +       '<span style="color:' + EMAIL_C_ACC + ';font-family:' + EMAIL_FONT_SERIF + ';font-size:13px;'
+    +         'letter-spacing:3px;text-transform:uppercase;">' + escapeHtml_(SCHOOL_NAME) + '</span>'
+    +     '</td></tr>'
+    +     '<tr><td style="padding:32px;color:' + EMAIL_C_BODY + ';font-family:' + EMAIL_FONT_SANS + ';'
+    +       'font-size:15px;line-height:1.7;">'
+    +       contentHtml
+    +       '<p style="margin:28px 0 0;">Warm regards,<br>'
+    +         '<span style="font-family:' + EMAIL_FONT_SERIF + ';color:' + EMAIL_C_HEADING + ';">'
+    +         escapeHtml_(SCHOOL_NAME) + '</span></p>'
+    +     '</td></tr>'
+    +     '<tr><td style="padding:18px 32px;border-top:1px solid ' + EMAIL_C_LINE + ';text-align:center;">'
+    +       '<a href="' + SCHOOL_URL + '" style="color:' + EMAIL_C_HEADING + ';font-family:' + EMAIL_FONT_SANS + ';'
+    +         'font-size:12px;text-decoration:none;letter-spacing:.5px;">' + SCHOOL_URL.replace(/^https?:\/\//, '') + '</a>'
+    +     '</td></tr>'
+    +   '</table>'
+    + '</div>';
+}
+
+// A gold, sharp-edged CTA — the email equivalent of the site's accent buttons
+// (see #contactBtn in src/index.html), since email clients won't render the
+// site's own button classes.
+function emailButton_(href, label) {
+  return '<a href="' + href + '" style="display:inline-block;background:' + EMAIL_C_ACC + ';color:' + EMAIL_C_DEEP
+    + ';font-family:' + EMAIL_FONT_SANS + ';font-weight:bold;font-size:14px;padding:12px 24px;'
+    + 'text-decoration:none;letter-spacing:.5px;">' + escapeHtml_(label) + '</a>';
+}
+
+// Falls back to this when a confirmation has no bespoke HTML version: turns
+// the plain-text body into paragraphs, so every confirmation gets the shell
+// above even if its call site never builds its own markup.
+function textToHtml_(text) {
+  return text.split(/\n\n+/).map(function (para) {
+    return '<p style="margin:0 0 20px;">' + escapeHtml_(para).replace(/\n/g, '<br>') + '</p>';
+  }).join('');
+}
+
 // ---- Contact form ---------------------------------------------------------
 
 function handleContact_(data) {
@@ -413,28 +490,49 @@ function handleContact_(data) {
     });
   }
 
+  var brochureBlob = brochureBlob_();
+  var hasBrochure = !!brochureBlob;
   sendConfirmation_(email, track,
-    (BROCHURE_URL ? 'Your sample lesson and brochure — ' : 'Your sample lesson — ') + SCHOOL_NAME,
-    contactReplyBody_(name, message));
+    ((hasBrochure || BROCHURE_URL) ? 'Your sample lesson and brochure — ' : 'Your sample lesson — ') + SCHOOL_NAME,
+    contactReplyBody_(name, message, hasBrochure),
+    {
+      attachments: hasBrochure ? [brochureBlob] : [],
+      html: contactReplyHtml_(name, message, hasBrochure)
+    });
 
   return json_({ status: 'ok' });
+}
+
+// The brochure PDF from Drive, ready to attach — or null if it isn't set up
+// yet, or Drive can't produce it (deleted, wrong ID, no access). Never lets a
+// brochure problem turn a successful enquiry into an error on screen.
+function brochureBlob_() {
+  if (!BROCHURE_DRIVE_FILE_ID) return null;
+  try {
+    return DriveApp.getFileById(BROCHURE_DRIVE_FILE_ID).getBlob();
+  } catch (err) {
+    Logger.log('Brochure attachment unavailable: ' + err);
+    return null;
+  }
 }
 
 // The reply everyone gets. It leads with what they came for rather than with an
 // acknowledgement, invites a conversation without pressing for one, and only
 // promises an answer when there is a question to answer.
-function contactReplyBody_(name, message) {
+function contactReplyBody_(name, message, hasBrochure) {
   var body = 'Dear ' + name + ',\n\n'
     + 'Thank you for getting in touch with ' + SCHOOL_NAME + '. It is a pleasure to hear '
     + 'from you.\n\n';
 
-  body += BROCHURE_URL
+  body += (hasBrochure || BROCHURE_URL)
     ? 'Here are two ways to get a real feel for the programme, whenever you have the time '
       + 'for them:\n\n'
       + '  • Watch a full lesson from the training\n'
       + '    ' + SAMPLE_LESSON_URL + '\n\n'
-      + '  • Download the programme brochure\n'
-      + '    ' + BROCHURE_URL + '\n\n'
+      + (hasBrochure
+          ? '  • Read the programme brochure, attached to this email\n\n'
+          : '  • Download the programme brochure\n'
+            + '    ' + BROCHURE_URL + '\n\n')
       + 'The lesson is a complete lecture, not a trailer — an hour of it will tell you more '
       + 'than any prospectus can. The brochure covers the structure, the dates, the fees and '
       + 'what each of the four years asks of you.\n\n'
@@ -454,6 +552,48 @@ function contactReplyBody_(name, message) {
   }
 
   return body;
+}
+
+// The HTML twin of contactReplyBody_ above — same content and same order, but
+// with the video and (when there is no attachment) the brochure as real
+// buttons instead of bare URLs. Keep the two in step by hand; there are only
+// two of them and a template engine would be overkill here.
+function contactReplyHtml_(name, message, hasBrochure) {
+  var html = '<p style="margin:0 0 20px;">Dear ' + escapeHtml_(name) + ',</p>'
+    + '<p style="margin:0 0 20px;">Thank you for getting in touch with ' + escapeHtml_(SCHOOL_NAME)
+    + '. It is a pleasure to hear from you.</p>';
+
+  if (hasBrochure || BROCHURE_URL) {
+    html += '<p style="margin:0 0 20px;">Here are two ways to get a real feel for the programme, '
+      + 'whenever you have the time for them:</p>'
+      + '<p style="margin:0 0 16px;">' + emailButton_(SAMPLE_LESSON_URL, 'Watch a full lesson') + '</p>'
+      + (hasBrochure
+          ? '<p style="margin:0 0 20px;">The programme brochure is attached to this email.</p>'
+          : '<p style="margin:0 0 20px;">' + emailButton_(BROCHURE_URL, 'Download the brochure') + '</p>')
+      + '<p style="margin:0 0 20px;">The lesson is a complete lecture, not a trailer — an hour of '
+      + 'it will tell you more than any prospectus can. The brochure covers the structure, the '
+      + 'dates, the fees and what each of the four years asks of you.</p>';
+  } else {
+    html += '<p style="margin:0 0 20px;">If you would like to get a real feel for the programme, '
+      + 'you can watch a full lesson from the training here:</p>'
+      + '<p style="margin:0 0 20px;">' + emailButton_(SAMPLE_LESSON_URL, 'Watch a full lesson') + '</p>'
+      + '<p style="margin:0 0 20px;">It is a complete lecture, not a trailer — an hour of it will '
+      + 'tell you more than any prospectus can.</p>';
+  }
+
+  html += '<p style="margin:0 0 20px;">If you would like to talk any of it through, simply reply '
+    + 'to this email and we will arrange a call at a time that suits you. There is no commitment '
+    + 'either way, and no question is too small.</p>';
+
+  if (message) {
+    html += '<p style="margin:0 0 10px;">We have your message and one of us will come back to '
+      + 'you as soon as possible. This is what you sent, for your own records:</p>'
+      + '<blockquote style="margin:0 0 20px;padding:2px 18px;border-left:3px solid ' + EMAIL_C_ACC
+      + ';color:' + EMAIL_C_BODY + ';font-style:italic;">'
+      + escapeHtml_(message).replace(/\n/g, '<br>') + '</blockquote>';
+  }
+
+  return html;
 }
 
 // ---- Application details (/apply/ step 1) ---------------------------------
@@ -666,15 +806,25 @@ function officeEmail_(track) {
 // Deliberately swallows its own errors: the submission is already saved by the
 // time this runs, so a confirmation that won't send (mail quota, a typo'd
 // address) must never turn a successful submission into an error on screen.
-function sendConfirmation_(to, track, subject, body) {
+//
+// options.attachments: blobs to attach (e.g. the brochure — see brochureBlob_).
+// options.html: a bespoke HTML version of `body` (see contactReplyHtml_). When
+// omitted, `body` is auto-converted so every confirmation still gets the
+// branded shell (see textToHtml_, emailShell_) even from a call site that
+// never bothered to build its own markup.
+function sendConfirmation_(to, track, subject, body, options) {
+  options = options || {};
   try {
-    MailApp.sendEmail({
+    var mail = {
       to: to,
       name: SCHOOL_NAME,
       replyTo: officeEmail_(track), // a reply reaches a person, not this script
       subject: subject,
-      body: body + '\n\nWarm regards,\n' + SCHOOL_NAME + '\n' + SCHOOL_URL
-    });
+      body: body + '\n\nWarm regards,\n' + SCHOOL_NAME + '\n' + SCHOOL_URL,
+      htmlBody: emailShell_(options.html || textToHtml_(body))
+    };
+    if (options.attachments && options.attachments.length) mail.attachments = options.attachments;
+    MailApp.sendEmail(mail);
   } catch (err) {
     Logger.log('Confirmation to ' + to + ' failed: ' + err);
   }
