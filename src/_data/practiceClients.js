@@ -231,7 +231,46 @@ async function downloadStudentImages(students) {
     }
   });
 
+  pruneDepartedStudents(students);
+
   return localPaths;
+}
+
+// Delete the photos of students who are no longer in the sheet.
+//
+// Nothing else ever removes them. The output directory is not built from
+// scratch — CI restores the previous build's photos into it before Eleventy
+// runs — and the deploy step publishes with `keep_files: true`, so a card
+// dropped from the sheet keeps its picture both on disk and on the live site,
+// indefinitely. Anything whose filename does not match a current student id
+// goes; extensions are ignored, since the same student can move between .jpg
+// and .png as the source photo changes.
+function pruneDepartedStudents(students) {
+  const current = new Set(
+    students.map(function(s) { return s.id; }).filter(Boolean)
+  );
+
+  // An empty list means the fetch failed and no cache could stand in for it,
+  // which is indistinguishable here from "every student left". Deleting the
+  // whole gallery over a bad build day is not a trade worth making.
+  if (current.size === 0) return 0;
+
+  var removed = 0;
+
+  fs.readdirSync(IMAGES_OUTPUT_DIR, { withFileTypes: true }).forEach(function(entry) {
+    if (!entry.isFile()) return;
+    if (current.has(entry.name.replace(/\.[^.]+$/, ''))) return;
+
+    try {
+      fs.unlinkSync(path.join(IMAGES_OUTPUT_DIR, entry.name));
+      removed++;
+      console.log('  \uD83D\uDDD1\uFE0F  Removed ' + entry.name + ' \u2014 no longer in the sheet');
+    } catch (e) {
+      console.warn('  \u26A0\uFE0F Could not remove ' + entry.name + ': ' + e.message);
+    }
+  });
+
+  return removed;
 }
 
 module.exports = async function() {

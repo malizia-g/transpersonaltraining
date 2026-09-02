@@ -65,7 +65,9 @@ jobs:
         run: |
           if [ -d "_site/assets/images/people/students" ] && [ "$(ls -A _site/assets/images/people/students 2>/dev/null)" ]; then
             mkdir -p .cache/student-images
-            rsync -a _site/assets/images/people/students/ .cache/student-images/
+            # --delete so a departed student's photo, now pruned from _site by
+            # practiceClients.js, is not carried forward and restored next build.
+            rsync -a --delete _site/assets/images/people/students/ .cache/student-images/
           fi
       
       - name: Update schedule in deploy branch
