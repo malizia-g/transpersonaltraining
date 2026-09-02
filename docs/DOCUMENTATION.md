@@ -128,7 +128,7 @@ transpersonaltraining/
 │   │
 │   ├── scripts/                  # Modular JavaScript
 │   │   ├── main.js               # Entry point
-│   │   ├── modules/              # icons, navigation, theme-switcher, form-cache
+│   │   ├── modules/              # icons, navigation, form-cache
 │   │   └── pages/                # apply, contact, lectures-schedule, resources,
 │   │                             #   sample-lesson, schedule-ssr, training
 │   │
@@ -155,72 +155,54 @@ transpersonaltraining/
 
 ### Philosophy
 
-**Science with Soul** — combines scientific credibility (blue) with human warmth (yellow-tinted neutrals) and mystic depth (indigo & iris).
+**Science with Soul** — mystic depth (a deep indigo ground) carrying human
+warmth (a pale gold CTA on a warm paper). The scheme is *Indigo Night*, picked
+from the colour planner that lives on the `new_color_scheme` branch.
 
-### Primary Colors
+### How colour is declared
 
-| Color | Hex | Role | Psychology |
-|-------|-----|------|------------|
-| Scientific Blue | `#1E40AF` | Primary brand, buttons, authority | Trust, stability, intelligence |
-| Deep Indigo | `#312E81` | Secondary headings, depth | Wisdom, rich authority |
+The home page, the techniques page, the nav and the footer carry no literal
+hexes. Every colour resolves through the tokens at the top of
+`src/styles/main.css`, which are derived from fifteen numbers — five HSL
+triples plus three small offsets:
 
-### Accent Colors
+| Role | Token | Where it lands |
+|------|-------|----------------|
+| deep | `--deep-*` | hero, quote band, contact section, footer |
+| dusk | `--dusk-*` | the second dark the gradients drift to |
+| accent | `--acc-*` | CTA buttons, kickers, hairlines |
+| second | `--sec-*` | card borders, drop caps, section kickers |
+| paper | `--pap-*` | the light sections |
 
-| Color | Hex | Role | Psychology |
-|-------|-----|------|------------|
-| Warm Yellow | `#FCD34D` | CTA buttons, badges, warmth | Accessibility, optimism, humanity |
-| Calm Teal | `#2DD4BF` | Card borders, secondary accent | Healing, growth, balance |
+Everything else — the gradient stops, the five steps of text-on-dark, borders
+and hover states — is derived from those by nudging lightness or alpha, so
+changing the scheme means changing fifteen numbers and nothing else.
 
-### Neutral Warmth
-
-| Color | Hex | Role |
-|-------|-----|------|
-| Off-white | `#FFFEF9` | Primary background |
-| Warm cream | `#FAF8F3` | Secondary background |
-| Warm gray 600–700 | — | Body text |
-
-### Iris / Mystical Section
-
-Violet-Indigo gradient (Violet-500 → Indigo-500) — used for contact/CTA sections, guest teacher badges, and transpersonal section backgrounds.
-
-### Tailwind Color Classes
+### Derived tokens in the markup
 
 ```
-text-science-blue-*  / bg-science-blue-*        → Primary blue
-text-indigo-deep-*   / bg-indigo-deep-*          → Headings/depth
-text-warm-yellow-*   / bg-warm-yellow-*          → Accent/CTA
-text-accent-teal-*   / bg-accent-teal-*          → Secondary accent
-text-neutral-warm-*  / bg-neutral-warm-*         → Text/backgrounds
-text-violet-*        / bg-violet-*               → Mystical sections
+bg-[color:var(--c-deep)]      the dark ground        text-[color:var(--c-heading)]  headings
+bg-[color:var(--c-paper)]     the light sections     text-[color:var(--c-body)]     body copy
+bg-[color:var(--c-paper-hi)]  the lighter paper      text-[color:var(--c-link)]     links
+text-[color:var(--c-acc)]     CTA / kickers          text-[color:var(--c-on-dark-2)] copy on dark
+text-[color:var(--c-sec)]     supporting accent      border-[color:var(--c-line)]   rules
 ```
 
-### CSS Variables
+### Veils over the photographs
 
-```css
---color-primary:      #1E40AF;
---color-indigo-deep:  #312E81;
---color-cta:          #FCD34D;
---color-accent-teal:  #2DD4BF;
-```
+The hero, the quote band and the contact band are photographs with a wash of
+palette colour over them. Each band's wash is scaled by its own multiplier
+(`--veil-hero`, `--veil-glow`, `--veil-quote`, `--veil-contact`), so how much of
+the picture survives is a separate decision from what colour the page is. Indigo
+Night ships at `0.95 / 0.35 / 1 / 0.8`.
 
-### Component Color Mapping
+### Pages not yet converted
 
-| Component | Background | Text/Accent |
-|-----------|-----------|-------------|
-| Hero | Blue 900 → 800 gradient | Warm Yellow CTA, white secondary |
-| Welcome | Neutral Warm 50 | Science Blue 700 heading |
-| Feature Cards | White, colored top border (Teal / Blue / Yellow) | Science Blue 700 heading |
-| Contact CTA | Science Blue 700 → 600 gradient | Warm Yellow CTA button |
-
-### Brand Consistency Checklist
-
-- All headings: `text-science-blue-700` or darker
-- All CTA buttons: `bg-warm-yellow-200`
-- Body text: `text-neutral-warm-700` or `text-science-blue-800`
-- Section backgrounds: `bg-neutral-warm-50` or lighter
-- Accent elements: `accent-teal-*`
-- Hover states: increase yellow saturation (300 level)
-- Card borders: color variation (blue, teal, yellow)
+Pages other than the home and techniques pages still carry literal hexes and
+the older Tailwind colour classes (`science-blue-*`, `indigo-deep-*`,
+`warm-yellow-*`, `neutral-warm-*`, defined in `tailwind.config.js`). The nav and
+footer they share are token-driven, so they stay in step at the top and bottom
+of every page.
 
 ### Accessibility
 
@@ -365,23 +347,15 @@ The schedule page (`src/schedule.html`) displays events from Google Sheets.
 
 ## Theme System
 
-7 dynamic color themes:
+There isn't one. The site had seven switchable themes and a
+`theme-switcher.js` module; both were dropped when colour moved behind the
+tokens described under [Color Palette & Design System](#color-palette--design-system).
+A visitor sees one scheme, and it is the one compiled into the stylesheet.
 
-| Theme | Name |
-|-------|------|
-| `default` | School Lavender (light violet) |
-| `iris` | Deep Iris (dark violet) |
-| `blue` | Scientific Blue |
-| `ocean` | Ocean Depth (teal) |
-| `forest` | Deep Forest (green) |
-| `earth` | Burnt Earth (terracotta) |
-| `alchemy` | Alchemy (magenta) |
-
-Implementation:
-- CSS variables for dynamic colors
-- LocalStorage for persisting preference
-- Theme switcher button fixed bottom-right
-- JS module: `src/scripts/modules/theme-switcher.js`
+The colour planner — an on-page switcher, 22 schemes tagged by family, and a
+generator that gates each against fourteen WCAG contrast pairs — still exists on
+the `new_color_scheme` branch, where schemes are judged before one is brought
+here.
 
 ---
 

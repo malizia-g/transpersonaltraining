@@ -54,30 +54,30 @@ description: "The pillars our school is built on, and the three branches that gr
 
 {% macro darkLeaves(sec) %}
 {{ leaves(sec,
-    'border border-[#D9A756]/40 bg-[#1A2B44]',
-    'divide-[#D9A756]/25',
-    'hover:bg-[#0F2540]/20',
-    'bg-[#D9A756] text-[#0F2540]',
-    'text-[#FDFBF5]',
-    'text-[#D9A756]',
-    'text-[#B9C6D8]',
-    'text-[#D5DEE9]',
-    'text-[#D9A756]',
-    'border-[#D9A756]/25') }}
+    'border border-[color:var(--c-acc-40)] bg-[color:var(--c-deep-2)]',
+    'divide-[color:var(--c-acc-25)]',
+    'hover:bg-[color:var(--c-deep-20)]',
+    'bg-[color:var(--c-acc)] text-[color:var(--c-deep)]',
+    'text-[color:var(--c-paper-hi)]',
+    'text-[color:var(--c-acc)]',
+    'text-[color:var(--c-on-dark-3)]',
+    'text-[color:var(--c-on-dark-2)]',
+    'text-[color:var(--c-acc)]',
+    'border-[color:var(--c-acc-25)]') }}
 {% endmacro %}
 
 {% macro lightLeaves(sec) %}
 {{ leaves(sec,
-    'border border-[#E7D6BE] bg-[#FDFBF5]',
-    'divide-[#E7D6BE]',
-    'hover:bg-[#FEF9EF]',
-    'bg-[#0F2540] text-[#D9A756]',
-    'text-indigo-deep-900',
-    'text-[#B65E3F]',
-    'text-neutral-warm-600',
-    'text-neutral-warm-700',
-    'text-[#B65E3F]',
-    'border-[#E7D6BE]') }}
+    'border border-[color:var(--c-line)] bg-[color:var(--c-paper-hi)]',
+    'divide-[color:var(--c-line)]',
+    'hover:bg-[color:var(--c-paper-card)]',
+    'bg-[color:var(--c-deep)] text-[color:var(--c-acc)]',
+    'text-[color:var(--c-heading)]',
+    'text-[color:var(--c-sec)]',
+    'text-[color:var(--c-body-dim)]',
+    'text-[color:var(--c-body)]',
+    'text-[color:var(--c-sec)]',
+    'border-[color:var(--c-line)]') }}
 {% endmacro %}
 
 {# ── A branch header ─────────────────────────────────────────────────────── #}
@@ -105,20 +105,20 @@ description: "The pillars our school is built on, and the three branches that gr
                 class="w-full h-full object-cover object-bottom"
             />
         </picture>
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/80 via-[#0F2540]/50 to-[#0F2540]/85"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[color:var(--c-deep-80)] via-[color:var(--c-deep-50)] to-[color:var(--c-deep-85)]"></div>
     </div>
 
     <div class="relative z-10 container mx-auto px-6 text-center pt-20">
         <div class="animate-fade-in-up">
-            <p class="p4-kicker text-[#D9A756] mb-6 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-acc)] mb-6 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
                 {{ intro.data.kicker }}
                 <span class="p4-hairline"></span>
             </p>
-            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] mb-6 leading-tight drop-shadow-md">
+            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[color:var(--c-paper-hi)] mb-6 leading-tight drop-shadow-md">
                 {{ intro.data.heading }}
             </h1>
-            <p class="text-xl md:text-2xl text-[#D5DEE9] max-w-3xl mx-auto font-light leading-relaxed">
+            <p class="text-xl md:text-2xl text-[color:var(--c-on-dark-2)] max-w-3xl mx-auto font-light leading-relaxed">
                 Three branches, one training: the breath, the craft, and the maps that hold them
             </p>
         </div>
@@ -126,21 +126,21 @@ description: "The pillars our school is built on, and the three branches that gr
 </header>
 
 <!-- Breadcrumb -->
-<div class="bg-[#FDFBF5] border-b border-[#E7D6BE]">
+<div class="bg-[color:var(--c-paper-hi)] border-b border-[color:var(--c-line)]">
     <div class="container mx-auto px-6 py-4">
-        <div class="flex items-center gap-2 text-sm text-neutral-warm-600">
-            <a href="{{ '/' | url }}" class="hover:text-science-blue-800 transition-colors">Home</a>
+        <div class="flex items-center gap-2 text-sm text-[color:var(--c-body-dim)]">
+            <a href="{{ '/' | url }}" class="hover:text-[color:var(--c-link-hover)] transition-colors">Home</a>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <span class="text-indigo-deep-900 font-medium">School Pillars</span>
+            <span class="text-[color:var(--c-heading)] font-medium">School Pillars</span>
         </div>
     </div>
 </div>
 
 <!-- Intro: the page lead -->
-<section class="py-20 md:py-24 bg-[#FDFBF5]">
+<section class="py-20 md:py-24 bg-[color:var(--c-paper-hi)]">
     <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto text-center">
-            <div class="tq-lead text-lg md:text-xl text-neutral-warm-700 leading-relaxed font-light">
+            <div class="tq-lead text-lg md:text-xl text-[color:var(--c-body)] leading-relaxed font-light">
                 {{ intro.html | safe }}
             </div>
         </div>
@@ -148,23 +148,23 @@ description: "The pillars our school is built on, and the three branches that gr
 </section>
 
 <!-- The three branches -->
-<section id="branches" class="scroll-mt-24 pb-20 md:pb-24 bg-[#FDFBF5] border-b border-[#E7D6BE]">
+<section id="branches" class="scroll-mt-24 pb-20 md:pb-24 bg-[color:var(--c-paper-hi)] border-b border-[color:var(--c-line)]">
     <div class="container mx-auto px-6">
         <div class="max-w-5xl mx-auto">
             <!-- trunk -->
             <div class="text-center">
-                <p class="p4-kicker text-[#D9A756] mb-4 flex items-center justify-center gap-4">
+                <p class="p4-kicker text-[color:var(--c-acc)] mb-4 flex items-center justify-center gap-4">
                     <span class="p4-hairline"></span>
                     Our techniques
                     <span class="p4-hairline"></span>
                 </p>
-                <h2 class="p4-display text-3xl md:text-4xl font-medium text-indigo-deep-900">{{ intro.data.trunk_title }}</h2>
-                <p class="mt-3 text-neutral-warm-700 max-w-xl mx-auto">{{ intro.data.trunk_line }}</p>
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)]">{{ intro.data.trunk_title }}</h2>
+                <p class="mt-3 text-[color:var(--c-body)] max-w-xl mx-auto">{{ intro.data.trunk_line }}</p>
                 {% if intro.data.pillars %}
-                <ul class="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-neutral-warm-600">
+                <ul class="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-[color:var(--c-body-dim)]">
                     {% for pillar in intro.data.pillars %}
                     <li class="flex items-center gap-2">
-                        <span class="w-1.5 h-1.5 shrink-0 rotate-45 bg-[#B65E3F]" aria-hidden="true"></span>
+                        <span class="w-1.5 h-1.5 shrink-0 rotate-45 bg-[color:var(--c-sec)]" aria-hidden="true"></span>
                         {{ pillar }}
                     </li>
                     {% endfor %}
@@ -174,13 +174,13 @@ description: "The pillars our school is built on, and the three branches that gr
 
             <!-- the trunk rising into the fork -->
             <div class="mt-10 flex justify-center" aria-hidden="true">
-                <span class="w-px h-12 bg-[#D9A756]"></span>
+                <span class="w-px h-12 bg-[color:var(--c-acc)]"></span>
             </div>
             <div class="hidden md:grid grid-cols-3 gap-8 h-10" aria-hidden="true">
                 {% for sec in sections %}
                 <div class="relative">
-                    <span class="absolute top-0 h-px bg-[#D9A756] {% if loop.first %}left-1/2 -right-4{% elif loop.last %}-left-4 right-1/2{% else %}-left-4 -right-4{% endif %}"></span>
-                    <span class="absolute top-0 left-1/2 w-px h-full bg-[#D9A756]"></span>
+                    <span class="absolute top-0 h-px bg-[color:var(--c-acc)] {% if loop.first %}left-1/2 -right-4{% elif loop.last %}-left-4 right-1/2{% else %}-left-4 -right-4{% endif %}"></span>
+                    <span class="absolute top-0 left-1/2 w-px h-full bg-[color:var(--c-acc)]"></span>
                 </div>
                 {% endfor %}
             </div>
@@ -189,26 +189,26 @@ description: "The pillars our school is built on, and the three branches that gr
             <div class="grid md:grid-cols-3 gap-6 md:gap-8">
                 {% for sec in sections %}
                 <div class="flex flex-col">
-                    <a href="#{{ sec.data.anchor }}" class="group w-full flex-1 flex flex-col border-t-2 border-[#D9A756] bg-[#FEF9EF] hover:bg-[#FDFBF5] hover:shadow-xl transition-all duration-300 p-7">
+                    <a href="#{{ sec.data.anchor }}" class="group w-full flex-1 flex flex-col border-t-2 border-[color:var(--c-acc)] bg-[color:var(--c-paper-card)] hover:bg-[color:var(--c-paper-hi)] hover:shadow-xl transition-all duration-300 p-7">
                         <div class="flex items-start justify-between">
-                            <span class="p4-display text-5xl font-medium leading-none text-[#0F2540]/20 group-hover:text-[#D9A756]/60 transition-colors">{{ sec.data.number }}</span>
-                            <span class="w-11 h-11 bg-[#0F2540] flex items-center justify-center">
-                                <i data-lucide="{{ sec.data.icon }}" class="w-5 h-5 text-[#D9A756]"></i>
+                            <span class="p4-display text-5xl font-medium leading-none text-[color:var(--c-deep-20)] group-hover:text-[color:var(--c-acc-60)] transition-colors">{{ sec.data.number }}</span>
+                            <span class="w-11 h-11 bg-[color:var(--c-deep)] flex items-center justify-center">
+                                <i data-lucide="{{ sec.data.icon }}" class="w-5 h-5 text-[color:var(--c-acc)]"></i>
                             </span>
                         </div>
-                        <h3 class="mt-5 text-xl font-serif font-bold text-indigo-deep-900 leading-snug">{{ sec.data.short_title }}</h3>
-                        <p class="mt-2 text-sm text-neutral-warm-700 leading-relaxed">{{ sec.data.subtitle }}</p>
+                        <h3 class="mt-5 text-xl font-serif font-bold text-[color:var(--c-heading)] leading-snug">{{ sec.data.short_title }}</h3>
+                        <p class="mt-2 text-sm text-[color:var(--c-body)] leading-relaxed">{{ sec.data.subtitle }}</p>
 
                         <!-- the leaves this branch carries -->
-                        <ul class="mt-5 pt-4 border-t border-[#E7D6BE] space-y-2 flex-grow">
+                        <ul class="mt-5 pt-4 border-t border-[color:var(--c-line)] space-y-2 flex-grow">
                             {% for block in sec.blocks %}
-                            <li class="flex items-start gap-2 text-xs text-neutral-warm-600 leading-snug">
-                                <span class="mt-1.5 w-1.5 h-1.5 shrink-0 rotate-45 bg-[#B65E3F]" aria-hidden="true"></span>
+                            <li class="flex items-start gap-2 text-xs text-[color:var(--c-body-dim)] leading-snug">
+                                <span class="mt-1.5 w-1.5 h-1.5 shrink-0 rotate-45 bg-[color:var(--c-sec)]" aria-hidden="true"></span>
                                 {{ block.title }}
                             </li>
                             {% endfor %}
                         </ul>
-                        <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-science-blue-700 group-hover:text-science-blue-800">
+                        <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-[color:var(--c-link)] group-hover:text-[color:var(--c-link-hover)]">
                             Open this branch
                             <i data-lucide="arrow-down" class="w-4 h-4 transition-transform group-hover:translate-y-0.5"></i>
                         </span>
@@ -221,12 +221,12 @@ description: "The pillars our school is built on, and the three branches that gr
 </section>
 
 <!-- ═══ Branch 01 · Holotropic Breathwork & Experiential Work ═══ -->
-<section id="{{ experiential.data.anchor }}" class="scroll-mt-24 py-20 md:py-28 bg-[#0F2540] overflow-hidden">
+<section id="{{ experiential.data.anchor }}" class="scroll-mt-24 py-20 md:py-28 bg-[color:var(--c-deep)] overflow-hidden">
     <div class="container mx-auto px-6">
         {{ branchHeader(experiential,
-            'text-[#D9A756]/60',
-            'text-[#FDFBF5]',
-            'text-[#B9C6D8]') }}
+            'text-[color:var(--c-acc-60)]',
+            'text-[color:var(--c-paper-hi)]',
+            'text-[color:var(--c-on-dark-3)]') }}
         <div class="max-w-5xl mx-auto">
             {{ darkLeaves(experiential) }}
         </div>
@@ -235,21 +235,21 @@ description: "The pillars our school is built on, and the three branches that gr
 
 <!-- Quote interlude -->
 <section class="relative py-24 md:py-32 overflow-hidden p4-parallax" style="background-image: url('{{ '/assets/images/Headers/hero-what-is-tp-window-forest.jpg' | url }}'); background-image: image-set(url('{{ '/assets/images/Headers/hero-what-is-tp-window-forest.webp' | url }}') type('image/webp'), url('{{ '/assets/images/Headers/hero-what-is-tp-window-forest.jpg' | url }}') type('image/jpeg'));">
-    <div class="absolute inset-0 bg-[#0F2540]/80"></div>
+    <div class="absolute inset-0 bg-[color:var(--c-deep-80)]"></div>
     <div class="relative z-10 container mx-auto px-6 text-center">
-        <blockquote class="p4-display italic text-2xl md:text-4xl text-[#FDFBF5] max-w-4xl mx-auto leading-snug drop-shadow-md">
+        <blockquote class="p4-display italic text-2xl md:text-4xl text-[color:var(--c-paper-hi)] max-w-4xl mx-auto leading-snug drop-shadow-md">
             &ldquo;The continuous breath puts you in contact with your boundaries &mdash; and boundaries are doors.&rdquo;
         </blockquote>
     </div>
 </section>
 
 <!-- ═══ Branch 02 · Counselling & Psychotherapy Skills ═══ -->
-<section id="{{ oneToOne.data.anchor }}" class="scroll-mt-24 py-20 md:py-28 bg-[#FAF3E7]">
+<section id="{{ oneToOne.data.anchor }}" class="scroll-mt-24 py-20 md:py-28 bg-[color:var(--c-paper)]">
     <div class="container mx-auto px-6">
         {{ branchHeader(oneToOne,
-            'text-[#D9A756]',
-            'text-indigo-deep-900',
-            'text-neutral-warm-600') }}
+            'text-[color:var(--c-acc)]',
+            'text-[color:var(--c-heading)]',
+            'text-[color:var(--c-body-dim)]') }}
         <div class="max-w-5xl mx-auto">
             {{ lightLeaves(oneToOne) }}
         </div>
@@ -258,21 +258,21 @@ description: "The pillars our school is built on, and the three branches that gr
 
 <!-- Quote interlude -->
 <section class="relative py-24 md:py-32 overflow-hidden p4-parallax" style="background-image: url('{{ '/assets/images/Symbolic/symbolic-plant-roots.jpg' | url }}'); background-image: image-set(url('{{ '/assets/images/Symbolic/symbolic-plant-roots.webp' | url }}') type('image/webp'), url('{{ '/assets/images/Symbolic/symbolic-plant-roots.jpg' | url }}') type('image/jpeg'));">
-    <div class="absolute inset-0 bg-[#0F2540]/80"></div>
+    <div class="absolute inset-0 bg-[color:var(--c-deep-80)]"></div>
     <div class="relative z-10 container mx-auto px-6 text-center">
-        <blockquote class="p4-display italic text-2xl md:text-4xl text-[#FDFBF5] max-w-4xl mx-auto leading-snug drop-shadow-md">
+        <blockquote class="p4-display italic text-2xl md:text-4xl text-[color:var(--c-paper-hi)] max-w-4xl mx-auto leading-snug drop-shadow-md">
             &ldquo;Experience without a map gets lost; a map without experience stays empty.&rdquo;
         </blockquote>
     </div>
 </section>
 
 <!-- ═══ Branch 03 · Consciousness Maps & Research ═══ -->
-<section id="{{ maps.data.anchor }}" class="scroll-mt-24 py-20 md:py-28 bg-[#FDFBF5]">
+<section id="{{ maps.data.anchor }}" class="scroll-mt-24 py-20 md:py-28 bg-[color:var(--c-paper-hi)]">
     <div class="container mx-auto px-6">
         {{ branchHeader(maps,
-            'text-[#D9A756]',
-            'text-indigo-deep-900',
-            'text-neutral-warm-600') }}
+            'text-[color:var(--c-acc)]',
+            'text-[color:var(--c-heading)]',
+            'text-[color:var(--c-body-dim)]') }}
         <div class="max-w-5xl mx-auto">
             {{ lightLeaves(maps) }}
         </div>
@@ -280,18 +280,18 @@ description: "The pillars our school is built on, and the three branches that gr
 </section>
 
 <!-- CTA Section -->
-<section class="py-20 bg-gradient-to-br from-[#0F2540] to-[#2A2438] text-center">
+<section class="py-20 bg-gradient-to-br from-[color:var(--c-deep)] to-[color:var(--c-dusk)] text-center">
     <div class="container mx-auto px-6">
-        <p class="p4-kicker text-[#D9A756] mb-4 flex items-center justify-center gap-4">
+        <p class="p4-kicker text-[color:var(--c-acc)] mb-4 flex items-center justify-center gap-4">
             <span class="p4-hairline"></span>
             Join us
             <span class="p4-hairline"></span>
         </p>
-        <h2 class="p4-display text-3xl md:text-4xl font-medium mb-4 text-[#FDFBF5]">Experience These Techniques</h2>
-        <p class="text-[#D5DEE9] max-w-2xl mx-auto mb-8 text-lg">
+        <h2 class="p4-display text-3xl md:text-4xl font-medium mb-4 text-[color:var(--c-paper-hi)]">Experience These Techniques</h2>
+        <p class="text-[color:var(--c-on-dark-2)] max-w-2xl mx-auto mb-8 text-lg">
             Join our training programs to learn and practice these transformative therapeutic approaches.
         </p>
-        <a href="{{ '/training-overview/' | url }}" class="inline-block bg-[#D9A756] hover:bg-[#C08F3F] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
+        <a href="{{ '/training-overview/' | url }}" class="inline-block bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-deep)] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
             Explore Training Programs
         </a>
     </div>

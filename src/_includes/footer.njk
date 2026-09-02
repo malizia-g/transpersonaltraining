@@ -1,11 +1,11 @@
 {% set contactHref = '#contact' if page.url == '/' else (('/' | url) ~ '#contact') %}
-<footer class="bg-[#0B1B30] text-[#B9C4D2] py-16">
+<footer class="bg-[color:var(--c-deepest)] text-[color:var(--c-on-dark-3)] py-16">
     <div class="container mx-auto px-6">
         <div class="grid md:grid-cols-4 gap-12 border-b border-white/10 pb-12 mb-12">
             <!-- About Column -->
             <div>
                 <div class="flex items-center gap-2 mb-4">
-                    <div class="w-10 h-10 flex items-center justify-center bg-[#D9A756] rounded-full shrink-0">
+                    <div class="w-10 h-10 flex items-center justify-center bg-[color:var(--c-acc)] rounded-full shrink-0">
                         <img src="{{ '/assets/images/Graphics/logo.svg' | url }}" alt="Logo" class="w-8 h-8" style="display:block;" />
                     </div>
                     <h3 class="p4-display text-white font-semibold leading-tight">
@@ -13,72 +13,72 @@
                         <span class="block text-xl tracking-wide">Transpersonal Training</span>
                     </h3>
                 </div>
-                <p class="text-sm leading-relaxed text-[#8FA0B3]">
+                <p class="text-sm leading-relaxed text-[color:var(--c-on-dark-4)]">
                     Educating therapists for a revolution of consciousness through transpersonal psychotherapy and breathwork.
                 </p>
-                <p class="text-xs leading-relaxed text-[#7185A0] mt-4">
+                <p class="text-xs leading-relaxed text-[color:var(--c-on-dark-5)] mt-4">
                     Eastwest Transpersonal Training School
                 </p>
             </div>
 
             <!-- Quick Links -->
             <div>
-                <h4 class="p4-kicker text-[#D9A756] mb-5">Training</h4>
+                <h4 class="p4-kicker text-[color:var(--c-acc)] mb-5">Training</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="{{ '/training-overview/' | url }}" class="hover:text-[#D9A756] transition-colors">Training Overview</a></li>
-                    <li><a href="{{ '/curriculum/' | url }}" class="hover:text-[#D9A756] transition-colors">Curriculum</a></li>
-                    <li><a href="{{ '/schedule/' | url }}" class="hover:text-[#D9A756] transition-colors">Intensive Schedule</a></li>
-                    <li><a href="{{ '/lectures-schedule/' | url }}" class="hover:text-[#D9A756] transition-colors">Lectures Schedule</a></li>
-                    <li><a href="{{ '/teachers/' | url }}" class="hover:text-[#D9A756] transition-colors">Our Teachers</a></li>
-                    <li><a href="{{ '/blog/' | url }}" class="hover:text-[#D9A756] transition-colors">Blog</a></li>
+                    <li><a href="{{ '/training-overview/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">Training Overview</a></li>
+                    <li><a href="{{ '/curriculum/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">Curriculum</a></li>
+                    <li><a href="{{ '/schedule/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">Intensive Schedule</a></li>
+                    <li><a href="{{ '/lectures-schedule/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">Lectures Schedule</a></li>
+                    <li><a href="{{ '/teachers/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">Our Teachers</a></li>
+                    <li><a href="{{ '/blog/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">Blog</a></li>
                 </ul>
             </div>
 
             <!-- Resources -->
             <div>
-                <h4 class="p4-kicker text-[#D9A756] mb-5">Resources</h4>
+                <h4 class="p4-kicker text-[color:var(--c-acc)] mb-5">Resources</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="{{ '/techniques/' | url }}" class="hover:text-[#D9A756] transition-colors">School Pillars</a></li>
-                    <li><a href="{{ '/venues/' | url }}" class="hover:text-[#D9A756] transition-colors">Venues</a></li>
-                    <li><a href="{{ '/what-is-transpersonal-psychology/' | url }}" class="hover:text-[#D9A756] transition-colors">What is Transpersonal Psychology</a></li>
-                    <li><a href="{{ '/become-a-practice-client/' | url }}" class="hover:text-[#D9A756] transition-colors">Become a Practice Client</a></li>
-                    <li><a href="{{ '/resources/' | url }}" class="hover:text-[#D9A756] transition-colors">Recommended Reading</a></li>
-                    <li><a href="{{ '/collaborations/' | url }}" class="hover:text-[#D9A756] transition-colors">Collaborations</a></li>
+                    <li><a href="{{ '/techniques/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">School Pillars</a></li>
+                    <li><a href="{{ '/venues/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">Venues</a></li>
+                    <li><a href="{{ '/what-is-transpersonal-psychology/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">What is Transpersonal Psychology</a></li>
+                    <li><a href="{{ '/become-a-practice-client/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">Become a Practice Client</a></li>
+                    <li><a href="{{ '/resources/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">Recommended Reading</a></li>
+                    <li><a href="{{ '/collaborations/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">Collaborations</a></li>
                 </ul>
             </div>
 
             <!-- Contact -->
             <div>
-                <h4 class="p4-kicker text-[#D9A756] mb-5">Connect</h4>
+                <h4 class="p4-kicker text-[color:var(--c-acc)] mb-5">Connect</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="{{ contactHref }}" class="hover:text-[#D9A756] transition-colors">Contact Us</a></li>
-                    <li><a href="mailto:west-office@transpersonal-training.com" class="hover:text-[#D9A756] transition-colors">West office &middot; west-office@transpersonal-training.com</a></li>
-                    <li><a href="mailto:east-office@transpersonal-training.com" class="hover:text-[#D9A756] transition-colors">East office &middot; east-office@transpersonal-training.com</a></li>
-                    <li><a href="tel:+4917638034517" class="hover:text-[#D9A756] transition-colors">West office &middot; +49 176 38034517</a></li>
-                    <li><a href="tel:+37379024199" class="hover:text-[#D9A756] transition-colors">East office &middot; +373 79024199</a></li>
-                    <li><a href="https://www.facebook.com/EastwestTranspersonalTrainingSchool/" target="_blank" rel="noopener" class="hover:text-[#D9A756] transition-colors inline-flex items-center gap-1.5"><i data-lucide="facebook" class="w-4 h-4"></i>Facebook</a></li>
-                    <li><button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="hover:text-[#D9A756] transition-colors text-left bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy Policy</button></li>
+                    <li><a href="{{ contactHref }}" class="hover:text-[color:var(--c-acc)] transition-colors">Contact Us</a></li>
+                    <li><a href="mailto:west-office@transpersonal-training.com" class="hover:text-[color:var(--c-acc)] transition-colors">West office &middot; west-office@transpersonal-training.com</a></li>
+                    <li><a href="mailto:east-office@transpersonal-training.com" class="hover:text-[color:var(--c-acc)] transition-colors">East office &middot; east-office@transpersonal-training.com</a></li>
+                    <li><a href="tel:+4917638034517" class="hover:text-[color:var(--c-acc)] transition-colors">West office &middot; +49 176 38034517</a></li>
+                    <li><a href="tel:+37379024199" class="hover:text-[color:var(--c-acc)] transition-colors">East office &middot; +373 79024199</a></li>
+                    <li><a href="https://www.facebook.com/EastwestTranspersonalTrainingSchool/" target="_blank" rel="noopener" class="hover:text-[color:var(--c-acc)] transition-colors inline-flex items-center gap-1.5"><i data-lucide="facebook" class="w-4 h-4"></i>Facebook</a></li>
+                    <li><button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="hover:text-[color:var(--c-acc)] transition-colors text-left bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy Policy</button></li>
                 </ul>
             </div>
         </div>
 
         <!-- Bottom Bar -->
-        <div class="flex flex-col md:flex-row justify-between items-center text-xs text-[#7185A0]">
+        <div class="flex flex-col md:flex-row justify-between items-center text-xs text-[color:var(--c-on-dark-5)]">
             <p>&copy; 2026 transpersonal-training.com — Educating therapists for a revolution of consciousness.</p>
             <div class="flex gap-6 mt-4 md:mt-0">
-                <button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="hover:text-[#D9A756] bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy</button>
-                <a href="{{ '/legal-notice/' | url }}" class="hover:text-[#D9A756]">Legal Notice</a>
+                <button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="hover:text-[color:var(--c-acc)] bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy</button>
+                <a href="{{ '/legal-notice/' | url }}" class="hover:text-[color:var(--c-acc)]">Legal Notice</a>
             </div>
         </div>
     </div>
 </footer>
 
 <!-- Privacy Policy Modal -->
-<dialog id="privacy-modal" class="max-w-2xl w-[92vw] p-0 backdrop:bg-[#0B1B30]/70 shadow-2xl">
-    <div class="bg-[#FEF9EF] max-h-[85vh] overflow-y-auto">
-        <div class="sticky top-0 bg-[#0F2540] text-[#FDFBF5] px-6 py-5 flex items-center justify-between">
+<dialog id="privacy-modal" class="max-w-2xl w-[92vw] p-0 backdrop:bg-[color:var(--c-deepest-70)] shadow-2xl">
+    <div class="bg-[color:var(--c-paper-card)] max-h-[85vh] overflow-y-auto">
+        <div class="sticky top-0 bg-[color:var(--c-deep)] text-[color:var(--c-paper-hi)] px-6 py-5 flex items-center justify-between">
             <h2 class="p4-display text-2xl font-medium">Privacy Policy</h2>
-            <button type="button" onclick="document.getElementById('privacy-modal').close()" aria-label="Close" class="text-[#FDFBF5] hover:text-[#D9A756] bg-transparent border-none cursor-pointer p-1">
+            <button type="button" onclick="document.getElementById('privacy-modal').close()" aria-label="Close" class="text-[color:var(--c-paper-hi)] hover:text-[color:var(--c-acc)] bg-transparent border-none cursor-pointer p-1">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
         </div>
@@ -114,7 +114,7 @@
                 You can withdraw this consent and unsubscribe at any time by emailing us at the address above; this does
                 not affect any other request you have made.
             </p>
-            <p class="text-xs text-neutral-warm-500 pt-2 border-t border-[#E7D6BE]">
+            <p class="text-xs text-neutral-warm-500 pt-2 border-t border-[color:var(--c-line)]">
                 Last updated 2026.
             </p>
         </div>
