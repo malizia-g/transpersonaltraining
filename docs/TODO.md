@@ -298,6 +298,44 @@ contact form has a West/East track selector as an interim measure.
 - [ ] Confirm the definitive enrolment-options list (full training / self-development L1 only /
       single lecture €45 / single seminar on request — identical East & West)
 
+<a id="task-63"></a>
+### 63. Put the Apply entry back in the navigation
+
+Hidden from the menu on 2 September 2026, to go back once the page is ready to receive people.
+The markup is commented out rather than deleted, in both copies of the menu, so restoring it is
+one edit each.
+
+- [ ] Uncomment the Apply entry in [navigation.njk](../src/_includes/navigation.njk) — the desktop Resources dropdown **and** the mobile menu
+- [ ] While there, decide whether the footer's Resources column should list it too; it never has
+
+**The page is hidden from the menu, not from the site.** `/apply/` is still built, still
+published and still linked — prominently — from five pages: the homepage, the curriculum, the
+teachers page, the training overview and the sample lesson. If the intent is that nobody reaches
+it yet, those five links have to go as well. That is a separate decision and was not taken here.
+
+Sequence: [task 25](#task-25) (the East/West selector) is what makes the page ready; this is the
+step after it.
+
+<a id="task-64"></a>
+### 64. Review the enrolment agreement
+
+The agreement the applicant signs is fetched at build time from the master Google Doc through the
+forms Apps Script (`?doc=agreement`). The Doc is the single source of truth, so that is where any
+correction has to be made — editing `src/_data/agreement-fallback.html` changes only the emergency
+fallback, not what applicants actually sign.
+
+- [ ] Read the agreement through as a whole and mark what needs changing
+- [ ] Make the corrections in the master Google Doc, not in the repo
+- [ ] Check the fee, cohort and module figures against `training-overview.html` — the same conflict [task 43](#task-43) tracks, reaching here because the figures are duplicated into the contract
+- [ ] Refresh `agreement-fallback.html` from the reviewed text, so the fallback is not a stale contract waiting for a failed fetch
+- [ ] Name whoever signs it off legally (→ [task 20](#task-20), the legal entity)
+
+Why it matters: this is the only document on the site with contractual force, and the fallback
+chain in [src/_data/agreement.js](../src/_data/agreement.js) is deliberately silent — if the Doc
+fetch fails, the last cached copy is served without anything on the page saying so.
+
+→ Setup and the fetch chain: [APPLICATION_PAGE_SETUP.md](APPLICATION_PAGE_SETUP.md)
+
 <a id="task-35"></a>
 ### 35. Teachers page — the roster itself
 
@@ -663,6 +701,20 @@ because the pages themselves are driven by Google Sheets at build time.
 ### 59. Browserslist warning
 
 - [ ] `npx update-browserslist-db@latest`
+
+<a id="task-65"></a>
+### 65. Remove the 2027 announcement popup — **January 2027**
+
+The homepage carries a modal announcing that the new cycle opens in 2027, with a link to
+`old.transpersonal-training.com` for former students. It opens on every visit by design, and
+remembers nothing between them.
+
+- [ ] Delete the announcement block in [src/index.html](../src/index.html) — the `<dialog id="cycle-2027-modal">`, its `{# … #}` header comment and the `<script>` under it, which are contiguous
+- [ ] Decide whether the `old.` link needs a home elsewhere; the popup is the only place on the site that points there
+
+The script already refuses to open from 1 January 2027, so a missed deadline is not a visible
+embarrassment. That guard reads the **visitor's** clock, though, not ours: someone whose machine
+is set to 2026 would still see it. It buys time, it does not do the job.
 
 ---
 

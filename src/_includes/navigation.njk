@@ -65,10 +65,15 @@
                     Resources <i data-lucide="chevron-down" class="w-4 h-4"></i>
                 </button>
                 <div class="dropdown-menu">
+                    {# Apply is hidden from the menu until the page is ready; it goes back
+                       exactly as it stands here. Commented rather than deleted so restoring
+                       it is one edit, in both this menu and the mobile one below.
+                       → docs/TODO.md task 63.
                     <a href="{{ '/apply/' | url }}" class="text-sm">
                         <i data-lucide="clipboard-check" class="w-4 h-4 submenu-icon"></i>
                         <span>Apply</span>
                     </a>
+                    #}
                     <a href="{{ '/what-is-transpersonal-psychology/' | url }}" class="text-sm">
                         <i data-lucide="stethoscope" class="w-4 h-4 submenu-icon"></i>
                         <span>What is Transpersonal Psychology</span>
@@ -131,10 +136,12 @@
             <span>Lectures Schedule</span>
         </a>
         <span class="text-slate-200 py-2 border-b block font-semibold">Resources</span>
+        {# Hidden with its desktop twin above — restore both together. → docs/TODO.md task 63.
         <a href="{{ '/apply/' | url }}" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="clipboard-check" class="w-4 h-4 submenu-icon"></i>
             <span>Apply</span>
         </a>
+        #}
         <a href="{{ '/what-is-transpersonal-psychology/' | url }}" class="text-slate-200 py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
             <i data-lucide="stethoscope" class="w-4 h-4 submenu-icon"></i>
             <span>What is Transpersonal Psychology</span>
