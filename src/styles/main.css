@@ -164,18 +164,6 @@ html {
     transition: all 0.3s ease;
 }
 
-/* Mobile menu. The panel is the dark ground, so it retints with the palette. */
-#mobile-menu {
-    background-color: var(--c-deep) !important;
-    border-color: var(--c-deep-2) !important;
-}
-#mobile-menu a.border-b {
-    border-color: var(--c-acc-25) !important;
-}
-#mobile-menu a:hover {
-    color: var(--c-acc) !important;
-}
-
 /* Dropdown */
 .dropdown { position: relative; }
 .dropdown-menu {
@@ -205,8 +193,20 @@ html {
 .dropdown-menu .submenu-icon { color: var(--c-body-dim); transition: color 0.2s ease; }
 .dropdown-menu a:hover .submenu-icon { color: var(--c-sec); }
 
+/* Mobile menu. The panel is the dark ground, so it retints with the palette. */
+#mobile-menu {
+    background-color: var(--c-deep) !important;
+    border-color: var(--c-deep-2) !important;
+}
+#mobile-menu a.border-b {
+    border-color: var(--c-acc-25) !important;
+}
+#mobile-menu a:hover {
+    color: var(--c-acc) !important;
+}
+
 /* Mobile submenu icons */
-#mobile-menu .submenu-icon { color: rgba(226, 232, 240, 0.6); flex-shrink: 0; transition: color 0.2s ease; }
+#mobile-menu .submenu-icon { color: var(--c-on-dark-4); flex-shrink: 0; transition: color 0.2s ease; }
 #mobile-menu a:hover .submenu-icon { color: inherit; }
 
 /* Mobile menu scrolling: the menu is taller than a phone viewport, so it must
@@ -227,15 +227,6 @@ body.mobile-menu-open { overflow: hidden; }
 .level-card:hover {
     transform: translateY(-2px);
 }
-.level-badge {
-    letter-spacing: 0.1em;
-}
-.module-number {
-    width: 30px; height: 30px; min-width: 30px;
-    border-radius: 50%; display: flex;
-    align-items: center; justify-content: center;
-    font-weight: 700; font-size: 0.75rem; color: white; flex-shrink: 0;
-}
 .level-content {
     max-height: 0; overflow: hidden; opacity: 0;
     transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
@@ -248,7 +239,7 @@ body.mobile-menu-open { overflow: hidden; }
 .level-toggle { cursor: pointer; user-select: none; }
 .level-toggle:hover { opacity: 0.9; }
 .submodule-toggle { cursor: pointer; user-select: none; }
-.submodule-toggle:hover { background: rgba(255, 255, 255, 0.65); }
+.submodule-toggle:hover { background: var(--c-paper-hi-60); }
 .submodule-content {
     max-height: 0; overflow: hidden; opacity: 0;
     transition: max-height 0.35s ease, opacity 0.25s ease;
@@ -262,10 +253,6 @@ body.mobile-menu-open { overflow: hidden; }
     font-size: 0.75rem; padding: 0.25rem 0.75rem;
     font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
 }
-
-/* Requirement items (training program) */
-.req-item { display: flex; align-items: flex-start; gap: 0.5rem; }
-.req-check { color: #16a34a; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
 
 /* ── Vine (curriculum) ── */
 
