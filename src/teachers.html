@@ -46,14 +46,83 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.5s ease, padding 0.5s ease;
-        padding: 0 1.5rem;
+        padding: 0 15px;
     }
     
     .teacher-bio.active {
         max-height: none;
-        padding: 0;
+        padding: 0 15px 1rem;
     }
-    
+
+    /* ── Guest cards: the open card ──
+
+       A guest card is a quarter of the row where a core card is a third, so
+       its bio was being read in a column half the width. Opening one widens it
+       to two of those four columns and turns it side-on: the photo keeps a
+       portrait crop on the left, the name and the bio get the width.
+
+       The widening is a real grid span rather than a transform, so the card
+       takes the room it grows into instead of painting over its neighbours:
+       every card after it shifts up one place, the row below fills with the
+       ones that follow, and the script slides them all to their new places —
+       see animateGuestReflow.
+
+       It only applies from lg, the one breakpoint where the guest grid is
+       narrower than the core one: below that both grids are two columns wide
+       (or one on a phone), so a guest card already measures what a core card
+       measures and is left alone. */
+    @media (min-width: 1024px) {
+        .teacher-card-guest {
+            /* Deliberately not `all`: the span, the padding and the type all
+               switch in one step, and it is the movement that is animated —
+               the script drives it through this same transform transition. */
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .teacher-card-guest.expanded {
+            grid-column: span 2;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: var(--c-link);
+            /* Painted above its neighbours for the length of the slide, so the
+               cards leaving the row pass behind it rather than across it. */
+            position: relative;
+            z-index: 2;
+        }
+
+        .teacher-card-guest.expanded .guest-head {
+            display: flex;
+        }
+
+        .teacher-card-guest.expanded .guest-photo {
+            flex: none;
+            width: 46%;
+            height: 18rem;
+        }
+
+        /* In the narrow card the 280px portrait is cropped by a 224px window;
+           side-on it has a taller window than that to fill, so it takes the
+           height it is given. */
+        .teacher-card-guest.expanded .teacher-img {
+            height: 100%;
+        }
+
+        /* Centred rather than stacked at the top: side-on there is more height
+           than the three lines need, and left at the top they read as an
+           accident. */
+        .teacher-card-guest.expanded .guest-meta {
+            flex: 1;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .teacher-card-guest.expanded .guest-name {
+            font-size: 1.5rem;
+            min-height: 0;
+        }
+    }
+
     .badge-core {
         background: var(--c-acc);
         color: var(--c-deep);
@@ -112,7 +181,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
     .tab-content {
         display: none;
         animation: fadeIn 0.4s ease;
-        padding: 1rem 0.5rem;
+        padding: 1rem 0;
     }
     
     .tab-content.active {
@@ -308,22 +377,32 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
             <p class="text-[color:var(--c-body-dim)] text-lg">{{ guestIntro.data.description }}</p>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {# One grid for all of them, so that a widened card displaces the card
+           beside it, which displaces the next, and so on: every teacher shifts
+           up one place and the line that forms below is a full one. `order` is
+           what lets the script rearrange them — see reflowGuestGrid.
+
+           items-start: without it the grid stretches every card in a row to the
+           height of the one whose bio is open, which read as "all the cards
+           opened at once". #}
+        <div class="teachers-guest-grid grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
             {% for teacher in teachers.guest %}
-            <div class="teacher-card" id="{{ teacher.id }}" onclick="toggleBio(this)">
-                <div class="overflow-hidden h-56">
+            <div class="teacher-card teacher-card-guest" id="{{ teacher.id }}" style="order: {{ loop.index0 }}" onclick="toggleBio(this)">
+                <div class="guest-head">
+                <div class="guest-photo overflow-hidden h-56">
                     <picture>
                         <source srcset="{{ teacher.image | replace('.jpg', '.webp') | url }}" type="image/webp">
                         <img src="{{ teacher.image | url }}" alt="{{ teacher.name }}" class="teacher-img"{% if teacher.imagePosition %} style="object-position: {{ teacher.imagePosition }};"{% endif %}>
                     </picture>
                 </div>
-                <div class="p-4">
+                <div class="guest-meta p-4">
                     <div class="flex items-center justify-between mb-2">
                         <span class="badge-guest">Guest</span>
                         <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-sec)] bio-icon"></i>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1">{{ teacher.name }}</h3>
+                    <h3 class="guest-name text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1 md:min-h-[3.5rem]">{{ teacher.name }}</h3>
                     <p class="text-[color:var(--c-sec)] font-medium text-sm">{{ teacher.location }}</p>
+                </div>
                 </div>
                 <div class="teacher-bio">
                     <!-- Tab Navigation -->
@@ -406,7 +485,7 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {% for teacher in teachers.alumni %}
-            <div class="teacher-card teacher-card-compact" id="{{ teacher.id }}" onclick="toggleBio(this)">
+            <div class="teacher-card teacher-card-compact" id="{{ teacher.id }}" onclick="openTeacherBio(this)">
                 <div class="overflow-hidden h-28 sm:h-32">
                     <picture>
                         <source srcset="{{ teacher.image | replace('.jpg', '.webp') | url }}" type="image/webp">
@@ -419,11 +498,11 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
                             <h3 class="text-sm font-serif font-bold text-[color:var(--c-heading)] leading-tight line-clamp-2">{{ teacher.name }}</h3>
                             <p class="text-[color:var(--c-sec)] text-xs mt-0.5">{{ teacher.location }}</p>
                         </div>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-body-dim)] bio-icon mt-0.5 flex-shrink-0"></i>
+                        <i data-lucide="book-open" class="w-4 h-4 text-[color:var(--c-body-dim)] mt-0.5 flex-shrink-0"></i>
                     </div>
                 </div>
-                <div class="teacher-bio">
-                    <div class="p-4 pt-2">
+                <div class="teacher-bio-source hidden">
+                    <div>
                         <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             {% if teacher.bio %}
                                 {{ teacher.bio | markdown | safe }}
@@ -447,6 +526,25 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
     </div>
 </section>
 
+<!-- Biography popup, for the compact "Who Has Taught With Us" cards.
+     Native <dialog>, the same pattern as the resources page video popup. -->
+<dialog id="teacher-bio-modal" class="w-[92vw] max-w-2xl p-0 bg-transparent backdrop:bg-[color:var(--c-deepest-80)]">
+    <div class="relative bg-[color:var(--c-paper-card)] shadow-2xl max-h-[85vh] overflow-y-auto">
+        <button type="button" onclick="closeTeacherBio()" aria-label="Close biography"
+                class="absolute top-3 right-3 z-10 bg-[color:var(--c-paper-hi)] hover:bg-[color:var(--c-paper-2)] text-[color:var(--c-heading)] p-1.5 transition-colors border border-[color:var(--c-line)] cursor-pointer">
+            <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+        <div class="flex items-center gap-4 p-6 pb-4 border-b border-[color:var(--c-line)]">
+            <img id="tb-photo" src="" alt="" class="w-20 h-20 object-cover flex-shrink-0">
+            <div class="pr-10">
+                <h3 id="tb-name" class="text-2xl font-serif font-bold text-[color:var(--c-heading)] leading-tight"></h3>
+                <p id="tb-location" class="text-[color:var(--c-sec)] font-medium text-sm mt-1"></p>
+            </div>
+        </div>
+        <div id="tb-body" class="px-6 py-5 text-[color:var(--c-body)]"></div>
+    </div>
+</dialog>
+
 <!-- CTA Section -->
 <section class="py-24 bg-gradient-to-br from-[var(--c-deep)] to-[var(--c-deep-2)] text-[color:var(--c-on-dark-1)] relative overflow-hidden">
     <div class="container mx-auto px-6 text-center relative z-10">
@@ -467,32 +565,143 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
 </section>
 
 <script>
+    /* ── The guest cards' grid ──
+       Opening a card widens it to a grid span (see the stylesheet), so the grid
+       has to find the room: every card after it shifts up one place, and the
+       last of them drops onto the line below with the rest of its row. Which
+       card ends up where, and how they get there, is the job of the two
+       functions below. */
+    const GUEST_WIDE = window.matchMedia('(min-width: 1024px)');
+    const GUEST_STILL = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    function reflowGuestGrid() {
+        const grid = document.querySelector('.teachers-guest-grid');
+        if (!grid) return;
+        const cards = Array.prototype.slice.call(grid.children);
+        const columns = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+        cards.forEach(function (card, i) { card.style.order = i; });
+        if (!GUEST_WIDE.matches || columns < 2) return;
+
+        /* An open card in the last column has nothing to its right to grow
+           into, so the grid would wrap it onto the next line — the card you
+           just clicked would leave its place and turn up below. Move it one
+           place earlier instead: it grows leftwards into the last two columns,
+           staying where it was clicked, and the neighbour it displaced leads
+           the next line. */
+        let open = -1;
+        cards.forEach(function (card, i) { if (card.classList.contains('expanded')) open = i; });
+        if (open < 0 || open % columns !== columns - 1) return;
+        cards[open].style.order = open - 1;
+        cards[open - 1].style.order = open;
+    }
+
+    /* Grid placement doesn't animate: without this the cards a widening card
+       displaces would simply appear in their new places. So take the geometry
+       before and after the change, put every card that moved back where it was
+       with a transform, and release the lot on the next frame — the transition
+       in the stylesheet carries them across. The card that grew is left out:
+       it changes size rather than place, and interpolating that only stretches
+       it. */
+    function animateGuestReflow(change) {
+        const cards = Array.prototype.slice.call(document.querySelectorAll('.teacher-card-guest'));
+        if (!GUEST_WIDE.matches || GUEST_STILL.matches) { change(); return; }
+
+        const before = cards.map(function (card) { return card.getBoundingClientRect(); });
+        change();
+        const after = cards.map(function (card) { return card.getBoundingClientRect(); });
+
+        cards.forEach(function (card, i) {
+            const dx = before[i].left - after[i].left;
+            const dy = before[i].top - after[i].top;
+            if (Math.abs(before[i].width - after[i].width) > 1 || (!dx && !dy)) return;
+            card.style.transition = 'none';
+            card.style.transform = 'translate(' + dx + 'px, ' + dy + 'px)';
+        });
+
+        void document.body.offsetHeight;   // this is the frame they start from
+
+        // Handing them back to the stylesheet is what plays the movement: the
+        // transform goes, the transition it left behind carries them there.
+        cards.forEach(function (card) {
+            card.style.transition = '';
+            card.style.transform = '';
+        });
+    }
+
+    // Below lg every card is core-width already and none of this applies, so
+    // crossing the breakpoint has to put them back in plain order.
+    GUEST_WIDE.addEventListener('change', reflowGuestGrid);
+
     function toggleBio(card) {
         event.stopPropagation();
-        
-        // Close all other bios
-        document.querySelectorAll('.teacher-card').forEach(openCard => {
-            if (openCard !== card) {
-                const bio = openCard.querySelector('.teacher-bio');
-                if (bio) {
-                    bio.classList.remove('active');
-                    openCard.classList.remove('expanded');
+
+        animateGuestReflow(function () {
+            // Close all other bios
+            document.querySelectorAll('.teacher-card').forEach(openCard => {
+                if (openCard !== card) {
+                    const bio = openCard.querySelector('.teacher-bio');
+                    if (bio) {
+                        bio.classList.remove('active');
+                        openCard.classList.remove('expanded');
+                    }
                 }
+            });
+
+            // Toggle current bio
+            const bio = card.querySelector('.teacher-bio');
+            if (bio) {
+                bio.classList.toggle('active');
+                card.classList.toggle('expanded');
             }
+
+            reflowGuestGrid();
         });
-        
-        // Toggle current bio
-        const bio = card.querySelector('.teacher-bio');
-        if (bio) {
-            bio.classList.toggle('active');
-            card.classList.toggle('expanded');
-        }
-        
+
         // Re-initialize lucide icons for any new content
         if (window.lucide) {
             lucide.createIcons();
         }
     }
+
+    /* ── The compact cards' biography popup ── */
+    function openTeacherBio(card) {
+        if (window.event) window.event.stopPropagation();   // absent when opened from the URL hash
+        const dlg = document.getElementById('teacher-bio-modal');
+        const source = card.querySelector('.teacher-bio-source');
+        if (!dlg || !source) return;
+
+        const img = card.querySelector('img');
+        const photo = document.getElementById('tb-photo');
+        if (img) {
+            photo.src = img.currentSrc || img.src;
+            photo.alt = img.alt;
+            photo.style.objectPosition = img.style.objectPosition || '';
+        }
+        document.getElementById('tb-name').textContent = (card.querySelector('h3') || {}).textContent || '';
+        document.getElementById('tb-location').textContent = (card.querySelector('p') || {}).textContent || '';
+        document.getElementById('tb-body').innerHTML = source.innerHTML;
+
+        if (typeof dlg.showModal === 'function') dlg.showModal();
+        else dlg.setAttribute('open', '');
+        if (window.lucide) lucide.createIcons();
+    }
+
+    function closeTeacherBio() {
+        const dlg = document.getElementById('teacher-bio-modal');
+        if (dlg && dlg.open) {
+            if (typeof dlg.close === 'function') dlg.close();
+            else dlg.removeAttribute('open');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const dlg = document.getElementById('teacher-bio-modal');
+        if (!dlg) return;
+        // A click on the backdrop, outside the panel, closes the popup.
+        dlg.addEventListener('click', function (e) {
+            if (e.target === dlg) closeTeacherBio();
+        });
+    });
 
     function switchTab(event, tabId) {
         event.stopPropagation();
@@ -533,13 +742,20 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
         const card = document.getElementById(id);
         if (!card || !card.classList.contains('teacher-card')) return;
 
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        if (card.classList.contains('teacher-card-compact')) {
+            openTeacherBio(card);
+            return;
+        }
+
         const bio = card.querySelector('.teacher-bio');
         if (bio) {
             bio.classList.add('active');
             card.classList.add('expanded');
+            reflowGuestGrid();
             if (window.lucide) lucide.createIcons();
         }
-        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     window.addEventListener('DOMContentLoaded', openTeacherFromHash);
