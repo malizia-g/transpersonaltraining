@@ -5,6 +5,7 @@ role: Guest Teacher
 location: Estonia
 credentials: "Counselling Psychologist; Founder, SACH International & TERVIKLIK MINA School"
 image: /assets/images/People/teachers/jure-biechonski.jpg
+imagePosition: center 30%
 section: guest
 order: 4
 ---

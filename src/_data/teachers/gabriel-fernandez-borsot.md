@@ -5,6 +5,7 @@ role: Guest Teacher
 location: Spain
 credentials: "Transpersonal Therapist, Trainer & Gestalt Therapist"
 image: /assets/images/People/teachers/gabriel-fernandez-borsot.jpg
+imagePosition: center top
 section: guest
 order: 3
 ---
