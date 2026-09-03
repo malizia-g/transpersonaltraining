@@ -5,6 +5,7 @@ role: Guest Teacher
 location: France
 credentials: "Clinical & Social Psychologist, Transpersonal Psychotherapist, Gestalt Therapist"
 image: /assets/images/People/teachers/bernadette-blin.jpg
+imagePosition: center bottom
 section: guest
 order: 2
 ---
