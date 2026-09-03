@@ -116,6 +116,44 @@ var EMAIL_C_LINE = '#dcd7cb';    // --c-line
 var EMAIL_FONT_SERIF = "Georgia, 'Times New Roman', serif";
 var EMAIL_FONT_SANS = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
 
+// The logo badge in the email header — a PNG, not the site's own SVG. Outlook
+// desktop doesn't render SVG at all (inline <svg> or <img src="…svg">), so a
+// raster image is the one format every client actually shows. Generated from
+// src/assets/images/Graphics/logo.svg by scripts/build-email-logo-badge.js —
+// rerun that if the logo mark or the gold accent colour ever changes.
+//
+// It's hosted on the site itself rather than Drive, same reasoning as
+// BROCHURE_URL above: a public URL that doesn't depend on a Drive file
+// staying shared. But transpersonal-training.com still serves the old
+// WordPress site until the domain cutover (see .github/workflows/deploy.yml)
+// — the new build only lives at the GitHub Pages preview URL until then. So
+// the logo's URL isn't a constant: emailLogoUrl_() below checks the final
+// domain first and falls back to the preview if that 404s, so the image
+// works today and keeps working, unattended, once the domain goes live.
+var EMAIL_LOGO_PROD_URL = SCHOOL_URL + '/assets/images/Graphics/logo-badge-email.png';
+var EMAIL_LOGO_FALLBACK_URL = 'https://malizia-g.github.io/transpersonaltraining/assets/images/Graphics/logo-badge-email.png';
+
+// Resolves to whichever of the two URLs above is actually serving the badge
+// right now. Cached for an hour (CacheService, not a global — this runs once
+// per doPost execution, and Apps Script gives each run a fresh global scope)
+// so a burst of form submissions doesn't re-check on every single one.
+function emailLogoUrl_() {
+  var cache = CacheService.getScriptCache();
+  var cached = cache.get('emailLogoUrl');
+  if (cached) return cached;
+
+  var url = EMAIL_LOGO_FALLBACK_URL;
+  try {
+    var res = UrlFetchApp.fetch(EMAIL_LOGO_PROD_URL, { muteHttpExceptions: true, method: 'head' });
+    if (res.getResponseCode() === 200) url = EMAIL_LOGO_PROD_URL;
+  } catch (err) {
+    // Network hiccup — the fallback is still a good image for this send.
+  }
+
+  cache.put('emailLogoUrl', url, 3600);
+  return url;
+}
+
 var CONTACT_SHEET = 'Contact';
 var APPLICATION_SHEET = 'Applications';
 var MAX_UPLOAD_MB = 15;
@@ -413,7 +451,9 @@ function emailShell_(contentHtml) {
     + '<div style="background:' + EMAIL_C_PAPER + ';padding:32px 16px;">'
     +   '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" '
     +     'style="max-width:560px;margin:0 auto;background:#ffffff;border:1px solid ' + EMAIL_C_LINE + ';">'
-    +     '<tr><td style="background:' + EMAIL_C_DEEP + ';padding:28px 32px;text-align:center;">'
+    +     '<tr><td style="background:' + EMAIL_C_DEEP + ';padding:24px 32px;text-align:center;">'
+    +       '<img src="' + emailLogoUrl_() + '" width="48" height="48" alt="" '
+    +         'style="display:block;margin:0 auto 12px;border:0;border-radius:50%;">'
     +       '<span style="color:' + EMAIL_C_ACC + ';font-family:' + EMAIL_FONT_SERIF + ';font-size:13px;'
     +         'letter-spacing:3px;text-transform:uppercase;">' + escapeHtml_(SCHOOL_NAME) + '</span>'
     +     '</td></tr>'
