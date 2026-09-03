@@ -322,14 +322,83 @@
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.5s ease, padding 0.5s ease;
-        padding: 0 1.5rem;
+        padding: 0 15px;
     }
     
     .teacher-bio.active {
         max-height: none;
-        padding: 0;
+        padding: 0 15px 1rem;
     }
-    
+
+    /* ── Guest cards: the open card ──
+
+       A guest card is a quarter of the row where a core card is a third, so
+       its bio was being read in a column half the width. Opening one widens it
+       to two of those four columns and turns it side-on: the photo keeps a
+       portrait crop on the left, the name and the bio get the width.
+
+       The widening is a real grid span rather than a transform, so the card
+       takes the room it grows into instead of painting over its neighbours:
+       every card after it shifts up one place, the row below fills with the
+       ones that follow, and the script slides them all to their new places —
+       see animateGuestReflow.
+
+       It only applies from lg, the one breakpoint where the guest grid is
+       narrower than the core one: below that both grids are two columns wide
+       (or one on a phone), so a guest card already measures what a core card
+       measures and is left alone. */
+    @media (min-width: 1024px) {
+        .teacher-card-guest {
+            /* Deliberately not `all`: the span, the padding and the type all
+               switch in one step, and it is the movement that is animated —
+               the script drives it through this same transform transition. */
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .teacher-card-guest.expanded {
+            grid-column: span 2;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: var(--c-link);
+            /* Painted above its neighbours for the length of the slide, so the
+               cards leaving the row pass behind it rather than across it. */
+            position: relative;
+            z-index: 2;
+        }
+
+        .teacher-card-guest.expanded .guest-head {
+            display: flex;
+        }
+
+        .teacher-card-guest.expanded .guest-photo {
+            flex: none;
+            width: 46%;
+            height: 18rem;
+        }
+
+        /* In the narrow card the 280px portrait is cropped by a 224px window;
+           side-on it has a taller window than that to fill, so it takes the
+           height it is given. */
+        .teacher-card-guest.expanded .teacher-img {
+            height: 100%;
+        }
+
+        /* Centred rather than stacked at the top: side-on there is more height
+           than the three lines need, and left at the top they read as an
+           accident. */
+        .teacher-card-guest.expanded .guest-meta {
+            flex: 1;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .teacher-card-guest.expanded .guest-name {
+            font-size: 1.5rem;
+            min-height: 0;
+        }
+    }
+
     .badge-core {
         background: var(--c-acc);
         color: var(--c-deep);
@@ -388,7 +457,7 @@
     .tab-content {
         display: none;
         animation: fadeIn 0.4s ease;
-        padding: 1rem 0.5rem;
+        padding: 1rem 0;
     }
     
     .tab-content.active {
@@ -731,22 +800,25 @@
             <p class="text-[color:var(--c-body-dim)] text-lg">International experts sharing specialized knowledge and diverse methodologies</p>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div class="teachers-guest-grid grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
             
-            <div class="teacher-card" id="ingo-jahrsetz" onclick="toggleBio(this)">
-                <div class="overflow-hidden h-56">
+            <div class="teacher-card teacher-card-guest" id="ingo-jahrsetz" style="order: 0" onclick="toggleBio(this)">
+                <div class="guest-head">
+                <div class="guest-photo overflow-hidden h-56">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/ingo-benjamin-jahrsetz.webp" type="image/webp">
                         <img src="/transpersonaltraining/assets/images/People/teachers/ingo-benjamin-jahrsetz.jpg" alt="Dr. Ingo Benjamin Jahrsetz" class="teacher-img">
                     </picture>
                 </div>
-                <div class="p-4">
+                <div class="guest-meta p-4">
                     <div class="flex items-center justify-between mb-2">
                         <span class="badge-guest">Guest</span>
                         <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-sec)] bio-icon"></i>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1">Dr. Ingo Benjamin Jahrsetz</h3>
+                    <h3 class="guest-name text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1 md:min-h-[3.5rem]">Dr. Ingo Benjamin Jahrsetz</h3>
                     <p class="text-[color:var(--c-sec)] font-medium text-sm">Germany</p>
+                </div>
                 </div>
                 <div class="teacher-bio">
                     <!-- Tab Navigation -->
@@ -802,20 +874,22 @@
                 </div>
             </div>
             
-            <div class="teacher-card" id="bernadette-blin" onclick="toggleBio(this)">
-                <div class="overflow-hidden h-56">
+            <div class="teacher-card teacher-card-guest" id="bernadette-blin" style="order: 1" onclick="toggleBio(this)">
+                <div class="guest-head">
+                <div class="guest-photo overflow-hidden h-56">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/bernadette-blin.webp" type="image/webp">
                         <img src="/transpersonaltraining/assets/images/People/teachers/bernadette-blin.jpg" alt="Bernadette Blin" class="teacher-img">
                     </picture>
                 </div>
-                <div class="p-4">
+                <div class="guest-meta p-4">
                     <div class="flex items-center justify-between mb-2">
                         <span class="badge-guest">Guest</span>
                         <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-sec)] bio-icon"></i>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1">Bernadette Blin</h3>
+                    <h3 class="guest-name text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1 md:min-h-[3.5rem]">Bernadette Blin</h3>
                     <p class="text-[color:var(--c-sec)] font-medium text-sm">France</p>
+                </div>
                 </div>
                 <div class="teacher-bio">
                     <!-- Tab Navigation -->
@@ -870,20 +944,22 @@
                 </div>
             </div>
             
-            <div class="teacher-card" id="gabriel-fernandez-borsot" onclick="toggleBio(this)">
-                <div class="overflow-hidden h-56">
+            <div class="teacher-card teacher-card-guest" id="gabriel-fernandez-borsot" style="order: 2" onclick="toggleBio(this)">
+                <div class="guest-head">
+                <div class="guest-photo overflow-hidden h-56">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/gabriel-fernandez-borsot.webp" type="image/webp">
                         <img src="/transpersonaltraining/assets/images/People/teachers/gabriel-fernandez-borsot.jpg" alt="Gabriel Fernandez-Borsot, PhD" class="teacher-img">
                     </picture>
                 </div>
-                <div class="p-4">
+                <div class="guest-meta p-4">
                     <div class="flex items-center justify-between mb-2">
                         <span class="badge-guest">Guest</span>
                         <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-sec)] bio-icon"></i>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1">Gabriel Fernandez-Borsot, PhD</h3>
+                    <h3 class="guest-name text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1 md:min-h-[3.5rem]">Gabriel Fernandez-Borsot, PhD</h3>
                     <p class="text-[color:var(--c-sec)] font-medium text-sm">Spain</p>
+                </div>
                 </div>
                 <div class="teacher-bio">
                     <!-- Tab Navigation -->
@@ -941,20 +1017,22 @@
                 </div>
             </div>
             
-            <div class="teacher-card" id="jure-biechonski" onclick="toggleBio(this)">
-                <div class="overflow-hidden h-56">
+            <div class="teacher-card teacher-card-guest" id="jure-biechonski" style="order: 3" onclick="toggleBio(this)">
+                <div class="guest-head">
+                <div class="guest-photo overflow-hidden h-56">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/jure-biechonski.webp" type="image/webp">
                         <img src="/transpersonaltraining/assets/images/People/teachers/jure-biechonski.jpg" alt="Prof. Jure Biechonski" class="teacher-img">
                     </picture>
                 </div>
-                <div class="p-4">
+                <div class="guest-meta p-4">
                     <div class="flex items-center justify-between mb-2">
                         <span class="badge-guest">Guest</span>
                         <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-sec)] bio-icon"></i>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1">Prof. Jure Biechonski</h3>
+                    <h3 class="guest-name text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1 md:min-h-[3.5rem]">Prof. Jure Biechonski</h3>
                     <p class="text-[color:var(--c-sec)] font-medium text-sm">Estonia</p>
+                </div>
                 </div>
                 <div class="teacher-bio">
                     <!-- Tab Navigation -->
@@ -1013,20 +1091,22 @@
                 </div>
             </div>
             
-            <div class="teacher-card" id="nicolas-cambas" onclick="toggleBio(this)">
-                <div class="overflow-hidden h-56">
+            <div class="teacher-card teacher-card-guest" id="nicolas-cambas" style="order: 4" onclick="toggleBio(this)">
+                <div class="guest-head">
+                <div class="guest-photo overflow-hidden h-56">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/nicolas-cambas.webp" type="image/webp">
                         <img src="/transpersonaltraining/assets/images/People/teachers/nicolas-cambas.jpg" alt="Nicolás Cambas" class="teacher-img">
                     </picture>
                 </div>
-                <div class="p-4">
+                <div class="guest-meta p-4">
                     <div class="flex items-center justify-between mb-2">
                         <span class="badge-guest">Guest</span>
                         <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-sec)] bio-icon"></i>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1">Nicolás Cambas</h3>
+                    <h3 class="guest-name text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1 md:min-h-[3.5rem]">Nicolás Cambas</h3>
                     <p class="text-[color:var(--c-sec)] font-medium text-sm">Ecuador / Austria</p>
+                </div>
                 </div>
                 <div class="teacher-bio">
                     <!-- Tab Navigation -->
@@ -1082,20 +1162,22 @@
                 </div>
             </div>
             
-            <div class="teacher-card" id="tina-lindhard" onclick="toggleBio(this)">
-                <div class="overflow-hidden h-56">
+            <div class="teacher-card teacher-card-guest" id="tina-lindhard" style="order: 5" onclick="toggleBio(this)">
+                <div class="guest-head">
+                <div class="guest-photo overflow-hidden h-56">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/tina-lindhard.webp" type="image/webp">
                         <img src="/transpersonaltraining/assets/images/People/teachers/tina-lindhard.jpg" alt="Dr. Tina Lindhard" class="teacher-img">
                     </picture>
                 </div>
-                <div class="p-4">
+                <div class="guest-meta p-4">
                     <div class="flex items-center justify-between mb-2">
                         <span class="badge-guest">Guest</span>
                         <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-sec)] bio-icon"></i>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1">Dr. Tina Lindhard</h3>
+                    <h3 class="guest-name text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1 md:min-h-[3.5rem]">Dr. Tina Lindhard</h3>
                     <p class="text-[color:var(--c-sec)] font-medium text-sm">Spain</p>
+                </div>
                 </div>
                 <div class="teacher-bio">
                     <!-- Tab Navigation -->
@@ -1152,20 +1234,22 @@
                 </div>
             </div>
             
-            <div class="teacher-card" id="mario-lorenzetti" onclick="toggleBio(this)">
-                <div class="overflow-hidden h-56">
+            <div class="teacher-card teacher-card-guest" id="mario-lorenzetti" style="order: 6" onclick="toggleBio(this)">
+                <div class="guest-head">
+                <div class="guest-photo overflow-hidden h-56">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/mario-lorenzetti.webp" type="image/webp">
                         <img src="/transpersonaltraining/assets/images/People/teachers/mario-lorenzetti.jpg" alt="Mario Lorenzetti" class="teacher-img">
                     </picture>
                 </div>
-                <div class="p-4">
+                <div class="guest-meta p-4">
                     <div class="flex items-center justify-between mb-2">
                         <span class="badge-guest">Guest</span>
                         <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-sec)] bio-icon"></i>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1">Mario Lorenzetti</h3>
+                    <h3 class="guest-name text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1 md:min-h-[3.5rem]">Mario Lorenzetti</h3>
                     <p class="text-[color:var(--c-sec)] font-medium text-sm">Italy</p>
+                </div>
                 </div>
                 <div class="teacher-bio">
                     <!-- Tab Navigation -->
@@ -1228,20 +1312,22 @@
                 </div>
             </div>
             
-            <div class="teacher-card" id="rainer-pervoltz" onclick="toggleBio(this)">
-                <div class="overflow-hidden h-56">
+            <div class="teacher-card teacher-card-guest" id="rainer-pervoltz" style="order: 7" onclick="toggleBio(this)">
+                <div class="guest-head">
+                <div class="guest-photo overflow-hidden h-56">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/rainer-pervoltz.webp" type="image/webp">
                         <img src="/transpersonaltraining/assets/images/People/teachers/rainer-pervoltz.jpg" alt="Rainer Pervöltz" class="teacher-img">
                     </picture>
                 </div>
-                <div class="p-4">
+                <div class="guest-meta p-4">
                     <div class="flex items-center justify-between mb-2">
                         <span class="badge-guest">Guest</span>
                         <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-sec)] bio-icon"></i>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1">Rainer Pervöltz</h3>
+                    <h3 class="guest-name text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1 md:min-h-[3.5rem]">Rainer Pervöltz</h3>
                     <p class="text-[color:var(--c-sec)] font-medium text-sm">Germany</p>
+                </div>
                 </div>
                 <div class="teacher-bio">
                     <!-- Tab Navigation -->
@@ -1297,20 +1383,22 @@
                 </div>
             </div>
             
-            <div class="teacher-card" id="stephan-schillinger" onclick="toggleBio(this)">
-                <div class="overflow-hidden h-56">
+            <div class="teacher-card teacher-card-guest" id="stephan-schillinger" style="order: 8" onclick="toggleBio(this)">
+                <div class="guest-head">
+                <div class="guest-photo overflow-hidden h-56">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/stephan-schillinger.webp" type="image/webp">
                         <img src="/transpersonaltraining/assets/images/People/teachers/stephan-schillinger.jpg" alt="Stephan Schillinger" class="teacher-img">
                     </picture>
                 </div>
-                <div class="p-4">
+                <div class="guest-meta p-4">
                     <div class="flex items-center justify-between mb-2">
                         <span class="badge-guest">Guest</span>
                         <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-sec)] bio-icon"></i>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1">Stephan Schillinger</h3>
+                    <h3 class="guest-name text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1 md:min-h-[3.5rem]">Stephan Schillinger</h3>
                     <p class="text-[color:var(--c-sec)] font-medium text-sm">Switzerland / France</p>
+                </div>
                 </div>
                 <div class="teacher-bio">
                     <!-- Tab Navigation -->
@@ -1366,20 +1454,22 @@
                 </div>
             </div>
             
-            <div class="teacher-card" id="stefan-dressler" onclick="toggleBio(this)">
-                <div class="overflow-hidden h-56">
+            <div class="teacher-card teacher-card-guest" id="stefan-dressler" style="order: 9" onclick="toggleBio(this)">
+                <div class="guest-head">
+                <div class="guest-photo overflow-hidden h-56">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/stefan-dressler.webp" type="image/webp">
                         <img src="/transpersonaltraining/assets/images/People/teachers/stefan-dressler.jpg" alt="Dr. Stefan Dressler" class="teacher-img">
                     </picture>
                 </div>
-                <div class="p-4">
+                <div class="guest-meta p-4">
                     <div class="flex items-center justify-between mb-2">
                         <span class="badge-guest">Guest</span>
                         <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-sec)] bio-icon"></i>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1">Dr. Stefan Dressler</h3>
+                    <h3 class="guest-name text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1 md:min-h-[3.5rem]">Dr. Stefan Dressler</h3>
                     <p class="text-[color:var(--c-sec)] font-medium text-sm">Germany</p>
+                </div>
                 </div>
                 <div class="teacher-bio">
                     <!-- Tab Navigation -->
@@ -1442,20 +1532,22 @@
                 </div>
             </div>
             
-            <div class="teacher-card" id="jorge-ferrer" onclick="toggleBio(this)">
-                <div class="overflow-hidden h-56">
+            <div class="teacher-card teacher-card-guest" id="jorge-ferrer" style="order: 10" onclick="toggleBio(this)">
+                <div class="guest-head">
+                <div class="guest-photo overflow-hidden h-56">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/jorge-ferrer.webp" type="image/webp">
                         <img src="/transpersonaltraining/assets/images/People/teachers/jorge-ferrer.jpg" alt="Jorge N. Ferrer, PhD" class="teacher-img">
                     </picture>
                 </div>
-                <div class="p-4">
+                <div class="guest-meta p-4">
                     <div class="flex items-center justify-between mb-2">
                         <span class="badge-guest">Guest</span>
                         <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-sec)] bio-icon"></i>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1">Jorge N. Ferrer, PhD</h3>
+                    <h3 class="guest-name text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1 md:min-h-[3.5rem]">Jorge N. Ferrer, PhD</h3>
                     <p class="text-[color:var(--c-sec)] font-medium text-sm">United States</p>
+                </div>
                 </div>
                 <div class="teacher-bio">
                     <!-- Tab Navigation -->
@@ -1514,20 +1606,22 @@
                 </div>
             </div>
             
-            <div class="teacher-card" id="dario-hampi-pacari" onclick="toggleBio(this)">
-                <div class="overflow-hidden h-56">
+            <div class="teacher-card teacher-card-guest" id="dario-hampi-pacari" style="order: 11" onclick="toggleBio(this)">
+                <div class="guest-head">
+                <div class="guest-photo overflow-hidden h-56">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/dario-hampi-pacari.webp" type="image/webp">
                         <img src="/transpersonaltraining/assets/images/People/teachers/dario-hampi-pacari.jpg" alt="Dario Hampi Pacari" class="teacher-img">
                     </picture>
                 </div>
-                <div class="p-4">
+                <div class="guest-meta p-4">
                     <div class="flex items-center justify-between mb-2">
                         <span class="badge-guest">Guest</span>
                         <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-sec)] bio-icon"></i>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1">Dario Hampi Pacari</h3>
+                    <h3 class="guest-name text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1 md:min-h-[3.5rem]">Dario Hampi Pacari</h3>
                     <p class="text-[color:var(--c-sec)] font-medium text-sm">Italy</p>
+                </div>
                 </div>
                 <div class="teacher-bio">
                     <!-- Tab Navigation -->
@@ -1589,20 +1683,22 @@
                 </div>
             </div>
             
-            <div class="teacher-card" id="lilian-gscheidel" onclick="toggleBio(this)">
-                <div class="overflow-hidden h-56">
+            <div class="teacher-card teacher-card-guest" id="lilian-gscheidel" style="order: 12" onclick="toggleBio(this)">
+                <div class="guest-head">
+                <div class="guest-photo overflow-hidden h-56">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/lilian-gscheidel.webp" type="image/webp">
                         <img src="/transpersonaltraining/assets/images/People/teachers/lilian-gscheidel.jpg" alt="Lilian Gscheidel" class="teacher-img">
                     </picture>
                 </div>
-                <div class="p-4">
+                <div class="guest-meta p-4">
                     <div class="flex items-center justify-between mb-2">
                         <span class="badge-guest">Guest</span>
                         <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-sec)] bio-icon"></i>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1">Lilian Gscheidel</h3>
+                    <h3 class="guest-name text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1 md:min-h-[3.5rem]">Lilian Gscheidel</h3>
                     <p class="text-[color:var(--c-sec)] font-medium text-sm">Germany</p>
+                </div>
                 </div>
                 <div class="teacher-bio">
                     <!-- Tab Navigation -->
@@ -1666,20 +1762,22 @@
                 </div>
             </div>
             
-            <div class="teacher-card" id="erik-andersen" onclick="toggleBio(this)">
-                <div class="overflow-hidden h-56">
+            <div class="teacher-card teacher-card-guest" id="erik-andersen" style="order: 13" onclick="toggleBio(this)">
+                <div class="guest-head">
+                <div class="guest-photo overflow-hidden h-56">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/erik-andersen.webp" type="image/webp">
                         <img src="/transpersonaltraining/assets/images/People/teachers/erik-andersen.jpg" alt="Erik Andersen" class="teacher-img">
                     </picture>
                 </div>
-                <div class="p-4">
+                <div class="guest-meta p-4">
                     <div class="flex items-center justify-between mb-2">
                         <span class="badge-guest">Guest</span>
                         <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-sec)] bio-icon"></i>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1">Erik Andersen</h3>
+                    <h3 class="guest-name text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1 md:min-h-[3.5rem]">Erik Andersen</h3>
                     <p class="text-[color:var(--c-sec)] font-medium text-sm">South Africa</p>
+                </div>
                 </div>
                 <div class="teacher-bio">
                     <!-- Tab Navigation -->
@@ -1734,20 +1832,22 @@
                 </div>
             </div>
             
-            <div class="teacher-card" id="cathy-geils" onclick="toggleBio(this)">
-                <div class="overflow-hidden h-56">
+            <div class="teacher-card teacher-card-guest" id="cathy-geils" style="order: 14" onclick="toggleBio(this)">
+                <div class="guest-head">
+                <div class="guest-photo overflow-hidden h-56">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/cathy-geils.webp" type="image/webp">
                         <img src="/transpersonaltraining/assets/images/People/teachers/cathy-geils.jpg" alt="Cathy Geils" class="teacher-img">
                     </picture>
                 </div>
-                <div class="p-4">
+                <div class="guest-meta p-4">
                     <div class="flex items-center justify-between mb-2">
                         <span class="badge-guest">Guest</span>
                         <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-sec)] bio-icon"></i>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1">Cathy Geils</h3>
+                    <h3 class="guest-name text-lg font-serif font-bold text-[color:var(--c-heading)] mb-1 md:min-h-[3.5rem]">Cathy Geils</h3>
                     <p class="text-[color:var(--c-sec)] font-medium text-sm">South Africa</p>
+                </div>
                 </div>
                 <div class="teacher-bio">
                     <!-- Tab Navigation -->
@@ -1820,7 +1920,7 @@
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             
-            <div class="teacher-card teacher-card-compact" id="lev-belogorodskii" onclick="toggleBio(this)">
+            <div class="teacher-card teacher-card-compact" id="lev-belogorodskii" onclick="openTeacherBio(this)">
                 <div class="overflow-hidden h-28 sm:h-32">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/lev-belogorodskii.webp" type="image/webp">
@@ -1833,11 +1933,11 @@
                             <h3 class="text-sm font-serif font-bold text-[color:var(--c-heading)] leading-tight line-clamp-2">Lev Belogorodskii</h3>
                             <p class="text-[color:var(--c-sec)] text-xs mt-0.5">Russia</p>
                         </div>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-body-dim)] bio-icon mt-0.5 flex-shrink-0"></i>
+                        <i data-lucide="book-open" class="w-4 h-4 text-[color:var(--c-body-dim)] mt-0.5 flex-shrink-0"></i>
                     </div>
                 </div>
-                <div class="teacher-bio">
-                    <div class="p-4 pt-2">
+                <div class="teacher-bio-source hidden">
+                    <div>
                         <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             
                                 <p>Lev Belogorodskii is a psychotherapist trained in multiple modalities including Vivation, Biosynthesis, Biodynamic therapy, Family Constellations and Process Work under instructors such as David Boadella and Arnold Mindell. He has worked with individuals and groups in psychology, psychotherapy, coaching and business consulting for over 27 years.</p>
@@ -1849,7 +1949,7 @@
                 </div>
             </div>
             
-            <div class="teacher-card teacher-card-compact" id="liudmila-serbina" onclick="toggleBio(this)">
+            <div class="teacher-card teacher-card-compact" id="liudmila-serbina" onclick="openTeacherBio(this)">
                 <div class="overflow-hidden h-28 sm:h-32">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/liudmila-serbina.webp" type="image/webp">
@@ -1862,11 +1962,11 @@
                             <h3 class="text-sm font-serif font-bold text-[color:var(--c-heading)] leading-tight line-clamp-2">Liudmila Serbina</h3>
                             <p class="text-[color:var(--c-sec)] text-xs mt-0.5">Russia</p>
                         </div>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-body-dim)] bio-icon mt-0.5 flex-shrink-0"></i>
+                        <i data-lucide="book-open" class="w-4 h-4 text-[color:var(--c-body-dim)] mt-0.5 flex-shrink-0"></i>
                     </div>
                 </div>
-                <div class="teacher-bio">
-                    <div class="p-4 pt-2">
+                <div class="teacher-bio-source hidden">
+                    <div>
                         <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             
                                 <p>Liudmila Serbina is a Ph.D. psychotherapist of the European Association of Psychotherapists (EAP) and Scientific Director of the Institute of Integrative Psychology and Psychotherapy training program. Practicing since 1995, she has studied Process Work directly under Arnold and Amy Mindell since 1999. She has conducted psychotherapeutic groups, authored seminars, and organized international conferences throughout Russia and the CIS.</p>
@@ -1878,7 +1978,7 @@
                 </div>
             </div>
             
-            <div class="teacher-card teacher-card-compact" id="vladimir-maykov" onclick="toggleBio(this)">
+            <div class="teacher-card teacher-card-compact" id="vladimir-maykov" onclick="openTeacherBio(this)">
                 <div class="overflow-hidden h-28 sm:h-32">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/vladimir-maykov.webp" type="image/webp">
@@ -1891,11 +1991,11 @@
                             <h3 class="text-sm font-serif font-bold text-[color:var(--c-heading)] leading-tight line-clamp-2">Vladimir Maykov</h3>
                             <p class="text-[color:var(--c-sec)] text-xs mt-0.5">Russia</p>
                         </div>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-body-dim)] bio-icon mt-0.5 flex-shrink-0"></i>
+                        <i data-lucide="book-open" class="w-4 h-4 text-[color:var(--c-body-dim)] mt-0.5 flex-shrink-0"></i>
                     </div>
                 </div>
-                <div class="teacher-bio">
-                    <div class="p-4 pt-2">
+                <div class="teacher-bio-source hidden">
+                    <div>
                         <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             
                                 <p>Recognized as the pioneer of transpersonal studies in Russia, Vladimir Maykov established over 15 training programs in transpersonal psychology and psychotherapy. He led an international project that produced roughly 80 transpersonal psychology texts in Russian, founded a video archive of over 500 free transpersonal resources, and directed three documentary films.</p>
@@ -1907,7 +2007,7 @@
                 </div>
             </div>
             
-            <div class="teacher-card teacher-card-compact" id="pier-luigi-lattuada" onclick="toggleBio(this)">
+            <div class="teacher-card teacher-card-compact" id="pier-luigi-lattuada" onclick="openTeacherBio(this)">
                 <div class="overflow-hidden h-28 sm:h-32">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/pier-luigi-lattuada.webp" type="image/webp">
@@ -1920,11 +2020,11 @@
                             <h3 class="text-sm font-serif font-bold text-[color:var(--c-heading)] leading-tight line-clamp-2">Pier Luigi Lattuada</h3>
                             <p class="text-[color:var(--c-sec)] text-xs mt-0.5">Italy</p>
                         </div>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-body-dim)] bio-icon mt-0.5 flex-shrink-0"></i>
+                        <i data-lucide="book-open" class="w-4 h-4 text-[color:var(--c-body-dim)] mt-0.5 flex-shrink-0"></i>
                     </div>
                 </div>
-                <div class="teacher-bio">
-                    <div class="p-4 pt-2">
+                <div class="teacher-bio-source hidden">
+                    <div>
                         <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             
                                 <p>Pier Luigi Lattuada leads EUROTAS and directs a Milan-based psychotherapy school fully recognized by the Italian Ministry of Education, University and Research since 2002. He founded Biotransenergetics and has published sixteen books and over 30 articles since the 1980s, presenting at more than 50 international conferences across Europe, Russia, the USA, Brazil and beyond. He is also scientific director of the Integral Transpersonal Journal and a past medical director of Lifegate Holistic Medicine Clinic.</p>
@@ -1936,7 +2036,7 @@
                 </div>
             </div>
             
-            <div class="teacher-card teacher-card-compact" id="samvedam-randles" onclick="toggleBio(this)">
+            <div class="teacher-card teacher-card-compact" id="samvedam-randles" onclick="openTeacherBio(this)">
                 <div class="overflow-hidden h-28 sm:h-32">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/samvedam-b-randles.webp" type="image/webp">
@@ -1949,11 +2049,11 @@
                             <h3 class="text-sm font-serif font-bold text-[color:var(--c-heading)] leading-tight line-clamp-2">Samvedam B. Randles</h3>
                             <p class="text-[color:var(--c-sec)] text-xs mt-0.5">USA</p>
                         </div>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-body-dim)] bio-icon mt-0.5 flex-shrink-0"></i>
+                        <i data-lucide="book-open" class="w-4 h-4 text-[color:var(--c-body-dim)] mt-0.5 flex-shrink-0"></i>
                     </div>
                 </div>
-                <div class="teacher-bio">
-                    <div class="p-4 pt-2">
+                <div class="teacher-bio-source hidden">
+                    <div>
                         <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             
                                 <p>Samvedam B. Randles directs the Inner Arts Institute in Watertown, Massachusetts, where she trains and teaches Breathwork, Systemic Constellation Work, and Trauma and Collective Trauma Integration Work. She has 20 years of breathwork instruction experience, founded the Center for Body-oriented Psychotherapy in Boston, and brings 18 years of constellation facilitation experience plus 15 years training facilitators in the modality.</p>
@@ -1965,7 +2065,7 @@
                 </div>
             </div>
             
-            <div class="teacher-card teacher-card-compact" id="rita-aguila" onclick="toggleBio(this)">
+            <div class="teacher-card teacher-card-compact" id="rita-aguila" onclick="openTeacherBio(this)">
                 <div class="overflow-hidden h-28 sm:h-32">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/rita-aguila.webp" type="image/webp">
@@ -1978,11 +2078,11 @@
                             <h3 class="text-sm font-serif font-bold text-[color:var(--c-heading)] leading-tight line-clamp-2">Rita Aguila</h3>
                             <p class="text-[color:var(--c-sec)] text-xs mt-0.5">Portugal</p>
                         </div>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-body-dim)] bio-icon mt-0.5 flex-shrink-0"></i>
+                        <i data-lucide="book-open" class="w-4 h-4 text-[color:var(--c-body-dim)] mt-0.5 flex-shrink-0"></i>
                     </div>
                 </div>
-                <div class="teacher-bio">
-                    <div class="p-4 pt-2">
+                <div class="teacher-bio-source hidden">
+                    <div>
                         <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             
                                 <p>Rita Aguila brings a transpersonal approach and a specialization in trauma, with over 15 years exploring psychedelics therapeutically. She maintains a private practice serving teenagers and adults, facilitates women’s and couples’ retreats, and collaborates with Kosmicare at major festivals including BOOM.</p>
@@ -1994,7 +2094,7 @@
                 </div>
             </div>
             
-            <div class="teacher-card teacher-card-compact" id="charlotte-kihl" onclick="toggleBio(this)">
+            <div class="teacher-card teacher-card-compact" id="charlotte-kihl" onclick="openTeacherBio(this)">
                 <div class="overflow-hidden h-28 sm:h-32">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/charlotte-kihl.webp" type="image/webp">
@@ -2007,11 +2107,11 @@
                             <h3 class="text-sm font-serif font-bold text-[color:var(--c-heading)] leading-tight line-clamp-2">Charlotte Kihl</h3>
                             <p class="text-[color:var(--c-sec)] text-xs mt-0.5">Sweden</p>
                         </div>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-body-dim)] bio-icon mt-0.5 flex-shrink-0"></i>
+                        <i data-lucide="book-open" class="w-4 h-4 text-[color:var(--c-body-dim)] mt-0.5 flex-shrink-0"></i>
                     </div>
                 </div>
-                <div class="teacher-bio">
-                    <div class="p-4 pt-2">
+                <div class="teacher-bio-source hidden">
+                    <div>
                         <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             
                                 <p>Charlotte Kihl transitioned mid-career to pursue psychosynthesis training, which has remained her foundational practice for over 20 years. She supervises fourth-year psychosynthesis students in Sweden and previously taught at coaching institutes. Her expertise spans individual and couples therapy, family work, supervision, mindfulness instruction and transpersonal programs through her Stockholm practice, Grow Beyond.</p>
@@ -2023,7 +2123,7 @@
                 </div>
             </div>
             
-            <div class="teacher-card teacher-card-compact" id="kirsten-cameron" onclick="toggleBio(this)">
+            <div class="teacher-card teacher-card-compact" id="kirsten-cameron" onclick="openTeacherBio(this)">
                 <div class="overflow-hidden h-28 sm:h-32">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/kirsten-cameron.webp" type="image/webp">
@@ -2036,11 +2136,11 @@
                             <h3 class="text-sm font-serif font-bold text-[color:var(--c-heading)] leading-tight line-clamp-2">Dr. Kirsten E. Cameron</h3>
                             <p class="text-[color:var(--c-sec)] text-xs mt-0.5">California, USA</p>
                         </div>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-body-dim)] bio-icon mt-0.5 flex-shrink-0"></i>
+                        <i data-lucide="book-open" class="w-4 h-4 text-[color:var(--c-body-dim)] mt-0.5 flex-shrink-0"></i>
                     </div>
                 </div>
-                <div class="teacher-bio">
-                    <div class="p-4 pt-2">
+                <div class="teacher-bio-source hidden">
+                    <div>
                         <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             
                                 <p>Kirsten Cameron is a researcher, writer and educator whose work bridges transpersonal psychology, trauma studies and consciousness research. Her doctoral dissertation examined precognition as an adaptive response to childhood trauma. She has published in peer-reviewed journals including the International Journal of Transpersonal Studies and the Journal of Anomalous Experience and Cognition, and contributed to the Institute of Noetic Sciences. Her teaching emphasizes embodied awareness, intellectual curiosity, and the creative integration of science and spirit.</p>
@@ -2052,7 +2152,7 @@
                 </div>
             </div>
             
-            <div class="teacher-card teacher-card-compact" id="ingrida-indane" onclick="toggleBio(this)">
+            <div class="teacher-card teacher-card-compact" id="ingrida-indane" onclick="openTeacherBio(this)">
                 <div class="overflow-hidden h-28 sm:h-32">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/ingrida-indane.webp" type="image/webp">
@@ -2065,11 +2165,11 @@
                             <h3 class="text-sm font-serif font-bold text-[color:var(--c-heading)] leading-tight line-clamp-2">Ingrida Indane</h3>
                             <p class="text-[color:var(--c-sec)] text-xs mt-0.5">Latvia</p>
                         </div>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-body-dim)] bio-icon mt-0.5 flex-shrink-0"></i>
+                        <i data-lucide="book-open" class="w-4 h-4 text-[color:var(--c-body-dim)] mt-0.5 flex-shrink-0"></i>
                     </div>
                 </div>
-                <div class="teacher-bio">
-                    <div class="p-4 pt-2">
+                <div class="teacher-bio-source hidden">
+                    <div>
                         <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             
                                 <p>Ingrida Indane founded and directs the Transpersonal Education Institute in Latvia. She serves as executive director of the European Transpersonal Association and coordinates its Certification and Accreditation Committee. Her career spans art therapy, transpersonal psychology education and extensive international conference presentations, having conducted trainings in transpersonal arts therapy and psychology across Latvia and internationally since 1995.</p>
@@ -2081,7 +2181,7 @@
                 </div>
             </div>
             
-            <div class="teacher-card teacher-card-compact" id="serge-beddington-behrens" onclick="toggleBio(this)">
+            <div class="teacher-card teacher-card-compact" id="serge-beddington-behrens" onclick="openTeacherBio(this)">
                 <div class="overflow-hidden h-28 sm:h-32">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/serge-beddington-behrens.webp" type="image/webp">
@@ -2094,11 +2194,11 @@
                             <h3 class="text-sm font-serif font-bold text-[color:var(--c-heading)] leading-tight line-clamp-2">Dr. Serge Obolensky Beddington-Behrens</h3>
                             <p class="text-[color:var(--c-sec)] text-xs mt-0.5">England</p>
                         </div>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-body-dim)] bio-icon mt-0.5 flex-shrink-0"></i>
+                        <i data-lucide="book-open" class="w-4 h-4 text-[color:var(--c-body-dim)] mt-0.5 flex-shrink-0"></i>
                     </div>
                 </div>
-                <div class="teacher-bio">
-                    <div class="p-4 pt-2">
+                <div class="teacher-bio-source hidden">
+                    <div>
                         <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             
                                 <p>Serge Beddington-Behrens is an Oxford-educated professional with forty years of experience conducting spiritual retreats worldwide. He co-founded the Institute for the Study of Conscious Evolution in San Francisco during the 1980s and authored “Awakening the Universal Heart” and “Gateways to the Soul” (2020), with “Amazing Grace” released in 2023. He divides his time between London and Mallorca.</p>
@@ -2110,7 +2210,7 @@
                 </div>
             </div>
             
-            <div class="teacher-card teacher-card-compact" id="maria-kuehl-weigmann" onclick="toggleBio(this)">
+            <div class="teacher-card teacher-card-compact" id="maria-kuehl-weigmann" onclick="openTeacherBio(this)">
                 <div class="overflow-hidden h-28 sm:h-32">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/maria-kuehl-weigmann.webp" type="image/webp">
@@ -2123,11 +2223,11 @@
                             <h3 class="text-sm font-serif font-bold text-[color:var(--c-heading)] leading-tight line-clamp-2">Maria Kuehl-Weigmann</h3>
                             <p class="text-[color:var(--c-sec)] text-xs mt-0.5">Germany</p>
                         </div>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-body-dim)] bio-icon mt-0.5 flex-shrink-0"></i>
+                        <i data-lucide="book-open" class="w-4 h-4 text-[color:var(--c-body-dim)] mt-0.5 flex-shrink-0"></i>
                     </div>
                 </div>
-                <div class="teacher-bio">
-                    <div class="p-4 pt-2">
+                <div class="teacher-bio-source hidden">
+                    <div>
                         <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             
                                 <p>Maria Kuehl-Weigmann brought decades of clinical experience to the school through long-term work in student counseling at the Ruhr-University in Bochum and in her own practice, with specialized training across multiple therapeutic modalities. She spent four years working at Findhorn and remained closely involved with transpersonal training programs throughout her career. She passed away in 2023, remembered fondly as part of the school’s teaching history.</p>
@@ -2139,7 +2239,7 @@
                 </div>
             </div>
             
-            <div class="teacher-card teacher-card-compact" id="lydia-maidan" onclick="toggleBio(this)">
+            <div class="teacher-card teacher-card-compact" id="lydia-maidan" onclick="openTeacherBio(this)">
                 <div class="overflow-hidden h-28 sm:h-32">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/lydia-maidan.webp" type="image/webp">
@@ -2152,11 +2252,11 @@
                             <h3 class="text-sm font-serif font-bold text-[color:var(--c-heading)] leading-tight line-clamp-2">Lydia Maidan</h3>
                             <p class="text-[color:var(--c-sec)] text-xs mt-0.5">Moldova</p>
                         </div>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-body-dim)] bio-icon mt-0.5 flex-shrink-0"></i>
+                        <i data-lucide="book-open" class="w-4 h-4 text-[color:var(--c-body-dim)] mt-0.5 flex-shrink-0"></i>
                     </div>
                 </div>
-                <div class="teacher-bio">
-                    <div class="p-4 pt-2">
+                <div class="teacher-bio-source hidden">
+                    <div>
                         <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             
                                 <p>Lydia Maidan is a specialist in early childhood development who leads psychological trainings for pregnant women and provides counseling to parents. She serves as a board member of the Association of Transpersonal Development in Moldova and coordinated the European Transpersonal Association Congress in Moldova in 2013.</p>
@@ -2168,7 +2268,7 @@
                 </div>
             </div>
             
-            <div class="teacher-card teacher-card-compact" id="cristina-revenco" onclick="toggleBio(this)">
+            <div class="teacher-card teacher-card-compact" id="cristina-revenco" onclick="openTeacherBio(this)">
                 <div class="overflow-hidden h-28 sm:h-32">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/cristina-revenco.webp" type="image/webp">
@@ -2181,11 +2281,11 @@
                             <h3 class="text-sm font-serif font-bold text-[color:var(--c-heading)] leading-tight line-clamp-2">Cristina Revenco</h3>
                             <p class="text-[color:var(--c-sec)] text-xs mt-0.5">Romania</p>
                         </div>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-body-dim)] bio-icon mt-0.5 flex-shrink-0"></i>
+                        <i data-lucide="book-open" class="w-4 h-4 text-[color:var(--c-body-dim)] mt-0.5 flex-shrink-0"></i>
                     </div>
                 </div>
-                <div class="teacher-bio">
-                    <div class="p-4 pt-2">
+                <div class="teacher-bio-source hidden">
+                    <div>
                         <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             
                                 <p>Cristina Revenco practices as a licensed transpersonal psychotherapist with specialized experience working with children and adolescents facing developmental challenges, including autism spectrum disorders and ADHD. She founded Psycharmonia, a professional project, and regularly conducts webinars and workshops. Her training encompasses breathwork techniques, integral psychotherapy, art therapy, hypnosis and mindfulness practices, alongside broader interests in religious studies, mythology, philosophy and the arts.</p>
@@ -2197,7 +2297,7 @@
                 </div>
             </div>
             
-            <div class="teacher-card teacher-card-compact" id="dennis-johnson" onclick="toggleBio(this)">
+            <div class="teacher-card teacher-card-compact" id="dennis-johnson" onclick="openTeacherBio(this)">
                 <div class="overflow-hidden h-28 sm:h-32">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/dennis-johnson.webp" type="image/webp">
@@ -2210,11 +2310,11 @@
                             <h3 class="text-sm font-serif font-bold text-[color:var(--c-heading)] leading-tight line-clamp-2">Dennis Johnson</h3>
                             <p class="text-[color:var(--c-sec)] text-xs mt-0.5">Austria</p>
                         </div>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-body-dim)] bio-icon mt-0.5 flex-shrink-0"></i>
+                        <i data-lucide="book-open" class="w-4 h-4 text-[color:var(--c-body-dim)] mt-0.5 flex-shrink-0"></i>
                     </div>
                 </div>
-                <div class="teacher-bio">
-                    <div class="p-4 pt-2">
+                <div class="teacher-bio-source hidden">
+                    <div>
                         <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             
                                 <p>Dennis Johnson maintains an academic foundation in Tibetan and Buddhist Studies and has served as a librarian, translator, editor and interpreter. His professional experience includes roles at Windhorse Integral Mental Health Vienna and the Oxford Mindfulness Centre. His scholarly focus centers on transdisciplinary and transcultural research and practice, with applications toward individual, social and cultural transformation grounded in both traditional knowledge and modern science.</p>
@@ -2226,7 +2326,7 @@
                 </div>
             </div>
             
-            <div class="teacher-card teacher-card-compact" id="vera-covaliciuc" onclick="toggleBio(this)">
+            <div class="teacher-card teacher-card-compact" id="vera-covaliciuc" onclick="openTeacherBio(this)">
                 <div class="overflow-hidden h-28 sm:h-32">
                     <picture>
                         <source srcset="/transpersonaltraining/assets/images/People/teachers/vera-covaliciuc.webp" type="image/webp">
@@ -2239,11 +2339,11 @@
                             <h3 class="text-sm font-serif font-bold text-[color:var(--c-heading)] leading-tight line-clamp-2">Vera Covaliciuc</h3>
                             <p class="text-[color:var(--c-sec)] text-xs mt-0.5">Russia</p>
                         </div>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-[color:var(--c-body-dim)] bio-icon mt-0.5 flex-shrink-0"></i>
+                        <i data-lucide="book-open" class="w-4 h-4 text-[color:var(--c-body-dim)] mt-0.5 flex-shrink-0"></i>
                     </div>
                 </div>
-                <div class="teacher-bio">
-                    <div class="p-4 pt-2">
+                <div class="teacher-bio-source hidden">
+                    <div>
                         <div class="prose prose-sm max-w-none text-[color:var(--c-body)]">
                             
                                 <p>Vera Covaliciuc holds advanced training in regressology and quantum healing hypnosis, specializing in past-life regression, reincarnation and karmic trauma healing. She brings nearly three decades of classical music performance experience across Russia and Europe, including international festival participation and competition awards. She hosts and produces the Regressology Podcast on Spotify and has translated philosophical works by Shrinivas Arka and scientific articles by Dr. Tina Lindhard on consciousness topics.</p>
@@ -2258,6 +2358,25 @@
         </div>
     </div>
 </section>
+
+<!-- Biography popup, for the compact "Who Has Taught With Us" cards.
+     Native <dialog>, the same pattern as the resources page video popup. -->
+<dialog id="teacher-bio-modal" class="w-[92vw] max-w-2xl p-0 bg-transparent backdrop:bg-[color:var(--c-deepest-80)]">
+    <div class="relative bg-[color:var(--c-paper-card)] shadow-2xl max-h-[85vh] overflow-y-auto">
+        <button type="button" onclick="closeTeacherBio()" aria-label="Close biography"
+                class="absolute top-3 right-3 z-10 bg-[color:var(--c-paper-hi)] hover:bg-[color:var(--c-paper-2)] text-[color:var(--c-heading)] p-1.5 transition-colors border border-[color:var(--c-line)] cursor-pointer">
+            <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+        <div class="flex items-center gap-4 p-6 pb-4 border-b border-[color:var(--c-line)]">
+            <img id="tb-photo" src="" alt="" class="w-20 h-20 object-cover flex-shrink-0">
+            <div class="pr-10">
+                <h3 id="tb-name" class="text-2xl font-serif font-bold text-[color:var(--c-heading)] leading-tight"></h3>
+                <p id="tb-location" class="text-[color:var(--c-sec)] font-medium text-sm mt-1"></p>
+            </div>
+        </div>
+        <div id="tb-body" class="px-6 py-5 text-[color:var(--c-body)]"></div>
+    </div>
+</dialog>
 
 <!-- CTA Section -->
 <section class="py-24 bg-gradient-to-br from-[var(--c-deep)] to-[var(--c-deep-2)] text-[color:var(--c-on-dark-1)] relative overflow-hidden">
@@ -2279,32 +2398,143 @@
 </section>
 
 <script>
+    /* ── The guest cards' grid ──
+       Opening a card widens it to a grid span (see the stylesheet), so the grid
+       has to find the room: every card after it shifts up one place, and the
+       last of them drops onto the line below with the rest of its row. Which
+       card ends up where, and how they get there, is the job of the two
+       functions below. */
+    const GUEST_WIDE = window.matchMedia('(min-width: 1024px)');
+    const GUEST_STILL = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    function reflowGuestGrid() {
+        const grid = document.querySelector('.teachers-guest-grid');
+        if (!grid) return;
+        const cards = Array.prototype.slice.call(grid.children);
+        const columns = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+        cards.forEach(function (card, i) { card.style.order = i; });
+        if (!GUEST_WIDE.matches || columns < 2) return;
+
+        /* An open card in the last column has nothing to its right to grow
+           into, so the grid would wrap it onto the next line — the card you
+           just clicked would leave its place and turn up below. Move it one
+           place earlier instead: it grows leftwards into the last two columns,
+           staying where it was clicked, and the neighbour it displaced leads
+           the next line. */
+        let open = -1;
+        cards.forEach(function (card, i) { if (card.classList.contains('expanded')) open = i; });
+        if (open < 0 || open % columns !== columns - 1) return;
+        cards[open].style.order = open - 1;
+        cards[open - 1].style.order = open;
+    }
+
+    /* Grid placement doesn't animate: without this the cards a widening card
+       displaces would simply appear in their new places. So take the geometry
+       before and after the change, put every card that moved back where it was
+       with a transform, and release the lot on the next frame — the transition
+       in the stylesheet carries them across. The card that grew is left out:
+       it changes size rather than place, and interpolating that only stretches
+       it. */
+    function animateGuestReflow(change) {
+        const cards = Array.prototype.slice.call(document.querySelectorAll('.teacher-card-guest'));
+        if (!GUEST_WIDE.matches || GUEST_STILL.matches) { change(); return; }
+
+        const before = cards.map(function (card) { return card.getBoundingClientRect(); });
+        change();
+        const after = cards.map(function (card) { return card.getBoundingClientRect(); });
+
+        cards.forEach(function (card, i) {
+            const dx = before[i].left - after[i].left;
+            const dy = before[i].top - after[i].top;
+            if (Math.abs(before[i].width - after[i].width) > 1 || (!dx && !dy)) return;
+            card.style.transition = 'none';
+            card.style.transform = 'translate(' + dx + 'px, ' + dy + 'px)';
+        });
+
+        void document.body.offsetHeight;   // this is the frame they start from
+
+        // Handing them back to the stylesheet is what plays the movement: the
+        // transform goes, the transition it left behind carries them there.
+        cards.forEach(function (card) {
+            card.style.transition = '';
+            card.style.transform = '';
+        });
+    }
+
+    // Below lg every card is core-width already and none of this applies, so
+    // crossing the breakpoint has to put them back in plain order.
+    GUEST_WIDE.addEventListener('change', reflowGuestGrid);
+
     function toggleBio(card) {
         event.stopPropagation();
-        
-        // Close all other bios
-        document.querySelectorAll('.teacher-card').forEach(openCard => {
-            if (openCard !== card) {
-                const bio = openCard.querySelector('.teacher-bio');
-                if (bio) {
-                    bio.classList.remove('active');
-                    openCard.classList.remove('expanded');
+
+        animateGuestReflow(function () {
+            // Close all other bios
+            document.querySelectorAll('.teacher-card').forEach(openCard => {
+                if (openCard !== card) {
+                    const bio = openCard.querySelector('.teacher-bio');
+                    if (bio) {
+                        bio.classList.remove('active');
+                        openCard.classList.remove('expanded');
+                    }
                 }
+            });
+
+            // Toggle current bio
+            const bio = card.querySelector('.teacher-bio');
+            if (bio) {
+                bio.classList.toggle('active');
+                card.classList.toggle('expanded');
             }
+
+            reflowGuestGrid();
         });
-        
-        // Toggle current bio
-        const bio = card.querySelector('.teacher-bio');
-        if (bio) {
-            bio.classList.toggle('active');
-            card.classList.toggle('expanded');
-        }
-        
+
         // Re-initialize lucide icons for any new content
         if (window.lucide) {
             lucide.createIcons();
         }
     }
+
+    /* ── The compact cards' biography popup ── */
+    function openTeacherBio(card) {
+        if (window.event) window.event.stopPropagation();   // absent when opened from the URL hash
+        const dlg = document.getElementById('teacher-bio-modal');
+        const source = card.querySelector('.teacher-bio-source');
+        if (!dlg || !source) return;
+
+        const img = card.querySelector('img');
+        const photo = document.getElementById('tb-photo');
+        if (img) {
+            photo.src = img.currentSrc || img.src;
+            photo.alt = img.alt;
+            photo.style.objectPosition = img.style.objectPosition || '';
+        }
+        document.getElementById('tb-name').textContent = (card.querySelector('h3') || {}).textContent || '';
+        document.getElementById('tb-location').textContent = (card.querySelector('p') || {}).textContent || '';
+        document.getElementById('tb-body').innerHTML = source.innerHTML;
+
+        if (typeof dlg.showModal === 'function') dlg.showModal();
+        else dlg.setAttribute('open', '');
+        if (window.lucide) lucide.createIcons();
+    }
+
+    function closeTeacherBio() {
+        const dlg = document.getElementById('teacher-bio-modal');
+        if (dlg && dlg.open) {
+            if (typeof dlg.close === 'function') dlg.close();
+            else dlg.removeAttribute('open');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const dlg = document.getElementById('teacher-bio-modal');
+        if (!dlg) return;
+        // A click on the backdrop, outside the panel, closes the popup.
+        dlg.addEventListener('click', function (e) {
+            if (e.target === dlg) closeTeacherBio();
+        });
+    });
 
     function switchTab(event, tabId) {
         event.stopPropagation();
@@ -2345,13 +2575,20 @@
         const card = document.getElementById(id);
         if (!card || !card.classList.contains('teacher-card')) return;
 
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        if (card.classList.contains('teacher-card-compact')) {
+            openTeacherBio(card);
+            return;
+        }
+
         const bio = card.querySelector('.teacher-bio');
         if (bio) {
             bio.classList.add('active');
             card.classList.add('expanded');
+            reflowGuestGrid();
             if (window.lucide) lucide.createIcons();
         }
-        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     window.addEventListener('DOMContentLoaded', openTeacherFromHash);
