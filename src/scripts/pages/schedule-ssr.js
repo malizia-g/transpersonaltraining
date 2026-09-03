@@ -106,6 +106,39 @@ function reorderCards(period) {
     
     // Re-append in new order
     sortedCards.forEach(card => appointmentsList.appendChild(card));
+
+    placePeriodDividers(appointmentsList, sortedCards, period);
+}
+
+// The labelled hairlines that mark the seam between the two halves of the
+// "All" list. They only earn their place when both halves are actually on
+// screen, so any other period — or a filter that empties one side — hides
+// them again.
+function placePeriodDividers(listEl, sortedCards, period) {
+    const futureDivider = document.getElementById('divider-future');
+    const pastDivider = document.getElementById('divider-past');
+    if (!futureDivider || !pastDivider) return;
+
+    const visible = sortedCards.filter(card => card.style.display !== 'none');
+    const firstPast = period === 'all'
+        ? visible.find(card => !isFutureEvent(card.dataset.date))
+        : undefined;
+    const show = !!firstPast && visible.some(card => isFutureEvent(card.dataset.date));
+
+    toggleDivider(futureDivider, show);
+    toggleDivider(pastDivider, show);
+
+    if (show) {
+        listEl.insertBefore(futureDivider, visible[0]);
+        listEl.insertBefore(pastDivider, firstPast);
+    }
+}
+
+// The dividers are flex rows, so showing one means swapping Tailwind's
+// `hidden` for `flex` rather than clearing a display style.
+function toggleDivider(el, show) {
+    el.classList.toggle('hidden', !show);
+    el.classList.toggle('flex', show);
 }
 
 // Initialize filters

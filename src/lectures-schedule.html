@@ -65,6 +65,16 @@ description: "Live online lectures in transpersonal psychology training. Learn h
                 </div>
 
                 <div class="flex flex-wrap gap-4">
+                    <!-- Period Filter -->
+                    <div class="flex-1 min-w-[200px]">
+                        <label for="filter-period" class="block text-sm font-medium text-[color:var(--c-body-dim)] mb-1">Period</label>
+                        <select id="filter-period" class="w-full px-3 py-2 border border-[color:var(--c-line)] focus:ring-2 focus:ring-[color:var(--c-link)] focus:border-[color:var(--c-link)] bg-[color:var(--c-paper-card)] text-[color:var(--c-body)]">
+                            <option value="future">Future Lectures</option>
+                            <option value="past">Past Lectures</option>
+                            <option value="all">All Lectures</option>
+                        </select>
+                    </div>
+
                     <!-- Module Filter -->
                     <div class="flex-1 min-w-[200px]">
                         <label for="filter-module" class="block text-sm font-medium text-[color:var(--c-body-dim)] mb-1">Module</label>
@@ -214,6 +224,21 @@ description: "Live online lectures in transpersonal psychology training. Learn h
                         </div>
                     </div>
                     {% endfor %}
+
+                    {# In "All", the two halves run straight into each other, so
+                       these mark where the upcoming lectures end and the archive
+                       begins. Hidden unless both halves have something in them —
+                       see placePeriodDividers() in lectures-schedule.js. #}
+                    <div id="divider-future" class="hidden items-center gap-4">
+                        <span class="h-px flex-1 bg-[color:var(--c-acc-40)]"></span>
+                        <span class="p4-kicker text-[color:var(--c-sec)] whitespace-nowrap">Future lectures</span>
+                        <span class="h-px flex-1 bg-[color:var(--c-acc-40)]"></span>
+                    </div>
+                    <div id="divider-past" class="hidden items-center gap-4">
+                        <span class="h-px flex-1 bg-[color:var(--c-line)]"></span>
+                        <span class="p4-kicker text-[color:var(--c-body-dim)] whitespace-nowrap">Past lectures</span>
+                        <span class="h-px flex-1 bg-[color:var(--c-line)]"></span>
+                    </div>
                 {% else %}
                     <div class="bg-[color:var(--c-paper)] border border-[color:var(--c-line)] p-12 text-center">
                         <i data-lucide="video-off" class="w-20 h-20 text-[color:var(--c-body-dim)] mx-auto mb-4"></i>

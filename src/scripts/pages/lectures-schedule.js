@@ -57,9 +57,96 @@ window.toggleInlineVideo = function(btn, videoUrl) {
     }
 };
 
+// Dates come from the sheet as DD.MM.YYYY (see src/_data/lectureEvents.js).
+function parseLectureDate(dateString) {
+    if (!dateString) return null;
+    const parts = dateString.trim().split('.');
+    if (parts.length !== 3) return null;
+    return new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
+}
+
+// A lecture counts as future for the whole of its own day, so today's evening
+// session doesn't disappear at midnight the night before.
+function isFutureLecture(dateString) {
+    const date = parseLectureDate(dateString);
+    if (!date) return false;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return date >= today;
+}
+
+function sortLectureCards(cards, ascending = true) {
+    return Array.from(cards).sort((a, b) => {
+        const dateA = parseLectureDate(a.dataset.date);
+        const dateB = parseLectureDate(b.dataset.date);
+        if (!dateA && !dateB) return 0;
+        if (!dateA) return 1;
+        if (!dateB) return -1;
+        return ascending ? dateA - dateB : dateB - dateA;
+    });
+}
+
+// Whichever end of the calendar the period points at goes first: the next
+// lecture coming up, or the one most recently given.
+function reorderLectureCards(period) {
+    const listEl = document.getElementById('lectures-list');
+    if (!listEl) return;
+    const cards = listEl.querySelectorAll('.lecture-card');
+
+    let sorted;
+    if (period === 'future') {
+        sorted = sortLectureCards(cards, true);
+    } else if (period === 'past') {
+        sorted = sortLectureCards(cards, false);
+    } else {
+        const future = [];
+        const past = [];
+        cards.forEach(card => {
+            (isFutureLecture(card.dataset.date) ? future : past).push(card);
+        });
+        sorted = [...sortLectureCards(future, true), ...sortLectureCards(past, false)];
+    }
+
+    sorted.forEach(card => listEl.appendChild(card));
+
+    placePeriodDividers(listEl, sorted, period);
+}
+
+// The labelled hairlines that mark the seam between the two halves of the
+// "All" list. They only earn their place when both halves are actually on
+// screen, so any other period — or a filter that empties one side — hides
+// them again.
+function placePeriodDividers(listEl, sortedCards, period) {
+    const futureDivider = document.getElementById('divider-future');
+    const pastDivider = document.getElementById('divider-past');
+    if (!futureDivider || !pastDivider) return;
+
+    const visible = sortedCards.filter(card => card.style.display !== 'none');
+    const firstPast = period === 'all'
+        ? visible.find(card => !isFutureLecture(card.dataset.date))
+        : undefined;
+    const show = !!firstPast && visible.some(card => isFutureLecture(card.dataset.date));
+
+    toggleDivider(futureDivider, show);
+    toggleDivider(pastDivider, show);
+
+    if (show) {
+        listEl.insertBefore(futureDivider, visible[0]);
+        listEl.insertBefore(pastDivider, firstPast);
+    }
+}
+
+// The dividers are flex rows, so showing one means swapping Tailwind's
+// `hidden` for `flex` rather than clearing a display style.
+function toggleDivider(el, show) {
+    el.classList.toggle('hidden', !show);
+    el.classList.toggle('flex', show);
+}
+
 // Filter logic
 function initializeLectureFilters() {
     const cards = document.querySelectorAll('.lecture-card');
+    const filterPeriod = document.getElementById('filter-period');
     const filterModule = document.getElementById('filter-module');
     const filterTeacher = document.getElementById('filter-teacher');
     const filterSearch = document.getElementById('filter-search');
@@ -67,6 +154,7 @@ function initializeLectureFilters() {
 
     if (!cards.length) return;
 
+    if (filterPeriod) filterPeriod.addEventListener('change', applyLectureFilters);
     if (filterModule) filterModule.addEventListener('change', applyLectureFilters);
     if (filterTeacher) filterTeacher.addEventListener('change', applyLectureFilters);
     if (filterSearch) {
@@ -79,6 +167,7 @@ function initializeLectureFilters() {
 
     if (clearBtn) {
         clearBtn.addEventListener('click', () => {
+            if (filterPeriod) filterPeriod.value = 'future';
             if (filterModule) filterModule.value = '';
             if (filterTeacher) filterTeacher.value = '';
             if (filterSearch) filterSearch.value = '';
@@ -100,12 +189,14 @@ function initializeLectureFilters() {
 
 function applyLectureFilters() {
     const cards = document.querySelectorAll('.lecture-card');
+    const filterPeriod = document.getElementById('filter-period');
     const filterModule = document.getElementById('filter-module');
     const filterTeacher = document.getElementById('filter-teacher');
     const filterSearch = document.getElementById('filter-search');
     const listEl = document.getElementById('lectures-list');
     const emptyEl = document.getElementById('empty-filtered-state');
 
+    const selPeriod = filterPeriod?.value || 'future';
     const selModule = filterModule?.value || '';
     const selTeacher = filterTeacher?.value || '';
     const searchTerm = (filterSearch?.value || '').toLowerCase().trim();
@@ -117,18 +208,24 @@ function applyLectureFilters() {
         const teacher1 = card.dataset.teacher1 || '';
         const teacher2 = card.dataset.teacher2 || '';
         const title = (card.dataset.title || '').toLowerCase();
+        const isFuture = isFutureLecture(card.dataset.date || '');
 
+        const matchPeriod = selPeriod === 'all' ||
+                            (selPeriod === 'future' && isFuture) ||
+                            (selPeriod === 'past' && !isFuture);
         const matchModule = !selModule || module === selModule;
         const matchTeacher = !selTeacher || teacher1 === selTeacher || teacher2 === selTeacher;
         const matchSearch = !searchTerm || title.includes(searchTerm) || teacher1.toLowerCase().includes(searchTerm) || teacher2.toLowerCase().includes(searchTerm);
 
-        if (matchModule && matchTeacher && matchSearch) {
+        if (matchPeriod && matchModule && matchTeacher && matchSearch) {
             card.style.display = '';
             visibleCount++;
         } else {
             card.style.display = 'none';
         }
     });
+
+    reorderLectureCards(selPeriod);
 
     if (emptyEl && listEl) {
         if (visibleCount === 0 && cards.length > 0) {
@@ -155,11 +252,14 @@ function updateLectureFilterCount() {
     if (filteredEl) filteredEl.textContent = visible.length;
     if (totalEl) totalEl.textContent = cards.length;
 
+    const filterPeriod = document.getElementById('filter-period');
     const filterModule = document.getElementById('filter-module');
     const filterTeacher = document.getElementById('filter-teacher');
     const filterSearch = document.getElementById('filter-search');
 
-    const hasActive = filterModule?.value || filterTeacher?.value || filterSearch?.value;
+    // "future" is the default, so it doesn't count as a filter the user set.
+    const hasActive = (filterPeriod && filterPeriod.value !== 'future') ||
+                      filterModule?.value || filterTeacher?.value || filterSearch?.value;
 
     if (countEl) countEl.classList.toggle('hidden', !hasActive);
     if (clearBtn) {
