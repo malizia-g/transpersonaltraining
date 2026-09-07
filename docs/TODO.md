@@ -71,6 +71,17 @@ GitHub's UI, never through this codebase).
       category tested end to end (pages, 32 bio anchors, portal paths, patterns, 410s)
 - [x] Verify `student.transpersonal-training.com` still resolves — untouched, 200
 - [x] Run a production deployment test — site live, indexable, canonicals correct
+- [x] **These checks now run themselves — done 2026-09-07.** A step in `deploy.yml` verifies the
+      production build and **fails the deploy** if any safeguard is missing, so nothing here depends
+      on remembering a checklist at merge time. It guards: no `noindex` in a production build, the
+      `.htaccess` present with its teacher rules, the `NE` flag on every anchor rule,
+      `X-Forwarded-Proto` (not `%{HTTPS}`) in the canonical rule, `ErrorDocument 404`, a `robots.txt`
+      that doesn't block and points at the production sitemap, a sitemap free of `github.io` URLs,
+      and `404.html` present. Each assertion was tested by breaking the thing it guards.
+
+      Why fail rather than warn: every defect this migration produced left the site apparently
+      working. A skipped deploy is recoverable; a silently deindexed site is found weeks later.
+
 - [x] **Custom error pages — done 2026-09-07.** Apache served its stock error page (banner and all)
       for any URL that didn't exist. `/404.html` is only picked up automatically on GitHub Pages;
       Apache needs `ErrorDocument`, now set for 404, 403 and 410. Status codes are unaffected.
@@ -653,7 +664,12 @@ moves, the old site is gone and any mistake in the map becomes unverifiable.
 
 The domain property is already verified and active. What remains is launch-day work:
 
-- [ ] Submit the new sitemap (+ Bing Webmaster Tools)
+- [ ] Submit the sitemap in Search Console (+ Bing Webmaster Tools). Not needed for discovery —
+      `robots.txt` already advertises it — but a submitted sitemap is what gives the per-sitemap
+      indexing report, which is the instrument for watching the migration land over 4–6 weeks.
+      **Verified live 2026-09-07:** 21 URLs, all `https`, all returning `200` with no redirect hop,
+      `404.html` correctly absent. Do **not** use the Change of Address tool — the domain didn't
+      change, only what serves it.
 - [ ] URL-inspect the top 10 pages
 - [ ] Monitor coverage and redirects weekly for 4–6 weeks; fix crawl errors as they appear
 
