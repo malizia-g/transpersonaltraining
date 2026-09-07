@@ -197,6 +197,72 @@ module.exports = function(eleventyConfig) {
   // Copy new scripts structure
   eleventyConfig.addPassthroughCopy({ "src/scripts": "scripts" });
   
+  // Give every <img> its intrinsic width and height.
+  //
+  // Without them the browser doesn't know how much room an image needs until it
+  // has downloaded enough of it to find out, so everything below jumps down when
+  // it arrives. That jump is Cumulative Layout Shift, one of the three Core Web
+  // Vitals Google ranks on — and with ~20 photographs on the homepage it is the
+  // cheapest of the three to fix. The attributes only declare the aspect ratio;
+  // CSS still decides the displayed size, so `class="w-full"` keeps behaving
+  // exactly as before.
+  //
+  // Done here rather than by hand because there are 178 <img> tags across 20
+  // templates, several of them generated from Google Sheets data, and a build
+  // step also covers whatever gets added next.
+  // Cached across the whole build: the same photo appears on several pages, and
+  // sharp only reads the file header, but re-reading it 178 times is still waste.
+  const dimensionCache = new Map();
+
+  eleventyConfig.addTransform('imageDimensions', async function (content) {
+    if (!(this.page.outputPath || '').endsWith('.html')) return content;
+
+    const sharp = require('sharp');
+    const prefix = process.env.PATH_PREFIX || '/';
+    const tags = content.match(/<img\b[^>]*>/g);
+    if (!tags) return content;
+
+    let out = content;
+    for (const tag of new Set(tags)) {
+      if (/\bwidth=/.test(tag) && /\bheight=/.test(tag)) continue;
+
+      const srcMatch = tag.match(/\ssrc="([^"]+)"/);
+      if (!srcMatch) continue;
+      const src = srcMatch[1];
+      // Remote images (YouTube thumbnails) and SVG have nothing useful to read.
+      if (/^https?:/i.test(src) || /\.svg$/i.test(src)) continue;
+
+      let rel = src;
+      if (prefix !== '/' && rel.startsWith(prefix)) rel = '/' + rel.slice(prefix.length);
+
+      // Most images live in src/ and are passthrough-copied. The student photos
+      // are the exception: practiceClients.js downloads them straight into _site
+      // before templates render, so they only ever exist on the output side.
+      let file = path.join(__dirname, 'src', rel);
+      if (!fs.existsSync(file)) {
+        const built = path.join(__dirname, '_site', rel);
+        if (fs.existsSync(built)) file = built;
+      }
+
+      if (!dimensionCache.has(file)) {
+        try {
+          const meta = await sharp(file).metadata();
+          dimensionCache.set(file, meta.width && meta.height ? meta : null);
+        } catch (e) {
+          // A missing file is not this transform's problem to report — the build
+          // already fails elsewhere if an asset is genuinely absent.
+          dimensionCache.set(file, null);
+        }
+      }
+      const meta = dimensionCache.get(file);
+      if (!meta) continue;
+
+      const withDims = tag.replace(/<img\b/, `<img width="${meta.width}" height="${meta.height}"`);
+      out = out.split(tag).join(withDims);
+    }
+    return out;
+  });
+
   // Watch for changes
   eleventyConfig.addWatchTarget("src/styles/**/*.css");
   eleventyConfig.addWatchTarget("src/scripts/**/*.js");
