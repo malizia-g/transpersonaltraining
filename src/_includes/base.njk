@@ -90,7 +90,87 @@
     }
     </script>
     {% endif %}
-    
+
+    {# One Person per teacher, each anchored to the fragment its old bio URL now
+       redirects to. This is the load-bearing piece of the migration: 32 separate
+       bio pages were collapsed into this single one, and those pages were 64% of
+       the site's organic clicks. The @id tying each person to /teachers/#<id> is
+       what tells Google this page represents 32 distinct people rather than one
+       document that happens to mention them. #}
+    {% if page.url == "/teachers/" %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+      {%- for teacher in teachers.all %}
+        {
+          "@type": "Person",
+          "@id": "https://transpersonal-training.com/teachers/#{{ teacher.id }}",
+          "url": "https://transpersonal-training.com/teachers/#{{ teacher.id }}",
+          "name": {{ teacher.name | dump | safe }},
+          {%- if teacher.role %}
+          "jobTitle": {{ teacher.role | dump | safe }},
+          {%- endif %}
+          {%- if teacher.credentials %}
+          "description": {{ teacher.credentials | dump | safe }},
+          {%- endif %}
+          {%- if teacher.image %}
+          "image": "https://transpersonal-training.com{{ teacher.image }}",
+          {%- endif %}
+          {%- if teacher.location %}
+          "homeLocation": { "@type": "Place", "name": {{ teacher.location | dump | safe }} },
+          {%- endif %}
+          {%- if teacher.website %}
+          "sameAs": [{{ teacher.website | dump | safe }}],
+          {%- endif %}
+          "affiliation": {
+            "@type": "EducationalOrganization",
+            "name": "Transpersonal Training",
+            "url": "https://transpersonal-training.com"
+          }
+        }{% if not loop.last %},{% endif %}
+      {%- endfor %}
+      ]
+    }
+    </script>
+    {% endif %}
+
+    {# Breadcrumbs. The site is flat, so most pages are simply Home > Page; blog
+       posts get the extra Blog level. Worth emitting even for one level: Google
+       renders it in place of the raw URL in results. #}
+    {% if page.url != "/" %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://transpersonal-training.com/"
+        }{% if page.url.startsWith("/blog/") and page.url != "/blog/" %},
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://transpersonal-training.com/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": {{ title | dump | safe }}
+        }{% else %},
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": {{ title | dump | safe }}
+        }{% endif %}
+      ]
+    }
+    </script>
+    {% endif %}
+
     <!-- Page Loader Styles (inline for immediate display) -->
     <style>
         #page-loader {
