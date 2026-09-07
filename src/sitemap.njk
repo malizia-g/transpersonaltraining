@@ -8,7 +8,26 @@ eleventyExcludeFromCollections: true
   {%- if not page.data.eleventyExcludeFromCollections %}
   <url>
     <loc>https://transpersonal-training.com{{ page.url }}</loc>
-    <lastmod>{{ page.date | date('yyyy-MM-dd') }}</lastmod>
+    {#-
+      No <lastmod> on purpose — don't add one back without reading this.
+
+      It used to emit `page.date`, which in CI is the checkout time, so every
+      page claimed to have changed on every single deploy. Google ignores a
+      lastmod it finds untrustworthy, and a file that cries wolf on all 21 URLs
+      is exactly how it earns that. No claim beats a false one.
+
+      The obvious repair — the file's last git commit — is wrong here too:
+      /schedule/, /lectures-schedule/, /curriculum/ and
+      /become-a-practice-client/ are built from Google Sheets, so their content
+      changes with no commit behind it. Git dates would understate precisely the
+      pages where freshness actually matters.
+
+      Doing this properly means pairing git dates for repo-backed pages with the
+      real sheet timestamps (src/_data/sheetTimestamps.js already fetches them,
+      though it doesn't expose them to templates yet). That's a fair amount of
+      machinery for one optional field on a 21-page site — worth it only if
+      something concrete comes to depend on the signal.
+    -#}
     {%- if page.url == "/" %}
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
