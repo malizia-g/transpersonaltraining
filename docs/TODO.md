@@ -71,19 +71,23 @@ GitHub's UI, never through this codebase).
       category tested end to end (pages, 32 bio anchors, portal paths, patterns, 410s)
 - [x] Verify `student.transpersonal-training.com` still resolves — untouched, 200
 - [x] Run a production deployment test — site live, indexable, canonicals correct
-- [ ] **Enforce HTTPS site-wide — the one thing still open, and it matters.** `http://` currently
-      answers `200`, so the whole site is reachable over plain HTTP: duplicate content for Google, and
-      the `/apply/` form collects personal data and file uploads over an insecure scheme. The obvious
-      rule (`RewriteCond %{HTTPS} off`) **would loop forever here** — TLS terminates upstream at
-      openresty, so Apache always sees HTTPS as off. It needs the proxy's header instead:
+- [x] **Enforce HTTPS site-wide — done 2026-09-07.** All four origins (http/https x www/apex) now
+      collapse to `https://transpersonal-training.com` in a single hop, verified live.
 
-      ```apache
-      RewriteCond %{HTTP:X-Forwarded-Proto} =http
-      RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
-      ```
+      The rule is the last one in `src/.htaccess`, and it keys off `X-Forwarded-Proto`, not
+      `%{HTTPS}`. That is not a style preference — temporary probes deployed to the live server
+      measured what Apache actually receives behind openresty:
 
-      Confirm openresty actually sends that header before relying on it; if it doesn't, the rule is
-      inert rather than harmful, but HTTPS then has to be forced at the proxy/host level instead.
+      | Signal | over HTTPS | over HTTP |
+      |---|---|---|
+      | `X-Forwarded-Proto` | `https` | `http` |
+      | `%{HTTPS}` | **`off`** | `off` |
+      | `%{SERVER_PORT}` | `80` | `80` |
+      | `X-Forwarded-Ssl` | empty | empty |
+
+      `%{HTTPS}` reads `off` on HTTPS requests too, so the textbook rule would have matched its own
+      redirect and looped the site off the internet. Anyone revisiting this on a different host must
+      re-measure rather than copy the rule.
 
 Superseded: the Cloudflare Pages comparison at
 [MARKETING_AND_SEO.md § Hosting](MARKETING_AND_SEO.md#decision-4--hostingcdn) is no longer the plan —
