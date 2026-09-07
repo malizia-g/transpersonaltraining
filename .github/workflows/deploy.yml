@@ -144,4 +144,8 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           local-dir: ./_site/
-          server-dir: ${{ secrets.FTP_SERVER_DIR || './' }}
+          # The FTP login lands one level ABOVE the web root, in a directory
+          # Apache doesn't serve — the first deploy went there and the site
+          # answered 403 until this was set. public_html/ is the real document
+          # root; the secret stays as an override if the host ever moves it.
+          server-dir: ${{ secrets.FTP_SERVER_DIR || 'public_html/' }}
