@@ -1,59 +1,89 @@
 ---
 layout: base.njk
 title: "Transpersonal Psychotherapy & Holotropic Breathwork Training | EUROTAS Accredited"
-description: "Professional transpersonal psychotherapy, counselling and Holotropic Breathwork training. EUROTAS-accredited four-year course, online with in-person intensives across Western Europe."
+description: "EUROTAS-accredited four-year training in transpersonal psychotherapy, counselling and Holotropic Breathwork: online lectures plus intensives in Europe."
 ogType: website
 ---
 
 {% set welcome = 'home/welcome.md' | pageContent %}
-{% set forYou = 'home/for-you.md' | pageContent %}
 {% set quote = 'home/quote.md' | pageContent %}
-{% set homeCards = 'home/cards' | pageContentDir %}
+
+{# welcome.md closes on a paragraph about the teachers' experience and the
+   EUROTAS criteria, dropped here to keep the opening screen short. It is
+   trimmed in the template rather than deleted from the markdown so the source
+   text stays whole. markdown-it emits one paragraph per line, so keeping the
+   first two lines keeps the first two paragraphs. The three "roots" cards are
+   gone as well, which is why homeCards is no longer loaded. #}
+{% set welcomeIntro = welcome.html.split('\n').slice(0, 2).join('\n') %}
+
 
 <!-- ═══════════ HERO — video threshold ═══════════ -->
-<header class="relative min-h-[92vh] flex items-end overflow-hidden bg-[#0F2540]">
+<header class="relative min-h-[92vh] flex items-end overflow-hidden bg-[color:var(--c-deep)]">
     <div class="absolute inset-0 z-0">
-        <!-- Fallback image (shown only if the video fails to load) -->
+        <!-- Poster: first frame of the video, shown while it loads (and kept
+             when the video is skipped on slow/data-saver connections) -->
         <picture>
-            <source srcset="{{ '/assets/images/Headers/hero-homepage-venue-exterior.webp' | url }}" type="image/webp">
-            <img src="{{ '/assets/images/Headers/hero-homepage-venue-exterior.jpg' | url }}"
-                 alt="The seminar house in the forest"
-                 class="absolute inset-0 w-full h-full object-cover z-0"
+            <source srcset="{{ '/assets/images/Headers/hero-homepage-sunset.webp' | url }}" type="image/webp">
+            <img src="{{ '/assets/images/Headers/hero-homepage-sunset.jpg' | url }}"
+                 alt="The sun setting over woodland, seen from the air"
+                 class="absolute inset-0 w-full h-full object-cover z-0 sepia-[.25] saturate-[1.15] brightness-[1.03]"
                  id="hero-image">
         </picture>
-        <!-- Video background -->
+        <!-- Video background: the source is picked by the script below based
+             on screen size and connection quality -->
         <video id="hero-video"
-               class="absolute inset-0 w-full h-full object-cover z-10"
+               class="absolute inset-0 w-full h-full object-cover z-10 sepia-[.25] saturate-[1.15] brightness-[1.03]"
                autoplay
                muted
                loop
-               playsinline
-               src="{{ '/assets/videos/forest-stream.mp4' | url }}">
+               playsinline>
         </video>
-        <div class="absolute inset-0 z-20 bg-gradient-to-b from-[#0F2540]/90 via-[#0F2540]/40 to-neutral-warm-50"></div>
-        <div class="absolute inset-0 z-20 bg-gradient-to-r from-[#0F2540]/70 via-[#0F2540]/20 to-transparent"></div>
+        <script>
+        (function () {
+            // Adaptive hero video: 540p for small screens or 3g networks,
+            // 720p otherwise. No video at all — the poster image stays — for
+            // 2g, data-saver or reduced-motion users. navigator.connection
+            // only exists in Chromium browsers; elsewhere screen size decides.
+            var conn = navigator.connection || {};
+            var type = conn.effectiveType || '';
+            if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            if (conn.saveData || type === '2g' || type === 'slow-2g') return;
+            var small = matchMedia('(max-width: 767px)').matches;
+            var file = (small || type === '3g') ? 'hero-sunset-540.mp4' : 'hero-sunset-720.mp4';
+            document.getElementById('hero-video').src =
+                '{{ "/assets/videos/" | url }}' + file;
+        })();
+        </script>
+        <div class="absolute inset-0 z-20 bg-gradient-to-b from-[var(--v-hero-top)] via-[var(--v-hero-mid)] via-45% to-[var(--v-hero-foot)]"></div>
+        <div class="absolute inset-0 z-20 bg-gradient-to-r from-[var(--v-hero-side)] via-[var(--v-hero-side-mid)] to-transparent"></div>
+        <div class="absolute inset-0 z-20 bg-gradient-to-t from-[var(--v-glow)] via-transparent to-transparent"></div>
     </div>
 
-    <div class="relative z-10 container mx-auto px-6 pb-16 pt-40">
+    <div class="relative z-10 container mx-auto px-6 pb-10 pt-24 md:pb-16 md:pt-40">
         <div class="max-w-3xl animate-fade-in-up">
-            <p class="p4-kicker text-[#C9A45C] mb-7 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
+            <p class="p4-kicker text-[color:var(--c-acc)] mb-7 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
                 <span class="p4-hairline"></span>
                 A four-year path<br class="md:hidden"> 2027&ndash;2030
                 <span class="p4-hairline md:hidden"></span>
             </p>
-            <h1 class="p4-display text-5xl md:text-7xl font-medium text-[#FDFBF5] leading-[1.05] mb-7 drop-shadow-md">
+            <h1 class="p4-display text-5xl md:text-7xl font-medium text-[color:var(--c-paper-hi)] leading-[1.05] mb-7 drop-shadow-md">
                 Educating therapists for a<br class="hidden md:block">
-                <em class="text-[#C9A45C]">revolution of consciousness</em>
+                <em class="text-[color:var(--c-acc)]">revolution of consciousness</em>
             </h1>
-            <p class="text-lg md:text-xl text-[#E9EDF2] max-w-2xl font-light leading-relaxed mb-10">
-                A EUROTAS-accredited training in Transpersonal Psychotherapy, Counselling &amp; Holotropic Breathwork &mdash; online lectures, in-person intensives across Western Europe.
+            <p class="p4-display italic text-xl md:text-3xl text-[color:var(--c-paper-2)] max-w-2xl leading-relaxed mb-10 drop-shadow">
+                A training in Transpersonal Psychotherapy, Counselling &amp; Holotropic Breathwork&reg; &mdash; shared online lectures for one international East&ndash;West community, with in-person intensives held in Europe.
             </p>
+            {# The sample lesson is no longer a page anyone can click through to
+               — it only goes out by email once someone asks. Both CTAs here
+               point at that ask, or at the page that lays out the programme
+               itself, not at /apply/, which lives in the Resources menu and
+               the contact section below. #}
             <div class="flex flex-col sm:flex-row gap-4">
-                <a href="#contact" class="bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-10 py-4 font-medium text-lg tracking-wide text-center transition-all shadow-lg hover:shadow-xl">
-                    Apply for the 2027&ndash;2030 cohort
+                <a href="#contact" class="bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-deep)] px-10 py-4 font-medium text-lg tracking-wide text-center transition-all shadow-lg hover:shadow-xl">
+                    Request a Demo
                 </a>
-                <a href="curriculum/index.html" class="border border-[#FDFBF5]/60 hover:border-[#C9A45C] bg-[#0F2540]/30 text-[#FDFBF5] hover:text-[#C9A45C] px-10 py-4 font-medium text-lg tracking-wide text-center transition-all">
-                    Explore the curriculum
+                <a href="{{ '/training-overview/' | url }}" class="border border-[color:var(--c-paper-hi-60)] hover:border-[color:var(--c-acc)] bg-[color:var(--c-deep-30)] text-[color:var(--c-paper-hi)] hover:text-[color:var(--c-acc)] px-10 py-4 font-medium text-lg tracking-wide text-center transition-all">
+                    Explore the Training Overview
                 </a>
             </div>
         </div>
@@ -61,179 +91,191 @@ ogType: website
 </header>
 
 <!-- Fact strip -->
-<div class="bg-neutral-warm-50">
+<div class="bg-[color:var(--c-paper)]">
     <div class="container mx-auto px-6">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 py-10 border-b border-neutral-warm-200">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 py-10 border-b border-[color:var(--c-line)]">
             <div class="flex items-center gap-3">
-                <i data-lucide="award" class="w-8 h-8 text-science-blue-600 shrink-0"></i>
-                <p class="text-sm text-neutral-warm-700 leading-snug"><span class="block font-semibold text-indigo-deep-900">EUROTAS accredited</span>recognised qualification</p>
+                <i data-lucide="award" class="w-8 h-8 text-[color:var(--c-icon)] shrink-0"></i>
+                <p class="text-sm text-[color:var(--c-body)] leading-snug"><span class="block font-semibold text-[color:var(--c-heading)]">EUROTAS accredited</span>recognised qualification</p>
             </div>
             <div class="flex items-center gap-3">
-                <i data-lucide="calendar-range" class="w-8 h-8 text-science-blue-600 shrink-0"></i>
-                <p class="text-sm text-neutral-warm-700 leading-snug"><span class="block font-semibold text-indigo-deep-900">Four years</span>2027 &ndash; 2030</p>
+                <i data-lucide="calendar-range" class="w-8 h-8 text-[color:var(--c-icon)] shrink-0"></i>
+                <p class="text-sm text-[color:var(--c-body)] leading-snug"><span class="block font-semibold text-[color:var(--c-heading)]">Four years</span>1st year: self development</p>
             </div>
             <div class="flex items-center gap-3">
-                <i data-lucide="laptop" class="w-8 h-8 text-science-blue-600 shrink-0"></i>
-                <p class="text-sm text-neutral-warm-700 leading-snug"><span class="block font-semibold text-indigo-deep-900">Online lectures</span>study from anywhere</p>
+                <i data-lucide="laptop" class="w-8 h-8 text-[color:var(--c-icon)] shrink-0"></i>
+                <p class="text-sm text-[color:var(--c-body)] leading-snug"><span class="block font-semibold text-[color:var(--c-heading)]">Online lectures</span>study from anywhere</p>
             </div>
             <div class="flex items-center gap-3">
-                <i data-lucide="tent-tree" class="w-8 h-8 text-science-blue-600 shrink-0"></i>
-                <p class="text-sm text-neutral-warm-700 leading-snug"><span class="block font-semibold text-indigo-deep-900">In-person intensives</span>across Western Europe</p>
+                <i data-lucide="tent-tree" class="w-8 h-8 text-[color:var(--c-icon)] shrink-0"></i>
+                <p class="text-sm text-[color:var(--c-body)] leading-snug"><span class="block font-semibold text-[color:var(--c-heading)]">In-person intensives</span>Western &amp; Eastern tracks</p>
             </div>
         </div>
     </div>
 </div>
 
+<!-- ═══════════ START HERE ═══════════ -->
+<!-- The first thing a visitor can actually *do*. Four entry points, from
+     lowest to highest commitment: request a demo lesson by email, read about
+     the programme, join a live call, or try a free supervised session as a
+     practice client. -->
+<section class="bg-[color:var(--c-paper)] pt-16 md:pt-20">
+    <div class="container mx-auto px-6">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="p4-kicker text-[color:var(--c-sec)] mb-6 flex items-center justify-center gap-4">
+                    <span class="p4-hairline"></span> Start here <span class="p4-hairline"></span>
+                </p>
+                <p class="text-lg text-[color:var(--c-body)] leading-relaxed max-w-2xl mx-auto">
+                    Before any of the practical questions, it helps to know what the teaching actually
+                    feels like &mdash; pick whichever entry point suits you.
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <a href="#contact"
+                   class="group bg-[color:var(--c-paper-card)] border border-[color:var(--c-acc-60)] hover:border-[color:var(--c-sec)] p-8 transition-colors flex flex-col">
+                    <i data-lucide="play-circle" class="w-9 h-9 text-[color:var(--c-sec)] mb-5"></i>
+                    <h3 class="font-serif text-xl font-semibold text-[color:var(--c-heading)] mb-2">Request a Demo</h3>
+                    <p class="text-[color:var(--c-body)] text-sm leading-relaxed flex-grow">
+                        A complete lecture from the training &mdash; not a trailer &mdash; sent straight to
+                        your inbox, along with the brochure. The same form takes your questions.
+                    </p>
+                    <span class="mt-5 inline-flex items-center gap-2 text-[color:var(--c-link)] group-hover:text-[color:var(--c-link-hover)] font-medium text-sm">
+                        Get in touch <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </span>
+                </a>
+
+                <a href="{{ '/training-overview/' | url }}"
+                   class="group bg-[color:var(--c-paper-card)] border border-[color:var(--c-acc-60)] hover:border-[color:var(--c-sec)] p-8 transition-colors flex flex-col">
+                    <i data-lucide="compass" class="w-9 h-9 text-[color:var(--c-sec)] mb-5"></i>
+                    <h3 class="font-serif text-xl font-semibold text-[color:var(--c-heading)] mb-2">Explore the Training Overview</h3>
+                    <p class="text-[color:var(--c-body)] text-sm leading-relaxed flex-grow">
+                        Philosophy, structure, eligibility and fees &mdash; the whole shape of the programme
+                        in one page.
+                    </p>
+                    <span class="mt-5 inline-flex items-center gap-2 text-[color:var(--c-link)] group-hover:text-[color:var(--c-link-hover)] font-medium text-sm">
+                        Explore <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </span>
+                </a>
+
+                <a href="{{ '/monthly-call/' | url }}"
+                   class="group bg-[color:var(--c-paper-card)] border border-[color:var(--c-acc-60)] hover:border-[color:var(--c-sec)] p-8 transition-colors flex flex-col">
+                    <i data-lucide="video" class="w-9 h-9 text-[color:var(--c-sec)] mb-5"></i>
+                    <h3 class="font-serif text-xl font-semibold text-[color:var(--c-heading)] mb-2">Join Our Monthly Zoom Call</h3>
+                    <p class="text-[color:var(--c-body)] text-sm leading-relaxed flex-grow">
+                        Meet a member of the school live, ask questions, and hear from us directly &mdash; no
+                        obligation.
+                    </p>
+                    <span class="mt-5 inline-flex items-center gap-2 text-[color:var(--c-link)] group-hover:text-[color:var(--c-link-hover)] font-medium text-sm">
+                        See the next date <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </span>
+                </a>
+
+                <a href="{{ '/become-a-practice-client/' | url }}"
+                   class="group bg-[color:var(--c-paper-card)] border border-[color:var(--c-acc-60)] hover:border-[color:var(--c-sec)] p-8 transition-colors flex flex-col">
+                    <i data-lucide="user-check" class="w-9 h-9 text-[color:var(--c-sec)] mb-5"></i>
+                    <h3 class="font-serif text-xl font-semibold text-[color:var(--c-heading)] mb-2">Become a Practice Client</h3>
+                    <p class="text-[color:var(--c-body)] text-sm leading-relaxed flex-grow">
+                        Free, supervised counselling and psychotherapy sessions with our third-level students
+                        &mdash; no obligation to enrol.
+                    </p>
+                    <span class="mt-5 inline-flex items-center gap-2 text-[color:var(--c-link)] group-hover:text-[color:var(--c-link-hover)] font-medium text-sm">
+                        Explore <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ═══════════ WELCOME — editorial split ═══════════ -->
-<section id="welcome" class="bg-neutral-warm-50 py-20 md:py-28">
+<section id="welcome" class="bg-[color:var(--c-paper)] py-20 md:py-28">
     <div class="container mx-auto px-6">
         <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
             <div class="lg:col-span-6">
-                <p class="p4-kicker text-[#9A7734] mb-6 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
+                <p class="p4-kicker text-[color:var(--c-sec)] mb-6 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
                     <span class="p4-hairline"></span> Welcome to our school <span class="p4-hairline md:hidden"></span>
                 </p>
-                <h2 class="p4-display text-4xl md:text-6xl font-medium text-indigo-deep-900 leading-[1.08] mb-8">
+                <h2 class="p4-display text-4xl md:text-6xl font-medium text-[color:var(--c-heading)] leading-[1.08] mb-8">
                     A profession of the mind, learned with the whole&nbsp;heart
                 </h2>
-                <div class="p4-welcome p4-dropcap text-lg text-neutral-warm-700 leading-relaxed">
-                    {{ welcome.html | safe }}
+                <div class="p4-welcome p4-dropcap text-lg text-[color:var(--c-body)] leading-relaxed">
+                    {{ welcomeIntro | safe }}
                 </div>
-                <p class="mt-8 text-indigo-deep-900 font-medium">
-                    <a href="{{ '/lectures-schedule/' | url }}" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4 decoration-2">Online lectures</a>
+                <p class="mt-8 text-[color:var(--c-heading)] font-medium">
+                    <a href="{{ '/lectures-schedule/' | url }}" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-4 decoration-2">Online lectures</a>
                     and
-                    <a href="{{ '/schedule/' | url }}" class="text-science-blue-700 hover:text-science-blue-800 underline underline-offset-4 decoration-2">intensive seminars</a>
-                    in Western Europe &middot; 2027&ndash;2030
+                    <a href="{{ '/schedule/' | url }}" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-4 decoration-2">intensive seminars</a>
+                    in Europe &middot; 2027&ndash;2030
+                </p>
+                <p class="mt-4 text-[color:var(--c-body-dim)] text-sm leading-relaxed">
+                    Not ready for the full path? You can also join <strong class="text-[color:var(--c-heading)]">Level 1 on its own</strong>, as a stand alone year of self-development, with no obligation to continue.
                 </p>
             </div>
             <div class="lg:col-span-6 relative pb-16 pr-4 md:pr-10">
                 <picture>
                     <source srcset="{{ '/assets/images/Community/community-hug-embrace.webp' | url }}" type="image/webp">
-                    <img src="{{ '/assets/images/Community/community-hug-embrace.jpg' | url }}"
-                         alt="A warm group hug during a seminar"
-                         class="w-full aspect-[4/5] object-cover object-top shadow-xl">
+                    <img src="{{ '/assets/images/Community/community-hug-embrace.png' | url }}"
+                         alt="A collage of moments from a Level 1 seminar"
+                         class="w-full">
                 </picture>
-                <figure class="absolute -bottom-2 -left-2 md:left-auto md:-right-2 w-48 md:w-60 rotate-[-4deg]">
-                    <div class="bg-white p-2.5 pb-4 shadow-2xl border border-neutral-warm-200">
-                        <picture>
-                            <source srcset="{{ '/assets/images/Community/community-break-terrace-watermelon.webp' | url }}" type="image/webp">
-                            <img src="{{ '/assets/images/Community/community-break-terrace-watermelon.jpg' | url }}"
-                                 alt="A shared break on the terrace in golden light"
-                                 class="w-full h-32 md:h-40 object-cover">
-                        </picture>
-                        <figcaption class="p4-display italic text-sm text-neutral-warm-700 mt-2 text-center">life between the lessons</figcaption>
-                    </div>
-                </figure>
             </div>
         </div>
     </div>
 </section>
 
 <!-- ═══════════ QUOTE — mandala band with parallax ═══════════ -->
-<section class="relative py-28 md:py-40 overflow-hidden p4-parallax" style="background-image: url('{{ '/assets/images/Symbolic/symbolic-mandala-collection.jpg' | url }}');">
-    <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/90 via-[#12305A]/80 to-[#0F2540]/90"></div>
+<section class="relative py-28 md:py-40 overflow-hidden p4-parallax" style="background-image: url('{{ '/assets/images/Symbolic/symbolic-mandala-collection.jpg' | url }}'); background-image: image-set(url('{{ '/assets/images/Symbolic/symbolic-mandala-collection.webp' | url }}') type('image/webp'), url('{{ '/assets/images/Symbolic/symbolic-mandala-collection.jpg' | url }}') type('image/jpeg'));">
+    <div class="absolute inset-0 bg-gradient-to-b from-[var(--v-quote-top)] via-[var(--v-quote-mid)] to-[var(--v-quote-foot)]"></div>
     <div class="relative container mx-auto px-6">
         <div class="max-w-3xl mx-auto text-center">
-            <p class="p4-kicker text-[#C9A45C] mb-10">{{ quote.data.label }}</p>
-            <p class="p4-display text-3xl md:text-5xl italic font-medium text-[#FDFBF5] leading-[1.25]">
-                &ldquo;{{ quote.data.quote }}&rdquo;
+            <p class="p4-kicker text-[color:var(--c-acc)] mb-10">{{ quote.data.label }}</p>
+            <p class="p4-display text-3xl md:text-5xl italic font-medium text-[color:var(--c-paper-hi)] leading-[1.25]">
+                {{ quote.data.quote }}
             </p>
-            <p class="mt-10 text-[#B9C6D8]">{{ quote.data.attribution }}</p>
         </div>
     </div>
 </section>
 
-<!-- ═══════════ THREE ROOTS ═══════════ -->
-<section class="bg-neutral-warm-100 py-20 md:py-28">
+<!-- ═══════════ WHAT YOU WILL FIND HERE — signpost to Techniques ═══════════ -->
+<!-- A single link rather than three cards: the Techniques page covers this
+     ground at length. -->
+<section class="bg-[color:var(--c-paper-2)] py-20 md:py-28">
     <div class="container mx-auto px-6">
-        <div class="max-w-2xl mx-auto text-center mb-16">
-            <p class="p4-kicker text-[#9A7734] mb-6 flex items-center justify-center gap-4">
+        <div class="max-w-2xl mx-auto text-center">
+            <p class="p4-kicker text-[color:var(--c-sec)] mb-6 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span> What you will find here <span class="p4-hairline"></span>
             </p>
-            <h2 class="p4-display text-4xl md:text-6xl font-medium text-indigo-deep-900 leading-tight">
-                Three roots of the training
+            <h2 class="p4-display text-4xl md:text-6xl font-medium text-[color:var(--c-heading)] leading-tight mb-6">
+                Techniques &amp; frameworks
             </h2>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-px max-w-6xl mx-auto bg-[#C9A45C]/30 border border-[#C9A45C]/30">
-            {% set romans = ['I', 'II', 'III'] %}
-            {% for card in homeCards %}
-            <div class="bg-[#FFFEF9] flex flex-col items-center text-center hover:bg-white transition-colors duration-300">
-                <p class="p4-display text-5xl text-[#C9A45C] pt-8">{{ romans[loop.index0] }}</p>
-                {% if loop.index0 == 0 %}
-                <picture class="w-full block mt-6">
-                    <source srcset="{{ '/assets/images/Community/community-embrace-support.webp' | url }}" type="image/webp">
-                    <img src="{{ '/assets/images/Community/community-embrace-support.jpg' | url }}"
-                         alt="A group embrace during a seminar"
-                         class="w-full h-52 object-cover object-[50%_25%]" loading="lazy">
-                </picture>
-                {% elif loop.index0 == 1 %}
-                <picture class="w-full block mt-6">
-                    <source srcset="{{ '/assets/images/Techniques/technique-mandala-drawing.webp' | url }}" type="image/webp">
-                    <img src="{{ '/assets/images/Techniques/technique-mandala-drawing.jpg' | url }}"
-                         alt="Hands gathered around a mandala during integration work"
-                         class="w-full h-52 object-cover" loading="lazy">
-                </picture>
-                {% else %}
-                <div class="w-full h-52 bg-[#0F2540] flex items-center justify-center p-8 mt-6">
-                    <img src="{{ '/assets/images/Graphics/eurotas-symbol.png' | url }}"
-                         alt="EUROTAS — European Transpersonal Association symbol"
-                         class="max-h-full w-auto object-contain" loading="lazy">
-                </div>
-                {% endif %}
-                <div class="p-10 md:p-12 pt-8 flex flex-col grow">
-                    <h3 class="p4-display text-3xl font-medium text-indigo-deep-900 mb-5 leading-snug">{{ card.data.title }}</h3>
-                    <div class="text-neutral-warm-700 leading-relaxed">{{ card.html | safe }}</div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════ IS THIS FOR YOU ═══════════ -->
-<section class="bg-neutral-warm-50 py-20 md:py-28">
-    <div class="container mx-auto px-6">
-        <div class="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center max-w-6xl mx-auto">
-            <div class="relative order-2 lg:order-1 m-4">
-                <div id="foryou-frame" class="w-full aspect-[4/5] overflow-hidden shadow-lg">
-                    <picture>
-                        <source srcset="{{ '/assets/images/Symbolic/symbolic-backlit-doorway.webp' | url }}" type="image/webp">
-                        <img id="foryou-parallax"
-                             src="{{ '/assets/images/Symbolic/symbolic-backlit-doorway.jpg' | url }}"
-                             alt="A figure standing in a backlit doorway"
-                             class="w-full h-[115%] object-cover will-change-transform"
-                             loading="lazy">
-                    </picture>
-                </div>
-                <div class="absolute -inset-4 border border-[#C9A45C]/60 pointer-events-none" aria-hidden="true"></div>
-            </div>
-            <div class="order-1 lg:order-2">
-                <p class="p4-kicker text-[#9A7734] mb-6 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
-                    <span class="p4-hairline"></span> An honest question
-                    <span class="p4-hairline md:hidden"></span>
-                </p>
-                <h2 class="p4-display text-4xl md:text-5xl font-medium text-indigo-deep-900 leading-tight mb-6">
-                    {{ forYou.data.heading }}
-                </h2>
-                <p class="text-neutral-warm-700 text-lg mb-8">{{ forYou.data.intro }}</p>
-                <div class="p4-foryou text-neutral-warm-800">
-                    {{ forYou.html | safe }}
-                </div>
-            </div>
+            <p class="text-lg text-[color:var(--c-body)] leading-relaxed mb-10">
+                Holotropic Breathwork and experiential group practice, one-to-one counselling methods,
+                and the maps of the psyche that give them meaning.
+            </p>
+            <a href="{{ '/techniques/' | url }}"
+               class="inline-block border border-[color:var(--c-sec-60)] hover:border-[color:var(--c-sec)] hover:bg-[color:var(--c-sec)] text-[color:var(--c-sec)] hover:text-[color:var(--c-paper-card)] px-10 py-4 font-medium text-lg tracking-wide transition-colors">
+                See how we teach
+            </a>
         </div>
     </div>
 </section>
 
 <!-- ═══════════ MOMENTS — film strip ═══════════ -->
-<section class="bg-neutral-warm-50 pb-20 md:pb-28">
+<section class="bg-[color:var(--c-paper)] pb-20 md:pb-28">
     <div class="container mx-auto px-6 mb-10">
-        <div class="max-w-6xl mx-auto flex items-center gap-6 border-t border-neutral-warm-200 pt-10">
-            <h2 class="p4-display text-3xl md:text-4xl font-medium text-indigo-deep-900 whitespace-nowrap">Moments from our seminars</h2>
-            <span class="hidden md:block h-px flex-1 bg-[#C9A45C]/50" aria-hidden="true"></span>
+        <div class="max-w-6xl mx-auto flex items-center gap-6 border-t border-[color:var(--c-line)] pt-10">
+            <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] whitespace-nowrap">Moments from our seminars</h2>
+            <span class="hidden md:block h-px flex-1 bg-[color:var(--c-acc-65)]" aria-hidden="true"></span>
         </div>
     </div>
     <div class="p4-filmstrip overflow-x-auto snap-x snap-mandatory pb-4">
-        <div class="flex gap-3 px-6 w-max">
+        <div id="moments-filmstrip" class="flex gap-3 px-6 w-max">
+            <picture class="snap-start shrink-0">
+                <source srcset="{{ '/assets/images/Community/community-break-terrace-watermelon.webp' | url }}" type="image/webp">
+                <img src="{{ '/assets/images/Community/community-break-terrace-watermelon.jpg' | url }}" alt="A shared break on the terrace in golden light" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+            </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="{{ '/assets/images/Techniques/technique-bodywork-holding.webp' | url }}" type="image/webp">
                 <img src="{{ '/assets/images/Techniques/technique-bodywork-holding.jpg' | url }}" alt="Group bodywork and holding exercise" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
@@ -247,12 +289,15 @@ ogType: website
                 <img src="{{ '/assets/images/Community/community-group-circle-standing.jpg' | url }}" alt="Group standing together in a learning circle" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
+                <source srcset="{{ '/assets/images/Community/community-group-circle-lecture.webp' | url }}" type="image/webp">
+                <img src="{{ '/assets/images/Community/community-group-circle-lecture.jpg' | url }}" alt="An evening lecture circle in the training hall" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+            </picture>
+            <picture class="snap-start shrink-0">
                 <source srcset="{{ '/assets/images/Techniques/technique-trust-walk-pair.webp' | url }}" type="image/webp">
                 <img src="{{ '/assets/images/Techniques/technique-trust-walk-pair.jpg' | url }}" alt="A trust walk exercise in pairs" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
-                <source srcset="{{ '/assets/images/Community/community-walking-exercise-b.webp' | url }}" type="image/webp">
-                <img src="{{ '/assets/images/Community/community-walking-exercise-b.jpg' | url }}" alt="Community walking exercise" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <img src="{{ '/assets/images/Venue/venue-garden-lantern.jpg' | url }}" alt="A lantern glowing in the seminar house garden" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="{{ '/assets/images/Techniques/technique-somatic-bodywork.webp' | url }}" type="image/webp">
@@ -263,8 +308,8 @@ ogType: website
                 <img src="{{ '/assets/images/Community/community-art-exercise-a.jpg' | url }}" alt="Participants during a group art exercise" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
-                <source srcset="{{ '/assets/images/Venue/venue-garden-lantern.webp' | url }}" type="image/webp">
-                <img src="{{ '/assets/images/Venue/venue-garden-lantern.jpg' | url }}" alt="A lantern in the garden of the seminar house at dusk" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <source srcset="{{ '/assets/images/Venue/venue-terrace-dining.webp' | url }}" type="image/webp">
+                <img src="{{ '/assets/images/Venue/venue-terrace-dining.jpg' | url }}" alt="A shared meal on the seminar house terrace" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="{{ '/assets/images/Community/community-terrace-watching.webp' | url }}" type="image/webp">
@@ -275,6 +320,14 @@ ogType: website
                 <img src="{{ '/assets/images/Community/community-terrace-speaking.jpg' | url }}" alt="A participant speaking to the group on the terrace" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
+                <source srcset="{{ '/assets/images/Techniques/technique-paper-mandala-sunlight.webp' | url }}" type="image/webp">
+                <img src="{{ '/assets/images/Techniques/technique-paper-mandala-sunlight.jpg' | url }}" alt="A figure laid out in torn paper on the sunlit hall floor" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+            </picture>
+            <picture class="snap-start shrink-0">
+                <source srcset="{{ '/assets/images/Symbolic/symbolic-grounding-plants-floor.webp' | url }}" type="image/webp">
+                <img src="{{ '/assets/images/Symbolic/symbolic-grounding-plants-floor.jpg' | url }}" alt="Moss, grasses and a candle gathered for a grounding exercise" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+            </picture>
+            <picture class="snap-start shrink-0">
                 <source srcset="{{ '/assets/images/Symbolic/symbolic-garden-flowers.webp' | url }}" type="image/webp">
                 <img src="{{ '/assets/images/Symbolic/symbolic-garden-flowers.jpg' | url }}" alt="Wildflowers in the seminar house garden" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
@@ -282,60 +335,122 @@ ogType: website
                 <source srcset="{{ '/assets/images/Symbolic/symbolic-garden-flowers-lantern.webp' | url }}" type="image/webp">
                 <img src="{{ '/assets/images/Symbolic/symbolic-garden-flowers-lantern.jpg' | url }}" alt="Wildflowers with the garden lantern in the background" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
+            <picture class="snap-start shrink-0">
+                <source srcset="{{ '/assets/images/Venue/venue-todtmoos-firepit.webp' | url }}" type="image/webp">
+                <img src="{{ '/assets/images/Venue/venue-todtmoos-firepit.jpg' | url }}" alt="The group gathered around the fire pit at dusk" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+            </picture>
+            <picture class="snap-start shrink-0">
+                <source srcset="{{ '/assets/images/Venue/venue-todtmoos-lantern-snow-night.webp' | url }}" type="image/webp">
+                <img src="{{ '/assets/images/Venue/venue-todtmoos-lantern-snow-night.jpg' | url }}" alt="A street lamp glowing over fresh snow outside the seminar house" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+            </picture>
+            <picture class="snap-start shrink-0">
+                <source srcset="{{ '/assets/images/Symbolic/symbolic-tree-eye-moss.webp' | url }}" type="image/webp">
+                <img src="{{ '/assets/images/Symbolic/symbolic-tree-eye-moss.jpg' | url }}" alt="A healed scar in a mossy tree trunk, shaped like an eye" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+            </picture>
         </div>
     </div>
 </section>
 
 <!-- ═══════════ CONTACT ═══════════ -->
-<section id="contact" class="relative py-24 md:py-32 overflow-hidden p4-parallax border-t border-[#C9A45C]/25" style="background-image: url('{{ '/assets/images/Headers/hero-contact-todtmoos.jpg' | url }}');">
-    <div class="absolute inset-0 bg-gradient-to-b from-[#0F2540]/85 via-[#0F2540]/55 to-[#0F2540]/90"></div>
+<section id="contact" class="relative py-24 md:py-32 overflow-hidden p4-parallax border-t border-[color:var(--c-acc-40)]" style="background-image: url('{{ '/assets/images/Venue/venue-todtmoos-firepit.jpg' | url }}'); background-image: image-set(url('{{ '/assets/images/Venue/venue-todtmoos-firepit.webp' | url }}') type('image/webp'), url('{{ '/assets/images/Venue/venue-todtmoos-firepit.jpg' | url }}') type('image/jpeg'));">
+    <div class="absolute inset-0 bg-gradient-to-b from-[var(--v-contact-top)] via-[var(--v-contact-mid)] to-[var(--v-contact-foot)]"></div>
     <div class="relative container mx-auto px-6">
         <div class="max-w-2xl mx-auto text-center">
-            <p class="p4-kicker text-[#C9A45C] mb-8 flex items-center justify-center gap-4">
+            <p class="p4-kicker text-[color:var(--c-acc)] mb-8 flex items-center justify-center gap-4">
                 <span class="p4-hairline"></span>
-                Applications open
+                Get in touch
                 <span class="p4-hairline"></span>
             </p>
-            <h2 class="p4-display text-4xl md:text-6xl font-medium text-[#FDFBF5] mb-6 drop-shadow-md">Ready to begin<br>your journey?</h2>
-            <p class="text-lg text-[#D5DEE9] mb-14 drop-shadow">
-                Applications for the 2027&ndash;2030 cohort are open. Tell us a little about yourself and we'll be in touch.
+            <h2 class="p4-display text-4xl md:text-6xl font-medium text-[color:var(--c-paper-hi)] mb-6 drop-shadow-md">Request your demo lesson<br>&mdash; or just ask us.</h2>
+            <p class="text-lg text-[color:var(--c-on-dark-2)] mb-14 drop-shadow">
+                One form, two ways to use it. Leave your name and email and we will send you the demo lesson &mdash; a complete lecture from the training &mdash; and the brochure straight away.
+                Add a question or a request and a real person will read it and write back: about the training, the intensives, the right entry point for you, or a call at a time that suits you.
+                Ready to apply? <a href="{{ '/apply/' | url }}" class="text-[color:var(--c-acc)] underline underline-offset-4 decoration-[color:var(--c-acc-40)] hover:text-[color:var(--c-acc-light)]">See how to apply</a>.
             </p>
 
-            <form action="mailto:office@transpersonal-training.com" method="post" enctype="text/plain" class="text-left border border-[#C9A45C]/40 bg-[#0B1B30]/85 backdrop-blur-md p-6 md:p-10 space-y-6 shadow-2xl">
+            <form id="contactForm" action="mailto:west-office@transpersonal-training.com,east-office@transpersonal-training.com" method="post" enctype="text/plain" data-persist="contact" class="text-left border border-[color:var(--c-acc-40)] bg-[color:var(--c-deepest-85)] backdrop-blur-md p-6 md:p-10 space-y-6 shadow-2xl">
+                <!-- Honeypot: hidden from people, catnip for bots. Anything typed
+                     here means the submission is discarded server-side. -->
+                <div class="hidden" aria-hidden="true">
+                    <label for="contact-website">Leave this field empty</label>
+                    <input type="text" id="contact-website" name="website" tabindex="-1" autocomplete="off">
+                </div>
                 <div>
-                    <label for="apply-name" class="block p4-kicker !text-xs text-[#C9A45C] mb-3">Name</label>
-                    <input type="text" id="apply-name" name="name" required
-                           class="w-full bg-transparent border-0 border-b border-[#C9A45C]/40 text-[#EDF2F8] px-1 py-3 focus:outline-none focus:border-[#C9A45C] transition-colors placeholder:text-[#7C8DA3]"
+                    <label for="contact-name" class="block p4-kicker !text-xs text-[color:var(--c-acc)] mb-3">Name</label>
+                    <input type="text" id="contact-name" name="name" required
+                           class="w-full bg-transparent border-0 border-b border-[color:var(--c-acc-40)] text-[color:var(--c-on-dark-1)] px-1 py-3 focus:outline-none focus:border-[color:var(--c-acc)] transition-colors placeholder:text-[color:var(--c-on-dark-5)]"
                            placeholder="Your full name">
                 </div>
                 <div>
-                    <label for="apply-email" class="block p4-kicker !text-xs text-[#C9A45C] mb-3">Email</label>
-                    <input type="email" id="apply-email" name="email" required
-                           class="w-full bg-transparent border-0 border-b border-[#C9A45C]/40 text-[#EDF2F8] px-1 py-3 focus:outline-none focus:border-[#C9A45C] transition-colors placeholder:text-[#7C8DA3]"
+                    <label for="contact-email" class="block p4-kicker !text-xs text-[color:var(--c-acc)] mb-3">Email</label>
+                    <input type="email" id="contact-email" name="email" required
+                           class="w-full bg-transparent border-0 border-b border-[color:var(--c-acc-40)] text-[color:var(--c-on-dark-1)] px-1 py-3 focus:outline-none focus:border-[color:var(--c-acc)] transition-colors placeholder:text-[color:var(--c-on-dark-5)]"
                            placeholder="you@example.com">
                 </div>
+                {# Optional on purpose. Someone who only wants the brochure and
+                   the lesson should not have to compose a message first — the
+                   reply sends both either way, and adds "we'll get back to you"
+                   only when there is something to reply to. #}
                 <div>
-                    <label for="apply-why" class="block p4-kicker !text-xs text-[#C9A45C] mb-3">Why this training calls to you</label>
-                    <textarea id="apply-why" name="why" rows="4" required
-                              class="w-full bg-transparent border-0 border-b border-[#C9A45C]/40 text-[#EDF2F8] px-1 py-3 focus:outline-none focus:border-[#C9A45C] transition-colors placeholder:text-[#7C8DA3]"
-                              placeholder="A few honest words are enough"></textarea>
+                    <label for="contact-message" class="block p4-kicker !text-xs text-[color:var(--c-acc)] mb-3">Your question or request <span class="normal-case tracking-normal text-[color:var(--c-on-dark-5)]">(optional)</span></label>
+                    <textarea id="contact-message" name="message" rows="4"
+                              class="w-full bg-transparent border-0 border-b border-[color:var(--c-acc-40)] text-[color:var(--c-on-dark-1)] px-1 py-3 focus:outline-none focus:border-[color:var(--c-acc)] transition-colors placeholder:text-[color:var(--c-on-dark-5)]"
+                              placeholder="Ask us anything, or tell us what you are looking for &mdash; or leave this blank and we will simply send the demo lesson and the brochure."></textarea>
                 </div>
-                <button type="submit"
-                        class="w-full bg-[#C9A45C] hover:bg-[#B8934B] text-[#0F2540] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
-                    Submit application
+                <div>
+                    <label for="contact-track" class="block p4-kicker !text-xs text-[color:var(--c-acc)] mb-3">Which office? <span class="normal-case tracking-normal text-[color:var(--c-on-dark-5)]">(optional)</span></label>
+                    <select id="contact-track" name="track"
+                            class="w-full bg-transparent border-0 border-b border-[color:var(--c-acc-40)] text-[color:var(--c-on-dark-1)] px-1 py-3 focus:outline-none focus:border-[color:var(--c-acc)] transition-colors">
+                        <option value="" class="text-[color:var(--c-deep)]">Not sure — send to both</option>
+                        <option value="Western" class="text-[color:var(--c-deep)]">Western track</option>
+                        <option value="Eastern" class="text-[color:var(--c-deep)]">Eastern track</option>
+                    </select>
+                </div>
+                <div class="flex items-start gap-3">
+                    <input type="checkbox" id="contact-newsletter" name="newsletter" value="yes"
+                           class="mt-1 w-4 h-4 shrink-0 accent-[var(--c-acc)] bg-transparent border border-[color:var(--c-acc-40)] focus:outline-none focus:ring-2 focus:ring-[color:var(--c-acc)]">
+                    <label for="contact-newsletter" class="text-sm text-[color:var(--c-on-dark-2)] leading-relaxed">
+                        Also sign me up to the newsletter, for occasional updates about the training and the school.
+                        <span class="block text-xs text-[color:var(--c-on-dark-4)] mt-1">Optional &mdash; left unticked by default, and you can unsubscribe at any time.</span>
+                    </label>
+                </div>
+                <button type="submit" id="contactBtn"
+                        class="w-full bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-deep)] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed">
+                    <span id="contactBtnLabel">Send my request</span>
                 </button>
-                <p class="text-xs text-[#9DAEC2] leading-relaxed">
+                <div id="contactStatus" class="text-sm hidden"></div>
+                <p class="text-xs text-[color:var(--c-on-dark-4)] leading-relaxed">
                     By submitting this form you consent to Transpersonal Training processing the personal data you provide
-                    solely to respond to your enquiry, in accordance with the GDPR (Regulation (EU) 2016/679). See our
-                    <button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="underline underline-offset-4 hover:text-[#C9A45C] bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy Policy</button>
+                    in order to send you the demo lesson and brochure and to respond to your enquiry, in accordance with
+                    the GDPR (Regulation (EU) 2016/679). We will only add you to our mailing list if you tick the box
+                    above, and you can unsubscribe at any time. See our
+                    <button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="underline underline-offset-4 hover:text-[color:var(--c-acc)] bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy Policy</button>
                     for details on your rights.
                 </p>
             </form>
 
-            <p class="mt-10 text-[#D5DEE9]">
-                Or email us directly at
-                <a href="mailto:office@transpersonal-training.com" class="text-[#C9A45C] underline underline-offset-8 decoration-[#C9A45C]/40 hover:text-[#E0BE78]">office@transpersonal-training.com</a>
-            </p>
+            <p class="mt-10 text-[color:var(--c-on-dark-2)]">Or email us directly:</p>
+            <div class="mt-3 flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-2 text-sm text-[color:var(--c-on-dark-3)]">
+                <a href="mailto:west-office@transpersonal-training.com" class="flex flex-col items-center hover:text-[color:var(--c-acc)] transition-colors">
+                    <span class="inline-flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4 shrink-0"></i>West office</span>
+                    west-office@transpersonal-training.com
+                </a>
+                <a href="mailto:east-office@transpersonal-training.com" class="flex flex-col items-center hover:text-[color:var(--c-acc)] transition-colors">
+                    <span class="inline-flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4 shrink-0"></i>East office</span>
+                    east-office@transpersonal-training.com
+                </a>
+            </div>
+            <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-2 text-sm text-[color:var(--c-on-dark-3)]">
+                <a href="tel:+4917638034517" class="inline-flex items-center gap-2 hover:text-[color:var(--c-acc)] transition-colors">
+                    <i data-lucide="phone" class="w-4 h-4"></i>West office &middot; +49 176 38034517
+                </a>
+                <a href="tel:+37379024199" class="inline-flex items-center gap-2 hover:text-[color:var(--c-acc)] transition-colors">
+                    <i data-lucide="phone" class="w-4 h-4"></i>East office &middot; +373 79024199
+                </a>
+                <a href="https://www.facebook.com/EastwestTranspersonalTrainingSchool/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 hover:text-[color:var(--c-acc)] transition-colors">
+                    <i data-lucide="facebook" class="w-4 h-4"></i>Facebook
+                </a>
+            </div>
         </div>
     </div>
 </section>
@@ -357,4 +472,107 @@ ogType: website
         window.addEventListener('scroll', update, { passive: true });
         window.addEventListener('resize', update, { passive: true });
     })();
+
+    // Shuffle the "Moments from our seminars" filmstrip into a fresh order on every load
+    (function () {
+        const strip = document.getElementById('moments-filmstrip');
+        if (!strip) return;
+        const items = Array.from(strip.children);
+        for (let i = items.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [items[i], items[j]] = [items[j], items[i]];
+        }
+        items.forEach((item) => strip.appendChild(item));
+    })();
 </script>
+
+
+<!-- ═══════════ Announcement — the 2027 cycle ═══════════ -->
+{# Homepage only, and shown on every visit for as long as 2027 is still ahead
+   — see the script below. Opened from `load` rather than DOMContentLoaded:
+   #page-loader covers the viewport until then, and a dialog lives in the top
+   layer, so an earlier open would put the announcement over the spinner. #}
+<dialog id="cycle-2027-modal" aria-labelledby="cycle-2027-title" class="max-w-lg w-[92vw] p-0 backdrop:bg-[color:var(--c-deep-80)] shadow-2xl">
+    <div class="bg-[color:var(--c-paper-card)]">
+        <div class="bg-[color:var(--c-deep)] text-[color:var(--c-paper-hi)] px-6 md:px-8 py-6 flex items-start justify-between gap-4">
+            <div>
+                <p class="p4-kicker text-[color:var(--c-acc)] flex items-center gap-3 mb-3">
+                    <span class="p4-hairline"></span>
+                    2027&ndash;2030
+                </p>
+                <h2 id="cycle-2027-title" class="p4-display text-2xl md:text-3xl font-medium leading-tight">
+                    A new cycle opens in <em class="text-[color:var(--c-acc)]">2027</em>
+                </h2>
+            </div>
+            <button type="button" onclick="document.getElementById('cycle-2027-modal').close()" aria-label="Close" class="text-[color:var(--c-paper-hi)] hover:text-[color:var(--c-acc)] bg-transparent border-none cursor-pointer p-1 shrink-0">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <div class="px-6 md:px-8 py-7 space-y-6 text-[color:var(--c-body)] leading-relaxed">
+            <p>
+                The school opens its doors again for a new four-year cycle of the training in Transpersonal
+                Psychotherapy, Counselling &amp; Holotropic Breathwork&reg;, running from 2027 to 2030 &mdash;
+                shared online lectures for one international East&ndash;West community, with in-person
+                intensives held in Europe.
+            </p>
+            <p class="font-medium text-[color:var(--c-heading)]">
+                Where would you like to go?
+            </p>
+            {# The two doors, side by side and the same size on purpose: a
+               returning student should not have to hunt for the old site in a
+               footnote, and a new visitor should not be able to take the wrong
+               one by accident. Each button says where it goes and what is
+               there, so the choice reads before either is clicked. #}
+            <div class="grid sm:grid-cols-2 gap-4">
+                <button type="button" onclick="document.getElementById('cycle-2027-modal').close()" class="bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-deep)] px-4 py-4 text-center transition-all shadow hover:shadow-lg border-none cursor-pointer">
+                    <span class="block font-medium tracking-wide">Continue on the new website</span>
+                    <span class="block text-xs mt-1 opacity-80">The 2027&ndash;2030 cycle</span>
+                </button>
+                <a href="https://old.transpersonal-training.com/" target="_blank" rel="noopener" class="bg-transparent hover:bg-[color:var(--c-paper-2)] text-[color:var(--c-heading)] border border-[color:var(--c-heading)] px-4 py-4 text-center no-underline transition-all">
+                    <span class="block font-medium tracking-wide">Continue on the old website</span>
+                    <span class="block text-xs mt-1 text-[color:var(--c-body-dim)]">The 2021&ndash;2027 programmes</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="px-6 md:px-8 py-5 bg-[color:var(--c-paper)] border-t border-[color:var(--c-line)] text-sm text-[color:var(--c-body)] leading-relaxed">
+            Nothing has been taken down: the site you remember keeps its own address at
+            <a href="https://old.transpersonal-training.com/" target="_blank" rel="noopener" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-4">old.transpersonal-training.com</a>.
+        </div>
+    </div>
+</dialog>
+<script>
+    (function () {
+        var dialog = document.getElementById('cycle-2027-modal');
+        if (!dialog || typeof dialog.showModal !== 'function') return;
+
+        // Shown on every visit, on purpose: this announces a cycle that has not
+        // started yet, so it is the standing message of the moment rather than a
+        // notice to acknowledge once. Nothing is remembered between visits.
+        //
+        // It stops opening once 2027 arrives, because from that day the wording
+        // is wrong. Treat that as a safety net, not the plan: a visitor's clock
+        // is theirs to set, so the block itself comes out in January.
+        // → docs/TODO.md task 65
+        var STOPS_AT = new Date('2027-01-01T00:00:00Z');
+
+        dialog.addEventListener('click', function (e) {
+            if (e.target === dialog) dialog.close();
+        });
+
+        window.addEventListener('load', function () {
+            if (new Date() >= STOPS_AT) return;
+            // A beat after the loader clears, so the hero is what greets you
+            // first and the announcement arrives over a page already there.
+            setTimeout(function () {
+                if (!dialog.open) dialog.showModal();
+            }, 800);
+        });
+    })();
+</script>
+
+
+{% block scripts %}
+<script src="{{ '/scripts/pages/contact.js' | url }}"></script>
+{% endblock %}

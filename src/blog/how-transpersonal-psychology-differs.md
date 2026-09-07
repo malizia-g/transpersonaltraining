@@ -5,8 +5,7 @@ authorUrl: https://manalpsychotherapy.com/
 date: 2026-02-14
 description: "A clear comparison between transpersonal psychology and other therapeutic modalities, highlighting its unique holistic and integrative approach."
 image: threshold-doorway-light.jpg
-source: manalpsychotherapy.com
-sourceUrl: https://manalpsychotherapy.com/
+imageAlt: "A barefoot woman standing in a sunlit open doorway, looking out towards the green woodland beyond"
 tags: [transpersonal, psychology, holistic therapy, integrative therapy, psychotherapy, comparison]
 ---
 

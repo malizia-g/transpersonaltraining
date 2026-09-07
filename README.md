@@ -68,7 +68,7 @@ All project documentation is in the [`docs/`](docs/) folder:
 | [CONTENT_EDITING.md](docs/CONTENT_EDITING.md) | How to edit page content via Markdown files |
 | [DOCUMENTATION.md](docs/DOCUMENTATION.md) | Architecture, build process, design system, integrations |
 | [FUTURE_IDEAS.md](docs/FUTURE_IDEAS.md) | Planned improvements and proposals |
-| [PABLO_TASKS.md](docs/PABLO_TASKS.md) | Pending manual tasks (DNS, FTP, Google setup) |
+| [TODO.md](docs/TODO.md) | **Everything still open**, in one list — launch blockers, decisions, SEO work, post-launch items |
 
 ## Stack
 

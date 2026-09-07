@@ -1,4 +1,5 @@
 const pluginSEO = require('eleventy-plugin-seo');
+const { prefixMarkdownLinks } = require('./lib/prefix-markdown-links');
 const markdownIt = require('markdown-it');
 const matter = require('gray-matter');
 const fs = require('fs');
@@ -47,6 +48,14 @@ module.exports = function(eleventyConfig) {
     if (!str || !prefix) return false;
     return str.startsWith(prefix);
   });
+
+  // Extract the YouTube video id from any common YouTube URL form
+  // (watch?v=, youtu.be/, embed/). Returns '' if not a YouTube URL.
+  eleventyConfig.addFilter('youtubeId', function(url) {
+    if (!url) return '';
+    const match = String(url).match(/(?:youtu\.be\/|[?&]v=|\/embed\/)([A-Za-z0-9_-]{6,})/);
+    return match ? match[1] : '';
+  });
   // Collezione blog: tutti i markdown in src/blog/
   eleventyConfig.addCollection('blog', function(collectionApi) {
     const posts = collectionApi.getFilteredByGlob('src/blog/*.md');
@@ -54,12 +63,12 @@ module.exports = function(eleventyConfig) {
     return posts;
   });
   // Markdown instance
-  const md = markdownIt({
+  const md = prefixMarkdownLinks(markdownIt({
     html: true,
     linkify: true,
     typographer: true
-  });
-  
+  }));
+
   // Filter to read and render biography Markdown files
   eleventyConfig.addFilter('getBio', function(teacherId) {
     try {
@@ -91,7 +100,7 @@ module.exports = function(eleventyConfig) {
   });
 
   // Read all MD files in a content directory and return sorted array of { filename, html, data }
-  // dir is relative to src/content/ (e.g. 'techniques/cards')
+  // dir is relative to src/content/ (e.g. 'home/cards')
   eleventyConfig.addFilter('pageContentDir', function(dir) {
     try {
       const contentDir = path.join(__dirname, 'src/content', dir);
@@ -108,14 +117,71 @@ module.exports = function(eleventyConfig) {
     }
   });
 
-  // Promote standalone markdown-styled title/subtitle paragraphs to semantic headings
-  eleventyConfig.addFilter('promoteMarkdownHeadings', function(html) {
+  // Read a content MD file and split its body on '### ' headings.
+  // Returns { data, introHtml, blocks: [{ title, teachers, lead, icon, image, html }] }.
+  // Per-block conventions: an italic '*(Name, Name)*' line right after the
+  // heading is lifted out as `teachers`; a blockquote line '> One sentence.'
+  // is lifted out as `lead`, the preview a template can show while the rest of
+  // the block stays folded away; a standalone image line
+  // '![alt](/path "object-position")' is lifted out as `image` (the path is
+  // extensionless — the template builds the <picture> with .webp/.jpg);
+  // `data.icons[title]` in the frontmatter supplies `icon`.
+  // All three are removed from the body, so nothing renders twice.
+  eleventyConfig.addFilter('pageSections', function(filename) {
+    try {
+      const contentPath = path.join(__dirname, 'src/content', filename);
+      const raw = fs.readFileSync(contentPath, 'utf-8');
+      const parsed = matter(raw);
+      const parts = parsed.content.split(/^### +/m);
+      const introHtml = md.render((parts.shift() || '').trim());
+      const blocks = parts.map(part => {
+        const lines = part.split('\n');
+        const title = lines.shift().trim();
+        let body = lines.join('\n');
+        let teachers = null;
+        const teacherMatch = body.match(/^\*\(([^)]+)\)\*\s*$/m);
+        if (teacherMatch) {
+          teachers = teacherMatch[1];
+          body = body.replace(teacherMatch[0], '');
+        }
+        let lead = null;
+        const leadMatch = body.match(/^> +(.+)$/m);
+        if (leadMatch) {
+          lead = leadMatch[1].trim();
+          body = body.replace(leadMatch[0], '');
+        }
+        let image = null;
+        const imageMatch = body.match(/^!\[([^\]]*)\]\(([^)\s"]+)(?:\s+"([^"]+)")?\)\s*$/m);
+        if (imageMatch) {
+          image = { alt: imageMatch[1], src: imageMatch[2], position: imageMatch[3] || 'object-center' };
+          body = body.replace(imageMatch[0], '');
+        }
+        const icon = (parsed.data.icons || {})[title] || null;
+        return { title, teachers, lead, icon, image, html: md.render(body.trim()) };
+      });
+      return { data: parsed.data, introHtml, blocks };
+    } catch (error) {
+      return { data: {}, introHtml: '', blocks: [] };
+    }
+  });
+
+  // Promote standalone markdown-styled title/subtitle paragraphs to semantic headings.
+  //
+  // Pass the page title so the opening bold line can be reconciled with it: the
+  // layout already renders the title as the page's only <h1>, so promoting this
+  // one to <h1> too gave every post two — and when the bold line just repeats the
+  // title, the reader saw the same heading printed twice.
+  eleventyConfig.addFilter('promoteMarkdownHeadings', function(html, pageTitle) {
     if (!html) return '';
 
-    let output = html;
+    const stripTags = (s) => s.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
 
-    // First standalone bold paragraph -> H1
-    output = output.replace(/<p><strong>([\s\S]*?)<\/strong><\/p>/, '<h1>$1</h1>');
+    let output = html.replace(/<p><strong>([\s\S]*?)<\/strong><\/p>/, (match, inner) => {
+      if (pageTitle && stripTags(inner).toLowerCase() === String(pageTitle).trim().toLowerCase()) {
+        return '';
+      }
+      return `<h2>${inner}</h2>`;
+    });
 
     // Standalone italic paragraphs -> H2
     output = output.replace(/<p><em>([\s\S]*?)<\/em><\/p>/g, '<h2>$1</h2>');
@@ -126,6 +192,7 @@ module.exports = function(eleventyConfig) {
   // Copy static assets to output
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "src/CNAME": "CNAME" });
+  eleventyConfig.addPassthroughCopy({ "src/.htaccess": ".htaccess" });
   
   // Copy new scripts structure
   eleventyConfig.addPassthroughCopy({ "src/scripts": "scripts" });

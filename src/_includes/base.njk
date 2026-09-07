@@ -5,7 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% set excerpt = excerpt or description %}
     {% set ogtype = ogtype or ogType or ('article' if page.url != '/blog/' and (page.url | startsWith('/blog/')) else 'website') %}
-    {% seo "" %}
+    <title>{% pageTitle "" %}</title>
+
+    <meta name="description" content="{% pageDescription "" %}">
+    <meta name="robots" content="{% metaRobots "" %}">
+    <meta name="author" content="{% metaAuthor "" %}">
+
+    {# Syndicated blog posts set sourceUrl to the original article. Canonical then
+       points there instead of at our copy — Google's recommended pattern for
+       republished content — so the copy doesn't compete with (or get penalized
+       against) the original for ranking. #}
+    {% if sourceUrl %}
+    <link rel="canonical" href="{{ sourceUrl }}">
+    {% else %}
+    <link rel="canonical" href="{% canonicalURL "" %}">
+    {% endif %}
+
+    {% openGraph "" %}
+    {% twitterCard "" %}
 
     {# JSON-LD Structured Data #}
     {% if page.url == "/" %}
@@ -15,9 +32,26 @@
       "@type": "EducationalOrganization",
       "name": "Transpersonal Training",
       "url": "https://transpersonal-training.com",
-      "description": "Professional transpersonal psychotherapy and breathwork training. EUROTAS-accredited online programme with in-person intensives in Western Europe.",
-      "email": "office@transpersonal-training.com",
-      "sameAs": [],
+      "description": "Professional transpersonal psychotherapy and breathwork training. EUROTAS-accredited online programme, one international East–West cohort, with in-person intensives in Europe.",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+49-176-38034517",
+          "email": "west-office@transpersonal-training.com",
+          "contactType": "admissions",
+          "areaServed": "Western track",
+          "availableLanguage": ["English", "German"]
+        },
+        {
+          "@type": "ContactPoint",
+          "telephone": "+373-79024199",
+          "email": "east-office@transpersonal-training.com",
+          "contactType": "admissions",
+          "areaServed": "Eastern track",
+          "availableLanguage": ["Russian", "English"]
+        }
+      ],
+      "sameAs": ["https://www.facebook.com/EastwestTranspersonalTrainingSchool/"],
       "hasCredential": {
         "@type": "EducationalOccupationalCredential",
         "credentialCategory": "Professional Certification",
@@ -33,16 +67,16 @@
       "@context": "https://schema.org",
       "@type": "Course",
       "name": "Transpersonal Psychotherapy & Holotropic Breathwork Training",
-      "description": "A four-year, EUROTAS-accredited training in Transpersonal Psychotherapy, Counselling and Holotropic Breathwork®, delivered online with in-person intensives across Western Europe.",
+      "description": "A four-year, EUROTAS-accredited training in Transpersonal Psychotherapy, Counselling and Holotropic Breathwork®, delivered online to one international East–West cohort, with in-person intensives held in Europe.",
       "provider": {
         "@type": "EducationalOrganization",
         "name": "Transpersonal Training",
         "url": "https://transpersonal-training.com"
       },
       "educationalLevel": "Professional",
-      "educationalCredentialAwarded": "EUROTAS-accredited professional certification in transpersonal psychotherapy",
+      "educationalCredentialAwarded": "Certificate as Transpersonal Psychotherapy & Holotropic Breathwork Facilitator (EUROTAS-accredited), with an optional EUROTAS certification track",
       "timeRequired": "P4Y",
-      "occupationalCategory": "Transpersonal Psychotherapist",
+      "occupationalCategory": "Transpersonal Psychotherapy & Breathwork Facilitator",
       "teaches": ["Transpersonal Psychology", "Holotropic Breathwork", "Counselling Skills", "Psychotherapy"],
       "availableLanguage": "English",
       "inLanguage": "en",
@@ -83,14 +117,14 @@
         .loader-spinner {
             width: 50px;
             height: 50px;
-            border: 4px solid rgba(201, 164, 92, 0.25);
-            border-top-color: #C9A45C;
+            border: 4px solid var(--c-acc-25, rgba(201, 164, 92, 0.25));
+            border-top-color: var(--c-acc, #D9A756);
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
         
         .loader-text {
-            color: #334155;
+            color: var(--c-body, #334155);
             font-size: 1.125rem;
             font-weight: 500;
             margin-top: 1.5rem;
@@ -118,7 +152,7 @@
     <!-- Lucide Icons (defer loading) -->
     <script src="https://unpkg.com/lucide@0.344.0" defer></script>
 </head>
-<body class="font-sans text-slate-800 bg-slate-50 antialiased">
+<body class="font-sans text-[color:var(--c-heading)] bg-[color:var(--c-paper-hi)] antialiased">
 
     <!-- Page Loader -->
     <div id="page-loader">
@@ -136,6 +170,9 @@
 
     <!-- Footer -->
     {% include "footer.njk" %}
+
+    <!-- Where the forms post to (set in src/_data/forms.js) -->
+    <script>window.FORMS_ENDPOINT = {{ forms.endpoint | dump | safe }};</script>
 
     <!-- Main application script -->
     <script type="module" src="{{ '/scripts/main.js' | url }}"></script>

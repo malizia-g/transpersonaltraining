@@ -262,7 +262,7 @@ The `TESTS/` folder contains experimental HTML pages. Decision needed:
 | File | Size | Notes |
 |------|------|-------|
 | `hero_journey.html` | 48KB | Keep as page? Integrate? Delete? |
-| `client_model.html` | 18KB | May already be migrated to `src/client-model.html` |
+| `client_model.html` | 18KB | **Migrated** — the live page is `src/become-a-practice-client.html`. This copy is dead |
 | `transpersonal_therapist.html` | 21KB | Integrate into site or delete? |
 
 ---

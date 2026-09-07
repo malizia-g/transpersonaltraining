@@ -1,0 +1,965 @@
+/**
+ * Website forms endpoint — ONE web app behind every form on the site:
+ *
+ *   • contact form (homepage)     → a row in the "Contact" sheet, an auto-reply
+ *                                   carrying the sample lesson and brochure,
+ *                                   and an email to you when they asked a
+ *                                   question (the message field is optional)
+ *   • application details         → a row in the "Applications" sheet
+ *     (/apply/ step 1)
+ *   • signed enrolment agreement  → a file in your Drive, and its link written
+ *     (/apply/ step 3)              onto that person's "Applications" row
+ *
+ * Who gets told about a new message is read from the spreadsheet too, not
+ * hard-coded here — see NOTIFY_SHEET below. The contact form and the signed
+ * agreement also send a confirmation back to the person who submitted them.
+ *
+ * The applicant is matched by EMAIL: step 1 creates their row, step 3 finds it
+ * again and fills in the Agreement column. Re-submitting step 1 with the same
+ * email updates that row instead of adding a second one.
+ *
+ * It runs as YOU, which is what lets a static website write to your
+ * spreadsheet and Drive without any password living in the page.
+ *
+ * SETUP: see docs/APPLICATION_PAGE_SETUP.md. In short — open your forms
+ * spreadsheet, Extensions → Apps Script, paste this in, deploy as a Web App
+ * ("Execute as: Me", "Who has access: Anyone"), then paste the /exec URL into
+ * src/_data/forms.js.
+ *
+ * NOTE: do NOT paste this into the Apps Script project that already serves the
+ * website's Sheets data — that one has its own doGet() and the two would clash.
+ * This belongs in its own project, bound to the forms spreadsheet.
+ */
+
+// ---- Config ---------------------------------------------------------------
+// Who gets notified when something comes in. The addresses live in the forms
+// spreadsheet, in a tab with one column per office — so the school can add or
+// remove people without touching this code or redeploying. See notifyEmails_().
+//
+// Put the tab's name here. Capitalisation doesn't matter, and if the tab is
+// renamed outright it's still found by its two column headings — notifications
+// keep working either way.
+var NOTIFY_SHEET = 'Notifications';
+var NOTIFY_WEST_HEADER = 'WEST TRACK';
+var NOTIFY_EAST_HEADER = 'EAST TRACK';
+
+// The school's public addresses, the ones printed on the website. Two jobs:
+// the Reply-To on the confirmation we send back to the sender, and a fallback
+// set of recipients if the tab above can't be read, so a mistake in the
+// spreadsheet can never silence a notification altogether ('' = no email).
+//
+// Don't rely on them for notifications: mail sent here has to survive the
+// domain's forwarding, which is the hop that was swallowing them before. For a
+// human hitting Reply that hop works fine, which is why they're used for that.
+var OFFICE_EMAIL_WEST = 'west-office@transpersonal-training.com';
+var OFFICE_EMAIL_EAST = 'east-office@transpersonal-training.com';
+
+// The name and signature on mail the school sends out.
+var SCHOOL_NAME = 'Transpersonal Training';
+var SCHOOL_URL = 'https://transpersonal-training.com';
+
+// Leave empty when this script is bound to the spreadsheet (Extensions → Apps
+// Script). Only set it if you ever move the script to a standalone project.
+var SHEET_ID = '';
+
+// Drive folder for signed agreements. Leave FOLDER_ID empty to auto-create /
+// reuse a folder named FOLDER_NAME.
+var FOLDER_ID = '';
+var FOLDER_NAME = 'Signed Enrolment Agreements';
+
+// The master enrolment agreement Google Doc. The website pulls its text from
+// here at build time, so this Doc is the single source of truth — edit the
+// contract there, never in the website code.
+var AGREEMENT_DOC_ID = '1Gyu8MRYX9StBSReQPbCymDVo2hKrxfZNmUgDFs2b_eE';
+// Everything from a heading containing this phrase up to the next big heading is
+// left out of the website copy — that's the internal "notes for the school".
+var SKIP_SECTION_FROM = 'Notes for the school';
+
+// The things every enquiry gets sent, whether or not they asked a question.
+// Both are public pages on the site — nothing here is gated, and these links
+// are a convenience, not a reward for filling the form in. Keep them in step
+// with src/index.html and src/_data/brochure.js if either path ever moves.
+//
+// BROCHURE_URL: leave it EMPTY until the PDF is actually committed to
+// src/assets/documents/ (see docs/BROCHURE.md). The website hides its download
+// buttons on its own when the file is missing; this script cannot see the
+// filesystem, so emailing a link to a 404 is the one failure mode it has to be
+// told about by hand. Set it the same day the PDF goes live.
+var SAMPLE_LESSON_URL = SCHOOL_URL + '/sample-lesson/';
+var BROCHURE_URL = '';
+
+// The hand-designed school brochure, sent as a real email ATTACHMENT on the
+// contact confirmation (separate from BROCHURE_URL above, which is the
+// self-hosted, indexable download link on the website itself — see
+// docs/BROCHURE.md). This one just needs to exist in Drive, so it can go out
+// before the website copy is ever committed.
+//
+// SETUP: upload the brochure PDF to Drive, open it, copy the file ID out of
+// its URL (drive.google.com/file/d/THIS_PART/view) and paste it below. Leave
+// empty and the confirmation email simply skips the attachment.
+var BROCHURE_DRIVE_FILE_ID = '';
+
+// The site's own palette (src/styles/main.css, "Indigo Night"), spelled out as
+// flat hex. Email clients can't read the site's HSL custom properties or
+// Tailwind classes, so these five are the one place on the whole site where a
+// colour is a literal instead of a token — re-derive them by hand from
+// main.css if the palette ever changes. Fonts follow the same logic: the
+// site's Cormorant Garamond / Inter pairing isn't loadable in an email client,
+// so headings fall back to Georgia (closest safe serif) and body text to the
+// system sans stack, rather than the two families the site actually uses.
+var EMAIL_C_DEEP = '#1a1230';    // --c-deep
+var EMAIL_C_ACC = '#d4b75e';     // --c-acc
+var EMAIL_C_PAPER = '#f7f4ed';   // --c-paper
+var EMAIL_C_HEADING = '#252163'; // --c-heading
+var EMAIL_C_BODY = '#5c574d';    // --c-body
+var EMAIL_C_LINE = '#dcd7cb';    // --c-line
+var EMAIL_FONT_SERIF = "Georgia, 'Times New Roman', serif";
+var EMAIL_FONT_SANS = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
+
+// The logo badge in the email header — a PNG, not the site's own SVG. Outlook
+// desktop doesn't render SVG at all (inline <svg> or <img src="…svg">), so a
+// raster image is the one format every client actually shows. Generated from
+// src/assets/images/Graphics/logo.svg by scripts/build-email-logo-badge.js —
+// rerun that if the logo mark or the gold accent colour ever changes.
+//
+// It's hosted on the site itself rather than Drive, same reasoning as
+// BROCHURE_URL above: a public URL that doesn't depend on a Drive file
+// staying shared. But transpersonal-training.com still serves the old
+// WordPress site until the domain cutover (see .github/workflows/deploy.yml)
+// — the new build only lives at the GitHub Pages preview URL until then. So
+// the logo's URL isn't a constant: emailLogoUrl_() below checks the final
+// domain first and falls back to the preview if that 404s, so the image
+// works today and keeps working, unattended, once the domain goes live.
+var EMAIL_LOGO_PROD_URL = SCHOOL_URL + '/assets/images/Graphics/logo-badge-email.png';
+var EMAIL_LOGO_FALLBACK_URL = 'https://malizia-g.github.io/transpersonaltraining/assets/images/Graphics/logo-badge-email.png';
+
+// Resolves to whichever of the two URLs above is actually serving the badge
+// right now. Cached for an hour (CacheService, not a global — this runs once
+// per doPost execution, and Apps Script gives each run a fresh global scope)
+// so a burst of form submissions doesn't re-check on every single one.
+function emailLogoUrl_() {
+  var cache = CacheService.getScriptCache();
+  var cached = cache.get('emailLogoUrl');
+  if (cached) return cached;
+
+  var url = EMAIL_LOGO_FALLBACK_URL;
+  try {
+    var res = UrlFetchApp.fetch(EMAIL_LOGO_PROD_URL, { muteHttpExceptions: true, method: 'head' });
+    if (res.getResponseCode() === 200) url = EMAIL_LOGO_PROD_URL;
+  } catch (err) {
+    // Network hiccup — the fallback is still a good image for this send.
+  }
+
+  cache.put('emailLogoUrl', url, 3600);
+  return url;
+}
+
+var CONTACT_SHEET = 'Contact';
+var APPLICATION_SHEET = 'Applications';
+var MAX_UPLOAD_MB = 15;
+
+// The Applications columns, in order. Everything reads positions from this list
+// by name, so you can reorder or rename here without touching the code below.
+//
+// Two dates, deliberately: "Received" is when they filled the form in, "Apply
+// date" is when their signed agreement arrived — an empty Apply date means an
+// application that was started but never completed.
+var APPLICATION_HEADERS = [
+  'Received', 'Name', 'Date of birth', 'Nationality', 'Country of residence',
+  'Address', 'Email', 'Phone', 'Track', 'Subscription intent',
+  'Apply date', 'Agreement', 'Diploma'
+];
+var EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+// ---------------------------------------------------------------------------
+
+function doPost(e) {
+  try {
+    if (!e || !e.postData || !e.postData.contents) {
+      return json_({ status: 'error', message: 'No data received.' });
+    }
+    var data = JSON.parse(e.postData.contents);
+
+    // Honeypot: the form has a hidden field that a human never sees and never
+    // fills. If it has content, it's a bot — accept it so the bot moves on,
+    // but drop it on the floor.
+    if (data.website) return json_({ status: 'ok' });
+
+    if (data.action === 'contact') return handleContact_(data);
+    if (data.action === 'application') return handleApplication_(data);
+    if (data.action === 'agreement') return handleAgreement_(data);
+    return json_({ status: 'error', message: 'Unknown action.' });
+  } catch (err) {
+    return json_({ status: 'error', message: String(err) });
+  }
+}
+
+// ?doc=agreement serves the master agreement to the website build.
+// Plain /exec lets you check in a browser that the deployment is live.
+function doGet(e) {
+  if (e && e.parameter && e.parameter.doc === 'agreement') {
+    try {
+      return json_({ status: 'ok', html: docToHtml_(AGREEMENT_DOC_ID) });
+    } catch (err) {
+      return json_({ status: 'error', message: String(err) });
+    }
+  }
+  return json_({ status: 'ok', info: 'Website forms endpoint is live. Use POST to submit.' });
+}
+
+// ---- ONE-OFF: put the {{placeholders}} into the master Doc -----------------
+/**
+ * Run this ONCE, by hand, from the Apps Script editor: pick
+ * setupAgreementPlaceholders in the function dropdown and press Run. It edits
+ * the master agreement Doc so the website can fill it in per applicant:
+ *
+ *   - the student details table gets {{fullName}}, {{dob}}, … in its empty cells
+ *   - "Track: ☐ Western ☐ Eastern"      becomes "Track: {{track}}"
+ *   - "How you are joining" + its boxes  become "Subscription intent: {{joining}}"
+ *   - "Intended start date / cohort"     is removed (the website dropped it)
+ *   - the header Date and the student's signature Name get {{today}}/{{fullName}}
+ *
+ * Safe to run twice — it looks for what it hasn't done yet. It writes to a
+ * contract, so check the result: if anything looks wrong, the Doc's
+ * File → Version history restores the previous version in two clicks.
+ * Check View → Logs afterwards to see exactly what it changed.
+ */
+function setupAgreementPlaceholders() {
+  var doc = DocumentApp.openById(AGREEMENT_DOC_ID);
+  var body = doc.getBody();
+  var did = [];
+
+  // 1. Details table — match on the label in the left cell, so this doesn't
+  //    depend on row order.
+  var FIELDS = {
+    'Full legal name': '{{fullName}}',
+    'Date of birth': '{{dob}}',
+    'Nationality': '{{nationality}}',
+    'Country of residence': '{{countryResidence}}',
+    'Full postal address': '{{address}}',
+    'Email': '{{email}}',
+    'Telephone / WhatsApp': '{{phone}}'
+  };
+  var tables = body.getTables();
+  for (var t = 0; t < tables.length; t++) {
+    for (var r = 0; r < tables[t].getNumRows(); r++) {
+      var row = tables[t].getRow(r);
+      if (row.getNumCells() < 2) continue;
+      var placeholder = FIELDS[row.getCell(0).getText().trim()];
+      if (placeholder) {
+        row.getCell(1).setText(placeholder);
+        did.push(row.getCell(0).getText().trim() + ' → ' + placeholder);
+      }
+    }
+  }
+
+  // 2. Header date. Targeted at the "Document version" line, because
+  //    "Date: ____" also appears in the signature block.
+  var paragraphs = body.getParagraphs();
+  for (var i = 0; i < paragraphs.length; i++) {
+    if (paragraphs[i].getText().indexOf('Document version') !== -1) {
+      paragraphs[i].replaceText('_{3,}', '{{today}}');
+      did.push('header date → {{today}}');
+    }
+  }
+
+  // 3. Track, subscription intent, and the fields the website no longer asks for.
+  var remove = [];
+  paragraphs = body.getParagraphs();
+  for (var j = 0; j < paragraphs.length; j++) {
+    var p = paragraphs[j];
+    var text = p.getText().trim();
+
+    // Rebuilt rather than pattern-matched: the checkboxes are separated by
+    // non-breaking spaces, and replaceText uses RE2, whose \s — unlike
+    // JavaScript's — does not match them. Rewriting the line sidesteps
+    // whatever whitespace the Doc happens to contain.
+    if (text.indexOf('Track:') === 0) {
+      p.clear();
+      p.appendText('Track: ').setBold(true);
+      p.appendText('{{track}}').setBold(false);
+      did.push('track → {{track}}');
+
+    } else if (text.indexOf('How you are joining') === 0) {
+      p.clear();
+      p.appendText('Subscription intent (optional): ').setBold(true);
+      p.appendText('{{joining}}').setBold(false);
+      did.push('joining → {{joining}}');
+
+    // Only the joining checkboxes — the consent boxes in sections 6-8 also
+    // start with ☐ and must survive.
+    } else if (/^☐\s*(Full training|Self-development only|Single lectures)/.test(text)) {
+      remove.push(p);
+    } else if (text.indexOf('Intended start date') === 0) {
+      remove.push(p);
+    }
+  }
+  for (var k = 0; k < remove.length; k++) {
+    did.push('removed: ' + remove[k].getText().trim().substring(0, 40));
+    remove[k].removeFromParent();
+  }
+
+  // 4. The student's name on the signature line (not the School's).
+  for (var s = 0; s < tables.length; s++) {
+    if (tables[s].getText().indexOf('THE STUDENT') === -1) continue;
+    for (var sr = 0; sr < tables[s].getNumRows(); sr++) {
+      var cell = tables[s].getRow(sr).getCell(0);
+      if (cell.getText().trim().indexOf('Name:') === 0) {
+        cell.replaceText('_{3,}', '{{fullName}}');
+        did.push('signature name → {{fullName}}');
+      }
+    }
+  }
+
+  doc.saveAndClose();
+  Logger.log('Done:\n  ' + did.join('\n  '));
+  return did;
+}
+
+// ---- Google Doc → clean HTML ----------------------------------------------
+// Deliberately hand-rolled rather than using Drive's HTML export: that export is
+// a soup of inline styles and <span class="c17">, whereas the website's print
+// stylesheet needs plain semantic tags. This emits exactly those.
+
+function docToHtml_(docId) {
+  var body = DocumentApp.openById(docId).getBody();
+  var out = [];
+  var listItems = [];
+  var skipping = false;
+
+  function flushList() {
+    if (!listItems.length) return;
+    out.push('<ul>' + listItems.join('') + '</ul>');
+    listItems = [];
+  }
+
+  for (var i = 0; i < body.getNumChildren(); i++) {
+    var el = body.getChild(i);
+    var type = el.getType();
+
+    if (type === DocumentApp.ElementType.PARAGRAPH) {
+      var p = el.asParagraph();
+      var heading = p.getHeading();
+      var isBigHeading = heading === DocumentApp.ParagraphHeading.TITLE ||
+                         heading === DocumentApp.ParagraphHeading.HEADING1 ||
+                         heading === DocumentApp.ParagraphHeading.HEADING2;
+
+      // The internal notes run from their heading to the next big heading.
+      if (skipping && isBigHeading) skipping = false;
+      if (!skipping && heading !== DocumentApp.ParagraphHeading.NORMAL &&
+          p.getText().indexOf(SKIP_SECTION_FROM) !== -1) {
+        flushList();
+        skipping = true;
+      }
+      if (skipping) continue;
+
+      var html = runsToHtml_(p);
+      if (!html.trim()) continue;
+      flushList();
+      out.push(wrapParagraph_(heading, html));
+
+    } else if (type === DocumentApp.ElementType.LIST_ITEM) {
+      if (skipping) continue;
+      var li = runsToHtml_(el.asListItem());
+      if (li.trim()) listItems.push('<li>' + li + '</li>');
+
+    } else if (type === DocumentApp.ElementType.TABLE) {
+      if (skipping) continue;
+      flushList();
+      out.push(tableToHtml_(el.asTable()));
+
+    } else if (type === DocumentApp.ElementType.HORIZONTAL_RULE) {
+      if (skipping) continue;
+      flushList();
+      out.push('<hr>');
+    }
+  }
+  flushList();
+  return out.join('\n');
+}
+
+function wrapParagraph_(heading, html) {
+  var H = DocumentApp.ParagraphHeading;
+  if (heading === H.TITLE || heading === H.HEADING1) return '<h1>' + html + '</h1>';
+  if (heading === H.HEADING2) return '<h2>' + html + '</h2>';
+  if (heading === H.HEADING3 || heading === H.HEADING4 ||
+      heading === H.HEADING5 || heading === H.HEADING6) return '<h3>' + html + '</h3>';
+  return '<p>' + html + '</p>';
+}
+
+function tableToHtml_(table) {
+  var rows = [];
+  for (var r = 0; r < table.getNumRows(); r++) {
+    var row = table.getRow(r);
+    var cells = [];
+    for (var c = 0; c < row.getNumCells(); c++) {
+      var cell = row.getCell(c);
+      var parts = [];
+      for (var k = 0; k < cell.getNumChildren(); k++) {
+        var child = cell.getChild(k);
+        if (child.getType() === DocumentApp.ElementType.PARAGRAPH) {
+          parts.push(runsToHtml_(child.asParagraph()));
+        } else if (child.getType() === DocumentApp.ElementType.LIST_ITEM) {
+          parts.push(runsToHtml_(child.asListItem()));
+        }
+      }
+      cells.push('<td>' + parts.join('<br>') + '</td>');
+    }
+    rows.push('<tr>' + cells.join('') + '</tr>');
+  }
+  return '<table>' + rows.join('') + '</table>';
+}
+
+// Walks a paragraph's text runs so bold/italic/links survive the trip.
+function runsToHtml_(para) {
+  var text = para.editAsText();
+  var s = text.getText();
+  if (!s) return '';
+  var bounds = text.getTextAttributeIndices();
+  var html = '';
+  for (var i = 0; i < bounds.length; i++) {
+    var start = bounds[i];
+    var end = (i + 1 < bounds.length) ? bounds[i + 1] : s.length;
+    if (end <= start) continue;
+    var chunk = escapeHtml_(s.substring(start, end));
+    var url = text.getLinkUrl(start);
+    if (text.isBold(start)) chunk = '<strong>' + chunk + '</strong>';
+    if (text.isItalic(start)) chunk = '<em>' + chunk + '</em>';
+    if (url) chunk = '<a href="' + escapeHtml_(url) + '">' + chunk + '</a>';
+    html += chunk;
+  }
+  return html;
+}
+
+// The Doc holds {{placeholders}} that the website fills in per applicant, so
+// braces must survive escaping untouched.
+function escapeHtml_(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+// ---- Branded HTML email shell ----------------------------------------------
+// A styled skin over the plain-text confirmations. MailApp always sends both:
+// the plain body remains the source of truth (and what any client without
+// HTML rendering falls back to), the HTML is purely cosmetic on top of it.
+
+// contentHtml is the message itself; the dark header band, the sign-off and
+// the footer link are the chrome every confirmation shares.
+function emailShell_(contentHtml) {
+  return ''
+    + '<div style="background:' + EMAIL_C_PAPER + ';padding:32px 16px;">'
+    +   '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" '
+    +     'style="max-width:560px;margin:0 auto;background:#ffffff;border:1px solid ' + EMAIL_C_LINE + ';">'
+    +     '<tr><td style="background:' + EMAIL_C_DEEP + ';padding:24px 32px;text-align:center;">'
+    +       '<img src="' + emailLogoUrl_() + '" width="48" height="48" alt="" '
+    +         'style="display:block;margin:0 auto 12px;border:0;border-radius:50%;">'
+    +       '<span style="color:' + EMAIL_C_ACC + ';font-family:' + EMAIL_FONT_SERIF + ';font-size:13px;'
+    +         'letter-spacing:3px;text-transform:uppercase;">' + escapeHtml_(SCHOOL_NAME) + '</span>'
+    +     '</td></tr>'
+    +     '<tr><td style="padding:32px;color:' + EMAIL_C_BODY + ';font-family:' + EMAIL_FONT_SANS + ';'
+    +       'font-size:15px;line-height:1.7;">'
+    +       contentHtml
+    +       '<p style="margin:28px 0 0;">Warm regards,<br>'
+    +         '<span style="font-family:' + EMAIL_FONT_SERIF + ';color:' + EMAIL_C_HEADING + ';">'
+    +         escapeHtml_(SCHOOL_NAME) + '</span></p>'
+    +     '</td></tr>'
+    +     '<tr><td style="padding:18px 32px;border-top:1px solid ' + EMAIL_C_LINE + ';text-align:center;">'
+    +       '<a href="' + SCHOOL_URL + '" style="color:' + EMAIL_C_HEADING + ';font-family:' + EMAIL_FONT_SANS + ';'
+    +         'font-size:12px;text-decoration:none;letter-spacing:.5px;">' + SCHOOL_URL.replace(/^https?:\/\//, '') + '</a>'
+    +     '</td></tr>'
+    +   '</table>'
+    + '</div>';
+}
+
+// A gold, sharp-edged CTA — the email equivalent of the site's accent buttons
+// (see #contactBtn in src/index.html), since email clients won't render the
+// site's own button classes.
+function emailButton_(href, label) {
+  return '<a href="' + href + '" style="display:inline-block;background:' + EMAIL_C_ACC + ';color:' + EMAIL_C_DEEP
+    + ';font-family:' + EMAIL_FONT_SANS + ';font-weight:bold;font-size:14px;padding:12px 24px;'
+    + 'text-decoration:none;letter-spacing:.5px;">' + escapeHtml_(label) + '</a>';
+}
+
+// Falls back to this when a confirmation has no bespoke HTML version: turns
+// the plain-text body into paragraphs, so every confirmation gets the shell
+// above even if its call site never builds its own markup.
+function textToHtml_(text) {
+  return text.split(/\n\n+/).map(function (para) {
+    return '<p style="margin:0 0 20px;">' + escapeHtml_(para).replace(/\n/g, '<br>') + '</p>';
+  }).join('');
+}
+
+// ---- Contact form ---------------------------------------------------------
+
+function handleContact_(data) {
+  var name = clean_(data.name, 120);
+  var email = clean_(data.email, 160);
+  var message = clean_(data.message, 5000);
+  var track = clean_(data.track, 40); // which office to notify; blank = not sure, notify both
+  var newsletter = !!data.newsletter; // opted into the mailing list checkbox; unticked by default
+
+  // The message is OPTIONAL. Most people who write in are nowhere near
+  // applying — they want to see what the training actually is. Demanding a
+  // composed message before we will send them a lesson and a brochure puts a
+  // wall in front of the very thing that lowers the barrier.
+  if (!name || !email) {
+    return json_({ status: 'error', message: 'Please fill in your name and email.' });
+  }
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+    return json_({ status: 'error', message: 'That email address does not look right.' });
+  }
+
+  // sheet_() only writes these headers when it creates the sheet; if
+  // CONTACT_SHEET already exists from before the newsletter checkbox existed,
+  // add a "Newsletter" column by hand once.
+  sheet_(CONTACT_SHEET, ['Received', 'Name', 'Email', 'Message', 'Newsletter'])
+    .appendRow([new Date(), name, email, message, newsletter ? 'Yes' : 'No']);
+
+  // Only bother the office when there is something to answer. A bare request
+  // for the materials is handled entirely by the auto-reply below; it is still
+  // recorded in the sheet either way.
+  var notify = message ? notifyEmails_(track) : '';
+  if (notify) {
+    MailApp.sendEmail({
+      to: notify,
+      replyTo: email, // so you can just hit Reply
+      name: 'Transpersonal Training website',
+      subject: 'Website enquiry from ' + name,
+      body: name + ' <' + email + '> wrote:\n\n' + message
+    });
+  }
+
+  var brochureBlob = brochureBlob_();
+  var hasBrochure = !!brochureBlob;
+  sendConfirmation_(email, track,
+    ((hasBrochure || BROCHURE_URL) ? 'Your sample lesson and brochure — ' : 'Your sample lesson — ') + SCHOOL_NAME,
+    contactReplyBody_(name, message, hasBrochure),
+    {
+      attachments: hasBrochure ? [brochureBlob] : [],
+      html: contactReplyHtml_(name, message, hasBrochure)
+    });
+
+  return json_({ status: 'ok' });
+}
+
+// The brochure PDF from Drive, ready to attach — or null if it isn't set up
+// yet, or Drive can't produce it (deleted, wrong ID, no access). Never lets a
+// brochure problem turn a successful enquiry into an error on screen.
+function brochureBlob_() {
+  if (!BROCHURE_DRIVE_FILE_ID) return null;
+  try {
+    return DriveApp.getFileById(BROCHURE_DRIVE_FILE_ID).getBlob();
+  } catch (err) {
+    Logger.log('Brochure attachment unavailable: ' + err);
+    return null;
+  }
+}
+
+// The reply everyone gets. It leads with what they came for rather than with an
+// acknowledgement, invites a conversation without pressing for one, and only
+// promises an answer when there is a question to answer.
+function contactReplyBody_(name, message, hasBrochure) {
+  var body = 'Dear ' + name + ',\n\n'
+    + 'Thank you for getting in touch with ' + SCHOOL_NAME + '. It is a pleasure to hear '
+    + 'from you.\n\n';
+
+  body += (hasBrochure || BROCHURE_URL)
+    ? 'Here are two ways to get a real feel for the programme, whenever you have the time '
+      + 'for them:\n\n'
+      + '  • Watch a full lesson from the training\n'
+      + '    ' + SAMPLE_LESSON_URL + '\n\n'
+      + (hasBrochure
+          ? '  • Read the programme brochure, attached to this email\n\n'
+          : '  • Download the programme brochure\n'
+            + '    ' + BROCHURE_URL + '\n\n')
+      + 'The lesson is a complete lecture, not a trailer — an hour of it will tell you more '
+      + 'than any prospectus can. The brochure covers the structure, the dates, the fees and '
+      + 'what each of the four years asks of you.\n\n'
+    : 'If you would like to get a real feel for the programme, you can watch a full lesson '
+      + 'from the training here:\n\n'
+      + '    ' + SAMPLE_LESSON_URL + '\n\n'
+      + 'It is a complete lecture, not a trailer — an hour of it will tell you more than any '
+      + 'prospectus can.\n\n';
+
+  body += 'If you would like to talk any of it through, simply reply to this email and we '
+    + 'will arrange a call at a time that suits you. There is no commitment either way, and '
+    + 'no question is too small.\n\n';
+
+  if (message) {
+    body += 'We have your message and one of us will come back to you as soon as possible. '
+      + 'This is what you sent, for your own records:\n\n' + message + '\n\n';
+  }
+
+  return body;
+}
+
+// The HTML twin of contactReplyBody_ above — same content and same order, but
+// with the video and (when there is no attachment) the brochure as real
+// buttons instead of bare URLs. Keep the two in step by hand; there are only
+// two of them and a template engine would be overkill here.
+function contactReplyHtml_(name, message, hasBrochure) {
+  var html = '<p style="margin:0 0 20px;">Dear ' + escapeHtml_(name) + ',</p>'
+    + '<p style="margin:0 0 20px;">Thank you for getting in touch with ' + escapeHtml_(SCHOOL_NAME)
+    + '. It is a pleasure to hear from you.</p>';
+
+  if (hasBrochure || BROCHURE_URL) {
+    html += '<p style="margin:0 0 20px;">Here are two ways to get a real feel for the programme, '
+      + 'whenever you have the time for them:</p>'
+      + '<p style="margin:0 0 16px;">' + emailButton_(SAMPLE_LESSON_URL, 'Watch a full lesson') + '</p>'
+      + (hasBrochure
+          ? '<p style="margin:0 0 20px;">The programme brochure is attached to this email.</p>'
+          : '<p style="margin:0 0 20px;">' + emailButton_(BROCHURE_URL, 'Download the brochure') + '</p>')
+      + '<p style="margin:0 0 20px;">The lesson is a complete lecture, not a trailer — an hour of '
+      + 'it will tell you more than any prospectus can. The brochure covers the structure, the '
+      + 'dates, the fees and what each of the four years asks of you.</p>';
+  } else {
+    html += '<p style="margin:0 0 20px;">If you would like to get a real feel for the programme, '
+      + 'you can watch a full lesson from the training here:</p>'
+      + '<p style="margin:0 0 20px;">' + emailButton_(SAMPLE_LESSON_URL, 'Watch a full lesson') + '</p>'
+      + '<p style="margin:0 0 20px;">It is a complete lecture, not a trailer — an hour of it will '
+      + 'tell you more than any prospectus can.</p>';
+  }
+
+  html += '<p style="margin:0 0 20px;">If you would like to talk any of it through, simply reply '
+    + 'to this email and we will arrange a call at a time that suits you. There is no commitment '
+    + 'either way, and no question is too small.</p>';
+
+  if (message) {
+    html += '<p style="margin:0 0 10px;">We have your message and one of us will come back to '
+      + 'you as soon as possible. This is what you sent, for your own records:</p>'
+      + '<blockquote style="margin:0 0 20px;padding:2px 18px;border-left:3px solid ' + EMAIL_C_ACC
+      + ';color:' + EMAIL_C_BODY + ';font-style:italic;">'
+      + escapeHtml_(message).replace(/\n/g, '<br>') + '</blockquote>';
+  }
+
+  return html;
+}
+
+// ---- Application details (/apply/ step 1) ---------------------------------
+
+function handleApplication_(data) {
+  var email = clean_(data.email, 160);
+  if (!EMAIL_RE.test(email)) {
+    return json_({ status: 'error', message: 'That email address does not look right.' });
+  }
+
+  var sh = sheet_(APPLICATION_SHEET, APPLICATION_HEADERS);
+  var row = findRowByEmail_(sh, email);
+
+  var values = {
+    'Received': new Date(),
+    'Name': clean_(data.fullName, 120),
+    'Date of birth': clean_(data.dob, 40),
+    'Nationality': clean_(data.nationality, 80),
+    'Country of residence': clean_(data.countryResidence, 80),
+    'Address': clean_(data.address, 300),
+    'Email': email,
+    'Phone': clean_(data.phone, 60),
+    'Track': clean_(data.track, 40),
+    'Subscription intent': clean_(data.joining, 120),
+    // Keep what step 3 already wrote — re-generating must not wipe it.
+    'Apply date': row ? cell_(sh, row, 'Apply date') : '',
+    'Agreement': row ? cell_(sh, row, 'Agreement') : '',
+    'Diploma': row ? cell_(sh, row, 'Diploma') : ''
+  };
+
+  if (row) sh.getRange(row, 1, 1, APPLICATION_HEADERS.length).setValues([rowFrom_(values)]);
+  else sh.appendRow(rowFrom_(values));
+
+  return json_({ status: 'ok' });
+}
+
+// ---- Signed enrolment agreement (/apply/ step 3) --------------------------
+
+function handleAgreement_(data) {
+  if (!data.dataBase64) return json_({ status: 'error', message: 'No file content.' });
+
+  var email = clean_(data.email, 160);
+  if (!EMAIL_RE.test(email)) {
+    return json_({ status: 'error', message: 'That email address does not look right.' });
+  }
+
+  var bytes = Utilities.base64Decode(data.dataBase64);
+  if (bytes.length > MAX_UPLOAD_MB * 1024 * 1024) {
+    return json_({ status: 'error', message: 'That file is larger than ' + MAX_UPLOAD_MB + ' MB.' });
+  }
+
+  // The diploma is optional, so only decode/validate it if one was sent.
+  var diplomaBytes = null;
+  if (data.diplomaBase64) {
+    diplomaBytes = Utilities.base64Decode(data.diplomaBase64);
+    if (diplomaBytes.length > MAX_UPLOAD_MB * 1024 * 1024) {
+      return json_({ status: 'error', message: 'The diploma file is larger than ' + MAX_UPLOAD_MB + ' MB.' });
+    }
+  }
+
+  var sh = sheet_(APPLICATION_SHEET, APPLICATION_HEADERS);
+  var row = findRowByEmail_(sh, email);
+  // The whole row in one read. Each cell_() is a separate round trip to Sheets,
+  // and this handler is already the slowest thing the website does.
+  var existing = row ? sh.getRange(row, 1, 1, APPLICATION_HEADERS.length).getValues()[0] : [];
+  var name = String(existing[APPLICATION_HEADERS.indexOf('Name')] || '');
+  var track = String(existing[APPLICATION_HEADERS.indexOf('Track')] || ''); // routes the notification below
+
+  var folder = getFolder_();
+  var stamp = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd_HH-mm');
+  var label = sanitize_(name) || sanitize_(email.split('@')[0]) || 'applicant';
+
+  // Named on the blob rather than with a setName() afterwards: that would be a
+  // second call to Drive for something the first call can already carry.
+  var origName = sanitize_(data.filename) || 'signed-agreement';
+  var blob = Utilities.newBlob(bytes, data.mimeType || 'application/octet-stream',
+    label + '__' + stamp + '__' + origName);
+  var file = folder.createFile(blob);
+
+  // Same folder as the agreement, but tagged "Diploma" in the name instead so
+  // the two are easy to tell apart once they sit side by side in Drive.
+  var diplomaUrl = '';
+  if (diplomaBytes) {
+    var diplomaOrigName = sanitize_(data.diplomaFilename) || 'diploma';
+    var diplomaBlob = Utilities.newBlob(diplomaBytes, data.diplomaMimeType || 'application/octet-stream',
+      label + '__' + stamp + '__Diploma__' + diplomaOrigName);
+    diplomaUrl = folder.createFile(diplomaBlob).getUrl();
+  }
+
+  // The signed agreement arriving is what makes this a real application, so
+  // that moment — not the form fill — is the date stamped here.
+  var applyDate = new Date();
+  if (row) {
+    // One write instead of three. Built from the row we already read, so the
+    // untouched columns keep their values and an earlier diploma survives an
+    // upload that doesn't carry a new one.
+    var updated = existing.slice();
+    updated[APPLICATION_HEADERS.indexOf('Apply date')] = applyDate;
+    updated[APPLICATION_HEADERS.indexOf('Agreement')] = file.getUrl();
+    if (diplomaUrl) updated[APPLICATION_HEADERS.indexOf('Diploma')] = diplomaUrl;
+    sh.getRange(row, 1, 1, APPLICATION_HEADERS.length).setValues([updated]);
+  } else {
+    // No application row for this address — they typed a different email, or
+    // signed a copy from elsewhere. Never drop the file: give it its own row
+    // so it's still visible, and flag it in the notification below.
+    sh.appendRow(rowFrom_({
+      'Received': applyDate, 'Email': email, 'Apply date': applyDate, 'Agreement': file.getUrl(),
+      'Diploma': diplomaUrl
+    }));
+  }
+
+  var notify = notifyEmails_(track);
+  if (notify) {
+    MailApp.sendEmail({
+      to: notify,
+      replyTo: email,
+      subject: 'New signed enrolment agreement: ' + (name || email),
+      body: (row
+        ? 'Matched to the application from ' + name + '.'
+        : 'NO MATCHING APPLICATION for ' + email + ' — it was added as a new row. '
+          + 'They may have used a different email at step 1.') +
+        '\n\nEmail: ' + email + '\nFile: ' + file.getUrl() +
+        (diplomaUrl ? '\nDiploma: ' + diplomaUrl : '')
+    });
+  }
+  sendConfirmation_(email, track,
+    'Your signed enrolment agreement has arrived — ' + SCHOOL_NAME,
+    'Hi ' + (name || 'there') + ',\n\n'
+      + 'Your signed enrolment agreement has reached us safely'
+      + (diplomaUrl ? ', along with your diploma' : '') + '. It is now with the '
+      + 'office, and someone will be in touch by email about the next steps.\n\n'
+      + 'There is nothing more for you to do for now. If anything looks wrong, '
+      + 'just reply to this email and we will sort it out.');
+
+  return json_({
+    status: 'ok', matched: !!row, fileId: file.getId(), fileUrl: file.getUrl(),
+    diplomaUrl: diplomaUrl || undefined
+  });
+}
+
+// ---- Helpers --------------------------------------------------------------
+
+// Turns a {column name: value} map into a row in APPLICATION_HEADERS order,
+// so nothing here depends on remembering column numbers.
+function rowFrom_(values) {
+  return APPLICATION_HEADERS.map(function (h) {
+    return values[h] !== undefined ? values[h] : '';
+  });
+}
+
+function cell_(sh, row, header) {
+  return sh.getRange(row, APPLICATION_HEADERS.indexOf(header) + 1).getValue();
+}
+
+// The row number for an email, or 0. Searches bottom-up so the most recent
+// application wins if the same address was somehow entered twice.
+function findRowByEmail_(sh, email) {
+  var last = sh.getLastRow();
+  if (last < 2) return 0;
+  var col = APPLICATION_HEADERS.indexOf('Email') + 1;
+  var values = sh.getRange(2, col, last - 1, 1).getValues();
+  var needle = email.trim().toLowerCase();
+  for (var i = values.length - 1; i >= 0; i--) {
+    if (String(values[i][0]).trim().toLowerCase() === needle) return i + 2;
+  }
+  return 0;
+}
+
+// Finds the tab, creating it with a bold frozen header row the first time.
+function sheet_(name, headers) {
+  var ss = SHEET_ID ? SpreadsheetApp.openById(SHEET_ID) : SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss) throw new Error('No spreadsheet. Bind this script to your forms sheet, or set SHEET_ID.');
+  var sh = ss.getSheetByName(name);
+  if (!sh) {
+    sh = ss.insertSheet(name);
+    sh.appendRow(headers);
+    sh.getRange(1, 1, 1, headers.length).setFontWeight('bold');
+    sh.setFrozenRows(1);
+  }
+  return sh;
+}
+
+// Routes a notification to the right office by track, reading the addresses
+// from the notification tab. An unrecognised or missing track (message sent
+// before choosing an office, or no matching application row) goes to both, so
+// nothing is ever silently missed.
+function notifyEmails_(track) {
+  var west = notifyColumn_(NOTIFY_WEST_HEADER, OFFICE_EMAIL_WEST);
+  var east = notifyColumn_(NOTIFY_EAST_HEADER, OFFICE_EMAIL_EAST);
+
+  var picked = track === 'Western' ? west
+             : track === 'Eastern' ? east
+             : west.concat(east);
+
+  // Someone in both columns should still get exactly one copy.
+  return picked.filter(function (addr, i) { return picked.indexOf(addr) === i; }).join(',');
+}
+
+// The public address a reply should go to, by track — both when we don't know
+// which office it is.
+function officeEmail_(track) {
+  if (track === 'Western') return OFFICE_EMAIL_WEST;
+  if (track === 'Eastern') return OFFICE_EMAIL_EAST;
+  return [OFFICE_EMAIL_WEST, OFFICE_EMAIL_EAST].filter(function (e) { return !!e; }).join(',');
+}
+
+// Confirms to the sender that what they sent actually arrived — the website
+// says so on screen, but a page can be closed and an email can be kept.
+//
+// Deliberately swallows its own errors: the submission is already saved by the
+// time this runs, so a confirmation that won't send (mail quota, a typo'd
+// address) must never turn a successful submission into an error on screen.
+//
+// options.attachments: blobs to attach (e.g. the brochure — see brochureBlob_).
+// options.html: a bespoke HTML version of `body` (see contactReplyHtml_). When
+// omitted, `body` is auto-converted so every confirmation still gets the
+// branded shell (see textToHtml_, emailShell_) even from a call site that
+// never bothered to build its own markup.
+function sendConfirmation_(to, track, subject, body, options) {
+  options = options || {};
+  try {
+    var mail = {
+      to: to,
+      name: SCHOOL_NAME,
+      replyTo: officeEmail_(track), // a reply reaches a person, not this script
+      subject: subject,
+      body: body + '\n\nWarm regards,\n' + SCHOOL_NAME + '\n' + SCHOOL_URL,
+      htmlBody: emailShell_(options.html || textToHtml_(body))
+    };
+    if (options.attachments && options.attachments.length) mail.attachments = options.attachments;
+    MailApp.sendEmail(mail);
+  } catch (err) {
+    Logger.log('Confirmation to ' + to + ' failed: ' + err);
+  }
+}
+
+// The notification tab's grid, fetched once. notifyEmails_ wants two columns
+// out of it, and a Sheets read is a slow call to make twice — this global lives
+// exactly as long as one execution, which is the right scope for the cache.
+var notifyGrid_;
+
+function notifyGrid() {
+  if (notifyGrid_ !== undefined) return notifyGrid_;
+  var sh = notifySheet_();
+  notifyGrid_ = (sh && sh.getLastRow() > 1)
+    ? sh.getRange(1, 1, sh.getLastRow(), sh.getLastColumn()).getDisplayValues()
+    : null;
+  return notifyGrid_;
+}
+
+// The addresses in one column of the notification tab, top to bottom. Gaps are
+// normal — the two columns fill up at their own pace — so blanks are skipped,
+// and so is anything that isn't an email address (a note, a name, a heading
+// someone added). Falls back to the hard-coded office address when the tab or
+// the column has nothing usable in it.
+function notifyColumn_(header, fallback) {
+  var rows = notifyGrid();
+  if (rows) {
+    var headers = rows[0];
+    for (var col = 0; col < headers.length; col++) {
+      if (String(headers[col]).trim().toUpperCase() !== header) continue;
+      // slice, not shift: the grid is cached and the other column still needs it.
+      var found = rows.slice(1)
+        .map(function (row) { return String(row[col] || '').trim(); })
+        .filter(function (addr) { return EMAIL_RE.test(addr); });
+      if (found.length) return found;
+    }
+  }
+  return fallback ? [fallback] : [];
+}
+
+// The notification tab: by name, or — if it's been renamed — by the heading in
+// its first cell, so renaming the tab can't quietly cut the notifications off.
+var notifySheetFound_;
+
+function notifySheet_() {
+  if (notifySheetFound_ !== undefined) return notifySheetFound_;
+  notifySheetFound_ = findNotifySheet_();
+  return notifySheetFound_;
+}
+
+function findNotifySheet_() {
+  var ss = SHEET_ID ? SpreadsheetApp.openById(SHEET_ID) : SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss) return null;
+  var sh = ss.getSheetByName(NOTIFY_SHEET);
+  if (sh) return sh;
+
+  var all = ss.getSheets();
+
+  // getSheetByName is case-sensitive, and nobody should have to remember
+  // whether the tab was typed with a capital. Names are already in hand here,
+  // so this costs nothing.
+  var wanted = NOTIFY_SHEET.trim().toUpperCase();
+  for (var i = 0; i < all.length; i++) {
+    if (String(all[i].getName()).trim().toUpperCase() === wanted) return all[i];
+  }
+
+  // Renamed outright: fall back to the heading in the first cell. This one does
+  // cost a read per tab, which is why it comes last.
+  for (var j = 0; j < all.length; j++) {
+    var first = String(all[j].getRange(1, 1).getDisplayValue() || '').trim().toUpperCase();
+    if (first === NOTIFY_WEST_HEADER) return all[j];
+  }
+  return null;
+}
+
+function getFolder_() {
+  if (FOLDER_ID) return DriveApp.getFolderById(FOLDER_ID);
+  var it = DriveApp.getFoldersByName(FOLDER_NAME);
+  return it.hasNext() ? it.next() : DriveApp.createFolder(FOLDER_NAME);
+}
+
+// Trims and caps free text. A leading ' stops Sheets reading "=..." or "+..."
+// as a formula — a pasted spreadsheet formula should stay text.
+function clean_(s, max) {
+  if (!s) return '';
+  var out = String(s).trim().slice(0, max);
+  return /^[=+\-@]/.test(out) ? "'" + out : out;
+}
+
+function sanitize_(s) {
+  return s ? String(s).replace(/[^\w.\-]+/g, '_').slice(0, 80) : '';
+}
+
+function json_(obj) {
+  return ContentService
+    .createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
+}

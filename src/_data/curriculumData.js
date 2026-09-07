@@ -2,8 +2,26 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-const CURRICULUM_JSON_URL = 'https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnT9zQZMPfwAwsUoI5lYR8qrlW8V1lH-_9lS5l0D4FYpZFGWuLV4kxsK976Gog2y0qQRLiX7flsLYlu1IfCDH5J0o8cctKcJuPNa3uY_Sac5RnzE6GcJmiOHSqXFe4xIUYFjN60vY6ulJPCgZN5WcvmlhPHCZJotSrWPj0GbOqV3xQjuHPIW0xDm7K1XHk0l8Ny2si2lG53YtYdzmBc0LbzNsWD3yIKBaOuNU0WwNI40W6kg4UEGYnsB8m59NVFLPJKBirZLs_Tm5SVtd82LBsK4YqlPFw&lib=MH22ekMWpk3hvjZrINFFapw8mHdyRNTio';
+// The stable /exec web-app URL. It survives redeployments, unlike the
+// googleusercontent /macros/echo URL it redirects to, whose user_content_key is
+// minted per deployment — pinning the build to one of those silently freezes the
+// site on an old version of the Apps Script.
+const CURRICULUM_JSON_URL = 'https://script.google.com/macros/s/AKfycbxCzM30igQdGt2vYsRaQToDtKnjvIE5ZIypoKSaxoBtrXlajcEBc1NArDxmbXzNqCzhOA/exec';
 const CACHE_FILE = path.join(__dirname, 'curriculumData.cache.json');
+
+// Same web app, second route: ?format=pdf builds the curriculum as a PDF
+// (curriculum-pdf-download-apps-script.js). Kept next to the JSON URL so the two
+// can never drift apart.
+//
+// The build asks for the file's address rather than linking the route itself:
+// ?format=pdf answers with a page that bounces the browser on to Drive, and that
+// hop is done with JavaScript inside the Apps Script sandbox, which browsers may
+// refuse to let navigate. Resolving the Drive URL here makes the button an
+// ordinary link that downloads on the first click. It also means the PDF is
+// rebuilt with the site, so the file and the page always describe the same
+// curriculum.
+const CURRICULUM_PDF_URL = `${CURRICULUM_JSON_URL}?format=pdf`;
+const PDF_CACHE_FILE = path.join(__dirname, 'curriculumPdf.cache.json');
 
 function fetchUrl(url, redirectsLeft = 5) {
   return new Promise((resolve, reject) => {
@@ -63,6 +81,57 @@ function asArray(value) {
   return Array.isArray(value) ? value : [];
 }
 
+/* ── "Show on website" column ──────────────────────────────────────────────
+   The curriculum spreadsheet carries a visibility flag per row. It is read
+   here rather than in the template so a hidden row never reaches the page,
+   the cache, or the module counters. Only an explicit "false" hides a row:
+   a blank cell (or a row the export doesn't carry the column for) stays
+   visible, so content is never dropped silently. */
+const VISIBILITY_KEYS = [
+  'showonwebsite',
+  'showonsite',
+  'showonweb',
+  'showwebsite',
+  'website',
+  'visible',
+  'published',
+  'publish',
+  'show'
+];
+
+const HIDDEN_VALUES = new Set(['false', 'no', 'n', '0', 'off', 'hide', 'hidden', 'nascondi', 'nascosto']);
+
+let hiddenRowCount = 0;
+
+function normalizeKeyName(key) {
+  return String(key).toLowerCase().replace(/[^a-z]/g, '');
+}
+
+function isVisibleOnWebsite(raw) {
+  if (!raw || typeof raw !== 'object') {
+    return true;
+  }
+
+  for (const key of Object.keys(raw)) {
+    if (!VISIBILITY_KEYS.includes(normalizeKeyName(key))) {
+      continue;
+    }
+
+    const value = raw[key];
+    const isHidden =
+      value === false ||
+      value === 0 ||
+      (typeof value === 'string' && HIDDEN_VALUES.has(value.trim().toLowerCase()));
+
+    if (isHidden) {
+      hiddenRowCount += 1;
+      return false;
+    }
+  }
+
+  return true;
+}
+
 function cleanText(value) {
   if (value === null || value === undefined) {
     return '';
@@ -119,6 +188,10 @@ function normalizeSubModule(rawSub, index) {
 }
 
 function normalizeModule(rawModule, index) {
+  if (!isVisibleOnWebsite(rawModule)) {
+    return null;
+  }
+
   const topic = pickFirstString(rawModule, ['topic', 'title', 'name', 'module']);
   const description = pickFirstString(rawModule, ['description', 'desc', 'summary', 'content']);
   const hours = pickFirstString(rawModule, ['hours', 'totalHours', 'moduleHours', 'hour']);
@@ -137,9 +210,19 @@ function normalizeModule(rawModule, index) {
     ...asArray(rawModule?.children)
   ];
 
-  const subModules = rawSubModules
+  // Visibility is resolved before normalizing so a module can tell the page that it
+  // *has* a topic breakdown that is simply not published yet — otherwise a module
+  // whose sub-modules are all hidden looks identical to one that never had any.
+  const visibleRawSubModules = rawSubModules.filter(isVisibleOnWebsite);
+
+  const subModules = visibleRawSubModules
     .map((subModule, subIndex) => normalizeSubModule(subModule, subIndex))
     .filter(Boolean);
+
+  // Read back from the normalized shape too, so the flag survives a cache round-trip
+  // (the hidden rows themselves are long gone by then).
+  const hasHiddenSubModules =
+    rawModule?.hasHiddenSubModules === true || visibleRawSubModules.length < rawSubModules.length;
 
   if (!topic && !description && !hours && !deliveryFormat && subModules.length === 0) {
     return null;
@@ -151,7 +234,8 @@ function normalizeModule(rawModule, index) {
     description,
     hours,
     deliveryFormat,
-    subModules
+    subModules,
+    hasHiddenSubModules
   };
 }
 
@@ -179,6 +263,10 @@ function itemLooksLikeExamination(item) {
 }
 
 function extractSectionItems(section) {
+  if (!isVisibleOnWebsite(section)) {
+    return [];
+  }
+
   return []
     .concat(asArray(section?.activities))
     .concat(asArray(section?.items))
@@ -208,6 +296,10 @@ function saveCurriculumCache(normalized) {
 }
 
 function normalizePracticalItem(item, index) {
+  if (!isVisibleOnWebsite(item)) {
+    return null;
+  }
+
   const topic = pickFirstString(item, ['topic', 'title', 'name', 'module']);
   const deliveryFormat = pickFirstString(item, [
     'deliveryFormat',
@@ -288,13 +380,44 @@ function extractLevelModules(level) {
     .sort(compareModuleNumbers);
 }
 
+/* The spreadsheet's Level column has to stay "L1"/"L2"/"L3" — the Apps Script
+   groups the rows by matching /^L\d+$/ on it — so the short form is expanded
+   here, for the page, rather than at the source. A label that already reads
+   "Level 1" passes through untouched. */
+function expandLevelLabel(label) {
+  const match = /^L\s*(\d+)$/i.exec(label.trim());
+  return match ? `Level ${match[1]}` : label;
+}
+
+/* The level's real title lives in the Topic cell of its header row
+   ("L1: SELF DEVELOPMENT"). The Apps Script only recognises that row as a level
+   header when the cell starts "L1:" — spelled "Level 1:" it is parsed as an
+   ordinary section instead, and the level reaches us with an empty title. Read
+   the title back off that section rather than letting the page fall back to the
+   placeholder "Curriculum Level". */
+function deriveLevelTitleFromSections(level) {
+  for (const section of asArray(level?.sections)) {
+    const sectionTitle = pickFirstString(section, ['title', 'name', 'section', 'label']);
+    const match = /^(?:l|level)\s*\d+\s*[:\u2013\u2014-]\s*(.+)$/i.exec(sectionTitle);
+    if (match) {
+      return match[1].trim();
+    }
+  }
+
+  return '';
+}
+
 function normalizeSectionedCurriculum(rawLevels) {
   const levels = rawLevels
+    .filter(isVisibleOnWebsite)
     .map((level, index) => {
       const practicalItems = extractPracticalItems(level);
       const examinationItems = extractExaminationItems(level);
-      const label = pickFirstString(level, ['label', 'level', 'id']) || `Level ${index + 1}`;
-      const title = pickFirstString(level, ['title', 'name', 'heading']) || 'Curriculum Level';
+      const label = expandLevelLabel(pickFirstString(level, ['label', 'level', 'id']) || `Level ${index + 1}`);
+      const title =
+        pickFirstString(level, ['title', 'name', 'heading']) ||
+        deriveLevelTitleFromSections(level) ||
+        'Curriculum Level';
 
       return {
         id: `level${index + 1}`,
@@ -364,6 +487,7 @@ function extractExaminationItems(level) {
 function extractModules(level) {
   const fromLevel = asArray(level?.modules);
   const fromSections = asArray(level?.sections)
+    .filter(isVisibleOnWebsite)
     .filter((section) => !sectionLooksLikePractical(section) && !sectionLooksLikeExamination(section))
     .flatMap((section) => []
       .concat(asArray(section?.modules))
@@ -408,17 +532,19 @@ function extractLevels(rawData) {
 
 function normalizeCurriculum(rawData) {
   const rawLevels = extractLevels(rawData);
+  hiddenRowCount = 0;
 
   if (rawLevels.some((level) => asArray(level?.sections).length > 0)) {
     return normalizeSectionedCurriculum(rawLevels);
   }
 
   const levels = rawLevels
+    .filter(isVisibleOnWebsite)
     .map((level, index) => {
       const modules = extractModules(level);
       const practicalItems = extractPracticalItems(level);
       const examinationItems = extractExaminationItems(level);
-      const label = pickFirstString(level, ['label', 'level', 'id']) || `Level ${index + 1}`;
+      const label = expandLevelLabel(pickFirstString(level, ['label', 'level', 'id']) || `Level ${index + 1}`);
       const title = pickFirstString(level, ['title', 'name', 'heading']) || 'Curriculum Level';
 
       return {
@@ -440,6 +566,42 @@ function normalizeCurriculum(rawData) {
   };
 }
 
+/**
+ * The direct Drive address of the current curriculum PDF. Falls back to the
+ * ?format=pdf route (which still works, just with the redirect hop) and then to
+ * the last address we resolved, so the button never points at nothing.
+ */
+async function fetchCurriculumPdfUrl() {
+  try {
+    const response = await fetchUrl(`${CURRICULUM_PDF_URL}&mode=url`);
+    const url = typeof response?.url === 'string' ? response.url.trim() : '';
+
+    if (!url) {
+      throw new Error('PDF endpoint answered without a url');
+    }
+
+    fs.writeFileSync(PDF_CACHE_FILE, JSON.stringify(response, null, 2));
+    console.log(`📄 Curriculum PDF ready (${response.name || 'unnamed'})`);
+    return url;
+  } catch (error) {
+    console.warn('⚠️ Could not resolve the curriculum PDF URL:', error.message);
+
+    if (fs.existsSync(PDF_CACHE_FILE)) {
+      try {
+        const cached = JSON.parse(fs.readFileSync(PDF_CACHE_FILE, 'utf-8'));
+        if (typeof cached?.url === 'string' && cached.url) {
+          console.log('⚠️ Using the last known curriculum PDF URL');
+          return cached.url;
+        }
+      } catch (cacheError) {
+        console.error('❌ PDF cache read failed:', cacheError.message);
+      }
+    }
+
+    return CURRICULUM_PDF_URL;
+  }
+}
+
 module.exports = async function () {
   try {
     console.log('Fetching curriculum data from Google Apps Script...');
@@ -450,9 +612,13 @@ module.exports = async function () {
       throw new Error('Curriculum JSON parsed but contains no levels');
     }
 
+    if (hiddenRowCount > 0) {
+      console.log(`🙈 ${hiddenRowCount} curriculum row(s) hidden by the "Show on website" column`);
+    }
+
     saveCurriculumCache(normalized);
 
-    return normalized;
+    return { ...normalized, pdfUrl: await fetchCurriculumPdfUrl() };
   } catch (error) {
     console.error('Error loading curriculum data:', error.message);
 
@@ -464,7 +630,7 @@ module.exports = async function () {
           saveCurriculumCache(normalizedCache);
 
           console.log(`⚠️ Using cached curriculum data (${normalizedCache.levels.length} levels)`);
-          return normalizedCache;
+          return { ...normalizedCache, pdfUrl: await fetchCurriculumPdfUrl() };
         }
       } catch (cacheError) {
         console.error('❌ Cache read failed:', cacheError.message);
@@ -473,7 +639,8 @@ module.exports = async function () {
 
     return {
       levels: [],
-      totalModules: 0
+      totalModules: 0,
+      pdfUrl: CURRICULUM_PDF_URL
     };
   }
 };
