@@ -129,6 +129,62 @@ jobs:
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
 
+      # Runs before the upload, and failing it means nothing is published. That is
+      # the point: each of these breaks silently — the site keeps serving pages and
+      # looks fine, while the damage shows up weeks later in Search Console.
+      # A checklist in TODO.md cannot catch them; this can.
+      - name: Verify the production build before publishing it
+        if: github.ref == 'refs/heads/main'
+        run: |
+          fail=0
+          note() { echo "::error::$1"; fail=1; }
+
+          # The staging noindex step is gated to non-main. If that gate is ever
+          # broken by an edit, this build would quietly deindex the live site.
+          if grep -rl 'name="robots" content="noindex' _site --include='*.html' | grep -q .; then
+            note "noindex found in a production build — the staging gate is broken"
+            grep -rl 'name="robots" content="noindex' _site --include='*.html' | head
+          fi
+
+          # Without .htaccess every 301 disappears. The site still works, so nobody
+          # notices, while the 32 teacher URLs — 64% of organic clicks — start 404ing.
+          if [ ! -f _site/.htaccess ]; then
+            note ".htaccess missing from the build — the whole redirect map would vanish"
+          else
+            grep -q 'jure-biechonski' _site/.htaccess \
+              || note ".htaccess present but the teacher rules are gone"
+
+            # Anchors need the NE flag; without it mod_rewrite emits %23 and the
+            # redirect lands on a path that does not exist. This happened in production once.
+            if grep '/teachers/#' _site/.htaccess | grep -qv 'NE'; then
+              note "a /teachers/# rule is missing the NE flag — it would redirect to a 404"
+            fi
+
+            # ErrorDocument: Apache does not serve 404.html on its own.
+            grep -q 'ErrorDocument 404' _site/.htaccess || note "ErrorDocument 404 not set"
+
+            # The canonical rule must key off the proxy header: %{HTTPS} reads
+            # "off" even on HTTPS here, so that variant loops the site off the air.
+            grep -q 'X-Forwarded-Proto' _site/.htaccess \
+              || note "the https rule is not using X-Forwarded-Proto — on this host the alternative loops"
+          fi
+
+          # robots.txt must not carry the staging preview's shape.
+          grep -q 'Disallow: */ *$' _site/robots.txt && note "robots.txt disallows everything"
+          grep -q 'transpersonal-training.com/sitemap.xml' _site/robots.txt \
+            || note "robots.txt does not point at the production sitemap"
+
+          # A build made with the staging PATH_PREFIX would fill the sitemap with
+          # the wrong URLs and canonicalise every page to github.io.
+          grep -q 'github.io' _site/sitemap.xml && note "sitemap contains github.io URLs"
+          grep -qE '<loc>https://transpersonal-training\.com/' _site/sitemap.xml \
+            || note "sitemap has no production URLs"
+
+          [ -f _site/404.html ] || note "404.html missing"
+
+          [ "$fail" = "0" ] || { echo "Refusing to publish."; exit 1; }
+          echo "✅ production build verified"
+
       # Production host is FTP-only (no FTPS/SFTP available), so credentials and
       # the file transfer itself are unencrypted on the wire — accepted because
       # it's what the host offers. `dangerous-clean-slate` is deliberately left
