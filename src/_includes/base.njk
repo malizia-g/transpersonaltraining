@@ -135,15 +135,26 @@
     </script>
     {% endif %}
 
-    {# Upcoming intensives only. Past events in Event schema are noise at best —
-       Google's event results are for things you can still attend — so anything
-       whose end date has passed, or whose date the sheet wrote in a shape the
-       filter can't read, is left out rather than guessed at. #}
+    {# Upcoming intensives only, and only the ones this school actually runs.
+
+       Three exclusions, each because publishing the row as-is would state
+       something untrue:
+
+       - Past events. Google's event results are for things you can still
+         attend, and the sheet holds 29 dates that have been and gone.
+       - Dates the isoDateRange filter can't read. Skipped rather than guessed.
+       - Events we don't organise. The sheet lists the EUROTAS conference so
+         students know it exists, but EUROTAS runs it — marking it up with
+         ourselves as `organizer` and our own /schedule/ as its `url` would
+         claim someone else's event as ours. `type1` is the only field that
+         separates them, so Conference stands in for "not ours"; if the school
+         ever runs its own conference, this needs a real column in the sheet
+         instead. #}
     {% if page.url == "/schedule/" %}
     {%- set upcoming = [] %}
     {%- for event in scheduleEvents %}
       {%- set d = event.date | isoDateRange %}
-      {%- if d and d.end >= todayISO %}{% set _ = upcoming.push({ e: event, d: d }) %}{% endif %}
+      {%- if d and d.end >= todayISO and event.type1 != 'Conference' %}{% set _ = upcoming.push({ e: event, d: d }) %}{% endif %}
     {%- endfor %}
     {%- if upcoming.length %}
     <script type="application/ld+json">
@@ -165,7 +176,10 @@
           "location": { "@type": "Place", "name": {{ item.e.location | dump | safe }},
             "address": { "@type": "PostalAddress", "addressCountry": {{ item.e.location | dump | safe }} } },
           {%- endif %}
-          {%- if item.e.facilitator %}
+          {#- The sheet writes "-" for a facilitator not yet assigned, which is
+              five of the nine upcoming rows. Emitting it produced a Person
+              literally named "-". #}
+          {%- if item.e.facilitator and item.e.facilitator != '-' %}
           "performer": { "@type": "Person", "name": {{ item.e.facilitator | dump | safe }} },
           {%- endif %}
           "url": "https://transpersonal-training.com/schedule/",
