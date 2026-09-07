@@ -33,7 +33,39 @@
 
     
     
+
     
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://transpersonal-training.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "What is Transpersonal Psychology?"
+        }
+      ]
+    }
+    </script>
+    
+
     <!-- Page Loader Styles (inline for immediate display) -->
     <style>
         #page-loader {
@@ -86,14 +118,12 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/transpersonaltraining/assets/images/Graphics/favicon-16x16.png">
         <link rel="apple-touch-icon" sizes="180x180" href="/transpersonaltraining/assets/images/Graphics/apple-touch-icon.png">
     
-    <!-- Fonts (preconnect and async load) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet"></noscript>
     
-    <!-- Lucide Icons (defer loading) -->
-    <script src="https://unpkg.com/lucide@0.344.0" defer></script>
+    <link rel="preload" href="/transpersonaltraining/assets/fonts/Inter-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/transpersonaltraining/assets/fonts/CormorantGaramond-600-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+    
+    <script src="/transpersonaltraining/scripts/vendor/lucide-0.344.0.js" defer></script>
 </head>
 <body class="font-sans text-[color:var(--c-heading)] bg-[color:var(--c-paper-hi)] antialiased">
 
@@ -288,7 +318,7 @@
 <header class="relative h-[50vh] min-h-[400px] flex items-center justify-center text-[color:var(--c-on-dark-1)] bg-[color:var(--c-deep)] overflow-hidden">
 	<picture>
 		<source srcset="/transpersonaltraining/assets/images/Headers/hero-what-is-tp-window-forest.webp" type="image/webp">
-		<img src="/transpersonaltraining/assets/images/Headers/hero-what-is-tp-window-forest.jpg" alt="Open window looking onto the forest" class="absolute inset-0 w-full h-full object-cover z-0">
+		<img width="1920" height="1080" src="/transpersonaltraining/assets/images/Headers/hero-what-is-tp-window-forest.jpg" alt="Open window looking onto the forest" class="absolute inset-0 w-full h-full object-cover z-0">
 	</picture>
 	<div class="absolute inset-0 bg-gradient-to-b from-[var(--c-deep-80)] via-[var(--c-deep-60)] to-[var(--c-deep-80)] z-0"></div>
 	<div class="container mx-auto px-6 relative z-10 text-center pt-20">

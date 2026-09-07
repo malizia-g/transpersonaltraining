@@ -33,7 +33,39 @@
 
     
     
+
     
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://transpersonal-training.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Training Venues"
+        }
+      ]
+    }
+    </script>
+    
+
     <!-- Page Loader Styles (inline for immediate display) -->
     <style>
         #page-loader {
@@ -86,14 +118,12 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/transpersonaltraining/assets/images/Graphics/favicon-16x16.png">
         <link rel="apple-touch-icon" sizes="180x180" href="/transpersonaltraining/assets/images/Graphics/apple-touch-icon.png">
     
-    <!-- Fonts (preconnect and async load) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet"></noscript>
     
-    <!-- Lucide Icons (defer loading) -->
-    <script src="https://unpkg.com/lucide@0.344.0" defer></script>
+    <link rel="preload" href="/transpersonaltraining/assets/fonts/Inter-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/transpersonaltraining/assets/fonts/CormorantGaramond-600-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+    
+    <script src="/transpersonaltraining/scripts/vendor/lucide-0.344.0.js" defer></script>
 </head>
 <body class="font-sans text-[color:var(--c-heading)] bg-[color:var(--c-paper-hi)] antialiased">
 
@@ -288,7 +318,7 @@
             <source media="(min-width: 1024px)" srcset="/transpersonaltraining/assets/images/Headers/hero-venues-todtmoos-wide.webp" type="image/webp">
             <source media="(min-width: 1024px)" srcset="/transpersonaltraining/assets/images/Headers/hero-venues-todtmoos-wide.jpg">
             <source srcset="/transpersonaltraining/assets/images/Headers/hero-venues-todtmoos-narrow.webp" type="image/webp">
-            <img src="/transpersonaltraining/assets/images/Headers/hero-venues-todtmoos-narrow.jpg" alt="Sunlit forest valley near Todtmoos in the Black Forest" class="w-full h-full object-cover">
+            <img width="1298" height="1168" src="/transpersonaltraining/assets/images/Headers/hero-venues-todtmoos-narrow.jpg" alt="Sunlit forest valley near Todtmoos in the Black Forest" class="w-full h-full object-cover">
         </picture>
         <div class="absolute inset-0 bg-gradient-to-b from-[var(--c-deep-80)] via-[var(--c-deep-60)] to-[var(--c-deep-80)]"></div>
     </div>
@@ -360,26 +390,26 @@
             <div class="grid grid-cols-2 gap-4">
                 <picture class="col-span-2">
                     <source srcset="/transpersonaltraining/assets/images/Headers/hero-homepage-venue-exterior.webp" type="image/webp">
-                    <img src="/transpersonaltraining/assets/images/Headers/hero-homepage-venue-exterior.jpg" alt="The seminar house in the forest at Todtmoos" class="w-full h-56 md:h-64 object-cover shadow-md" loading="lazy">
+                    <img width="1920" height="1080" src="/transpersonaltraining/assets/images/Headers/hero-homepage-venue-exterior.jpg" alt="The seminar house in the forest at Todtmoos" class="w-full h-56 md:h-64 object-cover shadow-md" loading="lazy">
                 </picture>
                 <picture>
                     <source srcset="/transpersonaltraining/assets/images/Venue/venue-terrace-dining.webp" type="image/webp">
-                    <img src="/transpersonaltraining/assets/images/Venue/venue-terrace-dining.jpg" alt="Shared dining on the terrace" class="w-full h-40 md:h-48 object-cover shadow-md" loading="lazy">
+                    <img width="1920" height="1440" src="/transpersonaltraining/assets/images/Venue/venue-terrace-dining.jpg" alt="Shared dining on the terrace" class="w-full h-40 md:h-48 object-cover shadow-md" loading="lazy">
                 </picture>
                 <picture>
-                    <img src="/transpersonaltraining/assets/images/Venue/venue-garden-lantern.jpg" alt="A lantern in the garden at dusk" class="w-full h-40 md:h-48 object-cover shadow-md" loading="lazy">
+                    <img width="1200" height="1600" src="/transpersonaltraining/assets/images/Venue/venue-garden-lantern.jpg" alt="A lantern in the garden at dusk" class="w-full h-40 md:h-48 object-cover shadow-md" loading="lazy">
                 </picture>
                 <picture>
                     <source srcset="/transpersonaltraining/assets/images/Venue/venue-todtmoos-green-valley.webp" type="image/webp">
-                    <img src="/transpersonaltraining/assets/images/Venue/venue-todtmoos-green-valley.jpg" alt="The green Black Forest valley around the house in summer" class="w-full h-40 md:h-48 object-cover shadow-md" loading="lazy">
+                    <img width="1600" height="1200" src="/transpersonaltraining/assets/images/Venue/venue-todtmoos-green-valley.jpg" alt="The green Black Forest valley around the house in summer" class="w-full h-40 md:h-48 object-cover shadow-md" loading="lazy">
                 </picture>
                 <picture>
                     <source srcset="/transpersonaltraining/assets/images/Venue/venue-todtmoos-winter-valley.webp" type="image/webp">
-                    <img src="/transpersonaltraining/assets/images/Venue/venue-todtmoos-winter-valley.jpg" alt="The Black Forest valley under snow at dusk" class="w-full h-40 md:h-48 object-cover shadow-md" loading="lazy">
+                    <img width="1600" height="1200" src="/transpersonaltraining/assets/images/Venue/venue-todtmoos-winter-valley.jpg" alt="The Black Forest valley under snow at dusk" class="w-full h-40 md:h-48 object-cover shadow-md" loading="lazy">
                 </picture>
                 <picture class="col-span-2">
                     <source srcset="/transpersonaltraining/assets/images/Venue/venue-todtmoos-firepit.webp" type="image/webp">
-                    <img src="/transpersonaltraining/assets/images/Venue/venue-todtmoos-firepit.jpg" alt="The garden fire circle with the seminar house beyond" class="w-full h-40 md:h-48 object-cover shadow-md" loading="lazy">
+                    <img width="1600" height="1200" src="/transpersonaltraining/assets/images/Venue/venue-todtmoos-firepit.jpg" alt="The garden fire circle with the seminar house beyond" class="w-full h-40 md:h-48 object-cover shadow-md" loading="lazy">
                 </picture>
             </div>
         </div>
@@ -416,22 +446,22 @@
             <div class="grid grid-cols-2 gap-4 lg:order-1">
                 <picture class="col-span-2">
                     <source srcset="/transpersonaltraining/assets/images/Venue/monteverdi-farmhouse-exterior.webp" type="image/webp">
-                    <img src="/transpersonaltraining/assets/images/Venue/monteverdi-farmhouse-exterior.jpg" alt="Ivy-covered farmhouse at the Tenuta di Monteverdi" class="w-full h-56 md:h-64 object-cover shadow-md" loading="lazy">
+                    <img width="1600" height="1067" src="/transpersonaltraining/assets/images/Venue/monteverdi-farmhouse-exterior.jpg" alt="Ivy-covered farmhouse at the Tenuta di Monteverdi" class="w-full h-56 md:h-64 object-cover shadow-md" loading="lazy">
                 </picture>
                 <picture>
                     <source srcset="/transpersonaltraining/assets/images/Venue/monteverdi-cypress-farmhouse.webp" type="image/webp">
-                    <img src="/transpersonaltraining/assets/images/Venue/monteverdi-cypress-farmhouse.jpg" alt="Stone farmhouse framed by tall cypress trees" class="w-full h-40 md:h-48 object-cover shadow-md" loading="lazy">
+                    <img width="1600" height="1067" src="/transpersonaltraining/assets/images/Venue/monteverdi-cypress-farmhouse.jpg" alt="Stone farmhouse framed by tall cypress trees" class="w-full h-40 md:h-48 object-cover shadow-md" loading="lazy">
                 </picture>
                 <picture>
-                    <img src="/transpersonaltraining/assets/images/Venue/monteverdi-pool.jpg" alt="The estate swimming pool surrounded by greenery" class="w-full h-40 md:h-48 object-cover shadow-md" loading="lazy">
+                    <img width="1600" height="1067" src="/transpersonaltraining/assets/images/Venue/monteverdi-pool.jpg" alt="The estate swimming pool surrounded by greenery" class="w-full h-40 md:h-48 object-cover shadow-md" loading="lazy">
                 </picture>
                 <picture>
                     <source srcset="/transpersonaltraining/assets/images/Venue/monteverdi-dining-room.webp" type="image/webp">
-                    <img src="/transpersonaltraining/assets/images/Venue/monteverdi-dining-room.jpg" alt="Elegant dining room inside the estate" class="w-full h-40 md:h-48 object-cover shadow-md" loading="lazy">
+                    <img width="1600" height="1067" src="/transpersonaltraining/assets/images/Venue/monteverdi-dining-room.jpg" alt="Elegant dining room inside the estate" class="w-full h-40 md:h-48 object-cover shadow-md" loading="lazy">
                 </picture>
                 <picture>
                     <source srcset="/transpersonaltraining/assets/images/Venue/monteverdi-living-room.webp" type="image/webp">
-                    <img src="/transpersonaltraining/assets/images/Venue/monteverdi-living-room.jpg" alt="Living room with a stone fireplace" class="w-full h-40 md:h-48 object-cover shadow-md" loading="lazy">                </picture>
+                    <img width="1600" height="1067" src="/transpersonaltraining/assets/images/Venue/monteverdi-living-room.jpg" alt="Living room with a stone fireplace" class="w-full h-40 md:h-48 object-cover shadow-md" loading="lazy">                </picture>
             </div>
         </div>
     </div>
@@ -512,19 +542,19 @@
             <div class="grid grid-cols-2 gap-4">
                 <picture class="col-span-2">
                     <source srcset="/transpersonaltraining/assets/images/Headers/hero-apply-night-fire-circle.webp" type="image/webp">
-                    <img src="/transpersonaltraining/assets/images/Headers/hero-apply-night-fire-circle.jpg" alt="Students gathered in a circle around a fire at night during a seminar in Moldova" class="w-full h-56 md:h-64 object-cover shadow-md" loading="lazy">
+                    <img width="1280" height="960" src="/transpersonaltraining/assets/images/Headers/hero-apply-night-fire-circle.jpg" alt="Students gathered in a circle around a fire at night during a seminar in Moldova" class="w-full h-56 md:h-64 object-cover shadow-md" loading="lazy">
                 </picture>
                 <picture>
                     <source srcset="/transpersonaltraining/assets/images/Venue/venue-dniester-circle.webp" type="image/webp">
-                    <img src="/transpersonaltraining/assets/images/Venue/venue-dniester-circle.jpg" alt="An outdoor seminar circle set up in a riverside meadow near the Dniester" class="w-full h-40 md:h-48 object-cover shadow-md" loading="lazy">
+                    <img width="1600" height="1200" src="/transpersonaltraining/assets/images/Venue/venue-dniester-circle.jpg" alt="An outdoor seminar circle set up in a riverside meadow near the Dniester" class="w-full h-40 md:h-48 object-cover shadow-md" loading="lazy">
                 </picture>
                 <picture>
                     <source srcset="/transpersonaltraining/assets/images/Venue/venue-dniester-valley-view.webp" type="image/webp">
-                    <img src="/transpersonaltraining/assets/images/Venue/venue-dniester-valley-view.jpg" alt="A panoramic view over the Dniester river bend from the hillside" class="w-full h-40 md:h-48 object-cover shadow-md" loading="lazy">
+                    <img width="1600" height="1200" src="/transpersonaltraining/assets/images/Venue/venue-dniester-valley-view.jpg" alt="A panoramic view over the Dniester river bend from the hillside" class="w-full h-40 md:h-48 object-cover shadow-md" loading="lazy">
                 </picture>
                 <picture class="col-span-2">
                     <source srcset="/transpersonaltraining/assets/images/Venue/venue-dniester-garden-tents.webp" type="image/webp">
-                    <img src="/transpersonaltraining/assets/images/Venue/venue-dniester-garden-tents.jpg" alt="Participants walking through the garden past a lavender bed and seminar tents in Moldova" class="w-full h-48 md:h-56 object-cover shadow-md" loading="lazy">
+                    <img width="1600" height="1200" src="/transpersonaltraining/assets/images/Venue/venue-dniester-garden-tents.jpg" alt="Participants walking through the garden past a lavender bed and seminar tents in Moldova" class="w-full h-48 md:h-56 object-cover shadow-md" loading="lazy">
                 </picture>
             </div>
         </div>

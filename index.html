@@ -97,7 +97,19 @@
     }
     </script>
     
+
     
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
     <!-- Page Loader Styles (inline for immediate display) -->
     <style>
         #page-loader {
@@ -150,14 +162,12 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/transpersonaltraining/assets/images/Graphics/favicon-16x16.png">
         <link rel="apple-touch-icon" sizes="180x180" href="/transpersonaltraining/assets/images/Graphics/apple-touch-icon.png">
     
-    <!-- Fonts (preconnect and async load) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet"></noscript>
     
-    <!-- Lucide Icons (defer loading) -->
-    <script src="https://unpkg.com/lucide@0.344.0" defer></script>
+    <link rel="preload" href="/transpersonaltraining/assets/fonts/Inter-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/transpersonaltraining/assets/fonts/CormorantGaramond-600-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+    
+    <script src="/transpersonaltraining/scripts/vendor/lucide-0.344.0.js" defer></script>
 </head>
 <body class="font-sans text-[color:var(--c-heading)] bg-[color:var(--c-paper-hi)] antialiased">
 
@@ -358,7 +368,7 @@
              when the video is skipped on slow/data-saver connections) -->
         <picture>
             <source srcset="/transpersonaltraining/assets/images/Headers/hero-homepage-sunset.webp" type="image/webp">
-            <img src="/transpersonaltraining/assets/images/Headers/hero-homepage-sunset.jpg"
+            <img width="1280" height="720" src="/transpersonaltraining/assets/images/Headers/hero-homepage-sunset.jpg"
                  alt="The sun setting over woodland, seen from the air"
                  class="absolute inset-0 w-full h-full object-cover z-0 sepia-[.25] saturate-[1.15] brightness-[1.03]"
                  id="hero-image">
@@ -547,7 +557,7 @@
             <div class="lg:col-span-6 relative pb-16 pr-4 md:pr-10">
                 <picture>
                     <source srcset="/transpersonaltraining/assets/images/Community/community-hug-embrace.webp" type="image/webp">
-                    <img src="/transpersonaltraining/assets/images/Community/community-hug-embrace.png"
+                    <img width="900" height="1667" src="/transpersonaltraining/assets/images/Community/community-hug-embrace.png"
                          alt="A collage of moments from a Level 1 seminar"
                          class="w-full">
                 </picture>
@@ -605,78 +615,78 @@
         <div id="moments-filmstrip" class="flex gap-3 px-6 w-max">
             <picture class="snap-start shrink-0">
                 <source srcset="/transpersonaltraining/assets/images/Community/community-break-terrace-watermelon.webp" type="image/webp">
-                <img src="/transpersonaltraining/assets/images/Community/community-break-terrace-watermelon.jpg" alt="A shared break on the terrace in golden light" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <img width="1343" height="1600" src="/transpersonaltraining/assets/images/Community/community-break-terrace-watermelon.jpg" alt="A shared break on the terrace in golden light" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="/transpersonaltraining/assets/images/Techniques/technique-bodywork-holding.webp" type="image/webp">
-                <img src="/transpersonaltraining/assets/images/Techniques/technique-bodywork-holding.jpg" alt="Group bodywork and holding exercise" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <img width="1600" height="1200" src="/transpersonaltraining/assets/images/Techniques/technique-bodywork-holding.jpg" alt="Group bodywork and holding exercise" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="/transpersonaltraining/assets/images/Community/community-pair-mirroring.webp" type="image/webp">
-                <img src="/transpersonaltraining/assets/images/Community/community-pair-mirroring.jpg" alt="Two participants in a mirroring exercise" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <img width="1600" height="1200" src="/transpersonaltraining/assets/images/Community/community-pair-mirroring.jpg" alt="Two participants in a mirroring exercise" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="/transpersonaltraining/assets/images/Community/community-group-circle-standing.webp" type="image/webp">
-                <img src="/transpersonaltraining/assets/images/Community/community-group-circle-standing.jpg" alt="Group standing together in a learning circle" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <img width="1600" height="1200" src="/transpersonaltraining/assets/images/Community/community-group-circle-standing.jpg" alt="Group standing together in a learning circle" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="/transpersonaltraining/assets/images/Community/community-group-circle-lecture.webp" type="image/webp">
-                <img src="/transpersonaltraining/assets/images/Community/community-group-circle-lecture.jpg" alt="An evening lecture circle in the training hall" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <img width="1600" height="1200" src="/transpersonaltraining/assets/images/Community/community-group-circle-lecture.jpg" alt="An evening lecture circle in the training hall" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="/transpersonaltraining/assets/images/Techniques/technique-trust-walk-pair.webp" type="image/webp">
-                <img src="/transpersonaltraining/assets/images/Techniques/technique-trust-walk-pair.jpg" alt="A trust walk exercise in pairs" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <img width="1200" height="1600" src="/transpersonaltraining/assets/images/Techniques/technique-trust-walk-pair.jpg" alt="A trust walk exercise in pairs" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
-                <img src="/transpersonaltraining/assets/images/Venue/venue-garden-lantern.jpg" alt="A lantern glowing in the seminar house garden" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <img width="1200" height="1600" src="/transpersonaltraining/assets/images/Venue/venue-garden-lantern.jpg" alt="A lantern glowing in the seminar house garden" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="/transpersonaltraining/assets/images/Techniques/technique-somatic-bodywork.webp" type="image/webp">
-                <img src="/transpersonaltraining/assets/images/Techniques/technique-somatic-bodywork.jpg" alt="Somatic bodywork practice" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <img width="1600" height="1200" src="/transpersonaltraining/assets/images/Techniques/technique-somatic-bodywork.jpg" alt="Somatic bodywork practice" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="/transpersonaltraining/assets/images/Community/community-art-exercise-a.webp" type="image/webp">
-                <img src="/transpersonaltraining/assets/images/Community/community-art-exercise-a.jpg" alt="Participants during a group art exercise" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <img width="1600" height="1200" src="/transpersonaltraining/assets/images/Community/community-art-exercise-a.jpg" alt="Participants during a group art exercise" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="/transpersonaltraining/assets/images/Venue/venue-terrace-dining.webp" type="image/webp">
-                <img src="/transpersonaltraining/assets/images/Venue/venue-terrace-dining.jpg" alt="A shared meal on the seminar house terrace" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <img width="1920" height="1440" src="/transpersonaltraining/assets/images/Venue/venue-terrace-dining.jpg" alt="A shared meal on the seminar house terrace" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="/transpersonaltraining/assets/images/Community/community-terrace-watching.webp" type="image/webp">
-                <img src="/transpersonaltraining/assets/images/Community/community-terrace-watching.jpg" alt="Participants watching attentively on the terrace" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <img width="1600" height="1200" src="/transpersonaltraining/assets/images/Community/community-terrace-watching.jpg" alt="Participants watching attentively on the terrace" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="/transpersonaltraining/assets/images/Community/community-terrace-speaking.webp" type="image/webp">
-                <img src="/transpersonaltraining/assets/images/Community/community-terrace-speaking.jpg" alt="A participant speaking to the group on the terrace" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <img width="1600" height="1200" src="/transpersonaltraining/assets/images/Community/community-terrace-speaking.jpg" alt="A participant speaking to the group on the terrace" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="/transpersonaltraining/assets/images/Techniques/technique-paper-mandala-sunlight.webp" type="image/webp">
-                <img src="/transpersonaltraining/assets/images/Techniques/technique-paper-mandala-sunlight.jpg" alt="A figure laid out in torn paper on the sunlit hall floor" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <img width="1600" height="1200" src="/transpersonaltraining/assets/images/Techniques/technique-paper-mandala-sunlight.jpg" alt="A figure laid out in torn paper on the sunlit hall floor" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="/transpersonaltraining/assets/images/Symbolic/symbolic-grounding-plants-floor.webp" type="image/webp">
-                <img src="/transpersonaltraining/assets/images/Symbolic/symbolic-grounding-plants-floor.jpg" alt="Moss, grasses and a candle gathered for a grounding exercise" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <img width="1600" height="1200" src="/transpersonaltraining/assets/images/Symbolic/symbolic-grounding-plants-floor.jpg" alt="Moss, grasses and a candle gathered for a grounding exercise" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="/transpersonaltraining/assets/images/Symbolic/symbolic-garden-flowers.webp" type="image/webp">
-                <img src="/transpersonaltraining/assets/images/Symbolic/symbolic-garden-flowers.jpg" alt="Wildflowers in the seminar house garden" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <img width="1536" height="2048" src="/transpersonaltraining/assets/images/Symbolic/symbolic-garden-flowers.jpg" alt="Wildflowers in the seminar house garden" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="/transpersonaltraining/assets/images/Symbolic/symbolic-garden-flowers-lantern.webp" type="image/webp">
-                <img src="/transpersonaltraining/assets/images/Symbolic/symbolic-garden-flowers-lantern.jpg" alt="Wildflowers with the garden lantern in the background" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <img width="1300" height="1733" src="/transpersonaltraining/assets/images/Symbolic/symbolic-garden-flowers-lantern.jpg" alt="Wildflowers with the garden lantern in the background" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="/transpersonaltraining/assets/images/Venue/venue-todtmoos-firepit.webp" type="image/webp">
-                <img src="/transpersonaltraining/assets/images/Venue/venue-todtmoos-firepit.jpg" alt="The group gathered around the fire pit at dusk" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <img width="1600" height="1200" src="/transpersonaltraining/assets/images/Venue/venue-todtmoos-firepit.jpg" alt="The group gathered around the fire pit at dusk" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="/transpersonaltraining/assets/images/Venue/venue-todtmoos-lantern-snow-night.webp" type="image/webp">
-                <img src="/transpersonaltraining/assets/images/Venue/venue-todtmoos-lantern-snow-night.jpg" alt="A street lamp glowing over fresh snow outside the seminar house" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <img width="1200" height="1600" src="/transpersonaltraining/assets/images/Venue/venue-todtmoos-lantern-snow-night.jpg" alt="A street lamp glowing over fresh snow outside the seminar house" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
             <picture class="snap-start shrink-0">
                 <source srcset="/transpersonaltraining/assets/images/Symbolic/symbolic-tree-eye-moss.webp" type="image/webp">
-                <img src="/transpersonaltraining/assets/images/Symbolic/symbolic-tree-eye-moss.jpg" alt="A healed scar in a mossy tree trunk, shaped like an eye" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
+                <img width="825" height="1100" src="/transpersonaltraining/assets/images/Symbolic/symbolic-tree-eye-moss.jpg" alt="A healed scar in a mossy tree trunk, shaped like an eye" class="h-64 md:h-80 w-auto object-cover" loading="lazy">
             </picture>
         </div>
     </div>

@@ -33,7 +33,39 @@
 
     
     
+
     
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://transpersonal-training.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Free Counselling & Breathwork Sessions"
+        }
+      ]
+    }
+    </script>
+    
+
     <!-- Page Loader Styles (inline for immediate display) -->
     <style>
         #page-loader {
@@ -86,14 +118,12 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/transpersonaltraining/assets/images/Graphics/favicon-16x16.png">
         <link rel="apple-touch-icon" sizes="180x180" href="/transpersonaltraining/assets/images/Graphics/apple-touch-icon.png">
     
-    <!-- Fonts (preconnect and async load) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet"></noscript>
     
-    <!-- Lucide Icons (defer loading) -->
-    <script src="https://unpkg.com/lucide@0.344.0" defer></script>
+    <link rel="preload" href="/transpersonaltraining/assets/fonts/Inter-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/transpersonaltraining/assets/fonts/CormorantGaramond-600-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+    
+    <script src="/transpersonaltraining/scripts/vendor/lucide-0.344.0.js" defer></script>
 </head>
 <body class="font-sans text-[color:var(--c-heading)] bg-[color:var(--c-paper-hi)] antialiased">
 
@@ -310,7 +340,7 @@
             <source media="(min-width: 1024px)" srcset="/transpersonaltraining/assets/images/Headers/hero-practice-client-flowers-wide.webp" type="image/webp">
             <source media="(min-width: 1024px)" srcset="/transpersonaltraining/assets/images/Headers/hero-practice-client-flowers-wide.jpg">
             <source srcset="/transpersonaltraining/assets/images/Headers/hero-practice-client-flowers-narrow.webp" type="image/webp">
-            <img src="/transpersonaltraining/assets/images/Headers/hero-practice-client-flowers-narrow.jpg" alt="Wildflowers in the garden of the seminar house" class="w-full h-full object-cover">
+            <img width="1200" height="1080" src="/transpersonaltraining/assets/images/Headers/hero-practice-client-flowers-narrow.jpg" alt="Wildflowers in the garden of the seminar house" class="w-full h-full object-cover">
         </picture>
         <div class="absolute inset-0 bg-gradient-to-b from-[var(--c-deep-80)] via-[var(--c-deep-60)] to-[var(--c-deep-80)]"></div>
     </div>
@@ -416,7 +446,7 @@
                 
                 <article class="student-card bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] overflow-hidden shadow-sm">
                     
-                    <img
+                    <img width="800" height="534"
                         src="/transpersonaltraining/assets/images/people/students/anna-lepora.jpg"
                         alt="Anna Lepora"
                         class="w-full h-56 object-cover"
@@ -543,7 +573,7 @@ Psych-K® e Per-K® Facilitator, EFT Practitioner, Life Designer in Codes (D.Lum
                 
                 <article class="student-card bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] overflow-hidden shadow-sm">
                     
-                    <img
+                    <img width="800" height="800"
                         src="/transpersonaltraining/assets/images/people/students/fabio-malizia.jpg"
                         alt="Fabio Malizia"
                         class="w-full h-56 object-cover"
@@ -670,7 +700,7 @@ Currently seeing clients in a structured supervision track.</p>
                 
                 <article class="student-card bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] overflow-hidden shadow-sm">
                     
-                    <img
+                    <img width="717" height="800"
                         src="/transpersonaltraining/assets/images/people/students/georgia-pownall.jpg"
                         alt="Georgia Pownall"
                         class="w-full h-56 object-cover"
@@ -796,7 +826,7 @@ As I deepen the work, this ‘lens’ dissolves more and more, and a clearing em
                 
                 <article class="student-card bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] overflow-hidden shadow-sm">
                     
-                    <img
+                    <img width="800" height="627"
                         src="/transpersonaltraining/assets/images/people/students/manal-hammadi.jpg"
                         alt="Manal Al-Hammadi"
                         class="w-full h-56 object-cover"
@@ -917,7 +947,7 @@ As I deepen the work, this ‘lens’ dissolves more and more, and a clearing em
                 
                 <article class="student-card bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] overflow-hidden shadow-sm">
                     
-                    <img
+                    <img width="576" height="768"
                         src="/transpersonaltraining/assets/images/people/students/justyna-kowalska.jpg"
                         alt="Justyna Kowalska"
                         class="w-full h-56 object-cover"
