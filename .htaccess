@@ -23,6 +23,7 @@
 
 RewriteEngine On
 
+
 # ── §1 Public pages ──────────────────────────────────────────────
 # `/` → `/`, `/schedule/` → `/schedule/`, `/apply/` → `/apply/`: same path
 # on both sites, so no rule — nothing to redirect.
@@ -162,3 +163,22 @@ RewriteRule ^author/ https://transpersonal-training.com/teachers/ [R=301,L]
 RewriteRule ^alb_elements - [G,L]
 # "post-format archives" (REDIRECT_MAP.md §5) has no exact pattern recorded
 # — add its real path here once seen in GSC coverage after cutover.
+
+# ── Canonical origin: https, no www ─────────────────────────────
+# Deliberately LAST. Every rule above already targets an absolute
+# https://transpersonal-training.com URL, so a match up there resolves in a
+# single hop; this rule only catches what nothing else claimed.
+#
+# The condition reads the proxy's header rather than %{HTTPS}, and that is not
+# a stylistic choice: TLS terminates upstream at openresty, so Apache sees
+# %{HTTPS} as "off" on HTTPS requests too — measured on this server, not
+# assumed. A %{HTTPS}-based rule would therefore match its own redirect and
+# loop until the browser gives up. X-Forwarded-Proto is the only signal here
+# that actually differs between the two schemes (https vs http).
+#
+# Before this, the site answered on all four origins — http/https x www/apex —
+# serving identical content, with /apply/ taking personal data and file
+# uploads over plain HTTP.
+RewriteCond %{HTTP:X-Forwarded-Proto} =http [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://transpersonal-training.com%{REQUEST_URI} [R=301,L]
