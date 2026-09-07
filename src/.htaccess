@@ -1,0 +1,148 @@
+# 301 redirect map — old WordPress site → this Eleventy site.
+# Source of truth: docs/seo-baseline/REDIRECT_MAP.md. Generated for cutover
+# (TODO task 10); keep the two in sync if a rule changes here.
+#
+# Ordering: exact-path rules first, pattern rules last, so a pattern can
+# never shadow a more specific exact match above it.
+
+RewriteEngine On
+
+# ── §1 Public pages ──────────────────────────────────────────────
+# `/` → `/`, `/schedule/` → `/schedule/`, `/apply/` → `/apply/`: same path
+# on both sites, so no rule — nothing to redirect.
+
+RewriteRule ^program/?$ /training-overview/ [R=301,L]
+RewriteRule ^program-2026/?$ /training-overview/ [R=301,L]
+RewriteRule ^program-2024/?$ /training-overview/ [R=301,L]
+RewriteRule ^faculty/?$ /teachers/ [R=301,L]
+RewriteRule ^information/?$ /resources/ [R=301,L]
+
+RewriteRule ^archive-2021/?$ /schedule/ [R=301,L]
+RewriteRule ^archive-2022/?$ /schedule/ [R=301,L]
+RewriteRule ^archive-2023/?$ /schedule/ [R=301,L]
+RewriteRule ^archive-2024/?$ /schedule/ [R=301,L]
+RewriteRule ^archive-2025/?$ /schedule/ [R=301,L]
+
+RewriteRule ^closed_meeteing_iurii_becioski-7-9-04-23/?$ - [G,L]
+
+# One old newsletter PDF, marked low-priority in the map with a caution to
+# check the GSC Links export for hotlinks first (TODO task 54, still open).
+# Gone rather than silently dropped, so a stale hotlink gets a clean 410
+# instead of a generic 404.
+RewriteRule ^wp-content/uploads/2024/10/newsletter-9\.pdf$ - [G,L]
+
+# `/?page_id=3` — ancient WP-internal query-string URL, path is root.
+RewriteCond %{QUERY_STRING} ^page_id=3$
+RewriteRule ^$ - [G,L]
+
+# The West Program 2026 PDF was never a separate file — same generator as
+# the Curriculum PDF (Fabio, Sep 2026): a Google Apps Script pulls it from
+# the spreadsheet on demand (docs/googlescripts/curriculum-pdf-download-apps-script.js).
+# That script resolves to a Drive URL at build time (src/_data/curriculumData.js),
+# which is why these point at the /curriculum/ page and its live "Download PDF"
+# button rather than at a hardcoded Drive link — the Drive URL isn't stable
+# enough to bake into .htaccess, the page always has the current one.
+RewriteRule ^wp-content/uploads/2025/09/West_Program_26\.pdf$ /curriculum/ [R=301,L]
+RewriteRule ^wp-content/uploads/2025/10/West_Program_26\.pdf$ /curriculum/ [R=301,L]
+
+# ── §2 Teacher bio pages ─────────────────────────────────────────
+# 64% of the old site's organic clicks. All 32 consolidate onto the single
+# /teachers/ page, which server-renders every bio — see REDIRECT_MAP.md §2
+# for why that makes the many-to-one redirect defensible. Each card carries
+# id="{{ teacher.id }}" (src/teachers.html), so the fragment opens the right
+# bio on arrival.
+#
+# 28 of 32 old slugs match the teacher's id exactly:
+
+RewriteRule ^bernadette-blin/?$ /teachers/#bernadette-blin [R=301,L]
+RewriteRule ^dennis-johnson/?$ /teachers/#dennis-johnson [R=301,L]
+RewriteRule ^kati-wortelkamp/?$ /teachers/#kati-wortelkamp [R=301,L]
+RewriteRule ^maria-kuehl-weigmann/?$ /teachers/#maria-kuehl-weigmann [R=301,L]
+RewriteRule ^liudmila-serbina/?$ /teachers/#liudmila-serbina [R=301,L]
+RewriteRule ^stefan-dressler/?$ /teachers/#stefan-dressler [R=301,L]
+RewriteRule ^lev-belogorodskii/?$ /teachers/#lev-belogorodskii [R=301,L]
+RewriteRule ^cristina-revenco/?$ /teachers/#cristina-revenco [R=301,L]
+RewriteRule ^ingrida-indane/?$ /teachers/#ingrida-indane [R=301,L]
+RewriteRule ^lyudmila-skartsesku/?$ /teachers/#lyudmila-skartsesku [R=301,L]
+RewriteRule ^tina-lindhard/?$ /teachers/#tina-lindhard [R=301,L]
+RewriteRule ^samvedam-randles/?$ /teachers/#samvedam-randles [R=301,L]
+RewriteRule ^nicolas-cambas/?$ /teachers/#nicolas-cambas [R=301,L]
+RewriteRule ^serge-beddington-behrens/?$ /teachers/#serge-beddington-behrens [R=301,L]
+RewriteRule ^mario-lorenzetti/?$ /teachers/#mario-lorenzetti [R=301,L]
+RewriteRule ^stephan-schillinger/?$ /teachers/#stephan-schillinger [R=301,L]
+RewriteRule ^lydia-maidan/?$ /teachers/#lydia-maidan [R=301,L]
+RewriteRule ^pier-luigi-lattuada/?$ /teachers/#pier-luigi-lattuada [R=301,L]
+RewriteRule ^rainer-pervoltz/?$ /teachers/#rainer-pervoltz [R=301,L]
+RewriteRule ^lilian-gscheidel/?$ /teachers/#lilian-gscheidel [R=301,L]
+RewriteRule ^vladimir-maykov/?$ /teachers/#vladimir-maykov [R=301,L]
+RewriteRule ^charlotte-kihl/?$ /teachers/#charlotte-kihl [R=301,L]
+RewriteRule ^rita-aguila/?$ /teachers/#rita-aguila [R=301,L]
+RewriteRule ^erik-andersen/?$ /teachers/#erik-andersen [R=301,L]
+RewriteRule ^manal-al-hammadi/?$ /teachers/#manal-al-hammadi [R=301,L]
+RewriteRule ^gabriel-fernandez-borsot/?$ /teachers/#gabriel-fernandez-borsot [R=301,L]
+RewriteRule ^vera-covaliciuc/?$ /teachers/#vera-covaliciuc [R=301,L]
+RewriteRule ^kirsten-cameron/?$ /teachers/#kirsten-cameron [R=301,L]
+
+# 4 slugs differ — 3 documented in REDIRECT_MAP.md, plus one it missed:
+# /dario-giuffrida/ (commit cf5a15b renamed him to Dario Hampi Pacari; the
+# map's "29 of 32 match" count is off by one because of it — actually 28).
+
+RewriteRule ^jure-biechoniski/?$ /teachers/#jure-biechonski [R=301,L]
+RewriteRule ^dr-ingo-benjamin-jahrsetz/?$ /teachers/#ingo-jahrsetz [R=301,L]
+RewriteRule ^cathys-bio/?$ /teachers/#cathy-geils [R=301,L]
+RewriteRule ^dario-giuffrida/?$ /teachers/#dario-hampi-pacari [R=301,L]
+
+# Two special cases in the same old post type:
+
+# Not a bio — the enrolment agreement appendix, still linked from the old
+# footer. No equivalent page exists in the new site, so this points at the
+# nearest real one rather than a 404. Revisit if the appendix gets rebuilt
+# as its own page (REDIRECT_MAP.md §2 left this an open choice).
+RewriteRule ^agreement-appendix/?$ /legal-notice/ [R=301,L]
+
+RewriteRule ^portfolio-item/bernadette-blin/?$ /teachers/#bernadette-blin [R=301,L]
+
+# ── §3 Student portal — legacy root-domain paths ────────────────
+# The portal itself already lives on student.transpersonal-training.com
+# and is untouched by this cutover. These are the old paths that used to
+# sit on the root domain. Verified live against student. on 2026-09-07
+# (curl, all response codes) rather than assumed from the old path name —
+# REDIRECT_MAP.md flagged that each target needed confirming first, and
+# five of the twelve turned out not to share the old site's path name.
+
+RewriteRule ^login/?$ https://student.transpersonal-training.com/login/ [R=301,L]
+RewriteRule ^forgot-password/?$ https://student.transpersonal-training.com/forgot-password/ [R=301,L]
+RewriteRule ^reset-password/?$ https://student.transpersonal-training.com/reset-password/ [R=301,L]
+
+# No matching page found on student. for these three — sent to the portal
+# homepage per REDIRECT_MAP.md's own fallback rule, rather than guessed.
+RewriteRule ^register/?$ https://student.transpersonal-training.com/ [R=301,L]
+RewriteRule ^logout/?$ https://student.transpersonal-training.com/ [R=301,L]
+RewriteRule ^user-profile/?$ https://student.transpersonal-training.com/ [R=301,L]
+
+# Renamed on the portal, confirmed live:
+RewriteRule ^dashboard-page/?$ https://student.transpersonal-training.com/dashboard/ [R=301,L]
+RewriteRule ^course-archive/?$ https://student.transpersonal-training.com/courses/ [R=301,L]
+# Best available match for "payment" — /checkout/ is the live WooCommerce
+# page; there was no page actually named /payment/ or its equivalent to
+# confirm against, so treat this one as worth a manual click-through.
+RewriteRule ^payment/?$ https://student.transpersonal-training.com/checkout/ [R=301,L]
+
+RewriteRule ^add-events/?$ - [G,L]
+RewriteRule ^st/?$ - [G,L]
+RewriteRule ^login-customizer/?$ - [G,L]
+
+# ── §4 Event/lecture pages (348 URLs, 3 clicks total) ───────────
+# Google already treats these as not worth indexing. One pattern rule.
+
+RewriteRule ^events/ /schedule/ [R=301,L]
+
+# ── §5 Taxonomy & author archives (~165 URLs, zero traffic) ─────
+
+RewriteRule ^tag/ /blog/ [R=301,L]
+RewriteRule ^mec-category/ /schedule/ [R=301,L]
+RewriteRule ^category/ /blog/ [R=301,L]
+RewriteRule ^author/ /teachers/ [R=301,L]
+RewriteRule ^alb_elements - [G,L]
+# "post-format archives" (REDIRECT_MAP.md §5) has no exact pattern recorded
+# — add its real path here once seen in GSC coverage after cutover.

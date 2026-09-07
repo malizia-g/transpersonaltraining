@@ -41,7 +41,8 @@ that used to live at the bottom of this file, so there is one list to tick rathe
 
 The short version: the **hosting decision** ([TODO task 10](TODO.md#task-10)) is the single remaining
 blocker on the redirect map; the urgent hygiene items are independent of the cutover and should not
-wait for it ([31](TODO.md#task-31), [33](TODO.md#task-33), [34](TODO.md#task-34)).
+wait for it ([33](TODO.md#task-33), [34](TODO.md#task-34)). The `test.` subdomain ([31](TODO.md#task-31)) is
+done — taken down, verified 7 Sep 2026.
 
 **Phase D status — 🟡 partly done (Jul 2026):** titles/descriptions for 13 of ~15 mapped pages now
 match [SEO_KEYWORD_MAP.md](SEO_KEYWORD_MAP.md) (D2's first checklist item). Still open: H1s and body
@@ -161,7 +162,7 @@ Everything in this stage can be completed and tested before touching DNS or host
 | 1 | ✅ **DONE (Jul 2026)** — domain verified in Google Search Console | C | S | — |
 | 2 | ✅ **DONE (Jul 2026)** — baseline captured and analysed: **[seo-baseline/BASELINE.md](seo-baseline/BASELINE.md)**. 347 clicks / 17,448 impressions / 255 indexed pages / 7 referring domains. *(Ahrefs cross-check still pending)* | B/C | S | step 1 |
 | 3 | 🟡 WordPress URL inventory ✅ (574 URLs) + 301 redirect map ✅ drafted and data-prioritized ([seo-baseline/REDIRECT_MAP.md](seo-baseline/REDIRECT_MAP.md)); portal fate ✅ largely answered (already on `student.` subdomain); **still blocked on the hosting/CDN choice** | B | M | hosting decision |
-| 3b | 🔴 **NEW — urgent, independent of the cutover:** `test.transpersonal-training.com` is publicly indexed with a full duplicate of the site (402 impressions). Add HTTP auth or `noindex`+`Disallow`, then request removal in GSC | E | S | server access |
+| 3b | ✅ **DONE (Sep 2026)** — `test.transpersonal-training.com` taken down. Verified 7 Sep 2026: 404 on every content path, nothing running behind it. The 8 indexed pages fall out on their own | E | S | — |
 | 3c | ✅ **DONE (Jul 2026)** — bio-page traffic protection. Bio pages are **64% of all organic clicks**. Decision (Fabio): no per-teacher pages; all 32 old URLs 301 to **`/teachers/#<id>`**, and the page now expands the right teacher from the URL fragment. Viable because all 32 bios are server-rendered into that page's HTML. Residual risk tracked as [TODO task 32](TODO.md#task-32) | D/F | S | — |
 | 4 | ✅ **DONE (Jul 2026)** — real form backend live (Apps Script → Sheets + Drive + notification email). `mailto:` kept only as a no-JS fallback | A | S | — |
 | 5 | ✅ **DONE (Jul 2026)** — `/apply/` page built: details → generated enrolment agreement → signed-copy upload | A | M | — |
@@ -366,7 +367,7 @@ High-value keywords not yet mapped to any page (from Selecting Keywords, all low
 
 ## Phase E — Technical SEO & Performance
 
-- 🔴 **Secure the `test.` subdomain (urgent, do first).** `test.transpersonal-training.com` is publicly reachable and indexed by Google — a full WordPress duplicate of the school site (`/about/`, `/apply/`, `/courses/`), 8 pages, 402 impressions, 5 clicks. It competes with the real site for the same terms and exposes an unfinished environment in search results. Fix: HTTP auth (best) or `noindex` + `Disallow: /` in its robots.txt, then a removal request in GSC. Independent of the migration.
+- ~~**Secure the `test.` subdomain (urgent, do first).** `test.transpersonal-training.com` is publicly reachable and indexed by Google — a full WordPress duplicate of the school site, 8 pages, 402 impressions, 5 clicks.~~ → **DONE (Sep 2026).** The subdomain was taken down rather than secured. Verified 7 Sep 2026: `/` returns 403 and every content path 404, so the indexed pages drop out on their own.
 - **Existing 404s:** GSC reports **39 URLs already returning 404** on the live site. Export them (Indicizzazione → Pagine → "Non trovata (404)") and fix or redirect them *before* cutover, so they don't get misattributed to the migration.
 - **404 page:** create `src/404.html` with navigation and search-relevant links (GitHub Pages serves `/404.html` automatically).
 - ~~**Canonical for syndicated posts:** the two republished articles must emit `<link rel="canonical">` to the original URLs...~~ → **DONE (Jul 2026).** Only Mario's post was actually syndicated; it now points `rel=canonical` at `mariolorenzetti.org`. Manal's two posts were original-for-this-site, so the incorrect `sourceUrl` was removed from them instead — they self-canonicalize. `base.njk` derives canonical from a post's `sourceUrl` front matter automatically, so this doesn't need repeating per post.
@@ -724,7 +725,7 @@ settled — worth keeping, and worth keeping out of a checklist.
 3. **Student portal fate at migration** (blocks steps 3 and 17–18): keep WordPress on a subdomain vs replace before cutover. This interacts with [TODO task 5](TODO.md#task-5) (lectures login) and [task 10](TODO.md#task-10) (hosting). → **LARGELY RESOLVED (Jul 2026) by the GSC data:** the portal already runs on its own host, `student.transpersonal-training.com` (WordPress + Tutor LMS), so the cutover doesn't touch it. Remaining work is only 301-ing the ~12 legacy portal paths still on the root domain (`/login/`, `/payment/`, `/dashboard-page/`…) to their `student.` equivalents. Whether to *eventually* replace Tutor LMS with the new restricted-lectures approach is now a separate, non-blocking decision.
 <a id="decision-4--hostingcdn"></a>
 
-4. **Hosting/CDN** (blocks steps 3 and 18): GitHub Pages alone cannot do 301 redirects — put Cloudflare in front, or switch to Netlify/Cloudflare Pages? → **RECOMMENDATION (Jul 2026): move to Cloudflare Pages**, keeping the existing GitHub Actions build. **The blocker.** → [TODO task 10](TODO.md#task-10)
+4. ~~**Hosting/CDN** (blocks steps 3 and 18): GitHub Pages alone cannot do 301 redirects — put Cloudflare in front, or switch to Netlify/Cloudflare Pages?~~ → **DECIDED (Sep 2026), against this recommendation:** a dedicated Apache host over FTP, not Cloudflare Pages — see [TODO task 10](TODO.md#task-10) for what changed and why. Redirects now go through `.htaccess`, not a `_redirects` file.
 
    The redirect map needs roughly **60 rules** (15 page rules + 32 bio anchors + 12 portal paths + pattern rules). That number is what decides this:
 
@@ -736,6 +737,8 @@ settled — worth keeping, and worth keeping out of a checklist.
    | **Netlify** | native `_redirects`, equally capable and best-documented | ✅ good alternative; free tier has bandwidth/build-minute caps Cloudflare doesn't |
 
    **Why Cloudflare Pages specifically:** it settles three open items in one move — hosting, the 301s, and **Open Decision 2 (analytics)**, because Cloudflare Web Analytics is free and cookieless, which is exactly the privacy-consistent option Phase C recommends and keeps the "no tracking" promise in the privacy modal true. It also puts DNS, the redirects and the CDN in one place for cutover day, which matters when the change has to be fast and reversible.
+
+   **Not taken.** The site went to a dedicated Apache host over FTP instead ([TODO task 10](TODO.md#task-10)), so this analytics win doesn't come free — [task 17](TODO.md#task-17) (cookieless analytics) needs its own decision now.
 
    **Migration effort is small.** Keep [.github/workflows/deploy.yml](../.github/workflows/deploy.yml) exactly as it is — the Sheets fetching, the data and student-image caches, and the `repository_dispatch` rebuild trigger all keep working. Only the last step changes: instead of `peaceiris/actions-gh-pages` publishing to the `deploy` branch, run a `wrangler pages deploy _site` step. Also set `PATH_PREFIX` to `/` (it is currently `/transpersonaltraining/` for the GitHub project-site path) and add the `_redirects` file generated from [seo-baseline/REDIRECT_MAP.md](seo-baseline/REDIRECT_MAP.md). If GitHub Pages is kept for staging, nothing else needs to change.
 

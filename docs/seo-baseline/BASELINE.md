@@ -84,8 +84,9 @@ Neither appears in `wp-sitemap.xml`; both surfaced only because the GSC property
 1. **`test.transpersonal-training.com` — a public, indexed WordPress staging copy.**
    It serves a full duplicate of the school site (`/about/`, `/apply/`, `/courses/`) and earned
    402 impressions and 5 clicks. This is live duplicate content competing with the real site and
-   leaking an unfinished environment into search results. **Fix now, independently of the migration:**
-   HTTP auth or `noindex` + `Disallow`, then request removal in GSC. Added as an action below.
+   leaking an unfinished environment into search results. **Resolved (September 2026):** the subdomain
+   was taken down rather than secured. Verified 2026-09-07 — `/` returns 403, every content path 404,
+   and nothing runs behind it, so the 8 indexed pages fall out of the index on their own.
 2. **`student.transpersonal-training.com` — the student portal, already on its own subdomain.**
    It runs WordPress + Tutor LMS (courses, quizzes, instructor profiles). This materially changes
    **Open Decision 3** (portal fate): the portal is *already* separated from the main domain, so the
@@ -196,8 +197,8 @@ Tracked as [TODO task 33](../TODO.md#task-33).
    organic traffic and carry most backlinks. Good news: `src/_data/teachers/` already holds 32
    per-teacher markdown files, so generating a page per teacher is a template change, not a content
    project. **29 of 32 slugs already match the old URLs exactly** (see REDIRECT_MAP §2).
-2. **Secure `test.transpersonal-training.com` immediately** — this is a live SEO leak today,
-   unrelated to the cutover.
+2. ~~**Secure `test.transpersonal-training.com` immediately** — this is a live SEO leak today,
+   unrelated to the cutover.~~ **Done (Sep 2026):** taken down, verified 2026-09-07.
 3. **Open Decision 3 (portal) is largely answered** — the portal already lives on `student.`; leave it,
    and just redirect the legacy root-domain portal paths.
 4. **Baseline KPI targets** for the migration: do not lose the 347 clicks / 255 indexed pages; hold
@@ -213,9 +214,9 @@ there is one list to tick:
 
 | Action | Task |
 |---|---|
-| Block/noindex `test.` + removal request in GSC — **do this week** | [31](../TODO.md#task-31) |
+| ~~Block/noindex `test.` + removal request in GSC~~ — **done Sep 2026**, taken down instead | [31](../TODO.md#task-31) |
 | Portal SEO hygiene on `student.` | [33](../TODO.md#task-33) |
-| Recover the West Program 2026 PDF and 301 the dead paths | [34](../TODO.md#task-34) |
+| ~~Recover the West Program 2026 PDF~~ — turned out not to be missing, folded into [19](../TODO.md#task-34) | [34](../TODO.md#task-34) |
 | Per-teacher pages — *decided against for now*, revisit 4–6 weeks after cutover | [32](../TODO.md#task-32) |
 | Confirm Manual Actions is clean; Ahrefs cross-check of the 7 referring domains | [39](../TODO.md#task-39) |
 | Ask EUROTAS for the accredited-school listing link | [40](../TODO.md#task-40) |

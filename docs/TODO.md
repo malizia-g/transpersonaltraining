@@ -23,9 +23,11 @@ items from `MARKETING_AND_SEO.md`, `seo-baseline/BASELINE.md`, `seo-baseline/REA
 
 ## The one blocker
 
-Everything in §6 and roughly a third of §4 waits on **[task 10 — the hosting decision](#task-10)**.
-Nothing else in this file blocks the launch by itself. `PABLO_TASKS` used to say it plainly:
-*"the site cannot go live until the production hosting path is confirmed."* That is still true.
+**Resolved (Sep 2026):** [task 10](#task-10), the hosting decision, is done — a dedicated Apache
+host reached over FTP, not the Cloudflare Pages path this file used to recommend. Full cutover
+follows: `main` now builds for the domain root and deploys there on every push. What's still open
+from §6/§4 is the ~60-rule redirect map, which needs porting to `.htaccess` now that there's no
+`_redirects` file — see [task 10](#task-10).
 
 **Order of work:** §2 now (it costs us today, whatever happens next) → §1 decisions →
 §3 and §4 in parallel → §5 → §6 on cutover day → §7 after.
@@ -37,22 +39,35 @@ Nothing else in this file blocks the launch by itself. `PABLO_TASKS` used to say
 Each one blocks work that cannot sensibly start without it.
 
 <a id="task-10"></a>
-### 10. Production hosting path — **the blocker**
+### 10. Production hosting path — ✅ **DONE (Sep 2026)**
 
-**Recommendation (Jul 2026): Cloudflare Pages.** The migration needs ~60 real 301 redirects and
-GitHub Pages can serve none. Cloudflare Pages gives native `_redirects`, is free with unlimited
-bandwidth, and settles task 17 too (free cookieless analytics). The existing GitHub Actions build
-is kept — only the final publish step changes to `wrangler pages deploy`.
+**Decided: a dedicated Apache host, deployed over FTP** — not Cloudflare Pages, the recommendation
+this task used to carry. The host serves only this site (no shared WordPress), so it's a fresh
+`.htaccess`, unrelated to the one on `old.`/`test.`. FTP was the only protocol on offer (no
+FTPS/SFTP), accepted as what the host provides.
 
-- [ ] Decide the hosting path (recommended: Cloudflare Pages; alternative: Netlify)
-- [ ] Configure `transpersonal-training.com` and enforce HTTPS
-- [ ] Swap the deploy step in [.github/workflows/deploy.yml](../.github/workflows/deploy.yml), set `PATH_PREFIX` to `/`
-- [ ] Add the `_redirects` file generated from [REDIRECT_MAP.md](seo-baseline/REDIRECT_MAP.md)
+`.github/workflows/deploy.yml` now builds `main` with `PATH_PREFIX=/` and deploys straight to the
+host via [`SamKirkland/FTP-Deploy-Action`](https://github.com/SamKirkland/FTP-Deploy-Action) on
+every push; `staging` is untouched and still previews to `malizia-g.github.io/transpersonaltraining/`.
+Credentials live in three repo secrets — `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD` (added via
+GitHub's UI, never through this codebase) — plus an optional `FTP_SERVER_DIR` if the host's FTP
+login doesn't land directly in the web root.
+
+- [x] Decide the hosting path — dedicated Apache host over FTP
+- [x] Swap the deploy step in [.github/workflows/deploy.yml](../.github/workflows/deploy.yml); `PATH_PREFIX` is now `/` for `main`
+- [x] Port the redirect map to `.htaccess` `RewriteRule`s — done as [`src/.htaccess`](../src/.htaccess),
+      Eleventy passthrough-copies it into every build. Two rows are still not live, blocked on other
+      tasks, not on this one: the West Program PDF rules ([task 34](#task-34)) and the "post-format
+      archives" pattern, whose exact URL was never recorded. → [REDIRECT_MAP.md](seo-baseline/REDIRECT_MAP.md)
+- [ ] Confirm `mod_rewrite` is actually enabled on the host and the rules fire — untested against the
+      real server, only checked for correct syntax and against the live `student.` portal
+- [ ] Configure `transpersonal-training.com` DNS to point at the host, and enforce HTTPS
 - [ ] Verify `student.transpersonal-training.com` still resolves after the DNS change — it must be left untouched
-- [ ] Confirm the free plan's build limits suit a site that rebuilds on every Sheets change
-- [ ] Run a final production deployment test
+- [ ] Run a final production deployment test after DNS cuts over
 
-→ Full comparison table and rationale: [MARKETING_AND_SEO.md § Hosting](MARKETING_AND_SEO.md#decision-4--hostingcdn)
+Superseded: the Cloudflare Pages comparison at
+[MARKETING_AND_SEO.md § Hosting](MARKETING_AND_SEO.md#decision-4--hostingcdn) is no longer the plan —
+kept there as the record of why it was considered.
 
 <a id="task-20"></a>
 ### 20. The single legal entity + GDPR details
@@ -99,9 +114,11 @@ Why: the repository should not ship misleading legacy experiments.
 <a id="task-17"></a>
 ### 17. Analytics — pick the tool, then wire it up
 
-The choice is cookieless (Plausible / Cloudflare Web Analytics) vs GA4 with a consent banner.
+The choice is cookieless (Plausible / GoatCounter / Fathom) vs GA4 with a consent banner.
 **Recommendation: cookieless** — it is the only option that keeps the "no tracking" promise in the
-privacy modal true, and it comes free if task 10 lands on Cloudflare Pages.
+privacy modal true. [Task 10](#task-10) landed on a dedicated Apache host over FTP rather than
+Cloudflare Pages, so Cloudflare Web Analytics isn't free-by-default here — pick a self-hosted or
+paid cookieless option instead.
 
 - [ ] Decide the tool
 - [ ] Add it to the build
@@ -162,19 +179,6 @@ Blocks the blog cadence (Phase G) and the email sequences (Phase I).
 
 These are live problems on the current WordPress estate. None of them waits on task 10.
 
-<a id="task-31"></a>
-### 31. Secure `test.transpersonal-training.com` — **do this week**
-
-Search Console (July 2026) shows it publicly reachable and **indexed**: a full WordPress duplicate
-of the school site, 8 pages, 402 impressions, 5 clicks. It competes with the real site for the same
-searches and exposes an unfinished environment in results.
-
-- [ ] Put it behind HTTP authentication (best), or add `noindex` + `Disallow: /` to its robots.txt
-- [ ] Submit a removal request in Search Console once blocked
-- [ ] Confirm whether it is needed at all — if not, take it down
-
-→ [BASELINE.md Finding 3](seo-baseline/BASELINE.md#finding-3--two-subdomains-nobody-accounted-for)
-
 <a id="task-33"></a>
 ### 33. Portal SEO hygiene — `student.` is leaking into Google
 
@@ -192,16 +196,24 @@ no traffic, dilutes the domain's topical signal, wastes crawl budget, and expose
 *on top of* the 4,850 on his main-site bio, so name searches hit two of our pages and convert on neither.
 
 <a id="task-34"></a>
-### 34. Recover the missing West Program 2026 PDF
+### 34. Recover the missing West Program 2026 PDF — ✅ **RESOLVED (Sep 2026), folded into [task 19](#task-19)**
 
-Both upload paths 404 while `/program-2026/` itself is live:
-`/wp-content/uploads/2025/09/West_Program_26.pdf` and `…/2025/10/West_Program_26.pdf`.
+~~Both upload paths 404 while `/program-2026/` itself is live: find the file and republish it.~~ Wrong
+framing — there was never a file to lose. **Per Fabio:** the West Program PDF *is* the Curriculum
+PDF — same document, same spreadsheet-driven generator
+([docs/googlescripts/curriculum-pdf-download-apps-script.js](../docs/googlescripts/curriculum-pdf-download-apps-script.js)),
+already wired up as the "Download PDF" button on `/curriculum/`
+([src/curriculum.html](../src/curriculum.html), `curriculumData.pdfUrl`). The old WordPress uploads
+paths were just where that same generated PDF used to live.
 
-- [ ] Find the file and republish it
-- [ ] 301 both old paths to the new location
+Both old paths now 301 to `/curriculum/` in [`src/.htaccess`](../src/.htaccess) rather than to a
+hardcoded Drive link — the Drive URL is resolved fresh at every build
+([src/_data/curriculumData.js](../src/_data/curriculumData.js)), not stable enough to bake into
+`.htaccess`, so the redirect points at the page that always has the current one.
 
-Why: a programme brochure is exactly the lead magnet Phase I wants to gate behind an email form —
-worth recovering rather than redirecting away. See also [task 44](#task-44).
+What's left is entirely [task 19](#task-19)'s: the exporter script isn't installed on the spreadsheet
+yet, so today's button falls back to the bare `/exec` endpoint rather than a named, cached PDF. Not
+[task 44](#task-44) — that's a separate, static marketing brochure, unrelated to this pipeline.
 
 <a id="task-22"></a>
 ### 22. "Psychotherapist" — copy audit
@@ -603,8 +615,8 @@ moves, the old site is gone and any mistake in the map becomes unverifiable.
 <a id="task-14"></a>
 ### 14. Re-add the production CNAME — only if GitHub Pages wins
 
-- [ ] Re-add `src/CNAME` with `transpersonal-training.com` before the final production merge
-- [ ] Skip entirely if [task 10](#task-10) lands anywhere else
+~~Re-add `src/CNAME` with `transpersonal-training.com` before the final production merge.~~
+**Skipped** — [task 10](#task-10) landed on a dedicated Apache host over FTP, not GitHub Pages.
 
 <a id="task-13"></a>
 ### 13. Search Console at cutover
@@ -615,10 +627,11 @@ The domain property is already verified and active. What remains is launch-day w
 - [ ] URL-inspect the top 10 pages
 - [ ] Monitor coverage and redirects weekly for 4–6 weeks; fix crawl errors as they appear
 
-⚠️ **Remove the pre-launch noindex on cutover day.** `.github/workflows/deploy.yml` has a step named
-*"Keep the pre-launch build out of search results"* that forces `noindex, follow` onto every page,
-because the github.io copy canonicalises to a domain where most of those URLs still 404. Once the
-domain points here, that step must be deleted or the live site stays invisible.
+~~⚠️ Remove the pre-launch noindex on cutover day.~~ **Done automatically** — the step that forces
+`noindex, follow` (renamed *"Keep the staging preview out of search results"*) is now gated to
+`if: github.ref != 'refs/heads/main'` in `.github/workflows/deploy.yml`, so `main` never carries it
+and `staging` keeps it permanently, by design, as its preview build still canonicalises to the real
+domain.
 
 ---
 
@@ -648,6 +661,24 @@ is expected. If the loss turns out material, the fix is to give *a few* teachers
 - [ ] Venue-level local SEO for Todtmoos and Monteverdi — place names carry real search intent
       (see also [task 36](#task-36))
 
+<a id="task-66"></a>
+### 66. Evaluate the production host's performance
+
+[Task 10](#task-10) picked a dedicated Apache host over FTP instead of the Cloudflare Pages path
+this file used to recommend — chosen for the hosting decision itself, not benchmarked for speed.
+Cloudflare Pages would have come with a CDN and edge caching for free; this host's actual
+performance is still unmeasured.
+
+- [ ] Run PageSpeed Insights / Lighthouse (mobile **and** desktop) on the homepage, `/training-overview/`,
+      and `/teachers/` (the heaviest page, all 32 bios server-rendered)
+- [ ] Check TTFB from a couple of different regions — Europe at minimum, given the East–West audience
+- [ ] Confirm Brotli or gzip compression is actually on for HTML/CSS/JS, and that static assets
+      (images, fonts, CSS) carry cache-control/expires headers — cheap wins if missing
+- [ ] Confirm HTTP/2 (or /3) is enabled, not HTTP/1.1
+- [ ] Decide, from the numbers rather than a guess, whether to put a **free CDN layer** (e.g. Cloudflare
+      in DNS-only-proxy mode, no hosting change) in front — this is the one gap the Cloudflare Pages
+      recommendation would have closed automatically
+
 <a id="task-16"></a>
 ### 16. An article editing workflow
 
@@ -664,6 +695,10 @@ is expected. If the loss turns out material, the fix is to give *a few* teachers
 
 <a id="task-19"></a>
 ### 19. Finish the PDF exporter
+
+Also closes [task 34](#task-34): the West Program 2026 PDF is this same generator, not a separate
+file, so its two old WordPress URLs (redirected to `/curriculum/` in `src/.htaccess`) start serving
+the real thing the moment this is done.
 
 - [ ] Install `docs/googlescripts/curriculum-pdf-apps-script.js` into the Curriculum spreadsheet
 - [ ] Test both PDF outputs
@@ -729,6 +764,7 @@ is set to 2026 would still see it. It buys time, it does not do the job.
 | **Teacher bio URLs** | No per-teacher pages; all 32 → `/teachers/#<id>`, and the page expands the right teacher from the fragment. Residual risk is [task 32](#task-32) |
 | **Sitemap** | None submitted on the old site. The new one gets submitted at cutover ([task 13](#task-13)) |
 | **GSC property type** | Domain property, confirmed — the exports contain `student.` and `test.` URLs, which a URL-prefix property could never report |
+| <a id="task-31"></a>**`test.` subdomain** (task 31) | Taken down. Verified 2026-09-07: `/` returns 403, every content path 404, and nothing runs behind it — the 200 on `/wp-login.php` is the host's anti-bot interstitial, which then 404s. The 8 indexed pages fall out of the index on their own now that the URLs are gone; a GSC prefix removal would only speed that up. Original analysis: [BASELINE.md Finding 3](seo-baseline/BASELINE.md#finding-3--two-subdomains-nobody-accounted-for) |
 | **404 export** | Done 2026-07-20. Only 4 of 39 are on the main domain; the rest are deleted theme-demo pages on `student.`/`test.` |
 | **OG image** | Built — `src/assets/images/Graphics/og-default.jpg` |
 | **`/apply/` page, `/resources/`, `/collaborations/`** | Built and live |
@@ -737,4 +773,4 @@ is set to 2026 would still see it. It buys time, it does not do the job.
 
 ---
 
-*Last updated: 30 August 2026*
+*Last updated: 7 September 2026*

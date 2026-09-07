@@ -7,9 +7,13 @@
 > Priority column: **HIGH** = earns organic clicks and/or holds backlinks, must redirect to a true
 > equivalent · **med** = some impressions, no clicks · **low** = no signals, 410 acceptable.
 >
-> Still blocked on **hosting** (plan Open Decision 4): GitHub Pages can't serve 301s — these rules
-> assume Cloudflare Bulk Redirects or a Netlify/Cloudflare Pages `_redirects` file.
-> **Open Decision 3 (portal) is now largely answered** — see §3.
+> **Implemented (Sep 2026)** as [`src/.htaccess`](../../src/.htaccess) `RewriteRule`s, generated from
+> this file for [TODO task 10](../TODO.md#task-10)'s dedicated Apache host over FTP — not the
+> Cloudflare/Netlify `_redirects` format this file originally assumed. Eleventy passthrough-copies
+> it into every build (`.eleventy.js`), so it ships automatically. One rule (§5, "post-format
+> archives") is still not live, for lack of an exact pattern — see the note at the end of this file.
+> This file is the source of truth if a rule ever needs to change; keep `src/.htaccess` in sync by
+> hand, there's no generator script.
 
 ## 1. Public pages (from `raw/posts-page-1.txt`)
 
@@ -27,8 +31,8 @@
 | `/closed_meeteing_iurii_becioski-7-9-04-23/` | 410 | 1 | low | one-off closed meeting page |
 | `/wp-content/uploads/2024/10/newsletter-9.pdf` | 410 | 0 | low | check the Links export for hotlinked PDFs before killing uploads |
 | `/program-2024/` | `/training-overview/` | 0 | low | **already 404 today** — confirmed 2026-07-20 |
-| `/wp-content/uploads/2025/09/West_Program_26.pdf` | new PDF location | 0 | **HIGH** | **already 404 today.** The West Program 2026 brochure is missing — recover the file first ([TODO task 34](../TODO.md#task-34)), then redirect here |
-| `/wp-content/uploads/2025/10/West_Program_26.pdf` | new PDF location | 0 | **HIGH** | same file, second path |
+| `/wp-content/uploads/2025/09/West_Program_26.pdf` | `/curriculum/` | 0 | **HIGH** | Not a lost file — same spreadsheet-generated PDF as the Curriculum download ([TODO task 34](../TODO.md#task-34)/[19](../TODO.md#task-19)); redirects to the page with the live button rather than a hardcoded Drive link |
+| `/wp-content/uploads/2025/10/West_Program_26.pdf` | `/curriculum/` | 0 | **HIGH** | same, second path |
 | `/?page_id=3` | 410 | 0 | low | ancient WP internal URL, already 404 |
 
 ## 2. Teacher bio pages — the highest-stakes rules in this map
@@ -62,19 +66,24 @@ data, at which point *a few* high-demand teachers may get their own page after a
 
 ### The rules
 
-**29 of 32 old slugs match the new teacher IDs exactly**, so those are mechanical:
+**28 of 32 old slugs match the new teacher IDs exactly** (not 29 — see below), so those are mechanical:
 
 ```
-/<slug>/  →  /teachers/#<slug>        (29 rules, slugs in raw/posts-post-1.txt)
+/<slug>/  →  /teachers/#<slug>        (28 rules, slugs in raw/posts-post-1.txt)
 ```
 
-Three slugs differ and need explicit rules — all three are high-traffic, so getting them right matters:
+Four slugs differ and need explicit rules — all high-traffic enough that getting them right matters.
+The count above was wrong by one: **`dario-giuffrida` was missing.** Commit `cf5a15b` ("Rename Dario
+Giuffrida to Dario Hampi Pacari") renamed him on the new site without a matching note here — caught
+while implementing `src/.htaccess` (Sep 2026) by diffing the 33 old post slugs against the 33 files in
+`src/_data/teachers/`, rather than trusting this table's count.
 
 | Old URL | New anchor | Clicks | Impressions |
 |---------|-----------|--------|-------------|
 | `/jure-biechoniski/` | `/teachers/#jure-biechonski` (spelling fix) | 26 | 813 |
 | `/dr-ingo-benjamin-jahrsetz/` | `/teachers/#ingo-jahrsetz` | 13 | 181 |
 | `/cathys-bio/` | `/teachers/#cathy-geils` | 7 | 171 |
+| `/dario-giuffrida/` | `/teachers/#dario-hampi-pacari` (renamed, commit `cf5a15b`) | 0 | — |
 
 Two special cases in the same sitemap file:
 - **`/agreement-appendix/`** — not a bio. The enrolment agreement appendix, still linked from the
@@ -103,14 +112,21 @@ GSC revealed the portal already runs on **`student.transpersonal-training.com`**
 LMS). It is a separate host and the cutover does not touch it. Remaining work is only the legacy
 portal paths still sitting on the root domain:
 
-| Old URL | New target |
-|---------|-----------|
-| `/login/` `/register/` `/logout/` `/forgot-password/` `/reset-password/` | matching `student.` path |
-| `/user-profile/` `/dashboard-page/` `/payment/` `/course-archive/` | matching `student.` path |
-| `/add-events/` `/st/` `/login-customizer/` | 410 (admin internals) |
+**Verified against the live portal (curl, 2026-09-07)** rather than assumed — five of the twelve
+turned out not to share the old path name:
 
-Confirm each target exists on `student.` before writing the rule; where there's no equivalent, send it
-to the portal homepage rather than 404.
+| Old URL | New target | How it was decided |
+|---------|-----------|-----|
+| `/login/`, `/forgot-password/`, `/reset-password/` | same path on `student.` | 200/302 on the exact path |
+| `/dashboard-page/` | `student.` `/dashboard/` | renamed; `/dashboard-page/` itself 404s on `student.` |
+| `/course-archive/` | `student.` `/courses/` | renamed; matches the WooCommerce catalogue from BASELINE.md Finding 6 |
+| `/payment/` | `student.` `/checkout/` | best available match — no page literally named "payment"; worth a manual click-through |
+| `/register/`, `/logout/`, `/user-profile/` | `student.` homepage | no matching page found; per this file's own fallback rule below |
+| `/add-events/`, `/st/`, `/login-customizer/` | 410 (admin internals) | unchanged |
+
+Implemented in [`src/.htaccess`](../../src/.htaccess) §3. The fallback rule — *where there's no
+equivalent, send it to the portal homepage rather than 404* — is the one actually applied above for
+three of the twelve; it was a guideline here, now it's load-bearing.
 
 ## 4. Event/lecture pages (348 URLs, `raw/posts-mec-events-1.txt`)
 
@@ -137,9 +153,10 @@ All zero-traffic. Pattern rules:
 
 Status for each of these lives in [TODO.md](../TODO.md); what follows is what needs doing and why.
 
-- **`test.transpersonal-training.com` is public and indexed** — 8 pages, 402 impressions, a full
-  duplicate of the site. Unrelated to the cutover; fix now → [TODO task 31](../TODO.md#task-31)
-  ([BASELINE.md](BASELINE.md) Finding 3)
+- [x] ~~**`test.transpersonal-training.com` is public and indexed** — 8 pages, 402 impressions, a full
+      duplicate of the site. Unrelated to the cutover; fix now.~~ Done 2026-09-07: the subdomain was taken
+      down, and every content path now returns 404 → [TODO task 31](../TODO.md#task-31)
+      ([BASELINE.md](BASELINE.md) Finding 3)
 - [x] ~~**39 URLs already return 404** per GSC — export and triage.~~ Done 2026-07-20
       ([BASELINE.md](BASELINE.md) Finding 6). Result: only **4 are on the main domain** and all four are
       now rows in §1 above. The other 35 sit on `student.`/`test.` and are deleted theme-demo content —
@@ -152,7 +169,15 @@ Status for each of these lives in [TODO.md](../TODO.md); what follows is what ne
 
 ## Cutover format
 
-Cloudflare Bulk Redirects and Netlify `_redirects` both accept `source target 301` lines. This map
-converts mechanically: ~15 exact page rules + 3 bio slug rules (+29 identity paths) + 12 portal rules
-+ 5 pattern rules. Keep this file as the source of truth and generate the hosting-specific file from
-it at cutover (plan step 18).
+~~Cloudflare Bulk Redirects and Netlify `_redirects` both accept `source target 301` lines.~~
+**Superseded (Sep 2026):** [task 10](../TODO.md#task-10) landed on a dedicated Apache host, so the
+map became `mod_rewrite` `RewriteRule`s in [`src/.htaccess`](../../src/.htaccess) instead — ~15 exact
+page rules + 4 bio slug rules (+28 identity paths) + 12 portal rules + 5 pattern rules. This file
+stays the source of truth; `src/.htaccess` has no generator, so a rule change here needs the matching
+hand edit there.
+
+Not yet live, blocked on another task, not on hosting:
+- The "post-format archives" pattern (§5) — no exact URL pattern was ever recorded
+
+The West Program 2026 PDF rules (§1) *are* live — turned out to be a documentation error, not a
+missing asset; see [task 34](../TODO.md#task-34).

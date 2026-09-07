@@ -58,7 +58,7 @@ Tracked in **[TODO.md](../TODO.md)** — listed here only so this file names its
 - **Hosting decision** — the last blocker on finalizing the redirect map → [task 10](../TODO.md#task-10)
 - **Portal SEO hygiene** on `student.` — 76 indexed pages of quizzes, dashboards and theme demo
   content → [task 33](../TODO.md#task-33)
-- **Recover the West Program 2026 PDF** — both upload paths are dead → [task 34](../TODO.md#task-34)
+- ~~**Recover the West Program 2026 PDF**~~ — resolved: it's the Curriculum PDF, not a lost file → [task 34](../TODO.md#task-34)
 - **Confirm Manual Actions / Security Issues are clean** in GSC (expected: no issues) → [task 39](../TODO.md#task-39)
 
 ## Refreshing this baseline

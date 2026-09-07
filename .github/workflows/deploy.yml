@@ -55,8 +55,10 @@ jobs:
           npm run clean
           npm run build:css
         env:
-          PATH_PREFIX: /transpersonaltraining/
-      
+          # main serves transpersonal-training.com from the domain root; staging
+          # is still previewed under the malizia-g.github.io subpath below.
+          PATH_PREFIX: ${{ github.ref == 'refs/heads/main' && '/' || '/transpersonaltraining/' }}
+
       - name: Restore cached student images into _site
         run: |
           if [ -d ".cache/student-images" ] && [ "$(ls -A .cache/student-images 2>/dev/null)" ]; then
@@ -64,24 +66,21 @@ jobs:
             cp -r .cache/student-images/* _site/assets/images/people/students/
             echo "✅ Restored $(ls _site/assets/images/people/students/ | wc -l) cached student images"
           fi
-      
+
       - name: Build Eleventy
         run: npm run build:eleventy
         env:
-          PATH_PREFIX: /transpersonaltraining/
+          PATH_PREFIX: ${{ github.ref == 'refs/heads/main' && '/' || '/transpersonaltraining/' }}
 
-      # ── Temporary, until the domain cutover ──
-      # This build is served from malizia-g.github.io/transpersonaltraining/, but
-      # every page canonicalises to https://transpersonal-training.com/… — which
-      # still serves the old WordPress site, where /techniques/, /curriculum/,
-      # /training-overview/ and /blog/ all 404. Left indexable, this offers Google a
-      # complete duplicate of the school whose canonical target does not exist, and
-      # the new site ends up competing with itself. Same defect the marketing plan
-      # already flags as urgent for test.transpersonal-training.com.
-      #
-      # DELETE THIS STEP ON CUTOVER DAY, when the domain points here and the
-      # canonicals become true.
-      - name: Keep the pre-launch build out of search results
+      # ── staging preview only ──
+      # main went live on the production host at cutover (Sep 2026), so its
+      # canonicals are now true and this must not run for it. staging is still
+      # previewed from malizia-g.github.io/transpersonaltraining/, where every
+      # page canonicalises to the real domain — the same duplicate-content shape
+      # the marketing plan flagged as urgent for test.transpersonal-training.com —
+      # so the preview build stays noindexed.
+      - name: Keep the staging preview out of search results
+        if: github.ref != 'refs/heads/main'
         run: |
           # `noindex, follow`, and crawling deliberately left OPEN.
           #
@@ -92,9 +91,9 @@ jobs:
           # removes pages. `follow` keeps the crawler moving through the internal
           # links, so it reaches every page that needs dropping.
           printf '%s\n' \
-            '# Pre-launch build served from github.io. Every page returns' \
+            '# Staging preview served from github.io. Every page returns' \
             '# noindex; crawling is left open on purpose so that directive is' \
-            '# seen. Set by .github/workflows/deploy.yml — remove at cutover.' \
+            '# seen. Set by .github/workflows/deploy.yml.' \
             'User-agent: *' \
             'Allow: /' > _site/robots.txt
           # base.njk already emits a robots meta, so rewrite that one rather than
@@ -118,7 +117,8 @@ jobs:
             rsync -a --delete _site/assets/images/people/students/ .cache/student-images/
           fi
       
-      - name: Deploy to deploy branch
+      - name: Deploy staging preview to deploy branch
+        if: github.ref != 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -128,3 +128,20 @@ jobs:
           commit_message: 'Deploy: ${{ github.event.head_commit.message }}'
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
+
+      # Production host is FTP-only (no FTPS/SFTP available), so credentials and
+      # the file transfer itself are unencrypted on the wire — accepted because
+      # it's what the host offers. `dangerous-clean-slate` is deliberately left
+      # at its default (off): it would wipe the whole remote directory first,
+      # which is one accidental misconfiguration away from taking the live site
+      # down. Revisit only if orphaned old files on the host become a real problem.
+      - name: Deploy to production via FTP
+        if: github.ref == 'refs/heads/main'
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftp
+          local-dir: ./_site/
+          server-dir: ${{ secrets.FTP_SERVER_DIR || './' }}
