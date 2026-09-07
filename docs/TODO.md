@@ -670,6 +670,14 @@ The domain property is already verified and active. What remains is launch-day w
       **Verified live 2026-09-07:** 21 URLs, all `https`, all returning `200` with no redirect hop,
       `404.html` correctly absent. Do **not** use the Change of Address tool — the domain didn't
       change, only what serves it.
+
+      `<lastmod>` was **removed** the same day: it came from `page.date`, which in CI is the checkout
+      time, so all 21 URLs announced a change on every deploy. Google discounts a lastmod it can't
+      trust. Git dates are *not* the fix — `/schedule/`, `/lectures-schedule/`, `/curriculum/` and
+      `/become-a-practice-client/` are built from Sheets and change without a commit, so git would
+      understate exactly the pages where freshness matters. Doing it properly means git dates plus
+      the real sheet timestamps (`sheetTimestamps.js` fetches them already but doesn't expose them);
+      the reasoning is written into `src/sitemap.njk` so nobody restores the field as a "fix".
 - [ ] URL-inspect the top 10 pages
 - [ ] Monitor coverage and redirects weekly for 4–6 weeks; fix crawl errors as they appear
 
