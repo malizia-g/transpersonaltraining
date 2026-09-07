@@ -46,12 +46,20 @@ this task used to carry. The host serves only this site (no shared WordPress), s
 `.htaccess`, unrelated to the one on `old.`/`test.`. FTP was the only protocol on offer (no
 FTPS/SFTP), accepted as what the host provides.
 
-`.github/workflows/deploy.yml` now builds `main` with `PATH_PREFIX=/` and deploys straight to the
-host via [`SamKirkland/FTP-Deploy-Action`](https://github.com/SamKirkland/FTP-Deploy-Action) on
-every push; `staging` is untouched and still previews to `malizia-g.github.io/transpersonaltraining/`.
+`.github/workflows/deploy.yml` builds `main` with `PATH_PREFIX=/` and deploys to the host via
+[`SamKirkland/FTP-Deploy-Action`](https://github.com/SamKirkland/FTP-Deploy-Action) on every push;
+`staging` is untouched and still previews to `malizia-g.github.io/transpersonaltraining/`.
 Credentials live in three repo secrets — `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD` (added via
-GitHub's UI, never through this codebase) — plus an optional `FTP_SERVER_DIR` if the host's FTP
-login doesn't land directly in the web root.
+GitHub's UI, never through this codebase).
+
+**Went live 2026-09-07.** Two things the first deploy taught us, both worth remembering:
+
+- **The FTP login lands one level above the web root.** `server-dir: ./` uploaded all 307 files to a
+  directory nothing serves, while the site answered `403`. The deploy reported success throughout —
+  the tell was `Server Files: 0` in its log. `server-dir` is now `public_html/`, with the
+  `FTP_SERVER_DIR` secret kept as an override.
+- **There are now 307 orphaned files** in that wrong directory, plus a `.ftp-deploy-sync-state.json`.
+  Harmless — nothing serves them — but they're a stray copy of the site and worth deleting by hand.
 
 - [x] Decide the hosting path — dedicated Apache host over FTP
 - [x] Swap the deploy step in [.github/workflows/deploy.yml](../.github/workflows/deploy.yml); `PATH_PREFIX` is now `/` for `main`
@@ -59,11 +67,23 @@ login doesn't land directly in the web root.
       Eleventy passthrough-copies it into every build. Two rows are still not live, blocked on other
       tasks, not on this one: the West Program PDF rules ([task 34](#task-34)) and the "post-format
       archives" pattern, whose exact URL was never recorded. → [REDIRECT_MAP.md](seo-baseline/REDIRECT_MAP.md)
-- [ ] Confirm `mod_rewrite` is actually enabled on the host and the rules fire — untested against the
-      real server, only checked for correct syntax and against the live `student.` portal
-- [ ] Configure `transpersonal-training.com` DNS to point at the host, and enforce HTTPS
-- [ ] Verify `student.transpersonal-training.com` still resolves after the DNS change — it must be left untouched
-- [ ] Run a final production deployment test after DNS cuts over
+- [x] Confirm `mod_rewrite` is enabled and the rules fire — **verified live 2026-09-07**, every
+      category tested end to end (pages, 32 bio anchors, portal paths, patterns, 410s)
+- [x] Verify `student.transpersonal-training.com` still resolves — untouched, 200
+- [x] Run a production deployment test — site live, indexable, canonicals correct
+- [ ] **Enforce HTTPS site-wide — the one thing still open, and it matters.** `http://` currently
+      answers `200`, so the whole site is reachable over plain HTTP: duplicate content for Google, and
+      the `/apply/` form collects personal data and file uploads over an insecure scheme. The obvious
+      rule (`RewriteCond %{HTTPS} off`) **would loop forever here** — TLS terminates upstream at
+      openresty, so Apache always sees HTTPS as off. It needs the proxy's header instead:
+
+      ```apache
+      RewriteCond %{HTTP:X-Forwarded-Proto} =http
+      RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+      ```
+
+      Confirm openresty actually sends that header before relying on it; if it doesn't, the rule is
+      inert rather than harmful, but HTTPS then has to be forced at the proxy/host level instead.
 
 Superseded: the Cloudflare Pages comparison at
 [MARKETING_AND_SEO.md § Hosting](MARKETING_AND_SEO.md#decision-4--hostingcdn) is no longer the plan —
@@ -773,4 +793,4 @@ is set to 2026 would still see it. It buys time, it does not do the job.
 
 ---
 
-*Last updated: 7 September 2026*
+*Last updated: 7 September 2026 — site live*
