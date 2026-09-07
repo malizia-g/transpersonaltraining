@@ -23,6 +23,20 @@
 
 RewriteEngine On
 
+# ── TEMPORARY DIAGNOSTIC — remove once HTTPS enforcement is settled ──
+# Reveals what Apache actually receives behind openresty, so the HTTPS rule
+# can be written from evidence instead of a guess that might loop.
+RewriteCond %{HTTP:X-Forwarded-Proto} ^(.*)$
+RewriteRule ^__probe-xfp$ /RESULT-xfp-[%1] [R=302,NE,L]
+RewriteCond %{HTTP:X-Forwarded-Ssl} ^(.*)$
+RewriteRule ^__probe-xfs$ /RESULT-xfs-[%1] [R=302,NE,L]
+RewriteCond %{HTTPS} ^(.*)$
+RewriteRule ^__probe-https$ /RESULT-https-[%1] [R=302,NE,L]
+RewriteCond %{SERVER_PORT} ^(.*)$
+RewriteRule ^__probe-port$ /RESULT-port-[%1] [R=302,NE,L]
+# ── end diagnostic ──
+
+
 # ── §1 Public pages ──────────────────────────────────────────────
 # `/` → `/`, `/schedule/` → `/schedule/`, `/apply/` → `/apply/`: same path
 # on both sites, so no rule — nothing to redirect.
