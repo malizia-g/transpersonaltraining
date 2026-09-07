@@ -135,6 +135,80 @@
     </script>
     {% endif %}
 
+    {# Upcoming intensives only. Past events in Event schema are noise at best —
+       Google's event results are for things you can still attend — so anything
+       whose end date has passed, or whose date the sheet wrote in a shape the
+       filter can't read, is left out rather than guessed at. #}
+    {% if page.url == "/schedule/" %}
+    {%- set upcoming = [] %}
+    {%- for event in scheduleEvents %}
+      {%- set d = event.date | isoDateRange %}
+      {%- if d and d.end >= todayISO %}{% set _ = upcoming.push({ e: event, d: d }) %}{% endif %}
+    {%- endfor %}
+    {%- if upcoming.length %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+      {%- for item in upcoming %}
+        {
+          "@type": "Event",
+          "name": {{ item.e.title | dump | safe }},
+          "startDate": "{{ item.d.start }}",
+          "endDate": "{{ item.d.end }}",
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "https://schema.org/EventScheduled",
+          {%- if item.e.description %}
+          "description": {{ item.e.description | dump | safe }},
+          {%- endif %}
+          {%- if item.e.location %}
+          "location": { "@type": "Place", "name": {{ item.e.location | dump | safe }},
+            "address": { "@type": "PostalAddress", "addressCountry": {{ item.e.location | dump | safe }} } },
+          {%- endif %}
+          {%- if item.e.facilitator %}
+          "performer": { "@type": "Person", "name": {{ item.e.facilitator | dump | safe }} },
+          {%- endif %}
+          "url": "https://transpersonal-training.com/schedule/",
+          "organizer": {
+            "@type": "EducationalOrganization",
+            "name": "Transpersonal Training",
+            "url": "https://transpersonal-training.com"
+          }
+        }{% if not loop.last %},{% endif %}
+      {%- endfor %}
+      ]
+    }
+    </script>
+    {%- endif %}
+    {% endif %}
+
+    {# Blog posts. The index page is excluded — it is a listing, not an article. #}
+    {% if page.url.startsWith("/blog/") and page.url != "/blog/" %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": {{ title | dump | safe }},
+      "url": "https://transpersonal-training.com{{ page.url }}",
+      "mainEntityOfPage": "https://transpersonal-training.com{{ page.url }}",
+      {%- if description %}
+      "description": {{ description | dump | safe }},
+      {%- endif %}
+      {%- if page.date %}
+      "datePublished": "{{ page.date | date('yyyy-MM-dd') }}",
+      {%- endif %}
+      {%- if author %}
+      "author": { "@type": "Person", "name": {{ author | dump | safe }} },
+      {%- endif %}
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Transpersonal Training",
+        "url": "https://transpersonal-training.com"
+      }
+    }
+    </script>
+    {% endif %}
+
     {# Breadcrumbs. The site is flat, so most pages are simply Home > Page; blog
        posts get the extra Blog level. Worth emitting even for one level: Google
        renders it in place of the raw URL in results. #}

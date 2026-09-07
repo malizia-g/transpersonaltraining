@@ -210,6 +210,24 @@ module.exports = function(eleventyConfig) {
   // Done here rather than by hand because there are 178 <img> tags across 20
   // templates, several of them generated from Google Sheets data, and a build
   // step also covers whatever gets added next.
+  // The schedule sheet writes dates as "29.02.2024 - 03.03.2024" (and sometimes a
+  // single "29.02.2024"). Event schema needs ISO, so this turns one into the
+  // other; anything it can't parse returns null and the caller skips the event
+  // rather than emitting a malformed date.
+  eleventyConfig.addFilter('isoDateRange', function (value) {
+    const found = String(value || '').match(/\d{2}\.\d{2}\.\d{4}/g);
+    if (!found || !found.length) return null;
+    const iso = found.map(d => {
+      const [day, month, year] = d.split('.');
+      return `${year}-${month}-${day}`;
+    });
+    return { start: iso[0], end: iso[iso.length - 1] };
+  });
+
+  // Nunjucks has no notion of "now", and Event schema is only worth emitting for
+  // events that haven't happened yet.
+  eleventyConfig.addGlobalData('todayISO', () => new Date().toISOString().slice(0, 10));
+
   // Cached across the whole build: the same photo appears on several pages, and
   // sharp only reads the file header, but re-reading it 178 times is still waste.
   const dimensionCache = new Map();
