@@ -71,6 +71,12 @@ GitHub's UI, never through this codebase).
       category tested end to end (pages, 32 bio anchors, portal paths, patterns, 410s)
 - [x] Verify `student.transpersonal-training.com` still resolves — untouched, 200
 - [x] Run a production deployment test — site live, indexable, canonicals correct
+- [x] **Custom error pages — done 2026-09-07.** Apache served its stock error page (banner and all)
+      for any URL that didn't exist. `/404.html` is only picked up automatically on GitHub Pages;
+      Apache needs `ErrorDocument`, now set for 404, 403 and 410. Status codes are unaffected.
+      A caution for whoever extends this: `Options -Indexes` and `ServerSignature Off` are the
+      obvious companions and were **deliberately left out** — they need overrides this host may not
+      grant, and a refused directive in `.htaccess` is a 500 on every page, not a silent no-op.
 - [x] **Enforce HTTPS site-wide — done 2026-09-07.** All four origins (http/https x www/apex) now
       collapse to `https://transpersonal-training.com` in a single hop, verified live.
 
