@@ -21,6 +21,20 @@
 #   is a path that doesn't exist — a 404 on the 32 URLs that carry 64% of
 #   the site's organic traffic. The first production deploy did exactly that.
 
+# Apache does not serve /404.html for a missing page on its own — that is a
+# GitHub Pages convention, and this file was ported from that world. Without
+# these, an invented URL got Apache's stock error page, which also advertises
+# the server version and port.
+#
+# Only ErrorDocument is set here. `Options -Indexes` and `ServerSignature Off`
+# would be the natural companions, but they need the Options/Indexes overrides,
+# and if the host doesn't grant those Apache answers 500 for the whole site.
+# ErrorDocument needs FileInfo, which is provably on — mod_rewrite works.
+# Directory listing is off on this host already (checked: /assets/ gives 403).
+ErrorDocument 404 /404.html
+ErrorDocument 403 /404.html
+ErrorDocument 410 /404.html
+
 RewriteEngine On
 
 
