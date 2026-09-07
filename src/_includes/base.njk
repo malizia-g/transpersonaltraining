@@ -297,14 +297,17 @@
         <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/images/Graphics/favicon-16x16.png' | url }}">
         <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/images/Graphics/apple-touch-icon.png' | url }}">
     
-    <!-- Fonts (preconnect and async load) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet"></noscript>
-    
-    <!-- Lucide Icons (defer loading) -->
-    <script src="https://unpkg.com/lucide@0.344.0" defer></script>
+    {# Fonts are self-hosted and declared in main.css — see the note at the top of
+       src/styles/main.css for why. No preconnect is needed any more: they come
+       from this origin, already connected. These two carry the visible text on
+       first paint, so they are preloaded; the rest load as the page needs them. #}
+    <link rel="preload" href="{{ '/assets/fonts/Inter-400-latin.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ '/assets/fonts/CormorantGaramond-600-latin.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+
+    {# Lucide, self-hosted at the version we were already pinning. Same reasoning
+       as the fonts: one fewer third party watching visitors arrive, and one
+       fewer origin to reach before the icons appear. #}
+    <script src="{{ '/scripts/vendor/lucide-0.344.0.js' | url }}" defer></script>
 </head>
 <body class="font-sans text-[color:var(--c-heading)] bg-[color:var(--c-paper-hi)] antialiased">
 
