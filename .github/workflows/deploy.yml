@@ -182,6 +182,27 @@ jobs:
 
           [ -f _site/404.html ] || note "404.html missing"
 
+          # Fonts and icons are self-hosted so that nothing about a visitor
+          # reaches a third party — the claim the privacy modal makes. A stray
+          # CDN reference would quietly break that promise, and look fine.
+          if grep -rlE 'https?://[^"]*(googleapis|gstatic|unpkg|jsdelivr)' _site --include='*.html' | grep -q .; then
+            note "a third-party font/script host is back in the HTML"
+            grep -rlE 'https?://[^"]*(googleapis|gstatic|unpkg|jsdelivr)' _site --include='*.html' | head
+          fi
+
+          # The Person entities are what tell Google /teachers/ represents 32
+          # people rather than one page that lists them — the markup carrying the
+          # redirect strategy for 64% of organic clicks.
+          grep -q '"@type": "Person"' _site/teachers/index.html \
+            || note "Person schema missing from /teachers/"
+
+          # Dimensions prevent the layout shifting as photos arrive. If the
+          # transform silently stops matching, this is how we find out.
+          if [ "$(grep -o '<img' _site/index.html | wc -l)" -gt 0 ] \
+             && [ "$(grep -o '<img width="[0-9]*" height="[0-9]*"' _site/index.html | wc -l)" -lt 10 ]; then
+            note "homepage images lost their width/height — CLS regression"
+          fi
+
           [ "$fail" = "0" ] || { echo "Refusing to publish."; exit 1; }
           echo "✅ production build verified"
 
