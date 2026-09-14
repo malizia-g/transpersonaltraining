@@ -170,6 +170,11 @@ var APPLICATION_HEADERS = [
   'Apply date', 'Agreement', 'Diploma'
 ];
 var EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+// Submissions arriving sooner than this after the page opened are treated as
+// bots: nobody reads and fills a form in three seconds. Kept low on purpose —
+// a false positive on the upload step would silently lose a signed agreement.
+var MIN_FILL_MS = 3000;
 // ---------------------------------------------------------------------------
 
 function doPost(e) {
@@ -183,6 +188,9 @@ function doPost(e) {
     // fills. If it has content, it's a bot — accept it so the bot moves on,
     // but drop it on the floor.
     if (data.website) return json_({ status: 'ok' });
+    // Too fast to be a person — same treatment. A missing elapsedMs (a page
+    // still running older JS) is let through rather than risk a real enquiry.
+    if (typeof data.elapsedMs === 'number' && data.elapsedMs < MIN_FILL_MS) return json_({ status: 'ok' });
 
     if (data.action === 'contact') return handleContact_(data);
     if (data.action === 'application') return handleApplication_(data);

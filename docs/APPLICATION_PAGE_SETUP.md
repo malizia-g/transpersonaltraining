@@ -218,9 +218,14 @@ The `/exec` URL stays the same, so you never need to touch the site again.
 
 - **Replying:** enquiry emails are sent with the sender's address as *Reply-To*,
   so you can just hit Reply in Gmail and it goes to them, not to yourself.
-- **Spam:** each form carries a hidden "honeypot" field. People never see it;
-  bots fill it in, and anything with it filled is silently discarded. If spam
-  ever gets through anyway, the next step would be a captcha.
+- **Spam:** every form (contact, apply step 1, apply step 3) carries a hidden
+  "honeypot" field. People never see it; bots fill it in, and anything with it
+  filled is silently discarded. The pages also send how long after opening the
+  form was submitted, and anything faster than `MIN_FILL_MS` (3 seconds, top of
+  the script) is discarded the same way. Both checks live in the script, so
+  after changing either one, publish a new version (see *Updating the code
+  later*). If spam ever gets through anyway, the next step would be a captcha
+  (Cloudflare Turnstile).
 - **Unsaved work:** what someone types into either form is kept in *their own
   browser* (`localStorage`) so a crash or an accidental reload doesn't wipe it.
   It's cleared automatically once the form is successfully sent, and there's a

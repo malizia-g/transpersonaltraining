@@ -203,6 +203,12 @@ description: "Apply to our EUROTAS-accredited transpersonal psychotherapy, couns
             <p class="text-sm text-[color:var(--c-body-dim)] mb-6">Please read our <a href="{{ '/legal-notice/' | url }}" class="text-[color:var(--c-sec)] hover:text-[color:var(--c-sec-dark)] underline underline-offset-2 font-medium">legal notice</a> before you apply — it covers the agreement you will sign in step 2 and the protected title &ldquo;psychotherapist&rdquo;.</p>
 
             <form id="applicationForm" data-persist="apply" novalidate class="grid md:grid-cols-2 gap-5">
+                <!-- Honeypot: hidden from people, catnip for bots. Anything typed
+                     here means the submission is discarded server-side. -->
+                <div class="hidden" aria-hidden="true">
+                    <label for="apply-website">Leave this field empty</label>
+                    <input type="text" id="apply-website" name="website" tabindex="-1" autocomplete="off">
+                </div>
                 <div class="md:col-span-2">
                     <label class="field-label req" for="fullName">Full legal name</label>
                     <input class="field-input" id="fullName" name="fullName" type="text" autocomplete="name" required>
@@ -311,6 +317,10 @@ description: "Apply to our EUROTAS-accredited transpersonal psychotherapy, couns
             <p class="text-sm text-[color:var(--c-body)] mb-6">Scan or photograph every signed page as a single PDF (preferred) or image, then upload it. It is sent securely to the school office.</p>
 
             <form id="uploadForm" class="bg-[color:var(--c-paper)] border border-[color:var(--c-line)] p-6 md:p-8 space-y-5">
+                <div class="hidden" aria-hidden="true">
+                    <label for="upload-website">Leave this field empty</label>
+                    <input type="text" id="upload-website" name="website" tabindex="-1" autocomplete="off">
+                </div>
                 <div>
                     <label class="field-label req" for="upEmail">Your email</label>
                     <input class="field-input" id="upEmail" name="upEmail" type="email" required>
