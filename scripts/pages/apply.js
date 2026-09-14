@@ -16,6 +16,18 @@
     var EMAIL_LINK = '<a class="underline" href="mailto:west-office@transpersonal-training.com">west-office@transpersonal-training.com</a> or '
         + '<a class="underline" href="mailto:east-office@transpersonal-training.com">east-office@transpersonal-training.com</a>';
 
+    // Sent with every submission; the server drops anything sent implausibly fast.
+    var loadedAt = Date.now();
+
+    // Both forms carry a hidden honeypot field named "website"; the server
+    // discards anything that arrives with it filled in.
+    function antiSpam(f) {
+        return {
+            website: f && f.elements.website ? f.elements.website.value : '',
+            elapsedMs: Date.now() - loadedAt
+        };
+    }
+
     var form = document.getElementById('applicationForm');
     var step2 = document.getElementById('step2');
     var printBtn = document.getElementById('printBtn');
@@ -102,7 +114,7 @@
     function sendApplication(data) {
         var endpoint = window.FORMS_ENDPOINT || '';
         if (!endpoint) return;
-        var payload = Object.assign({ action: 'application' }, data);
+        var payload = Object.assign({ action: 'application' }, data, antiSpam(form));
         fetch(endpoint, { method: 'POST', body: JSON.stringify(payload) })
             .catch(function () { /* the office still gets the signed copy at step 3 */ });
     }
@@ -333,6 +345,7 @@
                     mimeType: file.type || 'application/octet-stream',
                     dataBase64: results[0]
                 };
+                Object.assign(body, antiSpam(uploadForm));
                 if (diplomaFile && results[1]) {
                     body.diplomaFilename = diplomaFile.name;
                     body.diplomaMimeType = diplomaFile.type || 'application/octet-stream';

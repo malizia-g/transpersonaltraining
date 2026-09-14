@@ -12,6 +12,9 @@
     var form = document.getElementById('contactForm');
     if (!form) return;
 
+    // Sent with the submission; the server drops anything sent implausibly fast.
+    var loadedAt = Date.now();
+
     var btn = document.getElementById('contactBtn');
     var btnLabel = document.getElementById('contactBtnLabel');
     var statusEl = document.getElementById('contactStatus');
@@ -46,7 +49,8 @@
             message: form.elements.message.value.trim(),
             track: form.elements.track ? form.elements.track.value.trim() : '', // which office to notify; empty = both
             newsletter: form.elements.newsletter ? form.elements.newsletter.checked : false,
-            website: form.elements.website ? form.elements.website.value : '' // honeypot
+            website: form.elements.website ? form.elements.website.value : '', // honeypot
+            elapsedMs: Date.now() - loadedAt
         };
         // The message is optional: plenty of people just want the lesson and
         // the brochure, and the reply sends those either way.
