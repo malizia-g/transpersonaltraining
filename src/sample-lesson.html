@@ -10,7 +10,10 @@ ogType: website
 {% set lesson = 'sample-lesson/01-lesson.md' | pageContent %}
 {% set transcript = 'sample-lesson/02-transcript.md' | pageContent %}
 {% set ytid = lesson.data.videoUrl | youtubeId %}
-{% set thumb = lesson.data.thumbnail or ('https://img.youtube.com/vi/' + ytid + '/maxresdefault.jpg' if ytid else '') %}
+{# sddefault, not maxresdefault: YouTube only makes maxres for HD uploads and
+   404s it otherwise, which left a black box with a broken-image icon here.
+   The <img> below still drops to hqdefault, which every video has. #}
+{% set thumb = lesson.data.thumbnail or ('https://img.youtube.com/vi/' + ytid + '/sddefault.jpg' if ytid else '') %}
 
 <!-- ═══════════ HERO ═══════════ -->
 <header class="relative bg-[color:var(--c-deep)] pt-36 pb-16 md:pt-44 md:pb-20">
@@ -48,6 +51,7 @@ ogType: website
                         aria-label="Play the sample lesson: {{ lesson.data.videoTitle }}"
                         class="group absolute inset-0 w-full h-full border-none p-0 cursor-pointer bg-black">
                     <img src="{{ thumb }}"
+                         {% if not lesson.data.thumbnail %}onerror="this.onerror=null;this.src='https://img.youtube.com/vi/{{ ytid }}/hqdefault.jpg'"{% endif %}
                          alt=""
                          class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-300">
                     <span class="absolute inset-0 bg-[color:var(--c-deep-25)] group-hover:bg-[color:var(--c-deep-10)] transition-colors flex items-center justify-center">
