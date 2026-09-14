@@ -4,7 +4,18 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-const TIMESTAMPS_URL = 'https://script.google.com/macros/s/AKfycbwHywVdKwfFubk5KfrsBJ7Iw5q4YjTYapeFRdN_MCt650qz4U3J9fQp0rtXBi018Iw/exec';
+// Asked in order; an earlier source wins for any key both report.
+//  1. The Seminars/Lectures spreadsheet's own web app (?timestamps=1) — reports
+//     "schedule" and "lectures" from that file's real last-modified date.
+//  2. The original standalone timestamps script, still the only source for
+//     "clientModels". Its "lectures" watched a spreadsheet abandoned in April,
+//     which is why it has to lose to (1).
+// A source that fails or answers with anything but { key: timestamp } is
+// skipped; a key nobody reports is simply fetched on every build.
+const TIMESTAMPS_URLS = [
+  'https://script.google.com/macros/s/AKfycbyRGO028PWtWuqhz4GqKsdL4z-dsiI2RFocHhNbgPA8fjpm-y9j3ZLzX4TCYwYbMZ6i/exec?timestamps=1',
+  'https://script.google.com/macros/s/AKfycbwHywVdKwfFubk5KfrsBJ7Iw5q4YjTYapeFRdN_MCt650qz4U3J9fQp0rtXBi018Iw/exec'
+];
 const TIMESTAMPS_CACHE = path.join(__dirname, 'sheetTimestamps.cache.json');
 
 // Escape hatch for when a sheet's remote timestamp stops tracking real edits.
@@ -36,9 +47,19 @@ let _timestampsPromise = null;
 
 function getRemoteTimestamps() {
   if (!_timestampsPromise) {
-    _timestampsPromise = fetchUrl(TIMESTAMPS_URL).catch((err) => {
-      console.warn('⚠️ Could not fetch sheet timestamps:', err.message);
-      return null;
+    _timestampsPromise = Promise.all(TIMESTAMPS_URLS.map((url) =>
+      fetchUrl(url).then((data) => {
+        const valid = data && typeof data === 'object' && !Array.isArray(data)
+          && Object.values(data).every((v) => typeof v === 'string');
+        if (!valid) throw new Error('unexpected answer (not redeployed yet?)');
+        return data;
+      }).catch((err) => {
+        console.warn(`⚠️ Could not fetch sheet timestamps from ${url.slice(0, 60)}…:`, err.message);
+        return null;
+      })
+    )).then((sources) => {
+      const merged = Object.assign({}, ...sources.filter(Boolean).reverse());
+      return Object.keys(merged).length ? merged : null;
     });
   }
   return _timestampsPromise;
