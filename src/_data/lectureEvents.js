@@ -5,7 +5,14 @@ const path = require('path');
 const { hasSheetChanged, commitSheetTimestamp } = require('./sheetTimestamps');
 
 const LECTURES_JSON_URL = 'https://script.google.com/macros/s/AKfycbyRGO028PWtWuqhz4GqKsdL4z-dsiI2RFocHhNbgPA8fjpm-y9j3ZLzX4TCYwYbMZ6i/exec?sheet=Lectures';
-const CACHE_FILE = path.join(__dirname, 'lectureEvents.cache.json');
+// Renamed when the date fix below landed: CI restores *.cache.json between
+// runs, and the old file still holds the day-early dates. A new name makes the
+// first build after the fix fetch fresh instead of trusting it.
+const CACHE_FILE = path.join(__dirname, 'lectureEvents-berlin.cache.json');
+
+const BERLIN_DATE = new Intl.DateTimeFormat('en-GB', {
+  timeZone: 'Europe/Berlin', day: '2-digit', month: '2-digit', year: 'numeric'
+});
 
 function fetchUrl(url) {
   return new Promise((resolve, reject) => {
@@ -50,10 +57,12 @@ module.exports = async function() {
       if (rawDate) {
         const d = new Date(rawDate);
         if (!isNaN(d.getTime())) {
-          const dd = String(d.getDate()).padStart(2, '0');
-          const mm = String(d.getMonth() + 1).padStart(2, '0');
-          const yyyy = d.getFullYear();
-          formattedDate = `${dd}.${mm}.${yyyy}`;
+          // The sheet sends midnight Berlin time. Read the day in that zone,
+          // not the build machine's: in UTC (CI) midnight Tuesday is still
+          // 23:00 Monday, and every lecture showed up a day early.
+          const parts = {};
+          for (const p of BERLIN_DATE.formatToParts(d)) parts[p.type] = p.value;
+          formattedDate = `${parts.day}.${parts.month}.${parts.year}`;
         }
       }
       return {
