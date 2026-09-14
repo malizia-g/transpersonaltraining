@@ -4,17 +4,23 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-// Asked in order; an earlier source wins for any key both report.
-//  1. The Seminars/Lectures spreadsheet's own web app (?timestamps=1) — reports
-//     "schedule" and "lectures" from that file's real last-modified date.
-//  2. The original standalone timestamps script, still the only source for
-//     "clientModels". Its "lectures" watched a spreadsheet abandoned in April,
-//     which is why it has to lose to (1).
-// A source that fails or answers with anything but { key: timestamp } is
-// skipped; a key nobody reports is simply fetched on every build.
-const TIMESTAMPS_URLS = [
-  'https://script.google.com/macros/s/AKfycbyRGO028PWtWuqhz4GqKsdL4z-dsiI2RFocHhNbgPA8fjpm-y9j3ZLzX4TCYwYbMZ6i/exec?timestamps=1',
-  'https://script.google.com/macros/s/AKfycbwHywVdKwfFubk5KfrsBJ7Iw5q4YjTYapeFRdN_MCt650qz4U3J9fQp0rtXBi018Iw/exec'
+// Each source is trusted only for the keys listed with it.
+//  - The Seminars/Lectures spreadsheet's own web app (?timestamps=1) reports
+//    "schedule" and "lectures" from that file's real last-modified date.
+//  - The original standalone timestamps script is kept for "clientModels"
+//    only. Its "lectures" watched a spreadsheet abandoned in April and never
+//    moves, so it must never stand in when the first source is slow: a key
+//    nobody reports is fetched fresh, which is always the safe side.
+// A source that fails or answers with anything but { key: timestamp } is skipped.
+const TIMESTAMP_SOURCES = [
+  {
+    url: 'https://script.google.com/macros/s/AKfycbyRGO028PWtWuqhz4GqKsdL4z-dsiI2RFocHhNbgPA8fjpm-y9j3ZLzX4TCYwYbMZ6i/exec?timestamps=1',
+    keys: ['schedule', 'lectures']
+  },
+  {
+    url: 'https://script.google.com/macros/s/AKfycbwHywVdKwfFubk5KfrsBJ7Iw5q4YjTYapeFRdN_MCt650qz4U3J9fQp0rtXBi018Iw/exec',
+    keys: ['clientModels']
+  }
 ];
 const TIMESTAMPS_CACHE = path.join(__dirname, 'sheetTimestamps.cache.json');
 
@@ -25,7 +31,9 @@ function fetchUrl(url) {
   return new Promise((resolve, reject) => {
     const req = https.get(url, {
       headers: { 'User-Agent': 'Eleventy-Static-Site-Generator' },
-      timeout: 15000
+      // Generous: a web app that hasn't run for a while takes a long time to
+      // wake up, and a timeout here now means re-fetching that sheet's data.
+      timeout: 30000
     }, (res) => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
         return fetchUrl(res.headers.location).then(resolve).catch(reject);
@@ -47,18 +55,19 @@ let _timestampsPromise = null;
 
 function getRemoteTimestamps() {
   if (!_timestampsPromise) {
-    _timestampsPromise = Promise.all(TIMESTAMPS_URLS.map((url) =>
+    _timestampsPromise = Promise.all(TIMESTAMP_SOURCES.map(({ url, keys }) =>
       fetchUrl(url).then((data) => {
-        const valid = data && typeof data === 'object' && !Array.isArray(data)
-          && Object.values(data).every((v) => typeof v === 'string');
-        if (!valid) throw new Error('unexpected answer (not redeployed yet?)');
-        return data;
+        const valid = data && typeof data === 'object' && !Array.isArray(data);
+        if (!valid) throw new Error('unexpected answer');
+        const picked = {};
+        keys.forEach((k) => { if (typeof data[k] === 'string') picked[k] = data[k]; });
+        return picked;
       }).catch((err) => {
-        console.warn(`⚠️ Could not fetch sheet timestamps from ${url.slice(0, 60)}…:`, err.message);
-        return null;
+        console.warn(`⚠️ Could not fetch sheet timestamps for ${keys.join(', ')}:`, err.message);
+        return {};
       })
     )).then((sources) => {
-      const merged = Object.assign({}, ...sources.filter(Boolean).reverse());
+      const merged = Object.assign({}, ...sources);
       return Object.keys(merged).length ? merged : null;
     });
   }
