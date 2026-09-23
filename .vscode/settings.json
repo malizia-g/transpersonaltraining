@@ -6,5 +6,13 @@
             "approve": true,
             "matchCommandLine": true
         }
+    },
+    "remote.autoForwardPortsSource": "hybrid",
+    "remote.restoreForwardedPorts": true,
+    "remote.portsAttributes": {
+        "8080": {
+            "label": "Eleventy dev",
+            "onAutoForward": "notify"
+        }
     }
 }
