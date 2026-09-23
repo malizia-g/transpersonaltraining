@@ -709,7 +709,16 @@
                 Ready to apply? <a href="/transpersonaltraining/apply/" class="text-[color:var(--c-acc)] underline underline-offset-4 decoration-[color:var(--c-acc-40)] hover:text-[color:var(--c-acc-light)]">See how to apply</a>.
             </p>
 
-            <form id="contactForm" action="mailto:west-office@transpersonal-training.com,east-office@transpersonal-training.com" method="post" enctype="text/plain" data-persist="contact" class="text-left border border-[color:var(--c-acc-40)] bg-[color:var(--c-deepest-85)] backdrop-blur-md p-6 md:p-10 space-y-6 shadow-2xl">
+            <!-- No action attribute: contact.js posts it. A mailto: action made
+                 Chrome call the form "not secure" and switch off autofill. -->
+            <form id="contactForm" data-persist="contact" class="text-left border border-[color:var(--c-acc-40)] bg-[color:var(--c-deepest-85)] backdrop-blur-md p-6 md:p-10 space-y-6 shadow-2xl">
+                <noscript>
+                    <p class="text-sm p-3 border bg-[color:var(--c-deep-60)] border-[color:var(--c-acc-40)] text-[color:var(--c-on-dark-2)]">
+                        This form needs JavaScript. Please write to us at
+                        <a class="underline" href="mailto:west-office@transpersonal-training.com">west-office@transpersonal-training.com</a> or
+                        <a class="underline" href="mailto:east-office@transpersonal-training.com">east-office@transpersonal-training.com</a>.
+                    </p>
+                </noscript>
                 <!-- Honeypot: hidden from people, catnip for bots. Anything typed
                      here means the submission is discarded server-side. -->
                 <div class="hidden" aria-hidden="true">

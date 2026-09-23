@@ -1,8 +1,9 @@
 // Homepage contact form → the Apps Script web app, which drops a row in the
 // forms spreadsheet and emails the office. See docs/APPLICATION_PAGE_SETUP.md.
 //
-// The form keeps its mailto: action as a no-JS fallback; whenever this script
-// runs we take over and post properly instead.
+// The form has no action of its own (a mailto: one made Chrome flag it as not
+// secure and turn autofill off); without JS a <noscript> note gives the
+// office addresses instead.
 //
 // Loaded as a plain script (not a module), same pattern as pages/apply.js.
 
