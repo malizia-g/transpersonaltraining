@@ -187,10 +187,18 @@ function doPost(e) {
     // Honeypot: the form has a hidden field that a human never sees and never
     // fills. If it has content, it's a bot — accept it so the bot moves on,
     // but drop it on the floor.
-    if (data.website) return json_({ status: 'ok' });
+    // Each drop is logged (Apps Script → Executions), so a real person caught
+    // by mistake shows up somewhere instead of vanishing.
+    if (data.website) {
+      Logger.log('Dropped as bot (honeypot filled): ' + data.action + ' from ' + data.email);
+      return json_({ status: 'ok' });
+    }
     // Too fast to be a person — same treatment. A missing elapsedMs (a page
     // still running older JS) is let through rather than risk a real enquiry.
-    if (typeof data.elapsedMs === 'number' && data.elapsedMs < MIN_FILL_MS) return json_({ status: 'ok' });
+    if (typeof data.elapsedMs === 'number' && data.elapsedMs < MIN_FILL_MS) {
+      Logger.log('Dropped as bot (sent after ' + data.elapsedMs + ' ms): ' + data.action + ' from ' + data.email);
+      return json_({ status: 'ok' });
+    }
 
     if (data.action === 'contact') return handleContact_(data);
     if (data.action === 'application') return handleApplication_(data);

@@ -4,7 +4,8 @@
 // Opt a form in with data-persist="<key>":
 //     <form id="applicationForm" data-persist="apply">
 // Named fields are saved as they are typed and restored on the next visit.
-// File inputs are skipped — browsers don't allow setting their value.
+// File inputs are skipped — browsers don't allow setting their value — and so
+// is anything marked data-no-persist.
 
 const PREFIX = 'tt-form:';
 const DEBOUNCE_MS = 300;
@@ -25,9 +26,12 @@ function store() {
 
 const SKIPPED_TYPES = ['file', 'password', 'submit', 'button', 'reset'];
 
+// data-no-persist keeps a field out of the cache — the honeypot, above all:
+// if autofill ever drops a value into it, restoring that value on every visit
+// would get each later submission silently discarded as a bot.
 function fields(form) {
     return Array.from(form.elements).filter(
-        (el) => el.name && !SKIPPED_TYPES.includes(el.type)
+        (el) => el.name && !SKIPPED_TYPES.includes(el.type) && !('noPersist' in el.dataset)
     );
 }
 
