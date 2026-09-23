@@ -7,6 +7,10 @@ const { hasSheetChanged, commitSheetTimestamp } = require('./sheetTimestamps');
 const SHEET_JSON_URL = 'https://script.google.com/macros/s/AKfycbyRGO028PWtWuqhz4GqKsdL4z-dsiI2RFocHhNbgPA8fjpm-y9j3ZLzX4TCYwYbMZ6i/exec?sheet=Seminars';
 const CACHE_FILE = path.join(__dirname, 'scheduleEvents.cache.json');
 
+// Emergency valve: lets a deploy go out on cached data when the sheet's
+// web app is down and the content cannot wait.
+const ALLOW_STALE_DATA = process.env.ALLOW_STALE_DATA === '1' || process.env.ALLOW_STALE_DATA === 'true';
+
 // Google answers the web app with a redirect to googleusercontent.com, which
 // sometimes redirects once more. Following only the first hop lands on an HTML
 // page and the build quietly falls back to a stale cache, so recurse — and
@@ -72,18 +76,26 @@ module.exports = async function() {
   } catch (error) {
     console.error('Error fetching schedule data:', error.message);
 
-    // Fall back to cached data
+    // Falling back to the cache used to happen silently: the build stayed
+    // green while the site served a stale seminars list, and nothing said so.
+    // Fail instead, so a bad fetch is visible at the point it happens.
+    if (!ALLOW_STALE_DATA) {
+      throw new Error(
+        `Could not fetch the seminars: ${error.message}. ` +
+        'Set ALLOW_STALE_DATA=1 to build from the cache anyway.'
+      );
+    }
+
     if (fs.existsSync(CACHE_FILE)) {
       try {
         const cached = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf-8'));
-        console.log(`⚠️ Using cached schedule data (${cached.length} events)`);
+        console.log(`⚠️ ALLOW_STALE_DATA — using cached schedule data (${cached.length} events)`);
         return cached;
       } catch (cacheErr) {
         console.error('❌ Cache read failed:', cacheErr.message);
       }
     }
 
-    // Return empty array as last resort so build doesn't fail
-    return [];
+    throw new Error(`Could not fetch the seminars and no usable cache exists: ${error.message}`);
   }
 };

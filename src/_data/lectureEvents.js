@@ -10,6 +10,10 @@ const LECTURES_JSON_URL = 'https://script.google.com/macros/s/AKfycbyRGO028PWtWu
 // first build after the fix fetch fresh instead of trusting it.
 const CACHE_FILE = path.join(__dirname, 'lectureEvents-berlin.cache.json');
 
+// Emergency valve: lets a deploy go out on cached data when the sheet's
+// web app is down and the content cannot wait.
+const ALLOW_STALE_DATA = process.env.ALLOW_STALE_DATA === '1' || process.env.ALLOW_STALE_DATA === 'true';
+
 const BERLIN_DATE = new Intl.DateTimeFormat('en-GB', {
   timeZone: 'Europe/Berlin', day: '2-digit', month: '2-digit', year: 'numeric'
 });
@@ -95,18 +99,26 @@ module.exports = async function() {
   } catch (error) {
     console.error('Error fetching lecture data:', error.message);
 
-    // Fall back to cached data
+    // Falling back to the cache used to happen silently: the build stayed
+    // green while the site served a stale lectures list, and nothing said so.
+    // Fail instead, so a bad fetch is visible at the point it happens.
+    if (!ALLOW_STALE_DATA) {
+      throw new Error(
+        `Could not fetch the lectures: ${error.message}. ` +
+        'Set ALLOW_STALE_DATA=1 to build from the cache anyway.'
+      );
+    }
+
     if (fs.existsSync(CACHE_FILE)) {
       try {
         const cached = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf-8'));
-        console.log(`⚠️ Using cached lecture data (${cached.length} events)`);
+        console.log(`⚠️ ALLOW_STALE_DATA — using cached lecture data (${cached.length} events)`);
         return cached;
       } catch (cacheErr) {
         console.error('❌ Cache read failed:', cacheErr.message);
       }
     }
 
-    // Return empty array as last resort so build doesn't fail
-    return [];
+    throw new Error(`Could not fetch the lectures and no usable cache exists: ${error.message}`);
   }
 };
