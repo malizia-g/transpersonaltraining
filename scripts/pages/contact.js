@@ -49,7 +49,7 @@
             message: form.elements.message.value.trim(),
             track: form.elements.track ? form.elements.track.value.trim() : '', // which office to notify; empty = both
             newsletter: form.elements.newsletter ? form.elements.newsletter.checked : false,
-            website: form.elements.website ? form.elements.website.value : '', // honeypot
+            website: form.elements.hp_leave_empty ? form.elements.hp_leave_empty.value : '', // honeypot
             elapsedMs: Date.now() - loadedAt
         };
         // The message is optional: plenty of people just want the lesson and

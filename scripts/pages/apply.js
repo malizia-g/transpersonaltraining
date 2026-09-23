@@ -19,11 +19,11 @@
     // Sent with every submission; the server drops anything sent implausibly fast.
     var loadedAt = Date.now();
 
-    // Both forms carry a hidden honeypot field named "website"; the server
+    // Both forms carry a hidden honeypot field (sent as "website"); the server
     // discards anything that arrives with it filled in.
     function antiSpam(f) {
         return {
-            website: f && f.elements.website ? f.elements.website.value : '',
+            website: f && f.elements.hp_leave_empty ? f.elements.hp_leave_empty.value : '',
             elapsedMs: Date.now() - loadedAt
         };
     }
