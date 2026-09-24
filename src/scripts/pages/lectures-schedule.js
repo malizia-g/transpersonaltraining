@@ -57,6 +57,9 @@ window.toggleInlineVideo = function(btn, videoUrl) {
     }
 };
 
+const MONTH_NAMES = ['january', 'february', 'march', 'april', 'may', 'june',
+    'july', 'august', 'september', 'october', 'november', 'december'];
+
 // Dates come from the sheet as DD.MM.YYYY (see src/_data/lectureEvents.js).
 function parseLectureDate(dateString) {
     if (!dateString) return null;
@@ -65,20 +68,58 @@ function parseLectureDate(dateString) {
     return new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
 }
 
-// A lecture counts as future for the whole of its own day, so today's evening
-// session doesn't disappear at midnight the night before.
-function isFutureLecture(dateString) {
-    const date = parseLectureDate(dateString);
-    if (!date) return false;
+// A cell the sheet couldn't turn into a date still tends to say roughly when:
+// "November 2026", "Spring 2027". Pull a month and a year out of the words so
+// the lecture lands near the right place instead of at the end of everything.
+// The span runs to the end of whatever was named, so a lecture said to be in
+// September stays ahead of today for all of September.
+function parseIndicativeSpan(dateString) {
+    const text = (dateString || '').toLowerCase();
+    const yearMatch = text.match(/\b(20\d{2})\b/);
+    if (!yearMatch) return null;
+
+    const year = parseInt(yearMatch[1]);
+    const month = MONTH_NAMES.findIndex(name => text.includes(name.slice(0, 3)));
+
+    return month >= 0
+        ? { start: new Date(year, month, 1), end: new Date(year, month + 1, 0) }
+        : { start: new Date(year, 0, 1), end: new Date(year, 11, 31) };
+}
+
+// Three answers, not two. A lecture with no date at all, or one described too
+// vaguely to place in a year, hasn't happened — calling it "past" because the
+// parser came back empty buried it in the one list nobody reads for what's
+// coming.
+function lecturePeriod(dateString) {
+    const raw = (dateString || '').trim();
+    if (!raw) return 'undated';
+
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    return date >= today;
+
+    const exact = parseLectureDate(raw);
+    if (exact) return exact >= today ? 'future' : 'past';
+
+    const span = parseIndicativeSpan(raw);
+    if (!span) return 'undated';
+    return span.end >= today ? 'future' : 'past';
+}
+
+// Where a card sits in the list: an exact date by its own day, an indicative
+// one by the start of the span it names, and an undated one nowhere.
+function lectureSortKey(dateString) {
+    const raw = (dateString || '').trim();
+    if (!raw) return null;
+    const exact = parseLectureDate(raw);
+    if (exact) return exact;
+    const span = parseIndicativeSpan(raw);
+    return span ? span.start : null;
 }
 
 function sortLectureCards(cards, ascending = true) {
     return Array.from(cards).sort((a, b) => {
-        const dateA = parseLectureDate(a.dataset.date);
-        const dateB = parseLectureDate(b.dataset.date);
+        const dateA = lectureSortKey(a.dataset.date);
+        const dateB = lectureSortKey(b.dataset.date);
         if (!dateA && !dateB) return 0;
         if (!dateA) return 1;
         if (!dateB) return -1;
@@ -102,7 +143,7 @@ function reorderLectureCards(period) {
         const future = [];
         const past = [];
         cards.forEach(card => {
-            (isFutureLecture(card.dataset.date) ? future : past).push(card);
+            (lecturePeriod(card.dataset.date) === 'past' ? past : future).push(card);
         });
         sorted = [...sortLectureCards(future, true), ...sortLectureCards(past, false)];
     }
@@ -123,9 +164,9 @@ function placePeriodDividers(listEl, sortedCards, period) {
 
     const visible = sortedCards.filter(card => card.style.display !== 'none');
     const firstPast = period === 'all'
-        ? visible.find(card => !isFutureLecture(card.dataset.date))
+        ? visible.find(card => lecturePeriod(card.dataset.date) === 'past')
         : undefined;
-    const show = !!firstPast && visible.some(card => isFutureLecture(card.dataset.date));
+    const show = !!firstPast && visible.some(card => lecturePeriod(card.dataset.date) !== 'past');
 
     toggleDivider(futureDivider, show);
     toggleDivider(pastDivider, show);
@@ -208,11 +249,12 @@ function applyLectureFilters() {
         const teacher1 = card.dataset.teacher1 || '';
         const teacher2 = card.dataset.teacher2 || '';
         const title = (card.dataset.title || '').toLowerCase();
-        const isFuture = isFutureLecture(card.dataset.date || '');
+        const period = lecturePeriod(card.dataset.date || '');
 
         const matchPeriod = selPeriod === 'all' ||
-                            (selPeriod === 'future' && isFuture) ||
-                            (selPeriod === 'past' && !isFuture);
+                            (selPeriod === 'future' && period !== 'past') ||
+                            (selPeriod === 'past' && period === 'past') ||
+                            (selPeriod === 'tbd' && period === 'undated');
         const matchModule = !selModule || module === selModule;
         const matchTeacher = !selTeacher || teacher1 === selTeacher || teacher2 === selTeacher;
         const matchSearch = !searchTerm || title.includes(searchTerm) || teacher1.toLowerCase().includes(searchTerm) || teacher2.toLowerCase().includes(searchTerm);

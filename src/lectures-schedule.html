@@ -72,6 +72,7 @@ description: "Live online lectures in transpersonal psychology training. Learn h
                             <option value="future">Future Lectures</option>
                             <option value="past">Past Lectures</option>
                             <option value="all">All Lectures</option>
+                            <option value="tbd">To be scheduled</option>
                         </select>
                     </div>
 
@@ -136,12 +137,20 @@ description: "Live online lectures in transpersonal psychology training. Learn h
 
                                     <div class="flex flex-col gap-2">
                                         <!-- Date & Time on same row -->
-                                        {% if lecture.date or lecture.startHour %}
                                         <div class="flex items-center gap-3 flex-wrap">
-                                            {% if lecture.date %}
+                                            {# An exact date reads plainly. Anything less says so out loud: a
+                                               blank slot would look like a rendering fault rather than a date
+                                               the school has not fixed yet. #}
+                                            {% if lecture.dateKind == 'exact' %}
                                             <div class="flex items-center gap-1.5">
                                                 <i data-lucide="calendar" class="w-3.5 h-3.5 text-[color:var(--c-link)] flex-shrink-0"></i>
                                                 <span class="text-xs text-[color:var(--c-body)]">{{ lecture.date }}</span>
+                                            </div>
+                                            {% else %}
+                                            <div class="flex items-center gap-1.5 flex-wrap">
+                                                <i data-lucide="calendar-clock" class="w-3.5 h-3.5 text-[color:var(--c-sec)] flex-shrink-0"></i>
+                                                <span class="text-xs text-[color:var(--c-body)]">{% if lecture.dateKind == 'indicative' %}{{ lecture.date }}{% else %}Date to be defined{% endif %}</span>
+                                                {% if lecture.dateKind == 'indicative' %}<span class="text-[10px] uppercase tracking-wider px-1.5 py-0.5 border border-[color:var(--c-line)] text-[color:var(--c-body-dim)] flex-shrink-0">to be confirmed</span>{% endif %}
                                             </div>
                                             {% endif %}
                                             {% if lecture.startHour %}
@@ -151,7 +160,6 @@ description: "Live online lectures in transpersonal psychology training. Learn h
                                             </div>
                                             {% endif %}
                                         </div>
-                                        {% endif %}
 
                                         <!-- Teachers on same row -->
                                         {% if lecture.teacher1 %}

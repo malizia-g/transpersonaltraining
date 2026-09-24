@@ -8,10 +8,13 @@ function extractYear(dateString) {
 
   if (parts.length === 3) {
     const year = parseInt(parts[2], 10);
-    return Number.isNaN(year) ? null : year;
+    if (!Number.isNaN(year)) return year;
   }
 
-  return null;
+  // An indicative date still names its year: "August 2026" belongs under 2026
+  // in the filter, not outside every option it offers.
+  const loose = dateString.match(/\b(20\d{2})\b/);
+  return loose ? parseInt(loose[1], 10) : null;
 }
 
 module.exports = async function() {

@@ -55,8 +55,14 @@ module.exports = async function() {
     console.log('Fetching lecture data from Google Sheets...');
     const data = await fetchUrl(LECTURES_JSON_URL);
 
+    const indicative = [];
+
     const mapped = data.map((item, index) => {
       let formattedDate = '';
+      // How much the sheet actually knows about when this happens, so the page
+      // can say "13.01.2026", "November 2026" or "to be defined" rather than
+      // showing an empty slot and leaving the reader to guess which it is.
+      let dateKind = 'undated';
       const rawDate = (item.date || '').trim();
       if (rawDate) {
         const d = new Date(rawDate);
@@ -67,11 +73,20 @@ module.exports = async function() {
           const parts = {};
           for (const p of BERLIN_DATE.formatToParts(d)) parts[p.type] = p.value;
           formattedDate = `${parts.day}.${parts.month}.${parts.year}`;
+          dateKind = 'exact';
+        } else {
+          // Not a real date, but the cell says something — "November 2026",
+          // "Spring 2027". Keep the words: they place the lecture better than
+          // nothing does, and blanking them loses what the sheet knew.
+          formattedDate = rawDate;
+          dateKind = 'indicative';
+          indicative.push(`${rawDate} — ${(item.title || 'untitled').trim()}`);
         }
       }
       return {
         index: index + 1,
         date: formattedDate,
+        dateKind,
         module: (item.module || '').trim(),
         title: (item.title || '').trim(),
         description: (item.description || '').trim(),
@@ -84,6 +99,14 @@ module.exports = async function() {
     });
 
     console.log(`Successfully fetched ${mapped.length} lecture events`);
+
+    // A date nobody can parse is either deliberate or a typo, and only a human
+    // can tell which. Name them so a slip shows up here instead of quietly
+    // becoming an "indicative" date on the live page.
+    if (indicative.length) {
+      console.warn(`⚠️ ${indicative.length} lecture date(s) kept as written — check none of these is a typo:`);
+      for (const line of indicative) console.warn(`   ${line}`);
+    }
 
     // Save cache for fallback
     try {

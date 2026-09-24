@@ -72,6 +72,7 @@ description: "Upcoming residential intensives and Holotropic Breathwork seminars
                             <option value="future">Future Events</option>
                             <option value="past">Past Events</option>
                             <option value="all">All Events</option>
+                            <option value="tbd">To be scheduled</option>
                         </select>
                     </div>
                     
@@ -144,10 +145,20 @@ description: "Upcoming residential intensives and Holotropic Breathwork seminars
                                     <!-- Info in colonna -->
                                     <div class="flex flex-col gap-2">
                                         <!-- Data -->
+                                        {# An exact range reads plainly. Anything less says so out loud,
+                                           so a date the school has not fixed yet doesn't look like a bug. #}
+                                        {% if event.dateKind == 'exact' %}
                                         <div class="flex items-center gap-1.5">
                                             <i data-lucide="calendar" class="w-3.5 h-3.5 text-[color:var(--c-link)] flex-shrink-0"></i>
                                             <span class="text-xs text-[color:var(--c-body)]">{{ event.date }}</span>
                                         </div>
+                                        {% else %}
+                                        <div class="flex items-center gap-1.5 flex-wrap">
+                                            <i data-lucide="calendar-clock" class="w-3.5 h-3.5 text-[color:var(--c-sec)] flex-shrink-0"></i>
+                                            <span class="text-xs text-[color:var(--c-body)]">{% if event.dateKind == 'indicative' %}{{ event.date }}{% else %}Date to be defined{% endif %}</span>
+                                            {% if event.dateKind == 'indicative' %}<span class="text-[10px] uppercase tracking-wider px-1.5 py-0.5 border border-[color:var(--c-line)] text-[color:var(--c-body-dim)] flex-shrink-0">to be confirmed</span>{% endif %}
+                                        </div>
+                                        {% endif %}
                                         
                                         <!-- Facilitator -->
                                         {% if event.facilitator %}

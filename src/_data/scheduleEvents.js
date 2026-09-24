@@ -54,12 +54,31 @@ module.exports = async function() {
     const data = await fetchUrl(SHEET_JSON_URL);
 
     // Map fields to ensure all expected fields are present
-    const mappedData = data.map(item => ({
-      ...item,
-      module: item.module || item['ewtt - module'] || item.ewtt_module || ''
-    }));
+    const mappedData = data.map(item => {
+      const rawDate = (item.date || '').trim();
+      return {
+        ...item,
+        // Same three states the lectures use: a real range, words that only
+        // hint at when, or nothing at all.
+        dateKind: !rawDate
+          ? 'undated'
+          : (/^\d{1,2}\.\d{1,2}\.\d{4}/.test(rawDate) ? 'exact' : 'indicative'),
+        module: item.module || item['ewtt - module'] || item.ewtt_module || ''
+      };
+    });
     
     console.log(`Successfully fetched ${mappedData.length} schedule events`);
+
+    // Event dates are free text ranges, so nothing here rejects a bad one.
+    // Flag the ones no parser will understand: an indicative "August 2026" is
+    // fine and deliberate, a mistyped "31.11.2026" is not, and they look alike.
+    const indicative = mappedData
+      .filter((item) => !/^\s*\d{1,2}\.\d{1,2}\.\d{4}/.test(item.date || ''))
+      .map((item) => `${(item.date || '(empty)').trim()} \u2014 ${(item.title || 'untitled').trim()}`);
+    if (indicative.length) {
+      console.warn(`\u26a0\ufe0f ${indicative.length} event date(s) kept as written \u2014 check none of these is a typo:`);
+      for (const line of indicative) console.warn(`   ${line}`);
+    }
 
     // Save cache for fallback
     try {

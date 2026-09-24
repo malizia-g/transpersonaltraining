@@ -9,6 +9,11 @@
      GET <url>?timestamps=1   → when this spreadsheet last changed, as
                                 { "schedule": ISO date, "lectures": ISO date }
 
+   A row is returned whenever it carries a date, a title, a facilitator, a
+   teacher or a description. The Date cell is free to hold a real date, a
+   rough one like "November 2026", or nothing at all — the website renders
+   the exact date, the words, or "to be defined" accordingly.
+
    The website (src/_data/sheetTimestamps.js) reads ?timestamps=1 at every
    build and only downloads the sheets again when the date has moved.
    Both tabs share one file, so an edit to either refreshes both.
@@ -69,14 +74,30 @@ function doGet(e) {
       }
     }
 
-    // Only add rows that have at least a date
-    if (rowData.date) {
+    // Keep anything the row can be recognised by. Requiring a date used to
+    // drop every lecture whose date isn't settled yet — the site never saw
+    // them, so they couldn't be listed as "to be defined" either. The Date
+    // cell may now hold a real date, a rough one ("November 2026"), or
+    // nothing; the website decides how to show each.
+    if (identifies_(rowData)) {
       jsonData.push(rowData);
     }
   }
 
   return ContentService.createTextOutput(JSON.stringify(jsonData))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+// A row is worth sending if it can be told apart from a blank one. Title
+// alone isn't enough: one seminar is recorded with a facilitator and no
+// title, and dropping it would lose a real event.
+function identifies_(rowData) {
+  var fields = ['date', 'title', 'facilitator', 'teacher 1', 'description'];
+  for (var i = 0; i < fields.length; i++) {
+    var value = rowData[fields[i]];
+    if (value && value.toString().trim()) return true;
+  }
+  return false;
 }
 
 // The file's own last-modified date, reported under the keys the website
