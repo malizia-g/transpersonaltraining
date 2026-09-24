@@ -3,8 +3,9 @@
  *
  *   • contact form (homepage)     → a row in the "Contact" sheet, an auto-reply
  *                                   carrying the sample lesson and brochure,
- *                                   and an email to you when they asked a
- *                                   question (the message field is optional)
+ *                                   and an email to you every time (its subject
+ *                                   says whether they asked a question — the
+ *                                   message field is optional)
  *   • application details         → a row in the "Applications" sheet
  *     (/apply/ step 1)
  *   • signed enrolment agreement  → a file in your Drive, and its link written
@@ -529,32 +530,59 @@ function handleContact_(data) {
   // sheet_() only writes these headers when it creates the sheet; if
   // CONTACT_SHEET already exists from before the newsletter checkbox existed,
   // add a "Newsletter" column by hand once.
-  sheet_(CONTACT_SHEET, ['Received', 'Name', 'Email', 'Message', 'Newsletter'])
-    .appendRow([new Date(), name, email, message, newsletter ? 'Yes' : 'No']);
+  //
+  // "Email status" says what happened to the two emails, error included — so a
+  // row that arrived with no email behind it explains itself right there in the
+  // sheet. Add that heading by hand too if the sheet predates it.
+  var sh = sheet_(CONTACT_SHEET, ['Received', 'Name', 'Email', 'Message', 'Newsletter', 'Email status']);
+  sh.appendRow([new Date(), name, email, message, newsletter ? 'Yes' : 'No', 'sending…']);
+  var row = sh.getLastRow();
+  var status = [];
 
-  // Only bother the office when there is something to answer. A bare request
-  // for the materials is handled entirely by the auto-reply below; it is still
-  // recorded in the sheet either way.
-  var notify = message ? notifyEmails_(track) : '';
+  // The office hears about every contact. The subject says whether there is
+  // a question waiting for an answer, or just a request for the materials the
+  // auto-reply below already covers — so the two can be told apart in the inbox.
+  //
+  // Its own try: a notification that won't send (a bad address in the
+  // notification tab, say) must not also stop the person's lesson going out.
+  var notify = notifyEmails_(track);
   if (notify) {
-    MailApp.sendEmail({
-      to: notify,
-      replyTo: email, // so you can just hit Reply
-      name: 'Transpersonal Training website',
-      subject: 'Website enquiry from ' + name,
-      body: name + ' <' + email + '> wrote:\n\n' + message
-    });
+    var details = 'Email: ' + email
+      + '\nOffice: ' + (track || 'not chosen')
+      + '\nNewsletter: ' + (newsletter ? 'yes' : 'no');
+    try {
+      MailApp.sendEmail({
+        to: notify,
+        replyTo: email, // so you can just hit Reply
+        name: 'Transpersonal Training website',
+        subject: message
+          ? 'Website enquiry from ' + name
+          : 'New contact (lesson and brochure only): ' + name,
+        body: message
+          ? name + ' <' + email + '> wrote:\n\n' + message + '\n\n' + details
+          : name + ' asked for the sample lesson and the brochure, with no message. '
+            + 'The automatic reply has already sent them.\n\n' + details
+      });
+      status.push('Notification sent to ' + notify);
+    } catch (err) {
+      Logger.log('Notification to ' + notify + ' failed: ' + err);
+      status.push('Notification to ' + notify + ' FAILED: ' + err);
+    }
+  } else {
+    status.push('No notification (no address in the notification tab)');
   }
 
   var brochureBlob = brochureBlob_();
   var hasBrochure = !!brochureBlob;
-  sendConfirmation_(email, track,
+  var confirmError = sendConfirmation_(email, track,
     ((hasBrochure || BROCHURE_URL) ? 'Your sample lesson and brochure — ' : 'Your sample lesson — ') + SCHOOL_NAME,
     contactReplyBody_(name, message, hasBrochure),
     {
       attachments: hasBrochure ? [brochureBlob] : [],
       html: contactReplyHtml_(name, message, hasBrochure)
     });
+  status.push(confirmError ? 'Reply FAILED: ' + confirmError : 'Reply sent to ' + email);
+  sh.getRange(row, 6).setValue(status.join(' · '));
 
   return json_({ status: 'ok' });
 }
@@ -862,6 +890,7 @@ function officeEmail_(track) {
 // Deliberately swallows its own errors: the submission is already saved by the
 // time this runs, so a confirmation that won't send (mail quota, a typo'd
 // address) must never turn a successful submission into an error on screen.
+// Returns the error as text ('' when it went), for callers that record it.
 //
 // options.attachments: blobs to attach (e.g. the brochure — see brochureBlob_).
 // options.html: a bespoke HTML version of `body` (see contactReplyHtml_). When
@@ -881,8 +910,10 @@ function sendConfirmation_(to, track, subject, body, options) {
     };
     if (options.attachments && options.attachments.length) mail.attachments = options.attachments;
     MailApp.sendEmail(mail);
+    return '';
   } catch (err) {
     Logger.log('Confirmation to ' + to + ' failed: ' + err);
+    return String(err);
   }
 }
 
