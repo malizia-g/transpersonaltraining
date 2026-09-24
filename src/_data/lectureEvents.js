@@ -18,11 +18,11 @@ const BERLIN_DATE = new Intl.DateTimeFormat('en-GB', {
   timeZone: 'Europe/Berlin', day: '2-digit', month: '2-digit', year: 'numeric'
 });
 
-function fetchUrl(url) {
+function fetchUrl(url, timeout) {
   return new Promise((resolve, reject) => {
-    const req = https.get(url, { headers: { 'User-Agent': 'Eleventy-Static-Site-Generator' }, timeout: 30000 }, (res) => {
+    const req = https.get(url, { headers: { 'User-Agent': 'Eleventy-Static-Site-Generator' }, timeout }, (res) => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-        return fetchUrl(res.headers.location).then(resolve).catch(reject);
+        return fetchUrl(res.headers.location, timeout).then(resolve).catch(reject);
       }
 
       let body = '';
@@ -40,6 +40,25 @@ function fetchUrl(url) {
   });
 }
 
+// One slow answer shouldn't sink a deploy. The web app cold-starts, and the
+// first call after a quiet spell can outlast any sensible timeout, so try
+// again with more patience each time before giving up for real.
+async function fetchUrlWithRetry(url, label) {
+  const timeouts = [30000, 60000, 90000];
+  let lastError;
+  for (let attempt = 0; attempt < timeouts.length; attempt++) {
+    try {
+      return await fetchUrl(url, timeouts[attempt]);
+    } catch (error) {
+      lastError = error;
+      if (attempt < timeouts.length - 1) {
+        console.warn(`\u21bb ${label}: ${error.message} \u2014 retrying (${attempt + 2}/${timeouts.length})`);
+      }
+    }
+  }
+  throw lastError;
+}
+
 module.exports = async function() {
   // Check if sheet has changed before fetching
   const changed = await hasSheetChanged('lectures');
@@ -53,7 +72,7 @@ module.exports = async function() {
 
   try {
     console.log('Fetching lecture data from Google Sheets...');
-    const data = await fetchUrl(LECTURES_JSON_URL);
+    const data = await fetchUrlWithRetry(LECTURES_JSON_URL, 'lectures');
 
     const indicative = [];
 

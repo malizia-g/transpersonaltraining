@@ -15,11 +15,11 @@ const ALLOW_STALE_DATA = process.env.ALLOW_STALE_DATA === '1' || process.env.ALL
 // sometimes redirects once more. Following only the first hop lands on an HTML
 // page and the build quietly falls back to a stale cache, so recurse — and
 // give up on a hung socket rather than waiting for the default forever.
-function fetchUrl(url) {
+function fetchUrl(url, timeout) {
   return new Promise((resolve, reject) => {
-    const req = https.get(url, { headers: { 'User-Agent': 'Eleventy-Static-Site-Generator' }, timeout: 30000 }, (res) => {
+    const req = https.get(url, { headers: { 'User-Agent': 'Eleventy-Static-Site-Generator' }, timeout }, (res) => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-        return fetchUrl(res.headers.location).then(resolve).catch(reject);
+        return fetchUrl(res.headers.location, timeout).then(resolve).catch(reject);
       }
 
       let body = '';
@@ -37,6 +37,25 @@ function fetchUrl(url) {
   });
 }
 
+// One slow answer shouldn't sink a deploy. The web app cold-starts, and the
+// first call after a quiet spell can outlast any sensible timeout, so try
+// again with more patience each time before giving up for real.
+async function fetchUrlWithRetry(url, label) {
+  const timeouts = [30000, 60000, 90000];
+  let lastError;
+  for (let attempt = 0; attempt < timeouts.length; attempt++) {
+    try {
+      return await fetchUrl(url, timeouts[attempt]);
+    } catch (error) {
+      lastError = error;
+      if (attempt < timeouts.length - 1) {
+        console.warn(`\u21bb ${label}: ${error.message} \u2014 retrying (${attempt + 2}/${timeouts.length})`);
+      }
+    }
+  }
+  throw lastError;
+}
+
 module.exports = async function() {
   // Check if sheet has changed before fetching
   const changed = await hasSheetChanged('schedule');
@@ -51,7 +70,7 @@ module.exports = async function() {
   try {
     console.log('Fetching schedule data from Google Sheets...');
     
-    const data = await fetchUrl(SHEET_JSON_URL);
+    const data = await fetchUrlWithRetry(SHEET_JSON_URL, 'seminars');
 
     // Map fields to ensure all expected fields are present
     const mappedData = data.map(item => {
