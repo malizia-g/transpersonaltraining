@@ -158,10 +158,18 @@ description: "Apply to our EUROTAS-accredited transpersonal psychotherapy, couns
             <h2 class="p4-display text-3xl md:text-5xl font-medium text-[color:var(--c-heading)] leading-tight mb-6">
                 Sign up for the 2027&ndash;2030 cohort
             </h2>
+            {% if applications.open %}
             <p class="text-lg text-[color:var(--c-body)] leading-relaxed mb-10">
                 Three steps: your details, a personalised agreement to print and sign, then upload it.
                 Nothing is binding until the signed agreement reaches us.
             </p>
+            {% else %}
+            <p class="inline-block border border-[color:var(--c-acc)] text-[color:var(--c-heading)] font-medium px-6 py-3 mb-6">{{ applications.notice }}</p>
+            <p class="text-lg text-[color:var(--c-body)] leading-relaxed mb-10">
+                Once they open, applying takes three steps: your details, a personalised agreement to print and sign, then upload it.
+                Nothing is binding until the signed agreement reaches us.
+            </p>
+            {% endif %}
             <p class="text-sm text-[color:var(--c-body-dim)]">
                 Still have doubts? <a href="{{ '/#contact' | url }}" class="text-[color:var(--c-sec)] underline underline-offset-4 decoration-[color:var(--c-sec-40)] hover:text-[color:var(--c-sec-dark)]">Ask a question first</a>.
             </p>
@@ -202,7 +210,10 @@ description: "Apply to our EUROTAS-accredited transpersonal psychotherapy, couns
             <p class="text-sm text-[color:var(--c-body-dim)] mb-2">Fields marked <span class="text-red-700">*</span> are required. Your details are used to prepare your agreement and are sent to the school office when you generate it, so we know your application is on its way.</p>
             <p class="text-sm text-[color:var(--c-body-dim)] mb-6">Please read our <a href="{{ '/legal-notice/' | url }}" class="text-[color:var(--c-sec)] hover:text-[color:var(--c-sec-dark)] underline underline-offset-2 font-medium">legal notice</a> before you apply — it covers the agreement you will sign in step 2 and the protected title &ldquo;psychotherapist&rdquo;.</p>
 
-            <form id="applicationForm" data-persist="apply" novalidate class="grid md:grid-cols-2 gap-5">
+            <form id="applicationForm" data-persist="apply" novalidate>
+            {# A disabled fieldset switches off every field and the submit button
+               at once, so the form can't be sent while applications are closed. #}
+            <fieldset class="grid md:grid-cols-2 gap-5 disabled:opacity-60"{% if not applications.open %} disabled{% endif %}>
                 <!-- Honeypot: hidden from people, catnip for bots. Anything typed
                      here means the submission is discarded server-side. -->
                 <div class="hidden" aria-hidden="true">
@@ -258,21 +269,32 @@ description: "Apply to our EUROTAS-accredited transpersonal psychotherapy, couns
                 </div>
 
                 <div class="md:col-span-2 mt-2">
+                    {% if applications.open %}
                     <button type="submit" class="inline-flex items-center gap-2 bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-heading)] px-6 py-3 font-medium tracking-wide transition-all shadow-lg hover:shadow-xl">
                         <i data-lucide="file-text" class="w-4 h-4"></i>
                         Generate my agreement
                     </button>
+                    {% else %}
+                    <button type="submit" disabled class="inline-flex items-center gap-2 border border-[color:var(--c-line)] text-[color:var(--c-body-dim)] px-6 py-3 font-medium tracking-wide cursor-not-allowed">
+                        <i data-lucide="lock" class="w-4 h-4"></i>
+                        {{ applications.notice }}
+                    </button>
+                    {% endif %}
                     <p id="formHint" class="text-xs text-red-700 mt-3 hidden">Please complete the required fields above.</p>
                     <p class="text-xs text-[color:var(--c-body-dim)] mt-3">
                         Your answers are also kept in this browser as you type, so you won&rsquo;t lose them if the page closes or reloads.
                         <button type="button" data-clear-persist="apply" class="underline underline-offset-2 hover:text-[color:var(--c-sec)]">Clear saved answers</button>
                     </p>
                 </div>
+            </fieldset>
             </form>
         </div>
     </div>
 </section>
 
+{# Steps 2 and 3 are left out while applications are closed: step 2 carries the
+   whole agreement text in its <template>, and that Doc is still a draft. #}
+{% if applications.open %}
 <!-- STEP 2 — Generated agreement (hidden until generated) -->
 <section id="step2" class="py-8 bg-[color:var(--c-paper)] hidden">
     <div class="container mx-auto px-6">
@@ -350,6 +372,10 @@ description: "Apply to our EUROTAS-accredited transpersonal psychotherapy, couns
     </div>
 </section>
 
+{% endif %}
+
 {% block scripts %}
+{% if applications.open %}
 <script src="../scripts/pages/apply.js"></script>
+{% endif %}
 {% endblock %}

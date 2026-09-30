@@ -557,10 +557,16 @@ description: "Meet our faculty: Jure Biechonski, Manal Al-Hammadi, Lyudmila Skar
         <p class="text-xl text-[color:var(--c-on-dark-3)] max-w-2xl mx-auto mb-10">
             Join our internationally recognized training program and study with experienced teachers from around the world
         </p>
+        {% if applications.open %}
         <a href="{{ '/apply/' | url }}" class="inline-flex items-center gap-2 bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-heading)] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
             <span>Apply to Our Program</span>
             <i data-lucide="arrow-right" class="w-5 h-5"></i>
         </a>
+        {% else %}
+        <span aria-disabled="true" class="inline-flex items-center gap-2 border border-dashed border-[color:var(--c-on-dark-5)] text-[color:var(--c-on-dark-4)] px-8 py-4 font-medium text-lg tracking-wide cursor-not-allowed">
+            {{ applications.notice }}
+        </span>
+        {% endif %}
     </div>
 </section>
 

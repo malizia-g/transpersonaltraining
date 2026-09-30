@@ -186,7 +186,7 @@ ogType: website
             </div>
 
             <p class="text-center text-[color:var(--c-body-dim)] mt-12">
-                When you are ready, <a href="{{ '/apply/' | url }}" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-4">see how to apply</a>.
+                {% if applications.open %}When you are ready, <a href="{{ '/apply/' | url }}" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-4">see how to apply</a>.{% else %}{{ applications.notice }}.{% endif %}
             </p>
         </div>
     </div>

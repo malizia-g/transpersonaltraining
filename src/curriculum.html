@@ -293,14 +293,20 @@ description: "All modules across three levels: consciousness studies, counsellin
             <span class="p4-hairline"></span>
         </p>
         <h3 class="p4-display text-3xl md:text-4xl font-medium mb-4 text-[color:var(--c-paper-hi)]">Ready to begin?</h3>
-        <p class="text-[color:var(--c-on-dark-3)] max-w-2xl mx-auto mb-8">See how to apply, or get in touch to find the right entry point for you.</p>
+        <p class="text-[color:var(--c-on-dark-3)] max-w-2xl mx-auto mb-8">{% if applications.open %}See how to apply, or get in touch{% else %}Get in touch{% endif %} to find the right entry point for you.</p>
         {# Someone who has read the whole curriculum is further along than most
            visitors — this page used to end without ever offering the application
            page, which left /apply/ reachable only from the nav. #}
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            {% if applications.open %}
             <a href="{{ '/apply/' | url }}" class="inline-block bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-heading)] px-8 py-3 font-medium tracking-wide transition-all shadow-lg hover:shadow-xl">
                 Apply
             </a>
+            {% else %}
+            <span aria-disabled="true" class="inline-block border border-dashed border-[color:var(--c-on-dark-5)] text-[color:var(--c-on-dark-4)] px-8 py-3 font-medium tracking-wide cursor-not-allowed">
+                {{ applications.notice }}
+            </span>
+            {% endif %}
             <a href="{{ '/' | url }}#contact" class="inline-block border border-[color:var(--c-paper-hi-60)] hover:border-[color:var(--c-acc)] text-[color:var(--c-paper-hi)] hover:text-[color:var(--c-acc)] px-8 py-3 font-medium tracking-wide transition-all">
                 Get in touch
             </a>
