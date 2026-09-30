@@ -108,7 +108,7 @@ var WEB_PDF_CERTIFICATES = [
            'EUROTAS certification.'
   },
   {
-    title: 'Certificate as Transpersonal Psychotherapy & Holotropic Breathwork Facilitator',
+    title: 'Certificate as Transpersonal Psychotherapy & Breathwork Facilitator',
     body:  'With an optional EUROTAS certification track. Please note: “psychotherapist” ' +
            'is a legally protected title in many countries (for example Germany, France, ' +
            'Italy and Austria). Please check the psychotherapy regulations in the country ' +
