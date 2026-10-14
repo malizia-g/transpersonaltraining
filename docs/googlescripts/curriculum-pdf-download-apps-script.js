@@ -65,7 +65,7 @@ var WEB_PDF = {
 
   /* Mirrors the hero subtitle on /curriculum/ */
   SUBTITLE:  'A structured progression from self-development through professional ' +
-             'facilitation to advanced psychotherapy and Holotropic Breathwork practice.',
+             'facilitation to advanced psychotherapy and Holotropic Breathing practice.',
 
   /* Bump this after editing the layout: it is part of the fingerprint, so it
      forces the next request to rebuild a PDF that content alone would have

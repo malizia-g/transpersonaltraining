@@ -42,7 +42,7 @@ The Jungian frame of the shadow: to build a personality that earns love and belo
 ### Psychedelic Studies, Harm Reduction & Integration
 > A study track, not a practice of the school: history, set and setting, ethics, and the craft of integration.
 
-A study track (not a practice of the school) covering the history and therapeutic renaissance of psychedelics — from Grof's LSD research to current clinical work — together with set and setting, harm reduction principles, facilitation ethics, and the crucial craft of integration: somatic, narrative, creative and relational tools for turning an expanded state into lasting change. Holotropic Breathwork is presented as the non-pharmacological path through the same territory.
+A study track (not a practice of the school) covering the history and therapeutic renaissance of psychedelics — from Grof's LSD research to current clinical work — together with set and setting, harm reduction principles, facilitation ethics, and the crucial craft of integration: somatic, narrative, creative and relational tools for turning an expanded state into lasting change. Holotropic Breathing is presented as the non-pharmacological path through the same territory.
 
 ### The Hero's Journey & the Evolution of Consciousness
 > Campbell’s monomyth as the deep structure of transformation, repeating at every scale of a life.

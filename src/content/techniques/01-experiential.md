@@ -2,19 +2,19 @@
 number: "01"
 anchor: experiential
 icon: wind
-title: "Holotropic Breathwork & Experiential Work"
-short_title: Holotropic Breathwork & Experiential Work
+title: "Holotropic Breathing & Experiential Work"
+short_title: Holotropic Breathing & Experiential Work
 subtitle: Working with non-ordinary states of consciousness and the group field.
 unit: practices
 icons:
-  Holotropic Breathwork: wind
+  Holotropic Breathing: wind
   Working with Groups: users
   "Trance, Ritual & Expressive Tools": drum
 ---
 
-### Holotropic Breathwork
+### Holotropic Breathing
 > The heart of the training: accelerated breathing, evocative music and focused bodywork open the door to non-ordinary states of consciousness.
-![Mandala drawing during a Holotropic Breathwork session](/assets/images/Techniques/technique-mandala-breathwork "object-[50%_70%]")
+![Mandala drawing during a Holotropic Breathing session](/assets/images/Techniques/technique-mandala-breathwork "object-[50%_70%]")
 
 The heart of the experiential training. Developed by Stanislav Grof, it combines accelerated breathing, evocative music and focused bodywork to enter non-ordinary states of consciousness. Breath acts as a "controllable stress" that gives access to biographical, perinatal and transpersonal material; sessions are integrated through mandala drawing, sharing and bodywork.
 

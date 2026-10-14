@@ -8,7 +8,7 @@ eurotas_track_heading: EUROTAS Track
 
 **School Track:**
 
-- Complete 50 hours of supervision for personal transpersonal psychotherapy practice with clients and/or supervision during Holotropic Breathwork
+- Complete 50 hours of supervision for personal transpersonal psychotherapy practice with clients and/or supervision during Holotropic Breathing
   - 20 from Level 2
   - 30 from Level 3
   - Clients can be people from Level 1 (model clients) or clients from your personal practice.
