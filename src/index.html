@@ -631,20 +631,31 @@ ogType: website
     })();
 
     // Shuffle the "Moments from our seminars" filmstrip into a fresh order on every load
-    // and keep only a random handful, so the lazy images left out are never fetched
+    // and show only a random handful; the rest wait off the page (so their lazy images
+    // are not fetched) and join the strip a batch at a time as it nears its end
     (function () {
-        const MAX_MOMENTS = 10;
+        const BATCH = 10;
         const strip = document.getElementById('moments-filmstrip');
         if (!strip) return;
+        const scroller = strip.parentElement;
         const items = Array.from(strip.children);
         for (let i = items.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [items[i], items[j]] = [items[j], items[i]];
         }
-        items.forEach((item, i) => {
-            if (i < MAX_MOMENTS) strip.appendChild(item);
-            else item.remove();
-        });
+        items.forEach((item) => item.remove());
+        const waiting = items;
+        const showMore = () => waiting.splice(0, BATCH).forEach((item) => strip.appendChild(item));
+        showMore();
+        if (!waiting.length) return;
+
+        const onScroll = () => {
+            const left = scroller.scrollWidth - scroller.scrollLeft - scroller.clientWidth;
+            if (left > scroller.clientWidth) return;
+            showMore();
+            if (!waiting.length) scroller.removeEventListener('scroll', onScroll);
+        };
+        scroller.addEventListener('scroll', onScroll, { passive: true });
     })();
 </script>
 
