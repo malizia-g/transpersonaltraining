@@ -41,10 +41,10 @@ it — see [How a page loads its content](#how-a-page-loads-its-content) below.
   - [03-maps.md](../src/content/techniques/03-maps.md) — **sectioned** — Consciousness Maps & Research
 
 - [**become-a-practice-client/**](../src/content/become-a-practice-client/) → [`src/become-a-practice-client.html`](../src/become-a-practice-client.html)
-  - [**intro/**](../src/content/become-a-practice-client/intro/) — three icon cards
-    - [01-counselling.md](../src/content/become-a-practice-client/intro/01-counselling.md)
-    - [02-profiles.md](../src/content/become-a-practice-client/intro/02-profiles.md)
-    - [03-breathwork.md](../src/content/become-a-practice-client/intro/03-breathwork.md)
+  - [**options/**](../src/content/become-a-practice-client/options/) — the three ways to take part, one card each
+    - [01-volunteer.md](../src/content/become-a-practice-client/options/01-volunteer.md) — volunteer model in class (free)
+    - [02-private.md](../src/content/become-a-practice-client/options/02-private.md) — private sessions (reduced fee)
+    - [03-breathwork.md](../src/content/become-a-practice-client/options/03-breathwork.md) — breathwork seminars (discount possible)
   - [01-what-to-look-for.md](../src/content/become-a-practice-client/01-what-to-look-for.md)
 
 - [**teachers/**](../src/content/teachers/) → [`src/teachers.html`](../src/teachers.html) — the intro block above each faculty group
@@ -67,7 +67,7 @@ file is read, so it is worth knowing which you are editing:
 | Filter | Reads | Used for |
 |---|---|---|
 | `pageContent` | one file → front matter + rendered body | most prose sections |
-| `pageContentDir` | every `.md` in a folder, alphabetically | card sets — `commitment/`, `admissions/`, `intro/` |
+| `pageContentDir` | every `.md` in a folder, alphabetically | card sets — `commitment/`, `admissions/`, `options/` |
 | `pageSections` | one file, **split on `###` headings** into blocks | the School Pillars branches and "Why Is This Training for You?" |
 
 A page loads its files by name. Adding a `.md` file to a folder read by `pageContentDir` makes it
@@ -112,20 +112,20 @@ Paragraphs are separated by a blank line. The heading in the front matter (`head
 
 ---
 
-## Editing Cards (Commitment, Admissions, Practice-Client Intro)
+## Editing Cards (Commitment, Admissions, Practice-Client Options)
 
 A card is one `.md` file in a folder the page loads with `pageContentDir`. Front matter carries the
 structured bits, the body carries the description. From
-[become-a-practice-client/intro/01-counselling.md](../src/content/become-a-practice-client/intro/01-counselling.md):
+[training-overview/commitment/01-learning.md](../src/content/training-overview/commitment/01-learning.md):
 
 ```markdown
 ---
-icon: message-circle-heart
+heading: Learning
+icon: graduation-cap
 icon_color: text-[color:var(--c-link)]
 ---
 
-As a practice client, you can choose from available third-level students and contact
-them directly for supervised sessions.
+The card description.
 ```
 
 - `icon` — the [Lucide icon name](https://lucide.dev/icons/) (e.g. `wind`, `heart`, `compass`)
@@ -139,7 +139,7 @@ sibling file in the same folder rather than this example:
 
 | Folder | Fields |
 |---|---|
-| [`become-a-practice-client/intro/`](../src/content/become-a-practice-client/intro/) | `icon`, `icon_color` |
+| [`become-a-practice-client/options/`](../src/content/become-a-practice-client/options/) | `heading`, `icon`, `badge` (the cost label), `badge_style` (`accent`, `secondary` or `outline`) — body is a paragraph then a bullet list |
 | [`training-overview/commitment/`](../src/content/training-overview/commitment/) | `heading`, `icon`, `icon_color` — plus `school_track_heading` and `eurotas_track_heading` on the supervision card |
 | [`training-overview/admissions/`](../src/content/training-overview/admissions/) | `level`, `label`, `who_can_apply`, `note_anchor` — no icon |
 
@@ -257,7 +257,7 @@ long_text: |
 
 The page template controls the layout structure (HTML, CSS classes). The content files control what text appears inside.
 
-- To **add a card** in a folder read by `pageContentDir` (`commitment/`, `admissions/`, `intro/`): create a new `.md` file with the next prefix number.
+- To **add a card** in a folder read by `pageContentDir` (`commitment/`, `admissions/`, `options/`): create a new `.md` file with the next prefix number.
 - To **remove a card**: delete the file.
 - To **reorder cards**: rename the files — they load alphabetically.
 - To **add a block** to a sectioned file (School Pillars, "Why Is This Training for You?"): add a `###` heading; see [Editing Sectioned Pages](#editing-sectioned-pages-school-pillars-why-is-this-training-for-you).

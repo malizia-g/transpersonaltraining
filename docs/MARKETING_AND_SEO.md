@@ -331,7 +331,7 @@ This turns the Drive research into actual rankings.
 |----------|------|------------------------|--------------------------------|
 | 1 | Home | transpersonal psychology training / transpersonal counselling training | "Certified Transpersonal Psychology Training" |
 | 1 | **Courses (new page)** | hero journey, transpersonal training for therapists | "Our Hero Journey: an Advanced Shadow Work — Professional Training for Therapists" |
-| 1 | Become a Practice Client | free counselling / breathwork seminars free | promotional angle |
+| 1 | Become a Practice Client | ~~free counselling / breathwork seminars free~~ → low-cost counselling (2026-10: "free" dropped as misleading — private sessions are reduced-fee, only the volunteer model in class is free; see [SEO_KEYWORD_MAP.md](SEO_KEYWORD_MAP.md)) | promotional angle |
 | 2 | **Transpersonal Therapist (new page)** | what is transpersonal psychology → career angle | "Why Holistic Training is the Future of Psychotherapy" |
 | 2 | Techniques | breathwork facilitator training, breathwork certification | "Breathwork Facilitator Certification: Integrate Somatics into Therapy" |
 | 3 | Blog pillar | what is transpersonal psychology | "Beyond the Ego: An Introduction to Transpersonal Psychology" |

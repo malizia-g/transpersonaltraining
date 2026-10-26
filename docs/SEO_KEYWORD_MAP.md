@@ -82,7 +82,7 @@ sheet.
 | `/teachers/` ⭐ | transpersonal psychotherapy teachers | **the teachers' own names** — 64% of all clicks | `Transpersonal Psychotherapy Teachers` |
 | `/what-is-transpersonal-psychology/` | what is transpersonal psychology | transpersonal psychotherapy, hero journey, non-ordinary states of consciousness, integrative therapy education | `What is Transpersonal Psychology?` |
 | `/techniques/` | holotropic breathwork | breathwork certification, somatic healing, gestalt, breathwork for anxiety | `School Pillars — Holotropic Breathwork & Transpersonal Training` |
-| `/become-a-practice-client/` | free counselling | breathwork seminars free, free psychotherapy, behaviour pattern, repeating cycles, spiritual crisis, spiritual emergency | `Free Counselling & Breathwork Sessions` |
+| `/become-a-practice-client/` | low-cost counselling | supervised student therapy, discounted breathwork seminar | `Low-Cost Counselling & Breathwork with Supervised Students` — "free" was dropped from the keyword and title in 2026-10: private sessions carry a reduced fee, and only the volunteer-model option in class is free, so "free counselling" misled visitors |
 | `/schedule/` | breathwork seminars | holotropic breathwork intensives, residential training Europe | `Holotropic Breathwork Intensives & Seminars` |
 | `/venues/` | breathwork retreat Germany | training venues Italy, Black Forest, Tuscany | `Training Venues` — shortened on purpose while the venue list is incomplete ([TODO 36](TODO.md#task-36)) |
 | `/collaborations/` | eurotas accredited psychotherapy schools | transpersonal psychology institutes Europe | `EUROTAS Partners & Other Institutes` |
