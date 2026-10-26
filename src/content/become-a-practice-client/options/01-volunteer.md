@@ -10,4 +10,5 @@ During online lessons and intensives, a teacher — or a student, with the teach
 - Led by a teacher, or by a student with the teacher present
 - The student group watches and takes part in the discussion
 - Online or during a residential intensive
+- Volunteers are selected through an interview
 - No fee · limited places, on request
