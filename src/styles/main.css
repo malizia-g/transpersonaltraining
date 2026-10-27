@@ -609,3 +609,21 @@ body.mobile-menu-open { overflow: hidden; }
     color: var(--c-on-dark-1);
     font-weight: 400;
 }
+
+/* Clear homepage hero: the same idea for the video threshold. The vertical
+   wash keeps only a fade behind the nav and a lighter one at the foot, where
+   the copy sits; the wash from the left stays as the halo behind the copy. */
+.hero-clear-home {
+    --v-hero-top:      hsl(var(--deep-h) var(--deep-s) var(--deep-l) / .55);
+    --v-hero-mid:      transparent;
+    --v-hero-foot:     hsl(var(--dusk-h) var(--dusk-s) var(--dusk-l) / .50);
+    --v-hero-side:     hsl(var(--deep-h) calc(var(--deep-s) - 8%) calc(var(--deep-l) + 3.4%) / .50);
+    --v-hero-side-mid: hsl(var(--deep-h) calc(var(--deep-s) - 8%) calc(var(--deep-l) + 3.4%) / .08);
+}
+.hero-clear-home h1 {
+    text-shadow: 0 1px 2px rgb(0 0 0 / .55), 0 2px 16px rgb(0 0 0 / .45);
+}
+.hero-clear-home h1 + p,
+.hero-clear-home .p4-kicker {
+    text-shadow: 0 0 2px rgb(0 0 0 / .7), 0 1px 4px rgb(0 0 0 / .6), 0 2px 18px rgb(0 0 0 / .5);
+}
