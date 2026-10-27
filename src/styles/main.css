@@ -614,11 +614,17 @@ body.mobile-menu-open { overflow: hidden; }
    wash keeps only a fade behind the nav and a lighter one at the foot, where
    the copy sits; the wash from the left stays as the halo behind the copy. */
 .hero-clear-home {
-    --v-hero-top:      hsl(var(--deep-h) var(--deep-s) var(--deep-l) / .55);
+    --v-hero-top:      hsl(var(--deep-h) var(--deep-s) var(--deep-l) / .45);
     --v-hero-mid:      transparent;
-    --v-hero-foot:     hsl(var(--dusk-h) var(--dusk-s) var(--dusk-l) / .50);
-    --v-hero-side:     hsl(var(--deep-h) calc(var(--deep-s) - 8%) calc(var(--deep-l) + 3.4%) / .50);
-    --v-hero-side-mid: hsl(var(--deep-h) calc(var(--deep-s) - 8%) calc(var(--deep-l) + 3.4%) / .08);
+    --v-hero-foot:     hsl(var(--deep-h) var(--deep-s) var(--deep-l) / .35);
+    --v-hero-side:     hsl(var(--deep-h) calc(var(--deep-s) - 8%) calc(var(--deep-l) + 3.4%) / .40);
+    --v-hero-side-mid: transparent;
+    --v-glow:          transparent;
+}
+/* No colour grading either: the sunset in its own colours */
+.hero-clear-home #hero-video,
+.hero-clear-home #hero-image {
+    filter: none;
 }
 .hero-clear-home h1 {
     text-shadow: 0 1px 2px rgb(0 0 0 / .55), 0 2px 16px rgb(0 0 0 / .45);
