@@ -569,3 +569,43 @@ body.mobile-menu-open { overflow: hidden; }
     margin: auto;
     border-radius: 2px;
 }
+
+/* Clear hero: drops the uniform tint over the header photo and keeps the text
+   readable with a top fade behind the nav, a soft halo behind the copy only,
+   and a text shadow. Used on the landscape headers. */
+.hero-clear-scrim {
+    background:
+        radial-gradient(ellipse 58% 48% at 50% 58%,
+            hsl(var(--deep-h) var(--deep-s) var(--deep-l) / .58) 0%,
+            hsl(var(--deep-h) var(--deep-s) var(--deep-l) / .22) 55%,
+            transparent 80%),
+        linear-gradient(to bottom,
+            hsl(var(--deep-h) var(--deep-s) var(--deep-l) / .55) 0,
+            transparent 26%,
+            transparent 78%,
+            hsl(var(--deep-h) var(--deep-s) var(--deep-l) / .30) 100%);
+}
+@media (max-width: 767px) {
+    .hero-clear-scrim {
+        background:
+            radial-gradient(ellipse 95% 50% at 50% 58%,
+                hsl(var(--deep-h) var(--deep-s) var(--deep-l) / .55) 0%,
+                hsl(var(--deep-h) var(--deep-s) var(--deep-l) / .25) 60%,
+                transparent 85%),
+            linear-gradient(to bottom,
+                hsl(var(--deep-h) var(--deep-s) var(--deep-l) / .55) 0,
+                transparent 24%);
+    }
+}
+.hero-clear h1 {
+    text-shadow: 0 1px 2px rgb(0 0 0 / .55), 0 2px 16px rgb(0 0 0 / .45);
+}
+/* The kicker and the subtitle are thin, so they need a tighter, darker shadow */
+.hero-clear h1 + p,
+.hero-clear .p4-kicker {
+    text-shadow: 0 0 2px rgb(0 0 0 / .7), 0 1px 4px rgb(0 0 0 / .6), 0 2px 18px rgb(0 0 0 / .5);
+}
+.hero-clear h1 + p {
+    color: var(--c-on-dark-1);
+    font-weight: 400;
+}
