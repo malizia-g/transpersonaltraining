@@ -5,19 +5,44 @@ description: "Articles on transpersonal psychology, holistic therapy, spiritual 
 ogtype: website
 ---
 
-<section class="py-0 pb-10 md:pb-14 bg-[color:var(--c-paper-hi)]" lang="en">
-  <div class="w-full h-64 md:h-80 overflow-hidden relative mb-8">
+<header class="hero-clear relative h-[50vh] min-h-[400px] flex items-center justify-center text-[color:var(--c-on-dark-1)] bg-[color:var(--c-deep)] overflow-hidden" lang="en">
+  <div class="absolute inset-0 z-0">
     <picture>
       <source srcset="{{ '/assets/images/Headers/blog-hero.webp' | url }}" type="image/webp">
-      <img src="{{ '/assets/images/Headers/blog-hero.jpg' | url }}" alt="Transpersonal blog cover" class="w-full h-full object-cover object-center" loading="lazy" />
+      <img src="{{ '/assets/images/Headers/blog-hero.jpg' | url }}" alt="Wildflowers by the path outside the seminar house" class="w-full h-full object-cover object-center">
     </picture>
-    <div class="absolute inset-0 bg-gradient-to-b from-black/30 to-transparent"></div>
+    <div class="absolute inset-0 hero-clear-scrim"></div>
   </div>
-  <div class="container mx-auto px-6">
-    <h1 class="p4-display text-4xl md:text-5xl font-medium text-[color:var(--c-heading)] mb-10 text-center">Blog</h1>
-    <div class="max-w-3xl mx-auto text-center mb-12 text-[color:var(--c-body)] text-lg">
-      <p>Insights, stories, and tools on transpersonal psychology, holistic therapy, spiritual psychotherapy training, integrative therapy education, and breathwork for anxiety.</p>
+  <div class="container mx-auto px-6 relative z-10 text-center pt-20">
+    <div class="max-w-4xl mx-auto">
+      <p class="p4-kicker text-[color:var(--c-acc)] mb-6 flex items-center justify-center gap-4">
+        <span class="p4-hairline"></span>
+        Our hero's journey
+        <span class="p4-hairline"></span>
+      </p>
+      <h1 class="p4-display text-4xl md:text-6xl font-medium mb-6 leading-tight text-[color:var(--c-paper-hi)]">
+        Blog
+      </h1>
+      <p class="text-xl md:text-2xl text-[color:var(--c-on-dark-3)] font-light leading-relaxed max-w-3xl mx-auto">
+        Insights, stories, and tools on transpersonal psychology, holistic therapy, spiritual psychotherapy training, integrative therapy education, and breathwork for anxiety.
+      </p>
     </div>
+  </div>
+</header>
+
+<!-- Breadcrumb -->
+<div class="bg-[color:var(--c-paper-card)] border-b border-[color:var(--c-line)]">
+  <div class="container mx-auto px-6 py-4">
+    <div class="flex items-center gap-2 text-sm text-[color:var(--c-body-dim)]">
+      <a href="{{ '/' | url }}" class="hover:text-[color:var(--c-link)] transition-colors">Home</a>
+      <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      <span class="text-[color:var(--c-heading)] font-medium">Blog</span>
+    </div>
+  </div>
+</div>
+
+<section class="py-12 md:py-16 bg-[color:var(--c-paper-hi)]" lang="en">
+  <div class="container mx-auto px-6">
     <!-- FILTRI (popolati JS) -->
     <form id="blog-filters" class="mb-10 flex flex-wrap gap-4 justify-center">
       <select id="filter-author" class="border px-3 py-2"><option value="">All Authors</option></select>
