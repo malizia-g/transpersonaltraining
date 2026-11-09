@@ -36,8 +36,9 @@ function getConfig_() {
     apiKey: apiKey,
     senderEmail: props.getProperty('SENDER_EMAIL') || 'noreply@transpersonaltraining.eu',
     senderName: props.getProperty('SENDER_NAME') || 'Transpersonal Training',
-    siteUrl: props.getProperty('SITE_URL') || 'https://malizia-g.github.io/transpersonaltraining/',
-    logoUrl: props.getProperty('LOGO_URL') || 'https://malizia-g.github.io/transpersonaltraining/assets/images/logo.svg',
+    siteUrl: props.getProperty('SITE_URL') || 'https://transpersonal-training.com/',
+    // PNG, non SVG: Outlook e altri client non mostrano gli SVG.
+    logoUrl: 'https://transpersonal-training.com/assets/images/Graphics/logo-badge-email.png',
     heroImageUrl: props.getProperty('EMAIL_HERO_URL') || 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80',
     brevoUrl: 'https://api.brevo.com/v3/smtp/email',
     scheduleSheet: props.getProperty('SCHEDULE_SHEET') || 'Seminars',
@@ -258,34 +259,47 @@ function buildEmailHeader_(title, heading, subtitle) {
   if (heading === undefined) heading = 'Next Events';
   if (subtitle === undefined) subtitle = 'Discover upcoming modules, lectures and live sessions.';
 
+  // Colori e font del sito (src/styles/main.css). I client di posta non leggono
+  // le variabili CSS, quindi qui i colori sono scritti per esteso. I font arrivano
+  // dal dominio del sito; dove il client non li carica valgono Georgia e Arial.
+  var SERIF = "'Cormorant Garamond', Georgia, 'Times New Roman', serif";
+  var SANS = "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
+  var FONTS = 'https://transpersonal-training.com/assets/fonts/';
+
   return '<!DOCTYPE html>' +
     '<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">' +
     '<style>' +
-    'body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #eef2ef; color: #1f2f24; }' +
-    '.container { max-width: 600px; margin: 0 auto; background: #ffffff; }' +
+    "@font-face { font-family: 'Cormorant Garamond'; font-weight: 600; src: url(" + FONTS + "CormorantGaramond-600-latin.woff2) format('woff2'); }" +
+    "@font-face { font-family: 'Cormorant Garamond'; font-weight: 700; src: url(" + FONTS + "CormorantGaramond-700-latin.woff2) format('woff2'); }" +
+    "@font-face { font-family: Inter; font-weight: 400; src: url(" + FONTS + "Inter-400-latin.woff2) format('woff2'); }" +
+    'body { margin: 0; padding: 0; font-family: ' + SANS + '; background: #f7f4ed; color: #5c574d; }' +
+    '.container { max-width: 600px; margin: 0 auto; background: #fdfaf5; }' +
     '.hero { width: 100%; line-height: 0; }' +
     '.hero img { width: 100%; max-height: 260px; object-fit: cover; display: block; }' +
-    '.header { background: linear-gradient(180deg, #19352a 0%, #12251d 100%); color: #ffffff; padding: 26px 30px 30px; text-align: center; }' +
-    '.logo-wrap { display: inline-block; background: #0e1f18; border: 1px solid rgba(255,255,255,0.18); border-radius: 12px; padding: 8px 12px; margin-bottom: 14px; }' +
-    '.logo-wrap img { display: block; width: 130px; max-width: 100%; height: auto; }' +
-    '.kicker { margin: 0; font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; color: #b9d2c2; }' +
-    '.header h1 { margin: 8px 0 0; font-size: 28px; font-weight: 600; letter-spacing: 0.2px; }' +
-    '.header p { margin: 9px 0 0; font-size: 14px; color: #d8e7de; }' +
-    '.campaign-title { margin: 14px auto 0; display: inline-block; font-size: 12px; color: #d9ece0; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 999px; padding: 6px 12px; }' +
+    '.header { background: #1a1230; background: linear-gradient(180deg, #1a1230 0%, #2f1d35 100%); color: #efedf8; padding: 28px 30px 32px; text-align: center; border-bottom: 3px solid #d4b75e; }' +
+    '.header h1 { margin: 0; font-family: ' + SERIF + '; font-size: 32px; font-weight: 600; line-height: 1.15; color: #efedf8; }' +
+    '.header p { margin: 9px 0 0; font-size: 14px; color: #d9d4e8; }' +
+    '.campaign-title { margin: 14px auto 0; display: inline-block; font-size: 12px; color: #e8d391; border: 1px solid #d4b75e; border-radius: 999px; padding: 6px 12px; }' +
     '.content { padding: 30px; }' +
-    '.intro { color: #425648; font-size: 14px; margin: 0 0 20px; }' +
-    '.event { border-left: 4px solid #4f8466; padding: 15px 20px; margin-bottom: 18px; background: #f7fbf8; border-radius: 0 8px 8px 0; }' +
-    '.event h3 { margin: 0 0 8px 0; color: #1a2d22; font-size: 16px; }' +
-    '.event .meta { color: #566a5c; font-size: 13px; margin-bottom: 6px; }' +
-    '.event .desc { color: #444; font-size: 14px; line-height: 1.5; }' +
-    '.footer { background: #edf3ef; padding: 20px 30px; text-align: center; font-size: 12px; color: #627767; }' +
-    '.footer a { color: #2f6f4f; }' +
+    '.intro { color: #5c574d; font-size: 15px; line-height: 1.6; margin: 0 0 22px; }' +
+    '.section-title { font-family: ' + SERIF + '; color: #242163; font-size: 24px; font-weight: 600; margin: 24px 0 14px; }' +
+    '.event { border-left: 3px solid #d4b75e; padding: 15px 20px; margin-bottom: 18px; background: #ffffff; border-radius: 0 8px 8px 0; }' +
+    '.event h3 { margin: 0 0 8px 0; font-family: ' + SERIF + '; color: #242163; font-size: 22px; font-weight: 600; line-height: 1.2; }' +
+    '.event .meta { color: #6a3ea8; font-size: 13px; margin-bottom: 6px; }' +
+    '.event .desc { color: #5c574d; font-size: 14px; line-height: 1.55; }' +
+    '.footer { background: #1a1230; padding: 22px 30px; text-align: center; font-size: 12px; color: #d9d4e8; }' +
+    '.footer p { margin: 6px 0; }' +
+    '.footer a { color: #e8d391; }' +
     '</style></head><body>' +
     '<div class="container">' +
     '<div class="hero"><img src="' + escapeHtml_(config.heroImageUrl) + '" alt="Forest landscape" /></div>' +
     '<div class="header">' +
-    '<div class="logo-wrap"><a href="' + escapeHtml_(config.siteUrl) + '" target="_blank" rel="noopener noreferrer"><img src="' + escapeHtml_(config.logoUrl) + '" alt="Transpersonal Training" /></a></div>' +
-    '<p class="kicker">Transpersonal Training</p>' +
+    '<table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin: 0 auto 20px;"><tr>' +
+    '<td style="padding-right: 10px; vertical-align: middle;"><a href="' + escapeHtml_(config.siteUrl) + '" target="_blank" rel="noopener noreferrer"><img src="' + escapeHtml_(config.logoUrl) + '" width="44" height="44" alt="" style="display: block; border: 0;" /></a></td>' +
+    '<td style="vertical-align: middle; text-align: left; font-family: ' + SERIF.replace(/'/g, '') + '; font-weight: 700; color: #efedf8; line-height: 1;">' +
+    '<div style="font-size: 11px; letter-spacing: 0.1em;">EastWest</div>' +
+    '<div style="font-size: 22px; letter-spacing: 0.025em; margin-top: 2px;">Transpersonal Training</div>' +
+    '</td></tr></table>' +
     '<h1>' + escapeHtml_(heading) + '</h1>' +
     (subtitle ? '<p>' + escapeHtml_(subtitle) + '</p>' : '') +
     (title ? '<div class="campaign-title">' + escapeHtml_(title) + '</div>' : '') +
@@ -296,7 +310,7 @@ function buildEmailHeader_(title, heading, subtitle) {
 function buildEmailFooter_() {
   return '</div>' +
     '<div class="footer">' +
-    '<p>Transpersonal Training — European Transpersonal Training</p>' +
+    '<p>EastWest Transpersonal Training</p>' +
     '<p><a href="{{unsubscribe}}">Unsubscribe</a></p>' +
     '</div></div></body></html>';
 }
@@ -375,7 +389,8 @@ function buildLecturesHtml_(events) {
       html += '</div>';
     }
   }
-  
+
+  html += buildEmailFooter_();
   return html;
 }
 
@@ -694,7 +709,7 @@ function sendToLevel_(level) {
     var html = buildEmailHeader_('Updates for ' + level + ' Students');
     
     if (scheduleEvents.length > 0) {
-      html += '<h2 style="color:#1a1a2e; font-size:18px;">Training Events</h2>';
+      html += '<h2 class="section-title">Training Events</h2>';
       for (var i = 0; i < scheduleEvents.length; i++) {
         var e = scheduleEvents[i];
         html += '<div class="event">';
@@ -706,7 +721,7 @@ function sendToLevel_(level) {
     }
 
     if (lectureEvents.length > 0) {
-      html += '<h2 style="color:#1a1a2e; font-size:18px;">Lectures</h2>';
+      html += '<h2 class="section-title">Lectures</h2>';
       for (var j = 0; j < lectureEvents.length; j++) {
         var l = lectureEvents[j];
         html += '<div class="event">';
