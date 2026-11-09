@@ -39,7 +39,7 @@ function getConfig_() {
     siteUrl: props.getProperty('SITE_URL') || 'https://transpersonal-training.com/',
     // PNG, non SVG: Outlook e altri client non mostrano gli SVG.
     logoUrl: 'https://transpersonal-training.com/assets/images/Graphics/logo-badge-email.png',
-    heroImageUrl: props.getProperty('EMAIL_HERO_URL') || 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80',
+    heroImageUrl: props.getProperty('EMAIL_HERO_URL') || 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80&blend=1a1230&balph=45&bm=normal',
     brevoUrl: 'https://api.brevo.com/v3/smtp/email',
     scheduleSheet: props.getProperty('SCHEDULE_SHEET') || 'Seminars',
     lecturesSheet: 'Lectures',
@@ -274,11 +274,9 @@ function buildEmailHeader_(title, heading, subtitle) {
     "@font-face { font-family: Inter; font-weight: 400; src: url(" + FONTS + "Inter-400-latin.woff2) format('woff2'); }" +
     'body { margin: 0; padding: 0; font-family: ' + SANS + '; background: #f7f4ed; color: #5c574d; }' +
     '.container { max-width: 600px; margin: 0 auto; background: #fdfaf5; }' +
-    '.hero { width: 100%; line-height: 0; }' +
-    '.hero img { width: 100%; max-height: 260px; object-fit: cover; display: block; }' +
-    '.header { background: #1a1230; background: linear-gradient(180deg, #1a1230 0%, #2f1d35 100%); color: #efedf8; padding: 28px 30px 32px; text-align: center; border-bottom: 3px solid #d4b75e; }' +
-    '.header h1 { margin: 0; font-family: ' + SERIF + '; font-size: 32px; font-weight: 600; line-height: 1.15; color: #efedf8; }' +
-    '.header p { margin: 9px 0 0; font-size: 14px; color: #d9d4e8; }' +
+    '.header { color: #efedf8; padding: 56px 30px 60px; text-align: center; border-bottom: 3px solid #d4b75e; text-shadow: 0 1px 8px rgba(18,13,33,0.75); }' +
+    '.header h1 { margin: 0; font-family: ' + SERIF + '; font-size: 34px; font-weight: 600; line-height: 1.15; color: #ffffff; }' +
+    '.header p { margin: 9px 0 0; font-size: 14px; color: #efedf8; }' +
     '.campaign-title { margin: 14px auto 0; display: inline-block; font-size: 12px; color: #e8d391; border: 1px solid #d4b75e; border-radius: 999px; padding: 6px 12px; }' +
     '.content { padding: 30px; }' +
     '.intro { color: #5c574d; font-size: 15px; line-height: 1.6; margin: 0 0 22px; }' +
@@ -292,8 +290,8 @@ function buildEmailHeader_(title, heading, subtitle) {
     '.footer a { color: #e8d391; }' +
     '</style></head><body>' +
     '<div class="container">' +
-    '<div class="hero"><img src="' + escapeHtml_(config.heroImageUrl) + '" alt="Forest landscape" /></div>' +
-    '<div class="header">' +
+    // Foto come sfondo; dove il client non la mostra resta il colore scuro, così il testo si legge.
+    '<div class="header" style="background-color: #1a1230; background-image: url(\'' + escapeHtml_(config.heroImageUrl) + '\'); background-size: cover; background-position: center;">' +
     '<table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin: 0 auto 20px;"><tr>' +
     '<td style="padding-right: 10px; vertical-align: middle;"><a href="' + escapeHtml_(config.siteUrl) + '" target="_blank" rel="noopener noreferrer"><img src="' + escapeHtml_(config.logoUrl) + '" width="44" height="44" alt="" style="display: block; border: 0;" /></a></td>' +
     '<td style="vertical-align: middle; text-align: left; font-family: ' + SERIF.replace(/'/g, '') + '; font-weight: 700; color: #efedf8; line-height: 1;">' +
