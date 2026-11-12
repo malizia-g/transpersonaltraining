@@ -1,0 +1,198 @@
+# 301 redirect map — old WordPress site → this Eleventy site.
+# Source of truth: docs/seo-baseline/REDIRECT_MAP.md. Generated for cutover
+# (TODO task 10); keep the two in sync if a rule changes here.
+#
+# Ordering: exact-path rules first, pattern rules last, so a pattern can
+# never shadow a more specific exact match above it.
+#
+# Two things here were learned from the live server, not from the docs, and
+# both look like needless verbosity until you know why:
+#
+#   Targets are absolute https:// URLs rather than plain paths. TLS is
+#   terminated upstream (openresty in front of Apache), so Apache sees a
+#   plain-HTTP request and builds relative redirects as "http://…" — sending
+#   every redirected visitor to the insecure scheme. Writing the scheme
+#   explicitly is what stops that. The usual %{HTTPS}-based fix cannot work
+#   here: Apache always sees HTTPS as off behind this proxy, so that rule
+#   would redirect forever.
+#
+#   Rules whose target holds a "#" carry the NE (noescape) flag. Without it
+#   mod_rewrite percent-encodes it to %23, and /teachers/%23jure-biechonski
+#   is a path that doesn't exist — a 404 on the 32 URLs that carry 64% of
+#   the site's organic traffic. The first production deploy did exactly that.
+
+# Apache does not serve /404.html for a missing page on its own — that is a
+# GitHub Pages convention, and this file was ported from that world. Without
+# these, an invented URL got Apache's stock error page, which also advertises
+# the server version and port.
+#
+# Only ErrorDocument is set here. `Options -Indexes` and `ServerSignature Off`
+# would be the natural companions, but they need the Options/Indexes overrides,
+# and if the host doesn't grant those Apache answers 500 for the whole site.
+# ErrorDocument needs FileInfo, which is provably on — mod_rewrite works.
+# Directory listing is off on this host already (checked: /assets/ gives 403).
+ErrorDocument 404 /404.html
+ErrorDocument 403 /404.html
+ErrorDocument 410 /404.html
+
+RewriteEngine On
+
+
+# ── §1 Public pages ──────────────────────────────────────────────
+# `/` → `/`, `/schedule/` → `/schedule/`, `/apply/` → `/apply/`: same path
+# on both sites, so no rule — nothing to redirect.
+
+RewriteRule ^program/?$ https://transpersonal-training.com/training-overview/ [R=301,L]
+RewriteRule ^program-2026/?$ https://transpersonal-training.com/training-overview/ [R=301,L]
+RewriteRule ^program-2024/?$ https://transpersonal-training.com/training-overview/ [R=301,L]
+RewriteRule ^faculty/?$ https://transpersonal-training.com/teachers/ [R=301,L]
+RewriteRule ^information/?$ https://transpersonal-training.com/resources/ [R=301,L]
+
+RewriteRule ^archive-2021/?$ https://transpersonal-training.com/schedule/ [R=301,L]
+RewriteRule ^archive-2022/?$ https://transpersonal-training.com/schedule/ [R=301,L]
+RewriteRule ^archive-2023/?$ https://transpersonal-training.com/schedule/ [R=301,L]
+RewriteRule ^archive-2024/?$ https://transpersonal-training.com/schedule/ [R=301,L]
+RewriteRule ^archive-2025/?$ https://transpersonal-training.com/schedule/ [R=301,L]
+
+RewriteRule ^closed_meeteing_iurii_becioski-7-9-04-23/?$ - [G,L]
+
+# One old newsletter PDF, marked low-priority in the map with a caution to
+# check the GSC Links export for hotlinks first (TODO task 54, still open).
+# Gone rather than silently dropped, so a stale hotlink gets a clean 410
+# instead of a generic 404.
+RewriteRule ^wp-content/uploads/2024/10/newsletter-9\.pdf$ - [G,L]
+
+# `/?page_id=3` — ancient WP-internal query-string URL, path is root.
+RewriteCond %{QUERY_STRING} ^page_id=3$
+RewriteRule ^$ - [G,L]
+
+# The West Program 2026 PDF was never a separate file — same generator as
+# the Curriculum PDF (Fabio, Sep 2026): a Google Apps Script pulls it from
+# the spreadsheet on demand (docs/googlescripts/curriculum-pdf-download-apps-script.js).
+# That script resolves to a Drive URL at build time (src/_data/curriculumData.js),
+# which is why these point at the /curriculum/ page and its live "Download PDF"
+# button rather than at a hardcoded Drive link — the Drive URL isn't stable
+# enough to bake into .htaccess, the page always has the current one.
+RewriteRule ^wp-content/uploads/2025/09/West_Program_26\.pdf$ https://transpersonal-training.com/curriculum/ [R=301,L]
+RewriteRule ^wp-content/uploads/2025/10/West_Program_26\.pdf$ https://transpersonal-training.com/curriculum/ [R=301,L]
+
+# ── §2 Teacher bio pages ─────────────────────────────────────────
+# 64% of the old site's organic clicks. All 32 consolidate onto the single
+# /teachers/ page, which server-renders every bio — see REDIRECT_MAP.md §2
+# for why that makes the many-to-one redirect defensible. Each card carries
+# id="{{ teacher.id }}" (src/teachers.html), so the fragment opens the right
+# bio on arrival.
+#
+# 28 of 32 old slugs match the teacher's id exactly:
+
+RewriteRule ^bernadette-blin/?$ https://transpersonal-training.com/teachers/#bernadette-blin [R=301,NE,L]
+RewriteRule ^dennis-johnson/?$ https://transpersonal-training.com/teachers/#dennis-johnson [R=301,NE,L]
+RewriteRule ^kati-wortelkamp/?$ https://transpersonal-training.com/teachers/#kati-wortelkamp [R=301,NE,L]
+RewriteRule ^maria-kuehl-weigmann/?$ https://transpersonal-training.com/teachers/#maria-kuehl-weigmann [R=301,NE,L]
+RewriteRule ^liudmila-serbina/?$ https://transpersonal-training.com/teachers/#liudmila-serbina [R=301,NE,L]
+RewriteRule ^stefan-dressler/?$ https://transpersonal-training.com/teachers/#stefan-dressler [R=301,NE,L]
+RewriteRule ^lev-belogorodskii/?$ https://transpersonal-training.com/teachers/#lev-belogorodskii [R=301,NE,L]
+RewriteRule ^cristina-revenco/?$ https://transpersonal-training.com/teachers/#cristina-revenco [R=301,NE,L]
+RewriteRule ^ingrida-indane/?$ https://transpersonal-training.com/teachers/#ingrida-indane [R=301,NE,L]
+RewriteRule ^lyudmila-skartsesku/?$ https://transpersonal-training.com/teachers/#lyudmila-skartsesku [R=301,NE,L]
+RewriteRule ^tina-lindhard/?$ https://transpersonal-training.com/teachers/#tina-lindhard [R=301,NE,L]
+RewriteRule ^samvedam-randles/?$ https://transpersonal-training.com/teachers/#samvedam-randles [R=301,NE,L]
+RewriteRule ^nicolas-cambas/?$ https://transpersonal-training.com/teachers/#nicolas-cambas [R=301,NE,L]
+RewriteRule ^serge-beddington-behrens/?$ https://transpersonal-training.com/teachers/#serge-beddington-behrens [R=301,NE,L]
+RewriteRule ^mario-lorenzetti/?$ https://transpersonal-training.com/teachers/#mario-lorenzetti [R=301,NE,L]
+RewriteRule ^stephan-schillinger/?$ https://transpersonal-training.com/teachers/#stephan-schillinger [R=301,NE,L]
+RewriteRule ^lydia-maidan/?$ https://transpersonal-training.com/teachers/#lydia-maidan [R=301,NE,L]
+RewriteRule ^pier-luigi-lattuada/?$ https://transpersonal-training.com/teachers/#pier-luigi-lattuada [R=301,NE,L]
+RewriteRule ^rainer-pervoltz/?$ https://transpersonal-training.com/teachers/#rainer-pervoltz [R=301,NE,L]
+RewriteRule ^lilian-gscheidel/?$ https://transpersonal-training.com/teachers/#lilian-gscheidel [R=301,NE,L]
+RewriteRule ^vladimir-maykov/?$ https://transpersonal-training.com/teachers/#vladimir-maykov [R=301,NE,L]
+RewriteRule ^charlotte-kihl/?$ https://transpersonal-training.com/teachers/#charlotte-kihl [R=301,NE,L]
+RewriteRule ^rita-aguila/?$ https://transpersonal-training.com/teachers/#rita-aguila [R=301,NE,L]
+RewriteRule ^erik-andersen/?$ https://transpersonal-training.com/teachers/#erik-andersen [R=301,NE,L]
+RewriteRule ^manal-al-hammadi/?$ https://transpersonal-training.com/teachers/#manal-al-hammadi [R=301,NE,L]
+RewriteRule ^gabriel-fernandez-borsot/?$ https://transpersonal-training.com/teachers/#gabriel-fernandez-borsot [R=301,NE,L]
+RewriteRule ^vera-covaliciuc/?$ https://transpersonal-training.com/teachers/#vera-covaliciuc [R=301,NE,L]
+RewriteRule ^kirsten-cameron/?$ https://transpersonal-training.com/teachers/#kirsten-cameron [R=301,NE,L]
+
+# 4 slugs differ — 3 documented in REDIRECT_MAP.md, plus one it missed:
+# /dario-giuffrida/ (commit cf5a15b renamed him to Dario Hampi Pacari; the
+# map's "29 of 32 match" count is off by one because of it — actually 28).
+
+RewriteRule ^jure-biechoniski/?$ https://transpersonal-training.com/teachers/#jure-biechonski [R=301,NE,L]
+RewriteRule ^dr-ingo-benjamin-jahrsetz/?$ https://transpersonal-training.com/teachers/#ingo-jahrsetz [R=301,NE,L]
+RewriteRule ^cathys-bio/?$ https://transpersonal-training.com/teachers/#cathy-geils [R=301,NE,L]
+RewriteRule ^dario-giuffrida/?$ https://transpersonal-training.com/teachers/#dario-hampi-pacari [R=301,NE,L]
+
+# Two special cases in the same old post type:
+
+# Not a bio — the enrolment agreement appendix, still linked from the old
+# footer. No equivalent page exists in the new site, so this points at the
+# nearest real one rather than a 404. Revisit if the appendix gets rebuilt
+# as its own page (REDIRECT_MAP.md §2 left this an open choice).
+RewriteRule ^agreement-appendix/?$ https://transpersonal-training.com/legal-notice/ [R=301,L]
+
+RewriteRule ^portfolio-item/bernadette-blin/?$ https://transpersonal-training.com/teachers/#bernadette-blin [R=301,NE,L]
+
+# ── §3 Student portal — legacy root-domain paths ────────────────
+# The portal itself already lives on student.transpersonal-training.com
+# and is untouched by this cutover. These are the old paths that used to
+# sit on the root domain. Verified live against student. on 2026-09-07
+# (curl, all response codes) rather than assumed from the old path name —
+# REDIRECT_MAP.md flagged that each target needed confirming first, and
+# five of the twelve turned out not to share the old site's path name.
+
+RewriteRule ^login/?$ https://student.transpersonal-training.com/login/ [R=301,L]
+RewriteRule ^forgot-password/?$ https://student.transpersonal-training.com/forgot-password/ [R=301,L]
+RewriteRule ^reset-password/?$ https://student.transpersonal-training.com/reset-password/ [R=301,L]
+
+# No matching page found on student. for these three — sent to the portal
+# homepage per REDIRECT_MAP.md's own fallback rule, rather than guessed.
+RewriteRule ^register/?$ https://student.transpersonal-training.com/ [R=301,L]
+RewriteRule ^logout/?$ https://student.transpersonal-training.com/ [R=301,L]
+RewriteRule ^user-profile/?$ https://student.transpersonal-training.com/ [R=301,L]
+
+# Renamed on the portal, confirmed live:
+RewriteRule ^dashboard-page/?$ https://student.transpersonal-training.com/dashboard/ [R=301,L]
+RewriteRule ^course-archive/?$ https://student.transpersonal-training.com/courses/ [R=301,L]
+# Best available match for "payment" — /checkout/ is the live WooCommerce
+# page; there was no page actually named /payment/ or its equivalent to
+# confirm against, so treat this one as worth a manual click-through.
+RewriteRule ^payment/?$ https://student.transpersonal-training.com/checkout/ [R=301,L]
+
+RewriteRule ^add-events/?$ - [G,L]
+RewriteRule ^st/?$ - [G,L]
+RewriteRule ^login-customizer/?$ - [G,L]
+
+# ── §4 Event/lecture pages (348 URLs, 3 clicks total) ───────────
+# Google already treats these as not worth indexing. One pattern rule.
+
+RewriteRule ^events/ https://transpersonal-training.com/schedule/ [R=301,L]
+
+# ── §5 Taxonomy & author archives (~165 URLs, zero traffic) ─────
+
+RewriteRule ^tag/ https://transpersonal-training.com/blog/ [R=301,L]
+RewriteRule ^mec-category/ https://transpersonal-training.com/schedule/ [R=301,L]
+RewriteRule ^category/ https://transpersonal-training.com/blog/ [R=301,L]
+RewriteRule ^author/ https://transpersonal-training.com/teachers/ [R=301,L]
+RewriteRule ^alb_elements - [G,L]
+# "post-format archives" (REDIRECT_MAP.md §5) has no exact pattern recorded
+# — add its real path here once seen in GSC coverage after cutover.
+
+# ── Canonical origin: https, no www ─────────────────────────────
+# Deliberately LAST. Every rule above already targets an absolute
+# https://transpersonal-training.com URL, so a match up there resolves in a
+# single hop; this rule only catches what nothing else claimed.
+#
+# The condition reads the proxy's header rather than %{HTTPS}, and that is not
+# a stylistic choice: TLS terminates upstream at openresty, so Apache sees
+# %{HTTPS} as "off" on HTTPS requests too — measured on this server, not
+# assumed. A %{HTTPS}-based rule would therefore match its own redirect and
+# loop until the browser gives up. X-Forwarded-Proto is the only signal here
+# that actually differs between the two schemes (https vs http).
+#
+# Before this, the site answered on all four origins — http/https x www/apex —
+# serving identical content, with /apply/ taking personal data and file
+# uploads over plain HTTP.
+RewriteCond %{HTTP:X-Forwarded-Proto} =http [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://transpersonal-training.com%{REQUEST_URI} [R=301,L]

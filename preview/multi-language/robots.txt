@@ -1,0 +1,5 @@
+# Staging preview served from github.io. Every page returns
+# noindex; crawling is left open on purpose so that directive is
+# seen. Set by .github/workflows/deploy.yml.
+User-agent: *
+Allow: /
