@@ -1,0 +1,437 @@
+---
+permalink: /ru/obuchenie-transpersonalnoy-psihoterapii/
+translationOf: /training-overview/
+title: "Обучение трансперсональной психотерапии и холотропному дыханию"
+description: "Четырёхлетнее обучение трансперсональной психологии в три уровня: саморазвитие, консультирование, психотерапия и холотропное дыхание. Аккредитация EUROTAS, интенсивы на русском."
+---
+
+{% set philosophy = 'training-overview/01-philosophy.md' | pageContent(lang) %}
+{% set whyThisTraining = 'training-overview/02-why-this-training.md' | pageSections(lang) %}
+{% set programOverview = 'training-overview/03-program-overview.md' | pageContent(lang) %}
+{% set eligibility = 'training-overview/04-eligibility.md' | pageContent(lang) %}
+{% set commitmentCards = 'training-overview/commitment' | pageContentDir(lang) %}
+{% set admissions = 'training-overview/admissions' | pageContentDir(lang) %}
+
+<style>
+    .level-card:hover {
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    }
+</style>
+
+<!-- Hero Section -->
+<header class="hero-clear relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        <picture>
+            <source srcset="{{ '/assets/images/Headers/hero-training-overview-breathwork-tent.webp' | url }}" type="image/webp">
+            <img
+                src="{{ '/assets/images/Headers/hero-training-overview-breathwork-tent.jpg' | url }}"
+                alt="Участники лежат широким кругом во время группового сеанса холотропного дыхания под открытым шатром"
+                class="w-full h-full object-cover object-[50%_60%]"
+            />
+        </picture>
+        <div class="absolute inset-0 hero-clear-scrim"></div>
+    </div>
+
+    <div class="relative z-10 container mx-auto px-6 text-center pt-20">
+        <div class="animate-fade-in-up">
+            <p class="p4-kicker text-[color:var(--c-acc)] mb-6 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
+                Аккредитация EUROTAS &middot; 3 уровня &middot; 500+ часов
+                <span class="p4-hairline"></span>
+            </p>
+            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[color:var(--c-paper-hi)] mb-6 leading-tight drop-shadow-md">
+                Обучение трансперсональной психотерапии
+            </h1>
+            <p class="text-xl md:text-2xl text-[color:var(--c-on-dark-2)] max-w-3xl mx-auto font-light leading-relaxed">
+                Последовательный путь от саморазвития к профессиональному сопровождению, углублённой психотерапии<a href="#psychotherapy-note" class="text-[color:var(--c-acc)] font-bold no-underline" title="См. примечание о защищённом звании «психотерапевт»">*</a> и практике холотропного дыхания.
+            </p>
+        </div>
+    </div>
+</header>
+
+<!-- Breadcrumb -->
+<div class="bg-[color:var(--c-paper-card)] border-b border-[color:var(--c-line)]">
+    <div class="container mx-auto px-6 py-4">
+        <div class="flex items-center gap-2 text-sm text-[color:var(--c-body-dim)]">
+            <a href="{{ '/' | localeUrl(lang) | url }}" class="hover:text-[color:var(--c-link)] transition-colors">{{ i18n[lang].home }}</a>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <span class="text-[color:var(--c-body-dim)]">{{ navigation.training.label[lang] }}</span>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <span class="text-[color:var(--c-heading)] font-medium">{{ navigation.labels["/training-overview/"][lang] }}</span>
+        </div>
+    </div>
+</div>
+
+<!-- Training Philosophy — the one section that stays open, as the way in -->
+<section class="py-16 bg-[color:var(--c-paper-hi)] relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-5 pointer-events-none">
+        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[color:var(--c-link)] blur-3xl"></div>
+    </div>
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-6">
+                <p class="p4-kicker text-[color:var(--c-sec)] mb-3 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
+                    <span class="p4-hairline"></span>
+                    Философия обучения
+                    <span class="p4-hairline md:hidden"></span>
+                </p>
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)]">{{ philosophy.data.heading }}</h2>
+            </div>
+            <div class="text-[color:var(--c-body)] text-lg leading-relaxed space-y-6">
+                {{ philosophy.html | safe }}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why is this training for you? — self-selection questions, kept open like
+     Philosophy since it continues the same persuasive "way in" rather than
+     the reference material folded away below. -->
+<section class="py-16 bg-[color:var(--c-paper-card)] border-t border-[color:var(--c-line)]">
+    <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-8">
+                <p class="p4-kicker text-[color:var(--c-sec)] mb-3 flex items-center justify-center md:justify-start gap-4 text-center md:text-left">
+                    <span class="p4-hairline"></span>
+                    Для кого это
+                    <span class="p4-hairline md:hidden"></span>
+                </p>
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-4">{{ whyThisTraining.data.heading }}</h2>
+                <p class="text-[color:var(--c-body)] text-lg leading-relaxed">{{ whyThisTraining.data.intro }}</p>
+            </div>
+
+            <div class="p4-foryou">
+                {{ whyThisTraining.introHtml | safe }}
+            </div>
+
+            {% for block in whyThisTraining.blocks %}
+            <h3 class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mt-10 mb-2">{{ block.title }}</h3>
+            <div class="p4-foryou">
+                {{ block.html | safe }}
+            </div>
+            {% endfor %}
+
+            <div class="mt-8 bg-[color:var(--c-acc-10)] border-l-4 border-[color:var(--c-acc)] p-6">
+                <p class="text-[color:var(--c-body)] text-lg leading-relaxed font-medium">{{ whyThisTraining.data.closing }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- The rest of the page reads as a menu of folded panels, gathered into one
+     narrow bordered box so the closed labels stack up as the rows of a table
+     rather than six full-width bands. Native <details>, so it works without
+     JavaScript and stays keyboard- and screen-reader-operable. -->
+<section class="py-16 bg-[color:var(--c-paper)] border-t border-[color:var(--c-line)]">
+    <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+            <p class="text-center text-[color:var(--c-body)] text-lg leading-relaxed mb-8">
+                Откройте интересующие вас разделы &mdash; или, если удобнее спросить напрямую, <a href="{{ '/' | localeUrl(lang) | url }}#contact" class="text-[color:var(--c-sec)] hover:text-[color:var(--c-sec-dark)] font-medium underline underline-offset-4 decoration-[color:var(--c-acc)] transition-colors">напишите нам</a>.
+            </p>
+
+            <div class="border border-[color:var(--c-line)] bg-[color:var(--c-paper-card)] shadow-sm divide-y divide-[color:var(--c-line)]">
+                <details class="p4-reveal">
+                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[color:var(--c-paper-2)] transition-colors">
+                        <h2 class="p4-kicker text-[color:var(--c-sec)] flex items-center gap-4">
+                            <span class="p4-hairline"></span>
+                            Наша история
+                        </h2>
+                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[color:var(--c-sec)] transition-transform duration-300" aria-hidden="true"></i>
+                    </summary>
+                    <div class="border-t border-[color:var(--c-line)] px-6 pt-6">
+                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mb-6">Одна школа — Восток и Запад</h3>
+                        <div class="pb-10 space-y-5 text-[color:var(--c-body)] text-lg leading-relaxed">
+                            <p>
+                                Школа основана в 2021 году. Всё началось с Восточной программы (2021&ndash;2025), укоренённой в Молдове и Восточной Европе; за ней последовала Западная программа (2024&ndash;2027).
+                            </p>
+                            <p>
+                                В 2027&ndash;2030 годах обе части школы объединяются. <strong>Онлайн-лекции общие</strong>: одно международное сообщество учится бок о бок у одних и тех же преподавателей с Востока и Запада. Лекции читаются на английском языке, для русскоязычных студентов доступен автоматический перевод.
+                            </p>
+                            <p>
+                                <strong>Очные интенсивы проходят отдельно</strong> &mdash; на английском языке для Западного направления и <strong>на русском языке для Восточного направления</strong>. Если семинар открыт для обеих частей школы, мы обеспечиваем перевод. Направления не закрыты друг от друга: по предварительной договорённости вы можете посетить интенсив другого направления.
+                            </p>
+                            {# The same notice the home page announcement carries, kept in the
+                               school's own history rather than only in a dialog someone may
+                               have dismissed: this is where a returning student comes looking. #}
+                            <div class="bg-[color:var(--c-acc-10)] border-l-4 border-[color:var(--c-acc)] p-6 text-base">
+                                <p>
+                                    <span class="font-medium text-[color:var(--c-heading)]">Уже учились у нас?</span>
+                                    Всё о предыдущих циклах &mdash; и знакомый вам сайт &mdash; по-прежнему доступно по адресу
+                                    <a href="https://old.transpersonal-training.com/" target="_blank" rel="noopener" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-4">old.transpersonal-training.com</a>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="p4-reveal">
+                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[color:var(--c-paper-2)] transition-colors">
+                        <h2 class="p4-kicker text-[color:var(--c-sec)] flex items-center gap-4">
+                            <span class="p4-hairline"></span>
+                            Программа
+                        </h2>
+                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[color:var(--c-sec)] transition-transform duration-300" aria-hidden="true"></i>
+                    </summary>
+                    <div class="border-t border-[color:var(--c-line)] px-6 pt-6">
+                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mb-6">{{ programOverview.data.heading }}</h3>
+                        <div class="space-y-5 text-[color:var(--c-body)] text-lg leading-relaxed">
+                            {{ programOverview.html | safe }}
+                        </div>
+                        <div class="pt-6 pb-10">
+                            <a href="{{ '/curriculum/' | localeUrl(lang) | url }}" class="inline-flex items-center gap-2 text-[color:var(--c-sec)] hover:text-[color:var(--c-sec-dark)] font-medium underline underline-offset-4 decoration-[color:var(--c-acc)] transition-colors">
+                                <span>Полный учебный план по модулям (на английском)</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="p4-reveal">
+                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[color:var(--c-paper-2)] transition-colors">
+                        <h2 class="p4-kicker text-[color:var(--c-sec)] flex items-center gap-4">
+                            <span class="p4-hairline"></span>
+                            Требования
+                        </h2>
+                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[color:var(--c-sec)] transition-transform duration-300" aria-hidden="true"></i>
+                    </summary>
+                    <div class="border-t border-[color:var(--c-line)] px-6 pt-6">
+                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mb-6">{{ eligibility.data.heading }}</h3>
+                        <div class="pb-10">
+                            <div class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] p-8 shadow-sm">
+                                <h4 class="font-serif font-bold text-[color:var(--c-heading)] text-xl mb-4">{{ eligibility.data.subheading }}</h4>
+                                <p class="text-[color:var(--c-body)] text-base mb-5">{{ eligibility.data.intro }}</p>
+                                <div class="text-[color:var(--c-body-dim)] text-sm space-y-3 mb-6 eligibility-content">
+                                    {{ eligibility.html | safe }}
+                                </div>
+                                <div class="bg-[color:var(--c-acc-10)] border-l-4 border-[color:var(--c-acc)] p-4">
+                                    <p class="text-[color:var(--c-body)] text-sm leading-relaxed">
+                                        <strong class="text-[color:var(--c-sec)]">Важно:</strong> {{ eligibility.data.note }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="p4-reveal">
+                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[color:var(--c-paper-2)] transition-colors">
+                        <h2 class="p4-kicker text-[color:var(--c-sec)] flex items-center gap-4">
+                            <span class="p4-hairline"></span>
+                            Поступление
+                        </h2>
+                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[color:var(--c-sec)] transition-transform duration-300" aria-hidden="true"></i>
+                    </summary>
+                    <div class="border-t border-[color:var(--c-line)] px-6 pt-6">
+                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mb-6">Как поступить</h3>
+                        <div class="pb-10 grid gap-8">
+                            {% for adm in admissions %}
+                            <div class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] p-8 shadow-sm">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="text-xs font-bold uppercase tracking-wider text-[color:var(--c-sec)]">
+                                        {{ adm.data.level }}
+                                    </span>
+                                    <span class="text-xs text-[color:var(--c-body-dim)]">—</span>
+                                    <span class="text-xs font-semibold text-[color:var(--c-body-dim)] uppercase tracking-wider">{{ adm.data.label }}{% if adm.data.note_anchor %}<a href="{{ adm.data.note_anchor }}" class="text-[color:var(--c-sec)] font-bold no-underline normal-case" title="См. примечание о защищённом звании «психотерапевт»">*</a>{% endif %}</span>
+                                </div>
+                                {% if adm.data.who_can_apply %}
+                                <p class="text-[color:var(--c-body)] text-sm mb-4">
+                                    <strong>Кто может поступить:</strong> {{ adm.data.who_can_apply }}
+                                </p>
+                                {% endif %}
+                                <h4 class="font-semibold text-[color:var(--c-body)] text-sm mb-3">Требования</h4>
+                                <div class="text-[color:var(--c-body-dim)] text-sm space-y-2 admissions-content">
+                                    {{ adm.html | safe }}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </details>
+
+                <details class="p4-reveal">
+                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[color:var(--c-paper-2)] transition-colors">
+                        <h2 class="p4-kicker text-[color:var(--c-sec)] flex items-center gap-4">
+                            <span class="p4-hairline"></span>
+                            Обязательства
+                        </h2>
+                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[color:var(--c-sec)] transition-transform duration-300" aria-hidden="true"></i>
+                    </summary>
+                    <div class="border-t border-[color:var(--c-line)] px-6 pt-6">
+                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mb-6">Из чего состоит учёба</h3>
+                        <div class="pb-10">
+                            <p class="text-[color:var(--c-body)] text-lg leading-relaxed mb-8">
+                                Обучение требует постоянной вовлечённости в учёбу, саморазвитие и практику под супервизией.
+                            </p>
+
+                            <div class="grid md:grid-cols-2 gap-6">
+                                {% for card in commitmentCards %}
+                                <div class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] p-6 shadow-sm{% if loop.last or (loop.index == 3) %} md:col-span-2{% endif %}">
+                                    <h3 class="font-serif font-bold text-[color:var(--c-heading)] text-xl mb-4 flex items-center gap-2">
+                                        <i data-lucide="{{ card.data.icon }}" class="w-5 h-5 {{ card.data.icon_color }}"></i>
+                                        {{ card.data.heading }}
+                                    </h3>
+                                    <div class="text-[color:var(--c-body)] text-sm space-y-2 leading-relaxed commitment-content">
+                                        {{ card.html | safe }}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="p4-reveal">
+                    <summary class="flex items-center justify-between gap-6 px-6 py-4 cursor-pointer hover:bg-[color:var(--c-paper-2)] transition-colors">
+                        <h2 class="p4-kicker text-[color:var(--c-sec)] flex items-center gap-4">
+                            <span class="p4-hairline"></span>
+                            Стоимость и зачисление
+                        </h2>
+                        <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 text-[color:var(--c-sec)] transition-transform duration-300" aria-hidden="true"></i>
+                    </summary>
+                    <div class="border-t border-[color:var(--c-line)] px-6 pt-6">
+                        <h3 class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mb-6">Что вы получаете и сколько это стоит</h3>
+                        <div class="pb-10">
+                            <!-- Certificates per level -->
+                            <div class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm overflow-hidden mb-8">
+                                <table class="block md:table w-full text-left text-sm md:text-base">
+                                    <thead class="hidden md:table-header-group">
+                                        <tr class="bg-[color:var(--c-deep)] text-[color:var(--c-paper-hi)]">
+                                            <th class="px-4 py-3 font-semibold">Уровень</th>
+                                            <th class="px-4 py-3 font-semibold whitespace-nowrap">Длительность</th>
+                                            <th class="px-4 py-3 font-semibold">Сертификат</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="block md:table-row-group divide-y divide-[color:var(--c-line)]">
+                                        <tr class="block md:table-row">
+                                            <td class="block md:table-cell px-4 pt-4 pb-1 md:py-3 font-medium text-[color:var(--c-heading)] align-top">Уровень 1<br><span class="text-xs text-[color:var(--c-body-dim)] font-normal">Саморазвитие</span></td>
+                                            <td class="block md:table-cell px-4 py-1 md:py-3 text-[color:var(--c-body)] align-top whitespace-nowrap"><span class="md:hidden text-xs uppercase tracking-wide text-[color:var(--c-body-dim)] mr-2">Длительность</span>1 год</td>
+                                            <td class="block md:table-cell px-4 pt-1 pb-4 md:py-3 text-[color:var(--c-body)] align-top">Сертификат о прохождении. Можно пройти отдельно — как самостоятельный год саморазвития.</td>
+                                        </tr>
+                                        <tr class="block md:table-row">
+                                            <td class="block md:table-cell px-4 pt-4 pb-1 md:py-3 font-medium text-[color:var(--c-heading)] align-top">Уровень 2<br><span class="text-xs text-[color:var(--c-body-dim)] font-normal">Навыки консультирования</span></td>
+                                            <td class="block md:table-cell px-4 py-1 md:py-3 text-[color:var(--c-body)] align-top whitespace-nowrap"><span class="md:hidden text-xs uppercase tracking-wide text-[color:var(--c-body-dim)] mr-2">Длительность</span>1,5 года</td>
+                                            <td class="block md:table-cell px-4 pt-1 pb-4 md:py-3 text-[color:var(--c-body)] align-top">Сертификат по навыкам трансперсонального консультирования, выдаваемый через институт с аккредитацией EUROTAS, с зачётом часов для сертификации EUROTAS.</td>
+                                        </tr>
+                                        <tr class="block md:table-row">
+                                            <td class="block md:table-cell px-4 pt-4 pb-1 md:py-3 font-medium text-[color:var(--c-heading)] align-top">Уровень 3<br><span class="text-xs text-[color:var(--c-body-dim)] font-normal">Психотерапия<a href="#psychotherapy-note" class="text-[color:var(--c-sec)] font-bold no-underline" title="См. примечание о защищённом звании «психотерапевт»">*</a> и холотропное дыхание</span></td>
+                                            <td class="block md:table-cell px-4 py-1 md:py-3 text-[color:var(--c-body)] align-top whitespace-nowrap"><span class="md:hidden text-xs uppercase tracking-wide text-[color:var(--c-body-dim)] mr-2">Длительность</span>1,5 года</td>
+                                            <td class="block md:table-cell px-4 pt-1 pb-4 md:py-3 text-[color:var(--c-body)] align-top">Сертификат трансперсонального психотерапевта<a href="#psychotherapy-note" class="text-[color:var(--c-sec)] font-bold no-underline" title="См. примечание о защищённом звании «психотерапевт»">*</a> и фасилитатора дыхательных практик, с возможностью пройти сертификацию EUROTAS.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div id="psychotherapy-note" class="scroll-mt-24 bg-[color:var(--c-acc-10)] border-t border-[color:var(--c-acc-30)] px-4 py-3">
+                                    <p class="text-xs md:text-sm text-[color:var(--c-body)] leading-relaxed">
+                                        <strong class="text-[color:var(--c-sec)]">*Обратите внимание:</strong> во многих странах (например, в Германии, Франции, Италии и Австрии) звание &laquo;психотерапевт&raquo; защищено законом. Прежде чем использовать его в профессиональной деятельности, ознакомьтесь с правилами психотерапевтической практики в стране, где вы собираетесь работать. <a href="{{ '/legal-notice/' | localeUrl(lang) | url }}" class="text-[color:var(--c-sec)] hover:text-[color:var(--c-sec-dark)] underline underline-offset-2 font-medium">Полная правовая информация (на английском)</a>.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Enrolment options + Fees -->
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] p-6 shadow-sm">
+                                    <h3 class="font-serif font-bold text-[color:var(--c-heading)] text-xl mb-4 flex items-center gap-2">
+                                        <i data-lucide="list-checks" class="w-5 h-5 text-[color:var(--c-link)]"></i>
+                                        Как можно учиться
+                                    </h3>
+                                    <ul class="text-[color:var(--c-body)] text-sm space-y-2 leading-relaxed list-disc list-inside">
+                                        <li><strong>Полное обучение</strong> — все три уровня, с выходом на профессиональную сертификацию.</li>
+                                        <li><strong>Только саморазвитие</strong> — пройти Уровень 1 отдельно, без обязательства продолжать.</li>
+                                        <li><strong>Отдельные лекции</strong> — выбрать отдельные лекции в записи.</li>
+                                        <li><strong>Отдельные семинары</strong> — посетить один очный интенсив.</li>
+                                    </ul>
+                                    <p class="text-xs text-[color:var(--c-body-dim)] mt-4">Варианты обучения одинаковы для Западного и Восточного направлений.</p>
+                                </div>
+                                <div class="bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] p-6 shadow-sm">
+                                    <h3 class="font-serif font-bold text-[color:var(--c-heading)] text-xl mb-4 flex items-center gap-2">
+                                        <i data-lucide="wallet" class="w-5 h-5 text-[color:var(--c-link)]"></i>
+                                        Стоимость
+                                    </h3>
+                                    <ul class="text-[color:var(--c-body)] text-sm space-y-2 leading-relaxed">
+                                        <li class="flex justify-between gap-4"><span>Модуль &mdash; Восточное направление</span><span class="font-semibold text-[color:var(--c-heading)] whitespace-nowrap">&euro;489</span></li>
+                                        <li class="flex justify-between gap-4"><span>Модуль &mdash; Западное направление</span><span class="font-semibold text-[color:var(--c-heading)] whitespace-nowrap">&euro;689</span></li>
+                                        <li class="flex justify-between gap-4"><span>Отдельная лекция</span><span class="font-semibold text-[color:var(--c-heading)] whitespace-nowrap">&euro;45</span></li>
+                                        <li class="flex justify-between gap-4"><span>Отдельный семинар</span><span class="font-semibold text-[color:var(--c-heading)] whitespace-nowrap">по запросу</span></li>
+                                    </ul>
+                                    <p class="text-xs text-[color:var(--c-body-dim)] mt-4">Каждый модуль длится около трёх месяцев. Оплата помодульная — не нужно платить сразу за весь год.</p>
+                                    <p class="text-xs md:text-sm text-[color:var(--c-body)] leading-relaxed mt-4 bg-[color:var(--c-acc-10)] border border-[color:var(--c-acc-30)] px-3 py-2">
+                                        <strong class="text-[color:var(--c-sec)]">Обратите внимание:</strong> это стоимость текущего обучения 2024&ndash;2027. Стоимость нового цикла, который начнётся в октябре 2027 года, может измениться — мы сообщим её как можно скорее.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Discounts + payment note -->
+                            <div class="mt-6 bg-[color:var(--c-deep-5)] border border-[color:var(--c-deep-10)] p-6">
+                                <div class="flex items-start gap-3">
+                                    <i data-lucide="hand-heart" class="w-5 h-5 text-[color:var(--c-sec)] flex-shrink-0 mt-0.5"></i>
+                                    <div class="text-sm text-[color:var(--c-body)] leading-relaxed space-y-2">
+                                        <p><strong class="text-[color:var(--c-heading)]">Деньги не должны быть препятствием.</strong> Если стоимость для вас действительно проблема, напишите нам — мы можем предложить скидку в индивидуальном порядке.</p>
+                                        <p>Кроме того, вы получаете <strong class="text-[color:var(--c-heading)]">один бесплатный модуль за каждого нового студента</strong>, которого приведёте в школу.</p>
+                                        <p class="text-xs text-[color:var(--c-body-dim)] pt-1">Онлайн-оплата на сайте пока недоступна; зачисление и оплата оформляются напрямую через офис.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="bg-gradient-to-br from-[var(--c-deep)] to-[var(--c-deep-2)] text-[color:var(--c-on-dark-1)] py-16">
+    <div class="container mx-auto px-6 text-center">
+        <p class="p4-kicker text-[color:var(--c-acc)] mb-4 flex items-center justify-center gap-4">
+            <span class="p4-hairline"></span>
+            Следующий шаг
+            <span class="p4-hairline"></span>
+        </p>
+        <h2 class="p4-display text-3xl md:text-4xl font-medium mb-4 text-[color:var(--c-paper-hi)]">Готовы начать?</h2>
+        <p class="text-[color:var(--c-on-dark-3)] max-w-2xl mx-auto mb-8">{% if applications.open %}Узнайте, как подать заявку, изучите{% else %}Изучите{% endif %} учебный план подробнее или напишите нам, чтобы подобрать подходящий для вас формат.</p>
+        {# Same gap as on /curriculum/: this page argued the case at length and
+           then never offered the application page. #}
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            {% if applications.open %}
+            <a href="{{ '/apply/' | localeUrl(lang) | url }}" class="inline-block bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-heading)] px-8 py-3 font-medium tracking-wide transition-all shadow-lg hover:shadow-xl">
+                Подать заявку
+            </a>
+            {% else %}
+            <span aria-disabled="true" class="inline-block border border-dashed border-[color:var(--c-on-dark-5)] text-[color:var(--c-on-dark-4)] px-8 py-3 font-medium tracking-wide cursor-not-allowed">
+                {{ applications.noticeRu }}
+            </span>
+            {% endif %}
+            <a href="{{ '/curriculum/' | localeUrl(lang) | url }}" class="inline-block border border-[color:var(--c-paper-hi-60)] hover:border-[color:var(--c-acc)] text-[color:var(--c-paper-hi)] hover:text-[color:var(--c-acc)] px-8 py-3 font-medium tracking-wide transition-all">
+                Учебный план
+            </a>
+            <a href="{{ '/' | localeUrl(lang) | url }}#contact" class="inline-block border border-[color:var(--c-paper-hi-60)] hover:border-[color:var(--c-acc)] text-[color:var(--c-paper-hi)] hover:text-[color:var(--c-acc)] px-8 py-3 font-medium tracking-wide transition-all">
+                Связаться с нами
+            </a>
+        </div>
+    </div>
+</section>
+
+<script>
+    // The footnote markers point at #psychotherapy-note, which lives inside a
+    // panel that is folded away by default. Open its ancestors first, otherwise
+    // the browser has nothing to scroll to.
+    (function () {
+        function revealTarget(hash) {
+            if (!hash || hash.length < 2) return;
+            var target = document.getElementById(decodeURIComponent(hash.slice(1)));
+            if (!target) return;
+            var panel = target.closest('details');
+            while (panel) {
+                panel.open = true;
+                panel = panel.parentElement ? panel.parentElement.closest('details') : null;
+            }
+            target.scrollIntoView();
+        }
+
+        document.addEventListener('click', function (event) {
+            var link = event.target.closest('a[href^="#"]');
+            if (link) revealTarget(link.getAttribute('href'));
+        });
+        window.addEventListener('hashchange', function () { revealTarget(location.hash); });
+        revealTarget(location.hash);
+    })();
+</script>

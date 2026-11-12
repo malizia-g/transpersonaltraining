@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+{% set t = i18n[lang] %}
+<html lang="{{ lang }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,25 +22,70 @@
     <link rel="canonical" href="{% canonicalURL "" %}">
     {% endif %}
 
+    {# Language versions of this page. A translation names its English page in
+       `translationOf`; an English page is its own key. hreflang has to be
+       reciprocal and self-referencing to count, which is why every version
+       lists every version, itself included. x-default is English: the
+       version for anyone whose language has no page of its own. #}
+    {% set altKey = translationOf or page.url %}
+    {% set alts = collections.translations[altKey] %}
+    {% if alts %}
+    {% for code, href in alts %}
+    <link rel="alternate" hreflang="{{ code }}" href="{{ seo.url }}{{ href }}">
+    {% endfor %}
+    <link rel="alternate" hreflang="x-default" href="{{ seo.url }}{{ alts.en }}">
+    {% endif %}
+
+    {# First visit in a Russian-language browser: an English page that has a
+       Russian version sends the reader there. Once someone picks a language
+       with the switcher, that choice wins from then on, in both directions.
+
+       Done here rather than with an Accept-Language rule in .htaccess on
+       purpose. Search engines must be able to fetch the English URL and get
+       the English page — a server redirect keyed on language risks the
+       crawler only ever seeing one version — and Yandex's crawler renders
+       pages in a Russian locale, so crawlers are excluded by user agent too.
+       It runs in <head>, before anything paints, so there is no flash of the
+       English page. #}
+    {% if lang == 'en' and alts and alts.ru %}
+    <script>
+    (function () {
+        try {
+            if (/bot|crawl|spider|slurp|yandex|lighthouse|headless/i.test(navigator.userAgent)) return;
+            var chosen = null;
+            try { chosen = localStorage.getItem('lang'); } catch (e) {}
+            var wantsRu = chosen ? chosen === 'ru'
+                : /^ru\b/i.test((navigator.languages && navigator.languages[0]) || navigator.language || '');
+            if (wantsRu) location.replace({{ (alts.ru | url) | dump | safe }} + location.hash);
+        } catch (e) {}
+    })();
+    </script>
+    {% endif %}
+
     {% openGraph "" %}
+    <meta property="og:locale" content="{{ t.ogLocale }}">
+    {% if alts %}{% for code, href in alts %}{% if code != lang %}
+    <meta property="og:locale:alternate" content="{{ i18n[code].ogLocale }}">
+    {% endif %}{% endfor %}{% endif %}
     {% twitterCard "" %}
 
     {# JSON-LD Structured Data #}
-    {% if page.url == "/" %}
+    {% set sc = t.schema %}
+    {% if page.url == "/" or translationOf == "/" %}
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "EducationalOrganization",
       "name": "Transpersonal Training",
       "url": "https://transpersonal-training.com",
-      "description": "Professional transpersonal psychotherapy and breathwork training. EUROTAS-accredited online programme, one international East–West cohort, with in-person intensives in Europe.",
+      "description": {{ sc.orgDescription | dump | safe }},
       "contactPoint": [
         {
           "@type": "ContactPoint",
           "telephone": "+49-176-38034517",
           "email": "west-office@transpersonal-training.com",
           "contactType": "admissions",
-          "areaServed": "Western track",
+          "areaServed": {{ sc.westTrack | dump | safe }},
           "availableLanguage": ["English", "German"]
         },
         {
@@ -47,7 +93,7 @@
           "telephone": "+373-79024199",
           "email": "east-office@transpersonal-training.com",
           "contactType": "admissions",
-          "areaServed": "Eastern track",
+          "areaServed": {{ sc.eastTrack | dump | safe }},
           "availableLanguage": ["Russian", "English"]
         }
       ],
@@ -66,20 +112,22 @@
     {
       "@context": "https://schema.org",
       "@type": "Course",
-      "name": "Transpersonal Psychotherapy & Holotropic Breathing Training",
-      "description": "A four-year, EUROTAS-accredited training in Transpersonal Psychotherapy, Counselling and Holotropic Breathing, delivered online to one international East–West cohort, with in-person intensives held in Europe.",
+      "name": {{ sc.courseName | dump | safe }},
+      "description": {{ sc.courseDescription | dump | safe }},
       "provider": {
         "@type": "EducationalOrganization",
         "name": "Transpersonal Training",
         "url": "https://transpersonal-training.com"
       },
       "educationalLevel": "Professional",
-      "educationalCredentialAwarded": "Certificate as Transpersonal Psychotherapy & Breathwork Facilitator (EUROTAS-accredited), with an optional EUROTAS certification track",
+      "educationalCredentialAwarded": {{ sc.credential | dump | safe }},
       "timeRequired": "P4Y",
-      "occupationalCategory": "Transpersonal Psychotherapy & Breathwork Facilitator",
-      "teaches": ["Transpersonal Psychology", "Holotropic Breathing", "Counselling Skills", "Psychotherapy"],
-      "availableLanguage": "English",
-      "inLanguage": "en",
+      "occupationalCategory": {{ sc.occupation | dump | safe }},
+      "teaches": {{ sc.teaches | dump | safe }},
+      {#- Lectures are in English (with automatic Russian translation); the
+          Eastern track's intensives are held in Russian. #}
+      "availableLanguage": ["English", "Russian"],
+      "inLanguage": {{ lang | dump | safe }},
       "courseMode": ["online", "onsite"],
       "hasCourseInstance": {
         "@type": "CourseInstance",
@@ -226,7 +274,8 @@
     {# Breadcrumbs. The site is flat, so most pages are simply Home > Page; blog
        posts get the extra Blog level. Worth emitting even for one level: Google
        renders it in place of the raw URL in results. #}
-    {% if page.url != "/" %}
+    {% set homeUrl = '/' | localeUrl(lang) %}
+    {% if page.url != homeUrl %}
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -235,8 +284,8 @@
         {
           "@type": "ListItem",
           "position": 1,
-          "name": "Home",
-          "item": "https://transpersonal-training.com/"
+          "name": {{ t.home | dump | safe }},
+          "item": "https://transpersonal-training.com{{ homeUrl }}"
         }{% if page.url.startsWith("/blog/") and page.url != "/blog/" %},
         {
           "@type": "ListItem",
@@ -317,6 +366,10 @@
        first paint, so they are preloaded; the rest load as the page needs them. #}
     <link rel="preload" href="{{ '/assets/fonts/Inter-400-latin.woff2' | url }}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{ '/assets/fonts/CormorantGaramond-600-latin.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+    {% if lang == 'ru' %}
+    <link rel="preload" href="{{ '/assets/fonts/Inter-cyrillic.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ '/assets/fonts/CormorantGaramond-cyrillic.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+    {% endif %}
 
     {# Lucide, self-hosted at the version we were already pinning. Same reasoning
        as the fonts: one fewer third party watching visitors arrive, and one
@@ -328,7 +381,7 @@
     <!-- Page Loader -->
     <div id="page-loader">
         <div class="loader-spinner"></div>
-        <div class="loader-text">Loading...</div>
+        <div class="loader-text">{{ t.loading }}</div>
     </div>
 
     <!-- Navigation -->

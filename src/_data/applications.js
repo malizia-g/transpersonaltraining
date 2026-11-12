@@ -9,5 +9,7 @@
 
 module.exports = {
     open: false,
-    notice: 'Applications open in 2027'
+    notice: 'Applications open in 2027',
+    // The same notice on the Russian pages (src/ru/).
+    noticeRu: 'Приём заявок откроется в 2027 году'
 };

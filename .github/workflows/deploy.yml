@@ -5,6 +5,11 @@ on:
     branches:
       - main
       - staging
+      # Content branches that need review before they reach staging. Each one
+      # is published to its own folder of the github.io preview — see
+      # "Work out where this build is published" below. Add a branch here to
+      # give it a preview; nothing else needs changing.
+      - multi-language
   # schedule:
   #   - cron: '0 6 * * *'      # Daily rebuild at 6:00 UTC (8:00 CET / 7:00 GMT)
   workflow_dispatch:
@@ -17,8 +22,30 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    # staging and the review previews all push to the same `deploy` branch;
+    # two pushes racing each other would make one fail. Queue them instead.
+    concurrency:
+      group: ${{ github.ref == 'refs/heads/main' && 'production' || 'github-pages-deploy-branch' }}
+      cancel-in-progress: false
     
     steps:
+      # main → transpersonal-training.com (root)
+      # staging → malizia-g.github.io/transpersonaltraining/
+      # any other branch → malizia-g.github.io/transpersonaltraining/preview/<branch>/
+      #
+      # A preview lands in its own folder of the `deploy` branch. The staging
+      # deploy below uses keep_files, so it never deletes that folder, and a
+      # preview deploy only ever writes inside its own folder — staging's files
+      # are not touched. To retire a preview, delete its folder from `deploy`.
+      - name: Work out where this build is published
+        run: |
+          case "$GITHUB_REF_NAME" in
+            main)    echo "PATH_PREFIX=/" >> "$GITHUB_ENV" ;;
+            staging) echo "PATH_PREFIX=/transpersonaltraining/" >> "$GITHUB_ENV" ;;
+            *)       echo "PREVIEW_DIR=preview/$GITHUB_REF_NAME" >> "$GITHUB_ENV"
+                     echo "PATH_PREFIX=/transpersonaltraining/preview/$GITHUB_REF_NAME/" >> "$GITHUB_ENV" ;;
+          esac
+
       - name: Checkout repository
         uses: actions/checkout@v4
       
@@ -54,10 +81,6 @@ jobs:
         run: |
           npm run clean
           npm run build:css
-        env:
-          # main serves transpersonal-training.com from the domain root; staging
-          # is still previewed under the malizia-g.github.io subpath below.
-          PATH_PREFIX: ${{ github.ref == 'refs/heads/main' && '/' || '/transpersonaltraining/' }}
 
       - name: Restore cached student images into _site
         run: |
@@ -69,8 +92,6 @@ jobs:
 
       - name: Build Eleventy
         run: npm run build:eleventy
-        env:
-          PATH_PREFIX: ${{ github.ref == 'refs/heads/main' && '/' || '/transpersonaltraining/' }}
 
       # ── staging preview only ──
       # main went live on the production host at cutover (Sep 2026), so its
@@ -124,6 +145,8 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
           publish_branch: deploy
+          # Empty for staging (the root); preview/<branch> for a review branch.
+          destination_dir: ${{ env.PREVIEW_DIR }}
           keep_files: true
           commit_message: 'Deploy: ${{ github.event.head_commit.message }}'
           user_name: 'github-actions[bot]'

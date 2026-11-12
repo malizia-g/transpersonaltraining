@@ -1,8 +1,19 @@
-{% set contactHref = '#contact' if page.url == '/' else (('/' | url) ~ '#contact') %}
+{% set t = i18n[lang] %}
+{% set homeUrl = '/' | localeUrl(lang) %}
+{% set contactHref = '#contact' if page.url == homeUrl else ((homeUrl | url) ~ '#contact') %}
+{# The language switcher goes to this page in the other language when it
+   exists, and to that language's home page when it doesn't. Clicking it also
+   records the choice, so the automatic redirect in base.njk never overrides a
+   reader who has picked a language by hand. #}
+{% set otherLang = 'en' if lang == 'ru' else 'ru' %}
+{% set altKey = translationOf or page.url %}
+{% set alts = collections.translations[altKey] %}
+{% set switchHref = (alts[otherLang] if (alts and alts[otherLang]) else ('/' | localeUrl(otherLang))) | url %}
+{% set switchClick = "try{localStorage.setItem('lang','" ~ otherLang ~ "')}catch(e){}" %}
 <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 bg-transparent text-[color:var(--c-on-dark-2)]">
     <div class="container mx-auto px-6 flex justify-between items-center relative z-10">
         <!-- Logo (Desktop Only) -->
-        <a href="{{ '/' | url }}" class="hidden md:flex items-center gap-2 hover:opacity-80 transition-opacity">
+        <a href="{{ homeUrl | url }}" class="hidden md:flex items-center gap-2 hover:opacity-80 transition-opacity">
             <div class="w-10 h-10 flex items-center justify-center bg-[color:var(--c-acc)] rounded-full transition-transform duration-300 group hover:rotate-180 shrink-0">
                 <img src="{{ '/assets/images/Graphics/logo.svg' | url }}" alt="Logo" class="w-8 h-8 transition-transform duration-500 group-hover:rotate-180" style="display:block;" />
             </div>
@@ -13,7 +24,7 @@
         </a>
 
         <!-- Logo (Mobile Only) -->
-        <a href="{{ '/' | url }}" class="flex md:hidden items-center gap-2 hover:opacity-80 transition-opacity">
+        <a href="{{ homeUrl | url }}" class="flex md:hidden items-center gap-2 hover:opacity-80 transition-opacity">
             <div class="w-8 h-8 flex items-center justify-center bg-[color:var(--c-acc)] rounded-full transition-transform duration-300 group hover:rotate-180 shrink-0">
                 <img src="{{ '/assets/images/Graphics/logo.svg' | url }}" alt="Logo" class="w-6 h-6 transition-transform duration-500 group-hover:rotate-180" style="display:block;" />
             </div>
@@ -25,89 +36,28 @@
 
         <!-- Desktop Menu -->
         <div class="hidden md:flex items-center gap-8">
-            <!-- Training Dropdown -->
+            {% for group in [navigation.training, navigation.resources] %}
             <div class="dropdown">
                 <button type="button" class="nav-link text-sm font-medium hover:text-[color:var(--c-acc)] transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
-                    Training <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    {{ group.label[lang] }} <i data-lucide="chevron-down" class="w-4 h-4"></i>
                 </button>
                 <div class="dropdown-menu">
-                    <a href="{{ '/training-overview/' | url }}" class="text-sm">
-                        <i data-lucide="compass" class="w-4 h-4 submenu-icon"></i>
-                        <span>Training Overview</span>
+                    {% for item in group.items %}
+                    <a href="{{ item.url if item.external else (item.url | localeUrl(lang) | url) }}"{% if item.external %} target="_blank" rel="noopener"{% endif %} class="text-sm">
+                        <i data-lucide="{{ item.icon }}" class="w-4 h-4 submenu-icon"></i>
+                        <span>{{ item.label[lang] }}</span>
+                        {% if not item.external and not (item.url | hasTranslation(lang)) %}<span class="ml-auto text-[10px] tracking-wider opacity-60" title="{{ t.englishOnly }}">EN</span>{% endif %}
                     </a>
-                    <a href="{{ '/curriculum/' | url }}" class="text-sm">
-                        <i data-lucide="book-open" class="w-4 h-4 submenu-icon"></i>
-                        <span>Curriculum</span>
-                    </a>
-                    <a href="{{ '/teachers/' | url }}" class="text-sm">
-                        <i data-lucide="users" class="w-4 h-4 submenu-icon"></i>
-                        <span>Our Teachers</span>
-                    </a>
-                    <a href="{{ '/schedule/' | url }}" class="text-sm">
-                        <i data-lucide="calendar" class="w-4 h-4 submenu-icon"></i>
-                        <span>Intensive Schedule</span>
-                    </a>
-                    <a href="{{ '/venues/' | url }}" class="text-sm">
-                        <i data-lucide="map-pin" class="w-4 h-4 submenu-icon"></i>
-                        <span>Venues</span>
-                    </a>
-                    <a href="{{ '/lectures-schedule/' | url }}" class="text-sm">
-                        <i data-lucide="presentation" class="w-4 h-4 submenu-icon"></i>
-                        <span>Lectures Schedule</span>
-                    </a>
+                    {% endfor %}
                 </div>
             </div>
+            {% endfor %}
 
+            <a href="{{ navigation.blog.url | localeUrl(lang) | url }}" class="nav-link text-sm font-medium hover:text-[color:var(--c-acc)] transition-colors">{{ navigation.blog.label[lang] }}</a>
 
-            <!-- Resources Dropdown (con Techniques) -->
-            <div class="dropdown">
-                <button type="button" class="nav-link text-sm font-medium hover:text-[color:var(--c-acc)] transition-colors flex items-center gap-1 bg-transparent border-none cursor-pointer">
-                    Resources <i data-lucide="chevron-down" class="w-4 h-4"></i>
-                </button>
-                <div class="dropdown-menu">
-                    {# Apply is hidden from the menu until the page is ready; it goes back
-                       exactly as it stands here. Commented rather than deleted so restoring
-                       it is one edit, in both this menu and the mobile one below.
-                       → docs/TODO.md task 63.
-                    <a href="{{ '/apply/' | url }}" class="text-sm">
-                        <i data-lucide="clipboard-check" class="w-4 h-4 submenu-icon"></i>
-                        <span>Apply</span>
-                    </a>
-                    #}
-                    <a href="{{ '/what-is-transpersonal-psychology/' | url }}" class="text-sm">
-                        <i data-lucide="stethoscope" class="w-4 h-4 submenu-icon"></i>
-                        <span>What is Transpersonal Psychology</span>
-                    </a>
-                    <a href="{{ '/become-a-practice-client/' | url }}" class="text-sm">
-                        <i data-lucide="user-check" class="w-4 h-4 submenu-icon"></i>
-                        <span>Become a Practice Client</span>
-                    </a>
-                    <a href="{{ '/techniques/' | url }}" class="text-sm">
-                        <i data-lucide="activity" class="w-4 h-4 submenu-icon"></i>
-                        <span>School Pillars</span>
-                    </a>
-                    <a href="{{ '/resources/' | url }}" class="text-sm">
-                        <i data-lucide="book-marked" class="w-4 h-4 submenu-icon"></i>
-                        <span>Recommended Reading</span>
-                    </a>
-                    <a href="{{ '/collaborations/' | url }}" class="text-sm">
-                        <i data-lucide="handshake" class="w-4 h-4 submenu-icon"></i>
-                        <span>Collaborations</span>
-                    </a>
-                    <a href="https://student.transpersonal-training.com/" target="_blank" rel="noopener" class="text-sm">
-                        <i data-lucide="graduation-cap" class="w-4 h-4 submenu-icon"></i>
-                        <span>Learning platform</span>
-                    </a>
-                    <a href="https://old.transpersonal-training.com/" target="_blank" rel="noopener" class="text-sm">
-                        <i data-lucide="archive" class="w-4 h-4 submenu-icon"></i>
-                        <span>Old website</span>
-                    </a>
-                </div>
-            </div>
+            <a href="{{ switchHref }}" hreflang="{{ otherLang }}" lang="{{ otherLang }}" onclick="{{ switchClick }}" title="{{ t.switchTo }}" class="nav-link text-xs font-semibold tracking-widest hover:text-[color:var(--c-acc)] transition-colors border border-[color:var(--c-acc-40)] px-2 py-1">{{ i18n[otherLang].short }}</a>
 
-            <a href="{{ '/blog/' | url }}" class="nav-link text-sm font-medium hover:text-[color:var(--c-acc)] transition-colors">Blog</a>
-
-            <a href="{{ contactHref }}" class="bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-deep)] px-4 py-1.5 text-xs lg:px-6 lg:py-2 lg:text-sm font-medium tracking-wide transition-colors shadow-md whitespace-nowrap">Request a Demo</a>
+            <a href="{{ contactHref }}" class="bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-deep)] px-4 py-1.5 text-xs lg:px-6 lg:py-2 lg:text-sm font-medium tracking-wide transition-colors shadow-md whitespace-nowrap">{{ t.requestDemo }}</a>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -118,67 +68,21 @@
 
     <!-- Mobile Menu Dropdown -->
     <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full shadow-xl py-6 px-6 flex-col gap-4 z-20 border-t">
-        <span class="text-[color:var(--c-on-dark-2)] py-2 border-b block font-semibold">Training</span>
-        <a href="{{ '/training-overview/' | url }}" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
-            <i data-lucide="compass" class="w-4 h-4 submenu-icon"></i>
-            <span>Training Overview</span>
+        {% for group in [navigation.training, navigation.resources] %}
+        <span class="text-[color:var(--c-on-dark-2)] py-2 border-b block font-semibold">{{ group.label[lang] }}</span>
+        {% for item in group.items %}
+        <a href="{{ item.url if item.external else (item.url | localeUrl(lang) | url) }}"{% if item.external %} target="_blank" rel="noopener"{% endif %} class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
+            <i data-lucide="{{ item.icon }}" class="w-4 h-4 submenu-icon"></i>
+            <span>{{ item.label[lang] }}</span>
+            {% if not item.external and not (item.url | hasTranslation(lang)) %}<span class="ml-auto text-[10px] tracking-wider opacity-60" title="{{ t.englishOnly }}">EN</span>{% endif %}
         </a>
-        <a href="{{ '/curriculum/' | url }}" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
-            <i data-lucide="book-open" class="w-4 h-4 submenu-icon"></i>
-            <span>Curriculum</span>
+        {% endfor %}
+        {% endfor %}
+        <a href="{{ navigation.blog.url | localeUrl(lang) | url }}" class="text-[color:var(--c-on-dark-2)] py-2 border-b block transition-colors">{{ navigation.blog.label[lang] }}</a>
+        <a href="{{ switchHref }}" hreflang="{{ otherLang }}" lang="{{ otherLang }}" onclick="{{ switchClick }}" class="text-[color:var(--c-on-dark-2)] py-2 border-b flex items-center gap-2 transition-colors text-sm">
+            <i data-lucide="languages" class="w-4 h-4 submenu-icon"></i>
+            <span>{{ t.switchTo }}</span>
         </a>
-        <a href="{{ '/teachers/' | url }}" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
-            <i data-lucide="users" class="w-4 h-4 submenu-icon"></i>
-            <span>Our Teachers</span>
-        </a>
-        <a href="{{ '/schedule/' | url }}" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
-            <i data-lucide="calendar" class="w-4 h-4 submenu-icon"></i>
-            <span>Intensive Schedule</span>
-        </a>
-        <a href="{{ '/venues/' | url }}" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
-            <i data-lucide="map-pin" class="w-4 h-4 submenu-icon"></i>
-            <span>Venues</span>
-        </a>
-        <a href="{{ '/lectures-schedule/' | url }}" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
-            <i data-lucide="presentation" class="w-4 h-4 submenu-icon"></i>
-            <span>Lectures Schedule</span>
-        </a>
-        <span class="text-[color:var(--c-on-dark-2)] py-2 border-b block font-semibold">Resources</span>
-        {# Hidden with its desktop twin above — restore both together. → docs/TODO.md task 63.
-        <a href="{{ '/apply/' | url }}" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
-            <i data-lucide="clipboard-check" class="w-4 h-4 submenu-icon"></i>
-            <span>Apply</span>
-        </a>
-        #}
-        <a href="{{ '/what-is-transpersonal-psychology/' | url }}" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
-            <i data-lucide="stethoscope" class="w-4 h-4 submenu-icon"></i>
-            <span>What is Transpersonal Psychology</span>
-        </a>
-        <a href="{{ '/become-a-practice-client/' | url }}" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
-            <i data-lucide="user-check" class="w-4 h-4 submenu-icon"></i>
-            <span>Become a Practice Client</span>
-        </a>
-        <a href="{{ '/techniques/' | url }}" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
-            <i data-lucide="activity" class="w-4 h-4 submenu-icon"></i>
-            <span>School Pillars</span>
-        </a>
-        <a href="{{ '/resources/' | url }}" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
-            <i data-lucide="book-marked" class="w-4 h-4 submenu-icon"></i>
-            <span>Recommended Reading</span>
-        </a>
-        <a href="{{ '/collaborations/' | url }}" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
-            <i data-lucide="handshake" class="w-4 h-4 submenu-icon"></i>
-            <span>Collaborations</span>
-        </a>
-        <a href="https://student.transpersonal-training.com/" target="_blank" rel="noopener" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
-            <i data-lucide="graduation-cap" class="w-4 h-4 submenu-icon"></i>
-            <span>Learning platform</span>
-        </a>
-        <a href="https://old.transpersonal-training.com/" target="_blank" rel="noopener" class="text-[color:var(--c-on-dark-2)] py-2 pl-4 border-b flex items-center gap-2 transition-colors text-sm">
-            <i data-lucide="archive" class="w-4 h-4 submenu-icon"></i>
-            <span>Old website</span>
-        </a>
-        <a href="{{ '/blog/' | url }}" class="text-[color:var(--c-on-dark-2)] py-2 border-b block transition-colors">Blog</a>
-        <a href="{{ contactHref }}" class="bg-[color:var(--c-acc)] text-[color:var(--c-deep)] px-6 py-3 w-full mt-4 font-bold text-center block">Request a Demo</a>
+        <a href="{{ contactHref }}" class="bg-[color:var(--c-acc)] text-[color:var(--c-deep)] px-6 py-3 w-full mt-4 font-bold text-center block">{{ t.requestDemo }}</a>
     </div>
 </nav>

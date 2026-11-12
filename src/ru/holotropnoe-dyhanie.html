@@ -1,0 +1,299 @@
+---
+permalink: /ru/holotropnoe-dyhanie/
+translationOf: /techniques/
+title: "Холотропное дыхание и методы трансперсональной терапии — обучение"
+description: "Холотропное дыхание по Станиславу Грофу, навыки консультирования и психотерапии, карты сознания: на чём строится обучение в школе EastWest Transpersonal Training."
+---
+
+{% set intro = 'techniques/00-intro.md' | pageContent(lang) %}
+{% set experiential = 'techniques/01-experiential.md' | pageSections(lang) %}
+{% set oneToOne = 'techniques/02-one-to-one.md' | pageSections(lang) %}
+{% set maps = 'techniques/03-maps.md' | pageSections(lang) %}
+{% set sections = [experiential, oneToOne, maps] %}
+
+{# ── The leaves ──────────────────────────────────────────────────────────────
+   One shape for all three branches: a bordered box of native <details>, the
+   same pattern as training-overview.html. Closed, a leaf shows its title, who
+   teaches it and a one-line preview; everything else — the prose and the
+   photograph — waits until the reader asks for it.
+
+   `tone` classes are passed in whole rather than built up, so Tailwind's
+   scanner can still see them as literal strings in this file. #}
+{% macro leaves(sec, boxCls, dividerCls, hoverCls, chipCls, titleCls, teachersCls, leadCls, proseCls, chevronCls, ruleCls) %}
+<div class="{{ boxCls }} divide-y {{ dividerCls }} shadow-lg">
+    {% for block in sec.blocks %}
+    <details class="p4-reveal tq-leaf">
+        <summary class="flex items-start gap-4 md:gap-5 px-5 py-5 md:px-7 md:py-6 cursor-pointer {{ hoverCls }} transition-colors">
+            <span class="w-10 h-10 md:w-11 md:h-11 shrink-0 flex items-center justify-center {{ chipCls }}">
+                <i data-lucide="{{ block.icon | default('leaf') }}" class="w-5 h-5" aria-hidden="true"></i>
+            </span>
+            <span class="min-w-0 flex-1">
+                <span class="block font-serif text-lg md:text-xl font-bold leading-snug {{ titleCls }}">{{ block.title }}</span>
+                {% if block.teachers %}
+                <span class="block mt-1 text-xs tracking-wide {{ teachersCls }}">{{ block.teachers }}</span>
+                {% endif %}
+                {% if block.lead %}
+                <span class="block mt-2 text-sm leading-relaxed {{ leadCls }}">{{ block.lead }}</span>
+                {% endif %}
+            </span>
+            <i data-lucide="chevron-down" class="p4-reveal-chevron w-5 h-5 shrink-0 mt-1 {{ chevronCls }} transition-transform duration-300" aria-hidden="true"></i>
+        </summary>
+        <div class="border-t {{ ruleCls }} px-5 md:px-7 py-7">
+            {% if block.image %}
+            <picture>
+                <source srcset="{{ (block.image.src ~ '.webp') | url }}" type="image/webp">
+                <img src="{{ (block.image.src ~ '.jpg') | url }}" alt="{{ block.image.alt }}"
+                     class="w-full h-56 md:h-72 object-cover {{ block.image.position }} mb-7 shadow-md" loading="lazy">
+            </picture>
+            {% endif %}
+            <div class="tq-prose leading-relaxed {{ proseCls }}">{{ block.html | safe }}</div>
+        </div>
+    </details>
+    {% endfor %}
+</div>
+{% endmacro %}
+
+{% macro darkLeaves(sec) %}
+{{ leaves(sec,
+    'border border-[color:var(--c-acc-40)] bg-[color:var(--c-deep-2)]',
+    'divide-[color:var(--c-acc-25)]',
+    'hover:bg-[color:var(--c-deep-20)]',
+    'bg-[color:var(--c-acc)] text-[color:var(--c-deep)]',
+    'text-[color:var(--c-paper-hi)]',
+    'text-[color:var(--c-acc)]',
+    'text-[color:var(--c-on-dark-3)]',
+    'text-[color:var(--c-on-dark-2)]',
+    'text-[color:var(--c-acc)]',
+    'border-[color:var(--c-acc-25)]') }}
+{% endmacro %}
+
+{% macro lightLeaves(sec) %}
+{{ leaves(sec,
+    'border border-[color:var(--c-line)] bg-[color:var(--c-paper-hi)]',
+    'divide-[color:var(--c-line)]',
+    'hover:bg-[color:var(--c-paper-card)]',
+    'bg-[color:var(--c-deep)] text-[color:var(--c-acc)]',
+    'text-[color:var(--c-heading)]',
+    'text-[color:var(--c-sec)]',
+    'text-[color:var(--c-body-dim)]',
+    'text-[color:var(--c-body)]',
+    'text-[color:var(--c-sec)]',
+    'border-[color:var(--c-line)]') }}
+{% endmacro %}
+
+{# ── A branch header ─────────────────────────────────────────────────────── #}
+{% macro branchHeader(sec, numCls, titleCls, subCls) %}
+<div class="max-w-5xl mx-auto mb-10 md:mb-14">
+    <div class="flex items-start gap-5 md:gap-8">
+        <span class="p4-display text-[4.5rem] md:text-[7rem] font-medium leading-[0.85] {{ numCls }} select-none">{{ sec.data.number }}</span>
+        <div class="pt-1 md:pt-3">
+            <span class="p4-hairline !w-10 md:!w-16 mb-4 block"></span>
+            <h2 class="p4-display text-3xl md:text-5xl font-medium {{ titleCls }} leading-tight">{{ sec.data.title }}</h2>
+            <p class="mt-3 p4-display italic text-lg md:text-xl {{ subCls }}">{{ sec.data.subtitle }}</p>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+<!-- Hero Section -->
+<header class="hero-clear relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        <picture>
+            <source srcset="{{ '/assets/images/Techniques/technique-group-bodywork-c.webp' | url }}" type="image/webp">
+            <img
+                src="{{ '/assets/images/Techniques/technique-group-bodywork-c.jpg' | url }}"
+                alt="Групповая телесная работа на семинаре по трансперсональной психологии"
+                class="w-full h-full object-cover object-bottom"
+            />
+        </picture>
+        <div class="absolute inset-0 hero-clear-scrim"></div>
+    </div>
+
+    <div class="relative z-10 container mx-auto px-6 text-center pt-20">
+        <div class="animate-fade-in-up">
+            <p class="p4-kicker text-[color:var(--c-acc)] mb-6 flex items-center justify-center gap-4">
+                <span class="p4-hairline"></span>
+                {{ intro.data.kicker }}
+                <span class="p4-hairline"></span>
+            </p>
+            <h1 class="p4-display text-4xl md:text-6xl font-medium text-[color:var(--c-paper-hi)] mb-6 leading-tight drop-shadow-md">
+                {{ intro.data.heading }}
+            </h1>
+            <p class="text-xl md:text-2xl text-[color:var(--c-on-dark-2)] max-w-3xl mx-auto font-light leading-relaxed">
+                Три ветви — одно обучение: дыхание, мастерство и карты, которые их удерживают
+            </p>
+        </div>
+    </div>
+</header>
+
+<!-- Breadcrumb -->
+<div class="bg-[color:var(--c-paper-hi)] border-b border-[color:var(--c-line)]">
+    <div class="container mx-auto px-6 py-4">
+        <div class="flex items-center gap-2 text-sm text-[color:var(--c-body-dim)]">
+            <a href="{{ '/' | localeUrl(lang) | url }}" class="hover:text-[color:var(--c-link-hover)] transition-colors">{{ i18n[lang].home }}</a>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <span class="text-[color:var(--c-heading)] font-medium">{{ intro.data.heading }}</span>
+        </div>
+    </div>
+</div>
+
+<!-- Intro: the page lead -->
+<section class="py-20 md:py-24 bg-[color:var(--c-paper-hi)]">
+    <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto text-center">
+            <div class="tq-lead text-lg md:text-xl text-[color:var(--c-body)] leading-relaxed font-light">
+                {{ intro.html | safe }}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- The three branches -->
+<section id="branches" class="scroll-mt-24 pb-20 md:pb-24 bg-[color:var(--c-paper-hi)] border-b border-[color:var(--c-line)]">
+    <div class="container mx-auto px-6">
+        <div class="max-w-5xl mx-auto">
+            <!-- trunk -->
+            <div class="text-center">
+                <p class="p4-kicker text-[color:var(--c-acc)] mb-4 flex items-center justify-center gap-4">
+                    <span class="p4-hairline"></span>
+                    Наши методы
+                    <span class="p4-hairline"></span>
+                </p>
+                <h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)]">{{ intro.data.trunk_title }}</h2>
+                <p class="mt-3 text-[color:var(--c-body)] max-w-xl mx-auto">{{ intro.data.trunk_line }}</p>
+                {% if intro.data.pillars %}
+                <ul class="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-[color:var(--c-body-dim)]">
+                    {% for pillar in intro.data.pillars %}
+                    <li class="flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 shrink-0 rotate-45 bg-[color:var(--c-sec)]" aria-hidden="true"></span>
+                        {{ pillar }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+
+            <!-- the trunk rising into the fork -->
+            <div class="mt-10 flex justify-center" aria-hidden="true">
+                <span class="w-px h-12 bg-[color:var(--c-acc)]"></span>
+            </div>
+            <div class="hidden md:grid grid-cols-3 gap-8 h-10" aria-hidden="true">
+                {% for sec in sections %}
+                <div class="relative">
+                    <span class="absolute top-0 h-px bg-[color:var(--c-acc)] {% if loop.first %}left-1/2 -right-4{% elif loop.last %}-left-4 right-1/2{% else %}-left-4 -right-4{% endif %}"></span>
+                    <span class="absolute top-0 left-1/2 w-px h-full bg-[color:var(--c-acc)]"></span>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- the three branches -->
+            <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+                {% for sec in sections %}
+                <div class="flex flex-col">
+                    <a href="#{{ sec.data.anchor }}" class="group w-full flex-1 flex flex-col border-t-2 border-[color:var(--c-acc)] bg-[color:var(--c-paper-card)] hover:bg-[color:var(--c-paper-hi)] hover:shadow-xl transition-all duration-300 p-7">
+                        <div class="flex items-start justify-between">
+                            <span class="p4-display text-5xl font-medium leading-none text-[color:var(--c-deep-20)] group-hover:text-[color:var(--c-acc-60)] transition-colors">{{ sec.data.number }}</span>
+                            <span class="w-11 h-11 bg-[color:var(--c-deep)] flex items-center justify-center">
+                                <i data-lucide="{{ sec.data.icon }}" class="w-5 h-5 text-[color:var(--c-acc)]"></i>
+                            </span>
+                        </div>
+                        <h3 class="mt-5 text-xl font-serif font-bold text-[color:var(--c-heading)] leading-snug">{{ sec.data.short_title }}</h3>
+                        <p class="mt-2 text-sm text-[color:var(--c-body)] leading-relaxed">{{ sec.data.subtitle }}</p>
+
+                        <!-- the leaves this branch carries -->
+                        <ul class="mt-5 pt-4 border-t border-[color:var(--c-line)] space-y-2 flex-grow">
+                            {% for block in sec.blocks %}
+                            <li class="flex items-start gap-2 text-xs text-[color:var(--c-body-dim)] leading-snug">
+                                <span class="mt-1.5 w-1.5 h-1.5 shrink-0 rotate-45 bg-[color:var(--c-sec)]" aria-hidden="true"></span>
+                                {{ block.title }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-[color:var(--c-link)] group-hover:text-[color:var(--c-link-hover)]">
+                            Открыть раздел
+                            <i data-lucide="arrow-down" class="w-4 h-4 transition-transform group-hover:translate-y-0.5"></i>
+                        </span>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ Branch 01 · Holotropic Breathing & Experiential Work ═══ -->
+<section id="{{ experiential.data.anchor }}" class="scroll-mt-24 py-20 md:py-28 bg-[color:var(--c-deep)] overflow-hidden">
+    <div class="container mx-auto px-6">
+        {{ branchHeader(experiential,
+            'text-[color:var(--c-acc-60)]',
+            'text-[color:var(--c-paper-hi)]',
+            'text-[color:var(--c-on-dark-3)]') }}
+        <div class="max-w-5xl mx-auto">
+            {{ darkLeaves(experiential) }}
+        </div>
+    </div>
+</section>
+
+<!-- Quote interlude -->
+<section class="relative py-24 md:py-32 overflow-hidden p4-parallax" style="background-image: url('{{ '/assets/images/Headers/hero-what-is-tp-window-forest.jpg' | url }}'); background-image: image-set(url('{{ '/assets/images/Headers/hero-what-is-tp-window-forest.webp' | url }}') type('image/webp'), url('{{ '/assets/images/Headers/hero-what-is-tp-window-forest.jpg' | url }}') type('image/jpeg'));">
+    <div class="absolute inset-0 bg-[color:var(--c-deep-80)]"></div>
+    <div class="relative z-10 container mx-auto px-6 text-center">
+        <blockquote class="p4-display italic text-2xl md:text-4xl text-[color:var(--c-paper-hi)] max-w-4xl mx-auto leading-snug drop-shadow-md">
+            &laquo;Непрерывное дыхание приводит вас в контакт с вашими границами &mdash; а границы &mdash; это двери.&raquo;
+        </blockquote>
+    </div>
+</section>
+
+<!-- ═══ Branch 02 · Counselling & Psychotherapy Skills ═══ -->
+<section id="{{ oneToOne.data.anchor }}" class="scroll-mt-24 py-20 md:py-28 bg-[color:var(--c-paper)]">
+    <div class="container mx-auto px-6">
+        {{ branchHeader(oneToOne,
+            'text-[color:var(--c-acc)]',
+            'text-[color:var(--c-heading)]',
+            'text-[color:var(--c-body-dim)]') }}
+        <div class="max-w-5xl mx-auto">
+            {{ lightLeaves(oneToOne) }}
+        </div>
+    </div>
+</section>
+
+<!-- Quote interlude -->
+<section class="relative py-24 md:py-32 overflow-hidden p4-parallax" style="background-image: url('{{ '/assets/images/Symbolic/symbolic-plant-roots.jpg' | url }}'); background-image: image-set(url('{{ '/assets/images/Symbolic/symbolic-plant-roots.webp' | url }}') type('image/webp'), url('{{ '/assets/images/Symbolic/symbolic-plant-roots.jpg' | url }}') type('image/jpeg'));">
+    <div class="absolute inset-0 bg-[color:var(--c-deep-80)]"></div>
+    <div class="relative z-10 container mx-auto px-6 text-center">
+        <blockquote class="p4-display italic text-2xl md:text-4xl text-[color:var(--c-paper-hi)] max-w-4xl mx-auto leading-snug drop-shadow-md">
+            &laquo;Опыт без карты теряется; карта без опыта остаётся пустой.&raquo;
+        </blockquote>
+    </div>
+</section>
+
+<!-- ═══ Branch 03 · Consciousness Maps & Research ═══ -->
+<section id="{{ maps.data.anchor }}" class="scroll-mt-24 py-20 md:py-28 bg-[color:var(--c-paper-hi)]">
+    <div class="container mx-auto px-6">
+        {{ branchHeader(maps,
+            'text-[color:var(--c-acc)]',
+            'text-[color:var(--c-heading)]',
+            'text-[color:var(--c-body-dim)]') }}
+        <div class="max-w-5xl mx-auto">
+            {{ lightLeaves(maps) }}
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 bg-gradient-to-br from-[color:var(--c-deep)] to-[color:var(--c-dusk)] text-center">
+    <div class="container mx-auto px-6">
+        <p class="p4-kicker text-[color:var(--c-acc)] mb-4 flex items-center justify-center gap-4">
+            <span class="p4-hairline"></span>
+            Присоединяйтесь
+            <span class="p4-hairline"></span>
+        </p>
+        <h2 class="p4-display text-3xl md:text-4xl font-medium mb-4 text-[color:var(--c-paper-hi)]">Попробуйте эти методы на собственном опыте</h2>
+        <p class="text-[color:var(--c-on-dark-2)] max-w-2xl mx-auto mb-8 text-lg">
+            Присоединяйтесь к нашему обучению, чтобы изучить эти трансформирующие терапевтические подходы и практиковать их.
+        </p>
+        <a href="{{ '/training-overview/' | localeUrl(lang) | url }}" class="inline-block bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-deep)] px-8 py-4 font-medium text-lg tracking-wide transition-all shadow-lg hover:shadow-xl">
+            Подробнее об обучении
+        </a>
+    </div>
+</section>

@@ -1,4 +1,9 @@
-{% set contactHref = '#contact' if page.url == '/' else (('/' | url) ~ '#contact') %}
+{% set t = i18n[lang] %}
+{% set f = t.footer %}
+{# Link labels come from the menu data (navigation.labels), so a page is
+   called the same thing in the menu and here, in every language. #}
+{% set homeUrl = '/' | localeUrl(lang) %}
+{% set contactHref = '#contact' if page.url == homeUrl else ((homeUrl | url) ~ '#contact') %}
 <footer class="bg-[color:var(--c-deepest)] text-[color:var(--c-on-dark-3)] py-16">
     <div class="container mx-auto px-6">
         <div class="grid md:grid-cols-4 gap-12 border-b border-white/10 pb-12 mb-12">
@@ -14,7 +19,7 @@
                     </h3>
                 </div>
                 <p class="text-sm leading-relaxed text-[color:var(--c-on-dark-4)]">
-                    Educating therapists for a revolution of consciousness through transpersonal psychotherapy and breathwork.
+                    {{ f.tagline }}
                 </p>
                 <p class="text-xs leading-relaxed text-[color:var(--c-on-dark-5)] mt-4">
                     Eastwest Transpersonal Training School
@@ -23,53 +28,53 @@
 
             <!-- Quick Links -->
             <div>
-                <h4 class="p4-kicker text-[color:var(--c-acc)] mb-5">Training</h4>
+                <h4 class="p4-kicker text-[color:var(--c-acc)] mb-5">{{ f.training }}</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="{{ '/training-overview/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">Training Overview</a></li>
-                    <li><a href="{{ '/curriculum/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">Curriculum</a></li>
-                    <li><a href="{{ '/schedule/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">Intensive Schedule</a></li>
-                    <li><a href="{{ '/lectures-schedule/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">Lectures Schedule</a></li>
-                    <li><a href="{{ '/teachers/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">Our Teachers</a></li>
-                    <li><a href="{{ '/blog/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">Blog</a></li>
+                    <li><a href="{{ '/training-overview/' | localeUrl(lang) | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">{{ navigation.labels['/training-overview/'][lang] }}</a></li>
+                    <li><a href="{{ '/curriculum/' | localeUrl(lang) | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">{{ navigation.labels['/curriculum/'][lang] }}</a></li>
+                    <li><a href="{{ '/schedule/' | localeUrl(lang) | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">{{ navigation.labels['/schedule/'][lang] }}</a></li>
+                    <li><a href="{{ '/lectures-schedule/' | localeUrl(lang) | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">{{ navigation.labels['/lectures-schedule/'][lang] }}</a></li>
+                    <li><a href="{{ '/teachers/' | localeUrl(lang) | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">{{ navigation.labels['/teachers/'][lang] }}</a></li>
+                    <li><a href="{{ '/blog/' | localeUrl(lang) | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">{{ navigation.labels['/blog/'][lang] }}</a></li>
                 </ul>
             </div>
 
             <!-- Resources -->
             <div>
-                <h4 class="p4-kicker text-[color:var(--c-acc)] mb-5">Resources</h4>
+                <h4 class="p4-kicker text-[color:var(--c-acc)] mb-5">{{ f.resources }}</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="{{ '/techniques/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">School Pillars</a></li>
-                    <li><a href="{{ '/venues/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">Venues</a></li>
-                    <li><a href="{{ '/what-is-transpersonal-psychology/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">What is Transpersonal Psychology</a></li>
-                    <li><a href="{{ '/become-a-practice-client/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">Become a Practice Client</a></li>
-                    <li><a href="{{ '/resources/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">Recommended Reading</a></li>
-                    <li><a href="{{ '/collaborations/' | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">Collaborations</a></li>
-                    <li><a href="https://student.transpersonal-training.com/" target="_blank" rel="noopener" class="hover:text-[color:var(--c-acc)] transition-colors">Learning platform</a></li>
-                    <li><a href="https://old.transpersonal-training.com/" target="_blank" rel="noopener" class="hover:text-[color:var(--c-acc)] transition-colors">Old website</a></li>
+                    <li><a href="{{ '/techniques/' | localeUrl(lang) | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">{{ navigation.labels['/techniques/'][lang] }}</a></li>
+                    <li><a href="{{ '/venues/' | localeUrl(lang) | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">{{ navigation.labels['/venues/'][lang] }}</a></li>
+                    <li><a href="{{ '/what-is-transpersonal-psychology/' | localeUrl(lang) | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">{{ navigation.labels['/what-is-transpersonal-psychology/'][lang] }}</a></li>
+                    <li><a href="{{ '/become-a-practice-client/' | localeUrl(lang) | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">{{ navigation.labels['/become-a-practice-client/'][lang] }}</a></li>
+                    <li><a href="{{ '/resources/' | localeUrl(lang) | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">{{ navigation.labels['/resources/'][lang] }}</a></li>
+                    <li><a href="{{ '/collaborations/' | localeUrl(lang) | url }}" class="hover:text-[color:var(--c-acc)] transition-colors">{{ navigation.labels['/collaborations/'][lang] }}</a></li>
+                    <li><a href="https://student.transpersonal-training.com/" target="_blank" rel="noopener" class="hover:text-[color:var(--c-acc)] transition-colors">{{ navigation.labels['https://student.transpersonal-training.com/'][lang] }}</a></li>
+                    <li><a href="https://old.transpersonal-training.com/" target="_blank" rel="noopener" class="hover:text-[color:var(--c-acc)] transition-colors">{{ navigation.labels['https://old.transpersonal-training.com/'][lang] }}</a></li>
                 </ul>
             </div>
 
             <!-- Contact -->
             <div>
-                <h4 class="p4-kicker text-[color:var(--c-acc)] mb-5">Connect</h4>
+                <h4 class="p4-kicker text-[color:var(--c-acc)] mb-5">{{ f.connect }}</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="{{ contactHref }}" class="hover:text-[color:var(--c-acc)] transition-colors">Contact Us</a></li>
-                    <li><a href="mailto:west-office@transpersonal-training.com" class="hover:text-[color:var(--c-acc)] transition-colors">West office &middot; west-office@transpersonal-training.com</a></li>
-                    <li><a href="mailto:east-office@transpersonal-training.com" class="hover:text-[color:var(--c-acc)] transition-colors">East office &middot; east-office@transpersonal-training.com</a></li>
-                    <li><a href="tel:+4917638034517" class="hover:text-[color:var(--c-acc)] transition-colors">West office &middot; +49 176 38034517</a></li>
-                    <li><a href="tel:+37379024199" class="hover:text-[color:var(--c-acc)] transition-colors">East office &middot; +373 79024199</a></li>
+                    <li><a href="{{ contactHref }}" class="hover:text-[color:var(--c-acc)] transition-colors">{{ f.contactUs }}</a></li>
+                    <li><a href="mailto:west-office@transpersonal-training.com" class="hover:text-[color:var(--c-acc)] transition-colors">{{ f.westOffice }} &middot; west-office@transpersonal-training.com</a></li>
+                    <li><a href="mailto:east-office@transpersonal-training.com" class="hover:text-[color:var(--c-acc)] transition-colors">{{ f.eastOffice }} &middot; east-office@transpersonal-training.com</a></li>
+                    <li><a href="tel:+4917638034517" class="hover:text-[color:var(--c-acc)] transition-colors">{{ f.westOffice }} &middot; +49 176 38034517</a></li>
+                    <li><a href="tel:+37379024199" class="hover:text-[color:var(--c-acc)] transition-colors">{{ f.eastOffice }} &middot; +373 79024199</a></li>
                     <li><a href="https://www.facebook.com/EastwestTranspersonalTrainingSchool/" target="_blank" rel="noopener" class="hover:text-[color:var(--c-acc)] transition-colors inline-flex items-center gap-1.5"><i data-lucide="facebook" class="w-4 h-4"></i>Facebook</a></li>
-                    <li><button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="hover:text-[color:var(--c-acc)] transition-colors text-left bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy Policy</button></li>
+                    <li><button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="hover:text-[color:var(--c-acc)] transition-colors text-left bg-transparent border-none p-0 cursor-pointer font-inherit">{{ f.privacy }}</button></li>
                 </ul>
             </div>
         </div>
 
         <!-- Bottom Bar -->
         <div class="flex flex-col md:flex-row justify-between items-center text-xs text-[color:var(--c-on-dark-5)]">
-            <p>&copy; 2026 transpersonal-training.com — Educating therapists for a revolution of consciousness.</p>
+            <p>&copy; 2026 transpersonal-training.com — {{ f.copyright }}</p>
             <div class="flex gap-6 mt-4 md:mt-0">
-                <button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="hover:text-[color:var(--c-acc)] bg-transparent border-none p-0 cursor-pointer font-inherit">Privacy</button>
-                <a href="{{ '/legal-notice/' | url }}" class="hover:text-[color:var(--c-acc)]">Legal Notice</a>
+                <button type="button" onclick="document.getElementById('privacy-modal').showModal()" class="hover:text-[color:var(--c-acc)] bg-transparent border-none p-0 cursor-pointer font-inherit">{{ f.privacyShort }}</button>
+                <a href="{{ '/legal-notice/' | localeUrl(lang) | url }}" class="hover:text-[color:var(--c-acc)]">{{ f.legalNotice }}</a>
             </div>
         </div>
     </div>
@@ -79,46 +84,13 @@
 <dialog id="privacy-modal" class="max-w-2xl w-[92vw] p-0 backdrop:bg-[color:var(--c-deepest-70)] shadow-2xl">
     <div class="bg-[color:var(--c-paper-card)] max-h-[85vh] overflow-y-auto">
         <div class="sticky top-0 bg-[color:var(--c-deep)] text-[color:var(--c-paper-hi)] px-6 py-5 flex items-center justify-between">
-            <h2 class="p4-display text-2xl font-medium">Privacy Policy</h2>
-            <button type="button" onclick="document.getElementById('privacy-modal').close()" aria-label="Close" class="text-[color:var(--c-paper-hi)] hover:text-[color:var(--c-acc)] bg-transparent border-none cursor-pointer p-1">
+            <h2 class="p4-display text-2xl font-medium">{{ f.privacy }}</h2>
+            <button type="button" onclick="document.getElementById('privacy-modal').close()" aria-label="{{ f.close }}" class="text-[color:var(--c-paper-hi)] hover:text-[color:var(--c-acc)] bg-transparent border-none cursor-pointer p-1">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
         </div>
         <div class="px-6 md:px-8 py-8 space-y-5 text-[color:var(--c-body)] leading-relaxed text-sm md:text-base">
-            <p>
-                This website does not use cookies, analytics, tracking pixels or any similar technology, and it does not
-                collect, store or process any personal data through your simple use of these pages. There is nothing to
-                consent to and nothing to opt out of — no data is gathered by browsing this site.
-            </p>
-            <h3 class="text-lg font-semibold text-[color:var(--c-heading)]">If you contact us or apply</h3>
-            <p>
-                The only personal data we ever receive is what you choose to send us directly — for example through the
-                application form or by writing to
-                <a href="mailto:west-office@transpersonal-training.com" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-4">west-office@transpersonal-training.com</a>
-                (Western track) or
-                <a href="mailto:east-office@transpersonal-training.com" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-4">east-office@transpersonal-training.com</a>
-                (Eastern track).
-                In that case, the following applies in accordance with the EU General Data Protection Regulation
-                (Regulation (EU) 2016/679, "GDPR"):
-            </p>
-            <ul class="list-disc list-inside space-y-2">
-                <li><span class="font-medium text-[color:var(--c-heading)]">Data controller:</span> Eastwest Transpersonal Training School, reachable at the email addresses above.</li>
-                <li><span class="font-medium text-[color:var(--c-heading)]">Categories of data processed:</span> the name, email address and any other information you voluntarily include in your message or application.</li>
-                <li><span class="font-medium text-[color:var(--c-heading)]">Purpose and legal basis:</span> responding to your enquiry and assessing applications, on the basis of your consent (Art. 6(1)(a) GDPR) and, where applicable, to take pre-contractual steps at your request (Art. 6(1)(b) GDPR).</li>
-                <li><span class="font-medium text-[color:var(--c-heading)]">Retention:</span> your data is kept only for as long as necessary to handle your enquiry or application, and is then deleted.</li>
-                <li><span class="font-medium text-[color:var(--c-heading)]">Recipients:</span> your data is not sold or shared with third parties, save where strictly necessary to respond to you (e.g. our email provider) or where required by law.</li>
-                <li><span class="font-medium text-[color:var(--c-heading)]">Your rights:</span> under Articles 15–22 GDPR you may request access to, rectification or erasure of your data, restriction of or objection to its processing, and data portability, and you may lodge a complaint with your national data protection authority at any time. To exercise these rights, simply email us at the address above.</li>
-            </ul>
-            <h3 class="text-lg font-semibold text-[color:var(--c-heading)]">Newsletter</h3>
-            <p>
-                If you tick the newsletter box on the contact form, we also keep your name and email to send you
-                occasional updates about the training and the school, on the basis of your consent (Art. 6(1)(a) GDPR).
-                You can withdraw this consent and unsubscribe at any time by emailing us at the address above; this does
-                not affect any other request you have made.
-            </p>
-            <p class="text-xs text-[color:var(--c-body-dim)] pt-2 border-t border-[color:var(--c-line)]">
-                Last updated 2026.
-            </p>
+            {% include "privacy/" ~ lang ~ ".njk" %}
         </div>
     </div>
 </dialog>

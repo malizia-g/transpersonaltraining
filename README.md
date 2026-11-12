@@ -68,6 +68,7 @@ All project documentation is in the [`docs/`](docs/) folder:
 | [CONTENT_EDITING.md](docs/CONTENT_EDITING.md) | How to edit page content via Markdown files |
 | [DOCUMENTATION.md](docs/DOCUMENTATION.md) | Architecture, build process, design system, integrations |
 | [FUTURE_IDEAS.md](docs/FUTURE_IDEAS.md) | Planned improvements and proposals |
+| [i18n/RUSSIAN.md](docs/i18n/RUSSIAN.md) | The Russian pages: what is translated, keyword choices, review notes, how translations work |
 | [TODO.md](docs/TODO.md) | **Everything still open**, in one list — launch blockers, decisions, SEO work, post-launch items |
 
 ## Stack

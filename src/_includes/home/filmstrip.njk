@@ -1,0 +1,44 @@
+{# "Moments from our seminars": the photos come from src/_data/filmstrip.js,
+   with their alt text in each language. Used by the home page in every
+   language. The script shuffles the strip into a fresh order on every load
+   and shows only a random handful; the rest wait off the page (so their lazy
+   images are not fetched) and join the strip a batch at a time as it nears
+   its end. #}
+    <div class="p4-filmstrip overflow-x-auto snap-x snap-mandatory pb-4">
+        <div id="moments-filmstrip" class="flex gap-3 px-6 w-max">
+            {%- for photo in filmstrip %}
+            <picture class="snap-start shrink-0">
+                {%- if photo.webp %}
+                <source srcset="{{ (photo.src ~ '.webp') | url }}" type="image/webp">
+                {%- endif %}
+                <img src="{{ (photo.src ~ '.' ~ photo.ext) | url }}" alt="{{ photo.alt[lang] or photo.alt.en }}" class="h-64 md:h-80 w-auto object-cover"{% if photo.width %} width="{{ photo.width }}" height="{{ photo.height }}"{% endif %} loading="lazy">
+            </picture>
+            {%- endfor %}
+        </div>
+    </div>
+<script>
+    (function () {
+        const BATCH = 10;
+        const strip = document.getElementById('moments-filmstrip');
+        if (!strip) return;
+        const scroller = strip.parentElement;
+        const items = Array.from(strip.children);
+        for (let i = items.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [items[i], items[j]] = [items[j], items[i]];
+        }
+        items.forEach((item) => item.remove());
+        const waiting = items;
+        const showMore = () => waiting.splice(0, BATCH).forEach((item) => strip.appendChild(item));
+        showMore();
+        if (!waiting.length) return;
+
+        const onScroll = () => {
+            const left = scroller.scrollWidth - scroller.scrollLeft - scroller.clientWidth;
+            if (left > scroller.clientWidth) return;
+            showMore();
+            if (!waiting.length) scroller.removeEventListener('scroll', onScroll);
+        };
+        scroller.addEventListener('scroll', onScroll, { passive: true });
+    })();
+</script>

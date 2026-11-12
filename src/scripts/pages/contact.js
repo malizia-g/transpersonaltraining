@@ -20,8 +20,36 @@
     var btnLabel = document.getElementById('contactBtnLabel');
     var statusEl = document.getElementById('contactStatus');
 
-    var EMAIL_LINK = '<a class="underline hover:text-[color:var(--c-acc-light)]" href="mailto:west-office@transpersonal-training.com">west-office@transpersonal-training.com</a> or '
-        + '<a class="underline hover:text-[color:var(--c-acc-light)]" href="mailto:east-office@transpersonal-training.com">east-office@transpersonal-training.com</a>';
+    // The page's own language decides the messages. Anything without a
+    // translation here falls back to English.
+    var LANG = (document.documentElement.lang || 'en').slice(0, 2).toLowerCase();
+
+    function emailLinks(or) {
+        return '<a class="underline hover:text-[color:var(--c-acc-light)]" href="mailto:west-office@transpersonal-training.com">west-office@transpersonal-training.com</a> ' + or + ' '
+            + '<a class="underline hover:text-[color:var(--c-acc-light)]" href="mailto:east-office@transpersonal-training.com">east-office@transpersonal-training.com</a>';
+    }
+
+    var MESSAGES = {
+        en: {
+            off: 'Our contact form isn’t switched on yet — please write to us at ' + emailLinks('or') + ' and we’ll reply.',
+            missing: 'Please fill in your name and email.',
+            sendingBtn: 'Sending…',
+            sending: 'Sending your message…',
+            ok: 'Thank you — we’ve got your details. Check your inbox: the demo lesson and the brochure are on their way. If you asked us something, one of us will write back personally.',
+            fail: 'Sorry, your message didn’t go through. Please try again, or write to us at ' + emailLinks('or') + '.',
+            button: 'Send my request'
+        },
+        ru: {
+            off: 'Контактная форма пока не подключена — пожалуйста, напишите нам на ' + emailLinks('или') + ', и мы ответим.',
+            missing: 'Пожалуйста, укажите имя и адрес электронной почты.',
+            sendingBtn: 'Отправка…',
+            sending: 'Отправляем ваше сообщение…',
+            ok: 'Спасибо — мы получили ваши данные. Проверьте почту: демо-урок и брошюра уже в пути. Если вы задали вопрос, один из нас ответит вам лично.',
+            fail: 'К сожалению, сообщение не отправилось. Попробуйте ещё раз или напишите нам на ' + emailLinks('или') + '.',
+            button: 'Отправить запрос'
+        }
+    };
+    var MSG = MESSAGES[LANG] || MESSAGES.en;
 
     function setStatus(kind, html) {
         if (!statusEl) return;
@@ -39,7 +67,7 @@
 
         var endpoint = window.FORMS_ENDPOINT || '';
         if (!endpoint) {
-            setStatus('info', 'Our contact form isn’t switched on yet — please write to us at ' + EMAIL_LINK + ' and we’ll reply.');
+            setStatus('info', MSG.off);
             return;
         }
 
@@ -51,18 +79,19 @@
             track: form.elements.track ? form.elements.track.value.trim() : '', // which office to notify; empty = both
             newsletter: form.elements.newsletter ? form.elements.newsletter.checked : false,
             website: form.elements.hp_leave_empty ? form.elements.hp_leave_empty.value : '', // honeypot
-            elapsedMs: Date.now() - loadedAt
+            elapsedMs: Date.now() - loadedAt,
+            lang: LANG // so the office knows which language to answer in
         };
         // The message is optional: plenty of people just want the lesson and
         // the brochure, and the reply sends those either way.
         if (!payload.name || !payload.email) {
-            setStatus('err', 'Please fill in your name and email.');
+            setStatus('err', MSG.missing);
             return;
         }
 
         btn.disabled = true;
-        btnLabel.textContent = 'Sending…';
-        setStatus('info', 'Sending your message…');
+        btnLabel.textContent = MSG.sendingBtn;
+        setStatus('info', MSG.sending);
 
         // Sent as text/plain (the default for a string body) so the browser
         // makes a "simple" request and skips the CORS preflight that Apps
@@ -75,17 +104,17 @@
             })
             .then(function (out) {
                 if (out && out.status === 'error') throw new Error(out.message || 'Server error');
-                setStatus('ok', 'Thank you — we’ve got your details. Check your inbox: the demo lesson and the brochure are on their way. If you asked us something, one of us will write back personally.');
+                setStatus('ok', MSG.ok);
                 form.reset();
                 // It's safely with the school now; don't keep a copy in this browser.
                 if (window.FormCache) window.FormCache.clear('contact');
             })
             .catch(function () {
-                setStatus('err', 'Sorry, your message didn’t go through. Please try again, or write to us at ' + EMAIL_LINK + '.');
+                setStatus('err', MSG.fail);
             })
             .finally(function () {
                 btn.disabled = false;
-                btnLabel.textContent = 'Send my request';
+                btnLabel.textContent = MSG.button;
             });
     });
 })();

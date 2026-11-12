@@ -86,11 +86,67 @@ module.exports = function(eleventyConfig) {
     return md.render(content);
   });
 
+  // ── Languages ──────────────────────────────────────────────────────────
+  // English lives at the root; every other language lives under /<lang>/ and
+  // is hand-written, not machine-translated, so only the pages worth the work
+  // exist there. A translated page says which English page it translates with
+  // `translationOf: /english-url/` in its front matter — that one field is the
+  // whole link between the two, and everything below is derived from it:
+  // hreflang tags, the language switcher, the automatic redirect, and the
+  // menus (which point at the translation when there is one and at the English
+  // page when there isn't).
+  //
+  // Content markdown follows the same rule: a page in language X asks for
+  // 'home/welcome.md' and gets src/content/X/home/welcome.md if it exists.
+  const contentRoot = path.join(__dirname, 'src/content');
+  function localizedContentPath(rel, lang) {
+    if (lang && lang !== 'en') {
+      const translated = path.join(contentRoot, lang, rel);
+      if (fs.existsSync(translated)) return translated;
+    }
+    return path.join(contentRoot, rel);
+  }
+
+  // { '/training-overview/': { en: '/training-overview/', ru: '/ru/…/' }, … }
+  // Filled by the collection below, which Eleventy builds before any template
+  // renders, so the filters can read it.
+  let translationMap = {};
+  eleventyConfig.addCollection('translations', function(collectionApi) {
+    const all = collectionApi.getAll();
+    const urls = new Set(all.map(item => item.url));
+    const map = {};
+    for (const item of all) {
+      const of = item.data.translationOf;
+      if (!of) continue;
+      // A typo here would silently orphan the translation: no hreflang, no
+      // switcher, no redirect. Fail the build instead.
+      if (!urls.has(of)) {
+        throw new Error(`${item.inputPath}: translationOf "${of}" is not a page on the site`);
+      }
+      map[of] = map[of] || { en: of };
+      map[of][item.data.lang] = item.url;
+    }
+    translationMap = map;
+    return map;
+  });
+
+  // '/training-overview/' | localeUrl('ru') → the Russian page if there is
+  // one, otherwise the English URL unchanged.
+  eleventyConfig.addFilter('localeUrl', function(enUrl, lang) {
+    const entry = translationMap[enUrl];
+    return (lang && entry && entry[lang]) || enUrl;
+  });
+  eleventyConfig.addFilter('hasTranslation', function(enUrl, lang) {
+    if (!lang || lang === 'en') return true;
+    const entry = translationMap[enUrl];
+    return Boolean(entry && entry[lang]);
+  });
+
   // Read a content MD file and return { html, data }
   // filename is relative to src/content/ (e.g. 'home/welcome.md')
-  eleventyConfig.addFilter('pageContent', function(filename) {
+  eleventyConfig.addFilter('pageContent', function(filename, lang) {
     try {
-      const contentPath = path.join(__dirname, 'src/content', filename);
+      const contentPath = localizedContentPath(filename, lang);
       const raw = fs.readFileSync(contentPath, 'utf-8');
       const parsed = matter(raw);
       return { html: md.render(parsed.content), data: parsed.data };
@@ -101,9 +157,9 @@ module.exports = function(eleventyConfig) {
 
   // Read all MD files in a content directory and return sorted array of { filename, html, data }
   // dir is relative to src/content/ (e.g. 'home/cards')
-  eleventyConfig.addFilter('pageContentDir', function(dir) {
+  eleventyConfig.addFilter('pageContentDir', function(dir, lang) {
     try {
-      const contentDir = path.join(__dirname, 'src/content', dir);
+      const contentDir = localizedContentPath(dir, lang);
       const files = fs.readdirSync(contentDir)
         .filter(f => f.endsWith('.md'))
         .sort();
@@ -127,9 +183,9 @@ module.exports = function(eleventyConfig) {
   // extensionless — the template builds the <picture> with .webp/.jpg);
   // `data.icons[title]` in the frontmatter supplies `icon`.
   // All three are removed from the body, so nothing renders twice.
-  eleventyConfig.addFilter('pageSections', function(filename) {
+  eleventyConfig.addFilter('pageSections', function(filename, lang) {
     try {
-      const contentPath = path.join(__dirname, 'src/content', filename);
+      const contentPath = localizedContentPath(filename, lang);
       const raw = fs.readFileSync(contentPath, 'utf-8');
       const parsed = matter(raw);
       const parts = parsed.content.split(/^### +/m);
@@ -279,6 +335,26 @@ module.exports = function(eleventyConfig) {
       out = out.split(tag).join(withDims);
     }
     return out;
+  });
+
+  // eleventy-plugin-seo writes <title>, the meta description and the Open
+  // Graph/Twitter tags through an HTML5 entity encoder that turns every
+  // non-ASCII character into a named entity, so a Russian title came out as
+  // "&Ocy;&bcy;&ucy;…". Browsers and search engines decode that, but it is
+  // six times the bytes and unreadable to anyone checking the source. On
+  // non-English pages, put the characters back inside <head>, leaving the
+  // five entities that actually need escaping alone. English pages are not
+  // touched, so their output stays exactly as it was.
+  const { Html5Entities } = require('html-entities');
+  const entities = new Html5Entities();
+  eleventyConfig.addTransform('readableHeadEntities', function (content) {
+    if (!(this.page.outputPath || '').endsWith('.html')) return content;
+    if (content.includes('<html lang="en">')) return content;
+    const headEnd = content.indexOf('</head>');
+    if (headEnd < 0) return content;
+    const head = content.slice(0, headEnd).replace(/&[A-Za-z][A-Za-z0-9]*;/g, (m) =>
+      /^&(amp|lt|gt|quot|apos);$/.test(m) ? m : entities.decode(m));
+    return head + content.slice(headEnd);
   });
 
   // Watch for changes

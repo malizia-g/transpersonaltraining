@@ -1,0 +1,100 @@
+---
+permalink: /ru/chto-takoe-transpersonalnaya-psihologiya/
+translationOf: /what-is-transpersonal-psychology/
+title: "Что такое трансперсональная психология?"
+description: "Трансперсональная психология простыми словами: история, основатели (Маслоу, Гроф), необычные состояния сознания и трансперсональная психотерапия — для кого она."
+---
+
+{% set abstract = 'what-is-transpersonal-psychology/00-abstract.md' | pageContent(lang) %}
+{% set s1 = 'what-is-transpersonal-psychology/01-understanding-the-field.md' | pageContent(lang) %}
+{% set s2 = 'what-is-transpersonal-psychology/02-science-and-spirit.md' | pageContent(lang) %}
+{% set s3 = 'what-is-transpersonal-psychology/03-why-it-matters.md' | pageContent(lang) %}
+
+<header class="hero-clear relative h-[50vh] min-h-[400px] flex items-center justify-center text-[color:var(--c-on-dark-1)] bg-[color:var(--c-deep)] overflow-hidden">
+	<picture>
+		<source srcset="{{ '/assets/images/Headers/hero-what-is-tp-window-forest.webp' | url }}" type="image/webp">
+		<img src="{{ '/assets/images/Headers/hero-what-is-tp-window-forest.jpg' | url }}" alt="Открытое окно с видом на лес" class="absolute inset-0 w-full h-full object-cover z-0">
+	</picture>
+	<div class="absolute inset-0 hero-clear-scrim z-0"></div>
+	<div class="container mx-auto px-6 relative z-10 text-center pt-20">
+		<div class="max-w-4xl mx-auto">
+			<p class="p4-kicker text-[color:var(--c-acc)] mb-6 flex items-center justify-center gap-4">
+				<span class="p4-hairline"></span>
+				Основы направления
+				<span class="p4-hairline"></span>
+			</p>
+			<h1 class="p4-display text-4xl md:text-6xl font-medium mb-6 leading-tight text-[color:var(--c-paper-hi)]">
+				Что такое трансперсональная психология?
+			</h1>
+			<p class="text-xl md:text-2xl text-[color:var(--c-on-dark-3)] font-light leading-relaxed max-w-3xl mx-auto">
+				На пересечении психологии человека и духовного опыта.
+			</p>
+		</div>
+	</div>
+</header>
+
+<div class="bg-[color:var(--c-paper-card)] border-b border-[color:var(--c-line)]">
+	<div class="container mx-auto px-6 py-4">
+		<div class="flex items-center gap-2 text-sm text-[color:var(--c-body-dim)]">
+			<a href="{{ '/' | localeUrl(lang) | url }}" class="hover:text-[color:var(--c-link)] transition-colors">{{ i18n[lang].home }}</a>
+			<i data-lucide="chevron-right" class="w-4 h-4"></i>
+			<span class="text-[color:var(--c-body-dim)]">{{ navigation.resources.label[lang] }}</span>
+			<i data-lucide="chevron-right" class="w-4 h-4"></i>
+			<span class="text-[color:var(--c-heading)] font-medium">Что такое трансперсональная психология</span>
+		</div>
+	</div>
+</div>
+
+<section class="py-12 bg-[color:var(--c-paper-card)] border-b border-[color:var(--c-line)]">
+	<div class="container mx-auto px-6">
+		<div class="max-w-3xl mx-auto text-center text-lg text-[color:var(--c-body-dim)] leading-relaxed">
+			{{ abstract.html | safe }}
+		</div>
+	</div>
+</section>
+
+<section class="py-16 bg-[color:var(--c-paper-hi)]">
+	<div class="container mx-auto px-6">
+		<div class="max-w-4xl mx-auto">
+			<h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-8">{{ s1.data.heading }}</h2>
+			<div class="space-y-6 text-[color:var(--c-body)] leading-relaxed">
+				{{ s1.html | safe }}
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="py-16 bg-[color:var(--c-paper)]">
+	<div class="container mx-auto px-6">
+		<div class="max-w-4xl mx-auto">
+			<h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-8">{{ s2.data.heading }}</h2>
+			<div class="space-y-6 text-[color:var(--c-body)] leading-relaxed">
+				{{ s2.html | safe }}
+				<blockquote class="border-l-4 border-[color:var(--c-acc)] pl-6 italic text-[color:var(--c-heading)] p4-display text-xl">
+					{{ s2.data.blockquote }}
+				</blockquote>
+				<p class="text-sm text-[color:var(--c-body-dim)]">{{ s2.data.blockquote_source }}</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="py-16 bg-[color:var(--c-paper-hi)]">
+	<div class="container mx-auto px-6">
+		<div class="max-w-4xl mx-auto">
+			<h2 class="p4-display text-3xl md:text-4xl font-medium text-[color:var(--c-heading)] mb-8">{{ s3.data.heading }}</h2>
+			<div class="space-y-6 text-[color:var(--c-body)] leading-relaxed">
+				{{ s3.html | safe }}
+			</div>
+
+			<div class="mt-10 flex flex-col sm:flex-row gap-4">
+				<a href="{{ '/training-overview/' | localeUrl(lang) | url }}" class="bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-heading)] px-6 py-3 font-medium tracking-wide transition-all text-center shadow-lg hover:shadow-xl">
+					Об обучении трансперсональной психотерапии
+				</a>
+				<a href="{{ '/' | localeUrl(lang) | url }}" class="border border-[color:var(--c-deep-40)] hover:border-[color:var(--c-sec)] text-[color:var(--c-heading)] hover:text-[color:var(--c-sec)] px-6 py-3 font-medium tracking-wide transition-all text-center">
+					На главную
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
