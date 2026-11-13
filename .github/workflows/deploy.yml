@@ -93,6 +93,12 @@ jobs:
       - name: Build Eleventy
         run: npm run build:eleventy
 
+      # Review branches only: the translated pages as .txt files, at
+      # <preview>/review/, for reviewers who correct text rather than web pages.
+      - name: Export page text for reviewers
+        if: env.PREVIEW_DIR != ''
+        run: node scripts/i18n/export-review-txt.js _site "https://malizia-g.github.io$PATH_PREFIX"
+
       # ── staging preview only ──
       # main went live on the production host at cutover (Sep 2026), so its
       # canonicals are now true and this must not run for it. staging is still
