@@ -34,6 +34,7 @@ function fetchJson(url, timeout = 60000) {
 
 const fmt = (opts) => new Intl.DateTimeFormat('en-GB', { timeZone: TIMEZONE, ...opts });
 const dayFmt = fmt({ weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+const dayShortFmt = fmt({ weekday: 'long', day: 'numeric', month: 'long' });
 const timeFmt = fmt({ hour: '2-digit', minute: '2-digit', hour12: false });
 const zoneFmt = fmt({ timeZoneName: 'short' });
 
@@ -59,6 +60,7 @@ function decorate(call) {
   return {
     ...call,
     day: dayFmt.format(start),
+    dayShort: dayShortFmt.format(start), // "Wednesday 9 December", for the homepage popup
     time: `${timeFmt.format(start)}–${timeFmt.format(end)}`,
     zone: zoneFmt.formatToParts(start).find((p) => p.type === 'timeZoneName').value,
     googleUrl: 'https://calendar.google.com/calendar/render?action=TEMPLATE'
