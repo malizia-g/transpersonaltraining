@@ -1002,6 +1002,47 @@
 
 <dialog id="cycle-2027-modal" aria-labelledby="cycle-2027-title" class="max-w-lg w-[92vw] p-0 backdrop:bg-[color:var(--c-deep-80)] shadow-2xl">
     <div class="bg-[color:var(--c-paper-card)]">
+        
+        
+        <div data-popup-call data-start="2026-12-09T19:00:00.000Z" data-end="2026-12-09T20:00:00.000Z" hidden>
+            <div class="bg-[color:var(--c-deep)] text-[color:var(--c-paper-hi)] px-6 md:px-8 py-6 flex items-start justify-between gap-4">
+                <div>
+                    <p class="p4-kicker text-[color:var(--c-acc)] flex items-center gap-3 mb-3">
+                        <span class="p4-hairline"></span>
+                        Free info call &middot; Google Meet
+                    </p>
+                    <h2 class="p4-display text-2xl md:text-3xl font-medium leading-tight">
+                        Meet the school live on <em class="text-[color:var(--c-acc)]">Wednesday 9 December</em>
+                    </h2>
+                </div>
+                <button type="button" onclick="document.getElementById('cycle-2027-modal').close()" aria-label="Close" class="text-[color:var(--c-paper-hi)] hover:text-[color:var(--c-acc)] bg-transparent border-none cursor-pointer p-1 shrink-0">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div class="px-6 md:px-8 py-7 space-y-6 text-[color:var(--c-body)] leading-relaxed">
+                <p class="inline-flex items-center gap-2 font-medium text-[color:var(--c-heading)] text-lg">
+                    <i data-lucide="clock" class="w-5 h-5 text-[color:var(--c-sec)]"></i>
+                    20:00–21:00 <span class="text-sm font-normal text-[color:var(--c-body-dim)]">(CET)</span>
+                </p>
+                <p>
+                    A new four-year cycle of the training opens in 2027. Join our free online call to meet a member
+                    of the school, ask your questions and hear how the training works &mdash; no obligation.
+                </p>
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <a href="/transpersonaltraining/monthly-call/#signup" class="bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-deep)] px-4 py-4 text-center no-underline transition-all shadow hover:shadow-lg">
+                        <span class="block font-medium tracking-wide">Save my place</span>
+                        <span class="block text-xs mt-1 opacity-80">We email you the link</span>
+                    </a>
+                    <button type="button" onclick="document.getElementById('cycle-2027-modal').close()" class="bg-transparent hover:bg-[color:var(--c-paper-2)] text-[color:var(--c-heading)] border border-[color:var(--c-heading)] px-4 py-4 text-center transition-all cursor-pointer">
+                        <span class="block font-medium tracking-wide">Explore the website</span>
+                        <span class="block text-xs mt-1 text-[color:var(--c-body-dim)]">The 2027&ndash;2030 cycle</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+
+        <div data-popup-cycle>
         <div class="bg-[color:var(--c-deep)] text-[color:var(--c-paper-hi)] px-6 md:px-8 py-6 flex items-start justify-between gap-4">
             <div>
                 <p class="p4-kicker text-[color:var(--c-acc)] flex items-center gap-3 mb-3">
@@ -1039,6 +1080,7 @@
                 </a>
             </div>
         </div>
+        </div>
 
         <div class="px-6 md:px-8 py-5 bg-[color:var(--c-paper)] border-t border-[color:var(--c-line)] text-sm text-[color:var(--c-body)] leading-relaxed">
             Nothing has been taken down: the site you remember keeps its own address at
@@ -1061,12 +1103,37 @@
         // → docs/TODO.md task 65
         var STOPS_AT = new Date('2027-01-01T00:00:00Z');
 
+        // An info call starting within this many days takes the popup over:
+        // the call in large, the old-website note still small at the bottom.
+        // The page is built ahead of time, so "imminent" is decided here,
+        // against the visitor's clock, not at build time.
+        var CALL_LEAD_DAYS = 30;
+
         dialog.addEventListener('click', function (e) {
             if (e.target === dialog) dialog.close();
         });
 
+        function imminentCall() {
+            var now = Date.now();
+            var calls = dialog.querySelectorAll('[data-popup-call]');
+            for (var i = 0; i < calls.length; i++) {
+                var start = new Date(calls[i].getAttribute('data-start')).getTime();
+                var end = new Date(calls[i].getAttribute('data-end')).getTime();
+                if (end > now && start - now <= CALL_LEAD_DAYS * 864e5) return calls[i];
+            }
+            return null;
+        }
+
         window.addEventListener('load', function () {
-            if (new Date() >= STOPS_AT) return;
+            var call = imminentCall();
+            if (call) {
+                call.hidden = false;
+                dialog.querySelector('[data-popup-cycle]').hidden = true;
+                dialog.setAttribute('aria-label', 'Free info call');
+                dialog.removeAttribute('aria-labelledby');
+            } else if (new Date() >= STOPS_AT) {
+                return;
+            }
             // A beat after the loader clears, so the hero is what greets you
             // first and the announcement arrives over a page already there.
             setTimeout(function () {
