@@ -6,6 +6,7 @@
    Usage:
      GET <url>                → data from the active sheet
      GET <url>?sheet=Seminars → data from the "Seminars" sheet
+     GET <url>?calls=1        → upcoming info calls (see Calls.js)
      GET <url>?timestamps=1   → when this spreadsheet last changed, as
                                 { "schedule": ISO date, "lectures": ISO date }
 
@@ -26,6 +27,9 @@
 
 function doGet(e) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
+
+  // ?calls=1 → upcoming info calls from the EWTT calendar (Calls.js)
+  if (e && e.parameter && e.parameter.calls) return callsFeed_();
 
   if (e && e.parameter && e.parameter.timestamps) {
     return ContentService.createTextOutput(JSON.stringify(timestamps_(ss)))
