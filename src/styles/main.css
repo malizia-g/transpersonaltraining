@@ -610,12 +610,13 @@ body.mobile-menu-open { overflow: hidden; }
     font-weight: 400;
 }
 
-/* Clear homepage hero: no veils over the video at all — the sunset shows
-   clean, and the copy relies on its own text shadow for legibility. */
+/* Clear homepage hero: only a faint fade behind the nav and a lighter one
+   at the foot, where the copy sits; no halo from the left. The copy relies
+   mostly on its own text shadow for legibility. */
 .hero-clear-home {
-    --v-hero-top:      transparent;
+    --v-hero-top:      hsl(var(--deep-h) var(--deep-s) var(--deep-l) / .25);
     --v-hero-mid:      transparent;
-    --v-hero-foot:     transparent;
+    --v-hero-foot:     hsl(var(--deep-h) var(--deep-s) var(--deep-l) / .20);
     --v-hero-side:     transparent;
     --v-hero-side-mid: transparent;
     --v-glow:          transparent;
