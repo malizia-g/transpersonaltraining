@@ -46,33 +46,45 @@ export function initMobileMenu() {
 
 /**
  * Initialize navbar scroll effect
- * Transparent and roomy at the top; solid and compressed on scroll, in
- * whichever dark the active palette has set
+ * Transparent and roomy at the top. The dark bar fades in with the first
+ * pixels of scroll (fully solid by FADE_PX), in whichever dark the active
+ * palette has set; the padding compresses once past 50px.
  */
 export function initNavbarScroll() {
     const navbar = document.getElementById('navbar');
     if (!navbar) return;
 
-    // Initialize navbar state on page load
-    const updateNavbarStyle = () => {
-        const scrollClasses = ['shadow-lg'];
+    const FADE_PX = 120;
+    // The background follows the scroll directly, so it must not lag behind
+    // the 0.3s transition the padding uses
+    navbar.style.transitionProperty = 'padding, box-shadow';
 
-        if (window.scrollY > 50) {
-            // On scroll - solid background, backdrop blur, compressed padding
-            navbar.classList.remove('bg-transparent', 'py-6');
-            navbar.style.backgroundColor = 'var(--c-deep-95)';
-            navbar.classList.add('backdrop-blur-sm', 'py-1.5', ...scrollClasses);
-        } else {
-            // At top - transparent and roomy
-            navbar.classList.add('bg-transparent', 'py-6');
-            navbar.style.backgroundColor = 'transparent';
-            navbar.classList.remove('backdrop-blur-sm', 'py-1.5', ...scrollClasses);
-        }
+    let ticking = false;
+    const updateNavbarStyle = () => {
+        ticking = false;
+        const y = window.scrollY;
+        const t = Math.min(Math.max(y / FADE_PX, 0), 1);
+
+        navbar.style.backgroundColor = t === 0
+            ? 'transparent'
+            : `color-mix(in srgb, var(--c-deep-95) ${(t * 100).toFixed(1)}%, transparent)`;
+        navbar.classList.toggle('bg-transparent', t === 0);
+        navbar.classList.toggle('backdrop-blur-sm', t > 0.5);
+
+        const compact = y > 50;
+        navbar.classList.toggle('py-6', !compact);
+        navbar.classList.toggle('py-1.5', compact);
+        navbar.classList.toggle('shadow-lg', t === 1);
     };
-    
+
     // Run on page load
     updateNavbarStyle();
-    
-    // Run on scroll
-    window.addEventListener('scroll', updateNavbarStyle);
+
+    // Run on scroll, at most once per frame
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(updateNavbarStyle);
+        }
+    }, { passive: true });
 }
