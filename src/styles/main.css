@@ -610,14 +610,13 @@ body.mobile-menu-open { overflow: hidden; }
     font-weight: 400;
 }
 
-/* Clear homepage hero: the same idea for the video threshold. The vertical
-   wash keeps only a fade behind the nav and a lighter one at the foot, where
-   the copy sits; the wash from the left stays as the halo behind the copy. */
+/* Clear homepage hero: no veils over the video at all — the sunset shows
+   clean, and the copy relies on its own text shadow for legibility. */
 .hero-clear-home {
-    --v-hero-top:      hsl(var(--deep-h) var(--deep-s) var(--deep-l) / .45);
+    --v-hero-top:      transparent;
     --v-hero-mid:      transparent;
-    --v-hero-foot:     hsl(var(--deep-h) var(--deep-s) var(--deep-l) / .35);
-    --v-hero-side:     hsl(var(--deep-h) calc(var(--deep-s) - 8%) calc(var(--deep-l) + 3.4%) / .40);
+    --v-hero-foot:     transparent;
+    --v-hero-side:     transparent;
     --v-hero-side-mid: transparent;
     --v-glow:          transparent;
 }
