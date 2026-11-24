@@ -1,25 +1,5 @@
 // Schedule page - Filter and sort functionality for pre-rendered events
 
-// Function to toggle description expansion (global scope for onclick)
-window.toggleDescription = function(cardId) {
-    const descElement = document.getElementById(`desc-${cardId}`);
-    const textElement = document.getElementById(`text-${cardId}`);
-    const iconElement = document.getElementById(`icon-${cardId}`);
-    
-    if (!descElement) return;
-    
-    if (descElement.classList.contains('expanded')) {
-        descElement.classList.remove('expanded');
-        textElement.textContent = 'Read more';
-        iconElement.setAttribute('data-lucide', 'chevron-down');
-    } else {
-        descElement.classList.add('expanded');
-        textElement.textContent = 'Read less';
-        iconElement.setAttribute('data-lucide', 'chevron-up');
-    }
-    lucide.createIcons();
-};
-
 // Parse European date (DD.MM.YYYY)
 function parseDate(dateString) {
     if (!dateString) return null;

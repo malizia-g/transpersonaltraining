@@ -136,25 +136,33 @@ description: "Upcoming residential intensives and Holotropic Breathing seminars 
                     data-type2="{{ s.type2 | trim }}"
                     data-place="{{ s.placeLabel }}"
                     data-people="{{ s.peopleKeys }}">
-                    <a href="{{ s.url | url }}" class="group flex flex-col md:flex-row md:items-start gap-2 md:gap-10 py-5 px-2 hover:bg-[color:var(--c-paper-card)] transition-colors">
-                        <span class="text-sm text-[color:var(--c-body-dim)] md:w-40 flex-shrink-0 md:pt-1 leading-snug">
-                            {% if s.range %}<time datetime="{{ s.range.start }}">{{ s.dateText }}</time>{% else %}{{ s.dateText or 'Date to be defined' }}{% endif %}
-                            {% if s.dateKind == 'indicative' %}<span class="block w-fit mt-1 text-[10px] uppercase tracking-wider px-1.5 py-0.5 border border-[color:var(--c-line)] whitespace-nowrap">to be confirmed</span>{% endif %}
-                        </span>
-                        <span class="flex-1 min-w-0">
-                            <span class="block text-lg font-serif font-bold text-[color:var(--c-heading)] group-hover:text-[color:var(--c-link)] transition-colors">{{ s.cleanTitle }}</span>
-                            <span class="block text-sm text-[color:var(--c-body-dim)] mt-0.5">
-                                {{ [s.placeName, s.city, s.country] | compact | join(' · ') }}{% if s.facilitators.length %} — {{ s.facilitators | names }}{% endif %}
-                            </span>
-                            {% if s.description %}<span class="block text-sm text-[color:var(--c-body)] mt-1.5 line-clamp-2">{{ s.description }}</span>{% endif %}
-                        </span>
-                        <span class="flex flex-wrap md:flex-col md:items-end gap-1.5 self-start flex-shrink-0 md:w-32 mt-1 md:mt-1">
-                            {% if s.range and not s.isPast %}<span class="whitespace-nowrap period-badge text-[10px] uppercase tracking-wider px-1.5 py-0.5 border border-[color:var(--c-acc-40)] bg-[color:var(--c-acc-15)] text-[color:var(--c-sec)]">Upcoming</span>{% endif %}
+                    <div class="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-8 py-5 px-2">
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-serif font-bold text-[color:var(--c-heading)] mb-2 leading-snug">
+                                <a href="{{ s.url | url }}" class="hover:text-[color:var(--c-link)] transition-colors">{{ s.cleanTitle }}</a>
+                            </h3>
+                            <div class="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[color:var(--c-body)]">
+                                {% if s.range %}
+                                <span class="inline-flex items-center gap-1.5"><i data-lucide="calendar" class="w-3.5 h-3.5 text-[color:var(--c-link)] flex-shrink-0"></i><time datetime="{{ s.range.start }}">{{ s.dateText }}</time></span>
+                                {% else %}
+                                <span class="inline-flex items-center gap-1.5"><i data-lucide="calendar-clock" class="w-3.5 h-3.5 text-[color:var(--c-sec)] flex-shrink-0"></i>{{ s.dateText or 'Date to be defined' }}{% if s.dateKind == 'indicative' %}<span class="text-[10px] uppercase tracking-wider px-1.5 py-0.5 border border-[color:var(--c-line)] text-[color:var(--c-body-dim)] whitespace-nowrap">to be confirmed</span>{% endif %}</span>
+                                {% endif %}
+                                {% if s.placeName or s.city or s.country %}
+                                <span class="inline-flex items-center gap-1.5"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-[color:var(--c-heading)] flex-shrink-0"></i>{{ [s.placeName, s.city, s.country] | compact | join(' · ') }}{% if s.mapsUrl %}<a href="{{ s.mapsUrl }}" target="_blank" rel="noopener" class="text-[color:var(--c-link)] underline underline-offset-2">Map</a>{% endif %}</span>
+                                {% endif %}
+                                {% if s.facilitators.length %}
+                                <span class="inline-flex items-center gap-1.5 flex-wrap"><i data-lucide="user" class="w-3.5 h-3.5 text-[color:var(--c-sec)] flex-shrink-0"></i>{% for p in s.facilitators %}{% if p.url %}<a href="{{ p.url | url }}" class="hover:text-[color:var(--c-link)] underline-offset-2 hover:underline">{{ p.name }}</a>{% else %}{{ p.name }}{% endif %}{% if not loop.last %},&nbsp;{% endif %}{% endfor %}</span>
+                                {% endif %}
+                            </div>
+                            {% if s.description %}<p class="mt-2 text-sm text-[color:var(--c-body-dim)] leading-relaxed line-clamp-2">{{ s.description }}</p>{% endif %}
+                        </div>
+                        <div class="flex flex-wrap sm:flex-col sm:items-end gap-1.5 self-start flex-shrink-0 sm:w-32">
+                            {% if s.range and not s.isPast %}<span class="whitespace-nowrap text-[10px] uppercase tracking-wider px-1.5 py-0.5 border border-[color:var(--c-acc-40)] bg-[color:var(--c-acc-15)] text-[color:var(--c-sec)]">Upcoming</span>{% endif %}
                             {% if s.isOption %}<span class="whitespace-nowrap text-[10px] uppercase tracking-wider px-1.5 py-0.5 border border-[color:var(--c-line)] text-[color:var(--c-body-dim)]">Optional</span>{% endif %}
-                            {% for t in s.types %}<span class="text-[10px] uppercase tracking-wider px-1.5 py-0.5 border border-[color:var(--c-link-25)] bg-[color:var(--c-link-10)] text-[color:var(--c-link)] whitespace-nowrap">{{ t | shortType }}</span>{% endfor %}
+                            {% for t in s.types %}<span class="whitespace-nowrap text-[10px] uppercase tracking-wider px-1.5 py-0.5 border border-[color:var(--c-link-25)] bg-[color:var(--c-link-10)] text-[color:var(--c-link)]">{{ t | shortType }}</span>{% endfor %}
                             {% if s.moduleLabel %}<span class="whitespace-nowrap text-[10px] uppercase tracking-wider px-1.5 py-0.5 border border-[color:var(--c-deep-25)] bg-[color:var(--c-deep-10)] text-[color:var(--c-heading)]">{{ s.moduleLabel }}</span>{% endif %}
-                        </span>
-                    </a>
+                        </div>
+                    </div>
                 </li>
                 {% endfor %}
             </ul>
