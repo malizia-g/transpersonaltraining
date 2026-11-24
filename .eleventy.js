@@ -245,6 +245,11 @@ module.exports = function(eleventyConfig) {
     model.seminars(events).filter((s) => s.venueData && s.venueData.key === venueKey && s.slug !== exceptSlug));
   eleventyConfig.addFilter('euro', (n) => `€${Number(n).toLocaleString('en-GB')}`);
   eleventyConfig.addFilter('times', (a, b) => a * b);
+  // Badge labels on the schedule rows: the sheet's types, said shorter.
+  eleventyConfig.addFilter('shortType', (t) => ({
+    'Holotropic Breathwork': 'Breathwork',
+    'Family Constellation': 'Constellations',
+  }[String(t).trim()] || t));
   eleventyConfig.addFilter('compact', (arr) => (arr || []).filter(Boolean));
   eleventyConfig.addFilter('names', (list) => (list || []).map((p) => p.name).join(', '));
   eleventyConfig.addFilter('seminarYears', (list) => [...new Set((list || []).map((s) => (s.range ? s.range.start.slice(0, 4) : 'Date to be defined')))]);
