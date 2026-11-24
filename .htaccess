@@ -76,6 +76,10 @@ RewriteRule ^$ - [G,L]
 RewriteRule ^wp-content/uploads/2025/09/West_Program_26\.pdf$ https://transpersonal-training.com/curriculum/ [R=301,L]
 RewriteRule ^wp-content/uploads/2025/10/West_Program_26\.pdf$ https://transpersonal-training.com/curriculum/ [R=301,L]
 
+# /seminars/ itself is not a page: each seminar lives at /seminars/<slug>/,
+# and the list of them all is the intensive schedule.
+RewriteRule ^seminars/?$ https://transpersonal-training.com/schedule/ [R=301,L]
+
 # ── §2 Teacher bio pages ─────────────────────────────────────────
 # 64% of the old site's organic clicks. Each one now goes to that teacher's
 # own page, /teachers/<id>/ (src/teachers/teacher.njk) — one URL per person
