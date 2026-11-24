@@ -1,4 +1,5 @@
 ---
+aliases: ["Kati"]
 id: kati-wortelkamp
 name: Kati Wortelkamp
 role: Head West

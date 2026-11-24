@@ -5,6 +5,7 @@ role: Guest Teacher
 location: South Africa
 credentials: PhD in Constellations Work; Clinical Psychologist
 image: /assets/images/People/teachers/cathy-geils.jpg
+imagePosition: center 25%
 section: guest
 order: 15
 ---

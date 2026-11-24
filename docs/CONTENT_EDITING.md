@@ -286,3 +286,21 @@ Moving those intros into `src/content/` is [TODO task 58](TODO.md#task-58).
 [`monthly-call.html`](../src/monthly-call.html), [`legal-notice.html`](../src/legal-notice.html)
 and [`404.html`](../src/404.html). Ask before restructuring any of them — several carry
 form logic or generated data alongside the prose.
+
+## Seminar, teacher and lecture-topic pages
+
+These pages are generated, not written by hand:
+
+| URL | One page per | Built from |
+|---|---|---|
+| `/teachers/<id>/` | teacher | `src/_data/teachers/<id>.md` |
+| `/seminars/<slug>/` | row of the **Seminars** sheet | the sheet + `src/_data/venues.js` |
+| `/lectures/<topic>/` | lecture *topic* (all sessions on it) | the **Lectures** sheet, grouped in `lib/site-model.js` |
+
+**Seminars sheet columns** (after ImageUrl):
+
+- **Slug** — the page URL, e.g. `double-holotropic-breathwork-freiburg-todtmoos-2026-12-10`. Leave it as it is once the page is live; for a new row leave it empty and the site builds one from title, city, place and date.
+- **City** — nearest large city (Freiburg, Grosseto, Chisinau…). **Venue** — the place itself (`Haus am Mühlenbach, Todtmoos`).
+- **Address**, **Maps** (Google Maps link), **Arrival** (link to the directions, e.g. `https://transpersonal-training.com/venues/#getting-to-todtmoos`).
+
+Arrival directions for Todtmoos and Monteverdi live in `src/_data/venues.js`; the Todtmoos PDF is `src/assets/documents/arrival-todtmoos-haus-am-muehlenbach.pdf`. Teacher names in the sheets are matched to teacher pages by full name, surname, or the `aliases:` list in the teacher's Markdown file — add an alias there if a spelling isn't recognised.

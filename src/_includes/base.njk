@@ -91,12 +91,10 @@
     </script>
     {% endif %}
 
-    {# One Person per teacher, each anchored to the fragment its old bio URL now
-       redirects to. This is the load-bearing piece of the migration: 32 separate
-       bio pages were collapsed into this single one, and those pages were 64% of
-       the site's organic clicks. The @id tying each person to /teachers/#<id> is
-       what tells Google this page represents 32 distinct people rather than one
-       document that happens to mention them. #}
+    {# One Person per teacher, each pointing at the teacher's own page — the
+       same @id that page declares, so Google ties the overview card and the
+       profile page to one person. The old WordPress bio URLs 301 to those
+       pages (src/.htaccess §2). #}
     {% if page.url == "/teachers/" %}
     <script type="application/ld+json">
     {
@@ -105,8 +103,8 @@
       {%- for teacher in teachers.all %}
         {
           "@type": "Person",
-          "@id": "https://transpersonal-training.com/teachers/#{{ teacher.id }}",
-          "url": "https://transpersonal-training.com/teachers/#{{ teacher.id }}",
+          "@id": "https://transpersonal-training.com/teachers/{{ teacher.id }}/#person",
+          "url": "https://transpersonal-training.com/teachers/{{ teacher.id }}/",
           "name": {{ teacher.name | dump | safe }},
           {%- if teacher.role %}
           "jobTitle": {{ teacher.role | dump | safe }},
@@ -182,7 +180,7 @@
           {%- if item.e.facilitator and item.e.facilitator != '-' %}
           "performer": { "@type": "Person", "name": {{ item.e.facilitator | dump | safe }} },
           {%- endif %}
-          "url": "https://transpersonal-training.com/schedule/",
+          "url": "https://transpersonal-training.com{{ (item.e | seminarUrl(scheduleEvents)) or '/schedule/' }}",
           "organizer": {
             "@type": "EducationalOrganization",
             "name": "Transpersonal Training",
@@ -194,6 +192,12 @@
     }
     </script>
     {%- endif %}
+    {% endif %}
+
+    {# Detail pages (teachers, seminars, lecture topics) compute their own
+       JSON-LD in their directory data file as `structuredData`. #}
+    {% if structuredData %}
+    <script type="application/ld+json">{{ structuredData | dump | safe }}</script>
     {% endif %}
 
     {# Blog posts. The index page is excluded — it is a listing, not an article. #}
@@ -248,6 +252,17 @@
           "@type": "ListItem",
           "position": 3,
           "name": {{ title | dump | safe }}
+        }{% elif breadcrumbParent %},
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": {{ breadcrumbParent.name | dump | safe }},
+          "item": "https://transpersonal-training.com{{ breadcrumbParent.url }}"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": {{ (crumbName or title) | dump | safe }}
         }{% else %},
         {
           "@type": "ListItem",

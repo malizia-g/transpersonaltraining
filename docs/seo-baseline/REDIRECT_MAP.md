@@ -40,6 +40,17 @@
 **These 32 URLs are 64% of all organic clicks (228 of 347) and carry most of the site's backlinks.**
 They rank in positions 3–8 for teacher-name searches. See [BASELINE.md](BASELINE.md) Finding 1.
 
+### Update (Fabio, November 2026): each → its own page, `/teachers/<teacher-id>/`
+
+Superseded the July decision below. Every teacher now has a dedicated page
+(`src/teachers/teacher.njk`) with bio, credentials, the seminars they led and
+the lecture topics they teach, and the 32 old bio URLs 301 straight to it
+(`src/.htaccess` §2). One URL per person, as on the old WordPress site, which
+is what ranked for teacher-name searches. `/teachers/` is now the overview
+linking to them; a leftover `/teachers/#<id>` link is forwarded to the
+teacher's page by a script on that page. The rows below still list the
+`#<id>` targets — read them as `/teachers/<id>/`.
+
 ### Decision (Fabio, July 2026): all 32 → `/teachers/`, anchored per teacher
 
 No per-teacher pages. Every old bio URL 301s to **`/teachers/#<teacher-id>`**.

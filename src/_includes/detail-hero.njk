@@ -1,0 +1,22 @@
+{# Dark band the fixed, light-text navigation can sit on. Pass:
+   heroImage (path without extension, .jpg + .webp must exist), heroAlt,
+   kicker, heading, subheading. #}
+<header class="hero-clear relative min-h-[340px] md:min-h-[400px] flex items-end overflow-hidden bg-[color:var(--c-deep)]">
+    <div class="absolute inset-0 z-0">
+        <picture>
+            <source srcset="{{ (heroImage + '.webp') | url }}" type="image/webp">
+            <img src="{{ (heroImage + '.jpg') | url }}" alt="{{ heroAlt }}" class="w-full h-full object-cover {{ heroPosition or 'object-center' }}">
+        </picture>
+        <div class="absolute inset-0 hero-clear-scrim"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[var(--c-deep)] via-transparent to-transparent opacity-80"></div>
+    </div>
+    <div class="relative z-10 container mx-auto px-6 pt-32 pb-12">
+        <div class="max-w-4xl">
+            <p class="p4-kicker text-[color:var(--c-acc)] mb-4 flex items-center gap-4">
+                <span class="p4-hairline"></span>{{ kicker }}
+            </p>
+            <h1 class="p4-display text-3xl md:text-5xl font-medium text-[color:var(--c-paper-hi)] leading-tight mb-4">{{ heading }}</h1>
+            {% if subheading %}<p class="text-lg md:text-xl text-[color:var(--c-on-dark-2)] font-light">{{ subheading | safe }}</p>{% endif %}
+        </div>
+    </div>
+</header>

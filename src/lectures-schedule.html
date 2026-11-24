@@ -132,7 +132,8 @@ description: "Live online lectures in transpersonal psychology training. Learn h
                                 <!-- Left: Title + Info -->
                                 <div class="flex-1 min-w-0">
                                     <h3 class="text-lg font-serif font-bold text-[color:var(--c-heading)] group-hover:text-[color:var(--c-link)] transition-colors mb-2">
-                                        {{ lecture.title }}
+                                        {% set topicHref = lecture.title | lectureTopicUrl %}
+                                        {% if topicHref %}<a href="{{ topicHref | url }}" class="hover:underline underline-offset-4">{{ lecture.title }}</a>{% else %}{{ lecture.title }}{% endif %}
                                     </h3>
 
                                     <div class="flex flex-col gap-2">

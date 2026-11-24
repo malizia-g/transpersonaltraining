@@ -1,0 +1,70 @@
+{% set heroImage = '/assets/images/Headers/hero-lectures-group-listening-wide' %}
+{% set heroAlt = 'A group of students listening during a lecture' %}
+{% set kicker = 'Online lecture topic' %}
+{% set heading = topic.title %}
+{% set subheading = topic.sessions.length + ' session' + ('s' if topic.sessions.length != 1 else '') + (' · ' + (topic.teachers | names) if topic.teachers.length else '') %}
+{% include "detail-hero.njk" %}
+{% set crumb = topic.title %}
+{% include "detail-breadcrumb.njk" %}
+
+<section class="py-16 md:py-20 bg-[color:var(--c-paper-hi)]">
+    <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto grid lg:grid-cols-[1fr_minmax(0,320px)] gap-10 lg:gap-14 items-start">
+            <div class="min-w-0">
+                {% if topic.descriptions.length %}
+                <div class="detail-prose">
+                    {% for d in topic.descriptions %}<p>{{ d }}</p>{% endfor %}
+                </div>
+                {% endif %}
+                <div class="detail-prose mt-4">
+                    <p>These lectures are part of the online programme of the four-year <a href="{{ '/training-overview/' | url }}">Transpersonal Psychotherapy &amp; Holotropic Breathwork training</a>: live evening sessions on Zoom shared by the whole international East–West cohort, between the residential intensives.</p>
+                </div>
+
+                <h2 class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mt-12 mb-5">Sessions</h2>
+                <ul class="divide-y divide-[color:var(--c-line)] border-y border-[color:var(--c-line)]">
+                    {% for s in topic.sessions %}
+                    <li class="py-4 flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-6">
+                        <span class="text-sm text-[color:var(--c-body-dim)] sm:w-40 flex-shrink-0">{% if s.iso %}<time datetime="{{ s.iso }}">{{ s.dateText }}</time>{% else %}{{ s.dateText }}{% endif %}</span>
+                        <span class="flex-1">
+                            <span class="block font-medium text-[color:var(--c-heading)]">{{ s.title }}</span>
+                            <span class="block text-sm text-[color:var(--c-body-dim)]">
+                                {% for p in s.teachers %}{% if p.url %}<a href="{{ p.url | url }}" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-2">{{ p.name }}</a>{% else %}{{ p.name }}{% endif %}{% if not loop.last %}, {% endif %}{% endfor %}
+                                {% if s.module %}{% if s.teachers.length %} · {% endif %}Module {{ s.module }}{% endif %}
+                            </span>
+                        </span>
+                        {% if s.iso and not s.isPast %}<span class="text-[10px] uppercase tracking-wider px-1.5 py-0.5 border border-[color:var(--c-acc-40)] text-[color:var(--c-sec)] self-start">Upcoming</span>{% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <div class="mt-10 flex flex-wrap gap-4">
+                    <a href="{{ '/lectures-schedule/' | url }}" class="inline-flex items-center gap-2 text-[color:var(--c-sec)] hover:text-[color:var(--c-sec-dark)] font-medium">Full lecture calendar <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+                    <a href="{{ '/lectures/' | url }}" class="inline-flex items-center gap-2 text-[color:var(--c-sec)] hover:text-[color:var(--c-sec-dark)] font-medium">All lecture topics <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+                </div>
+            </div>
+
+            {% if topic.teachers.length %}
+            <aside class="lg:sticky lg:top-28 bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm p-6">
+                <p class="p4-kicker text-[color:var(--c-sec)] mb-4">Taught by</p>
+                <ul class="space-y-4">
+                    {% for p in topic.teachers %}
+                    <li>
+                        {% if p.teacher %}
+                        <a href="{{ p.url | url }}" class="group flex items-center gap-3">
+                            <img src="{{ p.teacher.image | url }}" alt="" class="w-14 h-14 object-cover flex-shrink-0"{% if p.teacher.imagePosition %} style="object-position: {{ p.teacher.imagePosition }};"{% endif %} loading="lazy">
+                            <span>
+                                <span class="block font-medium text-[color:var(--c-heading)] group-hover:text-[color:var(--c-link)]">{{ p.name }}</span>
+                                <span class="block text-xs text-[color:var(--c-body-dim)]">{{ p.teacher.credentials }}</span>
+                            </span>
+                        </a>
+                        {% else %}
+                        <span class="font-medium text-[color:var(--c-heading)]">{{ p.name }}</span>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </aside>
+            {% endif %}
+        </div>
+    </div>
+</section>

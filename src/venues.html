@@ -59,6 +59,79 @@ description: "Where our intensives happen: a house in the Black Forest at Todtmo
     </div>
 </section>
 
+
+{# ── How to get there, written from the organisers' own travel notes (data in
+   src/_data/venues.js). The anchors are what gets sent to participants:
+   /venues/#getting-to-todtmoos and /venues/#getting-to-monteverdi. ── #}
+{% macro arrival(v, bg) %}
+<section id="{{ v.arrivalAnchor }}" class="scroll-mt-24 py-14 md:py-16 {{ bg }} border-t border-[color:var(--c-line)]">
+    <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+            <p class="p4-kicker text-[color:var(--c-sec)] mb-3 flex items-center gap-4"><span class="p4-hairline"></span>How to get there</p>
+            <h3 class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mb-2">Getting to {{ v.name }}</h3>
+            <p class="text-[color:var(--c-body)] mb-8">
+                <span class="font-medium text-[color:var(--c-heading)]">{{ v.name }}</span>,
+                {{ v.address.street }}, {{ v.address.postalCode }} {{ v.address.locality }}, {{ v.country }}
+                &middot; nearest city: {{ v.city }}
+            </p>
+            <div class="grid md:grid-cols-2 gap-4">
+                {% for step in v.arrival %}
+                <div class="flex gap-4 p-5 bg-[color:var(--c-paper-hi)] border border-[color:var(--c-line)]">
+                    <i data-lucide="{{ step.icon }}" class="w-5 h-5 text-[color:var(--c-sec)] flex-shrink-0 mt-1"></i>
+                    <div class="detail-prose text-base">
+                        <p class="font-semibold text-[color:var(--c-heading)]">{{ step.mode }}</p>
+                        <p class="!mt-1">{{ step.html | safe }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% if v.notes %}
+            <ul class="detail-prose text-base mt-6">
+                {% for note in v.notes %}<li>{{ note }}</li>{% endfor %}
+            </ul>
+            {% endif %}
+            {% if v.rooms %}
+            <div class="mt-8 overflow-x-auto">
+                <table class="w-full text-sm border border-[color:var(--c-line)] bg-[color:var(--c-paper-hi)]">
+                    <caption class="text-left font-semibold text-[color:var(--c-heading)] mb-2">{{ v.rooms.caption }}</caption>
+                    <thead>
+                        <tr class="bg-[color:var(--c-paper-2)] text-[color:var(--c-heading)]">
+                            <th scope="col" class="text-left p-2">Room</th>
+                            {% for n in v.rooms.nights %}<th scope="col" class="p-2 text-right whitespace-nowrap">{{ n }} night{{ 's' if n > 1 }}</th>{% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for r in v.rooms.rows %}
+                        <tr class="border-t border-[color:var(--c-line)] text-[color:var(--c-body)]">
+                            <th scope="row" class="text-left font-normal p-2">{{ r.label }}</th>
+                            {% for n in v.rooms.nights %}<td class="p-2 text-right">{{ (r.perNight | times(n)) | euro }}</td>{% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <p class="text-sm text-[color:var(--c-body-dim)] mt-2">{{ v.rooms.extras }}</p>
+            </div>
+            {% endif %}
+            <div class="flex flex-wrap gap-3 mt-8">
+                <a href="{{ v.maps }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-[color:var(--c-deep)] hover:bg-[color:var(--c-deep-2)] text-[color:var(--c-paper-hi)] px-5 py-3 font-medium transition-colors">
+                    <i data-lucide="map" class="w-4 h-4"></i> Open in Google Maps
+                </a>
+                {% if v.pdf %}
+                <a href="{{ v.pdf | url }}" download class="inline-flex items-center gap-2 border border-[color:var(--c-deep)] text-[color:var(--c-heading)] hover:bg-[color:var(--c-paper)] px-5 py-3 font-medium transition-colors">
+                    <i data-lucide="file-down" class="w-4 h-4"></i> Download arrival directions (PDF)
+                </a>
+                {% endif %}
+                {% if v.website %}
+                <a href="{{ v.website }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-[color:var(--c-sec)] hover:text-[color:var(--c-sec-dark)] font-medium px-2 py-3">
+                    Venue website <i data-lucide="external-link" class="w-4 h-4"></i>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endmacro %}
+
 <!-- Venue 1: Todtmoos -->
 <section id="todtmoos" class="scroll-mt-24 py-16 md:py-20 bg-[color:var(--c-paper)] border-t border-[color:var(--c-line)]">
     <div class="container mx-auto px-6">
@@ -111,6 +184,8 @@ description: "Where our intensives happen: a house in the Black Forest at Todtmo
     </div>
 </section>
 
+{{ arrival(venues.todtmoos, "bg-[color:var(--c-paper-card)]") }}
+
 <!-- Venue 2: Tenuta di Monteverdi -->
 <section id="monteverdi" class="scroll-mt-24 py-16 md:py-20 bg-[color:var(--c-paper-card)] border-t border-[color:var(--c-line)]">
     <div class="container mx-auto px-6">
@@ -161,6 +236,8 @@ description: "Where our intensives happen: a house in the Black Forest at Todtmo
         </div>
     </div>
 </section>
+
+{{ arrival(venues.monteverdi, "bg-[color:var(--c-paper)]") }}
 
 <!-- Venue 3: Eastern track (coming soon) -->
 <section id="eastern-venue" class="scroll-mt-24 py-16 md:py-20 bg-[color:var(--c-paper)] border-t border-[color:var(--c-line)]">

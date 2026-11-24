@@ -1,0 +1,43 @@
+---
+layout: base.njk
+permalink: /lectures/
+title: "Online Lecture Topics in Transpersonal Psychotherapy & Holotropic Breathwork"
+description: "The subjects taught in the online lectures of the Transpersonal Training: counseling skills, Holotropic Breathwork strategy, spiritual emergency, perinatal matrices, Gestalt, constellations and more."
+---
+{% set topics = lectureEvents | lectureTopics %}
+{% set heroImage = '/assets/images/Headers/hero-lectures-group-listening-wide' %}
+{% set heroAlt = 'A group of students listening during a lecture' %}
+{% set kicker = 'Online lectures' %}
+{% set heading = 'What the lectures cover' %}
+{% set subheading = topics.length + ' topics, taught live online by the faculty' %}
+{% include "detail-hero.njk" %}
+
+<div class="bg-[color:var(--c-paper-card)] border-b border-[color:var(--c-line)]">
+    <nav aria-label="Breadcrumb" class="container mx-auto px-6 py-4">
+        <div class="flex items-center gap-2 text-sm text-[color:var(--c-body-dim)]">
+            <a href="{{ '/' | url }}" class="hover:text-[color:var(--c-link)] transition-colors">Home</a>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <span class="text-[color:var(--c-heading)] font-medium">Lecture topics</span>
+        </div>
+    </nav>
+</div>
+
+<section class="py-16 md:py-20 bg-[color:var(--c-paper-hi)]">
+    <div class="container mx-auto px-6">
+        <div class="max-w-5xl mx-auto">
+            <p class="text-lg text-[color:var(--c-body)] leading-relaxed mb-10">
+                Between the residential intensives the whole East–West cohort meets online for weekly evening lectures. Each topic below gathers every session taught on it, with its teachers and dates. For the week-by-week calendar see the <a href="{{ '/lectures-schedule/' | url }}" class="text-[color:var(--c-link)] underline underline-offset-4">lecture schedule</a>.
+            </p>
+            <ul class="grid sm:grid-cols-2 gap-4">
+                {% for t in topics %}
+                <li>
+                    <a href="{{ t.url | url }}" class="group block h-full p-5 bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] hover:border-[color:var(--c-acc)] hover:shadow-md transition-all">
+                        <span class="block text-lg font-serif font-bold text-[color:var(--c-heading)] group-hover:text-[color:var(--c-link)]">{{ t.title }}</span>
+                        <span class="block text-xs text-[color:var(--c-body-dim)] mt-1">{{ t.sessions.length }} session{{ 's' if t.sessions.length != 1 }}{% if t.teachers.length %} · {{ t.teachers | names }}{% endif %}</span>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>

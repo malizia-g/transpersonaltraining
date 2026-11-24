@@ -1,4 +1,5 @@
 ---
+aliases: ["Erik Anderson"]
 id: erik-andersen
 name: Erik Andersen
 role: Guest Teacher

@@ -1,4 +1,5 @@
 ---
+aliases: ["Lidia Maidan"]
 id: lydia-maidan
 name: Lydia Maidan
 location: Moldova

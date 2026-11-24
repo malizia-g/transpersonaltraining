@@ -1,4 +1,5 @@
 ---
+aliases: ["Rita Aguilar", "Aguilar"]
 id: rita-aguila
 name: Rita Aguila
 location: Portugal

@@ -1,0 +1,163 @@
+{% set s = seminar %}
+{% set v = s.venueData %}
+{% set heroImage = v.hero if (v and v.hero) else '/assets/images/Headers/hero-training-overview-breathwork-tent' %}
+{% set heroAlt = v.heroAlt if (v and v.heroAlt) else 'Participants in a Holotropic Breathwork session' %}
+{% set kicker = ('Conference' if s.isConference else ('Holotropic Breathwork seminar' if 'reath' in s.title else 'Seminar')) + (' · ' + s.city if s.city else '') %}
+{% set heading = s.cleanTitle %}
+{% set subheading = s.dateText + (' &middot; ' + s.placeName if s.placeName else (' &middot; ' + s.country if s.country else '')) %}
+{% include "detail-hero.njk" %}
+{% set crumb = s.cleanTitle + (' (' + s.range.start.slice(0, 4) + ')' if s.range else '') %}
+{% include "detail-breadcrumb.njk" %}
+
+<section class="py-16 md:py-20 bg-[color:var(--c-paper-hi)]">
+    <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto grid lg:grid-cols-[1fr_minmax(0,340px)] gap-10 lg:gap-14 items-start">
+
+            <div class="min-w-0">
+                {% if s.range and s.isPast %}
+                <p class="inline-flex items-center gap-2 text-sm px-3 py-1.5 mb-6 bg-[color:var(--c-paper-2)] text-[color:var(--c-body-dim)]">
+                    <i data-lucide="history" class="w-4 h-4"></i> This seminar took place in {{ s.range.start.slice(0, 4) }}. See the <a href="{{ '/schedule/' | url }}" class="underline underline-offset-2 text-[color:var(--c-link)]">upcoming dates</a>.
+                </p>
+                {% elif s.range %}
+                <p class="inline-flex items-center gap-2 text-sm px-3 py-1.5 mb-6 bg-[color:var(--c-acc-15)] text-[color:var(--c-sec)] border border-[color:var(--c-acc-40)]">
+                    <i data-lucide="calendar-check" class="w-4 h-4"></i> Upcoming{% if s.isOption %} · optional practice weekend{% endif %}
+                </p>
+                {% endif %}
+
+                {% if s.description %}
+                <div class="detail-prose">
+                    <p>{{ s.description }}</p>
+                </div>
+                {% endif %}
+
+                {% if s.isOption and not s.isConference %}
+                <div class="detail-prose mt-4">
+                    <p>Optional seminars are open to students as additional practice and self-exploration; they count towards the personal experience in expanded states that the training requires, but are not part of the compulsory modules.</p>
+                </div>
+                {% elif s.moduleLabel %}
+                <div class="detail-prose mt-4">
+                    <p>This residential intensive is part of <strong>{{ s.moduleLabel }}</strong> of the four-year <a href="{{ '/training-overview/' | url }}">Transpersonal Psychotherapy &amp; Holotropic Breathwork training</a>.</p>
+                </div>
+                {% endif %}
+
+                {# ── Getting there ── #}
+                <h2 id="getting-there" class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mt-12 mb-4">Getting there</h2>
+                {% if v and v.arrival %}
+                <p class="text-[color:var(--c-body)] mb-6">{{ v.summary }}</p>
+                <div class="space-y-4">
+                    {% for step in v.arrival %}
+                    <div class="flex gap-4 p-4 bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)]">
+                        <i data-lucide="{{ step.icon }}" class="w-5 h-5 text-[color:var(--c-sec)] flex-shrink-0 mt-1"></i>
+                        <div class="detail-prose text-base">
+                            <p class="font-semibold text-[color:var(--c-heading)]">{{ step.mode }}</p>
+                            <p class="!mt-1">{{ step.html | safe }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% if v.notes %}
+                <ul class="detail-prose text-base mt-6">
+                    {% for note in v.notes %}<li>{{ note }}</li>{% endfor %}
+                </ul>
+                {% endif %}
+                {% elif s.city or s.country %}
+                <p class="text-[color:var(--c-body)]">This seminar is held {% if s.placeName %}at {{ s.placeName }}, {% endif %}{{ ['in ' + s.city if s.city else '', s.country] | compact | join(', ') }}. Directions are sent to participants with their booking confirmation.</p>
+                {% endif %}
+
+                <div class="flex flex-wrap gap-3 mt-6">
+                    {% if s.mapsUrl %}
+                    <a href="{{ s.mapsUrl }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-[color:var(--c-deep)] hover:bg-[color:var(--c-deep-2)] text-[color:var(--c-paper-hi)] px-5 py-3 font-medium transition-colors">
+                        <i data-lucide="map" class="w-4 h-4"></i> Open in Google Maps
+                    </a>
+                    {% endif %}
+                    {% if v and v.pdf %}
+                    <a href="{{ v.pdf | url }}" download class="inline-flex items-center gap-2 border border-[color:var(--c-deep)] text-[color:var(--c-heading)] hover:bg-[color:var(--c-paper)] px-5 py-3 font-medium transition-colors">
+                        <i data-lucide="file-down" class="w-4 h-4"></i> Arrival directions (PDF)
+                    </a>
+                    {% endif %}
+                    {% if v and v.page %}
+                    <a href="{{ v.page | url }}" class="inline-flex items-center gap-2 text-[color:var(--c-sec)] hover:text-[color:var(--c-sec-dark)] font-medium px-2 py-3">
+                        About the venue <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                    {% endif %}
+                </div>
+
+                {# ── Same venue, other years: the archive is the point ── #}
+                {% if v %}
+                {% set others = v.key | venueSeminars(scheduleEvents, s.slug) %}
+                {% if others.length %}
+                <h2 class="p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)] mt-14 mb-2">More seminars in {{ v.place }}</h2>
+                <p class="text-[color:var(--c-body-dim)] mb-5">{{ others.length + 1 }} seminars held or planned {% if v.name %}at {{ v.name }}{% else %}in {{ v.place }}{% endif %} since {{ (others | last).range.start.slice(0, 4) if (others | last).range else '' }}.</p>
+                <ul class="divide-y divide-[color:var(--c-line)] border-y border-[color:var(--c-line)]">
+                    {% for o in others | batch(8) | first %}
+                    <li>
+                        <a href="{{ o.url | url }}" class="group flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-6 py-3 hover:bg-[color:var(--c-paper)] transition-colors">
+                            <span class="text-sm text-[color:var(--c-body-dim)] sm:w-48 flex-shrink-0">{{ o.dateText }}</span>
+                            <span class="font-medium text-[color:var(--c-heading)] group-hover:text-[color:var(--c-link)]">{{ o.cleanTitle }}</span>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <a href="{{ '/seminars/' | url }}" class="inline-flex items-center gap-2 mt-4 text-[color:var(--c-sec)] hover:text-[color:var(--c-sec-dark)] font-medium">All seminars <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+                {% endif %}
+                {% endif %}
+            </div>
+
+            {# ── Key facts ── #}
+            <aside class="lg:sticky lg:top-28 bg-[color:var(--c-paper-card)] border border-[color:var(--c-line)] shadow-sm">
+                <div class="h-1 bg-gradient-to-r from-[var(--c-deep)] via-[var(--c-link)] to-[var(--c-acc)]"></div>
+                <dl class="p-6 space-y-5 text-sm">
+                    <div>
+                        <dt class="p4-kicker text-[color:var(--c-sec)] mb-1">Dates</dt>
+                        <dd class="text-[color:var(--c-heading)] font-medium">
+                            {% if s.range %}<time datetime="{{ s.range.start }}">{{ s.dateText }}</time>{% else %}{{ s.dateText or 'To be defined' }}{% endif %}
+                        </dd>
+                    </div>
+                    {% if s.placeName or s.city %}
+                    <div>
+                        <dt class="p4-kicker text-[color:var(--c-sec)] mb-1">Venue</dt>
+                        <dd class="text-[color:var(--c-body)]">
+                            {% if s.placeName %}<span class="block text-[color:var(--c-heading)] font-medium">{{ s.placeName }}</span>{% endif %}
+                            {% if v and v.address %}<span class="block">{{ v.address.street }}</span><span class="block">{{ v.address.postalCode }} {{ v.address.locality }}, {{ v.country }}</span>
+                            {% elif s.address %}<span class="block">{{ s.address }}</span>{% endif %}
+                        </dd>
+                    </div>
+                    {% endif %}
+                    {% if s.city %}
+                    <div>
+                        <dt class="p4-kicker text-[color:var(--c-sec)] mb-1">Nearest city</dt>
+                        <dd class="text-[color:var(--c-body)]">{{ s.city }}{% if s.country %}, {{ s.country }}{% endif %}{% if v and v.region %} · {{ v.region }}{% endif %}</dd>
+                    </div>
+                    {% endif %}
+                    {% if s.facilitators.length %}
+                    <div>
+                        <dt class="p4-kicker text-[color:var(--c-sec)] mb-1">Facilitated by</dt>
+                        <dd class="text-[color:var(--c-body)] space-y-1">
+                            {% for p in s.facilitators %}
+                            <span class="block">{% if p.url %}<a href="{{ p.url | url }}" class="text-[color:var(--c-link)] hover:text-[color:var(--c-link-hover)] underline underline-offset-2">{{ p.name }}</a>{% else %}{{ p.name }}{% endif %}</span>
+                            {% endfor %}
+                        </dd>
+                    </div>
+                    {% endif %}
+                    {% if s.types.length %}
+                    <div>
+                        <dt class="p4-kicker text-[color:var(--c-sec)] mb-1">Format</dt>
+                        <dd class="flex flex-wrap gap-1.5">
+                            {% for t in s.types %}<span class="px-2 py-0.5 text-xs bg-[color:var(--c-link-10)] text-[color:var(--c-link)] border border-[color:var(--c-link-25)]">{{ t }}</span>{% endfor %}
+                        </dd>
+                    </div>
+                    {% endif %}
+                    {% if s.moduleLabel %}
+                    <div>
+                        <dt class="p4-kicker text-[color:var(--c-sec)] mb-1">Training module</dt>
+                        <dd class="text-[color:var(--c-body)]">{{ s.moduleLabel }}</dd>
+                    </div>
+                    {% endif %}
+                </dl>
+                <div class="px-6 pb-6">
+                    <a href="{{ '/' | url }}#contact" class="block text-center bg-[color:var(--c-acc)] hover:bg-[color:var(--c-acc-dark)] text-[color:var(--c-heading)] px-5 py-3 font-medium transition-colors">Ask about this seminar</a>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>

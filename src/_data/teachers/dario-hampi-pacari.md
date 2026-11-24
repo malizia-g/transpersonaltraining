@@ -1,4 +1,5 @@
 ---
+aliases: ["Dario Giuffrida", "Hampi Pakari", "Dario"]
 id: dario-hampi-pacari
 name: Dario Hampi Pacari
 role: Guest Teacher

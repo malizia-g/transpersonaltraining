@@ -633,3 +633,18 @@ body.mobile-menu-open { overflow: hidden; }
 .hero-clear-home .p4-kicker {
     text-shadow: 0 0 2px rgb(0 0 0 / .7), 0 1px 4px rgb(0 0 0 / .6), 0 2px 18px rgb(0 0 0 / .5);
 }
+
+/* ── Detail pages: /teachers/<id>/, /seminars/<slug>/, /lectures/<topic>/ ──
+   Long-form text from Markdown and the sheets, without the typography
+   plugin the site doesn't load. */
+.detail-prose { color: var(--c-body); line-height: 1.75; font-size: 1.0625rem; }
+.detail-prose p + p,
+.detail-prose p + ul,
+.detail-prose ul + p { margin-top: 1rem; }
+.detail-prose ul { list-style: disc; padding-left: 1.4rem; }
+.detail-prose ul li { margin: .4rem 0; }
+.detail-prose ul li::marker { color: var(--c-link); }
+.detail-prose a { color: var(--c-link); text-decoration: underline; text-underline-offset: 3px; }
+.detail-prose a:hover { color: var(--c-link-hover); }
+.detail-prose strong { font-weight: 600; color: var(--c-heading); }
+.detail-prose h2, .detail-prose h3 { font-family: 'Cormorant Garamond', Georgia, serif; color: var(--c-heading); font-weight: 600; margin: 1.5rem 0 .5rem; font-size: 1.35rem; }

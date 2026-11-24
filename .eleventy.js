@@ -224,6 +224,30 @@ module.exports = function(eleventyConfig) {
     return { start: iso[0], end: iso[iso.length - 1] };
   });
 
+  // Seminar, teacher and lecture-topic pages (see lib/site-model.js). The
+  // listing pages link to the same URLs the paginated pages are built at, so
+  // both go through these.
+  const model = require('./lib/site-model');
+  eleventyConfig.addFilter('seminarList', (events) => model.seminars(events));
+  eleventyConfig.addFilter('seminarUrl', function (event, events) {
+    const found = model.seminars(events).find((s) => s.raw === event);
+    return found ? found.url : '';
+  });
+  eleventyConfig.addFilter('seminarFor', (event, events) => model.seminars(events).find((s) => s.raw === event) || null);
+  eleventyConfig.addFilter('lectureTopics', (lectures) => model.lectureTopics(lectures));
+  eleventyConfig.addFilter('lectureTopicUrl', (title) => model.lectureTopicUrl(title));
+  eleventyConfig.addFilter('teacherSeminars', (id, events) => model.seminarsFor(id, events));
+  eleventyConfig.addFilter('teacherTopics', (id, lectures) => model.topicsFor(id, lectures));
+  eleventyConfig.addFilter('people', (str) => model.people(str));
+  eleventyConfig.addFilter('humanDate', (iso) => (iso ? model.humanDate(iso) : ''));
+  eleventyConfig.addFilter('venueSeminars', (venueKey, events, exceptSlug) =>
+    model.seminars(events).filter((s) => s.venueData && s.venueData.key === venueKey && s.slug !== exceptSlug));
+  eleventyConfig.addFilter('euro', (n) => `€${Number(n).toLocaleString('en-GB')}`);
+  eleventyConfig.addFilter('times', (a, b) => a * b);
+  eleventyConfig.addFilter('compact', (arr) => (arr || []).filter(Boolean));
+  eleventyConfig.addFilter('names', (list) => (list || []).map((p) => p.name).join(', '));
+  eleventyConfig.addFilter('seminarYears', (list) => [...new Set((list || []).map((s) => (s.range ? s.range.start.slice(0, 4) : 'Date to be defined')))]);
+
   // Nunjucks has no notion of "now", and Event schema is only worth emitting for
   // events that haven't happened yet.
   eleventyConfig.addGlobalData('todayISO', () => new Date().toISOString().slice(0, 10));

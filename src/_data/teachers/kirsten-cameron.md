@@ -1,4 +1,5 @@
 ---
+aliases: ["Kisten Cameron"]
 id: kirsten-cameron
 name: Dr. Kirsten E. Cameron
 location: "California, USA"

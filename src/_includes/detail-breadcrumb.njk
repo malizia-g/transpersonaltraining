@@ -1,0 +1,11 @@
+<div class="bg-[color:var(--c-paper-card)] border-b border-[color:var(--c-line)]">
+    <nav aria-label="Breadcrumb" class="container mx-auto px-6 py-4">
+        <div class="flex items-center gap-2 text-sm text-[color:var(--c-body-dim)] flex-wrap">
+            <a href="{{ '/' | url }}" class="hover:text-[color:var(--c-link)] transition-colors">Home</a>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <a href="{{ breadcrumbParent.url | url }}" class="hover:text-[color:var(--c-link)] transition-colors">{{ breadcrumbParent.name }}</a>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <span class="text-[color:var(--c-heading)] font-medium">{{ crumb }}</span>
+        </div>
+    </nav>
+</div>

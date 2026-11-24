@@ -1,4 +1,5 @@
 ---
+aliases: ["Lindhardt"]
 id: tina-lindhard
 name: Dr. Tina Lindhard
 role: Guest Teacher

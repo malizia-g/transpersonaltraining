@@ -1,4 +1,5 @@
 ---
+aliases: ["Stefan dresler", "Dresler"]
 id: stefan-dressler
 name: Dr. Stefan Dressler
 role: Guest Teacher

@@ -1,4 +1,5 @@
 ---
+aliases: ["Skarstsesku", "Lyudmila"]
 id: lyudmila-skartsesku
 name: Lyudmila Skartsesku
 role: Head East
