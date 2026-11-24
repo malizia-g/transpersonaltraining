@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════════
    PAST LECTURES + MODULES — 24 November 2026 (run once)
    ═══════════════════════════════════════════════════════════════════
-   Menu: 🚀 Automations → 📚 Add past lectures + restore modules.
+   Menu: 🚀 Automations → 📚 Add past lectures + seminars.
 
    1. Restores the Module of every lecture whose Module came out empty when
       the tab was rebuilt, from "Lectures (old 2026-11-24)" (same date and
@@ -776,8 +776,162 @@ function addPastLecturesAndModules() {
   body.sort({ column: col('date'), ascending: true });
   formatSheets();
 
-  var msg = restored + ' modules restored, ' + toAdd.length + ' past lectures added, ' + newTopics.length + ' new topics in Lists' +
+  var semMsg = addPastSeminars_(ss);
+  var msg = semMsg + '; ' + restored + ' modules restored, ' + toAdd.length + ' past lectures added, ' + newTopics.length + ' new topics in Lists' +
             (missing.length ? ', added to Teachers: ' + missing.join(', ') : '') + '.';
   Logger.log(msg);
   try { SpreadsheetApp.getUi().alert('Past lectures', msg, SpreadsheetApp.getUi().ButtonSet.OK); } catch (e) {}
+}
+
+/* ── Seminars from the old programmes ───────────────────────────────
+   Two dates corrected against West_Program_25 (the Rainer Pervöltz
+   intensive and the option weekend before it were in July, not June; their
+   slugs follow, those pages were only ever on staging), and seven past
+   seminars that were missing from the tab. "Mexico" joins the Venues tab. */
+
+// [old slug, new date, new slug]
+var PAST_SEMINAR_FIXES_ = [
+ [
+  "intensive-healing-the-inner-child-grof-breathwork-freiburg-todtmoos-2025-06-03",
+  "03.07.2025 - 06.07.2025",
+  "intensive-healing-the-inner-child-grof-breathwork-freiburg-todtmoos-2025-07-03"
+ ],
+ [
+  "double-holotropic-breathwork-freiburg-todtmoos-2025-06-01",
+  "01.07.2025 - 03.07.2025",
+  "double-holotropic-breathwork-freiburg-todtmoos-2025-07-01"
+ ]
+];
+// [date, title, facilitator 1, 2, 3, location, type1, type2, module, description, slug]
+var PAST_SEMINARS_ = [
+ [
+  "18.05.2024",
+  "Option: Holotropic Breathwork (Riga)",
+  "Lyudmila Skartsesku",
+  "",
+  "",
+  "Riga",
+  "Holotropic Breathwork",
+  "",
+  "-",
+  "A weekend built around one Holotropic Breathwork session, with participants alternating as breather and sitter. Accelerated breathing, evocative music and bodywork open access to non-ordinary states for healing, followed by mandala drawing and group sharing.",
+  "holotropic-breathwork-riga-2024-05-18"
+ ],
+ [
+  "02.05.2025 - 04.05.2025",
+  "Option: Double Holotropic Breathwork (Riga)",
+  "Lyudmila Skartsesku",
+  "",
+  "",
+  "Riga",
+  "Holotropic Breathwork",
+  "",
+  "-",
+  "A weekend built around two Holotropic Breathwork sessions, with participants alternating as breather and sitter. Grof's method of accelerated breathing, music and bodywork opens access to non-ordinary states for healing, followed by mandala drawing and group sharing.",
+  "double-holotropic-breathwork-riga-2025-05-02"
+ ],
+ [
+  "08.08.2025 - 10.08.2025",
+  "Option: Triple Holotropic Breathwork (Riga)",
+  "Kati Wortelkamp",
+  "",
+  "",
+  "Riga",
+  "Holotropic Breathwork",
+  "",
+  "-",
+  "An intensive weekend offering three Holotropic Breathwork sessions, with participants rotating through the roles of breather and sitter. Repeated breathwork allows deeper, more sustained access to non-ordinary states, with group sharing and mandala work after each session.",
+  "triple-holotropic-breathwork-riga-2025-08-08"
+ ],
+ [
+  "28.08.2025 - 31.08.2025",
+  "Option: Double Holotropic Breathwork",
+  "Kati Wortelkamp",
+  "Ursula Boger",
+  "",
+  "Todtmoos",
+  "Holotropic Breathwork",
+  "",
+  "-",
+  "A weekend built around two Holotropic Breathwork sessions, with participants alternating as breather and sitter. Grof's method of accelerated breathing, music and bodywork opens access to non-ordinary states for healing, followed by mandala drawing and group sharing.",
+  "double-holotropic-breathwork-freiburg-todtmoos-2025-08-28"
+ ],
+ [
+  "21.10.2025 - 26.10.2025",
+  "EUROTAS International Transpersonal Conference (Mexico)",
+  "",
+  "",
+  "",
+  "Mexico",
+  "Conference",
+  "",
+  "-",
+  "The 2025 EUROTAS International Transpersonal Conference in Mexico: a gathering of the international transpersonal community with keynotes, workshops and experiential sessions. No lectures took place in the training that week.",
+  "eurotas-international-transpersonal-conference-mexico-2025-10-21"
+ ],
+ [
+  "07.11.2025 - 09.11.2025",
+  "Option: Double Holotropic Breathwork (Riga)",
+  "Lyudmila Skartsesku",
+  "",
+  "",
+  "Riga",
+  "Holotropic Breathwork",
+  "",
+  "-",
+  "A weekend built around two Holotropic Breathwork sessions, with participants alternating as breather and sitter. Grof's method of accelerated breathing, music and bodywork opens access to non-ordinary states for healing, followed by mandala drawing and group sharing.",
+  "double-holotropic-breathwork-riga-2025-11-07"
+ ],
+ [
+  "12.12.2025 - 14.12.2025",
+  "Option: Grof® Breathwork (Todtmoos)",
+  "Kati Wortelkamp",
+  "",
+  "",
+  "Todtmoos",
+  "Holotropic Breathwork",
+  "",
+  "-",
+  "A weekend built around one Holotropic Breathwork session, with participants alternating as breather and sitter. Accelerated breathing, evocative music and bodywork open access to non-ordinary states for healing, followed by mandala drawing and group sharing.",
+  "grof-breathwork-freiburg-todtmoos-2025-12-12"
+ ]
+];
+
+function addPastSeminars_(ss) {
+  var sheet = ss.getSheetByName('Seminars');
+  var h = headerMap_(sheet);
+  var venues = ss.getSheetByName('Venues');
+  var known = venues.getRange(2, 1, Math.max(venues.getLastRow() - 1, 1), 1).getDisplayValues().map(function (x) { return x[0]; });
+  if (known.indexOf('Mexico') < 0) {
+    venues.getRange(venues.getLastRow() + 1, 1, 1, 8).setValues([['Mexico', '', '', '', 'Mexico', '', 'https://www.google.com/maps/search/?api=1&query=Mexico', '']]);
+  }
+  var last = sheet.getLastRow();
+  var v = sheet.getRange(1, 1, last, sheet.getLastColumn()).getDisplayValues();
+  var slugRow = {};
+  for (var i = 1; i < v.length; i++) slugRow[String(v[i][h['slug']]).trim()] = i + 1;
+  var fixed = 0, added = 0;
+  PAST_SEMINAR_FIXES_.forEach(function (f) {
+    var row = slugRow[f[0]];
+    if (!row) return;
+    sheet.getRange(row, h['date'] + 1).setValue(f[1]);
+    sheet.getRange(row, h['slug'] + 1).setValue(f[2]);
+    slugRow[f[2]] = row;
+    fixed++;
+  });
+  var keys = ['date', 'title', 'facilitator 1', 'facilitator 2', 'facilitator 3', 'location', 'type1', 'type2', 'ewtt - module', 'description', 'slug'];
+  var width = sheet.getLastColumn();
+  var out = [];
+  PAST_SEMINARS_.forEach(function (s) {
+    if (slugRow[s[10]]) return;
+    var row = new Array(width).fill('');
+    keys.forEach(function (k, j) { if (k in h) row[h[k]] = s[j]; });
+    out.push(row);
+  });
+  if (out.length) {
+    var start = sheet.getLastRow() + 1;
+    sheet.getRange(start, h['date'] + 1, out.length, 1).setNumberFormat('@');
+    sheet.getRange(start, 1, out.length, width).setValues(out);
+    added = out.length;
+  }
+  return fixed + ' seminar dates corrected, ' + added + ' past seminars added';
 }

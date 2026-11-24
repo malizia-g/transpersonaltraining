@@ -50,7 +50,7 @@ function onOpen() {
     .addItem('🏷️ Fill empty lecture topics', 'fillLectureTopics')
     .addSeparator()
     // One-off (PastLectures.js); remove once it has run.
-    .addItem('📚 Add past lectures + restore modules', 'addPastLecturesAndModules')
+    .addItem('📚 Add past lectures + seminars', 'addPastLecturesAndModules')
     .addItem('🎨 Format sheets', 'formatSheetsFromMenu')
     .addSeparator()
     .addItem('✉️ Send upcoming seminars', 'sendSeminarsEmail')
