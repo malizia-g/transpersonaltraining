@@ -71,6 +71,17 @@ function getFirstExistingSheet_(ss, names) {
    DATE HELPERS
    ═══════════════════════════════════════════════════════════════════ */
 
+/** Sort events by their _start date (undated last) and drop the helper key. */
+function sortByStart_(events) {
+  events.sort(function (a, b) {
+    var x = a._start ? a._start.getTime() : Infinity;
+    var y = b._start ? b._start.getTime() : Infinity;
+    return x - y;
+  });
+  events.forEach(function (e) { delete e._start; });
+  return events;
+}
+
 /** Parse a single date in DD.MM.YYYY format */
 function parseDate_(str) {
   if (str instanceof Date && !isNaN(str.getTime())) {
@@ -176,10 +187,14 @@ function getSeminarEvents_() {
           ? label + ', ' + venues[label].country : (label || e.location || ''),
         type1: e.type1 || '',
         type2: e.type2 || '',
-        imageUrl: getDirectImageUrl_(String(e.imageurl || '').trim())
+        imageUrl: getDirectImageUrl_(String(e.imageurl || '').trim()),
+        _start: parseDate_(rawDate)
       });
     }
   }
+  // Date order, not row order: rows added later (or out of sequence) would
+  // otherwise show up after the months that follow them.
+  sortByStart_(events);
   return events;
 }
 
@@ -251,10 +266,13 @@ function getLectureEvents_() {
         module: String(data[i][3] || '').trim(),     
         title: String(data[i][4] || '').trim(),      
         description: String(data[i][5] || '').trim(),
-        imageUrl: finalImageUrl 
+        imageUrl: finalImageUrl,
+        _start: d
       });
     }
   }
+
+  sortByStart_(events);
 
   return events;
 }
