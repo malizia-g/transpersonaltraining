@@ -245,6 +245,22 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addFilter('humanDate', (iso) => (iso ? model.humanDate(iso) : ''));
   eleventyConfig.addFilter('venueSeminars', (venueKey, events, exceptSlug) =>
     model.seminars(events).filter((s) => s.venueData && s.venueData.key === venueKey && s.slug !== exceptSlug));
+  // People named in the sheets who have no teacher page. Guests who simply
+  // don't have one are listed in KNOWN_WITHOUT_PAGE; anything else is either
+  // a new person or a spelling the matcher doesn't recognise — add an alias
+  // in src/_data/teachers/<id>.md, a teacher page, or a name to this list.
+  const KNOWN_WITHOUT_PAGE = ['Agnese', 'Anna Milaeva', 'Fabio Malizia', 'Gisela Möhle', 'Jasmine',
+    'Mireia Berdun', 'Sigits Duduris', 'Ursula Boger'];
+  eleventyConfig.on('eleventy.after', () => {
+    const names = model.unmatchedNames();
+    const unknown = names.filter((n) => !KNOWN_WITHOUT_PAGE.includes(n));
+    const known = names.filter((n) => KNOWN_WITHOUT_PAGE.includes(n));
+    if (known.length) console.log(`ℹ️  Named in the sheets, no teacher page (expected): ${known.join(', ')}`);
+    if (unknown.length) {
+      console.warn(`⚠️  ${unknown.length} name(s) in the sheets match no teacher page — new person or misspelling?`);
+      for (const n of unknown) console.warn(`   ${n}`);
+    }
+  });
   eleventyConfig.addFilter('euro', (n) => `€${Number(n).toLocaleString('en-GB')}`);
   eleventyConfig.addFilter('times', (a, b) => a * b);
   // Badge labels on the schedule rows: the sheet's types, said shorter.
