@@ -48,10 +48,6 @@ function onOpen() {
     .addSeparator()
     .addItem('📊 Open JSON in New Tab', 'openJsonInNewTab')
     .addSeparator()
-    // One-off (ProgramUpdate.js): venues, URLs and the Nov 2026 program.
-    // Remove this line once it has been run.
-    .addItem('🗺️ Apply program update (Nov 2026)', 'applyProgramUpdateNov2026')
-    .addSeparator()
     .addItem('✉️ Send upcoming seminars', 'sendSeminarsEmail')
     .addItem('✉️ Send upcoming lectures', 'sendLecturesEmail')
     .addItem('✉️ Send only text', 'sendOnlyTextEmail')

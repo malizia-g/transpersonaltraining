@@ -127,59 +127,37 @@ function reorderCards(period) {
         // Past events: most recent first
         sortedCards = sortCards(cards, false);
     } else {
-        // All events: future first (nearest), then past (most recent)
-        const futureCards = [];
-        const pastCards = [];
-        
-        cards.forEach(card => {
-            if (eventPeriod(card.dataset.date) === 'past') {
-                pastCards.push(card);
-            } else {
-                futureCards.push(card);
-            }
-        });
-        
-        sortedCards = [
-            ...sortCards(futureCards, true),
-            ...sortCards(pastCards, false)
-        ];
+        // All events: newest first, one run of years like the archive it is.
+        // (Future-then-past would print the current year's heading twice.)
+        sortedCards = sortCards(cards, false);
     }
     
     // Re-append in new order
     sortedCards.forEach(card => appointmentsList.appendChild(card));
 
-    placePeriodDividers(appointmentsList, sortedCards, period);
+    placeYearHeadings(appointmentsList, sortedCards);
 }
 
-// The labelled hairlines that mark the seam between the two halves of the
-// "All" list. They only earn their place when both halves are actually on
-// screen, so any other period — or a filter that empties one side — hides
-// them again.
-function placePeriodDividers(listEl, sortedCards, period) {
-    const futureDivider = document.getElementById('divider-future');
-    const pastDivider = document.getElementById('divider-past');
-    if (!futureDivider || !pastDivider) return;
-
-    const visible = sortedCards.filter(card => card.style.display !== 'none');
-    const firstPast = period === 'all'
-        ? visible.find(card => eventPeriod(card.dataset.date) === 'past')
-        : undefined;
-    const show = !!firstPast && visible.some(card => eventPeriod(card.dataset.date) !== 'past');
-
-    toggleDivider(futureDivider, show);
-    toggleDivider(pastDivider, show);
-
-    if (show) {
-        listEl.insertBefore(futureDivider, visible[0]);
-        listEl.insertBefore(pastDivider, firstPast);
-    }
-}
-
-// The dividers are flex rows, so showing one means swapping Tailwind's
-// `hidden` for `flex` rather than clearing a display style.
-function toggleDivider(el, show) {
-    el.classList.toggle('hidden', !show);
-    el.classList.toggle('flex', show);
+// One heading per year above the visible rows. The list is pre-rendered with
+// them (so the archive reads properly without JavaScript); after every filter
+// or reorder they are thrown away and drawn again in front of the first
+// visible row of each year.
+function placeYearHeadings(listEl, sortedCards) {
+    listEl.querySelectorAll('.year-heading').forEach(el => el.remove());
+    let current = null;
+    sortedCards.forEach(card => {
+        if (card.style.display === 'none') return;
+        const year = extractYear(card.dataset.date) || 'Date to be defined';
+        if (year === current) return;
+        current = year;
+        const li = document.createElement('li');
+        li.className = 'year-heading pt-10 pb-3 border-b border-[color:var(--c-line)]';
+        const h = document.createElement('h2');
+        h.className = 'p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)]';
+        h.textContent = year;
+        li.appendChild(h);
+        listEl.insertBefore(li, card);
+    });
 }
 
 // Initialize filters
@@ -227,6 +205,13 @@ function initializeFilters() {
         });
     }
     
+    // ?period=all (or past, tbd) — used by the "all seminars" links on the
+    // seminar pages, which arrive wanting the whole archive.
+    const wanted = new URLSearchParams(window.location.search).get('period');
+    if (filterPeriod && wanted && [...filterPeriod.options].some(o => o.value === wanted)) {
+        filterPeriod.value = wanted;
+    }
+
     // Apply initial filters (future events by default)
     applyFilters();
 }
@@ -255,8 +240,8 @@ function applyFilters() {
         const cardYear = extractYear(cardDate);
         const cardType1 = card.dataset.type1 || '';
         const cardType2 = card.dataset.type2 || '';
-        const cardFacilitator = card.dataset.facilitator || '';
-        const cardLocation = card.dataset.location || '';
+        const cardPeople = card.dataset.people || '';
+        const cardPlace = card.dataset.place || '';
         const period = eventPeriod(cardDate);
         
         const matchesPeriod = selectedPeriod === 'all' || 
@@ -265,8 +250,10 @@ function applyFilters() {
                             (selectedPeriod === 'tbd' && period === 'undated');
         const matchesYear = !selectedYear || cardYear == selectedYear;
         const matchesType = !selectedType || cardType1 === selectedType || cardType2 === selectedType;
-        const matchesFacilitator = !selectedFacilitator || cardFacilitator === selectedFacilitator;
-        const matchesLocation = !selectedLocation || cardLocation === selectedLocation;
+        // data-people is "|kati-wortelkamp|lyudmila-skartsesku|": one person per
+        // option, however many share the seminar.
+        const matchesFacilitator = !selectedFacilitator || cardPeople.includes('|' + selectedFacilitator + '|');
+        const matchesLocation = !selectedLocation || cardPlace === selectedLocation;
         
         if (matchesPeriod && matchesYear && matchesType && matchesFacilitator && matchesLocation) {
             card.style.display = '';

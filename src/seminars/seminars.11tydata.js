@@ -25,7 +25,7 @@ module.exports = {
     before: (events) => seminars(events),
     addAllPagesToCollections: true,
   },
-  breadcrumbParent: { name: 'Seminars', url: '/seminars/' },
+  breadcrumbParent: { name: 'Intensive Schedule', url: '/schedule/' },
   eleventyComputed: {
     crumbName: (data) => data.seminar.cleanTitle + (data.seminar.range ? ` (${data.seminar.range.start.slice(0, 4)})` : ''),
     permalink: (data) => data.seminar.url,

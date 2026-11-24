@@ -229,6 +229,7 @@ module.exports = function(eleventyConfig) {
   // both go through these.
   const model = require('./lib/site-model');
   eleventyConfig.addFilter('seminarList', (events) => model.seminars(events));
+  eleventyConfig.addFilter('seminarFilters', (events) => model.seminarFilters(events));
   eleventyConfig.addFilter('seminarUrl', function (event, events) {
     const found = model.seminars(events).find((s) => s.raw === event);
     return found ? found.url : '';
