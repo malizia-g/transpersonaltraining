@@ -709,7 +709,10 @@ function formatSheets() {
     ['teacher 1', 'teacher 2'].forEach(function (k) {
       if (k in h) column(lec, h, k).setDataValidation(dropdown(pool(teachers, 1)));
     });
-    if ('module' in h) column(lec, h, 'module').setDataValidation(dropdown(pool(lists, 3)));
+    if ('module' in h) {
+      // The table's typed column left a number format that shows nothing.
+      column(lec, h, 'module').setDataValidation(dropdown(pool(lists, 3))).setNumberFormat('0').setHorizontalAlignment('center');
+    }
     if ('topic' in h) {
       column(lec, h, 'topic').setDataValidation(dropdown(pool(lists, 4)));
       lec.getRange(1, h['topic'] + 1).setNote('Which /lectures/<topic>/ page this session is on: same topic, same page. "-" = no topic page (meetings, tests).');

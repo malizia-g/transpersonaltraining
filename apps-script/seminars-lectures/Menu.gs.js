@@ -49,8 +49,8 @@ function onOpen() {
     .addItem('📊 Open JSON in New Tab', 'openJsonInNewTab')
     .addItem('🏷️ Fill empty lecture topics', 'fillLectureTopics')
     .addSeparator()
-    // One-off (Restructure.js); remove once it has run.
-    .addItem('🧱 Restructure sheet (pools + dropdowns)', 'restructureSheets')
+    // One-off (PastLectures.js); remove once it has run.
+    .addItem('📚 Add past lectures + restore modules', 'addPastLecturesAndModules')
     .addItem('🎨 Format sheets', 'formatSheetsFromMenu')
     .addSeparator()
     .addItem('✉️ Send upcoming seminars', 'sendSeminarsEmail')
