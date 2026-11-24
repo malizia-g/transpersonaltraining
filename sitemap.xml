@@ -61,11 +61,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://transpersonal-training.com/lectures/art-therapy/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://transpersonal-training.com/lectures/emotions-shame-fear-guilt/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -86,17 +81,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://transpersonal-training.com/lectures/history-of-transpersonal-psychology/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://transpersonal-training.com/lectures/holotropic-states-of-consciousness/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://transpersonal-training.com/lectures/how-to-end-the-inner-war/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -106,12 +91,12 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://transpersonal-training.com/lectures/ken-wilber-integral-theory/</loc>
+    <loc>https://transpersonal-training.com/lectures/love-in-the-context-of-psychotherapy/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://transpersonal-training.com/lectures/love-in-the-context-of-psychotherapy/</loc>
+    <loc>https://transpersonal-training.com/lectures/meditation-and-heart-based-therapy/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -141,6 +126,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://transpersonal-training.com/lectures/shamanism/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://transpersonal-training.com/lectures/spiritual-emergency/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -157,11 +147,6 @@
   </url>
   <url>
     <loc>https://transpersonal-training.com/lectures/counseling-skills/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://transpersonal-training.com/lectures/what-is-therapy-and-how-does-that-fit-with-a-spiritual-journey/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
