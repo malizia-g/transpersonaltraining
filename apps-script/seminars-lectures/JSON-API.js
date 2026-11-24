@@ -88,15 +88,67 @@ function doGet(e) {
     }
   }
 
+  // Seminars only keep what is chosen (Facilitator 1-3, Location…); the
+  // website still gets the fields it always had, filled from the pools.
+  if (sheet.getName() === 'Seminars') {
+    var venues = venueIndex_(ss);
+    jsonData = jsonData.map(function (row) { return enrichSeminar_(row, venues); });
+  }
+
   return ContentService.createTextOutput(JSON.stringify(jsonData))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+// Venues tab → { "<Location>": { place, city, region, country, address, maps, arrival } }
+function venueIndex_(ss) {
+  var sh = ss.getSheetByName('Venues');
+  var out = {};
+  if (!sh || sh.getLastRow() < 2) return out;
+  var v = sh.getDataRange().getDisplayValues();
+  var h = v[0].map(function (x) { return String(x).trim().toLowerCase(); });
+  var col = function (name) { return h.indexOf(name); };
+  for (var i = 1; i < v.length; i++) {
+    var key = String(v[i][col('location')] || '').trim();
+    if (!key) continue;
+    var cell = function (name) { var c = col(name); return c < 0 ? '' : String(v[i][c] || '').trim(); };
+    out[key] = {
+      place: cell('place'), city: cell('nearest city'), region: cell('region'), country: cell('country'),
+      address: cell('address'), maps: cell('google maps'), arrival: cell('arrival')
+    };
+  }
+  return out;
+}
+
+// One seminar row in the old shape the website and emails expect:
+// facilitator "A & B", location = country, venue = place, city, address,
+// maps, arrival. Rows already in the old shape pass through unchanged.
+function enrichSeminar_(row, venues) {
+  if (!row.facilitator && ('facilitator 1' in row)) {
+    row.facilitator = ['facilitator 1', 'facilitator 2', 'facilitator 3']
+      .map(function (k) { return String(row[k] || '').trim(); })
+      .filter(function (x) { return x; })
+      .join(' & ');
+  }
+  var label = String(row.location || '').trim();
+  var v = venues[label];
+  if (v) {
+    row.locationlabel = label;
+    row.location = v.country;
+    row.venue = v.place;
+    row.city = v.city;
+    row.region = v.region;
+    row.address = v.address;
+    row.maps = v.maps;
+    row.arrival = v.arrival;
+  }
+  return row;
 }
 
 // A row is worth sending if it can be told apart from a blank one. Title
 // alone isn't enough: one seminar is recorded with a facilitator and no
 // title, and dropping it would lose a real event.
 function identifies_(rowData) {
-  var fields = ['date', 'title', 'facilitator', 'teacher 1', 'description'];
+  var fields = ['date', 'title', 'facilitator', 'facilitator 1', 'teacher 1', 'description'];
   for (var i = 0; i < fields.length; i++) {
     var value = rowData[fields[i]];
     if (value && value.toString().trim()) return true;

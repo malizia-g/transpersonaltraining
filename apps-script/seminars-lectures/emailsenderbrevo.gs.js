@@ -141,13 +141,19 @@ function getSeminarEvents_() {
   var sheet = getFirstExistingSheet_(ss, ['Seminars', config.scheduleSheet, 'Schedule']);
   if (!sheet) return [];
 
+  // Columns by name, not position: the tab was reorganised (Facilitator 1-3,
+  // Location chosen from Venues) and may be again.
   var data = sheet.getDataRange().getValues();
+  var headers = data[0].map(function (x) { return String(x).trim().toLowerCase(); });
+  var venues = venueIndex_(ss);
   var events = [];
   var today = new Date();
   today.setHours(0, 0, 0, 0);
 
   for (var i = 1; i < data.length; i++) {
-    var rawDate = data[i][0];
+    var row = {};
+    headers.forEach(function (k, j) { if (k) row[k] = data[i][j]; });
+    var rawDate = row['date'];
     if (rawDate === '' || rawDate === null || rawDate === undefined) continue;
 
     var dateStr = formatDateToString_(rawDate);
@@ -155,19 +161,22 @@ function getSeminarEvents_() {
 
     var endDate = parseDateRange_(rawDate);
     if (endDate && endDate >= today) {
-      var rawImageUrl = String(data[i][8] || '').trim();
-      var finalImageUrl = getDirectImageUrl_(rawImageUrl);
-
+      var text = {};
+      Object.keys(row).forEach(function (k) { text[k] = row[k] instanceof Date ? row[k] : String(row[k] || '').trim(); });
+      var label = text['location'];
+      var e = enrichSeminar_(text, venues);
       events.push({
         date: dateStr,
-        facilitator: String(data[i][1] || '').trim(),
-        title: String(data[i][2] || '').trim(),
-        description: String(data[i][3] || '').trim(),
-        module: String(data[i][4] || '').trim(),
-        location: String(data[i][5] || '').trim(),
-        type1: String(data[i][6] || '').trim(),
-        type2: String(data[i][7] || '').trim(),
-        imageUrl: finalImageUrl 
+        facilitator: e.facilitator === '-' ? '' : (e.facilitator || ''),
+        title: e.title || '',
+        description: e.description || '',
+        module: e['ewtt - module'] === '-' ? '' : (e['ewtt - module'] || ''),
+        // The Location as chosen ("Todtmoos"), plus the country when it adds something.
+        location: venues[label] && venues[label].country && label.indexOf(venues[label].country) < 0
+          ? label + ', ' + venues[label].country : (label || e.location || ''),
+        type1: e.type1 || '',
+        type2: e.type2 || '',
+        imageUrl: getDirectImageUrl_(String(e.imageurl || '').trim())
       });
     }
   }
