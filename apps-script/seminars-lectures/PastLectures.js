@@ -815,6 +815,26 @@ function addPastLecturesAndModules() {
     }
   }
 
+  // 1b — new topics and teachers into the pools FIRST: the dropdowns
+  // reject any value not already in Lists / Teachers.
+  var lists = ss.getSheetByName('Lists');
+  var topics = lists.getRange(2, 4, Math.max(lists.getLastRow() - 1, 1), 1).getDisplayValues()
+    .map(function (x) { return x[0]; }).filter(function (x) { return x; });
+  var newTopics = [];
+  PAST_LECTURES_.forEach(function (l) {
+    if (topics.indexOf(l[5]) < 0 && newTopics.indexOf(l[5]) < 0) newTopics.push(l[5]);
+  });
+  var allTopics = topics.concat(newTopics).sort(function (a, b) { return a === '-' ? -1 : b === '-' ? 1 : a.localeCompare(b); });
+  lists.getRange(2, 4, allTopics.length, 1).setValues(allTopics.map(function (x) { return [x]; }));
+
+  var teachers = ss.getSheetByName('Teachers');
+  var pool = teachers.getRange(2, 1, Math.max(teachers.getLastRow() - 1, 1), 1).getDisplayValues().map(function (x) { return x[0]; });
+  var missing = [];
+  PAST_LECTURES_.forEach(function (l) {
+    [l[2], l[3]].forEach(function (n) { if (n && pool.indexOf(n) < 0 && missing.indexOf(n) < 0) missing.push(n); });
+  });
+  if (missing.length) teachers.getRange(teachers.getLastRow() + 1, 1, missing.length, 1).setValues(missing.map(function (x) { return [x]; }));
+
   // 2 — past lectures
   var existing = {};
   var descFor = {};
@@ -848,25 +868,6 @@ function addPastLecturesAndModules() {
     toAdd.push(row);
   });
   if (toAdd.length) sheet.getRange(sheet.getLastRow() + 1, 1, toAdd.length, width).setValues(toAdd);
-
-  // 3 — topics and teachers into the pools, then order by date
-  var lists = ss.getSheetByName('Lists');
-  var topics = lists.getRange(2, 4, Math.max(lists.getLastRow() - 1, 1), 1).getDisplayValues()
-    .map(function (x) { return x[0]; }).filter(function (x) { return x; });
-  var newTopics = [];
-  PAST_LECTURES_.forEach(function (l) {
-    if (topics.indexOf(l[5]) < 0 && newTopics.indexOf(l[5]) < 0) newTopics.push(l[5]);
-  });
-  var allTopics = topics.concat(newTopics).sort(function (a, b) { return a === '-' ? -1 : b === '-' ? 1 : a.localeCompare(b); });
-  lists.getRange(2, 4, allTopics.length, 1).setValues(allTopics.map(function (x) { return [x]; }));
-
-  var teachers = ss.getSheetByName('Teachers');
-  var pool = teachers.getRange(2, 1, Math.max(teachers.getLastRow() - 1, 1), 1).getDisplayValues().map(function (x) { return x[0]; });
-  var missing = [];
-  PAST_LECTURES_.forEach(function (l) {
-    [l[2], l[3]].forEach(function (n) { if (n && pool.indexOf(n) < 0 && missing.indexOf(n) < 0) missing.push(n); });
-  });
-  if (missing.length) teachers.getRange(teachers.getLastRow() + 1, 1, missing.length, 1).setValues(missing.map(function (x) { return [x]; }));
 
   var body = sheet.getRange(2, 1, sheet.getLastRow() - 1, sheet.getLastColumn());
   body.sort({ column: col('date'), ascending: true });
