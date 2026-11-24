@@ -1,30 +1,5 @@
 // Lectures schedule - Filter functionality and inline video
 
-// Toggle description expand/collapse
-window.toggleLectureDescription = function(cardId) {
-    const descEl = document.getElementById(`ldesc-${cardId}`);
-    const textEl = document.getElementById(`ltext-${cardId}`);
-    const iconEl = document.getElementById(`licon-${cardId}`);
-    if (!descEl) return;
-
-    const isExpanded = descEl.dataset.expanded === 'true';
-
-    if (isExpanded) {
-        descEl.classList.add('whitespace-nowrap', 'text-ellipsis');
-        descEl.style.maxHeight = '1.5em';
-        descEl.dataset.expanded = 'false';
-        textEl.textContent = 'Read more';
-        iconEl.style.transform = '';
-    } else {
-        descEl.classList.remove('whitespace-nowrap', 'text-ellipsis');
-        descEl.style.maxHeight = descEl.scrollHeight + 'px';
-        descEl.dataset.expanded = 'true';
-        textEl.textContent = 'Read less';
-        iconEl.style.transform = 'rotate(180deg)';
-    }
-};
-
-// Toggle inline video within the card
 window.toggleInlineVideo = function(btn, videoUrl) {
     const card = btn.closest('.lecture-card');
     if (!card) return;
@@ -140,51 +115,41 @@ function reorderLectureCards(period) {
     } else if (period === 'past') {
         sorted = sortLectureCards(cards, false);
     } else {
-        const future = [];
-        const past = [];
-        cards.forEach(card => {
-            (lecturePeriod(card.dataset.date) === 'past' ? past : future).push(card);
-        });
-        sorted = [...sortLectureCards(future, true), ...sortLectureCards(past, false)];
+        // All: newest first, one run of years (future-then-past would print
+        // the current year's heading twice).
+        sorted = sortLectureCards(cards, false);
     }
 
     sorted.forEach(card => listEl.appendChild(card));
 
-    placePeriodDividers(listEl, sorted, period);
+    placeYearHeadings(listEl, sorted);
 }
 
-// The labelled hairlines that mark the seam between the two halves of the
-// "All" list. They only earn their place when both halves are actually on
-// screen, so any other period — or a filter that empties one side — hides
-// them again.
-function placePeriodDividers(listEl, sortedCards, period) {
-    const futureDivider = document.getElementById('divider-future');
-    const pastDivider = document.getElementById('divider-past');
-    if (!futureDivider || !pastDivider) return;
-
-    const visible = sortedCards.filter(card => card.style.display !== 'none');
-    const firstPast = period === 'all'
-        ? visible.find(card => lecturePeriod(card.dataset.date) === 'past')
-        : undefined;
-    const show = !!firstPast && visible.some(card => lecturePeriod(card.dataset.date) !== 'past');
-
-    toggleDivider(futureDivider, show);
-    toggleDivider(pastDivider, show);
-
-    if (show) {
-        listEl.insertBefore(futureDivider, visible[0]);
-        listEl.insertBefore(pastDivider, firstPast);
-    }
+// One heading per year above the visible rows, redrawn after every filter
+// or reorder (same as the intensive schedule).
+function lectureYear(dateString) {
+    const key = lectureSortKey(dateString);
+    return key ? String(key.getFullYear()) : 'Date to be defined';
 }
 
-// The dividers are flex rows, so showing one means swapping Tailwind's
-// `hidden` for `flex` rather than clearing a display style.
-function toggleDivider(el, show) {
-    el.classList.toggle('hidden', !show);
-    el.classList.toggle('flex', show);
+function placeYearHeadings(listEl, sortedCards) {
+    listEl.querySelectorAll('.year-heading').forEach(el => el.remove());
+    let current = null;
+    sortedCards.forEach(card => {
+        if (card.style.display === 'none') return;
+        const year = lectureYear(card.dataset.date);
+        if (year === current) return;
+        current = year;
+        const li = document.createElement('li');
+        li.className = 'year-heading pt-10 pb-3 border-b border-[color:var(--c-line)]';
+        const h = document.createElement('h2');
+        h.className = 'p4-display text-2xl md:text-3xl font-medium text-[color:var(--c-heading)]';
+        h.textContent = year;
+        li.appendChild(h);
+        listEl.insertBefore(li, card);
+    });
 }
 
-// Filter logic
 function initializeLectureFilters() {
     const cards = document.querySelectorAll('.lecture-card');
     const filterPeriod = document.getElementById('filter-period');
@@ -246,8 +211,8 @@ function applyLectureFilters() {
 
     cards.forEach(card => {
         const module = card.dataset.module || '';
-        const teacher1 = card.dataset.teacher1 || '';
-        const teacher2 = card.dataset.teacher2 || '';
+        const people = card.dataset.people || '';
+        const teachers = (card.dataset.teachers || '').toLowerCase();
         const title = (card.dataset.title || '').toLowerCase();
         const period = lecturePeriod(card.dataset.date || '');
 
@@ -256,8 +221,10 @@ function applyLectureFilters() {
                             (selPeriod === 'past' && period === 'past') ||
                             (selPeriod === 'tbd' && period === 'undated');
         const matchModule = !selModule || module === selModule;
-        const matchTeacher = !selTeacher || teacher1 === selTeacher || teacher2 === selTeacher;
-        const matchSearch = !searchTerm || title.includes(searchTerm) || teacher1.toLowerCase().includes(searchTerm) || teacher2.toLowerCase().includes(searchTerm);
+        // data-people is "|lyudmila-skartsesku|kati-wortelkamp|": one option per
+        // person, whatever spelling the sheet used.
+        const matchTeacher = !selTeacher || people.includes('|' + selTeacher + '|');
+        const matchSearch = !searchTerm || title.includes(searchTerm) || teachers.includes(searchTerm);
 
         if (matchPeriod && matchModule && matchTeacher && matchSearch) {
             card.style.display = '';
