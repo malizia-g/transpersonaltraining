@@ -44,6 +44,7 @@ function onOpen() {
   const ui = SpreadsheetApp.getUi();
   ui.createMenu('🚀 Automations')
     .addItem('🔄 Update Website (this will take 5 minutes)', 'triggerGitHubRebuild')
+    .addItem('🧪 Update staging preview (5 minutes)', 'triggerStagingRebuild')
     .addSeparator()
     .addItem('📊 Open JSON in New Tab', 'openJsonInNewTab')
     .addSeparator()

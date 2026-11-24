@@ -3,7 +3,18 @@ const REPO_NAME = 'transpersonaltraining';
 const WORKFLOW_FILE = 'deploy.yml';
 const BRANCH = 'main';
 
+// Rebuilds the live site (main).
 function triggerGitHubRebuild() {
+  triggerBuild_(BRANCH);
+}
+
+// Rebuilds the staging preview only: same sheet data, staging's code, so
+// changes can be checked before they reach the live site.
+function triggerStagingRebuild() {
+  triggerBuild_('staging');
+}
+
+function triggerBuild_(branch) {
 
   const scriptProperties = PropertiesService.getScriptProperties();
   let GITHUB_TOKEN = scriptProperties.getProperty('GITHUB_TOKEN');
@@ -19,7 +30,7 @@ function triggerGitHubRebuild() {
     },
     contentType: 'application/json',
     payload: JSON.stringify({
-      ref: BRANCH
+      ref: branch
     }),
     muteHttpExceptions: true
   };
@@ -29,7 +40,7 @@ function triggerGitHubRebuild() {
     const statusCode = response.getResponseCode();
     
     if (statusCode === 204) {
-      SpreadsheetApp.getUi().alert('✅ Deploy  succesfully started, refresh the website in 5 minutes!');
+      SpreadsheetApp.getUi().alert('✅ Deploy of ' + branch + ' successfully started, refresh the website in 5 minutes!');
     } else {
       SpreadsheetApp.getUi().alert(`⚠️ Error: ${statusCode}\n${response.getContentText()}`);
     }
