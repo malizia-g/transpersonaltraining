@@ -303,4 +303,6 @@ These pages are generated, not written by hand:
 - **City** — nearest large city (Freiburg, Grosseto, Chisinau…). **Venue** — the place itself (`Haus am Mühlenbach, Todtmoos`).
 - **Address**, **Maps** (Google Maps link), **Arrival** (link to the directions, e.g. `https://transpersonal-training.com/venues/#getting-to-todtmoos`).
 
+**Lectures sheet, column Topic** — which `/lectures/<topic>/` page a session belongs to. Sessions with the same Topic share one page; a Topic equal to an existing page title keeps that page's URL. Write `-` to keep a session off every topic page (students' meetings, tests). Left empty, the site guesses from the title (rules in `lib/site-model.js`, `TOPICS`). The sheet menu item *🏷️ Fill empty lecture topics* fills empty cells for titles it already knows.
+
 Arrival directions for Todtmoos and Monteverdi live in `src/_data/venues.js`; the Todtmoos PDF is `src/assets/documents/arrival-todtmoos-haus-am-muehlenbach.pdf`. Teacher names in the sheets are matched to teacher pages by full name, surname, or the `aliases:` list in the teacher's Markdown file — add an alias there if a spelling isn't recognised.

@@ -47,6 +47,7 @@ function onOpen() {
     .addItem('🧪 Update staging preview (5 minutes)', 'triggerStagingRebuild')
     .addSeparator()
     .addItem('📊 Open JSON in New Tab', 'openJsonInNewTab')
+    .addItem('🏷️ Fill empty lecture topics', 'fillLectureTopics')
     .addSeparator()
     .addItem('✉️ Send upcoming seminars', 'sendSeminarsEmail')
     .addItem('✉️ Send upcoming lectures', 'sendLecturesEmail')

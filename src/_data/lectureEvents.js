@@ -113,7 +113,10 @@ module.exports = async function() {
         teacher2: (item['teacher 2'] || '').trim(),
         startHour: (item['start hour'] || '').trim(),
         finishHour: (item['finish hour'] || '').trim(),
-        videoLink: (item['video link'] || '').trim()
+        videoLink: (item['video link'] || '').trim(),
+        // Which /lectures/<topic>/ page the session belongs to. Empty means
+        // "work it out from the title" (lib/site-model.js).
+        topic: (item.topic || '').trim()
       };
     });
 

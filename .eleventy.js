@@ -236,7 +236,7 @@ module.exports = function(eleventyConfig) {
   });
   eleventyConfig.addFilter('seminarFor', (event, events) => model.seminars(events).find((s) => s.raw === event) || null);
   eleventyConfig.addFilter('lectureTopics', (lectures) => model.lectureTopics(lectures));
-  eleventyConfig.addFilter('lectureTopicUrl', (title) => model.lectureTopicUrl(title));
+  eleventyConfig.addFilter('lectureTopicUrl', (lecture) => model.lectureTopicUrl(lecture));
   eleventyConfig.addFilter('teacherSeminars', (id, events) => model.seminarsFor(id, events));
   eleventyConfig.addFilter('teacherTopics', (id, lectures) => model.topicsFor(id, lectures));
   eleventyConfig.addFilter('people', (str) => model.people(str));
