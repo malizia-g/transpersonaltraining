@@ -1704,7 +1704,9 @@ function applyLectureUpdate_(sheet) {
       if (idx['start hour']) sheet.getRange(row, idx['start hour']).setValue('19:00');
       if (idx['finish hour']) sheet.getRange(row, idx['finish hour']).setValue('21:00');
     } else { updated++; }
-    sheet.getRange(row, idx['date']).setValue(when).setNumberFormat('dd/mm/yyyy');
+    // The Lectures tab is a table with a typed Date column: it formats the
+    // date itself and refuses setNumberFormat.
+    sheet.getRange(row, idx['date']).setValue(when);
     sheet.getRange(row, idx['title']).setValue(title);
     sheet.getRange(row, idx['teacher 1']).setValue(t1);
     sheet.getRange(row, idx['teacher 2']).setValue(t2);
@@ -1716,8 +1718,7 @@ function applyLectureUpdate_(sheet) {
     shown[row - 1] = fresh.getDisplayValues()[0];
   });
 
-  // Keep the tab in date order, undated rows last.
-  var body = sheet.getRange(2, 1, sheet.getLastRow() - 1, sheet.getLastColumn());
-  body.sort({ column: idx['date'], ascending: true });
+  // No sorting here: the tab is a table, and the website orders lectures
+  // by date on its own.
   return { updated: updated, added: added };
 }
